@@ -78,7 +78,7 @@ class OptionsService(IgnisGObject):
                 for i in data.keys():
                     self.__data[i] = Option(name=i, value=data[i])
 
-        except Exception:
+        except FileNotFoundError:
             with open(OPTIONS_FILE, "w") as file:
                 json.dump(empty, file)
 
