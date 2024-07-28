@@ -1,0 +1,36 @@
+from gi.repository import GdkPixbuf
+
+
+def crop_pixbuf(pixbuf: GdkPixbuf.Pixbuf, width: int, height: int) -> GdkPixbuf.Pixbuf:
+    """
+    Crop the ``GdkPixbuf.Pixbuf`` to the given width and height.
+
+    Args:
+        pixbuf (``GdkPixbuf.Pixbuf``): The source pixbuf.
+        width (``int``): The width to crop to.
+        height (``int``): The height to crop to.
+
+    Returns:
+        ``GdkPixbuf.Pixbuf``: The cropped pixbuf.
+    """
+    img_width = pixbuf.get_width()
+    img_height = pixbuf.get_height()
+
+    # Calculate the aspect ratios
+    target_aspect_ratio = width / height
+    current_aspect_ratio = img_width / img_height
+
+    if current_aspect_ratio > target_aspect_ratio:
+        # Image is wider than aspect ratio, crop the width
+        target_width = int(img_height * target_aspect_ratio)
+        target_height = img_height
+    else:
+        # Image is taller than aspect ratio, crop the height
+        target_width = img_width
+        target_height = int(img_width / target_aspect_ratio)
+
+    crop_x = (img_width - target_width) // 2
+    crop_y = (img_height - target_height) // 2
+
+    cropped_image = pixbuf.new_subpixbuf(crop_x, crop_y, target_width, target_height)
+    return cropped_image

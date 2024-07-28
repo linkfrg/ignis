@@ -1,0 +1,25 @@
+<node>
+    <interface name="com.github.linkfrg.ignis">
+        <method name='Inspector'/>
+        <method name='Quit'/>
+        <method name='Reload'/>
+        <method name='ListWindows'>
+            <arg direction="out" type="as" name="windows"/>
+        </method>
+        <method name="ToggleWindow">
+            <arg direction="in" type="s" name="name"/>
+        </method>
+        <method name="OpenWindow">
+            <arg direction="in" type="s" name="name"/>
+        </method>
+        <method name="CloseWindow">
+            <arg direction="in" type="s" name="name"/>
+        </method>
+        <method name="RunPython">
+            <arg direction="in" type="s" name="code"/>
+        </method>
+        <method name="RunFile">
+            <arg direction="in" type="s" name="path"/>
+        </method>
+    </interface>
+</node>

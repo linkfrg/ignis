@@ -1,0 +1,8 @@
+<node>
+    <interface name="org.freedesktop.DBus.Peer">
+        <method name="GetMachineId">
+            <arg direction="out" type="s" />
+        </method>
+        <method name="Ping" />
+    </interface>
+</node>

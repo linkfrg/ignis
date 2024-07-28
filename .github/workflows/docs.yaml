@@ -1,0 +1,48 @@
+name: Build and Deploy Documentation
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y meson ninja-build libgtk-4-dev git gobject-introspection python-gi-dev valac libpulse-dev gir1.2-nm-1.0 gir1.2-gstreamer-1.0 python3-requests python-is-python3 python3-pip python3-cairo
+
+    - name: Build gtk4-layer-shell
+      run: |
+        git clone https://github.com/wmww/gtk4-layer-shell.git
+        cd gtk4-layer-shell
+        meson setup build --prefix=/usr
+        ninja -C build
+        sudo ninja -C build install
+
+    - name: Install Python dependencies
+      run: |
+        pip install sphinx sphinx_book_theme --break-system-packages
+       
+    - name: Build Ignis
+      run: |
+        meson setup build --prefix=/usr
+        ninja -C build
+        sudo ninja -C build install
+
+    - name: Build documentation
+      run: |
+        cd docs
+        make html
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: docs/_build/html

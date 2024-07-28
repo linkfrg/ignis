@@ -1,0 +1,18 @@
+<node>
+    <interface name="org.mpris.MediaPlayer2">
+        <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="true" />
+        <method name="Raise" />
+        <method name="Quit" />
+        <property name="CanQuit" type="b" access="read" />
+        <property name="Fullscreen" type="b" access="readwrite" />
+        <property name="CanSetFullscreen" type="b" access="read" />
+        <property name="CanRaise" type="b" access="read" />
+        <property name="HasTrackList" type="b" access="read" />
+        <property name="Identity" type="s" access="read" />
+        <property name="DesktopEntry" type="s" access="read">
+            <annotation name="org.mpris.MediaPlayer2.property.optional" value="true" />
+        </property>
+        <property name="SupportedUriSchemes" type="as" access="read" />
+        <property name="SupportedMimeTypes" type="as" access="read" />
+    </interface>
+</node>
