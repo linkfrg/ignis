@@ -347,7 +347,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -363,6 +365,23 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.Notification"><code class="docutils literal notranslate"><span class="pre">Notification</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.NotificationAction"><code class="docutils literal notranslate"><span class="pre">NotificationAction</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.NotificationAction.invoke"><code class="docutils literal notranslate"><span class="pre">NotificationAction.invoke()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.NotificationService"><code class="docutils literal notranslate"><span class="pre">NotificationService</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.NotificationService.clear_all"><code class="docutils literal notranslate"><span class="pre">NotificationService.clear_all()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.NotificationService.get_notification"><code class="docutils literal notranslate"><span class="pre">NotificationService.get_notification()</span></code></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -372,8 +391,102 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="notifications">
-<h1>Notifications<a class="headerlink" href="#notifications" title="Link to this heading">#</a></h1>
+  <section id="module-ignis.services.notifications">
+<span id="notifications"></span><h1>Notifications<a class="headerlink" href="#module-ignis.services.notifications" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="ignis.services.notifications.Notification">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Notification</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dbus</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DBusService</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">icon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">summary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">urgency</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">popup</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.notifications.Notification" title="Link to this definition">#</a></dt>
+<dd><p>A notification object. Contain data about the notification and allows performing actions.</p>
+<dl class="simple">
+<dt>Signals:</dt><dd><ul class="simple">
+<li><p><strong>&quot;closed&quot;</strong> (): Emitted when notification has been closed.</p></li>
+<li><p><strong>&quot;dismissed&quot;</strong> (): Emitted when notification has been dismissed.</p></li>
+</ul>
+</dd>
+<dt>Properties:</dt><dd><ul class="simple">
+<li><p><strong>id</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, read-only): ID of the notification.</p></li>
+<li><p><strong>app_name</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, read-only): Name of the application that sent the notification.</p></li>
+<li><p><strong>icon</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): Icon name, path to image or <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>summary</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, read-only): Summary text of the notification, usually the title.</p></li>
+<li><p><strong>body</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, read-only): Body text of the notification, usually containing additional information.</p></li>
+<li><p><strong>actions</strong> (List[<a class="reference internal" href="#ignis.services.notifications.NotificationAction" title="ignis.services.notifications.NotificationAction"><code class="xref py py-class docutils literal notranslate"><span class="pre">NotificationAction</span></code></a>], read-only): List of actions associated with the notification.</p></li>
+<li><p><strong>timeout</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, read-only): Timeout for the notification. Typically, this is -1 and has no effect.</p></li>
+<li><p><strong>time</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>, read-only): Time in POSIX format when the notification was sent.</p></li>
+<li><p><strong>popup</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-only):Whether the notification is a popup.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ignis.services.notifications.NotificationAction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">NotificationAction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dbus</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DBusService</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notification</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ignis.services.notifications.Notification" title="ignis.services.notifications.Notification"><span class="pre">Notification</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.notifications.NotificationAction" title="Link to this definition">#</a></dt>
+<dd><p>A simple object that contains data about a notification action.</p>
+<dl class="simple">
+<dt>Properties:</dt><dd><ul class="simple">
+<li><p><strong>id</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The ID of the action.</p></li>
+<li><p><strong>label</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, read-only): The label of the notification. This one should be displayed to user.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.notifications.NotificationAction.invoke">
+<span class="sig-name descname"><span class="pre">invoke</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.notifications.NotificationAction.invoke" title="Link to this definition">#</a></dt>
+<dd><p>Invoke action.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ignis.services.notifications.NotificationService">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">NotificationService</span></span><a class="headerlink" href="#ignis.services.notifications.NotificationService" title="Link to this definition">#</a></dt>
+<dd><p>A notification daemon.
+Allow receiving notifications and perform actions on them.</p>
+<dl class="simple">
+<dt>Signals:</dt><dd><ul class="simple">
+<li><p><strong>&quot;notified&quot;</strong> (<a class="reference internal" href="#ignis.services.notifications.Notification" title="ignis.services.notifications.Notification"><code class="xref py py-class docutils literal notranslate"><span class="pre">Notification</span></code></a>): Emitted when a new notification appears.</p></li>
+<li><p><strong>&quot;new_popup&quot;</strong> (<a class="reference internal" href="#ignis.services.notifications.Notification" title="ignis.services.notifications.Notification"><code class="xref py py-class docutils literal notranslate"><span class="pre">Notification</span></code></a>): Emitted when a new popup notification appears. Only emitted if <code class="docutils literal notranslate"><span class="pre">dnd</span></code> is set to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+</ul>
+</dd>
+<dt>Properties:</dt><dd><ul class="simple">
+<li><p><strong>notifications</strong> (List[<a class="reference internal" href="#ignis.services.notifications.Notification" title="ignis.services.notifications.Notification"><code class="xref py py-class docutils literal notranslate"><span class="pre">Notification</span></code></a>], read-only): A list of all notifications.</p></li>
+<li><p><strong>popups</strong> (List[<a class="reference internal" href="#ignis.services.notifications.Notification" title="ignis.services.notifications.Notification"><code class="xref py py-class docutils literal notranslate"><span class="pre">Notification</span></code></a>], read-only): A list of currently active popup notifications, sorted from newest to oldest.</p></li>
+<li><p><strong>dnd</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-write, default: <code class="docutils literal notranslate"><span class="pre">False</span></code>): Do Not Disturb mode. If set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, the <code class="docutils literal notranslate"><span class="pre">&quot;new_popup&quot;</span></code> signal will not be emitted, and all new <a class="reference internal" href="#ignis.services.notifications.Notification" title="ignis.services.notifications.Notification"><code class="xref py py-class docutils literal notranslate"><span class="pre">Notification</span></code></a> instances will have <code class="docutils literal notranslate"><span class="pre">popup</span></code> set to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+<li><p><strong>popup_timeout</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, read-write, default: <code class="docutils literal notranslate"><span class="pre">5</span></code>): Timeout before a popup is automatically dismissed, in seconds.</p></li>
+<li><p><strong>max_popups_count</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, read-write, default: <code class="docutils literal notranslate"><span class="pre">3</span></code>): Maximum number of popups. If the length of the <code class="docutils literal notranslate"><span class="pre">popups</span></code> list exceeds <code class="docutils literal notranslate"><span class="pre">max_popups_count</span></code>, the oldest popup will be dismissed.</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Example usage:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.services</span> <span class="kn">import</span> <span class="n">Service</span>
+
+<span class="n">notifications</span> <span class="o">=</span> <span class="n">Service</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;notifications&quot;</span><span class="p">)</span>
+
+<span class="n">notifications</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;notified&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">notification</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">notification</span><span class="o">.</span><span class="n">app_name</span><span class="p">,</span> <span class="n">notification</span><span class="o">.</span><span class="n">summary</span><span class="p">))</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.notifications.NotificationService.clear_all">
+<span class="sig-name descname"><span class="pre">clear_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.notifications.NotificationService.clear_all" title="Link to this definition">#</a></dt>
+<dd><p>Clear all notifications.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.notifications.NotificationService.get_notification">
+<span class="sig-name descname"><span class="pre">get_notification</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#ignis.services.notifications.Notification" title="ignis.services.notifications.Notification"><span class="pre">Notification</span></a></span></span><a class="headerlink" href="#ignis.services.notifications.NotificationService.get_notification" title="Link to this definition">#</a></dt>
+<dd><p>Get <a class="reference internal" href="#ignis.services.notifications.Notification" title="ignis.services.notifications.Notification"><code class="xref py py-class docutils literal notranslate"><span class="pre">Notification</span></code></a> by ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>id</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) -- ID of notification.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#ignis.services.notifications.Notification" title="ignis.services.notifications.Notification"><code class="xref py py-class docutils literal notranslate"><span class="pre">Notification</span></code></a> or <code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 
@@ -411,6 +524,30 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.Notification"><code class="docutils literal notranslate"><span class="pre">Notification</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.NotificationAction"><code class="docutils literal notranslate"><span class="pre">NotificationAction</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.NotificationAction.invoke"><code class="docutils literal notranslate"><span class="pre">NotificationAction.invoke()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.NotificationService"><code class="docutils literal notranslate"><span class="pre">NotificationService</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.NotificationService.clear_all"><code class="docutils literal notranslate"><span class="pre">NotificationService.clear_all()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.NotificationService.get_notification"><code class="docutils literal notranslate"><span class="pre">NotificationService.get_notification()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
