@@ -18,7 +18,6 @@ bindir = get_option('bindir')
 pylibdir = python.get_install_dir()
 
 pkgdatadir = join_paths(datadir, meson.project_name())
-pkglibdir = join_paths(libdir, meson.project_name())
 
 # Dependencies
 dependency('glib-2.0')
@@ -33,7 +32,7 @@ subproject('gvc',
     default_options: [
         'package_name=' + meson.project_name(),
         'pkgdatadir=' + pkgdatadir,
-        'pkglibdir=' + pkglibdir,
+        'pkglibdir=' + libdir,
         'static=false',
         'introspection=true',
         'alsa=false'
@@ -52,3 +51,4 @@ install_subdir(
     install_dir: pylibdir,
 )
 
+meson.add_install_script('post_install.py', join_paths(pylibdir, meson.project_name()))
