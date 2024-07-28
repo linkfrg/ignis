@@ -2,7 +2,7 @@ import json
 from ignis.gobject import IgnisGObject, Binding
 from gi.repository import GObject
 from typing import Any
-from ignis import CACHE_DIR
+from ignis.settings import CACHE_DIR
 
 OPTIONS_FILE = f"{CACHE_DIR}/options.json"
 
