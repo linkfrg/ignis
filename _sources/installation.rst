@@ -20,6 +20,7 @@ Building from source
 - gtk4-layer-shell
 - pygobject
 - pycairo
+- libpulse (if using PipeWire, install ``pipewire-pulse``)
 
 .. code-block:: bash
     
