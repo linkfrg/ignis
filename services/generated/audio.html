@@ -347,9 +347,7 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
+
 </div></div>
       
     </div>
@@ -365,15 +363,6 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.audio.AudioService"><code class="docutils literal notranslate"><span class="pre">AudioService</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.audio.Stream"><code class="docutils literal notranslate"><span class="pre">Stream</span></code></a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -383,73 +372,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="module-ignis.services.audio">
-<span id="audio"></span><h1>Audio<a class="headerlink" href="#module-ignis.services.audio" title="Link to this heading">#</a></h1>
-<dl class="py class">
-<dt class="sig sig-object py" id="ignis.services.audio.AudioService">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AudioService</span></span><a class="headerlink" href="#ignis.services.audio.AudioService" title="Link to this definition">#</a></dt>
-<dd><p>An audio service.
-Allow controlling audio devices.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>This service uses the PulseAudio backend.
-To use it with PipeWire, install <code class="docutils literal notranslate"><span class="pre">pipewire-pulse</span></code>.</p>
-</div>
-<dl class="simple">
-<dt>Signals:</dt><dd><ul class="simple">
-<li><p><strong>&quot;speaker-added&quot;</strong> (<a class="reference internal" href="#ignis.services.audio.Stream" title="ignis.services.audio.Stream"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stream</span></code></a>): Emitted when a speaker is added.</p></li>
-<li><p><strong>&quot;microphone-added&quot;</strong> (<a class="reference internal" href="#ignis.services.audio.Stream" title="ignis.services.audio.Stream"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stream</span></code></a>): Emitted when a microphone is added.</p></li>
-<li><p><strong>&quot;app-added&quot;</strong> (<a class="reference internal" href="#ignis.services.audio.Stream" title="ignis.services.audio.Stream"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stream</span></code></a>): Emitted when an app is added.</p></li>
-<li><p><strong>&quot;recorder-added&quot;</strong> (<a class="reference internal" href="#ignis.services.audio.Stream" title="ignis.services.audio.Stream"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stream</span></code></a>): Emitted when a recorder is added.</p></li>
-</ul>
-</dd>
-<dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>control</strong> (<code class="docutils literal notranslate"><span class="pre">Gvc.MixerControl</span></code>, read-only): A instance of <code class="docutils literal notranslate"><span class="pre">Gvc.MixerControl</span></code>. You typically shouldn't use this property.</p></li>
-<li><p><strong>speaker</strong> (<a class="reference internal" href="#ignis.services.audio.Stream" title="ignis.services.audio.Stream"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stream</span></code></a>, read-write): The default speaker.</p></li>
-<li><p><strong>microphone</strong> (<a class="reference internal" href="#ignis.services.audio.Stream" title="ignis.services.audio.Stream"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stream</span></code></a>, read-write): The default microphone.</p></li>
-<li><p><strong>streams</strong> (List[<a class="reference internal" href="#ignis.services.audio.Stream" title="ignis.services.audio.Stream"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stream</span></code></a>], read-only): List of all streams.</p></li>
-<li><p><strong>speakers</strong> (List[<a class="reference internal" href="#ignis.services.audio.Stream" title="ignis.services.audio.Stream"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stream</span></code></a>], read-only): List of speakers.</p></li>
-<li><p><strong>microphones</strong> (List[<a class="reference internal" href="#ignis.services.audio.Stream" title="ignis.services.audio.Stream"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stream</span></code></a>], read-only): List of microphones.</p></li>
-<li><p><strong>apps</strong> (List[<a class="reference internal" href="#ignis.services.audio.Stream" title="ignis.services.audio.Stream"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stream</span></code></a>], read-only): List of applications currently playing sound.</p></li>
-<li><p><strong>recorders</strong> (List[<a class="reference internal" href="#ignis.services.audio.Stream" title="ignis.services.audio.Stream"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stream</span></code></a>], read-only): List of audio recorders.</p></li>
-</ul>
-</dd>
-</dl>
-<p><strong>Example usage:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.service</span> <span class="kn">import</span> <span class="n">Service</span>
-
-<span class="n">audio</span> <span class="o">=</span> <span class="n">Service</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;audio&quot;</span><span class="p">)</span>
-
-<span class="n">audio</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;speaker-added&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">speaker</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">speaker</span><span class="o">.</span><span class="n">description</span><span class="p">))</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="ignis.services.audio.Stream">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Stream</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">control</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">MixerControl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stream</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">MixerStream</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.audio.Stream" title="Link to this definition">#</a></dt>
-<dd><p>An audio stream.
-A general class for speakers, microphones, applications, and recorders.</p>
-<dl class="simple">
-<dt>Signals:</dt><dd><ul class="simple">
-<li><p><strong>&quot;removed&quot;</strong> (): Emitted when the stream has been removed.</p></li>
-</ul>
-</dd>
-<dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>stream</strong> (<code class="docutils literal notranslate"><span class="pre">Gvc.MixerStream</span></code>, read-only): An instance of <code class="docutils literal notranslate"><span class="pre">Gvc.MixerStream</span></code>. You typically shouldn't use this property.</p></li>
-<li><p><strong>application_id</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): Application ID or <code class="docutils literal notranslate"><span class="pre">None</span></code>. Usually returns <code class="docutils literal notranslate"><span class="pre">None</span></code> xD.</p></li>
-<li><p><strong>icon_name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): Current icon name, depending on <code class="docutils literal notranslate"><span class="pre">volume</span></code> and <code class="docutils literal notranslate"><span class="pre">is_muted</span></code> properties. Works only for speakers and microphones.</p></li>
-<li><p><strong>id</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, read-only): ID of the stream.</p></li>
-<li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): Name of the stream.</p></li>
-<li><p><strong>description</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): Description of the stream.</p></li>
-<li><p><strong>is_muted</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-write): Whether the stream is muted.</p></li>
-<li><p><strong>volume</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>, read-write): Volume of the stream.</p></li>
-<li><p><strong>is_default</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-only): Whether the stream is default. Works only for speakers and microphones.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
+  <section id="audio">
+<h1>Audio<a class="headerlink" href="#audio" title="Link to this heading">#</a></h1>
 </section>
 
 
@@ -487,22 +411,6 @@ A general class for speakers, microphones, applications, and recorders.</p>
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.audio.AudioService"><code class="docutils literal notranslate"><span class="pre">AudioService</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.audio.Stream"><code class="docutils literal notranslate"><span class="pre">Stream</span></code></a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>
