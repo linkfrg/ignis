@@ -67,16 +67,20 @@ class WallpaperService(IgnisGObject):
 
         self._windows = []
 
-        for i in range(Utils.get_n_monitors()):
+        for monitor_id in range(Utils.get_n_monitors()):
+            monitor = Utils.get_monitor(monitor_id)
+            geometry = monitor.get_geometry()
             window = Window(
                 layer="background",
                 exclusivity="ignore",
-                monitor=i,
-                namespace=f"ignis_wallpaper_service_{i}",
+                monitor=monitor_id,
+                namespace=f"ignis_wallpaper_service_{monitor_id}",
                 anchor=["left", "right", "top", "bottom"],
                 child=Picture(
                     image=CACHE_WALLPAPER_PATH,
                     content_fit="cover",
+                    width=geometry.width,
+                    height=geometry.height
                 ),
             )
             self._windows.append(window)
