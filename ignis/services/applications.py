@@ -1,5 +1,6 @@
 import os
 import subprocess
+import re
 from gi.repository import GObject, Gio
 from ignis.gobject import IgnisGObject
 from typing import List
@@ -57,8 +58,9 @@ class Application(IgnisGObject):
         - **icon** (``str``, read-only): The icon of the application. If the app has no icon, "image-missing" will be returned.
         - **keywords** (``str``, read-only): Keywords of the application. Ususally, these are words that describe the application.
         - **desktop_file** (``str``, read-only): The .desktop file of the application.
-        - **executable** (``str``, read-only): The executable of the application. Usually, this is a shell command that launches the application.
-        - **actions** (List[:class:`~ignis.services.applications.Application`], read-only): List of actions.
+        - **executable** (``str``, read-only): The executable of the application. Usually, this is a binary file of the application.
+        - **exec_string** (``str``, read-only): The string that contains the executable with command line arguments, used to launch the application.
+        - **actions** (List[:class:`~ignis.services.applications.Application`], read-only): A list of actions.
         - **is_pinned** (``bool``, read-write): Whether the application is pinned.
     """
 
@@ -114,6 +116,10 @@ class Application(IgnisGObject):
         return self._app.get_executable()
     
     @GObject.Property
+    def exec_string(self) -> str:
+        return self._app.get_string("Exec")
+    
+    @GObject.Property
     def actions(self) -> List[ApplicationAction]:
         return self._actions
 
@@ -148,8 +154,9 @@ class Application(IgnisGObject):
         """
         Launch the application.
         """
+        exec_string = re.sub(r'%\S*', '', self.exec_string)
         subprocess.Popen(
-            f"gtk-launch {self.desktop_file}",
+            exec_string,
             shell=True,
             start_new_session=True,
             stdout=subprocess.DEVNULL,
