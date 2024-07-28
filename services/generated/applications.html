@@ -415,8 +415,9 @@ document.write(`
 <li><p><strong>icon</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The icon of the application. If the app has no icon, &quot;image-missing&quot; will be returned.</p></li>
 <li><p><strong>keywords</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): Keywords of the application. Ususally, these are words that describe the application.</p></li>
 <li><p><strong>desktop_file</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The .desktop file of the application.</p></li>
-<li><p><strong>executable</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The executable of the application. Usually, this is a shell command that launches the application.</p></li>
-<li><p><strong>actions</strong> (List[<a class="reference internal" href="#ignis.services.applications.Application" title="ignis.services.applications.Application"><code class="xref py py-class docutils literal notranslate"><span class="pre">Application</span></code></a>], read-only): List of actions.</p></li>
+<li><p><strong>executable</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The executable of the application. Usually, this is a binary file of the application.</p></li>
+<li><p><strong>exec_string</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The string that contains the executable with command line arguments, used to launch the application.</p></li>
+<li><p><strong>actions</strong> (List[<a class="reference internal" href="#ignis.services.applications.Application" title="ignis.services.applications.Application"><code class="xref py py-class docutils literal notranslate"><span class="pre">Application</span></code></a>], read-only): A list of actions.</p></li>
 <li><p><strong>is_pinned</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-write): Whether the application is pinned.</p></li>
 </ul>
 </dd>
