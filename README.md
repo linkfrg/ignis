@@ -2,6 +2,9 @@
 
 __Ignis is a Python framework for building desktop shells using GTK4.__
 
+[Installation](https://linkfrg.github.io/ignis/installation.html)
+[Documentation](https://linkfrg.github.io/ignis/index.html)
+
 ## Features
 - Configured in Python
 - Uses GTK4
