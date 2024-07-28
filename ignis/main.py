@@ -1,14 +1,10 @@
 import os
 import ctypes
 import argparse
-from gi.repository import GLib
 from ignis.client import IgnisClient
 from ignis.utils import Utils
 
 DEFAULT_CONFIG_PATH = "~/.config/ignis/config.py"
-
-CACHE_DIR = f"{GLib.get_user_cache_dir()}/ignis/"
-os.makedirs(CACHE_DIR, exist_ok=True)
 
 
 def set_process_name(name):

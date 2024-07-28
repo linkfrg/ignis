@@ -4,14 +4,15 @@ from ignis.gobject import IgnisGObject
 from ignis.widgets.window import Window
 from ignis.widgets.picture import Picture
 from ignis.utils import Utils
-from gi.repository import GLib, GObject
+from gi.repository import GObject
 from ignis.services import Service
+from ignis.settings import CACHE_DIR
 
 options = Service.get("options")
 
 options.create_option(name="wallpaper", default=None, exists_ok=True)
 
-CACHE_WALLPAPER_PATH = f"{GLib.get_user_cache_dir()}/ignis/wallpaper"
+CACHE_WALLPAPER_PATH = f"{CACHE_DIR}/wallpaper"
 
 
 class WallpaperService(IgnisGObject):

@@ -7,8 +7,9 @@ from ignis.gobject import IgnisGObject
 from ignis.utils import Utils
 from ignis.logging import logger
 from typing import List
+from ignis.settings import CACHE_DIR
 
-ART_URL_CACHE_DIR = f"{GLib.get_user_cache_dir()}/ignis/art_url"
+ART_URL_CACHE_DIR = f"{CACHE_DIR}/art_url"
 
 os.makedirs(ART_URL_CACHE_DIR, exist_ok=True)
 

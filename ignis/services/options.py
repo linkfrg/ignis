@@ -1,9 +1,10 @@
 import json
 from ignis.gobject import IgnisGObject, Binding
-from gi.repository import GLib, GObject
+from gi.repository import GObject
 from typing import Any
+from ignis import CACHE_DIR
 
-OPTIONS_FILE = f"{GLib.get_user_cache_dir()}/ignis/options.json"
+OPTIONS_FILE = f"{CACHE_DIR}/options.json"
 
 
 class OptionNotFoundError(Exception):

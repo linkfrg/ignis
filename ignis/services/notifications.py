@@ -9,6 +9,7 @@ from ignis.services import Service
 from ignis.services.options import OptionsService
 from typing import List
 from datetime import datetime
+from ignis.settings import CACHE_DIR
 
 options: OptionsService = Service.get("options")
 
@@ -20,7 +21,7 @@ options.create_option(name=DND_OPTION, default=False, exists_ok=True)
 options.create_option(name=POPUP_TIMEOUT_OPTION, default=5, exists_ok=True)
 options.create_option(name=MAX_POPUPS_COUNT_OPTION, default=3, exists_ok=True)
 
-NOTIFICATIONS_CACHE_DIR = f"{GLib.get_user_cache_dir()}/ignis/notifications"
+NOTIFICATIONS_CACHE_DIR = f"{CACHE_DIR}/notifications"
 NOTIFICATIONS_CACHE_FILE = f"{NOTIFICATIONS_CACHE_DIR}/notifications.json"
 NOTIFICATIONS_IMAGE_DATA = f"{NOTIFICATIONS_CACHE_DIR}/images"
 NOTIFICATIONS_EMPTY_CACHE_FILE = {"notifications": []}
