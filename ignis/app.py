@@ -111,7 +111,8 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         """
         Apply CSS/SCSS/SASS style from a path.
         If ``style_path`` has a ``.sass`` or ``.scss`` extension, it will be automatically compiled.
-
+        Requires ``dart-sass`` for SASS/SCSS compilation.
+        
         Args:
             style_path (``str``): Path to the .css/.scss/.sass file.
         """
