@@ -1,126 +1,91 @@
 import os
+import click
 import ctypes
-import argparse
+import collections
 from ignis.client import IgnisClient
 from ignis.utils import Utils
 
 DEFAULT_CONFIG_PATH = "~/.config/ignis/config.py"
 
 
+class OrderedGroup(click.Group):
+    def __init__(self, name=None, commands=None, **attrs):
+        super(OrderedGroup, self).__init__(name, commands, **attrs)
+        self.commands = commands or collections.OrderedDict()
+
+    def list_commands(self, ctx):
+        return self.commands
+
 def set_process_name(name):
     libc = ctypes.CDLL("libc.so.6")
     libc.prctl(15, ctypes.c_char_p(name.encode()), 0, 0, 0)
 
+def print_version(ctx, param, value):
+    if value:
+        ctx.exit(print(f"Ignis {Utils.get_ignis_version()}"))
 
-def parse_arguments():
-    parser = argparse.ArgumentParser(description="", prog="ignis")
-    parser.add_argument(
-        "--config",
-        "-c",
-        default=DEFAULT_CONFIG_PATH,
-        help=f"Path to the configuration file (default: {DEFAULT_CONFIG_PATH})",
-    )
-    parser.add_argument(
-        "--debug",
-        action="store_true",
-        help="Print debug information to terminal",
-    )
-    parser.add_argument(
-        "--open",
-        metavar="WINDOW",
-        help="Open a window",
-    )
-    parser.add_argument(
-        "--close",
-        metavar="WINDOW",
-        help="Close a window",
-    )
-    parser.add_argument(
-        "--toggle",
-        metavar="WINDOW",
-        help="Toggle a window",
-    )
-    parser.add_argument(
-        "--list-windows",
-        action="store_true",
-        help="List all windows",
-    )
-    parser.add_argument(
-        "--run-python",
-        metavar="CODE",
-        help="Execute inline python code",
-    )
-    parser.add_argument(
-        "--run-file",
-        metavar="FILE",
-        help="Execute python file",
-    )
-    parser.add_argument(
-        "--inspector",
-        action="store_true",
-        help="Open Inspector",
-    )
-    parser.add_argument(
-        "--reload",
-        action="store_true",
-        help="Reload ignis",
-    )
-    parser.add_argument(
-        "--quit",
-        action="store_true",
-        help="Quit ignis",
-    )
-    parser.add_argument(
-        "--version",
-        action="store_true",
-        help="Print version",
-    )
+def call_client_func(name: str, *args) -> None:
+    client = IgnisClient()
+    if not client.has_owner:
+        print("Ignis is not running.")
+        exit(1)
+    getattr(client, name)(*args)
 
-    return parser.parse_args()
-
-
+@click.group(cls=OrderedGroup)
+@click.option('--version', is_flag=True, callback=print_version, expose_value=False, is_eager=True, help='Print version and exit')
 def main():
     set_process_name("ignis")
-    args = parse_arguments()
+
+@main.command(name="init", help="Initialize Ignis")
+@click.option("--config", "-c", help=f"Path to the configuration file (default: {DEFAULT_CONFIG_PATH})", default=DEFAULT_CONFIG_PATH, type=str, metavar="PATH")
+@click.option("--debug", help="Print debug information to terminal", is_flag=True)
+def init(config: str, debug: bool) -> None:
     client = IgnisClient()
-    
-    if not client.has_owner:
-        run_server(args.config)
-    else:
-        if args.open:
-            client.OpenWindow(args.open)
+    if client.has_owner:
+        print("Ignis is already running")
+        exit(1)
+    run_server(config)
 
-        elif args.close:
-            client.CloseWindow(args.close)
+@main.command(name="open", help="Open window")
+@click.argument("window")
+def open(window: str) -> None:
+    call_client_func("OpenWindow", window)
 
-        elif args.toggle:
-            client.ToggleWindow(args.toggle)
+@main.command(name="close", help="Close window")
+@click.argument("window")
+def close(window: str) -> None:
+    call_client_func("CloseWindow", window)
 
-        elif args.list_windows:
-            client.ListWindows()
+@main.command(name="toggle", help="Toggle window")
+@click.argument("window")
+def toggle(window: str) -> None:
+    call_client_func("ToggleWindow", window)
 
-        elif args.run_python:
-            client.RunPython(args.run_python)
+@main.command(name="list-windows", help="List all windows")
+def list_windows() -> None:
+    call_client_func("ListWindows")
 
-        elif args.run_file:
-            client.RunFile(args.run_file)
+@main.command(name="run-python", help="Execute inline python code")
+@click.argument("code")
+def run_python(code: str) -> None:
+    call_client_func("RunPython", code)
 
-        elif args.inspector:
-            client.Inspector()
+@main.command(name="run-file", help="Execute python file")
+@click.argument("file")
+def run_file(file: str) -> None:
+    call_client_func("RunFile", file)
 
-        elif args.reload:
-            client.Reload()
+@main.command(name="inspector", help="Open GTK Inspector")
+def inspector() -> None:
+    call_client_func("Inspector")
 
-        elif args.quit:
-            client.Quit()
+@main.command(name="reload", help="Reload Ignis")
+def reload() -> None:
+    call_client_func("Reload")
 
-        elif args.version:
-            print(f"Ignis {Utils.get_ignis_version()}")
-            
-        else:
-            print("Ignis is already running")
-            exit(1)
-
+@main.command(name="quit", help="Quit Ignis")
+def quit() -> None:
+    call_client_func("Quit")
 
 def run_server(config: str) -> None:
     from ignis.app import app
