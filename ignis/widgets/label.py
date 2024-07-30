@@ -11,9 +11,9 @@ class Label(Gtk.Label, BaseWidget):
         - **justify** (``str``, optional, read-write): The alignment of the lines in the text of the label relative to each other. This does NOT affect the alignment of the label within its allocation. Possible values: ``"left"``, ``"right"``, ``"center"``, ``"fill"``.
         - **ellipsize** (``str``, optional, read-write): The preferred place to ellipsize the string. Possible values: ``"none"``, ``"start"``, ``"middle"``, ``"end"``.
         - **wrap_mode** (``str``, optional, read-write): If wrap is set, controls how linewrapping is done. Possible values: ``"word"``, ``"char"``, ``"word_char"``.
-    
+
     .. code-block:: python
-    
+
         Widget.Label(
             label='heh',
             use_markup=False,
@@ -34,4 +34,3 @@ class Label(Gtk.Label, BaseWidget):
         self.override_enum("wrap_mode", Pango.WrapMode)
         self.override_enum("ellipsize", Pango.EllipsizeMode)
         BaseWidget.__init__(self, **kwargs)
-    

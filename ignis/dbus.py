@@ -68,7 +68,7 @@ class DBusService(IgnisGObject):
         params,
         invocation,
     ):
-        
+
         def callback(func: callable, unpacked_params) -> None:
             result = func(invocation, *unpacked_params)
             invocation.return_value(result)
@@ -139,7 +139,7 @@ class DBusProxy(IgnisGObject):
     @GObject.Property
     def interface_name(self) -> str:
         return self._proxy.get_interface_name()
-    
+
     @GObject.Property
     def connection(self) -> str:
         return self._proxy.get_connection()
@@ -151,11 +151,11 @@ class DBusProxy(IgnisGObject):
     @GObject.Property
     def methods(self) -> List[str]:
         return self._methods
-    
+
     @GObject.Property
     def properties(self) -> List[str]:
         return self._properties
-    
+
     @GObject.Property
     def has_owner(self) -> bool:
         dbus = DBusProxy(
@@ -165,7 +165,7 @@ class DBusProxy(IgnisGObject):
             info=Utils.load_interface_xml("org.freedesktop.DBus"),
         )
         return dbus.NameHasOwner("(s)", self.name)
-    
+
     def __getattr__(self, name: str) -> Any:
         if name in self.methods:
             return getattr(self._proxy, name)
@@ -173,7 +173,7 @@ class DBusProxy(IgnisGObject):
             return self.__get_dbus_property(name)
         else:
             return super().__getattribute__(name)
-        
+
     def signal_subscribe(
         self,
         signal_name: str,
@@ -210,7 +210,7 @@ class DBusProxy(IgnisGObject):
             )[0]
         except GLib.GError:
             return None
-        
+
     def watch_name(
         self, on_name_appeared: callable = None, on_name_vanished: callable = None
     ) -> None:

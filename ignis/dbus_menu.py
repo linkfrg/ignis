@@ -43,7 +43,7 @@ class DBusMenu(Gtk.PopoverMenu):
         self.__proxy.signal_subscribe(
             "ItemsPropertiesUpdated", lambda *args: self.__update_menu()
         )
-        
+
         self.__update_menu()
 
     def __update_menu(self) -> None:

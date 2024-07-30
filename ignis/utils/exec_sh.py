@@ -17,7 +17,7 @@ def exec_sh(command: str) -> subprocess.CompletedProcess:
 class AsyncCompletedProcess:
     """
     Completed process object for :func:`~ignis.utils.exec_sh.exec_sh_async`.
-    
+
     Properties:
         - **returncode** (``int``, read-only): The return code of the process.
         - **stdout** (``str``, read-only): The output of the process.
@@ -33,11 +33,11 @@ class AsyncCompletedProcess:
     @property
     def returncode(self) -> int:
         return self._returncode
-    
+
     @property
     def stdout(self) -> str:
         return self._stdout
-    
+
     @property
     def stderr(self) -> str:
         return self._stderr

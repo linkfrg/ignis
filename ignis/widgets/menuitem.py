@@ -45,19 +45,19 @@ class MenuItem(IgnisGObject):
     @GObject.Property
     def label(self) -> str:
         return self._label
-    
+
     @GObject.Property
     def uniq_name(self) -> str:
         return self._uniq_name
-    
+
     @GObject.Property
     def enabled(self) -> bool:
         return self._enabled
-    
+
     @GObject.Property
     def on_activate(self) -> callable:
         return self._on_activate
-    
+
     @on_activate.setter
     def on_activate(self, value: callable) -> None:
         self._on_activate = value

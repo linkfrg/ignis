@@ -25,7 +25,7 @@ class ServiceClass:
                 module = importlib.import_module(f".{service}", package=__name__)
                 service_class = getattr(module, self._services[service])
                 setattr(self, f"_{service}", service_class())
-            
+
             return getattr(self, f"_{service}")
         else:
             logger.error(f"Service '{service}' not found!")

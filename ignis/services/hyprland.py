@@ -34,12 +34,13 @@ class HyprlandService(IgnisGObject):
 
         hyprland.connect("notify::kb-layout", lambda x, y: print(hyprland.kb_layout))
     """
+
     def __init__(self):
         super().__init__()
         if not os.path.exists(SOCKET_DIR):
             logger.critical("Hyprland IPC not found! To use the Hyprland service, ensure that you are running Hyprland.")
             exit(1)
-            
+
         self._workspaces = []
         self._active_workspace = {}
         self._kb_layout = ""
@@ -106,11 +107,11 @@ class HyprlandService(IgnisGObject):
             if kb["main"]:
                 self._kb_layout = kb["active_keymap"]
                 self.notify("kb_layout")
-    
+
     def __sync_active_window(self) -> None:
         self._active_window = json.loads(self.send_command("j/activewindow"))
         self.notify("active_window")
-            
+
 
     def send_command(self, cmd: str) -> str:
         """
@@ -120,7 +121,7 @@ class HyprlandService(IgnisGObject):
 
         Args:
             cmd (``str``): A command.
-        
+
         Returns:
             Response from Hyprland IPC.
         """
@@ -144,7 +145,6 @@ class HyprlandService(IgnisGObject):
 
         Args:
             workspace_id (``int``): ID of workspace to be switched to
-            
         """
         self.send_command(f"dispatch workspace {workspace_id}")
 

@@ -60,4 +60,3 @@ class Widget:
     SpinButton = SpinButton
     DropDown = DropDown
     Overlay = Overlay
-    

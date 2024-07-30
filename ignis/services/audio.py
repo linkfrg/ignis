@@ -19,7 +19,7 @@ MICROPHONE_ICON_TEMPLATE = "microphone-sensitivity-{}-symbolic"
 
 class Stream(IgnisGObject):
     """
-    An audio stream. 
+    An audio stream.
     A general class for speakers, microphones, applications, and recorders.
 
     Signals:
@@ -51,7 +51,7 @@ class Stream(IgnisGObject):
     def _setup(self) -> None:
         if not self._stream:
             return
-        
+
         for property_name in [
             "application_id",
             "id",
@@ -61,7 +61,7 @@ class Stream(IgnisGObject):
             "volume",
         ]:
             id_ = self._stream.connect(
-                f"notify::{property_name}", lambda *args: self.notify(property_name)
+                f"notify::{property_name}", lambda *args, property_name=property_name: self.notify(property_name)
             )
             self.__connection_ids.append(id_)
 
@@ -140,7 +140,7 @@ class Stream(IgnisGObject):
             default_stream = self._control.get_default_source()
         else:
             return
-        
+
         if not default_stream:
             return
 
@@ -210,6 +210,7 @@ class AudioService(IgnisGObject):
 
         audio.connect("speaker-added", lambda x, speaker: print(speaker.description))
     """
+
     __gsignals__ = {
         "speaker-added": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, (Stream,)),
         "microphone-added": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, (Stream,)),
@@ -276,7 +277,7 @@ class AudioService(IgnisGObject):
     @GObject.Property
     def microphones(self) -> List[Stream]:
         return self._microphones.values()
-    
+
     @GObject.Property
     def apps(self) -> List[Stream]:
         return self._apps.values()

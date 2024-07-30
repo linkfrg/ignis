@@ -54,8 +54,8 @@ class FileMonitor(IgnisGObject):
 
         See `Gio.FileMonitorEvent <https://lazka.github.io/pgi-docs/index.html#Gio-2.0/enums.html#Gio.FileMonitorEvent>`_
 
-    **Example usage:**    
-    
+    **Example usage:**
+
     .. code-block::
 
         Utils.FileMonitor(
@@ -90,11 +90,11 @@ class FileMonitor(IgnisGObject):
         self._sub_paths = []
 
         if recursive:
-            for root, dirs, files in os.walk(path):
+            for root, dirs, _files in os.walk(path):
                 for d in dirs:
                     subdir_path = os.path.join(root, d)
                     self.__add_submonitor(subdir_path)
-        
+
         file_monitors.append(self) # to prevent the garbage collector from collecting self
 
     def __on_change(self, file_monitor, file, other_file, event_type) -> None:
@@ -102,14 +102,14 @@ class FileMonitor(IgnisGObject):
         if self._callback:
             self._callback(path, EVENT[event_type])
             self.emit("changed", path, EVENT[event_type])
-        
+
         if self.recursive and os.path.isdir(path):
             self.__add_submonitor(path)
 
     def __add_submonitor(self, path: str) -> None:
         if path in self._sub_paths:
             return
-        
+
         sub_gfile = Gio.File.new_for_path(path)
         monitor = sub_gfile.monitor(FLAGS[self.flags], None)
         monitor.connect("changed", self.__on_change)

@@ -11,9 +11,9 @@ class Overlay(Gtk.Overlay, BaseWidget):
 
     Properties:
         - **overlays** (List[``Gtk.Widget``, optional, read-write]): List of overlay widgets.
-    
+
     .. code-block:: python
-    
+
         Widget.Overlay(
             child=Widget.Label(label="This is the main child"),
             overlays=[
@@ -34,7 +34,7 @@ class Overlay(Gtk.Overlay, BaseWidget):
     @GObject.Property
     def overlays(self) -> List[Gtk.Widget]:
         return self._overlays
-    
+
     @overlays.setter
     def overlays(self, value: List[Gtk.Widget]) -> None:
         for i in self._overlays:

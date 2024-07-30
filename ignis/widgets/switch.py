@@ -17,7 +17,6 @@ class Switch(Gtk.Switch, BaseWidget):
             active=True,
             on_change=lambda x, active: print(active),
         )
-        
     """
     __gtype_name__ = "IgnisSwitch"
     __gproperties__ = {**BaseWidget.gproperties}

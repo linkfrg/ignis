@@ -340,7 +340,7 @@ class ActiveAccessPoint(WifiAccessPoint):
             self._point = ap
         else:
             self._point = NM.AccessPoint()
-            
+
         self.notify_all()
 
 

@@ -56,7 +56,7 @@ class PopoverMenu(Gtk.PopoverMenu, BaseWidget):
             self._current_section = Gio.Menu()
             self._sections.append(self._current_section)
             return
-        
+
         if item.submenu:
             self._current_section.append_submenu(item.label, item.submenu.menu_model)
         else:

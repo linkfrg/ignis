@@ -5,7 +5,7 @@ from ignis.base_widget import BaseWidget
 class ListBoxRow(Gtk.ListBoxRow, BaseWidget):
     """
     Bases: `Gtk.ListBoxRow <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/ListBoxRow.html>`_.
-    
+
     A row for :class:`~ignis.widgets.listbox.ListBox`.
 
     Properties:
@@ -15,7 +15,7 @@ class ListBoxRow(Gtk.ListBoxRow, BaseWidget):
     .. code-block:: python
 
         Widget.ListBoxRow(
-            label="row 1", 
+            label="row 1",
             on_activate=lambda x: print("selected row 1"),
             selected=True
         )

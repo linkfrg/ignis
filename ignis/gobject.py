@@ -30,8 +30,8 @@ class Binding(GObject.Object):
     @GObject.Property
     def transform(self) -> callable:
         return self._transform
-    
-    
+
+
 class IgnisGObject(GObject.Object):
     """
     Bases: `GObject.Object <https://lazka.github.io/pgi-docs/index.html#GObject-2.0/classes/Object.html>`_.
@@ -72,7 +72,7 @@ class IgnisGObject(GObject.Object):
                 if i.name in without:
                     continue
             self.notify(i.name)
-    
+
     def set_property(self, property_name: str, value: Any) -> None:
         """
         :meta private:
@@ -114,10 +114,10 @@ class IgnisGObject(GObject.Object):
             :class:`~ignis.gobject.Binding`
         """
         return Binding(self, property_name, transform)
-    
+
     def __getattribute__(self, name: str) -> Any:
         # This modified __getattribute__ method redirect all "set_" methods to set_property method to provive bindings support.
-        # "get_" method redirect need to widgets that override enums, to make "get_" return strings instead of enums. 
+        # "get_" method redirect need to widgets that override enums, to make "get_" return strings instead of enums.
 
         if name.startswith("set_"):
             property_name = name.replace("set_", "")
@@ -129,4 +129,3 @@ class IgnisGObject(GObject.Object):
                 return lambda: self.get_property(property_name)
 
         return super().__getattribute__(name)
-    

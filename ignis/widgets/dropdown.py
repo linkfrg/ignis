@@ -15,7 +15,7 @@ class DropDown(Gtk.DropDown, BaseWidget):
         - **selected** (``str``, read-only): The selected string. This is not an argument to the constructor; it is a shortcut for ``self.selected_item.props.string``.
 
     .. code-block:: python
-    
+
         Widget.DropDown(
             items=["option 1", "option 2", "option 3"],
             on_selected=lambda x, selected: print(selected)
@@ -36,7 +36,7 @@ class DropDown(Gtk.DropDown, BaseWidget):
     @GObject.Property
     def items(self) -> List[str]:
         return self._items
-    
+
     @items.setter
     def items(self, value: List[str]) -> None:
         self._items = value
@@ -49,7 +49,7 @@ class DropDown(Gtk.DropDown, BaseWidget):
     @GObject.Property
     def on_selected(self) -> callable:
         return self._on_selected
-    
+
     @on_selected.setter
     def on_selected(self, value: callable) -> None:
         self._on_selected = value

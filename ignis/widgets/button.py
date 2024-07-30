@@ -37,7 +37,7 @@ class Button(Gtk.Button, BaseWidget):
 
         BaseWidget.__init__(self, **kwargs)
         self.connect("clicked", lambda x: self.on_click(x) if self.on_click else None)
-        
+
     def __init_controller(self, button: int, callback: callable) -> None:
         def on_pressed(gesture_click: Gtk.GestureClick, n_press, x, y) -> None:
             gesture_click.set_state(Gtk.EventSequenceState.CLAIMED)

@@ -219,7 +219,6 @@ class NotificationService(IgnisGObject):
         notifications = Service.get("notifications")
 
         notifications.connect("notified", lambda x, notification: print(notification.app_name, notification.summary))
-        
     """
 
     __gsignals__ = {
@@ -266,13 +265,11 @@ class NotificationService(IgnisGObject):
 
     @GObject.Property
     def notifications(self) -> list:
-        return sorted(
-            list(self._notifications.values()), key=lambda x: x.id, reverse=True
-        )
+        return sorted(self._notifications.values(), key=lambda x: x.id, reverse=True)
 
     @GObject.Property
     def popups(self) -> list:
-        return sorted(list(self._popups.values()), key=lambda x: x.id, reverse=True)
+        return sorted(self._popups.values(), key=lambda x: x.id, reverse=True)
 
     @GObject.Property
     def dnd(self) -> bool:
@@ -424,7 +421,7 @@ class NotificationService(IgnisGObject):
         }
         with open(NOTIFICATIONS_CACHE_FILE, "w") as file:
             json.dump(data, file, indent=2)
-            
+
     def __add_notification(self, notification: Notification) -> None:
         notification.connect("closed", lambda x: self.__close_notification(x))
         notification.connect("dismissed", lambda x: self.__dismiss_popup(x))
@@ -432,9 +429,9 @@ class NotificationService(IgnisGObject):
 
     def __load_notifications(self) -> None:
         try:
-            with open(NOTIFICATIONS_CACHE_FILE, "r") as file:
+            with open(NOTIFICATIONS_CACHE_FILE) as file:
                 log_file = json.load(file)
-                
+
             for n in log_file.get("notifications", []):
                 notification = Notification(**n, popup=False, dbus=self.__dbus)
                 self.__add_notification(notification)

@@ -8,7 +8,7 @@ class RegularWindow(Gtk.Window, BaseWidget):
     Bases: `Gtk.Window <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Window.html>`_.
 
     A standart application window.
-    
+
     Properties:
         - **namespace** (``str``, read-only): The name of the window, used for accessing it from the CLI and :class:`~ignis.app.ignisApp`. It must be unique.
 
@@ -31,7 +31,7 @@ class RegularWindow(Gtk.Window, BaseWidget):
         self._namespace = namespace
 
         app.add_window(namespace, self)
-    
+
     @GObject.Property
     def namespace(self) -> str:
         return self._namespace

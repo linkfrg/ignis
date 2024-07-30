@@ -15,12 +15,11 @@ class ToggleButton(Gtk.ToggleButton, BaseWidget):
         Widget.ToggleButton(
             on_toggled=lambda x, active: print(active)
         )
-        
     """
 
     __gtype_name__ = "IgnisToggleButton"
     __gproperties__ = {**BaseWidget.gproperties}
-    
+
     def __init__(self, **kwargs) -> None:
         Gtk.ToggleButton.__init__(self)
         BaseWidget.__init__(self, **kwargs)
@@ -30,7 +29,7 @@ class ToggleButton(Gtk.ToggleButton, BaseWidget):
     @GObject.Property
     def on_toggled(self) -> callable:
         return self._on_toggled
-    
+
     @on_toggled.setter
     def on_toggled(self, value: callable) -> None:
         self._on_toggled = value

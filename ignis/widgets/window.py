@@ -6,7 +6,7 @@ from ignis.utils import Utils
 from typing import List
 from gi.repository import Gtk4LayerShell as GtkLayerShell
 from ignis.logging import logger
-    
+
 
 LAYER = {
     "background": GtkLayerShell.Layer.BACKGROUND,
@@ -74,7 +74,7 @@ class Window(Gtk.Window, BaseWidget):
         self,
         namespace: str,
         monitor: int = None,
-        anchor: List[str] = [],
+        anchor: List[str] = None,
         exclusivity: str = "normal",
         layer: str = "top",
         kb_mode: str = "none",
@@ -214,10 +214,10 @@ class Window(Gtk.Window, BaseWidget):
     def __change_input_region(self) -> None:
         if self.input_width < 0:
             return
-        
+
         if self.input_height < 0:
             return
-        
+
         rectangle = cairo.RectangleInt(0, 0, self.input_width, self.input_height)
         region = cairo.Region(rectangle)
         self.get_surface().set_input_region(region)

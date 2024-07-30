@@ -79,7 +79,7 @@ class FileDialog(Gtk.FileDialog, BaseWidget):
                 file = dialog.open_finish(result)
         except GLib.GError:
             return
-        
+
         if file is not None:
             self._file = file
             self.emit("file-set", file)

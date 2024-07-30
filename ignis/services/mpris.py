@@ -96,7 +96,7 @@ class MprisPlayer(IgnisGObject):
         for key in prop_dict.keys():
             if key == "Metadata":
                 self.__cache_art_url()
-                
+
         self.notify_all()
 
     @Utils.run_in_thread
@@ -110,7 +110,7 @@ class MprisPlayer(IgnisGObject):
             result = ART_URL_CACHE_DIR + "/" + os.path.basename(path)
             if not os.path.exists(result):
                 shutil.copy(path, result)
-                
+
         elif art_url.startswith("https://") or art_url.startswith("http://"):
             result = ART_URL_CACHE_DIR + "/" + os.path.basename(art_url)
             if not os.path.exists(result):
@@ -119,7 +119,7 @@ class MprisPlayer(IgnisGObject):
                 except requests.exceptions.ConnectionError:
                     logger.warning("Failed to download the art image of media.")
                     return
-                
+
                 if response.status_code == 200:
                     with open(
                         os.path.join(ART_URL_CACHE_DIR, os.path.basename(art_url)),

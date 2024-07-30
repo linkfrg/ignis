@@ -12,7 +12,7 @@ class CenterBox(Gtk.CenterBox, BaseWidget):
         - **vertical** (``bool``, optional, read-write): Whether the box arranges children vertically.
 
     .. code-block:: python
-    
+
         Widget.CenterBox(
             vertical=False,
             start_widget=Widget.Label(label='start'),
@@ -30,7 +30,7 @@ class CenterBox(Gtk.CenterBox, BaseWidget):
 
     @GObject.Property
     def vertical(self) -> bool:
-        self.get_orientation() == Gtk.Orientation.VERTICAL
+        return self.get_orientation() == Gtk.Orientation.VERTICAL
 
     @vertical.setter
     def vertical(self, value: bool) -> None:

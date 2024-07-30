@@ -2,7 +2,7 @@ from gi.repository import Gio
 
 
 def get_file_icon_name(path: str, symbolic: bool = False) -> str:
-    """ 
+    """
     Get a standart icon name for the file or directory.
 
     Args:

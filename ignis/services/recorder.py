@@ -73,10 +73,10 @@ AUDIO_DEVICE_PIPELINE = """
 
 class RecorderService(IgnisGObject):
     """
-    A screen recorder. 
+    A screen recorder.
     Uses XDG Desktop portal and PipeWire.
     Allow record screen with microphone audio and internal system audio.
-        
+
     **Dependencies**:
         - **GStreamer**
         - **PipeWire**
@@ -108,8 +108,8 @@ class RecorderService(IgnisGObject):
 
         # record for 30 seconds and then stop
         Utils.Timeout(ms=30 * 1000, target=recorder.stop_recording)
-    
     """
+
     __gsignals__ = {
         "recording_started": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
         "recording_stopped": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
@@ -187,7 +187,7 @@ class RecorderService(IgnisGObject):
         path: str = None,
         record_microphone: bool = False,
         record_internal_audio: bool = False,
-        audio_devices: List[str] = [],
+        audio_devices: List[str] = None,
     ) -> None:
         """
         Start recording.
@@ -197,8 +197,8 @@ class RecorderService(IgnisGObject):
             record_microphone (``bool``, optional): Whether record audio from microphone.
             record_internal_audio (``bool``, optional): Whether record internal audio.
             audio_devices (``List[str]``, optional): List of audio devices names from which audio should be recorded.
-        
         """
+
         if path is None:
             path = f"{self.default_file_location}/{datetime.datetime.now().strftime(self.default_filename)}"
 
@@ -216,11 +216,12 @@ class RecorderService(IgnisGObject):
         if record_internal_audio:
             audio_pipeline = self.__combine_audio_pipeline(audio_pipeline, audio.speaker.name + ".monitor")
 
-        for device in audio_devices:
-            audio_pipeline = self.__combine_audio_pipeline(audio_pipeline, device)
+        if audio_devices:
+            for device in audio_devices:
+                audio_pipeline = self.__combine_audio_pipeline(audio_pipeline, device)
 
         self._pipeline_description += audio_pipeline
-            
+
         self.__create_session()
 
     def __combine_audio_pipeline(self, audio_pipeline: str, device: str) -> None:
@@ -319,7 +320,7 @@ class RecorderService(IgnisGObject):
             self.stop_recording()
             return
 
-        for node_id, stream_properties in results["streams"]:
+        for node_id, _stream_properties in results["streams"]:
             self.__play_pipewire_stream(node_id)
 
     def __play_pipewire_stream(self, node_id: int) -> None:

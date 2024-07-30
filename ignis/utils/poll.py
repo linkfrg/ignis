@@ -38,11 +38,11 @@ class Poll(IgnisGObject):
     @GObject.Property
     def output(self) -> Any:
         return self._output
-    
+
     @GObject.Property
     def timeout(self) -> int:
         return self._timeout
-    
+
     @timeout.setter
     def timeout(self, value: int) -> None:
         self._timeout = value
@@ -50,12 +50,12 @@ class Poll(IgnisGObject):
     @GObject.Property
     def callback(self) -> callable:
         return self._callback
-    
+
     @callback.setter
     def callback(self, value: callable) -> None:
         self._callback = value
 
-    def __main(self) -> None:        
+    def __main(self) -> None:
         self._output = self._callback(*self._args)
         self.emit("changed")
         self.notify('output')

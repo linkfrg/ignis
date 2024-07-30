@@ -51,7 +51,7 @@ class Icon(Gtk.Image, BaseWidget):
             else:
                 self.set_from_icon_name(value)
                 return
-            
+
         if pixbuf is None:
             return
 

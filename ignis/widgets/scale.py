@@ -105,7 +105,7 @@ class Scale(Gtk.Scale, BaseWidget):
 
     @GObject.Property
     def vertical(self) -> bool:
-        self.get_orientation() == Gtk.Orientation.VERTICAL
+        return self.get_orientation() == Gtk.Orientation.VERTICAL
 
     @vertical.setter
     def vertical(self, value: bool) -> None:

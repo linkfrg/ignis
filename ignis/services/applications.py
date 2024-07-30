@@ -31,11 +31,11 @@ class ApplicationAction(IgnisGObject):
     @GObject.Property
     def action(self) -> str:
         return self._action
-    
+
     @GObject.Property
     def name(self) -> str:
         return self._name
-    
+
     def launch(self) -> None:
         """
         Launch action.
@@ -114,11 +114,11 @@ class Application(IgnisGObject):
     @GObject.Property
     def executable(self) -> str:
         return self._app.get_executable()
-    
+
     @GObject.Property
     def exec_string(self) -> str:
         return self._app.get_string("Exec")
-    
+
     @GObject.Property
     def actions(self) -> List[ApplicationAction]:
         return self._actions
@@ -131,7 +131,7 @@ class Application(IgnisGObject):
     def is_pinned(self, value: bool) -> None:
         if value == self._is_pinned:
             return
-        
+
         self._is_pinned = value
         if value:
             self.emit("pinned")
@@ -194,7 +194,7 @@ class ApplicationsService(IgnisGObject):
 
     @GObject.Property
     def apps(self) -> List[Application]:
-        return sorted(list(self._apps.values()), key=lambda x: x.name)
+        return sorted(self._apps.values(), key=lambda x: x.name)
 
     @GObject.Property
     def pinned(self) -> List[Application]:

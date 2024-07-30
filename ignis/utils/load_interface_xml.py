@@ -15,6 +15,6 @@ def load_interface_xml(interface_name: str) -> Gio.DBusInterfaceInfo:
         ``Gio.DBusInterfaceInfo``: The interface information.
     """
     file_path = f"{DBUS_DIR}/{interface_name}.xml"
-    with open(file_path, "r") as file:
+    with open(file_path) as file:
         xml = file.read()
     return Gio.DBusNodeInfo.new_for_xml(xml).interfaces[0]

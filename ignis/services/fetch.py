@@ -43,12 +43,12 @@ class FetchService(IgnisGObject):
         from ignis.service import Service
 
         fetch = Service.get("fetch")
-        
+
         print(fetch.os_name)
         print(fetch.hostname)
         print(fetch.kernel)
-    
     """
+
     def __init__(self):
         super().__init__()
         self._os_info = self.__get_os_info()
@@ -102,11 +102,11 @@ class FetchService(IgnisGObject):
     @GObject.Property
     def os_logo(self) -> str:
         return self._os_info.get("LOGO", "Unknown")
-    
+
     @GObject.Property
     def os_logo_dark(self) -> str:
         return f"{self.os_logo}-dark"
-    
+
     @GObject.Property
     def os_logo_text(self) -> str:
         return f"{self.os_logo}-text"
@@ -125,7 +125,7 @@ class FetchService(IgnisGObject):
 
     @GObject.Property
     def hostname(self) -> str:
-        with open("/etc/hostname", "r") as file:
+        with open("/etc/hostname") as file:
             data = file.read()
         return data
 
@@ -135,7 +135,7 @@ class FetchService(IgnisGObject):
 
     @GObject.Property
     def uptime(self) -> Tuple[int, int, int, int]:
-        with open("/proc/uptime", "r") as f:
+        with open("/proc/uptime") as f:
             uptime_seconds = float(f.readline().split()[0])
 
         uptime_minutes, seconds = divmod(uptime_seconds, 60)
@@ -157,7 +157,7 @@ class FetchService(IgnisGObject):
     @GObject.Property
     def mem_info(self) -> dict:
         mem_info = {}
-        with open("/proc/meminfo", "r") as file:
+        with open("/proc/meminfo") as file:
             for line in file:
                 key, value = line.split(":")
                 value = value.replace("kB", "")
@@ -180,21 +180,21 @@ class FetchService(IgnisGObject):
 
     @GObject.Property
     def board_vendor(self) -> str:
-        with open("/sys/devices/virtual/dmi/id/board_vendor", "r") as file:
+        with open("/sys/devices/virtual/dmi/id/board_vendor") as file:
             data = file.read()
 
         return data.strip()
 
     @GObject.Property
     def board_name(self) -> str:
-        with open("/sys/devices/virtual/dmi/id/board_name", "r") as file:
+        with open("/sys/devices/virtual/dmi/id/board_name") as file:
             data = file.read()
 
         return data.strip()
 
     @GObject.Property
     def bios_version(self) -> str:
-        with open("/sys/devices/virtual/dmi/id/bios_version", "r") as file:
+        with open("/sys/devices/virtual/dmi/id/bios_version") as file:
             data = file.read()
 
         return data.strip()

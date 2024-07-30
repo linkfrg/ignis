@@ -21,7 +21,7 @@ class Picture(Gtk.Picture, BaseWidget):
         - **"contain"**: Scale the content to fit the allocation, while taking its aspect ratio in consideration..
         - **"cover"**: Cover the entire allocation, while taking the content aspect ratio in consideration.
         - **"scale_down"**: The content is scaled down to fit the allocation, if needed, otherwise its original size is used.
-        
+
         For more info, see `Gtk.ContentFit <https://lazka.github.io/pgi-docs/Gtk-4.0/enums.html#Gtk.ContentFit>`_
 
     .. code-block:: python

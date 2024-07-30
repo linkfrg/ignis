@@ -32,7 +32,6 @@ class EventBox(Box):
             on_scroll_up=lambda self: print("scrolled up!"),
             on_scroll_down=lambda self: print("scrolled down!")
         )
-
     """
 
     __gtype_name__ = "IgnisEventBox"

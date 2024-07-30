@@ -12,7 +12,7 @@ class SystemTrayItem(IgnisGObject):
 
     .. warning::
         If you want to add ``menu`` to several containers (e.g., make two status bars with a system tray),
-        you must call the ``copy()`` method to obtain a copy of the menu. 
+        you must call the ``copy()`` method to obtain a copy of the menu.
         This is necessary because you can't add a single widget to multiple containers.
 
         .. code-block:: python
@@ -85,7 +85,7 @@ class SystemTrayItem(IgnisGObject):
         ]:
             self.__dbus.signal_subscribe(
                 signal_name=signal_name,
-                callback=lambda *args: self.notify(signal_name.replace("New", "").lower()),
+                callback=lambda *args, signal_name=signal_name: self.notify(signal_name.replace("New", "").lower()),
             )
 
         self.__ready()
@@ -196,15 +196,15 @@ class SystemTrayService(IgnisGObject):
         system_tray = Service.get("system_tray")
 
         system_tray.connect("added", lambda x, item: print(item.title))
-        
-
     """
+
     __gsignals__ = {
         "added": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, (GObject.Object,)),
     }
 
     def __init__(self):
         super().__init__()
+        self._items = {}
 
         self.__dbus = DBusService(
             name="org.kde.StatusNotifierWatcher",
@@ -230,8 +230,6 @@ class SystemTrayService(IgnisGObject):
         self.__dbus.register_dbus_method(
             name="RegisterStatusNotifierItem", method=self.__RegisterStatusNotifierItem
         )
-
-        self._items = {}
 
     @GObject.Property
     def items(self) -> list:

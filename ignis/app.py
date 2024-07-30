@@ -112,7 +112,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         Apply CSS/SCSS/SASS style from a path.
         If ``style_path`` has a ``.sass`` or ``.scss`` extension, it will be automatically compiled.
         Requires ``dart-sass`` for SASS/SCSS compilation.
-        
+
         Args:
             style_path (``str``): Path to the .css/.scss/.sass file.
         """
@@ -123,7 +123,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         if style_path.endswith(".scss") or style_path.endswith(".sass"):
             compiled_scss = Utils.sass_compile(path=style_path)
         else:
-            with open(style_path, "r") as file:
+            with open(style_path) as file:
                 compiled_scss = file.read()
 
         self._style_path = style_path
@@ -273,7 +273,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         eval(code)
 
     def __RunFile(self, invocation, path: str) -> None:
-        with open(path, "r") as file:
+        with open(path) as file:
             code = file.read()
             exec(code)
 

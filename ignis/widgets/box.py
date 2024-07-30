@@ -7,10 +7,10 @@ class Box(Gtk.Box, BaseWidget):
     Bases: `Gtk.Box <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Box.html>`_.
 
     The main layout widget.
-    
+
     .. hint::
         You can use generators to set children.
-        
+
         .. code-block::
 
             Widget.Box(
@@ -22,7 +22,7 @@ class Box(Gtk.Box, BaseWidget):
         - **vertical** (``bool``, optional, read-write): Whether the box arranges children vertically.
 
     .. code-block:: python
-    
+
         Widget.Box(
             child=[Widget.Label(label='heh'), Widget.Label(label='heh2')],
             vertical=False,
@@ -52,7 +52,7 @@ class Box(Gtk.Box, BaseWidget):
             if c:
                 self.append(c)
                 self._child.append(c)
-    
+
     def append(self, child: Gtk.Widget) -> None:
         self._child.append(child)
         super().append(child)
@@ -60,14 +60,14 @@ class Box(Gtk.Box, BaseWidget):
     def remove(self, child: Gtk.Widget) -> None:
         self._child.remove(child)
         super().remove(child)
-    
+
     def prepend(self, child: Gtk.Widget) -> None:
         self._child.insert(0, child)
         super().prepend(child)
 
     @GObject.Property
     def vertical(self) -> bool:
-        self.get_orientation() == Gtk.Orientation.VERTICAL
+        return self.get_orientation() == Gtk.Orientation.VERTICAL
 
     @vertical.setter
     def vertical(self, value: bool) -> None:

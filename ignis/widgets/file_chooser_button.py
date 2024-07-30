@@ -75,11 +75,11 @@ class FileChooserButton(Gtk.Button, BaseWidget):
     @GObject.Property
     def dialog(self) -> FileDialog:
         return self._dialog
-    
+
     @GObject.Property
     def label(self) -> Label:
         return self._label
-    
+
     @GObject.Property
     def initial_icon_name(self) -> str:
         return self._initial_icon_name

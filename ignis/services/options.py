@@ -73,7 +73,7 @@ class OptionsService(IgnisGObject):
     def __load_data(self) -> dict:
         empty = {}
         try:
-            with open(OPTIONS_FILE, "r") as file:
+            with open(OPTIONS_FILE) as file:
                 data = json.load(file)
 
                 for i in data.keys():

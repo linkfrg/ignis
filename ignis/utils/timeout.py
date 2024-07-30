@@ -22,15 +22,15 @@ class Timeout(IgnisGObject):
         self._ms = ms
         self._target = target
         self._id = GLib.timeout_add(ms, target, *args)
-    
+
     @GObject.Property
     def ms(self) -> int:
         return self._ms
-    
+
     @GObject.Property
     def target(self) -> callable:
         return self._target
-    
+
     def cancel(self) -> None:
         """
         Cancel the timeout if it is active.

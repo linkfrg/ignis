@@ -14,7 +14,7 @@ def compile_file(path: str) -> str:
         logger.error(f"SASS compilation error:\n{result.stderr.decode()}")
         return
 
-    with open(COMPILED_CSS, "r") as file:
+    with open(COMPILED_CSS) as file:
         return file.read()
 
 
