@@ -270,9 +270,11 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         self.toggle_window(window_name)
 
     def __RunPython(self, invocation, code: str) -> None:
+        invocation.return_value(None)
         eval(code)
 
     def __RunFile(self, invocation, path: str) -> None:
+        invocation.return_value(None)
         with open(path) as file:
             code = file.read()
             exec(code)
