@@ -50,10 +50,7 @@ class FileChooserButton(Gtk.Button, BaseWidget):
         self._dialog = dialog
         self._label = label
 
-        self.__file_icon = Icon(
-            visible=False,
-            style="padding-right: 7px;"
-        )
+        self.__file_icon = Icon(visible=False, style="padding-right: 7px;")
 
         self.child = Box(
             child=[

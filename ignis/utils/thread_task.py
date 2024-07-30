@@ -2,6 +2,7 @@ from gi.repository import GObject
 from ignis.gobject import IgnisGObject
 from .thread import run_in_thread
 
+
 class ThreadTask(IgnisGObject):
     """
     Execute a function in another thread and call a callback when it's finished.
@@ -15,6 +16,7 @@ class ThreadTask(IgnisGObject):
         callback (``callabke``): The function to call when ``target`` has finished.
 
     """
+
     __gsignals__ = {
         "finished": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, (object,)),
     }

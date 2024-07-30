@@ -6,6 +6,7 @@ from ignis.gobject import IgnisGObject
 from ignis.dbus_menu import DBusMenu
 from ignis.logging import logger
 
+
 class SystemTrayItem(IgnisGObject):
     """
     System tray item.
@@ -34,8 +35,13 @@ class SystemTrayItem(IgnisGObject):
         - **tooltip** (``str``, read-only): Tooltip, the text should be displayed when you hover cursor over the icon.
 
     """
+
     __gsignals__ = {
-        "ready": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()), # user shouldn't connect to this signal
+        "ready": (
+            GObject.SignalFlags.RUN_FIRST,
+            GObject.TYPE_NONE,
+            (),
+        ),  # user shouldn't connect to this signal
         "removed": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
     }
 
@@ -61,7 +67,6 @@ class SystemTrayItem(IgnisGObject):
             "notify::g-name-owner", lambda *args: self.emit("removed")
         )
 
-
         menu_path = self.__dbus.Menu
         if menu_path:
             self._menu = DBusMenu(name=self.__dbus.name, object_path=menu_path)
@@ -85,7 +90,9 @@ class SystemTrayItem(IgnisGObject):
         ]:
             self.__dbus.signal_subscribe(
                 signal_name=signal_name,
-                callback=lambda *args, signal_name=signal_name: self.notify(signal_name.replace("New", "").lower()),
+                callback=lambda *args, signal_name=signal_name: self.notify(
+                    signal_name.replace("New", "").lower()
+                ),
             )
 
         self.__ready()

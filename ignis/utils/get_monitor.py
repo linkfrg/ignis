@@ -1,5 +1,6 @@
 from gi.repository import Gdk
 
+
 def get_monitor(monitor_id: int) -> Gdk.Monitor:
     """
     Get the ``Gdk.Monitor`` by its ID.

@@ -20,6 +20,7 @@ class ListBoxRow(Gtk.ListBoxRow, BaseWidget):
             selected=True
         )
     """
+
     __gtype_name__ = "IgnisListBoxRow"
     __gproperties__ = {**BaseWidget.gproperties}
 

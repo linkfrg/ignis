@@ -21,6 +21,7 @@ class RegularWindow(Gtk.Window, BaseWidget):
             titlebar=Widget.HeaderBar(show_title_buttons=True),
         )
     """
+
     __gtype_name__ = "IgnisRegularWindow"
     __gproperties__ = {**BaseWidget.gproperties}
 

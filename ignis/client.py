@@ -1,13 +1,14 @@
 from ignis.dbus import DBusProxy
 from ignis.utils import Utils
 
+
 class IgnisClient:
     def __init__(self):
         self.__dbus = DBusProxy(
             name="com.github.linkfrg.ignis",
             object_path="/com/github/linkfrg/ignis",
             interface_name="com.github.linkfrg.ignis",
-            info=Utils.load_interface_xml("com.github.linkfrg.ignis")
+            info=Utils.load_interface_xml("com.github.linkfrg.ignis"),
         )
 
     @property

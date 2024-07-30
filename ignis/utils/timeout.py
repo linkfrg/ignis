@@ -1,6 +1,7 @@
 from gi.repository import GLib, GObject
 from ignis.gobject import IgnisGObject
 
+
 class Timeout(IgnisGObject):
     """
     Call a function after a specified interval of time.
@@ -17,6 +18,7 @@ class Timeout(IgnisGObject):
 
         Utils.Timeout(ms=3000, target=lambda: print("Hello"))
     """
+
     def __init__(self, ms: int, target: callable, *args):
         super().__init__()
         self._ms = ms

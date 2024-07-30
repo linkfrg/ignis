@@ -2,6 +2,7 @@ from gi.repository import GObject, Gio, Gtk
 from ignis.gobject import IgnisGObject
 from ignis.app import app
 
+
 class MenuItem(IgnisGObject):
     """
     Bases: :class:``ignis.gobject.IgnisGObject``.
@@ -28,8 +29,16 @@ class MenuItem(IgnisGObject):
             submenu=Widget.PopoverMenu()
         )
     """
+
     __gtype_name__ = "IgnisMenuItem"
-    def __init__(self, label: str, enabled: bool = True, on_activate: callable = None, submenu: Gtk.PopoverMenu = None):
+
+    def __init__(
+        self,
+        label: str,
+        enabled: bool = True,
+        on_activate: callable = None,
+        submenu: Gtk.PopoverMenu = None,
+    ):
         super().__init__()
         self._label = label
         self._enabled = enabled

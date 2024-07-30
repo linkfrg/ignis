@@ -1,6 +1,7 @@
 import os
 from gi.repository import GObject, Gio
 from ignis.gobject import IgnisGObject
+
 FLAGS = {
     None: Gio.FileMonitorFlags.NONE,
     "none": Gio.FileMonitorFlags.NONE,
@@ -25,6 +26,7 @@ EVENT = {
 }
 
 file_monitors = []
+
 
 class FileMonitor(IgnisGObject):
     """
@@ -95,7 +97,9 @@ class FileMonitor(IgnisGObject):
                     subdir_path = os.path.join(root, d)
                     self.__add_submonitor(subdir_path)
 
-        file_monitors.append(self) # to prevent the garbage collector from collecting self
+        file_monitors.append(
+            self
+        )  # to prevent the garbage collector from collecting self
 
     def __on_change(self, file_monitor, file, other_file, event_type) -> None:
         path = file.get_path()

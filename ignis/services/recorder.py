@@ -18,10 +18,19 @@ RECORDING_DEFAULT_FILE_LOCATION_OPTION = "recording_default_file_location"
 RECORDING_DEFAULT_FILENAME_OPTION = "recording_default_filename"
 
 options.create_option(name=RECORDING_BITRATE_OPTION, default=8000, exists_ok=True)
-options.create_option(name=RECORDING_DEFAULT_FILE_LOCATION_OPTION, default=GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_VIDEOS), exists_ok=True)
-options.create_option(name=RECORDING_DEFAULT_FILENAME_OPTION, default="%Y-%m-%d_%H-%M-%S.mp4", exists_ok=True)
+options.create_option(
+    name=RECORDING_DEFAULT_FILE_LOCATION_OPTION,
+    default=GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_VIDEOS),
+    exists_ok=True,
+)
+options.create_option(
+    name=RECORDING_DEFAULT_FILENAME_OPTION,
+    default="%Y-%m-%d_%H-%M-%S.mp4",
+    exists_ok=True,
+)
 
 N_THREADS = str(min(max(1, GLib.get_num_processors()), 64))
+
 
 def gst_inspect(name: str) -> None:
     try:
@@ -211,10 +220,14 @@ class RecorderService(IgnisGObject):
         audio_pipeline = ""
 
         if record_microphone:
-            audio_pipeline = self.__combine_audio_pipeline(audio_pipeline, audio.microphone.name)
+            audio_pipeline = self.__combine_audio_pipeline(
+                audio_pipeline, audio.microphone.name
+            )
 
         if record_internal_audio:
-            audio_pipeline = self.__combine_audio_pipeline(audio_pipeline, audio.speaker.name + ".monitor")
+            audio_pipeline = self.__combine_audio_pipeline(
+                audio_pipeline, audio.speaker.name + ".monitor"
+            )
 
         if audio_devices:
             for device in audio_devices:

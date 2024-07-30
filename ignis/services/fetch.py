@@ -3,6 +3,7 @@ from ignis.gobject import IgnisGObject
 from gi.repository import GObject, Gtk, Gdk
 from typing import Tuple
 
+
 class FetchService(IgnisGObject):
     """
     System info service.
@@ -206,4 +207,3 @@ class FetchService(IgnisGObject):
     @GObject.Property
     def icon_theme(self) -> str:
         return Gtk.IconTheme.get_for_display(Gdk.Display.get_default()).get_theme_name()
-

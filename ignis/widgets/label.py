@@ -1,6 +1,7 @@
 from gi.repository import Gtk, Pango
 from ignis.base_widget import BaseWidget
 
+
 class Label(Gtk.Label, BaseWidget):
     """
     Bases: `Gtk.Label <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Label.html>`_.

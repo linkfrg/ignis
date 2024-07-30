@@ -1,6 +1,7 @@
 from gi.repository import Gtk, GObject
 from ignis.base_widget import BaseWidget
 
+
 class Separator(Gtk.Separator, BaseWidget):
     """
     Bases: `Gtk.Separator <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Separator.html>`_.
@@ -16,6 +17,7 @@ class Separator(Gtk.Separator, BaseWidget):
             vertical=False,
         )
     """
+
     __gtype_name__ = "IgnisSeparator"
     __gproperties__ = {**BaseWidget.gproperties}
 

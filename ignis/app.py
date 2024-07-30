@@ -118,7 +118,9 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         """
 
         if not os.path.exists(style_path):
-            raise FileNotFoundError(f"Provided style path doesn't exists: '{style_path}'")
+            raise FileNotFoundError(
+                f"Provided style path doesn't exists: '{style_path}'"
+            )
 
         if style_path.endswith(".scss") or style_path.endswith(".sass"):
             compiled_scss = Utils.sass_compile(path=style_path)

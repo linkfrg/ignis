@@ -3,6 +3,7 @@ from typing import Any, List
 from ignis.utils import Utils
 from ignis.gobject import IgnisGObject
 
+
 class DBusService(IgnisGObject):
     def __init__(
         self,
@@ -68,7 +69,6 @@ class DBusService(IgnisGObject):
         params,
         invocation,
     ):
-
         def callback(func: callable, unpacked_params) -> None:
             result = func(invocation, *unpacked_params)
             invocation.return_value(result)
@@ -77,7 +77,9 @@ class DBusService(IgnisGObject):
         if func:
             # params can contain pixbuf, very large amount of data
             # and unpacking may take some time and block the main thread
-            Utils.ThreadTask(target=params.unpack, callback=lambda result: callback(func, result))
+            Utils.ThreadTask(
+                target=params.unpack, callback=lambda result: callback(func, result)
+            )
 
     def __handle_get_property(self, connection, sender, object_path, interface, value):
         func = self._properties.get(value, None)

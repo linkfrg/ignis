@@ -1,6 +1,7 @@
 import subprocess
 from gi.repository import Gio
 
+
 def exec_sh(command: str) -> subprocess.CompletedProcess:
     """
     Execute a shell (bash) command.
@@ -23,6 +24,7 @@ class AsyncCompletedProcess:
         - **stdout** (``str``, read-only): The output of the process.
         - **stderr** (``str``, read-only): The errors of the process.
     """
+
     def __init__(self, process: Gio.Subprocess) -> None:
         data = process.communicate(None, None)
         self._returncode = process.get_exit_status()
@@ -43,7 +45,6 @@ class AsyncCompletedProcess:
         return self._stderr
 
 
-
 def exec_sh_async(command: str, on_finished: callable = None) -> None:
     """
     Execute a shell (bash) command asynchronously.
@@ -53,6 +54,7 @@ def exec_sh_async(command: str, on_finished: callable = None) -> None:
         on_finished (``callable``, optional): A function to call when the process is finished. An instance of :class:`~ignis.utils.exec_sh.AsyncCompletedProcess` will be passed to this function.
 
     """
+
     def wait_check_callback(process: Gio.Subprocess, result: Gio.AsyncResult) -> None:
         process.wait_check_finish(result)
         on_finished(AsyncCompletedProcess(process))

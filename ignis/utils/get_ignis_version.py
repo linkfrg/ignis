@@ -2,6 +2,7 @@ import os
 
 VERSION_FILE = f"{os.path.dirname(os.path.abspath(__file__))}/../VERSION"
 
+
 def get_ignis_version() -> str:
     """
     Get the current Ignis version.

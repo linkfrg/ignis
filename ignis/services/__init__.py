@@ -2,6 +2,7 @@ import importlib
 from ignis.gobject import IgnisGObject
 from ignis.logging import logger
 
+
 class ServiceClass:
     def __init__(self) -> None:
         self._services = {
@@ -29,7 +30,6 @@ class ServiceClass:
             return getattr(self, f"_{service}")
         else:
             logger.error(f"Service '{service}' not found!")
-
 
 
 Service = ServiceClass()

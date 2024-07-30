@@ -20,6 +20,7 @@ class Entry(Gtk.Entry, BaseWidget):
             on_change=lambda x: print(x.text),
         )
     """
+
     __gtype_name__ = "IgnisEntry"
     __gproperties__ = {**BaseWidget.gproperties}
 
@@ -29,7 +30,9 @@ class Entry(Gtk.Entry, BaseWidget):
         self._on_change = None
         BaseWidget.__init__(self, **kwargs)
 
-        self.connect("activate", lambda x: self.on_accept(x) if self.on_accept else None)
+        self.connect(
+            "activate", lambda x: self.on_accept(x) if self.on_accept else None
+        )
         self.connect(
             "notify::text", lambda x, y: self.on_change(x) if self.on_change else None
         )

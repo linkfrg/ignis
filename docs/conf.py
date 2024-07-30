@@ -19,7 +19,7 @@ html_theme = "sphinx_book_theme"
 html_static_path = ["_static"]
 
 html_css_files = [
-    'css/custom.css',
+    "css/custom.css",
 ]
 
 html_title = "Ignis Wiki"
@@ -27,12 +27,14 @@ smartquotes = False
 
 add_module_names = False
 
+
 def get_widget_template(name):
     return f"""{name}
 {'-'*len(name)}
 
 .. autoclass:: ignis.widgets.Widget.{name}
 """
+
 
 def get_service_template(name):
     return f"""{name.capitalize().replace("_", "")}
@@ -42,12 +44,14 @@ def get_service_template(name):
     :members:
 """
 
+
 def get_utils_function_template(name):
     return f"""{name}
 {'-'*len(name)}
 
 .. autofunction:: ignis.utils.Utils.{name}
 """
+
 
 def get_utils_class_template(name):
     return f"""{name}
@@ -56,6 +60,7 @@ def get_utils_class_template(name):
 .. automodule:: ignis.utils.{name}
     :members:
 """
+
 
 for i in ["widgets", "services", "utils"]:
     try:

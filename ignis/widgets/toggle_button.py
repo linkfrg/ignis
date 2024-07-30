@@ -1,6 +1,7 @@
 from gi.repository import GObject, Gtk
 from ignis.base_widget import BaseWidget
 
+
 class ToggleButton(Gtk.ToggleButton, BaseWidget):
     """
     Bases: `Gtk.ToggleButton <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/ToggleButton.html>`_.
@@ -24,7 +25,10 @@ class ToggleButton(Gtk.ToggleButton, BaseWidget):
         Gtk.ToggleButton.__init__(self)
         BaseWidget.__init__(self, **kwargs)
 
-        self.connect("toggled", lambda x: self.on_toggled(self, self.active) if self.on_toggled else None)
+        self.connect(
+            "toggled",
+            lambda x: self.on_toggled(self, self.active) if self.on_toggled else None,
+        )
 
     @GObject.Property
     def on_toggled(self) -> callable:

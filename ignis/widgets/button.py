@@ -65,7 +65,9 @@ class Button(Gtk.Button, BaseWidget):
     def on_right_click(self, value: callable) -> None:
         self._on_right_click = value
         if not self.__right_click_controller:
-            self.__right_click_controller = self.__init_controller(3, self._on_right_click)
+            self.__right_click_controller = self.__init_controller(
+                3, self._on_right_click
+            )
 
     @GObject.Property
     def on_middle_click(self) -> callable:
@@ -75,4 +77,6 @@ class Button(Gtk.Button, BaseWidget):
     def on_middle_click(self, value: callable) -> None:
         self._on_middle_click = value
         if not self.__middle_click_controller:
-            self.__middle_click_controller = self.__init_controller(2, self._on_middle_click)
+            self.__middle_click_controller = self.__init_controller(
+                2, self._on_middle_click
+            )

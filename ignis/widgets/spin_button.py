@@ -1,6 +1,7 @@
 from gi.repository import Gtk, GObject
 from ignis.base_widget import BaseWidget
 
+
 class SpinButton(Gtk.SpinButton, BaseWidget):
     """
     Bases: `Gtk.SpinButton <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/SpinButton.html>`_.
@@ -24,6 +25,7 @@ class SpinButton(Gtk.SpinButton, BaseWidget):
             on_change=lambda x, value: print(value)
         )
     """
+
     __gtype_name__ = "IgnisSpinButton"
     __gproperties__ = {**BaseWidget.gproperties}
 

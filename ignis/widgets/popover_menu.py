@@ -3,6 +3,7 @@ from ignis.base_widget import BaseWidget
 from typing import List
 from ignis.widgets.menuitem import MenuItem
 
+
 class PopoverMenu(Gtk.PopoverMenu, BaseWidget):
     """
     Subclass of `Gtk.PopoverMenu <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/PopoverMenu.html>`_
@@ -61,7 +62,6 @@ class PopoverMenu(Gtk.PopoverMenu, BaseWidget):
             self._current_section.append_submenu(item.label, item.submenu.menu_model)
         else:
             self._current_section.append(item.label, f"app.{item.uniq_name}")
-
 
         self._menu.remove_all()
         for i in self._sections:

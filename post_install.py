@@ -6,4 +6,3 @@ import sys
 install_dir = sys.argv[1]
 
 compileall.compile_dir(install_dir, force=True, quiet=1)
-

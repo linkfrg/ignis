@@ -11,6 +11,7 @@ HYPRLAND_INSTANCE_SIGNATURE = os.getenv("HYPRLAND_INSTANCE_SIGNATURE")
 XDG_RUNTIME_DIR = os.getenv("XDG_RUNTIME_DIR")
 SOCKET_DIR = f"{XDG_RUNTIME_DIR}/hypr/{HYPRLAND_INSTANCE_SIGNATURE}"
 
+
 class HyprlandService(IgnisGObject):
     """
     Hyprland IPC client.
@@ -38,7 +39,9 @@ class HyprlandService(IgnisGObject):
     def __init__(self):
         super().__init__()
         if not os.path.exists(SOCKET_DIR):
-            logger.critical("Hyprland IPC not found! To use the Hyprland service, ensure that you are running Hyprland.")
+            logger.critical(
+                "Hyprland IPC not found! To use the Hyprland service, ensure that you are running Hyprland."
+            )
             exit(1)
 
         self._workspaces = []
@@ -101,7 +104,6 @@ class HyprlandService(IgnisGObject):
         self.notify("workspaces")
         self.notify("active-workspace")
 
-
     def __sync_kb_layout(self) -> None:
         for kb in json.loads(self.send_command("j/devices"))["keyboards"]:
             if kb["main"]:
@@ -111,7 +113,6 @@ class HyprlandService(IgnisGObject):
     def __sync_active_window(self) -> None:
         self._active_window = json.loads(self.send_command("j/activewindow"))
         self.notify("active_window")
-
 
     def send_command(self, cmd: str) -> str:
         """
@@ -147,4 +148,3 @@ class HyprlandService(IgnisGObject):
             workspace_id (``int``): ID of workspace to be switched to
         """
         self.send_command(f"dispatch workspace {workspace_id}")
-

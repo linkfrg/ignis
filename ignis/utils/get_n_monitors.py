@@ -1,5 +1,6 @@
 from gi.repository import Gdk
 
+
 def get_n_monitors() -> int:
     """
     Get the number of monitors.

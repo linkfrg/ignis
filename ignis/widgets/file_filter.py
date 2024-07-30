@@ -2,6 +2,7 @@ from gi.repository import Gtk, GObject
 from ignis.base_widget import BaseWidget
 from typing import List
 
+
 class FileFilter(Gtk.FileFilter, BaseWidget):
     """
     Bases: `Gtk.FileFilter <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/FileFilter.html>`_.

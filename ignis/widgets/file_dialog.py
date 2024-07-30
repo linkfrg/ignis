@@ -4,6 +4,7 @@ from typing import List
 from ignis.widgets.file_filter import FileFilter
 from ignis.base_widget import BaseWidget
 
+
 class FileDialog(Gtk.FileDialog, BaseWidget):
     """
     Bases: `Gtk.FileDialog <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/FileDialog.html>`_.
@@ -58,7 +59,6 @@ class FileDialog(Gtk.FileDialog, BaseWidget):
         self._initial_path = None
         self._select_folder = False
         BaseWidget.__init__(self, **kwargs)
-
 
         self.connect(
             "file-set",

@@ -13,6 +13,7 @@ PINNED_APPS_OPTION = "pinned_apps"
 
 options.create_option(name=PINNED_APPS_OPTION, default=[], exists_ok=True)
 
+
 class ApplicationAction(IgnisGObject):
     """
     Application action.
@@ -21,6 +22,7 @@ class ApplicationAction(IgnisGObject):
         - **action** (``str``, read-only): ID of the action.
         - **name** (``str``, read-only): Human-readable name of the action.
     """
+
     def __init__(self, app: Gio.DesktopAppInfo, action: str):
         super().__init__()
 
@@ -41,6 +43,7 @@ class ApplicationAction(IgnisGObject):
         Launch action.
         """
         self._app.launch_action(self.action, None)
+
 
 class Application(IgnisGObject):
     """
@@ -154,7 +157,7 @@ class Application(IgnisGObject):
         """
         Launch the application.
         """
-        exec_string = re.sub(r'%\S*', '', self.exec_string)
+        exec_string = re.sub(r"%\S*", "", self.exec_string)
         subprocess.Popen(
             exec_string,
             shell=True,
@@ -162,6 +165,7 @@ class Application(IgnisGObject):
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
         )
+
 
 class ApplicationsService(IgnisGObject):
     """

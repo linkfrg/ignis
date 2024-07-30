@@ -1,6 +1,7 @@
 from gi.repository import Gtk
 from ignis.base_widget import BaseWidget
 
+
 class HeaderBar(Gtk.HeaderBar, BaseWidget):
     """
     Bases: `Gtk.HeaderBar <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/HeaderBar.html>`_.

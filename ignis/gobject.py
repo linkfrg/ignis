@@ -1,6 +1,7 @@
 from gi.repository import GObject, GLib
 from typing import Union, Any, List
 
+
 class Binding(GObject.Object):
     """
     An object that describe binding.
@@ -11,6 +12,7 @@ class Binding(GObject.Object):
         - **transform** (``GObject.Object``, optional, read-only): The function that accepts a new property value and returns the processed value.
 
     """
+
     def __init__(
         self, target: GObject.Object, target_property: str, transform: callable = None
     ):
@@ -43,6 +45,7 @@ class IgnisGObject(GObject.Object):
     2. It offers easier control over properties (without the need for the ``.props`` attribute).
 
     """
+
     def __init__(self):
         super().__init__()
 
@@ -80,11 +83,22 @@ class IgnisGObject(GObject.Object):
         if value is None:
             return
         elif isinstance(value, Binding):
-            self.bind_property(source_property=property_name, target=value.target, target_property=value.target_property, transform=value.transform)
+            self.bind_property(
+                source_property=property_name,
+                target=value.target,
+                target_property=value.target_property,
+                transform=value.transform,
+            )
         else:
             super().set_property(property_name, value)
 
-    def bind_property(self, source_property: str, target: GObject.Object, target_property: str, transform: callable = None) -> None:
+    def bind_property(
+        self,
+        source_property: str,
+        target: GObject.Object,
+        target_property: str,
+        transform: callable = None,
+    ) -> None:
         """
         Bind ``source_property`` on ``self`` with ``target_property`` on ``target``.
 
@@ -94,8 +108,9 @@ class IgnisGObject(GObject.Object):
             target_property (``str``): the property on ``target`` to bind.
             transform (``callable``, optional): The function that accepts a new property value and returns the processed value.
         """
+
         def callback(*args):
-            value = target.get_property(target_property.replace('-', '_'))
+            value = target.get_property(target_property.replace("-", "_"))
             if transform:
                 value = transform(value)
             self.set_property(source_property, value)

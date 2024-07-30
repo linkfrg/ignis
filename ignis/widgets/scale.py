@@ -1,6 +1,7 @@
 from gi.repository import Gtk, GObject, Gdk
 from ignis.base_widget import BaseWidget
 
+
 class Scale(Gtk.Scale, BaseWidget):
     """
     Bases: `Gtk.Scale <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Scale.html>`_.
@@ -30,6 +31,7 @@ class Scale(Gtk.Scale, BaseWidget):
             value_pos='top'
         )
     """
+
     __gtype_name__ = "IgnisScale"
     __gproperties__ = {**BaseWidget.gproperties}
 

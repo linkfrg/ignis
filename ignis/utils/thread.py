@@ -1,5 +1,6 @@
 import threading
 
+
 def thread(target: callable, *args, **kwargs) -> threading.Thread:
     """
     Simply run the given function in a thread.
@@ -14,10 +15,12 @@ def thread(target: callable, *args, **kwargs) -> threading.Thread:
     th.start()
     return th
 
+
 def run_in_thread(func: callable) -> callable:
     """
     Decorator to run the decorated function in a thread.
     """
+
     def wrapper(*args, **kwargs):
         return thread(func, *args, **kwargs)
 

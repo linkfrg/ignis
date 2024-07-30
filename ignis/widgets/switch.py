@@ -2,6 +2,7 @@ from gi.repository import Gtk, GObject
 from ignis.base_widget import BaseWidget
 from typing import Any
 
+
 class Switch(Gtk.Switch, BaseWidget):
     """
     Bases: `Gtk.Switch <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Switch.html>`_.
@@ -18,6 +19,7 @@ class Switch(Gtk.Switch, BaseWidget):
             on_change=lambda x, active: print(active),
         )
     """
+
     __gtype_name__ = "IgnisSwitch"
     __gproperties__ = {**BaseWidget.gproperties}
 

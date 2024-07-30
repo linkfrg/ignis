@@ -80,7 +80,7 @@ class WallpaperService(IgnisGObject):
                     image=CACHE_WALLPAPER_PATH,
                     content_fit="cover",
                     width=geometry.width,
-                    height=geometry.height
+                    height=geometry.height,
                 ),
             )
             self._windows.append(window)

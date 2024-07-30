@@ -4,6 +4,7 @@ from gi.repository import Gtk, GObject, GdkPixbuf, Gdk
 from typing import Union
 from ignis.utils import Utils
 
+
 class Picture(Gtk.Picture, BaseWidget):
     """
     Bases: `Gtk.Picture <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Picture.html>`_.
@@ -36,7 +37,9 @@ class Picture(Gtk.Picture, BaseWidget):
     __gtype_name__ = "IgnisPicture"
     __gproperties__ = {**BaseWidget.gproperties}
 
-    def __init__(self, content_fit: str = "contain", width: int = -1, height: int = -1, **kwargs):
+    def __init__(
+        self, content_fit: str = "contain", width: int = -1, height: int = -1, **kwargs
+    ):
         Gtk.Picture.__init__(self)
         self.override_enum("content_fit", Gtk.ContentFit)
 

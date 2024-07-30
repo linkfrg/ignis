@@ -1,6 +1,7 @@
 from gi.repository import Gtk, GObject
 from ignis.base_widget import BaseWidget
 
+
 class CheckButton(Gtk.CheckButton, BaseWidget):
     """
     Bases: `Gtk.CheckButton <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/CheckButton.html>`_.
@@ -26,6 +27,7 @@ class CheckButton(Gtk.CheckButton, BaseWidget):
             active=True,
         )
     """
+
     __gtype_name__ = "IgnisCheckButton"
     __gproperties__ = {**BaseWidget.gproperties}
 
@@ -33,7 +35,10 @@ class CheckButton(Gtk.CheckButton, BaseWidget):
         Gtk.CheckButton.__init__(self)
         BaseWidget.__init__(self, **kwargs)
 
-        self.connect('toggled', lambda x: self.on_toggled(x, x.active) if self.on_toggled else None)
+        self.connect(
+            "toggled",
+            lambda x: self.on_toggled(x, x.active) if self.on_toggled else None,
+        )
 
     @GObject.Property
     def on_toggled(self) -> callable:

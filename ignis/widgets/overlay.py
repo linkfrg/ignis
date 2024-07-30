@@ -2,6 +2,7 @@ from gi.repository import Gtk, GObject
 from ignis.base_widget import BaseWidget
 from typing import List
 
+
 class Overlay(Gtk.Overlay, BaseWidget):
     """
     Bases: `Gtk.Overlay <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Overlay.html>`_.
@@ -23,6 +24,7 @@ class Overlay(Gtk.Overlay, BaseWidget):
             ]
         )
     """
+
     __gtype_name__ = "IgnisOverlay"
     __gproperties__ = {**BaseWidget.gproperties}
 

@@ -2,6 +2,7 @@ from gi.repository import Gtk, GObject
 from ignis.base_widget import BaseWidget
 from typing import List
 
+
 class Grid(Gtk.Grid, BaseWidget):
     """
     Bases: `Gtk.Grid <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Grid.html>`_.
@@ -66,7 +67,6 @@ class Grid(Gtk.Grid, BaseWidget):
             self.remove(c)
         self._child = child
         self.__apply()
-
 
     def __apply(self) -> None:
         if self.column_num:

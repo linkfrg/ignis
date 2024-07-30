@@ -21,6 +21,7 @@ except (ImportError, ValueError):
     )
     exit(1)
 
+
 class MprisPlayer(IgnisGObject):
     """
     A media player object.

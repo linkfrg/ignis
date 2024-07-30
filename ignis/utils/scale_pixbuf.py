@@ -10,6 +10,4 @@ def scale_pixbuf(pixbuf: GdkPixbuf.Pixbuf, width: int, height: int) -> GdkPixbuf
         width (``int``): The target width.
         height (``int``): The target height.
     """
-    return pixbuf.scale_simple(
-        width, height, GdkPixbuf.InterpType.BILINEAR
-    )
+    return pixbuf.scale_simple(width, height, GdkPixbuf.InterpType.BILINEAR)

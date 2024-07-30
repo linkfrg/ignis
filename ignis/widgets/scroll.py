@@ -1,6 +1,7 @@
 from gi.repository import Gtk
 from ignis.base_widget import BaseWidget
 
+
 class Scroll(Gtk.ScrolledWindow, BaseWidget):
     """
     Bases: `Gtk.ScrolledWindow <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/ScrolledWindow.html>`_.
@@ -16,6 +17,7 @@ class Scroll(Gtk.ScrolledWindow, BaseWidget):
             )
         )
     """
+
     __gtype_name__ = "IgnisScroll"
     __gproperties__ = {**BaseWidget.gproperties}
 

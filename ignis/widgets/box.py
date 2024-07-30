@@ -2,6 +2,7 @@ from gi.repository import Gtk, GObject
 from ignis.base_widget import BaseWidget
 from typing import List
 
+
 class Box(Gtk.Box, BaseWidget):
     """
     Bases: `Gtk.Box <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Box.html>`_.

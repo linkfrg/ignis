@@ -36,6 +36,7 @@ class Stream(IgnisGObject):
         - **volume** (``float``, read-write): Volume of the stream.
         - **is_default** (``bool``, read-only): Whether the stream is default. Works only for speakers and microphones.
     """
+
     __gsignals__ = {
         "removed": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
     }
@@ -61,7 +62,8 @@ class Stream(IgnisGObject):
             "volume",
         ]:
             id_ = self._stream.connect(
-                f"notify::{property_name}", lambda *args, property_name=property_name: self.notify(property_name)
+                f"notify::{property_name}",
+                lambda *args, property_name=property_name: self.notify(property_name),
             )
             self.__connection_ids.append(id_)
 
@@ -146,10 +148,12 @@ class Stream(IgnisGObject):
 
         return default_stream.get_id() == self.id
 
+
 class DefaultSpeaker(Stream):
     """
     :meta private:
     """
+
     def __init__(self, control: Gvc.MixerControl):
         super().__init__(control, None)
 
@@ -160,10 +164,12 @@ class DefaultSpeaker(Stream):
         self._stream = stream
         self._setup()
 
+
 class DefaultMicrophone(Stream):
     """
     :meta private:
     """
+
     def __init__(self, control: Gvc.MixerControl):
         super().__init__(control, None)
 
@@ -213,7 +219,11 @@ class AudioService(IgnisGObject):
 
     __gsignals__ = {
         "speaker-added": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, (Stream,)),
-        "microphone-added": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, (Stream,)),
+        "microphone-added": (
+            GObject.SignalFlags.RUN_FIRST,
+            GObject.TYPE_NONE,
+            (Stream,),
+        ),
         "app-added": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, (Stream,)),
         "recorder-added": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, (Stream,)),
     }
@@ -233,9 +243,12 @@ class AudioService(IgnisGObject):
         self._apps = {}
         self._recorders = {}
 
-
-        self._control.connect("default-sink-changed", lambda *args: self.__default_changed("speaker"))
-        self._control.connect("default-source-changed", lambda *args: self.__default_changed("microphone"))
+        self._control.connect(
+            "default-sink-changed", lambda *args: self.__default_changed("speaker")
+        )
+        self._control.connect(
+            "default-source-changed", lambda *args: self.__default_changed("microphone")
+        )
         self._control.connect("stream-added", self.__add_stream)
         self._control.connect("stream-removed", self.__remove_stream)
 
