@@ -21,6 +21,21 @@ but you can now pass a string with the actual value of the enum: ``"start"``, ``
    Overridden properties do not support enums.
    For example, you cannot pass an enum to the ``valign`` property.
 
+The ``setup`` property
+--------------------
+You can pass a callback function to the widget costructor as the ``setup`` property.
+The widget will be passed to the callback function as an argument.
+This can be useful when you need to perform actions when the widget is initialized (for example, connect to signal).
+
+.. code-block:: python
+
+   from ignis.widgets import Widget
+
+   Widget.Label(
+      label="you will not see this text", 
+      setup=lambda self: self.set_label("instead, you will see this")
+   )
+
 Common widget properties
 -------------------------
 
