@@ -16,12 +16,12 @@ class Poll(IgnisGObject):
 
     **Example usage:**
 
-        .. code-block:: python
+    .. code-block:: python
 
-            from ignis.utils import Utils
+        from ignis.utils import Utils
 
-            # print "Hello" every second
-            Utils.Poll(timeout=1, callback=lambda: print("Hello"))
+        # print "Hello" every second
+        Utils.Poll(timeout=1, callback=lambda: print("Hello"))
     """
 
     __gsignals__ = {
