@@ -127,7 +127,7 @@ class Stream(IgnisGObject):
 
     @GObject.Property
     def volume(self) -> float:
-        return self._stream.get_volume() / self._control.get_vol_max_norm() * 100
+        return round(self._stream.get_volume() / self._control.get_vol_max_norm() * 100)
 
     @volume.setter
     def volume(self, value: float):
