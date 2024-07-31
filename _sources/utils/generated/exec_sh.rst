@@ -1,5 +1,4 @@
 exec_sh
 -------
 
-.. automodule:: ignis.utils.exec_sh
-    :members:
+.. autofunction:: ignis.utils.Utils.exec_sh

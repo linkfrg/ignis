@@ -1,5 +1,4 @@
 get_ignis_version
 -----------------
 
-.. automodule:: ignis.utils.get_ignis_version
-    :members:
+.. autofunction:: ignis.utils.Utils.get_ignis_version

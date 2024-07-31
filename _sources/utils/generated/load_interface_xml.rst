@@ -1,5 +1,4 @@
 load_interface_xml
 ------------------
 
-.. automodule:: ignis.utils.load_interface_xml
-    :members:
+.. autofunction:: ignis.utils.Utils.load_interface_xml

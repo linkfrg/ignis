@@ -44,7 +44,6 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'utils/generated/thread';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="thread_task" href="thread_task.html" />
     <link rel="prev" title="scale_pixbuf" href="scale_pixbuf.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -205,21 +204,24 @@
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">Utils</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="FileMonitor.html">FileMonitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Poll.html">Poll</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ThreadTask.html">ThreadTask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Timeout.html">Timeout</a></li>
 <li class="toctree-l2"><a class="reference internal" href="crop_pixbuf.html">crop_pixbuf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="exec_sh.html">exec_sh</a></li>
-<li class="toctree-l2"><a class="reference internal" href="file_monitor.html">file_monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exec_sh_async.html">exes_sh_async</a></li>
 <li class="toctree-l2"><a class="reference internal" href="get_file_icon_name.html">get_file_icon_name</a></li>
+<li class="toctree-l2"><a class="reference internal" href="get_ignis_commit_hash.html">get_ignis_commit_hash</a></li>
 <li class="toctree-l2"><a class="reference internal" href="get_ignis_version.html">get_ignis_version</a></li>
 <li class="toctree-l2"><a class="reference internal" href="get_monitor.html">get_monitor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="get_n_monitors.html">get_n_monitors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="get_paintable.html">get_paintable</a></li>
 <li class="toctree-l2"><a class="reference internal" href="load_interface_xml.html">load_interface_xml</a></li>
-<li class="toctree-l2"><a class="reference internal" href="poll.html">poll</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sass.html">sass</a></li>
+<li class="toctree-l2"><a class="reference internal" href="run_in_thread.html">run_in_thread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sass_compile.html">sass_compile</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scale_pixbuf.html">scale_pixbuf</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">thread</a></li>
-<li class="toctree-l2"><a class="reference internal" href="thread_task.html">thread_task</a></li>
-<li class="toctree-l2"><a class="reference internal" href="timeout.html">timeout</a></li>
 </ul>
 </details></li>
 </ul>
@@ -370,8 +372,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.thread.run_in_thread"><code class="docutils literal notranslate"><span class="pre">run_in_thread()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.thread.thread"><code class="docutils literal notranslate"><span class="pre">thread()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.thread"><code class="docutils literal notranslate"><span class="pre">thread()</span></code></a></li>
 </ul>
             </nav>
         </div>
@@ -383,17 +384,11 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="module-ignis.utils.thread">
-<span id="thread"></span><h1>thread<a class="headerlink" href="#module-ignis.utils.thread" title="Link to this heading">#</a></h1>
+  <section id="thread">
+<h1>thread<a class="headerlink" href="#thread" title="Link to this heading">#</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="ignis.utils.thread.run_in_thread">
-<span class="sig-name descname"><span class="pre">run_in_thread</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">callable</span></span></span><a class="headerlink" href="#ignis.utils.thread.run_in_thread" title="Link to this definition">#</a></dt>
-<dd><p>Decorator to run the decorated function in a thread.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="ignis.utils.thread.thread">
-<span class="sig-name descname"><span class="pre">thread</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Thread</span></span></span><a class="headerlink" href="#ignis.utils.thread.thread" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.utils.Utils.thread">
+<span class="sig-name descname"><span class="pre">thread</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Thread</span></span></span><a class="headerlink" href="#ignis.utils.Utils.thread" title="Link to this definition">#</a></dt>
 <dd><p>Simply run the given function in a thread.
 The provided args and kwargs will be passed to the function.</p>
 <dl class="field-list simple">
@@ -431,15 +426,6 @@ The provided args and kwargs will be passed to the function.</p>
         <p class="prev-next-title">scale_pixbuf</p>
       </div>
     </a>
-    <a class="right-next"
-       href="thread_task.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">thread_task</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -456,8 +442,7 @@ The provided args and kwargs will be passed to the function.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.thread.run_in_thread"><code class="docutils literal notranslate"><span class="pre">run_in_thread()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.thread.thread"><code class="docutils literal notranslate"><span class="pre">thread()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.thread"><code class="docutils literal notranslate"><span class="pre">thread()</span></code></a></li>
 </ul>
   </nav></div>
 

@@ -204,21 +204,24 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="utils/index.html">Utils</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils/generated/FileMonitor.html">FileMonitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/generated/Poll.html">Poll</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/generated/ThreadTask.html">ThreadTask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/generated/Timeout.html">Timeout</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils/generated/crop_pixbuf.html">crop_pixbuf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils/generated/exec_sh.html">exec_sh</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/generated/file_monitor.html">file_monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/generated/exec_sh_async.html">exes_sh_async</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils/generated/get_file_icon_name.html">get_file_icon_name</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/generated/get_ignis_commit_hash.html">get_ignis_commit_hash</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils/generated/get_ignis_version.html">get_ignis_version</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils/generated/get_monitor.html">get_monitor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils/generated/get_n_monitors.html">get_n_monitors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils/generated/get_paintable.html">get_paintable</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils/generated/load_interface_xml.html">load_interface_xml</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/generated/poll.html">poll</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/generated/sass.html">sass</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/generated/run_in_thread.html">run_in_thread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/generated/sass_compile.html">sass_compile</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils/generated/scale_pixbuf.html">scale_pixbuf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils/generated/thread.html">thread</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/generated/thread_task.html">thread_task</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/generated/timeout.html">timeout</a></li>
 </ul>
 </details></li>
 </ul>
@@ -364,7 +367,7 @@ document.write(`
 </li>
       <li><a href="app.html#ignis.app.IgnisApp.apply_css">apply_css() (IgnisApp method)</a>
 </li>
-      <li><a href="utils/generated/exec_sh.html#ignis.utils.exec_sh.AsyncCompletedProcess">AsyncCompletedProcess (class in ignis.utils.exec_sh)</a>
+      <li><a href="utils/generated/exec_sh_async.html#ignis.utils.exec_sh.AsyncCompletedProcess">AsyncCompletedProcess (class in ignis.utils.exec_sh)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -394,24 +397,16 @@ document.write(`
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="widgets/generated/Calendar.html#ignis.widgets.Widget.Calendar">Calendar (class in ignis.widgets.Widget)</a>
 </li>
-      <li><a href="utils/generated/file_monitor.html#ignis.utils.file_monitor.FileMonitor.cancel">cancel() (FileMonitor method)</a>
-
-      <ul>
-        <li><a href="utils/generated/poll.html#ignis.utils.poll.Poll.cancel">(Poll method)</a>
-</li>
-        <li><a href="utils/generated/timeout.html#ignis.utils.timeout.Timeout.cancel">(Timeout method)</a>
-</li>
-      </ul></li>
       <li><a href="widgets/generated/CenterBox.html#ignis.widgets.Widget.CenterBox">CenterBox (class in ignis.widgets.Widget)</a>
 </li>
       <li><a href="widgets/generated/CheckButton.html#ignis.widgets.Widget.CheckButton">CheckButton (class in ignis.widgets.Widget)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="services/generated/notifications.html#ignis.services.notifications.NotificationService.clear_all">clear_all() (NotificationService method)</a>
 </li>
       <li><a href="app.html#ignis.app.IgnisApp.close_window">close_window() (IgnisApp method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="services/generated/options.html#ignis.services.options.OptionsService.connect_option">connect_option() (OptionsService method)</a>
 </li>
       <li><a href="services/generated/network.html#ignis.services.network.WifiAccessPoint.connect_to">connect_to() (WifiAccessPoint method)</a>
@@ -420,7 +415,7 @@ document.write(`
 </li>
       <li><a href="services/generated/options.html#ignis.services.options.OptionsService.create_option">create_option() (OptionsService method)</a>
 </li>
-      <li><a href="utils/generated/crop_pixbuf.html#ignis.utils.crop_pixbuf.crop_pixbuf">crop_pixbuf() (in module ignis.utils.crop_pixbuf)</a>
+      <li><a href="utils/generated/crop_pixbuf.html#ignis.utils.Utils.crop_pixbuf">crop_pixbuf() (in module ignis.utils.Utils)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -444,9 +439,9 @@ document.write(`
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="widgets/generated/EventBox.html#ignis.widgets.Widget.EventBox">EventBox (class in ignis.widgets.Widget)</a>
 </li>
-      <li><a href="utils/generated/exec_sh.html#ignis.utils.exec_sh.exec_sh">exec_sh() (in module ignis.utils.exec_sh)</a>
+      <li><a href="utils/generated/exec_sh.html#ignis.utils.Utils.exec_sh">exec_sh() (in module ignis.utils.Utils)</a>
 </li>
-      <li><a href="utils/generated/exec_sh.html#ignis.utils.exec_sh.exec_sh_async">exec_sh_async() (in module ignis.utils.exec_sh)</a>
+      <li><a href="utils/generated/exec_sh_async.html#ignis.utils.Utils.exec_sh_async">exec_sh_async() (in module ignis.utils.Utils)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -464,7 +459,7 @@ document.write(`
 </li>
       <li><a href="widgets/generated/FileFilter.html#ignis.widgets.Widget.FileFilter">FileFilter (class in ignis.widgets.Widget)</a>
 </li>
-      <li><a href="utils/generated/file_monitor.html#ignis.utils.file_monitor.FileMonitor">FileMonitor (class in ignis.utils.file_monitor)</a>
+      <li><a href="utils/generated/FileMonitor.html#ignis.utils.Utils.FileMonitor">FileMonitor() (in module ignis.utils.Utils)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -472,15 +467,15 @@ document.write(`
 <h2 id="G">G</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="utils/generated/get_file_icon_name.html#ignis.utils.get_file_icon_name.get_file_icon_name">get_file_icon_name() (in module ignis.utils.get_file_icon_name)</a>
+      <li><a href="utils/generated/get_file_icon_name.html#ignis.utils.Utils.get_file_icon_name">get_file_icon_name() (in module ignis.utils.Utils)</a>
 </li>
-      <li><a href="utils/generated/get_ignis_version.html#ignis.utils.get_ignis_version.get_ignis_commit_hash">get_ignis_commit_hash() (in module ignis.utils.get_ignis_version)</a>
+      <li><a href="utils/generated/get_ignis_commit_hash.html#ignis.utils.Utils.get_ignis_commit_hash">get_ignis_commit_hash() (in module ignis.utils.Utils)</a>
 </li>
-      <li><a href="utils/generated/get_ignis_version.html#ignis.utils.get_ignis_version.get_ignis_version">get_ignis_version() (in module ignis.utils.get_ignis_version)</a>
+      <li><a href="utils/generated/get_ignis_version.html#ignis.utils.Utils.get_ignis_version">get_ignis_version() (in module ignis.utils.Utils)</a>
 </li>
-      <li><a href="utils/generated/get_monitor.html#ignis.utils.get_monitor.get_monitor">get_monitor() (in module ignis.utils.get_monitor)</a>
+      <li><a href="utils/generated/get_monitor.html#ignis.utils.Utils.get_monitor">get_monitor() (in module ignis.utils.Utils)</a>
 </li>
-      <li><a href="utils/generated/get_n_monitors.html#ignis.utils.get_n_monitors.get_n_monitors">get_n_monitors() (in module ignis.utils.get_n_monitors)</a>
+      <li><a href="utils/generated/get_n_monitors.html#ignis.utils.Utils.get_n_monitors">get_n_monitors() (in module ignis.utils.Utils)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -488,7 +483,7 @@ document.write(`
 </li>
       <li><a href="services/generated/options.html#ignis.services.options.OptionsService.get_option">get_option() (OptionsService method)</a>
 </li>
-      <li><a href="utils/generated/get_paintable.html#ignis.utils.get_paintable.get_paintable">get_paintable() (in module ignis.utils.get_paintable)</a>
+      <li><a href="utils/generated/get_paintable.html#ignis.utils.Utils.get_paintable">get_paintable() (in module ignis.utils.Utils)</a>
 </li>
       <li><a href="app.html#ignis.app.IgnisApp.get_window">get_window() (IgnisApp method)</a>
 </li>
@@ -549,6 +544,8 @@ document.write(`
         <li><a href="services/generated/network.html#module-ignis.services.network">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     ignis.services.notifications
 
@@ -575,113 +572,6 @@ document.write(`
 
       <ul>
         <li><a href="services/generated/wallpaper.html#module-ignis.services.wallpaper">module</a>
-</li>
-      </ul></li>
-      <li>
-    ignis.utils.crop_pixbuf
-
-      <ul>
-        <li><a href="utils/generated/crop_pixbuf.html#module-ignis.utils.crop_pixbuf">module</a>
-</li>
-      </ul></li>
-      <li>
-    ignis.utils.exec_sh
-
-      <ul>
-        <li><a href="utils/generated/exec_sh.html#module-ignis.utils.exec_sh">module</a>
-</li>
-      </ul></li>
-      <li>
-    ignis.utils.file_monitor
-
-      <ul>
-        <li><a href="utils/generated/file_monitor.html#module-ignis.utils.file_monitor">module</a>
-</li>
-      </ul></li>
-      <li>
-    ignis.utils.get_file_icon_name
-
-      <ul>
-        <li><a href="utils/generated/get_file_icon_name.html#module-ignis.utils.get_file_icon_name">module</a>
-</li>
-      </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li>
-    ignis.utils.get_ignis_version
-
-      <ul>
-        <li><a href="utils/generated/get_ignis_version.html#module-ignis.utils.get_ignis_version">module</a>
-</li>
-      </ul></li>
-      <li>
-    ignis.utils.get_monitor
-
-      <ul>
-        <li><a href="utils/generated/get_monitor.html#module-ignis.utils.get_monitor">module</a>
-</li>
-      </ul></li>
-      <li>
-    ignis.utils.get_n_monitors
-
-      <ul>
-        <li><a href="utils/generated/get_n_monitors.html#module-ignis.utils.get_n_monitors">module</a>
-</li>
-      </ul></li>
-      <li>
-    ignis.utils.get_paintable
-
-      <ul>
-        <li><a href="utils/generated/get_paintable.html#module-ignis.utils.get_paintable">module</a>
-</li>
-      </ul></li>
-      <li>
-    ignis.utils.load_interface_xml
-
-      <ul>
-        <li><a href="utils/generated/load_interface_xml.html#module-ignis.utils.load_interface_xml">module</a>
-</li>
-      </ul></li>
-      <li>
-    ignis.utils.poll
-
-      <ul>
-        <li><a href="utils/generated/poll.html#module-ignis.utils.poll">module</a>
-</li>
-      </ul></li>
-      <li>
-    ignis.utils.sass
-
-      <ul>
-        <li><a href="utils/generated/sass.html#module-ignis.utils.sass">module</a>
-</li>
-      </ul></li>
-      <li>
-    ignis.utils.scale_pixbuf
-
-      <ul>
-        <li><a href="utils/generated/scale_pixbuf.html#module-ignis.utils.scale_pixbuf">module</a>
-</li>
-      </ul></li>
-      <li>
-    ignis.utils.thread
-
-      <ul>
-        <li><a href="utils/generated/thread.html#module-ignis.utils.thread">module</a>
-</li>
-      </ul></li>
-      <li>
-    ignis.utils.thread_task
-
-      <ul>
-        <li><a href="utils/generated/thread_task.html#module-ignis.utils.thread_task">module</a>
-</li>
-      </ul></li>
-      <li>
-    ignis.utils.timeout
-
-      <ul>
-        <li><a href="utils/generated/timeout.html#module-ignis.utils.timeout">module</a>
 </li>
       </ul></li>
       <li><a href="app.html#ignis.app.IgnisApp">IgnisApp (class in ignis.app)</a>
@@ -712,7 +602,7 @@ document.write(`
 </li>
       <li><a href="widgets/generated/ListBoxRow.html#ignis.widgets.Widget.ListBoxRow">ListBoxRow (class in ignis.widgets.Widget)</a>
 </li>
-      <li><a href="utils/generated/load_interface_xml.html#ignis.utils.load_interface_xml.load_interface_xml">load_interface_xml() (in module ignis.utils.load_interface_xml)</a>
+      <li><a href="utils/generated/load_interface_xml.html#ignis.utils.Utils.load_interface_xml">load_interface_xml() (in module ignis.utils.Utils)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -743,36 +633,6 @@ document.write(`
         <li><a href="services/generated/system_tray.html#module-ignis.services.system_tray">ignis.services.system_tray</a>
 </li>
         <li><a href="services/generated/wallpaper.html#module-ignis.services.wallpaper">ignis.services.wallpaper</a>
-</li>
-        <li><a href="utils/generated/crop_pixbuf.html#module-ignis.utils.crop_pixbuf">ignis.utils.crop_pixbuf</a>
-</li>
-        <li><a href="utils/generated/exec_sh.html#module-ignis.utils.exec_sh">ignis.utils.exec_sh</a>
-</li>
-        <li><a href="utils/generated/file_monitor.html#module-ignis.utils.file_monitor">ignis.utils.file_monitor</a>
-</li>
-        <li><a href="utils/generated/get_file_icon_name.html#module-ignis.utils.get_file_icon_name">ignis.utils.get_file_icon_name</a>
-</li>
-        <li><a href="utils/generated/get_ignis_version.html#module-ignis.utils.get_ignis_version">ignis.utils.get_ignis_version</a>
-</li>
-        <li><a href="utils/generated/get_monitor.html#module-ignis.utils.get_monitor">ignis.utils.get_monitor</a>
-</li>
-        <li><a href="utils/generated/get_n_monitors.html#module-ignis.utils.get_n_monitors">ignis.utils.get_n_monitors</a>
-</li>
-        <li><a href="utils/generated/get_paintable.html#module-ignis.utils.get_paintable">ignis.utils.get_paintable</a>
-</li>
-        <li><a href="utils/generated/load_interface_xml.html#module-ignis.utils.load_interface_xml">ignis.utils.load_interface_xml</a>
-</li>
-        <li><a href="utils/generated/poll.html#module-ignis.utils.poll">ignis.utils.poll</a>
-</li>
-        <li><a href="utils/generated/sass.html#module-ignis.utils.sass">ignis.utils.sass</a>
-</li>
-        <li><a href="utils/generated/scale_pixbuf.html#module-ignis.utils.scale_pixbuf">ignis.utils.scale_pixbuf</a>
-</li>
-        <li><a href="utils/generated/thread.html#module-ignis.utils.thread">ignis.utils.thread</a>
-</li>
-        <li><a href="utils/generated/thread_task.html#module-ignis.utils.thread_task">ignis.utils.thread_task</a>
-</li>
-        <li><a href="utils/generated/timeout.html#module-ignis.utils.timeout">ignis.utils.timeout</a>
 </li>
       </ul></li>
   </ul></td>
@@ -837,7 +697,7 @@ document.write(`
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="services/generated/mpris.html#ignis.services.mpris.MprisPlayer.play_pause">play_pause() (MprisPlayer method)</a>
 </li>
-      <li><a href="utils/generated/poll.html#ignis.utils.poll.Poll">Poll (class in ignis.utils.poll)</a>
+      <li><a href="utils/generated/Poll.html#ignis.utils.Utils.Poll">Poll() (in module ignis.utils.Utils)</a>
 </li>
       <li><a href="widgets/generated/PopoverMenu.html#ignis.widgets.Widget.PopoverMenu">PopoverMenu (class in ignis.widgets.Widget)</a>
 </li>
@@ -871,7 +731,7 @@ document.write(`
 </li>
       <li><a href="widgets/generated/Revealer.html#ignis.widgets.Widget.Revealer">Revealer (class in ignis.widgets.Widget)</a>
 </li>
-      <li><a href="utils/generated/thread.html#ignis.utils.thread.run_in_thread">run_in_thread() (in module ignis.utils.thread)</a>
+      <li><a href="utils/generated/run_in_thread.html#ignis.utils.Utils.run_in_thread">run_in_thread() (in module ignis.utils.Utils)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -879,11 +739,11 @@ document.write(`
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="utils/generated/sass.html#ignis.utils.sass.sass_compile">sass_compile() (in module ignis.utils.sass)</a>
+      <li><a href="utils/generated/sass_compile.html#ignis.utils.Utils.sass_compile">sass_compile() (in module ignis.utils.Utils)</a>
 </li>
       <li><a href="widgets/generated/Scale.html#ignis.widgets.Widget.Scale">Scale (class in ignis.widgets.Widget)</a>
 </li>
-      <li><a href="utils/generated/scale_pixbuf.html#ignis.utils.scale_pixbuf.scale_pixbuf">scale_pixbuf() (in module ignis.utils.scale_pixbuf)</a>
+      <li><a href="utils/generated/scale_pixbuf.html#ignis.utils.Utils.scale_pixbuf">scale_pixbuf() (in module ignis.utils.Utils)</a>
 </li>
       <li><a href="services/generated/network.html#ignis.services.network.Wifi.scan">scan() (Wifi method)</a>
 </li>
@@ -921,13 +781,13 @@ document.write(`
 <h2 id="T">T</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="utils/generated/thread.html#ignis.utils.thread.thread">thread() (in module ignis.utils.thread)</a>
+      <li><a href="utils/generated/thread.html#ignis.utils.Utils.thread">thread() (in module ignis.utils.Utils)</a>
 </li>
-      <li><a href="utils/generated/thread_task.html#ignis.utils.thread_task.ThreadTask">ThreadTask (class in ignis.utils.thread_task)</a>
+      <li><a href="utils/generated/ThreadTask.html#ignis.utils.Utils.ThreadTask">ThreadTask() (in module ignis.utils.Utils)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="utils/generated/timeout.html#ignis.utils.timeout.Timeout">Timeout (class in ignis.utils.timeout)</a>
+      <li><a href="utils/generated/Timeout.html#ignis.utils.Utils.Timeout">Timeout() (in module ignis.utils.Utils)</a>
 </li>
       <li><a href="app.html#ignis.app.IgnisApp.toggle_window">toggle_window() (IgnisApp method)</a>
 </li>

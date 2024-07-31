@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>poll &#8212; Ignis Wiki</title>
+    <title>Poll &#8212; Ignis Wiki</title>
   
   
   
@@ -41,11 +41,11 @@
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'utils/generated/poll';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'utils/generated/Poll';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="sass" href="sass.html" />
-    <link rel="prev" title="load_interface_xml" href="load_interface_xml.html" />
+    <link rel="next" title="ThreadTask" href="ThreadTask.html" />
+    <link rel="prev" title="FileMonitor" href="FileMonitor.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -205,21 +205,24 @@
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">Utils</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="FileMonitor.html">FileMonitor</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Poll</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ThreadTask.html">ThreadTask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Timeout.html">Timeout</a></li>
 <li class="toctree-l2"><a class="reference internal" href="crop_pixbuf.html">crop_pixbuf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="exec_sh.html">exec_sh</a></li>
-<li class="toctree-l2"><a class="reference internal" href="file_monitor.html">file_monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exec_sh_async.html">exes_sh_async</a></li>
 <li class="toctree-l2"><a class="reference internal" href="get_file_icon_name.html">get_file_icon_name</a></li>
+<li class="toctree-l2"><a class="reference internal" href="get_ignis_commit_hash.html">get_ignis_commit_hash</a></li>
 <li class="toctree-l2"><a class="reference internal" href="get_ignis_version.html">get_ignis_version</a></li>
 <li class="toctree-l2"><a class="reference internal" href="get_monitor.html">get_monitor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="get_n_monitors.html">get_n_monitors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="get_paintable.html">get_paintable</a></li>
 <li class="toctree-l2"><a class="reference internal" href="load_interface_xml.html">load_interface_xml</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">poll</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sass.html">sass</a></li>
+<li class="toctree-l2"><a class="reference internal" href="run_in_thread.html">run_in_thread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sass_compile.html">sass_compile</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scale_pixbuf.html">scale_pixbuf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="thread.html">thread</a></li>
-<li class="toctree-l2"><a class="reference internal" href="thread_task.html">thread_task</a></li>
-<li class="toctree-l2"><a class="reference internal" href="timeout.html">timeout</a></li>
 </ul>
 </details></li>
 </ul>
@@ -276,7 +279,7 @@
       
       
       
-      <li><a href="../../_sources/utils/generated/poll.rst" target="_blank"
+      <li><a href="../../_sources/utils/generated/Poll.rst" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -360,7 +363,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>poll</h1>
+    <h1>Poll</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -370,10 +373,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.poll.Poll"><code class="docutils literal notranslate"><span class="pre">Poll</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.poll.Poll.cancel"><code class="docutils literal notranslate"><span class="pre">Poll.cancel()</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.Poll"><code class="docutils literal notranslate"><span class="pre">Poll()</span></code></a></li>
 </ul>
             </nav>
         </div>
@@ -385,11 +385,11 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="module-ignis.utils.poll">
-<span id="poll"></span><h1>poll<a class="headerlink" href="#module-ignis.utils.poll" title="Link to this heading">#</a></h1>
-<dl class="py class">
-<dt class="sig sig-object py" id="ignis.utils.poll.Poll">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Poll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.utils.poll.Poll" title="Link to this definition">#</a></dt>
+  <section id="poll">
+<h1>Poll<a class="headerlink" href="#poll" title="Link to this heading">#</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="ignis.utils.Utils.Poll">
+<span class="sig-name descname"><span class="pre">Poll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.utils.Utils.Poll" title="Link to this definition">#</a></dt>
 <dd><p>Call a callback every n seconds specefied by the timeout.</p>
 <dl class="simple">
 <dt>Properties:</dt><dd><ul class="simple">
@@ -401,20 +401,12 @@ document.write(`
 </dl>
 <p>You can pass arguments to the constructor, and they will be passed to the callback.</p>
 <p><strong>Example usage:</strong></p>
-<blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.utils</span> <span class="kn">import</span> <span class="n">Utils</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.utils</span> <span class="kn">import</span> <span class="n">Utils</span>
 
 <span class="c1"># print &quot;Hello&quot; every second</span>
 <span class="n">Utils</span><span class="o">.</span><span class="n">Poll</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
-</div></blockquote>
-<dl class="py method">
-<dt class="sig sig-object py" id="ignis.utils.poll.Poll.cancel">
-<span class="sig-name descname"><span class="pre">cancel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.utils.poll.Poll.cancel" title="Link to this definition">#</a></dt>
-<dd><p>Cancel polling.</p>
-</dd></dl>
-
 </dd></dl>
 
 </section>
@@ -431,20 +423,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="load_interface_xml.html"
+       href="FileMonitor.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">load_interface_xml</p>
+        <p class="prev-next-title">FileMonitor</p>
       </div>
     </a>
     <a class="right-next"
-       href="sass.html"
+       href="ThreadTask.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">sass</p>
+        <p class="prev-next-title">ThreadTask</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -464,10 +456,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.poll.Poll"><code class="docutils literal notranslate"><span class="pre">Poll</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.poll.Poll.cancel"><code class="docutils literal notranslate"><span class="pre">Poll.cancel()</span></code></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.Poll"><code class="docutils literal notranslate"><span class="pre">Poll()</span></code></a></li>
 </ul>
   </nav></div>
 

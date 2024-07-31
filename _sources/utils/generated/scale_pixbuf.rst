@@ -1,5 +1,4 @@
 scale_pixbuf
 ------------
 
-.. automodule:: ignis.utils.scale_pixbuf
-    :members:
+.. autofunction:: ignis.utils.Utils.scale_pixbuf

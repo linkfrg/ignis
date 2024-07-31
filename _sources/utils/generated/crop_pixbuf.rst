@@ -1,5 +1,4 @@
 crop_pixbuf
 -----------
 
-.. automodule:: ignis.utils.crop_pixbuf
-    :members:
+.. autofunction:: ignis.utils.Utils.crop_pixbuf

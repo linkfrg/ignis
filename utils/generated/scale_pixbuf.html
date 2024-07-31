@@ -45,7 +45,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="thread" href="thread.html" />
-    <link rel="prev" title="sass" href="sass.html" />
+    <link rel="prev" title="sass_compile" href="sass_compile.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -205,21 +205,24 @@
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">Utils</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="FileMonitor.html">FileMonitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Poll.html">Poll</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ThreadTask.html">ThreadTask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Timeout.html">Timeout</a></li>
 <li class="toctree-l2"><a class="reference internal" href="crop_pixbuf.html">crop_pixbuf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="exec_sh.html">exec_sh</a></li>
-<li class="toctree-l2"><a class="reference internal" href="file_monitor.html">file_monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exec_sh_async.html">exes_sh_async</a></li>
 <li class="toctree-l2"><a class="reference internal" href="get_file_icon_name.html">get_file_icon_name</a></li>
+<li class="toctree-l2"><a class="reference internal" href="get_ignis_commit_hash.html">get_ignis_commit_hash</a></li>
 <li class="toctree-l2"><a class="reference internal" href="get_ignis_version.html">get_ignis_version</a></li>
 <li class="toctree-l2"><a class="reference internal" href="get_monitor.html">get_monitor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="get_n_monitors.html">get_n_monitors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="get_paintable.html">get_paintable</a></li>
 <li class="toctree-l2"><a class="reference internal" href="load_interface_xml.html">load_interface_xml</a></li>
-<li class="toctree-l2"><a class="reference internal" href="poll.html">poll</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sass.html">sass</a></li>
+<li class="toctree-l2"><a class="reference internal" href="run_in_thread.html">run_in_thread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sass_compile.html">sass_compile</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">scale_pixbuf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="thread.html">thread</a></li>
-<li class="toctree-l2"><a class="reference internal" href="thread_task.html">thread_task</a></li>
-<li class="toctree-l2"><a class="reference internal" href="timeout.html">timeout</a></li>
 </ul>
 </details></li>
 </ul>
@@ -370,7 +373,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.scale_pixbuf.scale_pixbuf"><code class="docutils literal notranslate"><span class="pre">scale_pixbuf()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.scale_pixbuf"><code class="docutils literal notranslate"><span class="pre">scale_pixbuf()</span></code></a></li>
 </ul>
             </nav>
         </div>
@@ -382,11 +385,11 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="module-ignis.utils.scale_pixbuf">
-<span id="scale-pixbuf"></span><h1>scale_pixbuf<a class="headerlink" href="#module-ignis.utils.scale_pixbuf" title="Link to this heading">#</a></h1>
+  <section id="scale-pixbuf">
+<h1>scale_pixbuf<a class="headerlink" href="#scale-pixbuf" title="Link to this heading">#</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="ignis.utils.scale_pixbuf.scale_pixbuf">
-<span class="sig-name descname"><span class="pre">scale_pixbuf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pixbuf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Pixbuf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Pixbuf</span></span></span><a class="headerlink" href="#ignis.utils.scale_pixbuf.scale_pixbuf" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.utils.Utils.scale_pixbuf">
+<span class="sig-name descname"><span class="pre">scale_pixbuf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pixbuf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Pixbuf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Pixbuf</span></span></span><a class="headerlink" href="#ignis.utils.Utils.scale_pixbuf" title="Link to this definition">#</a></dt>
 <dd><p>Scale a <code class="docutils literal notranslate"><span class="pre">GdkPixbuf.Pixbuf</span></code> to the given width and height.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -413,12 +416,12 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="sass.html"
+       href="sass_compile.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">sass</p>
+        <p class="prev-next-title">sass_compile</p>
       </div>
     </a>
     <a class="right-next"
@@ -446,7 +449,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.scale_pixbuf.scale_pixbuf"><code class="docutils literal notranslate"><span class="pre">scale_pixbuf()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.scale_pixbuf"><code class="docutils literal notranslate"><span class="pre">scale_pixbuf()</span></code></a></li>
 </ul>
   </nav></div>
 

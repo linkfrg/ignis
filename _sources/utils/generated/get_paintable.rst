@@ -1,5 +1,4 @@
 get_paintable
 -------------
 
-.. automodule:: ignis.utils.get_paintable
-    :members:
+.. autofunction:: ignis.utils.Utils.get_paintable

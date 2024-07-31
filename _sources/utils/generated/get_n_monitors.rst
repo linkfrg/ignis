@@ -1,5 +1,4 @@
 get_n_monitors
 --------------
 
-.. automodule:: ignis.utils.get_n_monitors
-    :members:
+.. autofunction:: ignis.utils.Utils.get_n_monitors

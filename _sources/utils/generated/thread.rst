@@ -1,5 +1,4 @@
 thread
 ------
 
-.. automodule:: ignis.utils.thread
-    :members:
+.. autofunction:: ignis.utils.Utils.thread

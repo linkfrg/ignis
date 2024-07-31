@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>exec_sh &#8212; Ignis Wiki</title>
+    <title>sass_compile &#8212; Ignis Wiki</title>
   
   
   
@@ -41,11 +41,11 @@
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'utils/generated/exec_sh';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'utils/generated/sass_compile';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="exes_sh_async" href="exec_sh_async.html" />
-    <link rel="prev" title="crop_pixbuf" href="crop_pixbuf.html" />
+    <link rel="next" title="scale_pixbuf" href="scale_pixbuf.html" />
+    <link rel="prev" title="run_in_thread" href="run_in_thread.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -210,7 +210,7 @@
 <li class="toctree-l2"><a class="reference internal" href="ThreadTask.html">ThreadTask</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Timeout.html">Timeout</a></li>
 <li class="toctree-l2"><a class="reference internal" href="crop_pixbuf.html">crop_pixbuf</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">exec_sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exec_sh.html">exec_sh</a></li>
 <li class="toctree-l2"><a class="reference internal" href="exec_sh_async.html">exes_sh_async</a></li>
 <li class="toctree-l2"><a class="reference internal" href="get_file_icon_name.html">get_file_icon_name</a></li>
 <li class="toctree-l2"><a class="reference internal" href="get_ignis_commit_hash.html">get_ignis_commit_hash</a></li>
@@ -220,7 +220,7 @@
 <li class="toctree-l2"><a class="reference internal" href="get_paintable.html">get_paintable</a></li>
 <li class="toctree-l2"><a class="reference internal" href="load_interface_xml.html">load_interface_xml</a></li>
 <li class="toctree-l2"><a class="reference internal" href="run_in_thread.html">run_in_thread</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sass_compile.html">sass_compile</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">sass_compile</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scale_pixbuf.html">scale_pixbuf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="thread.html">thread</a></li>
 </ul>
@@ -279,7 +279,7 @@
       
       
       
-      <li><a href="../../_sources/utils/generated/exec_sh.rst" target="_blank"
+      <li><a href="../../_sources/utils/generated/sass_compile.rst" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -363,7 +363,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>exec_sh</h1>
+    <h1>sass_compile</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -373,7 +373,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.exec_sh"><code class="docutils literal notranslate"><span class="pre">exec_sh()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.sass_compile"><code class="docutils literal notranslate"><span class="pre">sass_compile()</span></code></a></li>
 </ul>
             </nav>
         </div>
@@ -385,21 +385,22 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="exec-sh">
-<h1>exec_sh<a class="headerlink" href="#exec-sh" title="Link to this heading">#</a></h1>
+  <section id="sass-compile">
+<h1>sass_compile<a class="headerlink" href="#sass-compile" title="Link to this heading">#</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="ignis.utils.Utils.exec_sh">
-<span class="sig-name descname"><span class="pre">exec_sh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">CompletedProcess</span></span></span><a class="headerlink" href="#ignis.utils.Utils.exec_sh" title="Link to this definition">#</a></dt>
-<dd><p>Execute a shell (bash) command.</p>
+<dt class="sig sig-object py" id="ignis.utils.Utils.sass_compile">
+<span class="sig-name descname"><span class="pre">sass_compile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ignis.utils.Utils.sass_compile" title="Link to this definition">#</a></dt>
+<dd><p>Compile a SASS/SCSS file or string.
+Requires <code class="docutils literal notranslate"><span class="pre">dart-sass</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>command</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The command to execute.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, optional) -- The path to the SASS/SCSS file.</p></li>
+<li><p><strong>string</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, optional) -- A string with SASS/SCSS style.</p></li>
+</ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The result of the command execution. You can use the <code class="docutils literal notranslate"><span class="pre">stdout</span></code> property to get the command's output.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">subprocess.CompletedProcess</span></code></p>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> -- If neither of the arguments is provided.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -418,20 +419,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="crop_pixbuf.html"
+       href="run_in_thread.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">crop_pixbuf</p>
+        <p class="prev-next-title">run_in_thread</p>
       </div>
     </a>
     <a class="right-next"
-       href="exec_sh_async.html"
+       href="scale_pixbuf.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">exes_sh_async</p>
+        <p class="prev-next-title">scale_pixbuf</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -451,7 +452,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.exec_sh"><code class="docutils literal notranslate"><span class="pre">exec_sh()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.sass_compile"><code class="docutils literal notranslate"><span class="pre">sass_compile()</span></code></a></li>
 </ul>
   </nav></div>
 
