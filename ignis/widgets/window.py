@@ -46,10 +46,10 @@ class Window(Gtk.Window, BaseWidget):
     Properties:
         - **namespace** (``str``, read-only): The name of the window, used to access it from the CLI and :class:`~ignis.app.ignisApp`. It must be unique. It is also the name of the layer.
         - **monitor** (``int``, optional, read-write): Monitor number on which to display the window.
-        - ** anchor** (``List[str]``, optional, read-write): List of anchors. If the list is empty, the window will be centered on the screen. Possible values: ``"bottom"``, ``"left"``, ``"right"``, ``"top"``.
-        - **exclusive** (``bool``, optional, read-write): Whether the compositor should reserve space for the window.
+        - **anchor** (``List[str]``, optional, read-write): List of anchors. If the list is empty, the window will be centered on the screen. Possible values: ``"bottom"``, ``"left"``, ``"right"``, ``"top"``.
+        - **exclusivity** (``str``, optional, read-write): Whether the compositor should reserve space for the window. Possible values: ``"ignore"``, ``"normal"``, ``"exclusive"``.
         - **layer** (``str``, optional, read-write): Layer of the surface. Possible values: ``"background"``, ``"bottom"``, ``"top"``, ``"overlay"``.
-        - **kb_mode** (``str``, optional, read-write): Whether the window should receive keyboard events from the compositor. Possible values: ``"none"``, ``"exclusive"``, `"on_demand"``.
+        - **kb_mode** (``str``, optional, read-write): Whether the window should receive keyboard events from the compositor. Possible values: ``"none"``, ``"exclusive"``, ``"on_demand"``.
         - **popup** (``bool``, optional, read-write): Whether the window should close on ESC. Works only if ``kb_mode`` is set to ``"exclusive"`` or ``"on_demand"``.
 
     .. code-block:: python
