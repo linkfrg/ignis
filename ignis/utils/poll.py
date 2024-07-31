@@ -59,7 +59,7 @@ class Poll(IgnisGObject):
         self._callback = value
 
     def __main(self) -> None:
-        self._output = self._callback(*self._args)
+        self._output = self._callback(self, *self._args)
         self.emit("changed")
         self.notify("output")
         self.__id = GLib.timeout_add_seconds(self._timeout, self.__main)
