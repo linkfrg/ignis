@@ -6,3 +6,4 @@ docs/_build
 generated
 .vscode
 build
+ignis/VERSION

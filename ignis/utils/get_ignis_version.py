@@ -5,10 +5,10 @@ VERSION_FILE = f"{os.path.dirname(os.path.abspath(__file__))}/../VERSION"
 
 def get_ignis_version() -> str:
     """
-    Get the current Ignis version.
+    Get the current Ignis version and commit hash.
 
     Returns:
-        ``str``: The Ignis version.
+        ``str``: A string containing the Ignis version and commit hash.
     """
     with open(VERSION_FILE) as file:
         version = file.read()

@@ -1,6 +1,6 @@
 project(
     'ignis',
-    version: run_command('cat', 'ignis/VERSION').stdout().strip(),
+    version: run_command('cat', 'VERSION').stdout().strip(),
     license: 'GPL-3.0-only',
     default_options: ['warning_level=2', 'werror=false']
 )
