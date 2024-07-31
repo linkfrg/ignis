@@ -7,7 +7,7 @@ from .timeout import Timeout
 from .file_monitor import FileMonitor
 from .thread import thread, run_in_thread
 from .sass import sass_compile
-from .get_ignis_version import get_ignis_version
+from .get_ignis_version import get_ignis_version, get_ignis_commit_hash
 from .scale_pixbuf import scale_pixbuf
 from .crop_pixbuf import crop_pixbuf
 from .get_paintable import get_paintable
@@ -33,3 +33,4 @@ class Utils:
     get_paintable = get_paintable
     get_file_icon_name = get_file_icon_name
     ThreadTask = ThreadTask
+    get_ignis_commit_hash = get_ignis_commit_hash

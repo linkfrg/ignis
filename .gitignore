@@ -7,3 +7,4 @@ generated
 .vscode
 build
 ignis/VERSION
+ignis/COMMIT

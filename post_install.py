@@ -21,4 +21,8 @@ with open(version_file) as file:
 
 ignis_version_file = Path(install_dir) / "VERSION"
 with open(ignis_version_file, "w") as file:
-    file.write(f"{version} {commit_hash}")
+    file.write(version)
+
+ignis_commit_hash_file = Path(install_dir) / "COMMIT"
+with open(ignis_commit_hash_file, "w") as file:
+    file.write(commit_hash)
