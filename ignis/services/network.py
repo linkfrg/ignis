@@ -1,18 +1,21 @@
 import gi
 from gi.repository import GObject, GLib
 from ignis.gobject import IgnisGObject
-from ignis.logging import logger
 from typing import List
 from ignis.widgets import Widget
+
+class NetworkManagerNotFoundError(Exception):
+    """
+    Raised when NetworkManager is not found.
+    """
+    def __init__(self, *args: object) -> None:
+        super().__init__("NetworkManager not found! To use the network service, install NetworkManager", *args)
 
 try:
     gi.require_version("NM", "1.0")
     from gi.repository import NM
 except (ImportError, ValueError):
-    logger.critical(
-        "NetworkManager not found! To use the network service, install NetworkManager."
-    )
-    exit(1)
+    raise NetworkManagerNotFoundError() from None
 
 STATE = {
     NM.DeviceState.UNKNOWN: "unknown",

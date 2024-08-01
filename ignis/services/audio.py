@@ -1,17 +1,20 @@
 import gi
-from ignis.logging import logger
 from gi.repository import GObject
 from ignis.gobject import IgnisGObject
 from typing import List
+
+class GvcNotFoundError(Exception):
+    """
+    Raised when Gvc is not found.
+    """
+    def __init__(self, *args) -> None:
+        super().__init__("Gvc not found! To use the audio service, ensure that Ignis is installed correctly", *args)
 
 try:
     gi.require_version("Gvc", "1.0")
     from gi.repository import Gvc
 except (ImportError, ValueError):
-    logger.critical(
-        "Gvc not found! To use the audio service, ensure that Ignis is installed correctly."
-    )
-    exit(1)
+    raise GvcNotFoundError() from None
 
 SPEAKER_ICON_TEMPLATE = "audio-volume-{}-symbolic"
 MICROPHONE_ICON_TEMPLATE = "microphone-sensitivity-{}-symbolic"

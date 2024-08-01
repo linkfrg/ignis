@@ -5,11 +5,22 @@ from gi.repository import GObject
 from ignis.gobject import IgnisGObject
 from ignis.utils import Utils
 from typing import List
-from ignis.logging import logger
 
 HYPRLAND_INSTANCE_SIGNATURE = os.getenv("HYPRLAND_INSTANCE_SIGNATURE")
 XDG_RUNTIME_DIR = os.getenv("XDG_RUNTIME_DIR")
 SOCKET_DIR = f"{XDG_RUNTIME_DIR}/hypr/{HYPRLAND_INSTANCE_SIGNATURE}"
+
+
+class HyprlandIPCNotFoundError(Exception):
+    """
+    Raised when Hyprland IPC is not found.
+    """
+
+    def __init__(self, *args: object) -> None:
+        super().__init__(
+            "Hyprland IPC not found! To use the Hyprland service, ensure that Hyprland is running",
+            *args,
+        )
 
 
 class HyprlandService(IgnisGObject):
@@ -39,10 +50,7 @@ class HyprlandService(IgnisGObject):
     def __init__(self):
         super().__init__()
         if not os.path.exists(SOCKET_DIR):
-            logger.critical(
-                "Hyprland IPC not found! To use the Hyprland service, ensure that you are running Hyprland."
-            )
-            exit(1)
+            raise HyprlandIPCNotFoundError()
 
         self._workspaces = []
         self._active_workspace = {}
@@ -78,8 +86,8 @@ class HyprlandService(IgnisGObject):
                 try:
                     data = sock.recv(1024).decode("utf-8")
                     self.__on_data_received(data)
-                except Exception as e:
-                    logger.error(f"Error in Hyprland service: {e}")
+                except UnicodeDecodeError:
+                    pass
 
     def __on_data_received(self, data: str) -> None:
         data_list = data.split("\n")

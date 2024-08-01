@@ -8,11 +8,19 @@ OPTIONS_FILE = f"{CACHE_DIR}/options.json"
 
 
 class OptionNotFoundError(Exception):
-    pass
+    """
+    Raised when an option is not found.
+    """
+    def __init__(self, name: str, *args) -> None:
+        super().__init__(f'No such option: "{name}"', *args)
 
 
 class OptionAlreadyExistsError(Exception):
-    pass
+    """
+    Raised when an option already exists.
+    """
+    def __init__(self, name: str, *args) -> None:
+        super().__init__(f'Option already exists: "{name}"', *args)
 
 
 class Option(IgnisGObject):
@@ -112,7 +120,7 @@ class OptionsService(IgnisGObject):
             self.__sync()
         else:
             if not exists_ok:
-                raise OptionAlreadyExistsError(f'Option already exists: "{name}"')
+                raise OptionAlreadyExistsError(name)
 
     def remove_option(self, name: str) -> None:
         """
@@ -128,7 +136,7 @@ class OptionsService(IgnisGObject):
         if option:
             self._data.pop(name)
         else:
-            raise OptionNotFoundError(f'No such option: "{name}"')
+            raise OptionNotFoundError(name)
 
     def get_option(self, name: str) -> Any:
         """
@@ -140,13 +148,15 @@ class OptionsService(IgnisGObject):
         Returns:
             The value of the option.
 
+        Raises:
+            OptionNotFoundError: Raised if the option does not exist.
         """
         option = self.__data.get(name, None)
 
         if option:
             return option.value
         else:
-            raise OptionNotFoundError(f'No such option: "{name}"')
+            raise OptionNotFoundError(name)
 
     def set_option(self, name: str, value: Any) -> None:
         """
@@ -155,13 +165,14 @@ class OptionsService(IgnisGObject):
         Args:
             name (``str``): The name of the option.
             value (``Any``): The value to set for the option.
-
+        Raises:
+            OptionNotFoundError: Raised if the option does not exist.
         """
         option = self.__data.get(name, None)
         if option:
             option.value = value
         else:
-            raise OptionNotFoundError(f'No such option: "{name}"')
+            raise OptionNotFoundError(name)
         self.__sync()
 
     def bind_option(self, name: str, transform: callable = None) -> Binding:
@@ -175,10 +186,12 @@ class OptionsService(IgnisGObject):
         Returns:
             ``Binding``.
 
+        Raises:
+            OptionNotFoundError: Raised if the option does not exist.
         """
         option = self.__data.get(name, None)
         if not option:
-            raise OptionNotFoundError(f'No such option "{name}"')
+            raise OptionNotFoundError(name)
 
         return Binding(option, "value", transform)
 
@@ -190,9 +203,12 @@ class OptionsService(IgnisGObject):
         Args:
             name (``str``): The name of the option.
             callback (``callable``): A function to call when the option value changes. The new value of the option will be passed to this function.
+
+        Raises:
+            OptionNotFoundError: Raised if the option does not exist.
         """
         option = self.__data.get(name, None)
         if not option:
-            raise OptionNotFoundError(f'No such option "{name}"')
+            raise OptionNotFoundError(name)
 
         option.connect("notify::value", lambda x, y: callback(option.value))

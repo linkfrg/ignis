@@ -5,7 +5,6 @@ from gi.repository import GObject, GLib
 from ignis.gobject import IgnisGObject
 from ignis.dbus import DBusProxy
 from ignis.app import app
-from ignis.logging import logger
 from ignis.services import Service
 from ignis.utils import Utils
 from typing import List
@@ -31,6 +30,20 @@ options.create_option(
 
 N_THREADS = str(min(max(1, GLib.get_num_processors()), 64))
 
+class GstNotFoundError(Exception):
+    """
+    Raised when GStreamer is not found.
+    """
+    def __init__(self, *args: object) -> None:
+        super().__init__("GStreamer not found! To use the recorder service, install GStreamer", *args)
+
+class GstPluginNotFoundError(Exception):
+    """
+    Raised when a GStreamer plugin is not found.
+    """
+    def __init__(self, name: str, plugin_package: str, *args) -> None:
+        super().__init__(f"{name} GStreamer plugin not found! To use the recorder service, install {plugin_package}", *args)
+
 
 def gst_inspect(name: str) -> None:
     try:
@@ -44,10 +57,7 @@ try:
     gi.require_version("Gst", "1.0")
     from gi.repository import Gst
 except (ImportError, ValueError):
-    logger.critical(
-        "GStreamer not found! To use the recorder service, install GStreamer."
-    )
-    exit(1)
+    raise GstNotFoundError("GStreamer not found! To use the recorder service, install GStreamer.") from None
 
 PIPELINE_TEMPLATE = """
     pipewiresrc path={node_id} do-timestamp=true keepalive-time=1000 resend-last=true !
@@ -147,21 +157,13 @@ class RecorderService(IgnisGObject):
 
     def __check_deps(self) -> None:
         if not gst_inspect("pipewiresrc"):
-            logger.critical(
-                "PipeWire GStreamer plugin not found! To use the recorder service, install gst-plugin-pipewire."
-            )
-            exit(1)
+            raise GstPluginNotFoundError("PipeWire", "gst-plugin-pipewire")
 
         if not gst_inspect("x264enc"):
-            logger.critical(
-                "H.264 encoder GStreamer plugin not found! To use the recorder service, install gst-plugins-ugly."
-            )
-            exit(1)
+            raise GstPluginNotFoundError("H.264 encoder", "gst-plugins-ugly")
+
         if not gst_inspect("mp4mux"):
-            logger.critical(
-                "H.264 encoder GStreamer plugin not found! To use the recorder service, install gst-plugins-good."
-            )
-            exit(1)
+            raise GstPluginNotFoundError("MP4 muxer", "gst-plugins-good")
 
     @GObject.Property
     def active(self) -> bool:

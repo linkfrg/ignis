@@ -439,6 +439,6 @@ class NotificationService(IgnisGObject):
             self._id = log_file.get("id", 0)
 
         except Exception:
-            logger.warn("Notification history file is corrupted! Cleaning...")
+            logger.warning("Notification history file is corrupted! Cleaning...")
             with open(NOTIFICATIONS_CACHE_FILE, "w") as file:
                 json.dump(NOTIFICATIONS_EMPTY_CACHE_FILE, file, indent=2)

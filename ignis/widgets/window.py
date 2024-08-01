@@ -36,6 +36,17 @@ EXCLUSIVITY = {
     "exclusive": 1,
 }
 
+class MonitorNotFoundError(Exception):
+    def __init__(self, monitor_id: int, *args: object) -> None:
+        super().__init__(f"No such monitor with id: {monitor_id}", *args)
+
+class LayerShellNotSupportedError(Exception):
+    """
+    Raised when the Layer Shell protocol is not supported.
+    """
+    def __init__(self, *args: object) -> None:
+        super().__init__("zwlr_layer_shell_v1 is not supported! Ensure you are running a Wayland compositor that implements the zwlr_layer_shell_v1 protocol", *args)
+
 
 class Window(Gtk.Window, BaseWidget):
     """
@@ -82,10 +93,7 @@ class Window(Gtk.Window, BaseWidget):
         **kwargs,
     ):
         if not GtkLayerShell.is_supported():
-            logger.critical(
-                "zwlr_layer_shell_v1 is not supported! Ensure you are running a Wayland compositor that implements the zwlr_layer_shell_v1 protocol (e.g., wlroots-based compositors)."
-            )
-            exit(1)
+            raise LayerShellNotSupportedError()
 
         Gtk.Window.__init__(self, application=app)
         GtkLayerShell.init_for_window(self)
@@ -188,8 +196,8 @@ class Window(Gtk.Window, BaseWidget):
     def monitor(self, value: int) -> None:
         gdkmonitor = Utils.get_monitor(value)
         if gdkmonitor is None:
-            logger.error(f"No such monitor with id: {value}")
-            return
+            raise MonitorNotFoundError(value)
+
         GtkLayerShell.set_monitor(self, gdkmonitor)
         self._monitor = value
 

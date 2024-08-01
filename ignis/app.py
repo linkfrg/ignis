@@ -7,6 +7,19 @@ from gi.repository import Gtk, Gdk, Gio, GObject, GLib
 from typing import List
 from ignis.gobject import IgnisGObject
 
+class WindowNotFoundError(Exception):
+    """
+    Raised when a window is not found.
+    """
+    def __init__(self, window_name: str, *args) -> None:
+        super().__init__(f'No such window: "{window_name}"', *args)
+
+class WindowAlreadyAddedError(Exception):
+    """
+    Raised when a window is already added to the application.
+    """
+    def __init__(self, window_name: str, *args) -> None:
+        super().__init__(f'Window already added: "{window_name}"', *args)
 
 class IgnisApp(Gtk.Application, IgnisGObject):
     """
@@ -29,7 +42,6 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         - **windows** (``List[Gtk.Window]``, read-only): List of windows.
         - **autoreload_config** (``bool``, read-write, default: ``True``): Whether to automatically reload the configuration when it changes (only .py files).
         - **autoreload_css** (``bool``, read-write, default: ``True``): Whether to automatically reload the CSS style when it changes (only .css/.scss/.sass files).
-
     """
 
     __gsignals__ = {
@@ -165,8 +177,9 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         self.hold()
 
         if not os.path.exists(self._config_path):
-            logger.critical(f"Provided config path doesn't exists: {self._config_path}")
-            exit(1)
+            raise FileNotFoundError(
+                f"Provided config path doesn't exists: {self._config_path}"
+            )
 
         config_dir = os.path.dirname(self._config_path)
         config_filename = os.path.splitext(os.path.basename(self._config_path))[0]
@@ -200,7 +213,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         if window:
             return window
         else:
-            logger.error(f"No such window: {window_name}")
+            raise WindowNotFoundError(window_name)
 
     def open_window(self, window_name: str) -> None:
         """
@@ -210,8 +223,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
             window_name (``str``): The window's namespace.
         """
         window = self.get_window(window_name)
-        if window:
-            window.visible = True
+        window.visible = True
 
     def close_window(self, window_name: str) -> None:
         """
@@ -221,8 +233,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
             window_name (``str``): The window's namespace.
         """
         window = self.get_window(window_name)
-        if window:
-            window.visible = False
+        window.visible = False
 
     def toggle_window(self, window_name: str) -> None:
         """
@@ -232,9 +243,8 @@ class IgnisApp(Gtk.Application, IgnisGObject):
             window_name (``str``): The window's namespace.
         """
         window = self.get_window(window_name)
-        if window:
-            window.visible = not window.visible
-            return window.visible
+        window.visible = not window.visible
+        return window.visible
 
     def add_window(self, window_name: str, window: Gtk.Window) -> None:
         """
@@ -245,6 +255,9 @@ class IgnisApp(Gtk.Application, IgnisGObject):
             window_name (``str``): The window's namespace.
             window (``Gtk.Window``): The window instance.
         """
+        if window_name in self._windows:
+            raise WindowAlreadyAddedError(window_name)
+
         self._windows[window_name] = window
 
     def reload(self) -> None:

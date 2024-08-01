@@ -1,6 +1,10 @@
 import importlib
 from ignis.gobject import IgnisGObject
-from ignis.logging import logger
+
+
+class ServiceNotFoundError(Exception):
+    def __init__(self, service_name: str, *args: object) -> None:
+        super().__init__(f'No such service "{service_name}"', *args)
 
 
 class ServiceClass:
@@ -29,7 +33,7 @@ class ServiceClass:
 
             return getattr(self, f"_{service}")
         else:
-            logger.error(f"Service '{service}' not found!")
+            raise ServiceNotFoundError(service)
 
 
 Service = ServiceClass()
