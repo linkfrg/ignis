@@ -90,9 +90,7 @@ class MprisPlayer(IgnisGObject):
 
         self.__player_proxy.proxy.connect("g-properties-changed", self.__sync)
 
-        self.__mpris_proxy.proxy.connect(
-            "notify::g-name-owner", lambda *args: self.emit("closed")
-        )
+        self.__mpris_proxy.watch_name(on_name_vanished=lambda *args: self.emit("closed"))
 
         self.__ready()
 
