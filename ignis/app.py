@@ -291,8 +291,6 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         if not window:
             raise WindowNotFoundError(window_name)
 
-        window.unrealize()
-
     def reload(self) -> None:
         """
         Reload Ignis.
