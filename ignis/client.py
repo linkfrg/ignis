@@ -15,14 +15,20 @@ class IgnisClient:
     def has_owner(self) -> bool:
         return self.__dbus.has_owner
 
-    def OpenWindow(self, window: str) -> None:
-        self.__dbus.OpenWindow("(s)", window)
+    def __call_window_method(self, method_name: str, window_name: str) -> None:
+        window_found = getattr(self.__dbus, method_name)("(s)", window_name)
+        if not window_found:
+            print(f"No such window: {window_name}")
+            exit(1)
 
-    def CloseWindow(self, window: str) -> None:
-        self.__dbus.CloseWindow("(s)", window)
+    def OpenWindow(self, window_name: str) -> None:
+        self.__call_window_method("OpenWindow", window_name)
 
-    def ToggleWindow(self, window: str) -> None:
-        self.__dbus.ToggleWindow("(s)", window)
+    def CloseWindow(self, window_name: str) -> None:
+        self.__call_window_method("CloseWindow", window_name)
+
+    def ToggleWindow(self, window_name: str) -> None:
+        self.__call_window_method("ToggleWindow", window_name)
 
     def ListWindows(self) -> None:
         response = self.__dbus.ListWindows()

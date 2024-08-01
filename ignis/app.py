@@ -313,8 +313,24 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         """
         Gtk.Window.set_interactive_debugging(True)
 
+    def __call_window_method(self, _type: str, window_name: str) -> bool:
+        try:
+            getattr(self, f"{_type}_window")(window_name)
+            return GLib.Variant("(b)", (True,))
+        except WindowNotFoundError:
+            return GLib.Variant("(b)", (False,))
+
+    def __OpenWindow(self, invocation, window_name: str) -> None:
+        return self.__call_window_method("open", window_name)
+
+    def __CloseWindow(self, invocation, window_name: str) -> None:
+        return self.__call_window_method("close", window_name)
+
     def __ToggleWindow(self, invocation, window_name: str) -> GLib.Variant:
-        self.toggle_window(window_name)
+        return self.__call_window_method("toggle", window_name)
+
+    def __ListWindows(self, invocation) -> str:
+        return GLib.Variant("(as)", (tuple(self._windows),))
 
     def __RunPython(self, invocation, code: str) -> None:
         invocation.return_value(None)
@@ -326,24 +342,16 @@ class IgnisApp(Gtk.Application, IgnisGObject):
             code = file.read()
             exec(code)
 
+    def __Inspector(self, invocation) -> None:
+        self.inspector()
+
     def __Reload(self, invocation) -> None:
         invocation.return_value(None)
         self.reload()
 
-    def __ListWindows(self, invocation) -> str:
-        return GLib.Variant("(as)", (tuple(self._windows),))
-
-    def __OpenWindow(self, invocation, window_name: str) -> None:
-        self.open_window(window_name)
-
-    def __CloseWindow(self, invocation, window_name: str) -> None:
-        self.close_window(window_name)
-
     def __Quit(self, invocation) -> None:
         self.quit()
 
-    def __Inspector(self, invocation) -> None:
-        self.inspector()
 
 
 app = IgnisApp()

@@ -8,12 +8,15 @@
         </method>
         <method name="ToggleWindow">
             <arg direction="in" type="s" name="name"/>
+            <arg direction="out" type="b" name="window-found"/>
         </method>
         <method name="OpenWindow">
             <arg direction="in" type="s" name="name"/>
+            <arg direction="out" type="b" name="window-found"/>
         </method>
         <method name="CloseWindow">
             <arg direction="in" type="s" name="name"/>
+            <arg direction="out" type="b" name="window-found"/>
         </method>
         <method name="RunPython">
             <arg direction="in" type="s" name="code"/>
