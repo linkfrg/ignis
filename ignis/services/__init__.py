@@ -3,6 +3,10 @@ from ignis.gobject import IgnisGObject
 
 
 class ServiceNotFoundError(Exception):
+    """
+    Raised when a service with the given name is not found.
+    """
+
     def __init__(self, service_name: str, *args: object) -> None:
         super().__init__(f'No such service "{service_name}"', *args)
 
@@ -25,6 +29,9 @@ class ServiceClass:
         }
 
     def get(self, service: str) -> IgnisGObject:
+        """
+        Get a service by its name.
+        """
         if service in self._services:
             if not hasattr(self, f"_{service}"):
                 module = importlib.import_module(f".{service}", package=__name__)

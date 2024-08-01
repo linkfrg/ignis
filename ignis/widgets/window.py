@@ -5,7 +5,6 @@ from ignis.base_widget import BaseWidget
 from ignis.utils import Utils
 from typing import List
 from gi.repository import Gtk4LayerShell as GtkLayerShell
-from ignis.logging import logger
 
 
 LAYER = {
@@ -36,16 +35,26 @@ EXCLUSIVITY = {
     "exclusive": 1,
 }
 
+
 class MonitorNotFoundError(Exception):
+    """
+    Raised when a monitor with the given ID is not found.
+    """
+
     def __init__(self, monitor_id: int, *args: object) -> None:
         super().__init__(f"No such monitor with id: {monitor_id}", *args)
+
 
 class LayerShellNotSupportedError(Exception):
     """
     Raised when the Layer Shell protocol is not supported.
     """
+
     def __init__(self, *args: object) -> None:
-        super().__init__("zwlr_layer_shell_v1 is not supported! Ensure you are running a Wayland compositor that implements the zwlr_layer_shell_v1 protocol", *args)
+        super().__init__(
+            "zwlr_layer_shell_v1 is not supported! Ensure you are running a Wayland compositor that implements the zwlr_layer_shell_v1 protocol",
+            *args,
+        )
 
 
 class Window(Gtk.Window, BaseWidget):

@@ -30,19 +30,28 @@ options.create_option(
 
 N_THREADS = str(min(max(1, GLib.get_num_processors()), 64))
 
+
 class GstNotFoundError(Exception):
     """
     Raised when GStreamer is not found.
     """
+
     def __init__(self, *args: object) -> None:
-        super().__init__("GStreamer not found! To use the recorder service, install GStreamer", *args)
+        super().__init__(
+            "GStreamer not found! To use the recorder service, install GStreamer", *args
+        )
+
 
 class GstPluginNotFoundError(Exception):
     """
     Raised when a GStreamer plugin is not found.
     """
+
     def __init__(self, name: str, plugin_package: str, *args) -> None:
-        super().__init__(f"{name} GStreamer plugin not found! To use the recorder service, install {plugin_package}", *args)
+        super().__init__(
+            f"{name} GStreamer plugin not found! To use the recorder service, install {plugin_package}",
+            *args,
+        )
 
 
 def gst_inspect(name: str) -> None:
@@ -57,7 +66,9 @@ try:
     gi.require_version("Gst", "1.0")
     from gi.repository import Gst
 except (ImportError, ValueError):
-    raise GstNotFoundError("GStreamer not found! To use the recorder service, install GStreamer.") from None
+    raise GstNotFoundError(
+        "GStreamer not found! To use the recorder service, install GStreamer."
+    ) from None
 
 PIPELINE_TEMPLATE = """
     pipewiresrc path={node_id} do-timestamp=true keepalive-time=1000 resend-last=true !

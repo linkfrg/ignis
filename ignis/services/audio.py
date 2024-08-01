@@ -3,12 +3,18 @@ from gi.repository import GObject
 from ignis.gobject import IgnisGObject
 from typing import List
 
+
 class GvcNotFoundError(Exception):
     """
     Raised when Gvc is not found.
     """
+
     def __init__(self, *args) -> None:
-        super().__init__("Gvc not found! To use the audio service, ensure that Ignis is installed correctly", *args)
+        super().__init__(
+            "Gvc not found! To use the audio service, ensure that Ignis is installed correctly",
+            *args,
+        )
+
 
 try:
     gi.require_version("Gvc", "1.0")

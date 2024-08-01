@@ -71,29 +71,41 @@ for i in ["widgets", "services", "utils"]:
     os.makedirs(f"{i}/generated", exist_ok=True)
 
 for name in Widget.__dict__:
-    if not name.startswith("__"):
-        with open(f"widgets/generated/{name}.rst", "w") as file:
-            file.write(get_widget_template(name))
+    if name.startswith("__"):
+        continue
+
+    override_path = f"widgets/overrides/{name}"
+    if os.path.exists(override_path):
+        with open(override_path) as file:
+            data = file.read()
+    else:
+        data = get_widget_template(name)
+
+    with open(f"widgets/generated/{name}.rst", "w") as file:
+        file.write(data)
 
 for filename in os.listdir("../ignis/services"):
-    if not filename.startswith("__"):
-        name = filename.replace(".py", "")
-        with open(f"services/generated/{name}.rst", "w") as file:
-            file.write(get_service_template(name))
+    if filename.startswith("__"):
+        continue
+
+    name = filename.replace(".py", "")
+    with open(f"services/generated/{name}.rst", "w") as file:
+        file.write(get_service_template(name))
 
 for name in Utils.__dict__:
     if name.startswith("__"):
         continue
 
     override_path = f"utils/overrides/{name}"
-    if inspect.isclass(name):
-        data = get_utils_class_template(name)
-    else:
-        data = get_utils_function_template(name)
-
     if os.path.exists(override_path):
         with open(override_path) as file:
             data = file.read()
+    else:
+        if inspect.isclass(name):
+            data = get_utils_class_template(name)
+        else:
+            data = get_utils_function_template(name)
+
 
     with open(f"utils/generated/{name}.rst", "w") as file:
         file.write(data)

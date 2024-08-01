@@ -11,6 +11,7 @@ class OptionNotFoundError(Exception):
     """
     Raised when an option is not found.
     """
+
     def __init__(self, name: str, *args) -> None:
         super().__init__(f'No such option: "{name}"', *args)
 
@@ -19,6 +20,7 @@ class OptionAlreadyExistsError(Exception):
     """
     Raised when an option already exists.
     """
+
     def __init__(self, name: str, *args) -> None:
         super().__init__(f'Option already exists: "{name}"', *args)
 
@@ -111,7 +113,6 @@ class OptionsService(IgnisGObject):
 
         Raises:
             OptionAlreadyExistsError: Raised if the option already exists and ``exists_ok`` is set to ``False``.
-
         """
 
         option = self.__data.get(name, None)

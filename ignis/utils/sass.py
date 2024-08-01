@@ -6,12 +6,17 @@ TEMP_DIR = "/tmp/ignis"
 COMPILED_CSS = f"{TEMP_DIR}/compiled.css"
 os.makedirs(TEMP_DIR, exist_ok=True)
 
+
 class DartSassNotFoundError(Exception):
     """
     Raised when Dart Sass is not found.
     """
+
     def __init__(self, *args: object) -> None:
-        super().__init__("Dart Sass not found! To compile SCSS/SASS, install dart-sass", *args)
+        super().__init__(
+            "Dart Sass not found! To compile SCSS/SASS, install dart-sass", *args
+        )
+
 
 def compile_file(path: str) -> str:
     result = subprocess.run(["sass", path, COMPILED_CSS], capture_output=True)

@@ -7,19 +7,24 @@ from gi.repository import Gtk, Gdk, Gio, GObject, GLib
 from typing import List
 from ignis.gobject import IgnisGObject
 
+
 class WindowNotFoundError(Exception):
     """
     Raised when a window is not found.
     """
+
     def __init__(self, window_name: str, *args) -> None:
         super().__init__(f'No such window: "{window_name}"', *args)
+
 
 class WindowAlreadyAddedError(Exception):
     """
     Raised when a window is already added to the application.
     """
+
     def __init__(self, window_name: str, *args) -> None:
         super().__init__(f'Window already added: "{window_name}"', *args)
+
 
 class IgnisApp(Gtk.Application, IgnisGObject):
     """
@@ -208,6 +213,8 @@ class IgnisApp(Gtk.Application, IgnisGObject):
 
         Returns:
             ``Gtk.Window``: The window object.
+        Raises:
+            WindowNotFoundError: If a window with the given namespace does not exist.
         """
         window = self._windows.get(window_name, None)
         if window:
@@ -221,6 +228,8 @@ class IgnisApp(Gtk.Application, IgnisGObject):
 
         Args:
             window_name (``str``): The window's namespace.
+        Raises:
+            WindowNotFoundError: If a window with the given namespace does not exist.
         """
         window = self.get_window(window_name)
         window.visible = True
@@ -231,6 +240,8 @@ class IgnisApp(Gtk.Application, IgnisGObject):
 
         Args:
             window_name (``str``): The window's namespace.
+        Raises:
+            WindowNotFoundError: If a window with the given namespace does not exist.
         """
         window = self.get_window(window_name)
         window.visible = False
@@ -241,6 +252,8 @@ class IgnisApp(Gtk.Application, IgnisGObject):
 
         Args:
             window_name (``str``): The window's namespace.
+        Raises:
+            WindowNotFoundError: If a window with the given namespace does not exist.
         """
         window = self.get_window(window_name)
         window.visible = not window.visible
@@ -254,11 +267,31 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         Args:
             window_name (``str``): The window's namespace.
             window (``Gtk.Window``): The window instance.
+
+        Raises:
+            WindowAlreadyAddedError: If a window with the given namespace already exists.
         """
         if window_name in self._windows:
             raise WindowAlreadyAddedError(window_name)
 
         self._windows[window_name] = window
+
+    def remove_window(self, window_name: str) -> None:
+        """
+        Remove a window by its name.
+        The window will be unrealized and removed from the application.
+
+        Args:
+            window_name (``str``): The window's namespace.
+
+        Raises:
+            WindowNotFoundError: If a window with the given namespace does not exist.
+        """
+        window = self._windows.pop(window_name, None)
+        if not window:
+            raise WindowNotFoundError(window_name)
+
+        window.unrealize()
 
     def reload(self) -> None:
         """

@@ -4,12 +4,18 @@ from ignis.gobject import IgnisGObject
 from typing import List
 from ignis.widgets import Widget
 
+
 class NetworkManagerNotFoundError(Exception):
     """
     Raised when NetworkManager is not found.
     """
+
     def __init__(self, *args: object) -> None:
-        super().__init__("NetworkManager not found! To use the network service, install NetworkManager", *args)
+        super().__init__(
+            "NetworkManager not found! To use the network service, install NetworkManager",
+            *args,
+        )
+
 
 try:
     gi.require_version("NM", "1.0")

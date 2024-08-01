@@ -13,12 +13,18 @@ ART_URL_CACHE_DIR = f"{CACHE_DIR}/art_url"
 
 os.makedirs(ART_URL_CACHE_DIR, exist_ok=True)
 
+
 class RequestsModuleNotFoundError(Exception):
     """
     Raised when the Python requests module is not found.
     """
+
     def __init__(self, *args: object) -> None:
-        super().__init__("Requests module not found! To use the audio service, install python-requests", *args)
+        super().__init__(
+            "Requests module not found! To use the audio service, install python-requests",
+            *args,
+        )
+
 
 try:
     import requests
