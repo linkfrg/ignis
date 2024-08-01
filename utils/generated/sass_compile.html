@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>sass_compile &#8212; Ignis Wiki</title>
+    <title>Sass &#8212; Ignis Wiki</title>
   
   
   
@@ -220,7 +220,7 @@
 <li class="toctree-l2"><a class="reference internal" href="get_paintable.html">get_paintable</a></li>
 <li class="toctree-l2"><a class="reference internal" href="load_interface_xml.html">load_interface_xml</a></li>
 <li class="toctree-l2"><a class="reference internal" href="run_in_thread.html">run_in_thread</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">sass_compile</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Sass</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scale_pixbuf.html">scale_pixbuf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="thread.html">thread</a></li>
 </ul>
@@ -363,7 +363,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>sass_compile</h1>
+    <h1>Sass</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -374,6 +374,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.sass_compile"><code class="docutils literal notranslate"><span class="pre">sass_compile()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.sass.DartSassNotFoundError"><code class="docutils literal notranslate"><span class="pre">DartSassNotFoundError</span></code></a></li>
 </ul>
             </nav>
         </div>
@@ -385,8 +386,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="sass-compile">
-<h1>sass_compile<a class="headerlink" href="#sass-compile" title="Link to this heading">#</a></h1>
+  <section id="sass">
+<h1>Sass<a class="headerlink" href="#sass" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="ignis.utils.Utils.sass_compile">
 <span class="sig-name descname"><span class="pre">sass_compile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ignis.utils.Utils.sass_compile" title="Link to this definition">#</a></dt>
@@ -403,6 +404,12 @@ Requires <code class="docutils literal notranslate"><span class="pre">dart-sass<
 <dd class="field-even"><p><strong>TypeError</strong> -- If neither of the arguments is provided.</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="ignis.utils.sass.DartSassNotFoundError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DartSassNotFoundError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.utils.sass.DartSassNotFoundError" title="Link to this definition">#</a></dt>
+<dd><p>Raised when Dart Sass is not found.</p>
 </dd></dl>
 
 </section>
@@ -453,6 +460,7 @@ Requires <code class="docutils literal notranslate"><span class="pre">dart-sass<
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.sass_compile"><code class="docutils literal notranslate"><span class="pre">sass_compile()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.sass.DartSassNotFoundError"><code class="docutils literal notranslate"><span class="pre">DartSassNotFoundError</span></code></a></li>
 </ul>
   </nav></div>
 

@@ -220,7 +220,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../utils/generated/get_paintable.html">get_paintable</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../utils/generated/load_interface_xml.html">load_interface_xml</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../utils/generated/run_in_thread.html">run_in_thread</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../utils/generated/sass_compile.html">sass_compile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utils/generated/sass_compile.html">Sass</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../utils/generated/scale_pixbuf.html">scale_pixbuf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../utils/generated/thread.html">thread</a></li>
 </ul>
@@ -373,6 +373,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandIPCNotFoundError"><code class="docutils literal notranslate"><span class="pre">HyprlandIPCNotFoundError</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService"><code class="docutils literal notranslate"><span class="pre">HyprlandService</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.send_command"><code class="docutils literal notranslate"><span class="pre">HyprlandService.send_command()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.switch_kb_layout"><code class="docutils literal notranslate"><span class="pre">HyprlandService.switch_kb_layout()</span></code></a></li>
@@ -392,6 +393,12 @@ document.write(`
                   
   <section id="module-ignis.services.hyprland">
 <span id="hyprland"></span><h1>Hyprland<a class="headerlink" href="#module-ignis.services.hyprland" title="Link to this heading">#</a></h1>
+<dl class="py exception">
+<dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandIPCNotFoundError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">HyprlandIPCNotFoundError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.hyprland.HyprlandIPCNotFoundError" title="Link to this definition">#</a></dt>
+<dd><p>Raised when Hyprland IPC is not found.</p>
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">HyprlandService</span></span><a class="headerlink" href="#ignis.services.hyprland.HyprlandService" title="Link to this definition">#</a></dt>
@@ -498,6 +505,7 @@ If you want to get response as JSON use this syntax: <code class="docutils liter
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandIPCNotFoundError"><code class="docutils literal notranslate"><span class="pre">HyprlandIPCNotFoundError</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService"><code class="docutils literal notranslate"><span class="pre">HyprlandService</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.send_command"><code class="docutils literal notranslate"><span class="pre">HyprlandService.send_command()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.switch_kb_layout"><code class="docutils literal notranslate"><span class="pre">HyprlandService.switch_kb_layout()</span></code></a></li>

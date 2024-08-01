@@ -220,7 +220,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../utils/generated/get_paintable.html">get_paintable</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../utils/generated/load_interface_xml.html">load_interface_xml</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../utils/generated/run_in_thread.html">run_in_thread</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../utils/generated/sass_compile.html">sass_compile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utils/generated/sass_compile.html">Sass</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../utils/generated/scale_pixbuf.html">scale_pixbuf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../utils/generated/thread.html">thread</a></li>
 </ul>
@@ -399,13 +399,15 @@ document.write(`
 <span id="options"></span><h1>Options<a class="headerlink" href="#module-ignis.services.options" title="Link to this heading">#</a></h1>
 <dl class="py exception">
 <dt class="sig sig-object py" id="ignis.services.options.OptionAlreadyExistsError">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">OptionAlreadyExistsError</span></span><a class="headerlink" href="#ignis.services.options.OptionAlreadyExistsError" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">OptionAlreadyExistsError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.options.OptionAlreadyExistsError" title="Link to this definition">#</a></dt>
+<dd><p>Raised when an option already exists.</p>
+</dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="ignis.services.options.OptionNotFoundError">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">OptionNotFoundError</span></span><a class="headerlink" href="#ignis.services.options.OptionNotFoundError" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">OptionNotFoundError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.options.OptionNotFoundError" title="Link to this definition">#</a></dt>
+<dd><p>Raised when an option is not found.</p>
+</dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ignis.services.options.OptionsService">
@@ -444,6 +446,9 @@ Use this service instead.</p>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">Binding</span></code>.</p>
 </dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#ignis.services.options.OptionNotFoundError" title="ignis.services.options.OptionNotFoundError"><strong>OptionNotFoundError</strong></a> -- Raised if the option does not exist.</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -458,6 +463,9 @@ When the option value changes, the callback function will be invoked with the ne
 <li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The name of the option.</p></li>
 <li><p><strong>callback</strong> (<code class="docutils literal notranslate"><span class="pre">callable</span></code>) -- A function to call when the option value changes. The new value of the option will be passed to this function.</p></li>
 </ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#ignis.services.options.OptionNotFoundError" title="ignis.services.options.OptionNotFoundError"><strong>OptionNotFoundError</strong></a> -- Raised if the option does not exist.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -491,6 +499,9 @@ When the option value changes, the callback function will be invoked with the ne
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The value of the option.</p>
 </dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#ignis.services.options.OptionNotFoundError" title="ignis.services.options.OptionNotFoundError"><strong>OptionNotFoundError</strong></a> -- Raised if the option does not exist.</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -518,6 +529,9 @@ When the option value changes, the callback function will be invoked with the ne
 <li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The name of the option.</p></li>
 <li><p><strong>value</strong> (<code class="docutils literal notranslate"><span class="pre">Any</span></code>) -- The value to set for the option.</p></li>
 </ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#ignis.services.options.OptionNotFoundError" title="ignis.services.options.OptionNotFoundError"><strong>OptionNotFoundError</strong></a> -- Raised if the option does not exist.</p>
 </dd>
 </dl>
 </dd></dl>
