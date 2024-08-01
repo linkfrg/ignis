@@ -275,11 +275,12 @@ class IgnisApp(Gtk.Application, IgnisGObject):
             raise WindowAlreadyAddedError(window_name)
 
         self._windows[window_name] = window
+        window.connect("unrealize", lambda x: self.remove_window(window_name))
 
     def remove_window(self, window_name: str) -> None:
         """
         Remove a window by its name.
-        The window will be unrealized and removed from the application.
+        The window will be removed from the application.
 
         Args:
             window_name (``str``): The window's namespace.
