@@ -7,7 +7,8 @@ from ignis.app import app
 from ignis.services.system_tray import SystemTrayItem
 from ignis.services.mpris import MprisPlayer
 
-app.apply_css(os.path.expanduser("~/.config/ignis/style.css"))
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+app.apply_css(f"{CURRENT_DIR}/style.scss")
 
 
 audio = Service.get("audio")
@@ -46,6 +47,7 @@ def workspaces() -> Widget.EventBox:
         on_scroll_up=lambda x: scroll_workspaces("up"),
         on_scroll_down=lambda x: scroll_workspaces("down"),
         css_classes=["workspaces"],
+        spacing=5,
         child=hyprland.bind(
             "workspaces",
             transform=lambda value: [workspace_button(i) for i in value],
@@ -56,16 +58,16 @@ def workspaces() -> Widget.EventBox:
 def mpris_title(player: MprisPlayer) -> Widget.Box:
     return Widget.Box(
         spacing=10,
+        setup=lambda self: player.connect(
+            "closed",
+            lambda x: self.unparent(),  # remove widget when player is closed
+        ),
         child=[
             Widget.Icon(image="audio-x-generic-symbolic"),
             Widget.Label(
                 ellipsize="end",
                 max_width_chars=20,
                 label=player.bind("title"),
-                setup=lambda self: player.connect(
-                    "closed",
-                    lambda x: self.unparent(),  # remove widget when player is closed
-                ),
             ),
         ],
     )
@@ -74,6 +76,12 @@ def mpris_title(player: MprisPlayer) -> Widget.Box:
 def media() -> Widget.Box:
     return Widget.Box(
         spacing=10,
+        child=[
+            Widget.Label(
+                label="No media players",
+                visible=mpris.bind("players", lambda value: len(value) == 0),
+            )
+        ],
         setup=lambda self: mpris.connect(
             "player-added", lambda x, player: self.append(mpris_title(player))
         ),
@@ -107,6 +115,7 @@ def current_notification() -> Widget.Label:
 def clock() -> Widget.Label:
     # poll for current time every second
     return Widget.Label(
+        css_classes=["clock"],
         label=Utils.Poll(
             1, lambda self: datetime.datetime.now().strftime("%H:%M")
         ).bind("output"),
@@ -173,7 +182,7 @@ def left() -> Widget.Box:
 
 def center() -> Widget.Box:
     return Widget.Box(
-        child=[current_notification(), Widget.Separator(vertical=True), media()],
+        child=[current_notification(), Widget.Separator(vertical=True, css_classes=["middle-separator"]), media()],
         spacing=10,
     )
 
@@ -191,7 +200,10 @@ def bar(monitor_id: int = 0) -> Widget.Window:
         anchor=["left", "top", "right"],
         exclusivity="exclusive",
         child=Widget.CenterBox(
-            start_widget=left(), center_widget=center(), end_widget=right()
+            css_classes=["bar"],
+            start_widget=left(),
+            center_widget=center(),
+            end_widget=right(),
         ),
     )
 

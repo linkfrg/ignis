@@ -1,0 +1,100 @@
+* {
+    all: unset;
+    font-weight: bold;
+}
+
+$bg: #1a1112;
+$bg-light: #261d1e;
+$fg: #f0dedf;
+$active: #ffb2bc;
+$unactive: #d7c1c3;
+
+.bar {
+    padding: 0.4rem 1rem;
+    background-color: $bg;
+    color: $fg;
+}
+
+.middle-separator {
+    background-color: gray;
+    padding: 0 0.03rem;
+}
+
+.volume-slider trough {
+    min-width: 100px;
+    background-color: gray;
+    min-height: 0.3rem;
+    border-radius: 1rem;
+
+    highlight {
+        background-color: $active;
+    }
+
+    slider {
+        background-color: $fg;
+        min-height: 20px;
+        min-width: 20px;
+        margin: -8px;
+        border-radius: 1rem;
+    }
+}
+
+.workspace {
+    border-radius: 1rem;
+    padding: 0 0.55rem;
+    transition: 0.3s;
+}
+
+.workspace:hover {
+    background-color: lighten($bg, 10%);
+}
+
+.workspace.active {
+    background-color: $active;
+    color: $bg;
+}
+
+.tray-item {
+    all: unset;
+}
+
+.clock {
+    font-size: 1.1rem;
+    margin-right: 0.5rem;
+}
+
+popover.menu {
+    contents {
+        background-color: $bg;
+        padding: 0.35rem;
+        border-radius: 1rem;
+        modelbutton {
+            transition: 0.3s;
+            border-radius: 0.5rem;
+            padding: 0.25rem 1rem;
+        }
+        modelbutton:hover {
+            background-color: mix($bg, $unactive, 80%);
+        }
+        separator {
+            background-color: mix($bg, $unactive, 90%);
+            min-height: 0.1rem;
+            margin: 0.5rem 0;
+        }
+
+        label:disabled {
+            color: $unactive;
+        }
+
+        arrow {
+            opacity: 0.3;
+          
+            &:hover { background: none; }
+          
+            &.left { -gtk-icon-source: -gtk-icontheme("go-previous-symbolic"); }
+          
+            &.right { -gtk-icon-source: -gtk-icontheme("go-next-symbolic"); }
+          }
+
+    }
+}
