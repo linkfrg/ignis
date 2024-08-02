@@ -7,7 +7,7 @@ from ignis.app import app
 from ignis.services.system_tray import SystemTrayItem
 from ignis.services.mpris import MprisPlayer
 
-app.apply_css(os.path.expanduser("~/.config/ignis/style.scss"))
+app.apply_css(os.path.expanduser("~/.config/ignis/style.css"))
 
 
 audio = Service.get("audio")
