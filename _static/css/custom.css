@@ -23,3 +23,10 @@ pre, code {
 pre {
     font-size: 1rem;
 }
+
+
+html[data-theme=dark] .bd-content img:not(.only-dark) {
+    background: transparent;
+    border-radius: 0;
+    filter: none;
+}

@@ -30,7 +30,7 @@
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=821e64f4" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=5dc8be31" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -350,7 +350,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -366,6 +368,15 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">A simple bar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">My own configuration</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -377,10 +388,14 @@ document.write(`
                   
   <section id="examples">
 <h1>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h1>
-<p><a class="reference external" href="https://github.com/linkfrg/ignis/tree/main/examples/bar">A simple bar</a></p>
+<section id="id1">
+<h2><a class="reference external" href="https://github.com/linkfrg/ignis/tree/main/examples/bar">A simple bar</a><a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <img alt="https://github.com/linkfrg/ignis/blob/main/examples/bar/simple-bar.png?raw=true" src="https://github.com/linkfrg/ignis/blob/main/examples/bar/simple-bar.png?raw=true" />
-<p><a class="reference external" href="https://github.com/linkfrg/dotfiles/">My own configuration</a></p>
+</section>
+<section id="id2">
+<h2><a class="reference external" href="https://github.com/linkfrg/dotfiles/">My own configuration</a><a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <img alt="https://github.com/linkfrg/dotfiles/blob/main/assets/1.png?raw=true" src="https://github.com/linkfrg/dotfiles/blob/main/assets/1.png?raw=true" />
+</section>
 </section>
 
 
@@ -409,6 +424,22 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">A simple bar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">My own configuration</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
