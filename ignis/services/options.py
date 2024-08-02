@@ -16,7 +16,7 @@ class OptionNotFoundError(Exception):
         super().__init__(f'No such option: "{name}"', *args)
 
 
-class OptionAlreadyExistsError(Exception):
+class OptionExistsError(Exception):
     """
     Raised when an option already exists.
     """
@@ -109,10 +109,10 @@ class OptionsService(IgnisGObject):
         Args:
             name (``str``): The name of the option.
             default (``Any``): The default value for the option.
-            exists_ok (``bool``, optional): If ``True``, do not raise ``OptionAlreadyExistsError`` if the option already exists. Defaults to ``False``.
+            exists_ok (``bool``, optional): If ``True``, do not raise ``OptionExistsError`` if the option already exists. Defaults to ``False``.
 
         Raises:
-            OptionAlreadyExistsError: Raised if the option already exists and ``exists_ok`` is set to ``False``.
+            OptionExistsError: Raised if the option already exists and ``exists_ok`` is set to ``False``.
         """
 
         option = self.__data.get(name, None)
@@ -121,7 +121,7 @@ class OptionsService(IgnisGObject):
             self.__sync()
         else:
             if not exists_ok:
-                raise OptionAlreadyExistsError(name)
+                raise OptionExistsError(name)
 
     def remove_option(self, name: str) -> None:
         """

@@ -17,7 +17,7 @@ class WindowNotFoundError(Exception):
         super().__init__(f'No such window: "{window_name}"', *args)
 
 
-class WindowAlreadyAddedError(Exception):
+class WindowAddedError(Exception):
     """
     Raised when a window is already added to the application.
     """
@@ -140,14 +140,14 @@ class IgnisApp(Gtk.Application, IgnisGObject):
             )
 
         if style_path.endswith(".scss") or style_path.endswith(".sass"):
-            compiled_scss = Utils.sass_compile(path=style_path)
+            css_style = Utils.sass_compile(path=style_path)
         else:
             with open(style_path) as file:
-                compiled_scss = file.read()
+                css_style = file.read()
 
         self._style_path = style_path
         self._css_provider = Gtk.CssProvider()
-        self._css_provider.load_from_string(compiled_scss)
+        self._css_provider.load_from_string(css_style)
 
         Gtk.StyleContext.add_provider_for_display(
             Gdk.Display.get_default(),
@@ -269,10 +269,10 @@ class IgnisApp(Gtk.Application, IgnisGObject):
             window (``Gtk.Window``): The window instance.
 
         Raises:
-            WindowAlreadyAddedError: If a window with the given namespace already exists.
+            WindowAddedError: If a window with the given namespace already exists.
         """
         if window_name in self._windows:
-            raise WindowAlreadyAddedError(window_name)
+            raise WindowAddedError(window_name)
 
         self._windows[window_name] = window
         window.connect("unrealize", lambda x: self.remove_window(window_name))

@@ -21,7 +21,7 @@ class RequestsModuleNotFoundError(Exception):
 
     def __init__(self, *args: object) -> None:
         super().__init__(
-            "Requests module not found! To use the audio service, install python-requests",
+            "Requests module not found! To use the mpris service, install python-requests",
             *args,
         )
 

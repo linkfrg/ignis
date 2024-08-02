@@ -1,10 +1,18 @@
 import os
 import subprocess
-from ignis.logging import logger
 
 TEMP_DIR = "/tmp/ignis"
 COMPILED_CSS = f"{TEMP_DIR}/compiled.css"
 os.makedirs(TEMP_DIR, exist_ok=True)
+
+
+class SassCompilationError(Exception):
+    """
+    Raised when Dart Sass compilation fails.
+    """
+
+    def __init__(self, stderr: str, *args: object) -> None:
+        super().__init__(f"SASS compilation error:\n{stderr}", *args)
 
 
 class DartSassNotFoundError(Exception):
@@ -22,8 +30,7 @@ def compile_file(path: str) -> str:
     result = subprocess.run(["sass", path, COMPILED_CSS], capture_output=True)
 
     if result.returncode != 0:
-        logger.error(f"SASS compilation error:\n{result.stderr.decode()}")
-        return
+        raise SassCompilationError(result.stderr.decode())
 
     with open(COMPILED_CSS) as file:
         return file.read()
@@ -39,8 +46,7 @@ def compile_string(string: str) -> str:
     stdout, stderr = process.communicate(input=string.encode())
 
     if process.returncode != 0:
-        logger.error(f"SASS compilation error:\n{stderr.decode()}")
-        return
+        raise SassCompilationError(stderr.decode())
     else:
         return stdout.decode()
 
