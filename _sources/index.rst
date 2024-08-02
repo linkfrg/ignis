@@ -18,3 +18,4 @@ Documentation
    widgets/index
    services/index
    utils/index
+   examples
