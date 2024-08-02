@@ -18,5 +18,11 @@ See [Wiki](https://linkfrg.github.io/ignis/index.html)
 ## Supported Desktops
 Ignis supports wlroots-based Wayland compositors (e.g., __Sway__, __Hyprland__) and all other compositors that implement the Layer Shell protocol.
 
+## Examples
+* A simple bar, see [examples](./examples/bar)
+![simple-bar](./examples/bar/simple-bar.png)
+
+* [My own configuration](https://github.com/linkfrg/dotfiles/)
+![My own configuration](https://github.com/linkfrg/dotfiles/blob/main/assets/1.png?raw=true)
 
 Heavily inspired by [AGS](https://github.com/aylur/ags)
