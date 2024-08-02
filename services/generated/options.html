@@ -373,7 +373,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.OptionAlreadyExistsError"><code class="docutils literal notranslate"><span class="pre">OptionAlreadyExistsError</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.OptionExistsError"><code class="docutils literal notranslate"><span class="pre">OptionExistsError</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.OptionNotFoundError"><code class="docutils literal notranslate"><span class="pre">OptionNotFoundError</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.OptionsService"><code class="docutils literal notranslate"><span class="pre">OptionsService</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.OptionsService.bind_option"><code class="docutils literal notranslate"><span class="pre">OptionsService.bind_option()</span></code></a></li>
@@ -398,8 +398,8 @@ document.write(`
   <section id="module-ignis.services.options">
 <span id="options"></span><h1>Options<a class="headerlink" href="#module-ignis.services.options" title="Link to this heading">#</a></h1>
 <dl class="py exception">
-<dt class="sig sig-object py" id="ignis.services.options.OptionAlreadyExistsError">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">OptionAlreadyExistsError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.options.OptionAlreadyExistsError" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.services.options.OptionExistsError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">OptionExistsError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.options.OptionExistsError" title="Link to this definition">#</a></dt>
 <dd><p>Raised when an option already exists.</p>
 </dd></dl>
 
@@ -479,11 +479,11 @@ When the option value changes, the callback function will be invoked with the ne
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The name of the option.</p></li>
 <li><p><strong>default</strong> (<code class="docutils literal notranslate"><span class="pre">Any</span></code>) -- The default value for the option.</p></li>
-<li><p><strong>exists_ok</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, optional) -- If <code class="docutils literal notranslate"><span class="pre">True</span></code>, do not raise <code class="docutils literal notranslate"><span class="pre">OptionAlreadyExistsError</span></code> if the option already exists. Defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+<li><p><strong>exists_ok</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, optional) -- If <code class="docutils literal notranslate"><span class="pre">True</span></code>, do not raise <code class="docutils literal notranslate"><span class="pre">OptionExistsError</span></code> if the option already exists. Defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#ignis.services.options.OptionAlreadyExistsError" title="ignis.services.options.OptionAlreadyExistsError"><strong>OptionAlreadyExistsError</strong></a> -- Raised if the option already exists and <code class="docutils literal notranslate"><span class="pre">exists_ok</span></code> is set to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<dd class="field-even"><p><a class="reference internal" href="#ignis.services.options.OptionExistsError" title="ignis.services.options.OptionExistsError"><strong>OptionExistsError</strong></a> -- Raised if the option already exists and <code class="docutils literal notranslate"><span class="pre">exists_ok</span></code> is set to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -585,7 +585,7 @@ When the option value changes, the callback function will be invoked with the ne
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.OptionAlreadyExistsError"><code class="docutils literal notranslate"><span class="pre">OptionAlreadyExistsError</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.OptionExistsError"><code class="docutils literal notranslate"><span class="pre">OptionExistsError</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.OptionNotFoundError"><code class="docutils literal notranslate"><span class="pre">OptionNotFoundError</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.OptionsService"><code class="docutils literal notranslate"><span class="pre">OptionsService</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.OptionsService.bind_option"><code class="docutils literal notranslate"><span class="pre">OptionsService.bind_option()</span></code></a></li>
