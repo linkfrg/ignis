@@ -212,7 +212,7 @@
 <li class="toctree-l2"><a class="reference internal" href="utils/generated/exec_sh.html">exec_sh</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils/generated/exec_sh_async.html">exes_sh_async</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils/generated/get_file_icon_name.html">get_file_icon_name</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/generated/get_ignis_commit_hash.html">get_ignis_commit_hash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/generated/get_ignis_commit.html">get_ignis_commit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils/generated/get_ignis_version.html">get_ignis_version</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils/generated/get_monitor.html">get_monitor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils/generated/get_n_monitors.html">get_n_monitors</a></li>
@@ -370,6 +370,8 @@ document.write(`
 </li>
       <li><a href="utils/generated/exec_sh_async.html#ignis.utils.exec_sh.AsyncCompletedProcess">AsyncCompletedProcess (class in ignis.utils.exec_sh)</a>
 </li>
+      <li><a href="services/generated/audio.html#ignis.services.audio.AudioService">AudioService (class in ignis.services.audio)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -474,7 +476,7 @@ document.write(`
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="utils/generated/get_file_icon_name.html#ignis.utils.Utils.get_file_icon_name">get_file_icon_name() (in module ignis.utils.Utils)</a>
 </li>
-      <li><a href="utils/generated/get_ignis_commit_hash.html#ignis.utils.Utils.get_ignis_commit_hash">get_ignis_commit_hash() (in module ignis.utils.Utils)</a>
+      <li><a href="utils/generated/get_ignis_commit.html#ignis.utils.Utils.get_ignis_commit">get_ignis_commit() (in module ignis.utils.Utils)</a>
 </li>
       <li><a href="utils/generated/get_ignis_version.html#ignis.utils.Utils.get_ignis_version">get_ignis_version() (in module ignis.utils.Utils)</a>
 </li>
@@ -482,10 +484,10 @@ document.write(`
 </li>
       <li><a href="utils/generated/get_n_monitors.html#ignis.utils.Utils.get_n_monitors">get_n_monitors() (in module ignis.utils.Utils)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="services/generated/notifications.html#ignis.services.notifications.NotificationService.get_notification">get_notification() (NotificationService method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="services/generated/options.html#ignis.services.options.OptionsService.get_option">get_option() (OptionsService method)</a>
 </li>
       <li><a href="utils/generated/get_paintable.html#ignis.utils.Utils.get_paintable">get_paintable() (in module ignis.utils.Utils)</a>
@@ -493,6 +495,12 @@ document.write(`
       <li><a href="app.html#ignis.app.IgnisApp.get_window">get_window() (IgnisApp method)</a>
 </li>
       <li><a href="widgets/generated/Grid.html#ignis.widgets.Widget.Grid">Grid (class in ignis.widgets.Widget)</a>
+</li>
+      <li><a href="services/generated/recorder.html#ignis.services.recorder.GstNotFoundError">GstNotFoundError</a>
+</li>
+      <li><a href="services/generated/recorder.html#ignis.services.recorder.GstPluginNotFoundError">GstPluginNotFoundError</a>
+</li>
+      <li><a href="services/generated/audio.html#ignis.services.audio.GvcNotFoundError">GvcNotFoundError</a>
 </li>
   </ul></td>
 </tr></table>
@@ -521,6 +529,13 @@ document.write(`
 
       <ul>
         <li><a href="services/generated/applications.html#module-ignis.services.applications">module</a>
+</li>
+      </ul></li>
+      <li>
+    ignis.services.audio
+
+      <ul>
+        <li><a href="services/generated/audio.html#module-ignis.services.audio">module</a>
 </li>
       </ul></li>
       <li>
@@ -565,6 +580,13 @@ document.write(`
 
       <ul>
         <li><a href="services/generated/options.html#module-ignis.services.options">module</a>
+</li>
+      </ul></li>
+      <li>
+    ignis.services.recorder
+
+      <ul>
+        <li><a href="services/generated/recorder.html#module-ignis.services.recorder">module</a>
 </li>
       </ul></li>
       <li>
@@ -627,6 +649,8 @@ document.write(`
       <ul>
         <li><a href="services/generated/applications.html#module-ignis.services.applications">ignis.services.applications</a>
 </li>
+        <li><a href="services/generated/audio.html#module-ignis.services.audio">ignis.services.audio</a>
+</li>
         <li><a href="services/generated/fetch.html#module-ignis.services.fetch">ignis.services.fetch</a>
 </li>
         <li><a href="services/generated/hyprland.html#module-ignis.services.hyprland">ignis.services.hyprland</a>
@@ -638,6 +662,8 @@ document.write(`
         <li><a href="services/generated/notifications.html#module-ignis.services.notifications">ignis.services.notifications</a>
 </li>
         <li><a href="services/generated/options.html#module-ignis.services.options">ignis.services.options</a>
+</li>
+        <li><a href="services/generated/recorder.html#module-ignis.services.recorder">ignis.services.recorder</a>
 </li>
         <li><a href="services/generated/system_tray.html#module-ignis.services.system_tray">ignis.services.system_tray</a>
 </li>
@@ -730,6 +756,8 @@ document.write(`
 <h2 id="R">R</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="services/generated/recorder.html#ignis.services.recorder.RecorderService">RecorderService (class in ignis.services.recorder)</a>
+</li>
       <li><a href="widgets/generated/RegularWindow.html#ignis.widgets.Widget.RegularWindow">RegularWindow (class in ignis.widgets.Widget)</a>
 </li>
       <li><a href="app.html#ignis.app.IgnisApp.reload">reload() (IgnisApp method)</a>
@@ -774,15 +802,21 @@ document.write(`
 </li>
       <li><a href="services/generated/hyprland.html#ignis.services.hyprland.HyprlandService.send_command">send_command() (HyprlandService method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="widgets/generated/Separator.html#ignis.widgets.Widget.Separator">Separator (class in ignis.widgets.Widget)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="services/generated/options.html#ignis.services.options.OptionsService.set_option">set_option() (OptionsService method)</a>
 </li>
       <li><a href="widgets/generated/SpinButton.html#ignis.widgets.Widget.SpinButton">SpinButton (class in ignis.widgets.Widget)</a>
 </li>
+      <li><a href="services/generated/recorder.html#ignis.services.recorder.RecorderService.start_recording">start_recording() (RecorderService method)</a>
+</li>
       <li><a href="services/generated/mpris.html#ignis.services.mpris.MprisPlayer.stop">stop() (MprisPlayer method)</a>
+</li>
+      <li><a href="services/generated/recorder.html#ignis.services.recorder.RecorderService.stop_recording">stop_recording() (RecorderService method)</a>
+</li>
+      <li><a href="services/generated/audio.html#ignis.services.audio.Stream">Stream (class in ignis.services.audio)</a>
 </li>
       <li><a href="widgets/generated/Switch.html#ignis.widgets.Widget.Switch">Switch (class in ignis.widgets.Widget)</a>
 </li>
