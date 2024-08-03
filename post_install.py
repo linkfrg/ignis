@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
+import shutil
 import subprocess
 import compileall
 from pathlib import Path
@@ -16,13 +17,19 @@ commit_hash = subprocess.run(
 script_dir = Path(__file__).resolve().parent
 
 version_file = script_dir / "VERSION"
-with open(version_file) as file:
-    version = file.read()
-
+commit_hash_file = script_dir / "COMMIT"
 ignis_version_file = Path(install_dir) / "VERSION"
-with open(ignis_version_file, "w") as file:
-    file.write(version)
-
 ignis_commit_hash_file = Path(install_dir) / "COMMIT"
-with open(ignis_commit_hash_file, "w") as file:
+
+try:
+    shutil.copy(version_file, ignis_version_file)
+except shutil.SameFileError:
+    pass
+
+with open(commit_hash_file, "w") as file:
     file.write(commit_hash)
+
+try:
+    shutil.copy(commit_hash_file, ignis_commit_hash_file)
+except shutil.SameFileError:
+    pass
