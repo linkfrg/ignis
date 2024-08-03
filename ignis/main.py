@@ -25,7 +25,7 @@ def set_process_name(name):
 def print_version(ctx, param, value):
     if value:
         ctx.exit(
-            print(f"Ignis {Utils.get_ignis_version()} {Utils.get_ignis_commit_hash()}")
+            print(f"Ignis {Utils.get_ignis_version()} {Utils.get_ignis_commit()}")
         )
 
 
