@@ -32,9 +32,9 @@ jobs:
        
     - name: Build Ignis
       run: |
-        meson setup build --prefix=/usr --libdir "lib/ignis"
-        meson compile -C build
-        meson install -C build
+        meson setup build --prefix=/usr
+        ninja -C build
+        sudo ninja -C build install
 
     - name: Build documentation
       run: |
