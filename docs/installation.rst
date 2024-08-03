@@ -27,7 +27,7 @@ Building from source
     
     git clone https://github.com/linkfrg/ignis.git
     cd ignis
-    meson setup build --prefix=/usr
+    meson setup build --prefix=/usr --libdir "lib/ignis"
     meson compile -C build
     meson install -C build
 
