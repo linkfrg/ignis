@@ -1,3 +1,4 @@
+import os
 from gi.repository import Gio
 
 
@@ -13,6 +14,9 @@ def get_file_icon_name(path: str, symbolic: bool = False) -> str:
         ``str``: The name of the icon.
     """
     file = Gio.File.new_for_path(path)
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"No such file or directory: {path}")
+
     icons = (
         file.query_info("standard::icon", Gio.FileQueryInfoFlags.NONE)
         .get_icon()

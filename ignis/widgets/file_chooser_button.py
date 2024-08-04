@@ -83,5 +83,8 @@ class FileChooserButton(Gtk.Button, BaseWidget):
 
     def __sync(self, path: str) -> None:
         self.label.label = os.path.basename(path)
-        self.__file_icon.icon_name = Utils.get_file_icon_name(path, symbolic=True)
-        self.__file_icon.visible = True
+        try:
+            self.__file_icon.icon_name = Utils.get_file_icon_name(path, symbolic=True)
+            self.__file_icon.visible = True
+        except FileNotFoundError:
+            pass
