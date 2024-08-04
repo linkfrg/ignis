@@ -1,15 +1,11 @@
+#!/usr/bin/env python3
 import gi
-from ctypes import CDLL
-
-CDLL("libgtk4-layer-shell.so")
-
-gi.require_version("Gtk", "4.0")
-gi.require_version("Gdk", "4.0")
-gi.require_version("Gtk4LayerShell", "1.0")
-gi.require_version("GdkPixbuf", "2.0")
 gi.require_version("GIRepository", "2.0")
-
 from gi.repository import GIRepository  # noqa: E402
 
 GIRepository.Repository.prepend_library_path("@LIBDIR@")
 GIRepository.Repository.prepend_search_path("@LIBDIR@")
+
+from ignis.main import main  # noqa: E402
+if __name__ == "__main__":
+    main()

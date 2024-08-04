@@ -6,5 +6,3 @@ docs/_build
 generated
 .vscode
 build
-ignis/__init__.py
-ignis/version.py

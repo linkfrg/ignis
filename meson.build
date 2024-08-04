@@ -1,6 +1,5 @@
 project(
     'ignis',
-    version: '0.1',
     license: 'GPL-3.0-only',
     default_options: ['warning_level=2', 'werror=false']
 )
@@ -42,12 +41,6 @@ subproject('gvc',
 )
 
 # Do installation
-install_data(
-    files('bin/ignis'),
-    install_dir: bindir,
-    install_mode: 'rwxr-xr-x',
-)
-
 install_subdir(
     'ignis',
     install_dir: pylibdir,
@@ -55,19 +48,19 @@ install_subdir(
 
 config = configuration_data()
 config.set('LIBDIR', libdir)
-config.set('VERSION', meson.project_version())
 config.set('COMMIT', run_command('git', 'rev-parse', 'HEAD').stdout().strip())
 
 configure_file(
-    input: 'ignis/__init__.py.in',
-    output: '__init__.py',
+    input: 'bin/ignis.in',
+    output: 'ignis',
     configuration: config,
-    install_dir: pkginstalldir
+    install_dir: bindir,
+    install_mode: 'rwxr-xr-x'
 )
 
 configure_file(
-    input: 'ignis/version.py.in',
-    output: 'version.py',
+    input: 'ignis/__commit__.py.in',
+    output: '__commit__.py',
     configuration: config,
     install_dir: pkginstalldir
 )
