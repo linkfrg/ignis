@@ -1,10 +1,5 @@
-D-Bus
+D-Bus menu
 ============
 
-There are some classes that can help you with intercating with D-Bus
-
-.. autoclass:: ignis.dbus.DBusService
-    :members:
-
-.. autoclass:: ignis.dbus.DBusProxy
+.. autoclass:: ignis.dbus_menu.DBusMenu
     :members:
