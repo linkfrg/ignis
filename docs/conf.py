@@ -2,10 +2,42 @@ import os
 import sys
 import shutil
 import inspect
+from importlib.machinery import SourceFileLoader
+
+
+def find_bin_directory():
+    # Check if in a virtual environment
+    if sys.base_prefix != sys.prefix:
+        return os.path.join(sys.prefix, 'bin')
+
+    # Check common system-wide bin directories
+    common_bin_dirs = ['/bin', '/usr/bin']
+    for bin_dir in common_bin_dirs:
+        if os.path.isdir(bin_dir):
+            return bin_dir
+
+def find_script(filename: str) -> str:
+    bin_dir = find_bin_directory()
+    if not bin_dir:
+        return
+
+    script_path = os.path.join(bin_dir, filename)
+    if os.path.isfile(script_path) and os.access(script_path, os.X_OK):
+        return script_path
+
+def import_script(name: str) -> None:
+    script_path = find_script(name)
+    if not script_path:
+        raise ImportError(f"{name} executable not found in the bin directory.")
+
+    SourceFileLoader(name, script_path).load_module()
+    del sys.modules[name]
+
+import_script("ignis")
 
 sys.path.insert(0, os.path.abspath(".."))
-from ignis.widgets import Widget
-from ignis.utils import Utils
+from ignis.widgets import Widget  # noqa: E402
+from ignis.utils import Utils  # noqa: E402
 
 project = "Ignis"
 copyright = "2024, linkfrg"

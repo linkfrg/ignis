@@ -6,7 +6,7 @@ from ignis.widgets.menuitem import MenuItem
 
 class PopoverMenu(Gtk.PopoverMenu, BaseWidget):
     """
-    Subclass of `Gtk.PopoverMenu <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/PopoverMenu.html>`_
+    Bases: `Gtk.PopoverMenu <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/PopoverMenu.html>`_.
 
     A dropdown menu consisting of a list of :class:`~ignis.widgets.Widget.MenuItem`.
     It must be added as a child to a container.

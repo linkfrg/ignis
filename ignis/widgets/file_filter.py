@@ -16,6 +16,7 @@ class FileFilter(Gtk.FileFilter, BaseWidget):
     Uses MIME types. `Here <https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types>`_ is a list of common MIME types.
 
     Properties:
+        - **mime_types** (``List[str]``, required, read-only): A list of MIME types.
         - **default** (``bool``, optional, read-write): Whether the filter will be selected by default.
 
     .. code-block :: python

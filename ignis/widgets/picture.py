@@ -43,6 +43,7 @@ class Picture(Gtk.Picture, BaseWidget):
         Gtk.Picture.__init__(self)
         self.override_enum("content_fit", Gtk.ContentFit)
 
+        # avoid custom setters to avoid running the __draw function multiple times during initialization
         self._image = None
         self._width = width
         self._height = height

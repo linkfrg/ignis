@@ -5,6 +5,9 @@ from ignis.utils import Utils
 
 
 class MenuItem(GObject.Object):
+    """
+    :meta private:
+    """
     def __init__(
         self,
         proxy: DBusProxy,
@@ -28,6 +31,17 @@ class MenuItem(GObject.Object):
 
 
 class DBusMenu(Gtk.PopoverMenu):
+    """
+    Bases: `Gtk.PopoverMenu <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/PopoverMenu.html>`_.
+
+    Like DbusmenuGtk3, but for GTK4.
+
+    Bus must provide ``com.canonical.dbusmenu`` D-Bus interface.
+
+    Parameters:
+        name (``str``): A bus name (well-known or unique).
+        object_path(``str``): An object path to menu.
+    """
     def __init__(self, name: str, object_path: str):
         super().__init__()
         self.__proxy = DBusProxy(
@@ -104,4 +118,10 @@ class DBusMenu(Gtk.PopoverMenu):
         return self.copy()
 
     def copy(self):
+        """
+        Make a copy of this instance.
+
+        Returns:
+            :class:`~ignis.dbus_menu.DBusMenu`: A copy of this instance.
+        """
         return DBusMenu(self.__proxy.name, self.__proxy.object_path)

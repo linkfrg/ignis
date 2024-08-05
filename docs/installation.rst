@@ -32,3 +32,9 @@ Building from source
     meson install -C build
 
 
+Running
+--------
+
+.. code-block:: bash
+
+    ignis init

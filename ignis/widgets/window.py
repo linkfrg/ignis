@@ -64,7 +64,7 @@ class Window(Gtk.Window, BaseWidget):
     The top-level widget that contains everything.
 
     Properties:
-        - **namespace** (``str``, read-only): The name of the window, used to access it from the CLI and :class:`~ignis.app.ignisApp`. It must be unique. It is also the name of the layer.
+        - **namespace** (``str``, required, read-only): The name of the window, used to access it from the CLI and :class:`~ignis.app.ignisApp`. It must be unique. It is also the name of the layer.
         - **monitor** (``int``, optional, read-write): Monitor number on which to display the window.
         - **anchor** (``List[str]``, optional, read-write): List of anchors. If the list is empty, the window will be centered on the screen. Possible values: ``"bottom"``, ``"left"``, ``"right"``, ``"top"``.
         - **exclusivity** (``str``, optional, read-write): Whether the compositor should reserve space for the window. Possible values: ``"ignore"``, ``"normal"``, ``"exclusive"``.

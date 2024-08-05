@@ -6,6 +6,6 @@ from gi.repository import GIRepository  # noqa: E402
 GIRepository.Repository.prepend_library_path("@LIBDIR@")
 GIRepository.Repository.prepend_search_path("@LIBDIR@")
 
-from ignis.main import main  # noqa: E402
 if __name__ == "__main__":
+    from ignis.main import main
     main()

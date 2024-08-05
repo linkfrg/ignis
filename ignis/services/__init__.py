@@ -13,6 +13,8 @@ class ServiceNotFoundError(Exception):
 
 class ServiceClass:
     def __init__(self) -> None:
+        # modify this dict to add/remove services
+        # SHORT_SERVICE_NAME: SERVICE_CLASS_NAME
         self._services = {
             "applications": "ApplicationsService",
             "audio": "AudioService",

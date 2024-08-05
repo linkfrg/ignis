@@ -9,7 +9,7 @@ class Poll(IgnisGObject):
 
     Properties:
         - **timeout** (``int``, read-write): The timeout interval in seconds.
-        - **callback** (``callable``, read-write): The function to call when the timeout is reached.
+        - **callback** (``callable``, read-write): The function to call when the timeout is reached. The ``self`` will passed as an argument.
         - **output** (``str``, read-only): The output of the callback. This is not an argument for the constructor.
 
     You can pass arguments to the constructor, and they will be passed to the callback.

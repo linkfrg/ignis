@@ -4,6 +4,12 @@ from ignis.gobject import IgnisGObject
 
 
 class BaseWidget(Gtk.Widget, IgnisGObject):
+    """
+    Bases: :class:`~ignis.gobject.IgnisGObject`.
+
+    The base class for all widgets.
+    Provides ``style`` property and allows overriding enums.
+    """
     gproperties = __gproperties__ = {}
     _overrided_enums = {}
 
@@ -18,7 +24,6 @@ class BaseWidget(Gtk.Widget, IgnisGObject):
         Gtk.Widget.__init__(self)
         IgnisGObject.__init__(self)
 
-        self._class_name = None
         self._style = None
         self._css_provider = None
 
@@ -89,4 +94,11 @@ class BaseWidget(Gtk.Widget, IgnisGObject):
             super().__getattribute__(name)
 
     def override_enum(self, property_name: str, enum: GObject.GEnum) -> None:
+        """
+        Override an enum.
+
+        Args:
+            property_name (``str``): The name of the property to override.
+            enum (``str``): An enum that accepts the property to be overridden. For example, for ``valign`` it will be ``Gtk.Align``.
+        """
         self._overrided_enums[property_name] = enum

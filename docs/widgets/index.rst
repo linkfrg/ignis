@@ -68,12 +68,17 @@ Common widget properties
 Built-in widgets
 --------------------
 
+Here is a list of built-in widgets.
+
 .. warning::
    The widget pages only describe the properties that Ignis adds.
    For more information about widget, each page contains a corresponding link to the widget in the PyGObject API reference.
 
+.. hint::
+   If the widget you need is not here, you can use it directly from GTK. 
+   Please note that it will not support ``style`` property, bindings, and other Ignis features.
+   Or, you can manually subclass it, see `Subclassing widgets <developer_guide/subclassing_widgets.rst>`_ for more info.
 
-Here is a list of built-in widgets.
 
 .. toctree:: 
    :glob:

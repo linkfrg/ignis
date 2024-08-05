@@ -10,7 +10,7 @@ class RegularWindow(Gtk.Window, BaseWidget):
     A standart application window.
 
     Properties:
-        - **namespace** (``str``, read-only): The name of the window, used for accessing it from the CLI and :class:`~ignis.app.ignisApp`. It must be unique.
+        - **namespace** (``str``, required, read-only): The name of the window, used for accessing it from the CLI and :class:`~ignis.app.ignisApp`. It must be unique.
 
     .. code-block:: python
 
