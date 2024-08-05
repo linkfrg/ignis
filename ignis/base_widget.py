@@ -10,6 +10,7 @@ class BaseWidget(Gtk.Widget, IgnisGObject):
     The base class for all widgets.
     Provides ``style`` property and allows overriding enums.
     """
+
     gproperties = __gproperties__ = {}
     _overrided_enums = {}
 

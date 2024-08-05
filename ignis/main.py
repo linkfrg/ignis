@@ -24,9 +24,7 @@ def set_process_name(name):
 
 def print_version(ctx, param, value):
     if value:
-        ctx.exit(
-            print(f"Ignis {Utils.get_ignis_version()} {Utils.get_ignis_commit()}")
-        )
+        ctx.exit(print(f"Ignis {Utils.get_ignis_version()} {Utils.get_ignis_commit()}"))
 
 
 def call_client_func(name: str, *args) -> None:

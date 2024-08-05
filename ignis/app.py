@@ -353,5 +353,4 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         self.quit()
 
 
-
 app = IgnisApp()

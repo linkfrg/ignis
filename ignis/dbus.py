@@ -91,7 +91,9 @@ class DBusService(IgnisGObject):
     def properties(self) -> dict:
         return self._properties
 
-    def __export_object(self, connection: Gio.DBusConnection, info: Gio.DBusInterfaceInfo) -> None:
+    def __export_object(
+        self, connection: Gio.DBusConnection, info: Gio.DBusInterfaceInfo
+    ) -> None:
         self._connection = connection
         self._connection.register_object(
             self._object_path,
@@ -124,7 +126,14 @@ class DBusService(IgnisGObject):
                 target=params.unpack, callback=lambda result: callback(func, result)
             )
 
-    def __handle_get_property(self, connection: Gio.DBusConnection, sender: str, object_path: str, interface: str, value: str) -> GLib.Variant:
+    def __handle_get_property(
+        self,
+        connection: Gio.DBusConnection,
+        sender: str,
+        object_path: str,
+        interface: str,
+        value: str,
+    ) -> GLib.Variant:
         func = self._properties.get(value, None)
         if func:
             return func()
@@ -213,6 +222,7 @@ class DBusProxy(IgnisGObject):
         value = proxy.MyValue
         print(value)
     """
+
     def __init__(
         self,
         name: str,
