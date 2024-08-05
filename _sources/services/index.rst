@@ -15,7 +15,14 @@ To access a service, use the universal ``Service`` class:
 
 .. danger::
    Some services have additional dependencies, which are listed on the service page.
-   Without these dependencies, the service will crash Ignis when you try to import it.
+   Without these dependencies, the service will raise an exception when you try to import it.
+
+Built-in services
+-----------------
+
+.. hint::
+   If the service you need is not here, you can make your own.
+   See `developer_guide/creating_service`_ for more info.
 
 .. toctree:: 
    :glob:

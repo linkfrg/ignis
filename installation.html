@@ -157,6 +157,7 @@
 <li class="toctree-l1"><a class="reference internal" href="dynamic_content.html">Dynamic content</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gobject.html">GObject</a></li>
 <li class="toctree-l1"><a class="reference internal" href="app.html">Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">CLI</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="widgets/index.html">Widgets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="widgets/generated/Box.html">Box</a></li>
 <li class="toctree-l2"><a class="reference internal" href="widgets/generated/Button.html">Button</a></li>
@@ -225,7 +226,18 @@
 <li class="toctree-l2"><a class="reference internal" href="utils/generated/thread.html">thread</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="dbus.html">D-Bus menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbus_menu.html">D-Bus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="developer_guide/index.html">Developer Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="developer_guide/env.html">Setting up a Development Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_guide/gobject.html">Custom GObjects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_guide/subclassing_widgets.html">Subclassing Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_guide/creating_service.html">Creating Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_guide/documentation.html">Documentation Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_guide/code_style.html">Code Style Guidelines</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -376,6 +388,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arch-linux">Arch linux</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-from-source">Building from source</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running">Running</a></li>
 </ul>
             </nav>
         </div>
@@ -414,6 +427,12 @@ document.write(`
 meson<span class="w"> </span>setup<span class="w"> </span>build<span class="w"> </span>--prefix<span class="o">=</span>/usr<span class="w"> </span>--libdir<span class="w"> </span><span class="s2">&quot;lib/ignis&quot;</span>
 meson<span class="w"> </span>compile<span class="w"> </span>-C<span class="w"> </span>build
 meson<span class="w"> </span>install<span class="w"> </span>-C<span class="w"> </span>build
+</pre></div>
+</div>
+</section>
+<section id="running">
+<h2>Running<a class="headerlink" href="#running" title="Link to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ignis<span class="w"> </span>init
 </pre></div>
 </div>
 </section>
@@ -466,6 +485,7 @@ meson<span class="w"> </span>install<span class="w"> </span>-C<span class="w"> <
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arch-linux">Arch linux</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-from-source">Building from source</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running">Running</a></li>
 </ul>
   </nav></div>
 

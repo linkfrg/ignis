@@ -156,6 +156,7 @@
 <li class="toctree-l1"><a class="reference internal" href="dynamic_content.html">Dynamic content</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gobject.html">GObject</a></li>
 <li class="toctree-l1"><a class="reference internal" href="app.html">Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">CLI</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="widgets/index.html">Widgets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="widgets/generated/Box.html">Box</a></li>
 <li class="toctree-l2"><a class="reference internal" href="widgets/generated/Button.html">Button</a></li>
@@ -224,7 +225,18 @@
 <li class="toctree-l2"><a class="reference internal" href="utils/generated/thread.html">thread</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="dbus.html">D-Bus menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbus_menu.html">D-Bus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="developer_guide/index.html">Developer Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="developer_guide/env.html">Setting up a Development Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_guide/gobject.html">Custom GObjects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_guide/subclassing_widgets.html">Subclassing Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_guide/creating_service.html">Creating Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_guide/documentation.html">Documentation Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="developer_guide/code_style.html">Code Style Guidelines</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -370,20 +382,24 @@ document.write(`
 </li>
       <li><a href="utils/generated/exec_sh_async.html#ignis.utils.exec_sh.AsyncCompletedProcess">AsyncCompletedProcess (class in ignis.utils.exec_sh)</a>
 </li>
+      <li><a href="services/generated/audio.html#ignis.services.audio.AudioService">AudioService (class in ignis.services.audio)</a>
+</li>
   </ul></td>
 </tr></table>
 
 <h2 id="B">B</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="developer_guide/subclassing_widgets.html#ignis.base_widget.BaseWidget">BaseWidget (class in ignis.base_widget)</a>
+</li>
       <li><a href="gobject.html#ignis.gobject.IgnisGObject.bind">bind() (IgnisGObject method)</a>
 </li>
       <li><a href="services/generated/options.html#ignis.services.options.OptionsService.bind_option">bind_option() (OptionsService method)</a>
 </li>
-      <li><a href="gobject.html#ignis.gobject.IgnisGObject.bind_property">bind_property() (IgnisGObject method)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="gobject.html#ignis.gobject.IgnisGObject.bind_property">bind_property() (IgnisGObject method)</a>
+</li>
       <li><a href="gobject.html#ignis.gobject.Binding">Binding (class in ignis.gobject)</a>
 </li>
       <li><a href="widgets/generated/Box.html#ignis.widgets.Widget.Box">Box (class in ignis.widgets.Widget)</a>
@@ -414,6 +430,8 @@ document.write(`
 </li>
       <li><a href="services/generated/network.html#ignis.services.network.WifiAccessPoint.connect_to_graphical">connect_to_graphical() (WifiAccessPoint method)</a>
 </li>
+      <li><a href="dbus.html#ignis.dbus_menu.DBusMenu.copy">copy() (DBusMenu method)</a>
+</li>
       <li><a href="services/generated/options.html#ignis.services.options.OptionsService.create_option">create_option() (OptionsService method)</a>
 </li>
       <li><a href="utils/generated/crop_pixbuf.html#ignis.utils.Utils.crop_pixbuf">crop_pixbuf() (in module ignis.utils.Utils)</a>
@@ -426,8 +444,14 @@ document.write(`
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="utils/generated/sass_compile.html#ignis.utils.sass.DartSassNotFoundError">DartSassNotFoundError</a>
 </li>
+      <li><a href="dbus.html#ignis.dbus_menu.DBusMenu">DBusMenu (class in ignis.dbus_menu)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="dbus_menu.html#ignis.dbus.DBusProxy">DBusProxy (class in ignis.dbus)</a>
+</li>
+      <li><a href="dbus_menu.html#ignis.dbus.DBusService">DBusService (class in ignis.dbus)</a>
+</li>
       <li><a href="widgets/generated/DropDown.html#ignis.widgets.Widget.DropDown">DropDown (class in ignis.widgets.Widget)</a>
 </li>
   </ul></td>
@@ -436,6 +460,8 @@ document.write(`
 <h2 id="E">E</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="dbus_menu.html#ignis.dbus.DBusService.emit_signal">emit_signal() (DBusService method)</a>
+</li>
       <li><a href="widgets/generated/Entry.html#ignis.widgets.Widget.Entry">Entry (class in ignis.widgets.Widget)</a>
 </li>
       <li><a href="services/generated/network.html#ignis.services.network.Ethernet">Ethernet (class in ignis.services.network)</a>
@@ -482,10 +508,10 @@ document.write(`
 </li>
       <li><a href="utils/generated/get_n_monitors.html#ignis.utils.Utils.get_n_monitors">get_n_monitors() (in module ignis.utils.Utils)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="services/generated/notifications.html#ignis.services.notifications.NotificationService.get_notification">get_notification() (NotificationService method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="services/generated/options.html#ignis.services.options.OptionsService.get_option">get_option() (OptionsService method)</a>
 </li>
       <li><a href="utils/generated/get_paintable.html#ignis.utils.Utils.get_paintable">get_paintable() (in module ignis.utils.Utils)</a>
@@ -493,6 +519,12 @@ document.write(`
       <li><a href="app.html#ignis.app.IgnisApp.get_window">get_window() (IgnisApp method)</a>
 </li>
       <li><a href="widgets/generated/Grid.html#ignis.widgets.Widget.Grid">Grid (class in ignis.widgets.Widget)</a>
+</li>
+      <li><a href="services/generated/recorder.html#ignis.services.recorder.GstNotFoundError">GstNotFoundError</a>
+</li>
+      <li><a href="services/generated/recorder.html#ignis.services.recorder.GstPluginNotFoundError">GstPluginNotFoundError</a>
+</li>
+      <li><a href="services/generated/audio.html#ignis.services.audio.GvcNotFoundError">GvcNotFoundError</a>
 </li>
   </ul></td>
 </tr></table>
@@ -521,6 +553,13 @@ document.write(`
 
       <ul>
         <li><a href="services/generated/applications.html#module-ignis.services.applications">module</a>
+</li>
+      </ul></li>
+      <li>
+    ignis.services.audio
+
+      <ul>
+        <li><a href="services/generated/audio.html#module-ignis.services.audio">module</a>
 </li>
       </ul></li>
       <li>
@@ -565,6 +604,13 @@ document.write(`
 
       <ul>
         <li><a href="services/generated/options.html#module-ignis.services.options">module</a>
+</li>
+      </ul></li>
+      <li>
+    ignis.services.recorder
+
+      <ul>
+        <li><a href="services/generated/recorder.html#module-ignis.services.recorder">module</a>
 </li>
       </ul></li>
       <li>
@@ -627,6 +673,8 @@ document.write(`
       <ul>
         <li><a href="services/generated/applications.html#module-ignis.services.applications">ignis.services.applications</a>
 </li>
+        <li><a href="services/generated/audio.html#module-ignis.services.audio">ignis.services.audio</a>
+</li>
         <li><a href="services/generated/fetch.html#module-ignis.services.fetch">ignis.services.fetch</a>
 </li>
         <li><a href="services/generated/hyprland.html#module-ignis.services.hyprland">ignis.services.hyprland</a>
@@ -638,6 +686,8 @@ document.write(`
         <li><a href="services/generated/notifications.html#module-ignis.services.notifications">ignis.services.notifications</a>
 </li>
         <li><a href="services/generated/options.html#module-ignis.services.options">ignis.services.options</a>
+</li>
+        <li><a href="services/generated/recorder.html#module-ignis.services.recorder">ignis.services.recorder</a>
 </li>
         <li><a href="services/generated/system_tray.html#module-ignis.services.system_tray">ignis.services.system_tray</a>
 </li>
@@ -684,13 +734,15 @@ document.write(`
 </li>
       <li><a href="services/generated/options.html#ignis.services.options.OptionExistsError">OptionExistsError</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="services/generated/options.html#ignis.services.options.OptionNotFoundError">OptionNotFoundError</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="services/generated/options.html#ignis.services.options.OptionsService">OptionsService (class in ignis.services.options)</a>
 </li>
       <li><a href="widgets/generated/Overlay.html#ignis.widgets.Widget.Overlay">Overlay (class in ignis.widgets.Widget)</a>
+</li>
+      <li><a href="developer_guide/subclassing_widgets.html#ignis.base_widget.BaseWidget.override_enum">override_enum() (BaseWidget method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -730,16 +782,22 @@ document.write(`
 <h2 id="R">R</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="services/generated/recorder.html#ignis.services.recorder.RecorderService">RecorderService (class in ignis.services.recorder)</a>
+</li>
+      <li><a href="dbus_menu.html#ignis.dbus.DBusService.register_dbus_method">register_dbus_method() (DBusService method)</a>
+</li>
+      <li><a href="dbus_menu.html#ignis.dbus.DBusService.register_dbus_property">register_dbus_property() (DBusService method)</a>
+</li>
       <li><a href="widgets/generated/RegularWindow.html#ignis.widgets.Widget.RegularWindow">RegularWindow (class in ignis.widgets.Widget)</a>
 </li>
       <li><a href="app.html#ignis.app.IgnisApp.reload">reload() (IgnisApp method)</a>
 </li>
       <li><a href="app.html#ignis.app.IgnisApp.reload_css">reload_css() (IgnisApp method)</a>
 </li>
-      <li><a href="app.html#ignis.app.IgnisApp.remove_css">remove_css() (IgnisApp method)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="app.html#ignis.app.IgnisApp.remove_css">remove_css() (IgnisApp method)</a>
+</li>
       <li><a href="services/generated/options.html#ignis.services.options.OptionsService.remove_option">remove_option() (OptionsService method)</a>
 </li>
       <li><a href="app.html#ignis.app.IgnisApp.remove_window">remove_window() (IgnisApp method)</a>
@@ -774,15 +832,25 @@ document.write(`
 </li>
       <li><a href="services/generated/hyprland.html#ignis.services.hyprland.HyprlandService.send_command">send_command() (HyprlandService method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="widgets/generated/Separator.html#ignis.widgets.Widget.Separator">Separator (class in ignis.widgets.Widget)</a>
 </li>
       <li><a href="services/generated/options.html#ignis.services.options.OptionsService.set_option">set_option() (OptionsService method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="dbus_menu.html#ignis.dbus.DBusProxy.signal_subscribe">signal_subscribe() (DBusProxy method)</a>
+</li>
+      <li><a href="dbus_menu.html#ignis.dbus.DBusProxy.signal_unsubscribe">signal_unsubscribe() (DBusProxy method)</a>
+</li>
       <li><a href="widgets/generated/SpinButton.html#ignis.widgets.Widget.SpinButton">SpinButton (class in ignis.widgets.Widget)</a>
 </li>
+      <li><a href="services/generated/recorder.html#ignis.services.recorder.RecorderService.start_recording">start_recording() (RecorderService method)</a>
+</li>
       <li><a href="services/generated/mpris.html#ignis.services.mpris.MprisPlayer.stop">stop() (MprisPlayer method)</a>
+</li>
+      <li><a href="services/generated/recorder.html#ignis.services.recorder.RecorderService.stop_recording">stop_recording() (RecorderService method)</a>
+</li>
+      <li><a href="services/generated/audio.html#ignis.services.audio.Stream">Stream (class in ignis.services.audio)</a>
 </li>
       <li><a href="widgets/generated/Switch.html#ignis.widgets.Widget.Switch">Switch (class in ignis.widgets.Widget)</a>
 </li>
@@ -818,7 +886,13 @@ document.write(`
 <h2 id="U">U</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="dbus_menu.html#ignis.dbus.DBusService.unown_name">unown_name() (DBusService method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="services/generated/applications.html#ignis.services.applications.Application.unpin">unpin() (Application method)</a>
+</li>
+      <li><a href="dbus_menu.html#ignis.dbus.DBusProxy.unwatch_name">unwatch_name() (DBusProxy method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -828,10 +902,12 @@ document.write(`
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="services/generated/wallpaper.html#ignis.services.wallpaper.WallpaperService">WallpaperService (class in ignis.services.wallpaper)</a>
 </li>
-      <li><a href="services/generated/network.html#ignis.services.network.Wifi">Wifi (class in ignis.services.network)</a>
+      <li><a href="dbus_menu.html#ignis.dbus.DBusProxy.watch_name">watch_name() (DBusProxy method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="services/generated/network.html#ignis.services.network.Wifi">Wifi (class in ignis.services.network)</a>
+</li>
       <li><a href="services/generated/network.html#ignis.services.network.WifiAccessPoint">WifiAccessPoint (class in ignis.services.network)</a>
 </li>
       <li><a href="widgets/generated/Window.html#ignis.widgets.Widget.Window">Window (class in ignis.widgets.Widget)</a>

@@ -15,7 +15,11 @@ Documentation
    dynamic_content
    gobject
    app
+   cli
    widgets/index
    services/index
    utils/index
+   dbus
+   dbus_menu
    examples
+   developer_guide/index

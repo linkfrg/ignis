@@ -45,7 +45,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Box" href="generated/Box.html" />
-    <link rel="prev" title="Application" href="../app.html" />
+    <link rel="prev" title="CLI" href="../cli.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -157,6 +157,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../dynamic_content.html">Dynamic content</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../gobject.html">GObject</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../app.html">Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli.html">CLI</a></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Widgets</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="generated/Box.html">Box</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/Button.html">Button</a></li>
@@ -225,7 +226,18 @@
 <li class="toctree-l2"><a class="reference internal" href="../utils/generated/thread.html">thread</a></li>
 </ul>
 </details></li>
+<li class="toctree-l1"><a class="reference internal" href="../dbus.html">D-Bus menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dbus_menu.html">D-Bus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../developer_guide/index.html">Developer Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/env.html">Setting up a Development Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/gobject.html">Custom GObjects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/subclassing_widgets.html">Subclassing Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/creating_service.html">Creating Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/documentation.html">Documentation Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../developer_guide/code_style.html">Code Style Guidelines</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -484,12 +496,18 @@ This can be useful when you need to perform actions when the widget is initializ
 </section>
 <section id="built-in-widgets">
 <h2>Built-in widgets<a class="headerlink" href="#built-in-widgets" title="Link to this heading">#</a></h2>
+<p>Here is a list of built-in widgets.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>The widget pages only describe the properties that Ignis adds.
 For more information about widget, each page contains a corresponding link to the widget in the PyGObject API reference.</p>
 </div>
-<p>Here is a list of built-in widgets.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If the widget you need is not here, you can use it directly from GTK.
+Please note that it will not support <code class="docutils literal notranslate"><span class="pre">style</span></code> property, bindings, and other Ignis features.
+Or, you can manually subclass it, see <a class="reference external" href="developer_guide/subclassing_widgets.rst">Subclassing widgets</a> for more info.</p>
+</div>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="generated/Box.html">Box</a></li>
@@ -539,12 +557,12 @@ For more information about widget, each page contains a corresponding link to th
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../app.html"
+       href="../cli.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Application</p>
+        <p class="prev-next-title">CLI</p>
       </div>
     </a>
     <a class="right-next"
