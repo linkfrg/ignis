@@ -24,8 +24,8 @@ Creating D-Bus Service
 --------------------------
 
 We will use :class:`~ignis.dbus.DBusService` in this template.
-Use ``PascalCase`` for D-Bus methods and properties naming.
-Also make D-Bus methods/properties private (add ``__`` before name).
+- Use ``PascalCase`` for D-Bus methods and properties naming.
+- Also make D-Bus methods/properties private (add ``__`` before name).
 
 .. code-block:: python
 

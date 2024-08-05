@@ -37,11 +37,11 @@ class DBusMenu(Gtk.PopoverMenu):
 
     Like DbusmenuGtk3, but for GTK4.
 
-    Bus must provide ``com.canonical.dbusmenu`` D-Bus interface.
+    The bus must provide the ``com.canonical.dbusmenu`` D-Bus interface.
 
     Parameters:
         name (``str``): A bus name (well-known or unique).
-        object_path(``str``): An object path to menu.
+        object_path(``str``): An object path to the menu.
     """
 
     def __init__(self, name: str, object_path: str):
@@ -121,7 +121,7 @@ class DBusMenu(Gtk.PopoverMenu):
 
     def copy(self):
         """
-        Make a copy of this instance.
+        Create a copy of this instance.
 
         Returns:
             :class:`~ignis.dbus_menu.DBusMenu`: A copy of this instance.

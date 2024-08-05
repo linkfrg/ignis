@@ -13,7 +13,7 @@ class DBusService(IgnisGObject):
         object_path (``str``): An object path.
         info (`Gio.DBusInterfaceInfo <https://lazka.github.io/pgi-docs/Gio-2.0/classes/DBusInterfaceInfo.html>`_): A ``Gio.DBusInterfaceInfo`` instance. You can get it from XML using :class:`~ignis.utils.Utils.load_interface_xml`.
         on_name_acquired (``callable``, optional): Function to call when ``name`` is acquired.
-        on_name_acquired (``callable``, optional): Function to call when ``name`` is lost.
+        on_name_lost (``callable``, optional): Function to call when ``name`` is lost.
 
     Properties:
         - **name** (``str``, read-only): The well-known name to own.
@@ -23,12 +23,12 @@ class DBusService(IgnisGObject):
         - **properties** (``dict``, read-only): The dictionary of registred DBus properties. See :func:`~ignis.dbus.DBusService.register_dbus_property`.
 
     DBus methods:
-        - must accept `Gio.DBusMethodInvocation <https://lazka.github.io/pgi-docs/index.html#Gio-2.0/classes/DBusMethodInvocation.html>`_ as the first argument.
-        - must accept all other arguments, typical for this method (specified by interface info).
-        - must return `GLib.Variant <https://lazka.github.io/pgi-docs/index.html#GLib-2.0/classes/Variant.html>`_ or ``None``, specified by interface info.
+        - Must accept `Gio.DBusMethodInvocation <https://lazka.github.io/pgi-docs/index.html#Gio-2.0/classes/DBusMethodInvocation.html>`_ as the first argument.
+        - Must accept all other arguments typical for this method (specified by interface info).
+        - Must return `GLib.Variant <https://lazka.github.io/pgi-docs/index.html#GLib-2.0/classes/Variant.html>`_ or ``None``, as specified by interface info.
 
     DBus properties:
-        - must return `GLib.Variant <https://lazka.github.io/pgi-docs/index.html#GLib-2.0/classes/Variant.html>`_, specified by interface info.
+        - Must return `GLib.Variant <https://lazka.github.io/pgi-docs/index.html#GLib-2.0/classes/Variant.html>`_, as specified by interface info.
 
     .. code-block:: python
 
@@ -140,33 +140,33 @@ class DBusService(IgnisGObject):
 
     def register_dbus_method(self, name: str, method: callable) -> None:
         """
-        Register DBus method for this service.
+        Register a D-Bus method for this service.
 
         Args:
             name (``str``): The name of the method to register.
-            method (``callable``): A function to call when method is called (from DBus).
+            method (``callable``): A function to call when the method is invoked (from D-Bus).
         """
         self._methods[name] = method
 
     def register_dbus_property(self, name: str, method: callable) -> None:
         """
-        Register DBus property for this service.
+        Register D-Bus property for this service.
 
         Args:
             name (``str``): The name of the property to register.
-            method (``callable``): A function to call when property is getted (from DBus).
+            method (``callable``): A function to call when the property is accessed (from DBus).
         """
         self._properties[name] = method
 
     def emit_signal(self, signal_name: str, parameters: GLib.Variant = None) -> None:
         """
-        Emit DBus signal on self ``name`` and ``object_path``.
+        Emit a D-Bus signal on this service.
 
         Args:
-            signal_name (``str``): The signal name to emit.
-            parameters (`GLib.Variant <https://lazka.github.io/pgi-docs/index.html#GLib-2.0/classes/Variant.html>`_, optional): The ``GLib.Variant`` containing paramaters to pass with signal.
-
+            signal_name (``str``): The name of the signal to emit.
+            parameters (`GLib.Variant <https://lazka.github.io/pgi-docs/index.html#GLib-2.0/classes/Variant.html>`_, optional): The ``GLib.Variant`` containing paramaters to pass with the signal.
         """
+
         self._connection.emit_signal(
             None,
             self._object_path,
@@ -177,15 +177,15 @@ class DBusService(IgnisGObject):
 
     def unown_name(self) -> None:
         """
-        Unown name.
+        Release ownership of the name.
         """
         Gio.bus_unown_name(self.__id)
 
 
 class DBusProxy(IgnisGObject):
     """
-    Class to help to interact with D-Bus services (create D-Bus proxy).
-    Unlike `Gio.DBusProxy <https://lazka.github.io/pgi-docs/index.html#Gio-2.0/classes/DBusProxy.html>`_ also provides comfortable pythonic property getting.
+    Class to interact with D-Bus services (create a D-Bus proxy).
+    Unlike `Gio.DBusProxy <https://lazka.github.io/pgi-docs/index.html#Gio-2.0/classes/DBusProxy.html>`_, this class also provides convenient pythonic property access.
 
     Parameters:
         name (``str``): A bus name (well-known or unique).
@@ -198,14 +198,14 @@ class DBusProxy(IgnisGObject):
         - **object_path** (``str``, read-only): An object path.
         - **interface_name** (``str``, read-only): A D-Bus interface name.
         - **proxy** (`Gio.DBusProxy <https://lazka.github.io/pgi-docs/index.html#Gio-2.0/classes/DBusProxy.html>`_, read-only): The ``Gio.DBusProxy`` instance.
-        - **methods** (``List[str]``, read-only): A list of methods exposed by DBus service.
-        - **properties** (``List[str]``, read-only): A list of properties exposed by DBus service.
-        - **has_owner** (``bool``, read-only): Whether ``name`` has owner.
+        - **methods** (``List[str]``, read-only): A list of methods exposed by D-Bus service.
+        - **properties** (``List[str]``, read-only): A list of properties exposed by D-Bus service.
+        - **has_owner** (``bool``, read-only): Whether the ``name`` has an owner.
 
-    To call D-Bus method use the standart pythonic way.
+    To call a D-Bus method, use the standart pythonic way.
     The first argument always needs to be the DBus signature tuple of the method call.
-    Next arguments must match provided D-Bus signature.
-    If D-Bus method does not accept any arguments, do not pass arguments.
+    Subsequent arguments must match the provided D-Bus signature.
+    If the D-Bus method does not accept any arguments, do not pass arguments.
 
     .. code-block:: python
 
@@ -213,7 +213,7 @@ class DBusProxy(IgnisGObject):
         proxy = DBusProxy(...)
         proxy.MyMethod("(is)", 42, "hello")
 
-    To get D-Bus property also use the standart pythonic way.
+    To get a D-Bus property, also use the standart pythonic way.
 
     .. code-block:: python
 
