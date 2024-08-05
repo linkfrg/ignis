@@ -466,30 +466,26 @@ Replace <code class="docutils literal notranslate"><span class="pre">WIDGET_NAME
 </section>
 <section id="docstrings">
 <h2>Docstrings<a class="headerlink" href="#docstrings" title="Link to this heading">#</a></h2>
-<p>Use the same patterns as described here: <a class="reference external" href="documentation.html">Documentation</a>.
-Additionally, specify the base widget and link to the PyGObject API Reference.
-Also, specify whether properties are optional.
-It is good practice to include a code example.</p>
+<ul class="simple">
+<li><p>Use the same patterns as described here: <a class="reference external" href="documentation.html">Documentation</a>.</p></li>
+<li><p>Specify the base widget and link to the PyGObject API Reference.</p></li>
+<li><p>Specify whether properties are <code class="docutils literal notranslate"><span class="pre">optional</span></code>/<code class="docutils literal notranslate"><span class="pre">required</span></code>.</p></li>
+<li><p>Include a code example.</p></li>
+</ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">Bases: `Gtk.Label &lt;https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Label.html&gt;`_.</span>
+<span class="s2">Bases: `Gtk.WIDGET_NAME &lt;https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/WIDGET_NAME.html&gt;`_.</span>
 
 <span class="s2">A widget that displays a small amount of text.</span>
 
 <span class="s2">Properties:</span>
-<span class="s2">    - **justify** (``str``, optional, read-write): description...</span>
-<span class="s2">    - **ellipsize** (``str``, optional, read-write): description...</span>
-<span class="s2">    - **wrap_mode** (``str``, optional, read-write): description...</span>
+<span class="s2">    - **prop1** (``str``, required, read-write): description...</span>
+<span class="s2">    - **prop2** (``int``, optional, read-write): description...</span>
 
 <span class="s2">.. code-block:: python</span>
 
-<span class="s2">    Widget.Label(</span>
-<span class="s2">        label=&#39;heh&#39;,</span>
-<span class="s2">        use_markup=False,</span>
-<span class="s2">        justify=&#39;left&#39;,</span>
-<span class="s2">        wrap=True,</span>
-<span class="s2">        wrap_mode=&#39;word&#39;,</span>
-<span class="s2">        ellipsize=&#39;end&#39;,</span>
-<span class="s2">        max_width_chars=52</span>
+<span class="s2">    Widget.WIDGET_NAME(</span>
+<span class="s2">        prop1=&quot;asd&quot;,</span>
+<span class="s2">        prop2=12</span>
 <span class="s2">    )</span>
 </pre></div>
 </div>

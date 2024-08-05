@@ -24,23 +24,26 @@ For functions, use the standard Google docstring style.
 .. code-block:: python
 
     """
-    Get a standard icon name for the file or directory.
+    Description of the function.
 
     Args:
-        path (``str``): The path to the file or directory.
-        symbolic (``bool``, optional): Whether the icon should be symbolic.
+        arg1 (``str``): description...
+        arg2 (``bool``, optional): description...
 
     Returns:
-        ``str``: The name of the icon.
+        ``str``: description...
+    
+    Raises:
+        SomeException: description...
     """
 
 For Class
 ------------
-If a class has custom signals, define them in the ``Signals`` section.
+- If a class has custom signals, define them in the ``Signals`` section.
 Signal names should be in double quotes.
 In brackets, indicate the custom arguments that the signal passes to the callback.
 
-If a class has custom properties, define them in the ``Properties`` section.
+- If a class has custom properties, define them in the ``Properties`` section.
 In brackets, indicate the property type and ``read-only`` or ``read-write``.
 
 .. code-block:: python

@@ -43,31 +43,26 @@ Replace ``WIDGET_NAME`` with the actual name of the widget.
 
 Docstrings
 ------------
-Use the same patterns as described here: `Documentation <documentation.html>`_.
-Additionally, specify the base widget and link to the PyGObject API Reference.
-Also, specify whether properties are optional.
-It is good practice to include a code example.
+
+- Use the same patterns as described here: `Documentation <documentation.html>`_.
+- Specify the base widget and link to the PyGObject API Reference.
+- Specify whether properties are ``optional``/``required``.
+- Include a code example.
 
 .. code-block:: python
 
     """
-    Bases: `Gtk.Label <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Label.html>`_.
+    Bases: `Gtk.WIDGET_NAME <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/WIDGET_NAME.html>`_.
 
     A widget that displays a small amount of text.
 
     Properties:
-        - **justify** (``str``, optional, read-write): description...
-        - **ellipsize** (``str``, optional, read-write): description...
-        - **wrap_mode** (``str``, optional, read-write): description...
+        - **prop1** (``str``, required, read-write): description...
+        - **prop2** (``int``, optional, read-write): description...
 
     .. code-block:: python
 
-        Widget.Label(
-            label='heh',
-            use_markup=False,
-            justify='left',
-            wrap=True,
-            wrap_mode='word',
-            ellipsize='end',
-            max_width_chars=52
+        Widget.WIDGET_NAME(
+            prop1="asd",
+            prop2=12
         )

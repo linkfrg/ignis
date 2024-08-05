@@ -418,8 +418,8 @@ document.write(`
 <section id="creating-d-bus-service">
 <h2>Creating D-Bus Service<a class="headerlink" href="#creating-d-bus-service" title="Link to this heading">#</a></h2>
 <p>We will use <a class="reference internal" href="../dbus.html#ignis.dbus.DBusService" title="ignis.dbus.DBusService"><code class="xref py py-class docutils literal notranslate"><span class="pre">DBusService</span></code></a> in this template.
-Use <code class="docutils literal notranslate"><span class="pre">PascalCase</span></code> for D-Bus methods and properties naming.
-Also make D-Bus methods/properties private (add <code class="docutils literal notranslate"><span class="pre">__</span></code> before name).</p>
+- Use <code class="docutils literal notranslate"><span class="pre">PascalCase</span></code> for D-Bus methods and properties naming.
+- Also make D-Bus methods/properties private (add <code class="docutils literal notranslate"><span class="pre">__</span></code> before name).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gi.repository</span> <span class="kn">import</span> <span class="n">Gio</span><span class="p">,</span> <span class="n">GLib</span>
 <span class="kn">from</span> <span class="nn">ignis.gobject</span> <span class="kn">import</span> <span class="n">IgnisGObject</span>
 <span class="kn">from</span> <span class="nn">ignis.dbus</span> <span class="kn">import</span> <span class="n">DBusService</span>

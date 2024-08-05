@@ -19,13 +19,13 @@ Create Python Virtual Environment
 Activate Virtual Environment
 ----------------------------
 
-For Bash:
+- For Bash:
 
 .. code-block:: bash
 
     source venv/bin/activate
 
-For Fish:
+- For Fish:
 
 .. code-block:: fish
 

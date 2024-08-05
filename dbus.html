@@ -413,7 +413,7 @@ document.write(`
                   
   <section id="d-bus">
 <h1>D-Bus<a class="headerlink" href="#d-bus" title="Link to this heading">#</a></h1>
-<p>There are some classes that can help you with intercating with D-Bus</p>
+<p>There are several classes that can help you interact with D-Bus.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="ignis.dbus.DBusService">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DBusService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DBusInterfaceInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">on_name_acquired</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">on_name_lost</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.dbus.DBusService" title="Link to this definition">#</a></dt>
@@ -425,7 +425,7 @@ document.write(`
 <li><p><strong>object_path</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- An object path.</p></li>
 <li><p><strong>info</strong> (<a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/classes/DBusInterfaceInfo.html">Gio.DBusInterfaceInfo</a>) -- A <code class="docutils literal notranslate"><span class="pre">Gio.DBusInterfaceInfo</span></code> instance. You can get it from XML using <a class="reference internal" href="utils/generated/load_interface_xml.html#ignis.utils.Utils.load_interface_xml" title="ignis.utils.Utils.load_interface_xml"><code class="xref py py-class docutils literal notranslate"><span class="pre">load_interface_xml</span></code></a>.</p></li>
 <li><p><strong>on_name_acquired</strong> (<code class="docutils literal notranslate"><span class="pre">callable</span></code>, optional) -- Function to call when <code class="docutils literal notranslate"><span class="pre">name</span></code> is acquired.</p></li>
-<li><p><strong>on_name_acquired</strong> -- Function to call when <code class="docutils literal notranslate"><span class="pre">name</span></code> is lost.</p></li>
+<li><p><strong>on_name_lost</strong> (<code class="docutils literal notranslate"><span class="pre">callable</span></code>, optional) -- Function to call when <code class="docutils literal notranslate"><span class="pre">name</span></code> is lost.</p></li>
 </ul>
 </dd>
 </dl>
@@ -439,13 +439,13 @@ document.write(`
 </ul>
 </dd>
 <dt>DBus methods:</dt><dd><ul class="simple">
-<li><p>must accept <a class="reference external" href="https://lazka.github.io/pgi-docs/index.html#Gio-2.0/classes/DBusMethodInvocation.html">Gio.DBusMethodInvocation</a> as the first argument.</p></li>
-<li><p>must accept all other arguments, typical for this method (specified by interface info).</p></li>
-<li><p>must return <a class="reference external" href="https://lazka.github.io/pgi-docs/index.html#GLib-2.0/classes/Variant.html">GLib.Variant</a> or <code class="docutils literal notranslate"><span class="pre">None</span></code>, specified by interface info.</p></li>
+<li><p>Must accept <a class="reference external" href="https://lazka.github.io/pgi-docs/index.html#Gio-2.0/classes/DBusMethodInvocation.html">Gio.DBusMethodInvocation</a> as the first argument.</p></li>
+<li><p>Must accept all other arguments typical for this method (specified by interface info).</p></li>
+<li><p>Must return <a class="reference external" href="https://lazka.github.io/pgi-docs/index.html#GLib-2.0/classes/Variant.html">GLib.Variant</a> or <code class="docutils literal notranslate"><span class="pre">None</span></code>, as specified by interface info.</p></li>
 </ul>
 </dd>
 <dt>DBus properties:</dt><dd><ul class="simple">
-<li><p>must return <a class="reference external" href="https://lazka.github.io/pgi-docs/index.html#GLib-2.0/classes/Variant.html">GLib.Variant</a>, specified by interface info.</p></li>
+<li><p>Must return <a class="reference external" href="https://lazka.github.io/pgi-docs/index.html#GLib-2.0/classes/Variant.html">GLib.Variant</a>, as specified by interface info.</p></li>
 </ul>
 </dd>
 </dl>
@@ -467,12 +467,12 @@ document.write(`
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.dbus.DBusService.emit_signal">
 <span class="sig-name descname"><span class="pre">emit_signal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Variant</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.dbus.DBusService.emit_signal" title="Link to this definition">#</a></dt>
-<dd><p>Emit DBus signal on self <code class="docutils literal notranslate"><span class="pre">name</span></code> and <code class="docutils literal notranslate"><span class="pre">object_path</span></code>.</p>
+<dd><p>Emit a D-Bus signal on this service.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>signal_name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The signal name to emit.</p></li>
-<li><p><strong>parameters</strong> -- The <code class="docutils literal notranslate"><span class="pre">GLib.Variant</span></code> containing paramaters to pass with signal.</p></li>
+<li><p><strong>signal_name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The name of the signal to emit.</p></li>
+<li><p><strong>parameters</strong> -- The <code class="docutils literal notranslate"><span class="pre">GLib.Variant</span></code> containing paramaters to pass with the signal.</p></li>
 </ul>
 </dd>
 </dl>
@@ -481,12 +481,12 @@ document.write(`
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.dbus.DBusService.register_dbus_method">
 <span class="sig-name descname"><span class="pre">register_dbus_method</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.dbus.DBusService.register_dbus_method" title="Link to this definition">#</a></dt>
-<dd><p>Register DBus method for this service.</p>
+<dd><p>Register a D-Bus method for this service.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The name of the method to register.</p></li>
-<li><p><strong>method</strong> (<code class="docutils literal notranslate"><span class="pre">callable</span></code>) -- A function to call when method is called (from DBus).</p></li>
+<li><p><strong>method</strong> (<code class="docutils literal notranslate"><span class="pre">callable</span></code>) -- A function to call when the method is invoked (from D-Bus).</p></li>
 </ul>
 </dd>
 </dl>
@@ -495,12 +495,12 @@ document.write(`
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.dbus.DBusService.register_dbus_property">
 <span class="sig-name descname"><span class="pre">register_dbus_property</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.dbus.DBusService.register_dbus_property" title="Link to this definition">#</a></dt>
-<dd><p>Register DBus property for this service.</p>
+<dd><p>Register D-Bus property for this service.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The name of the property to register.</p></li>
-<li><p><strong>method</strong> (<code class="docutils literal notranslate"><span class="pre">callable</span></code>) -- A function to call when property is getted (from DBus).</p></li>
+<li><p><strong>method</strong> (<code class="docutils literal notranslate"><span class="pre">callable</span></code>) -- A function to call when the property is accessed (from DBus).</p></li>
 </ul>
 </dd>
 </dl>
@@ -509,7 +509,7 @@ document.write(`
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.dbus.DBusService.unown_name">
 <span class="sig-name descname"><span class="pre">unown_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.dbus.DBusService.unown_name" title="Link to this definition">#</a></dt>
-<dd><p>Unown name.</p>
+<dd><p>Release ownership of the name.</p>
 </dd></dl>
 
 </dd></dl>
@@ -517,8 +517,8 @@ document.write(`
 <dl class="py class">
 <dt class="sig sig-object py" id="ignis.dbus.DBusProxy">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DBusProxy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interface_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DBusInterfaceInfo</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.dbus.DBusProxy" title="Link to this definition">#</a></dt>
-<dd><p>Class to help to interact with D-Bus services (create D-Bus proxy).
-Unlike <a class="reference external" href="https://lazka.github.io/pgi-docs/index.html#Gio-2.0/classes/DBusProxy.html">Gio.DBusProxy</a> also provides comfortable pythonic property getting.</p>
+<dd><p>Class to interact with D-Bus services (create a D-Bus proxy).
+Unlike <a class="reference external" href="https://lazka.github.io/pgi-docs/index.html#Gio-2.0/classes/DBusProxy.html">Gio.DBusProxy</a>, this class also provides convenient pythonic property access.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -535,22 +535,22 @@ Unlike <a class="reference external" href="https://lazka.github.io/pgi-docs/inde
 <li><p><strong>object_path</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): An object path.</p></li>
 <li><p><strong>interface_name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): A D-Bus interface name.</p></li>
 <li><p><strong>proxy</strong> (<a class="reference external" href="https://lazka.github.io/pgi-docs/index.html#Gio-2.0/classes/DBusProxy.html">Gio.DBusProxy</a>, read-only): The <code class="docutils literal notranslate"><span class="pre">Gio.DBusProxy</span></code> instance.</p></li>
-<li><p><strong>methods</strong> (<code class="docutils literal notranslate"><span class="pre">List[str]</span></code>, read-only): A list of methods exposed by DBus service.</p></li>
-<li><p><strong>properties</strong> (<code class="docutils literal notranslate"><span class="pre">List[str]</span></code>, read-only): A list of properties exposed by DBus service.</p></li>
-<li><p><strong>has_owner</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-only): Whether <code class="docutils literal notranslate"><span class="pre">name</span></code> has owner.</p></li>
+<li><p><strong>methods</strong> (<code class="docutils literal notranslate"><span class="pre">List[str]</span></code>, read-only): A list of methods exposed by D-Bus service.</p></li>
+<li><p><strong>properties</strong> (<code class="docutils literal notranslate"><span class="pre">List[str]</span></code>, read-only): A list of properties exposed by D-Bus service.</p></li>
+<li><p><strong>has_owner</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-only): Whether the <code class="docutils literal notranslate"><span class="pre">name</span></code> has an owner.</p></li>
 </ul>
 </dd>
 </dl>
-<p>To call D-Bus method use the standart pythonic way.
+<p>To call a D-Bus method, use the standart pythonic way.
 The first argument always needs to be the DBus signature tuple of the method call.
-Next arguments must match provided D-Bus signature.
-If D-Bus method does not accept any arguments, do not pass arguments.</p>
+Subsequent arguments must match the provided D-Bus signature.
+If the D-Bus method does not accept any arguments, do not pass arguments.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.dbus</span> <span class="kn">import</span> <span class="n">DBusProxy</span>
 <span class="n">proxy</span> <span class="o">=</span> <span class="n">DBusProxy</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
 <span class="n">proxy</span><span class="o">.</span><span class="n">MyMethod</span><span class="p">(</span><span class="s2">&quot;(is)&quot;</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="s2">&quot;hello&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>To get D-Bus property also use the standart pythonic way.</p>
+<p>To get a D-Bus property, also use the standart pythonic way.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.dbus</span> <span class="kn">import</span> <span class="n">DBusProxy</span>
 <span class="n">proxy</span> <span class="o">=</span> <span class="n">DBusProxy</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
 <span class="n">value</span> <span class="o">=</span> <span class="n">proxy</span><span class="o">.</span><span class="n">MyValue</span>

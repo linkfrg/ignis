@@ -424,25 +424,32 @@ Here are some examples for docstrings.</p>
 <h2>For Function<a class="headerlink" href="#for-function" title="Link to this heading">#</a></h2>
 <p>For functions, use the standard Google docstring style.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Get a standard icon name for the file or directory.</span>
+<span class="sd">Description of the function.</span>
 
 <span class="sd">Args:</span>
-<span class="sd">    path (``str``): The path to the file or directory.</span>
-<span class="sd">    symbolic (``bool``, optional): Whether the icon should be symbolic.</span>
+<span class="sd">    arg1 (``str``): description...</span>
+<span class="sd">    arg2 (``bool``, optional): description...</span>
 
 <span class="sd">Returns:</span>
-<span class="sd">    ``str``: The name of the icon.</span>
+<span class="sd">    ``str``: description...</span>
+
+<span class="sd">Raises:</span>
+<span class="sd">    SomeException: description...</span>
 <span class="sd">&quot;&quot;&quot;</span>
 </pre></div>
 </div>
 </section>
 <section id="for-class">
 <h2>For Class<a class="headerlink" href="#for-class" title="Link to this heading">#</a></h2>
-<p>If a class has custom signals, define them in the <code class="docutils literal notranslate"><span class="pre">Signals</span></code> section.
-Signal names should be in double quotes.
+<ul class="simple">
+<li><p>If a class has custom signals, define them in the <code class="docutils literal notranslate"><span class="pre">Signals</span></code> section.</p></li>
+</ul>
+<p>Signal names should be in double quotes.
 In brackets, indicate the custom arguments that the signal passes to the callback.</p>
-<p>If a class has custom properties, define them in the <code class="docutils literal notranslate"><span class="pre">Properties</span></code> section.
-In brackets, indicate the property type and <code class="docutils literal notranslate"><span class="pre">read-only</span></code> or <code class="docutils literal notranslate"><span class="pre">read-write</span></code>.</p>
+<ul class="simple">
+<li><p>If a class has custom properties, define them in the <code class="docutils literal notranslate"><span class="pre">Properties</span></code> section.</p></li>
+</ul>
+<p>In brackets, indicate the property type and <code class="docutils literal notranslate"><span class="pre">read-only</span></code> or <code class="docutils literal notranslate"><span class="pre">read-write</span></code>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">This is an example docstring for a class.</span>
 
