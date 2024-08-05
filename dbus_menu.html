@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>D-Bus &#8212; Ignis Wiki</title>
+    <title>D-Bus menu &#8212; Ignis Wiki</title>
   
   
   
@@ -45,7 +45,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Examples" href="examples.html" />
-    <link rel="prev" title="D-Bus menu" href="dbus.html" />
+    <link rel="prev" title="D-Bus" href="dbus.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -226,8 +226,8 @@
 <li class="toctree-l2"><a class="reference internal" href="utils/generated/thread.html">thread</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="dbus.html">D-Bus menu</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">D-Bus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dbus.html">D-Bus</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">D-Bus menu</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="developer_guide/index.html">Developer Guide</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="developer_guide/env.html">Setting up a Development Environment</a></li>
@@ -376,7 +376,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>D-Bus</h1>
+    <h1>D-Bus menu</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -386,18 +386,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus.DBusService"><code class="docutils literal notranslate"><span class="pre">DBusService</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus.DBusService.emit_signal"><code class="docutils literal notranslate"><span class="pre">DBusService.emit_signal()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus.DBusService.register_dbus_method"><code class="docutils literal notranslate"><span class="pre">DBusService.register_dbus_method()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus.DBusService.register_dbus_property"><code class="docutils literal notranslate"><span class="pre">DBusService.register_dbus_property()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus.DBusService.unown_name"><code class="docutils literal notranslate"><span class="pre">DBusService.unown_name()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus.DBusProxy"><code class="docutils literal notranslate"><span class="pre">DBusProxy</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus.DBusProxy.signal_subscribe"><code class="docutils literal notranslate"><span class="pre">DBusProxy.signal_subscribe()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus.DBusProxy.signal_unsubscribe"><code class="docutils literal notranslate"><span class="pre">DBusProxy.signal_unsubscribe()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus.DBusProxy.unwatch_name"><code class="docutils literal notranslate"><span class="pre">DBusProxy.unwatch_name()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus.DBusProxy.watch_name"><code class="docutils literal notranslate"><span class="pre">DBusProxy.watch_name()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus_menu.DBusMenu"><code class="docutils literal notranslate"><span class="pre">DBusMenu</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus_menu.DBusMenu.copy"><code class="docutils literal notranslate"><span class="pre">DBusMenu.copy()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -411,199 +401,32 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="d-bus">
-<h1>D-Bus<a class="headerlink" href="#d-bus" title="Link to this heading">#</a></h1>
-<p>There are some classes that can help you with intercating with D-Bus</p>
+  <section id="d-bus-menu">
+<h1>D-Bus menu<a class="headerlink" href="#d-bus-menu" title="Link to this heading">#</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="ignis.dbus.DBusService">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DBusService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DBusInterfaceInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">on_name_acquired</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">on_name_lost</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.dbus.DBusService" title="Link to this definition">#</a></dt>
-<dd><p>Class to help create DBus services.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The well-known name to own.</p></li>
-<li><p><strong>object_path</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- An object path.</p></li>
-<li><p><strong>info</strong> (<a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/classes/DBusInterfaceInfo.html">Gio.DBusInterfaceInfo</a>) -- A <code class="docutils literal notranslate"><span class="pre">Gio.DBusInterfaceInfo</span></code> instance. You can get it from XML using <a class="reference internal" href="utils/generated/load_interface_xml.html#ignis.utils.Utils.load_interface_xml" title="ignis.utils.Utils.load_interface_xml"><code class="xref py py-class docutils literal notranslate"><span class="pre">load_interface_xml</span></code></a>.</p></li>
-<li><p><strong>on_name_acquired</strong> (<code class="docutils literal notranslate"><span class="pre">callable</span></code>, optional) -- Function to call when <code class="docutils literal notranslate"><span class="pre">name</span></code> is acquired.</p></li>
-<li><p><strong>on_name_acquired</strong> -- Function to call when <code class="docutils literal notranslate"><span class="pre">name</span></code> is lost.</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="simple">
-<dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The well-known name to own.</p></li>
-<li><p><strong>object_path</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): An object path.</p></li>
-<li><p><strong>connection</strong> (<a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/classes/DBusConnection.html">Gio.DBusConnection</a>, read-only): The <code class="docutils literal notranslate"><span class="pre">Gio.DBusConnection</span></code> instance.</p></li>
-<li><p><strong>methods</strong> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>, read-only): The dictionary of registred DBus methods. See <a class="reference internal" href="#ignis.dbus.DBusService.register_dbus_method" title="ignis.dbus.DBusService.register_dbus_method"><code class="xref py py-func docutils literal notranslate"><span class="pre">register_dbus_method()</span></code></a>.</p></li>
-<li><p><strong>properties</strong> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>, read-only): The dictionary of registred DBus properties. See <a class="reference internal" href="#ignis.dbus.DBusService.register_dbus_property" title="ignis.dbus.DBusService.register_dbus_property"><code class="xref py py-func docutils literal notranslate"><span class="pre">register_dbus_property()</span></code></a>.</p></li>
-</ul>
-</dd>
-<dt>DBus methods:</dt><dd><ul class="simple">
-<li><p>must accept <a class="reference external" href="https://lazka.github.io/pgi-docs/index.html#Gio-2.0/classes/DBusMethodInvocation.html">Gio.DBusMethodInvocation</a> as the first argument.</p></li>
-<li><p>must accept all other arguments, typical for this method (specified by interface info).</p></li>
-<li><p>must return <a class="reference external" href="https://lazka.github.io/pgi-docs/index.html#GLib-2.0/classes/Variant.html">GLib.Variant</a> or <code class="docutils literal notranslate"><span class="pre">None</span></code>, specified by interface info.</p></li>
-</ul>
-</dd>
-<dt>DBus properties:</dt><dd><ul class="simple">
-<li><p>must return <a class="reference external" href="https://lazka.github.io/pgi-docs/index.html#GLib-2.0/classes/Variant.html">GLib.Variant</a>, specified by interface info.</p></li>
-</ul>
-</dd>
-</dl>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gi.repository</span> <span class="kn">import</span> <span class="n">Gio</span><span class="p">,</span> <span class="n">GLib</span>
-<span class="kn">from</span> <span class="nn">ignis.dbus</span> <span class="kn">import</span> <span class="n">DBusService</span>
-
-<span class="k">def</span> <span class="nf">_MyMethod</span><span class="p">(</span><span class="n">invocation</span><span class="p">:</span> <span class="n">Gio</span><span class="o">.</span><span class="n">DBusMethodInvocation</span><span class="p">,</span> <span class="n">prop1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">prop2</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GLib</span><span class="o">.</span><span class="n">Variant</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;do something&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">GLib</span><span class="o">.</span><span class="n">Variant</span><span class="p">(</span><span class="s2">&quot;(is)&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="s2">&quot;hello&quot;</span><span class="p">))</span>
-
-<span class="k">def</span> <span class="nf">_MyProperty</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">GLib</span><span class="o">.</span><span class="n">Variant</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">GLib</span><span class="o">.</span><span class="n">Variant</span><span class="p">(</span><span class="s2">&quot;(b)&quot;</span><span class="p">,</span> <span class="p">(</span><span class="kc">False</span><span class="p">,))</span>
-
-<span class="n">dbus</span> <span class="o">=</span> <span class="n">DBusService</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="n">dbus</span><span class="o">.</span><span class="n">register_dbus_method</span><span class="p">(</span><span class="s2">&quot;MyMethod&quot;</span><span class="p">,</span> <span class="n">_MyMethod</span><span class="p">)</span>
-<span class="n">dbus</span><span class="o">.</span><span class="n">register_dbus_property</span><span class="p">(</span><span class="s2">&quot;MyProperty&quot;</span><span class="p">,</span> <span class="n">_MyProperty</span><span class="p">)</span>
-</pre></div>
-</div>
-<dl class="py method">
-<dt class="sig sig-object py" id="ignis.dbus.DBusService.emit_signal">
-<span class="sig-name descname"><span class="pre">emit_signal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Variant</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.dbus.DBusService.emit_signal" title="Link to this definition">#</a></dt>
-<dd><p>Emit DBus signal on self <code class="docutils literal notranslate"><span class="pre">name</span></code> and <code class="docutils literal notranslate"><span class="pre">object_path</span></code>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>signal_name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The signal name to emit.</p></li>
-<li><p><strong>parameters</strong> -- The <code class="docutils literal notranslate"><span class="pre">GLib.Variant</span></code> containing paramaters to pass with signal.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ignis.dbus.DBusService.register_dbus_method">
-<span class="sig-name descname"><span class="pre">register_dbus_method</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.dbus.DBusService.register_dbus_method" title="Link to this definition">#</a></dt>
-<dd><p>Register DBus method for this service.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The name of the method to register.</p></li>
-<li><p><strong>method</strong> (<code class="docutils literal notranslate"><span class="pre">callable</span></code>) -- A function to call when method is called (from DBus).</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ignis.dbus.DBusService.register_dbus_property">
-<span class="sig-name descname"><span class="pre">register_dbus_property</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.dbus.DBusService.register_dbus_property" title="Link to this definition">#</a></dt>
-<dd><p>Register DBus property for this service.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The name of the property to register.</p></li>
-<li><p><strong>method</strong> (<code class="docutils literal notranslate"><span class="pre">callable</span></code>) -- A function to call when property is getted (from DBus).</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ignis.dbus.DBusService.unown_name">
-<span class="sig-name descname"><span class="pre">unown_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.dbus.DBusService.unown_name" title="Link to this definition">#</a></dt>
-<dd><p>Unown name.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="ignis.dbus.DBusProxy">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DBusProxy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interface_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DBusInterfaceInfo</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.dbus.DBusProxy" title="Link to this definition">#</a></dt>
-<dd><p>Class to help to interact with D-Bus services (create D-Bus proxy).
-Unlike <a class="reference external" href="https://lazka.github.io/pgi-docs/index.html#Gio-2.0/classes/DBusProxy.html">Gio.DBusProxy</a> also provides comfortable pythonic property getting.</p>
+<dt class="sig sig-object py" id="ignis.dbus_menu.DBusMenu">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DBusMenu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.dbus_menu.DBusMenu" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/PopoverMenu.html">Gtk.PopoverMenu</a>.</p>
+<p>Like DbusmenuGtk3, but for GTK4.</p>
+<p>Bus must provide <code class="docutils literal notranslate"><span class="pre">com.canonical.dbusmenu</span></code> D-Bus interface.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- A bus name (well-known or unique).</p></li>
-<li><p><strong>object_path</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- An object path.</p></li>
-<li><p><strong>interface_name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- A D-Bus interface name.</p></li>
-<li><p><strong>info</strong> -- A <code class="docutils literal notranslate"><span class="pre">Gio.DBusInterfaceInfo</span></code> instance. You can get it from XML using <a class="reference internal" href="utils/generated/load_interface_xml.html#ignis.utils.Utils.load_interface_xml" title="ignis.utils.Utils.load_interface_xml"><code class="xref py py-class docutils literal notranslate"><span class="pre">load_interface_xml</span></code></a>.</p></li>
+<li><p><strong>object_path</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- An object path to menu.</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="simple">
-<dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): A bus name (well-known or unique).</p></li>
-<li><p><strong>object_path</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): An object path.</p></li>
-<li><p><strong>interface_name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): A D-Bus interface name.</p></li>
-<li><p><strong>proxy</strong> (<a class="reference external" href="https://lazka.github.io/pgi-docs/index.html#Gio-2.0/classes/DBusProxy.html">Gio.DBusProxy</a>, read-only): The <code class="docutils literal notranslate"><span class="pre">Gio.DBusProxy</span></code> instance.</p></li>
-<li><p><strong>methods</strong> (<code class="docutils literal notranslate"><span class="pre">List[str]</span></code>, read-only): A list of methods exposed by DBus service.</p></li>
-<li><p><strong>properties</strong> (<code class="docutils literal notranslate"><span class="pre">List[str]</span></code>, read-only): A list of properties exposed by DBus service.</p></li>
-<li><p><strong>has_owner</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-only): Whether <code class="docutils literal notranslate"><span class="pre">name</span></code> has owner.</p></li>
-</ul>
-</dd>
-</dl>
-<p>To call D-Bus method use the standart pythonic way.
-The first argument always needs to be the DBus signature tuple of the method call.
-Next arguments must match provided D-Bus signature.
-If D-Bus method does not accept any arguments, do not pass arguments.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.dbus</span> <span class="kn">import</span> <span class="n">DBusProxy</span>
-<span class="n">proxy</span> <span class="o">=</span> <span class="n">DBusProxy</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="n">proxy</span><span class="o">.</span><span class="n">MyMethod</span><span class="p">(</span><span class="s2">&quot;(is)&quot;</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="s2">&quot;hello&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>To get D-Bus property also use the standart pythonic way.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.dbus</span> <span class="kn">import</span> <span class="n">DBusProxy</span>
-<span class="n">proxy</span> <span class="o">=</span> <span class="n">DBusProxy</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="n">value</span> <span class="o">=</span> <span class="n">proxy</span><span class="o">.</span><span class="n">MyValue</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-</pre></div>
-</div>
 <dl class="py method">
-<dt class="sig sig-object py" id="ignis.dbus.DBusProxy.signal_subscribe">
-<span class="sig-name descname"><span class="pre">signal_subscribe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#ignis.dbus.DBusProxy.signal_subscribe" title="Link to this definition">#</a></dt>
-<dd><p>Subscribe to D-Bus signal.</p>
+<dt class="sig sig-object py" id="ignis.dbus_menu.DBusMenu.copy">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ignis.dbus_menu.DBusMenu.copy" title="Link to this definition">#</a></dt>
+<dd><p>Make a copy of this instance.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>signal_name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The signal name to subscribe.</p></li>
-<li><p><strong>callback</strong> (<code class="docutils literal notranslate"><span class="pre">callable</span></code>, optional) -- A function to call when signal is emitted.</p></li>
-</ul>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A copy of this instance.</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>a subscription ID that can be used with <a class="reference internal" href="#ignis.dbus.DBusProxy.signal_unsubscribe" title="ignis.dbus.DBusProxy.signal_unsubscribe"><code class="xref py py-func docutils literal notranslate"><span class="pre">signal_unsubscribe()</span></code></a></p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ignis.dbus.DBusProxy.signal_unsubscribe">
-<span class="sig-name descname"><span class="pre">signal_unsubscribe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.dbus.DBusProxy.signal_unsubscribe" title="Link to this definition">#</a></dt>
-<dd><p>Unsubscribe from D-Bus signal.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>id</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) -- The ID of the subscription.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ignis.dbus.DBusProxy.unwatch_name">
-<span class="sig-name descname"><span class="pre">unwatch_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.dbus.DBusProxy.unwatch_name" title="Link to this definition">#</a></dt>
-<dd><p>Unwatch name.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ignis.dbus.DBusProxy.watch_name">
-<span class="sig-name descname"><span class="pre">watch_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">on_name_appeared</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">on_name_vanished</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.dbus.DBusProxy.watch_name" title="Link to this definition">#</a></dt>
-<dd><p>Watch <code class="docutils literal notranslate"><span class="pre">name</span></code>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>on_name_appeared</strong> (<code class="docutils literal notranslate"><span class="pre">callable</span></code>, optional) -- A function to call when <code class="docutils literal notranslate"><span class="pre">name</span></code> appeared.</p></li>
-<li><p><strong>on_name_vanished</strong> (<code class="docutils literal notranslate"><span class="pre">callable</span></code>, optional) -- A function to call when <code class="docutils literal notranslate"><span class="pre">name</span></code> vanished.</p></li>
-</ul>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#ignis.dbus_menu.DBusMenu" title="ignis.dbus_menu.DBusMenu"><code class="xref py py-class docutils literal notranslate"><span class="pre">DBusMenu</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -629,7 +452,7 @@ If D-Bus method does not accept any arguments, do not pass arguments.</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">D-Bus menu</p>
+        <p class="prev-next-title">D-Bus</p>
       </div>
     </a>
     <a class="right-next"
@@ -657,18 +480,8 @@ If D-Bus method does not accept any arguments, do not pass arguments.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus.DBusService"><code class="docutils literal notranslate"><span class="pre">DBusService</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus.DBusService.emit_signal"><code class="docutils literal notranslate"><span class="pre">DBusService.emit_signal()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus.DBusService.register_dbus_method"><code class="docutils literal notranslate"><span class="pre">DBusService.register_dbus_method()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus.DBusService.register_dbus_property"><code class="docutils literal notranslate"><span class="pre">DBusService.register_dbus_property()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus.DBusService.unown_name"><code class="docutils literal notranslate"><span class="pre">DBusService.unown_name()</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus.DBusProxy"><code class="docutils literal notranslate"><span class="pre">DBusProxy</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus.DBusProxy.signal_subscribe"><code class="docutils literal notranslate"><span class="pre">DBusProxy.signal_subscribe()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus.DBusProxy.signal_unsubscribe"><code class="docutils literal notranslate"><span class="pre">DBusProxy.signal_unsubscribe()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus.DBusProxy.unwatch_name"><code class="docutils literal notranslate"><span class="pre">DBusProxy.unwatch_name()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus.DBusProxy.watch_name"><code class="docutils literal notranslate"><span class="pre">DBusProxy.watch_name()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus_menu.DBusMenu"><code class="docutils literal notranslate"><span class="pre">DBusMenu</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus_menu.DBusMenu.copy"><code class="docutils literal notranslate"><span class="pre">DBusMenu.copy()</span></code></a></li>
 </ul>
 </li>
 </ul>
