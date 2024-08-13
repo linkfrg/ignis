@@ -5,22 +5,11 @@ from gi.repository import GObject
 from ignis.gobject import IgnisGObject
 from ignis.utils import Utils
 from typing import List
+from ignis.exceptions import HyprlandIPCNotFoundError
 
 HYPRLAND_INSTANCE_SIGNATURE = os.getenv("HYPRLAND_INSTANCE_SIGNATURE")
 XDG_RUNTIME_DIR = os.getenv("XDG_RUNTIME_DIR")
 SOCKET_DIR = f"{XDG_RUNTIME_DIR}/hypr/{HYPRLAND_INSTANCE_SIGNATURE}"
-
-
-class HyprlandIPCNotFoundError(Exception):
-    """
-    Raised when Hyprland IPC is not found.
-    """
-
-    def __init__(self, *args: object) -> None:
-        super().__init__(
-            "Hyprland IPC not found! To use the Hyprland service, ensure that Hyprland is running",
-            *args,
-        )
 
 
 class HyprlandService(IgnisGObject):

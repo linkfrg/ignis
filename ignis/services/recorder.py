@@ -8,6 +8,7 @@ from ignis.app import app
 from ignis.services import Service
 from ignis.utils import Utils
 from typing import List
+from ignis.exceptions import GstNotFoundError, GstPluginNotFoundError
 
 options = Service.get("options")
 audio = Service.get("audio")
@@ -29,29 +30,6 @@ options.create_option(
 )
 
 N_THREADS = str(min(max(1, GLib.get_num_processors()), 64))
-
-
-class GstNotFoundError(Exception):
-    """
-    Raised when GStreamer is not found.
-    """
-
-    def __init__(self, *args: object) -> None:
-        super().__init__(
-            "GStreamer not found! To use the recorder service, install GStreamer", *args
-        )
-
-
-class GstPluginNotFoundError(Exception):
-    """
-    Raised when a GStreamer plugin is not found.
-    """
-
-    def __init__(self, name: str, plugin_package: str, *args) -> None:
-        super().__init__(
-            f"{name} GStreamer plugin not found! To use the recorder service, install {plugin_package}",
-            *args,
-        )
 
 
 def gst_inspect(name: str) -> None:

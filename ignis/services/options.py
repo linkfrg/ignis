@@ -3,26 +3,9 @@ from ignis.gobject import IgnisGObject, Binding
 from gi.repository import GObject
 from typing import Any
 from ignis.settings import CACHE_DIR
+from ignis.exceptions import OptionExistsError, OptionNotFoundError
 
 OPTIONS_FILE = f"{CACHE_DIR}/options.json"
-
-
-class OptionNotFoundError(Exception):
-    """
-    Raised when an option is not found.
-    """
-
-    def __init__(self, name: str, *args) -> None:
-        super().__init__(f'No such option: "{name}"', *args)
-
-
-class OptionExistsError(Exception):
-    """
-    Raised when an option already exists.
-    """
-
-    def __init__(self, name: str, *args) -> None:
-        super().__init__(f'Option already exists: "{name}"', *args)
 
 
 class Option(IgnisGObject):

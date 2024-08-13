@@ -1,14 +1,6 @@
 import importlib
 from ignis.gobject import IgnisGObject
-
-
-class ServiceNotFoundError(Exception):
-    """
-    Raised when a service with the given name is not found.
-    """
-
-    def __init__(self, service_name: str, *args: object) -> None:
-        super().__init__(f'No such service "{service_name}"', *args)
+from ignis.exceptions import ServiceNotFoundError
 
 
 class ServiceClass:

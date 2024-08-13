@@ -1,29 +1,10 @@
 import os
 import subprocess
+from ignis.exceptions import SassCompilationError, DartSassNotFoundError
 
 TEMP_DIR = "/tmp/ignis"
 COMPILED_CSS = f"{TEMP_DIR}/compiled.css"
 os.makedirs(TEMP_DIR, exist_ok=True)
-
-
-class SassCompilationError(Exception):
-    """
-    Raised when Dart Sass compilation fails.
-    """
-
-    def __init__(self, stderr: str, *args: object) -> None:
-        super().__init__(f"SASS compilation error:\n{stderr}", *args)
-
-
-class DartSassNotFoundError(Exception):
-    """
-    Raised when Dart Sass is not found.
-    """
-
-    def __init__(self, *args: object) -> None:
-        super().__init__(
-            "Dart Sass not found! To compile SCSS/SASS, install dart-sass", *args
-        )
 
 
 def compile_file(path: str) -> str:

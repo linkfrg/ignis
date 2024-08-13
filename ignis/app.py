@@ -6,24 +6,7 @@ from ignis.logging import logger
 from gi.repository import Gtk, Gdk, Gio, GObject, GLib
 from typing import List
 from ignis.gobject import IgnisGObject
-
-
-class WindowNotFoundError(Exception):
-    """
-    Raised when a window is not found.
-    """
-
-    def __init__(self, window_name: str, *args) -> None:
-        super().__init__(f'No such window: "{window_name}"', *args)
-
-
-class WindowAddedError(Exception):
-    """
-    Raised when a window is already added to the application.
-    """
-
-    def __init__(self, window_name: str, *args) -> None:
-        super().__init__(f'Window already added: "{window_name}"', *args)
+from ignis.exceptions import WindowAddedError, WindowNotFoundError
 
 
 class IgnisApp(Gtk.Application, IgnisGObject):
