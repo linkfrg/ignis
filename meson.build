@@ -25,7 +25,6 @@ dependency('glib-2.0')
 dependency('gobject-introspection-1.0')
 dependency('gio-2.0')
 dependency('gtk4')
-dependency('pygobject-3.0')
 dependency('gtk4-layer-shell-0')
 
 # gvc

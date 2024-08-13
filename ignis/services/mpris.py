@@ -1,6 +1,7 @@
-import shutil
 import os
 import time
+import shutil
+import requests
 from ignis.dbus import DBusProxy
 from gi.repository import GObject, GLib
 from ignis.gobject import IgnisGObject
@@ -8,17 +9,10 @@ from ignis.utils import Utils
 from ignis.logging import logger
 from typing import List
 from ignis.settings import CACHE_DIR
-from ignis.exceptions import RequestsModuleNotFoundError
 
 ART_URL_CACHE_DIR = f"{CACHE_DIR}/art_url"
 
 os.makedirs(ART_URL_CACHE_DIR, exist_ok=True)
-
-
-try:
-    import requests
-except (ImportError, ValueError):
-    raise RequestsModuleNotFoundError() from None
 
 
 class MprisPlayer(IgnisGObject):

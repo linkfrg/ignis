@@ -49,18 +49,6 @@ class HyprlandIPCNotFoundError(Exception):
         )
 
 
-class RequestsModuleNotFoundError(Exception):
-    """
-    Raised when the Python requests module is not found.
-    """
-
-    def __init__(self, *args: object) -> None:
-        super().__init__(
-            "Requests module not found! To use the mpris service, install python-requests",
-            *args,
-        )
-
-
 class NetworkManagerNotFoundError(Exception):
     """
     Raised when NetworkManager is not found.
