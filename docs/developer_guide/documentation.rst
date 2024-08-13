@@ -40,10 +40,12 @@ For functions, use the standard Google docstring style.
 For Class
 ------------
 - If a class has custom signals, define them in the ``Signals`` section.
+
 Signal names should be in double quotes.
 In brackets, indicate the custom arguments that the signal passes to the callback.
 
 - If a class has custom properties, define them in the ``Properties`` section.
+
 In brackets, indicate the property type and ``read-only`` or ``read-write``.
 
 .. code-block:: python

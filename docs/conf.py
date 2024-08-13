@@ -1,39 +1,28 @@
+import gi
 import os
 import sys
 import shutil
 import inspect
-from importlib.machinery import SourceFileLoader
+
+gi.require_version("GIRepository", "2.0")
+from gi.repository import GIRepository  # noqa: E402
 
 
-def find_bin_directory():
+def find_lib_dir():
     # Check if in a virtual environment
     if sys.base_prefix != sys.prefix:
-        return os.path.join(sys.prefix, 'bin')
+        return os.path.join(sys.prefix, "lib", "ignis")
 
     # Check common system-wide bin directories
-    common_bin_dirs = ['/bin', '/usr/bin']
-    for bin_dir in common_bin_dirs:
-        if os.path.isdir(bin_dir):
-            return bin_dir
+    common_lib_dirs = ["/lib/ignis", "/usr/lib/ignis"]
+    for lib_dir in common_lib_dirs:
+        if os.path.isdir(lib_dir):
+            return lib_dir
 
-def find_script(filename: str) -> str:
-    bin_dir = find_bin_directory()
-    if not bin_dir:
-        return
 
-    script_path = os.path.join(bin_dir, filename)
-    if os.path.isfile(script_path) and os.access(script_path, os.X_OK):
-        return script_path
-
-def import_script(name: str) -> None:
-    script_path = find_script(name)
-    if not script_path:
-        raise ImportError(f"{name} executable not found in the bin directory.")
-
-    SourceFileLoader(name, script_path).load_module()
-    del sys.modules[name]
-
-import_script("ignis")
+lib_dir = find_lib_dir()
+GIRepository.Repository.prepend_library_path(lib_dir)
+GIRepository.Repository.prepend_search_path(lib_dir)
 
 sys.path.insert(0, os.path.abspath(".."))
 from ignis.widgets import Widget  # noqa: E402
@@ -95,6 +84,7 @@ def get_utils_class_template(name: str) -> None:
     :members:
 """
 
+
 for i in ["widgets", "services", "utils"]:
     try:
         shutil.rmtree(f"{i}/generated")
@@ -137,7 +127,6 @@ for name in Utils.__dict__:
             data = get_utils_class_template(name)
         else:
             data = get_utils_function_template(name)
-
 
     with open(f"utils/generated/{name}.rst", "w") as file:
         file.write(data)
