@@ -75,7 +75,7 @@ class HyprlandService(IgnisGObject):
                 try:
                     data = sock.recv(1024).decode("utf-8")
                     self.__on_data_received(data)
-                except UnicodeDecodeError:
+                except (UnicodeDecodeError, json.decoder.JSONDecodeError):
                     pass
 
     def __on_data_received(self, data: str) -> None:
