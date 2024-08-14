@@ -148,6 +148,9 @@ class WifiAccessPoint(IgnisGObject):
         - **icon_name** (``str``, read-only): The current icon name for the access point. Depends on signal strength and current connection status.
         - **requires_password** (``bool``, read-only): Whether the access point requires a password to connect.
         - **is_connected** (``bool``, read-only): Whether the device is currently connected to this access point.
+
+    Raises:
+        NetworkManagerNotFoundError: If Network Manager is not found.
     """
 
     def __init__(self, point: NM.AccessPoint, client: NM.Client, device: NM.DeviceWifi):

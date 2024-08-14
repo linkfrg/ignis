@@ -15,7 +15,7 @@ class Picture(Gtk.Picture, BaseWidget):
         - **image** (``Union[str, GdkPixbuf.Pixbuf]``, optional, read-write): Icon name, path to an image or ``GdkPixbuf.Pixbuf``.
         - **width** (``int``, optional, read-write): Width of the image.
         - **height** (``int``, optional, read-write): Height of the image.
-        - **content_fit** (``str``, optional, read-write): Controls how a content should be made to fit inside an allocation. Possible values: ``"fill"``, ``"contain"``, ``"cover"``, ``"scale_down"``.
+        - **content_fit** (``str``, optional, read-write): Controls how a content should be made to fit inside an allocation. Default: ``"contain"``.
 
     **Content fit:**
         - **"fill"**: Make the content fill the entire allocation, without taking its aspect ratio in consideration.

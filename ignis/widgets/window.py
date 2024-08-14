@@ -45,12 +45,38 @@ class Window(Gtk.Window, BaseWidget):
 
     Properties:
         - **namespace** (``str``, required, read-only): The name of the window, used to access it from the CLI and :class:`~ignis.app.ignisApp`. It must be unique. It is also the name of the layer.
-        - **monitor** (``int``, optional, read-write): Monitor number on which to display the window.
-        - **anchor** (``List[str]``, optional, read-write): List of anchors. If the list is empty, the window will be centered on the screen. Possible values: ``"bottom"``, ``"left"``, ``"right"``, ``"top"``.
-        - **exclusivity** (``str``, optional, read-write): Whether the compositor should reserve space for the window. Possible values: ``"ignore"``, ``"normal"``, ``"exclusive"``.
-        - **layer** (``str``, optional, read-write): Layer of the surface. Possible values: ``"background"``, ``"bottom"``, ``"top"``, ``"overlay"``.
-        - **kb_mode** (``str``, optional, read-write): Whether the window should receive keyboard events from the compositor. Possible values: ``"none"``, ``"exclusive"``, ``"on_demand"``.
+        - **monitor** (``int``, optional, read-write): Monitor number on which to display the window. Raises :class:`~ignis.exceptions.MonitorNotFoundError` if the monitor with the given ID is not found.
+        - **anchor** (``List[str]``, optional, read-write): List of anchors. If the list is empty, the window will be centered on the screen. Default: ``[]``.
+        - **exclusivity** (``str``, optional, read-write): Define how the compositor should avoid occluding a window area with other surfaces/layers. Default: ``"normal"``.
+        - **layer** (``str``, optional, read-write): Layer of the surface. Default: ``"top"``.
+        - **kb_mode** (``str``, optional, read-write): Whether the window should receive keyboard events from the compositor. Default: ``"none"``.
         - **popup** (``bool``, optional, read-write): Whether the window should close on ESC. Works only if ``kb_mode`` is set to ``"exclusive"`` or ``"on_demand"``.
+
+    **Anchors:**
+        - **"bottom"**
+        - **"left"**
+        - **"right"**
+        - **"top"**
+
+    **Exclusivity:**
+        - **"ignore"** : Completely ignore other surfaces. This allows you to overlap other surfaces.
+        - **"normal"** : The window will have no extra space and do not overlap other surfaces.
+        - **"exclusive"** : The compositor will reserve extra space for this window.
+
+    **Layer:**
+        - **"background"**
+        - **"bottom"**
+        - **"top"**
+        - **"overlay"**
+
+    **Keyboard mode:**
+        - **"none"** : This window should not receive keyboard events.
+        - **"exclusive"** : This window should have exclusive focus if it is on the top or overlay layer.
+        - **"on_demand"** : The user should be able to focus and unfocus this window.
+
+    Raises:
+        LayerShellNotSupportedError: If the compositor does not support the Layer Shell protocol.
+        MonitorNotFoundError: If an invalid ID is passed to the ``monitor`` property.
 
     .. code-block:: python
 

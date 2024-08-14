@@ -35,7 +35,7 @@ def compile_string(string: str) -> str:
 def sass_compile(path: str = None, string: str = None) -> str:
     """
     Compile a SASS/SCSS file or string.
-    Requires ``dart-sass``.
+    Requires `Dart Sass <https://sass-lang.com/dart-sass/>`_.
 
     Args:
         path (``str``, optional): The path to the SASS/SCSS file.
@@ -43,6 +43,8 @@ def sass_compile(path: str = None, string: str = None) -> str:
 
     Raises:
         TypeError: If neither of the arguments is provided.
+        DartSassNotFoundError: If Dart Sass not found.
+        SassCompilationError: If an error occurred while compiling SASS/SCSS.
     """
     if not os.path.exists("/bin/sass"):
         raise DartSassNotFoundError()

@@ -103,6 +103,10 @@ class RecorderService(IgnisGObject):
         - **default_file_location** (``str``, read-write, default: ``"$HOME/Videos"``): Default location for saving recordings.
         - **default_filename** (``str``, read-write, default: ``"%Y-%m-%d_%H-%M-%S.mp4"``): Default filename for recordings. Supports time formating.
 
+    Raises:
+        GstNotFoundError: If GStreamer is not found.
+        GstPluginNotFoundError: If GStreamer plugin is not found.
+
     **Example usage:**
 
     .. code-block:: python

@@ -38,10 +38,19 @@ class FileMonitor(IgnisGObject):
     Properties:
         - **path** (``str``, read-only): The path to the file or directory to be monitored.
         - **recursive** (``bool``, optional, read-only): Whether monitoring is recursive (monitor all subdirectories and files).
-        - **flags** (``str``, optional, read-only): What the monitor will watch for. Possible values: ``"none"``, ``"watch_mounts"``, ``"send_moved"``, ``"watch_hard_links"``, ``"watch_moves"``. See `Gio.FileMonitorFlags <https://lazka.github.io/pgi-docs/Gio-2.0/flags.html#Gio.FileMonitorFlags>`_ for more info.
+        - **flags** (``str``, optional, read-only): What the monitor will watch for.
         - **callback** (``callable``, optional, read-write): A function to call when the file or directory changes.
 
-    Event types:
+    **Flags:**
+        - **"none"**
+        - **"watch_mounts"**
+        - **"send_moved"**
+        - **"watch_hard_links"**
+        - **"watch_moves"**
+
+        See `Gio.FileMonitorFlags <https://lazka.github.io/pgi-docs/Gio-2.0/flags.html#Gio.FileMonitorFlags>`_ for more info.
+
+    **Event types:**
         - **"changed"**
         - **"changes_done_hint"**
         - **"moved_out"**
@@ -54,7 +63,7 @@ class FileMonitor(IgnisGObject):
         - **"renamed"**
         - **"moved_in"**
 
-        See `Gio.FileMonitorEvent <https://lazka.github.io/pgi-docs/index.html#Gio-2.0/enums.html#Gio.FileMonitorEvent>`_
+        See `Gio.FileMonitorEvent <https://lazka.github.io/pgi-docs/index.html#Gio-2.0/enums.html#Gio.FileMonitorEvent>`_ for more info.
 
     **Example usage:**
 

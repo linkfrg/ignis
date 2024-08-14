@@ -92,10 +92,10 @@ class OptionsService(IgnisGObject):
         Args:
             name (``str``): The name of the option.
             default (``Any``): The default value for the option.
-            exists_ok (``bool``, optional): If ``True``, do not raise ``OptionExistsError`` if the option already exists. Defaults to ``False``.
+            exists_ok (``bool``, optional): If ``True``, do not raise ``OptionExistsError`` if the option already exists. Default: ``False``.
 
         Raises:
-            OptionExistsError: Raised if the option already exists and ``exists_ok`` is set to ``False``.
+            OptionExistsError: If the option already exists and ``exists_ok`` is set to ``False``.
         """
 
         option = self.__data.get(name, None)
@@ -114,7 +114,7 @@ class OptionsService(IgnisGObject):
             name (``str``): The name of the option to be removed.
 
         Raises:
-            OptionNotFoundError: Raised if the option does not exist.
+            OptionNotFoundError: If the option does not exist.
         """
         option = self.__data.get(name, None)
         if option:
@@ -133,7 +133,7 @@ class OptionsService(IgnisGObject):
             The value of the option.
 
         Raises:
-            OptionNotFoundError: Raised if the option does not exist.
+            OptionNotFoundError: If the option does not exist.
         """
         option = self.__data.get(name, None)
 
@@ -150,7 +150,7 @@ class OptionsService(IgnisGObject):
             name (``str``): The name of the option.
             value (``Any``): The value to set for the option.
         Raises:
-            OptionNotFoundError: Raised if the option does not exist.
+            OptionNotFoundError: If the option does not exist.
         """
         option = self.__data.get(name, None)
         if option:
@@ -171,7 +171,7 @@ class OptionsService(IgnisGObject):
             ``Binding``.
 
         Raises:
-            OptionNotFoundError: Raised if the option does not exist.
+            OptionNotFoundError: If the option does not exist.
         """
         option = self.__data.get(name, None)
         if not option:
@@ -189,7 +189,7 @@ class OptionsService(IgnisGObject):
             callback (``callable``): A function to call when the option value changes. The new value of the option will be passed to this function.
 
         Raises:
-            OptionNotFoundError: Raised if the option does not exist.
+            OptionNotFoundError: If the option does not exist.
         """
         option = self.__data.get(name, None)
         if not option:

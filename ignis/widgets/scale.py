@@ -16,7 +16,13 @@ class Scale(Gtk.Scale, BaseWidget):
         - **value** (``float``, optional, read-write): Current value.
         - **on_change** (``callable``, optional, read-write): Function to call when the value changes.
         - **draw_value** (``int``, optional, read-write): Whether the current value is displayed.
-        - **value_pos** (``str``, optional, read-write): Position where the current value is displayed. Works only if ``draw_value`` is set to ``True``. Possible values: ``"left"``, `"right"``, `"top"``, `"bottom"``.
+        - **value_pos** (``str``, optional, read-write): Position where the current value is displayed. Works only if ``draw_value`` is set to ``True``. Default: ``"top"``.
+
+    **Value position:**
+        - **"left"**
+        - **"right"**
+        - **"top"**
+        - **"bottom"**
 
     .. code-block:: python
 

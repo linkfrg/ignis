@@ -33,6 +33,9 @@ class Stream(IgnisGObject):
         - **is_muted** (``bool``, read-write): Whether the stream is muted.
         - **volume** (``float``, read-write): Volume of the stream.
         - **is_default** (``bool``, read-only): Whether the stream is default. Works only for speakers and microphones.
+
+    Raises:
+        GvcNotFoundError: If Gvc is not found.
     """
 
     __gsignals__ = {

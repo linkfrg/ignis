@@ -22,6 +22,9 @@ class HyprlandService(IgnisGObject):
         - **kb_layout** (``str``, read-only): Currenly active keyboard layout.
         - **active_window** (``dict``, read-only): Currenly focused window.
 
+    Raises:
+        HyprlandIPCNotFoundError: If Hyprland IPC is not found.
+
     **Example usage:**
 
     .. code-block:: python
