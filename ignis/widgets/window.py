@@ -45,10 +45,10 @@ class Window(Gtk.Window, BaseWidget):
 
     Properties:
         - **namespace** (``str``, required, read-only): The name of the window, used to access it from the CLI and :class:`~ignis.app.ignisApp`. It must be unique. It is also the name of the layer.
-        - **monitor** (``int``, optional, read-write): Monitor number on which to display the window. Raises :class:`~ignis.exceptions.MonitorNotFoundError` if the monitor with the given ID is not found.
-        - **anchor** (``List[str]``, optional, read-write): List of anchors. If the list is empty, the window will be centered on the screen. Default: ``[]``.
-        - **exclusivity** (``str``, optional, read-write): Define how the compositor should avoid occluding a window area with other surfaces/layers. Default: ``"normal"``.
-        - **layer** (``str``, optional, read-write): Layer of the surface. Default: ``"top"``.
+        - **monitor** (``int``, optional, read-write): The monitor number on which to display the window. Raises :class:`~ignis.exceptions.MonitorNotFoundError` if the monitor with the given ID is not found.
+        - **anchor** (``List[str]``, optional, read-write): A list of anchors. If the list is empty, the window will be centered on the screen. Default: ``[]``.
+        - **exclusivity** (``str``, optional, read-write): Defines how the compositor should avoid occluding a window area with other surfaces/layers. Default: ``"normal"``.
+        - **layer** (``str``, optional, read-write): The layer of the surface. Default: ``"top"``.
         - **kb_mode** (``str``, optional, read-write): Whether the window should receive keyboard events from the compositor. Default: ``"none"``.
         - **popup** (``bool``, optional, read-write): Whether the window should close on ESC. Works only if ``kb_mode`` is set to ``"exclusive"`` or ``"on_demand"``.
 
