@@ -51,6 +51,15 @@ smartquotes = False
 add_module_names = False
 
 
+def format_service_name(name: str) -> str:
+    result = []
+    words = name.split("_")
+    for i in words:
+        result.append(i.capitalize())
+
+    return " ".join(result)
+
+
 def get_widget_template(name: str) -> None:
     return f"""{name}
 {'-'*len(name)}
@@ -60,7 +69,7 @@ def get_widget_template(name: str) -> None:
 
 
 def get_service_template(name: str) -> None:
-    return f"""{name.capitalize().replace("_", "")}
+    return f"""{format_service_name(name)}
 {'-'*len(name)}
 
 .. automodule:: ignis.services.{name}
@@ -96,13 +105,7 @@ for name in Widget.__dict__:
     if name.startswith("__"):
         continue
 
-    override_path = f"widgets/overrides/{name}"
-    if os.path.exists(override_path):
-        with open(override_path) as file:
-            data = file.read()
-    else:
-        data = get_widget_template(name)
-
+    data = get_widget_template(name)
     with open(f"widgets/generated/{name}.rst", "w") as file:
         file.write(data)
 

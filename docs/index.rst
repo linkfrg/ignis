@@ -16,6 +16,7 @@ Documentation
    gobject
    app
    cli
+   exceptions
    widgets/index
    services/index
    utils/index
