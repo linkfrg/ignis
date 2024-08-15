@@ -16,10 +16,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install ruff
 
-      - name: Check code style
+      - name: Check code
         run:
-          ruff --version
           ruff check ignis/
+
       - name: Check format
         continue-on-error: true
         run: ruff format ignis/ --check
