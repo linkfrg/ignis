@@ -27,7 +27,7 @@ jobs:
         
     - name: Install Python dependencies
       run: |
-        pip install sphinx sphinx_book_theme
+        pip install sphinx pydata-sphinx-theme
         pip install --upgrade -r requirements.txt
 
     - name: Build gtk4-layer-shell

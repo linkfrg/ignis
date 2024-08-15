@@ -7,20 +7,8 @@ Documentation
 
 .. toctree::
    :maxdepth: 1
-   
-   installation
-   getting_started
-   styling
-   properties
-   dynamic_content
-   gobject
-   app
-   cli
-   exceptions
-   widgets/index
-   services/index
-   utils/index
-   dbus
-   dbus_menu
-   examples
+
+   user_guide/index
+   api_reference/index
    developer_guide/index
+   examples/index

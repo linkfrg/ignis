@@ -2,7 +2,7 @@ Properties
 ===============
 
 Most classes in Ignis have properties.
-These properties can have specific types (int, str, float), can be read-write or read-only, and can be optional or mandatory.
+These properties can have specific types (int, str, float), can be read-write or read-only, and can be optional or required.
 
 In PyGObject, you typically use the special props attribute to access GObject properties. 
 However, in Ignis, you don't need to use this attribute. 

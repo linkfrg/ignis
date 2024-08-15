@@ -1,8 +1,5 @@
-Getting started
-===============
-
 First widgets
------------------
+===============
 
 First of all, let's create a config file in the default location.
 The default config file is located at ``~/.config/ignis/config.py``.
@@ -93,4 +90,3 @@ To find out the names of the icons, you can use ``gtk4-icon-browser`` (you need 
     Widget.Icon(
         image="audio-volume-high-symbolic"
     )
-
