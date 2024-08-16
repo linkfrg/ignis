@@ -2,7 +2,7 @@ import os
 import sys
 from ignis.dbus import DBusService
 from ignis.utils import Utils
-from ignis.logging import logger
+from loguru import logger
 from gi.repository import Gtk, Gdk, Gio, GObject, GLib
 from typing import List
 from ignis.gobject import IgnisGObject
@@ -179,10 +179,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         )
 
         sys.path.append(config_dir)
-        try:
-            __import__(config_filename)
-        except Exception as e:
-            logger.exception(e)
+        __import__(config_filename)
 
         self.emit("ready")
         logger.info("Ready.")

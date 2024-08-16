@@ -63,7 +63,7 @@ def init(config: str, debug: bool) -> None:
     if client.has_owner:
         print("Ignis is already running")
         exit(1)
-    run_server(config)
+    run_server(config, debug)
 
 
 @main.command(name="open", help="Open window")
@@ -116,8 +116,11 @@ def quit() -> None:
     call_client_func("Quit")
 
 
-def run_server(config: str) -> None:
+def run_server(config: str, debug: bool) -> None:
     from ignis.app import app
+    from ignis.logging import configure_logger
+
+    configure_logger(debug)
 
     config_path = os.path.expanduser(config)
     app._setup(config_path)

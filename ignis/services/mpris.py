@@ -6,7 +6,7 @@ from ignis.dbus import DBusProxy
 from gi.repository import GObject, GLib
 from ignis.gobject import IgnisGObject
 from ignis.utils import Utils
-from ignis.logging import logger
+from loguru import logger
 from typing import List
 from ignis.settings import CACHE_DIR
 

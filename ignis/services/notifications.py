@@ -4,7 +4,7 @@ from ignis.dbus import DBusService
 from gi.repository import GLib, GObject, GdkPixbuf
 from ignis.utils import Utils
 from ignis.gobject import IgnisGObject
-from ignis.logging import logger
+from loguru import logger
 from ignis.services import Service
 from ignis.services.options import OptionsService
 from typing import List

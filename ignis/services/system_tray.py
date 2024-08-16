@@ -4,7 +4,7 @@ from gi.repository import Gio, GLib, GObject, GdkPixbuf
 from typing import Union
 from ignis.gobject import IgnisGObject
 from ignis.dbus_menu import DBusMenu
-from ignis.logging import logger
+from loguru import logger
 
 
 class SystemTrayItem(IgnisGObject):
