@@ -99,6 +99,7 @@ class RecorderService(IgnisGObject):
 
     Properties:
         - **active** (``bool``, read-write): Whether recording is currently active.
+        - **is_paused** (``bool``, read-write): Whether recording is currently paused.
         - **bitrate** (``int``, read-write, default: 8000): The bitrate of the recording.
         - **default_file_location** (``str``, read-write, default: ``"$HOME/Videos"``): Default location for saving recordings.
         - **default_filename** (``str``, read-write, default: ``"%Y-%m-%d_%H-%M-%S.mp4"``): Default filename for recordings. Supports time formating.
@@ -139,7 +140,9 @@ class RecorderService(IgnisGObject):
         )
         self._session_token_counter = 0
         self._request_token_counter = 0
+
         self._active = False
+        self._is_paused = False
         self._pipeline_description = ""
         self.__pipeline = None
 
@@ -161,6 +164,10 @@ class RecorderService(IgnisGObject):
     @GObject.Property
     def active(self) -> bool:
         return self._active
+
+    @GObject.Property
+    def is_paused(self) -> bool:
+        return self._is_paused
 
     @GObject.Property
     def bitrate(self) -> int:
@@ -250,8 +257,28 @@ class RecorderService(IgnisGObject):
             self.__pipeline = None
             self._pipeline_description = ""
             self._active = False
+            self._is_paused = False
             self.notify("active")
+            self.notify("is-paused")
             self.emit("recording_stopped")
+
+    def pause_recording(self) -> None:
+        """
+        Pause recording. This has an effect only if the recording is active and not already paused.
+        """
+        if self.__pipeline:
+            self._is_paused = True
+            self.__pipeline.set_state(Gst.State.PAUSED)
+            self.notify("is-paused")
+
+    def continue_recording(self) -> None:
+        """
+        Continue recording. This has an effect only if the recording is active and paused.
+        """
+        if self.__pipeline:
+            self._is_paused = False
+            self.__pipeline.set_state(Gst.State.PLAYING)
+            self.notify("is-paused")
 
     def __create_session(self) -> None:
         request_token = self.__request_response(self.__on_create_session_response)
@@ -339,7 +366,9 @@ class RecorderService(IgnisGObject):
         self.__pipeline.set_state(Gst.State.PLAYING)
         self.__pipeline.get_bus().connect("message", self.__on_gst_message)
         self._active = True
+        self._is_paused = False
         self.notify("active")
+        self.notify("is-paused")
         self.emit("recording_started")
 
     def __on_gst_message(self, bus, message):
