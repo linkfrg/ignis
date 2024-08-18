@@ -354,6 +354,7 @@ class RecorderService(IgnisGObject):
         """
         if self.__pipeline:
             self.__pipeline.send_event(Gst.Event.new_eos())
+            self.__pipeline.set_state(Gst.State.NULL)
             self.__pipeline = None
             self._pipeline_description = ""
             self._active = False
