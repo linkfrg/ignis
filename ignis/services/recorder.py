@@ -79,6 +79,116 @@ AUDIO_DEVICE_PIPELINE = """
 """
 
 
+class SessionManager:
+    """
+    :meta private:
+
+    Internal class for interacting with the XDG Desktop Portal to request a screencast.
+    """
+
+    def __init__(self) -> None:
+        self.__dbus = DBusProxy(
+            name="org.freedesktop.portal.Desktop",
+            object_path="/org/freedesktop/portal/desktop",
+            interface_name="org.freedesktop.portal.ScreenCast",
+            info=Utils.load_interface_xml("org.freedesktop.portal.ScreenCast"),
+        )
+
+        self._session_token_counter = 0
+        self._request_token_counter = 0
+        self.__callback = None
+        self.__calback_args = None
+        self._session = None
+
+        self._sender_name = (
+            self.__dbus.connection.get_unique_name().replace(".", "_").replace(":", "")
+        )
+
+    def start_session(self, callback: callable, *args) -> None:
+        self.__callback = callback
+        self.__calback_args = args
+        self.__create_session()
+
+    def __create_session(self) -> None:
+        request_token = self.__request_response(self.__on_create_session_response)
+        self._session_token_counter += 1
+        session_token = f"u{self._session_token_counter}"
+        self.__dbus.CreateSession(
+            "(a{sv})",
+            {
+                "session_handle_token": GLib.Variant("s", session_token),
+                "handle_token": GLib.Variant("s", request_token),
+            },
+        )
+
+    def __request_response(self, callback: callable) -> str:
+        self._request_token_counter += 1
+        request_token = f"u{self._request_token_counter}"
+        request_path = f"/org/freedesktop/portal/desktop/request/{self._sender_name}/{request_token}"
+        request_proxy = DBusProxy(
+            name="org.freedesktop.portal.Desktop",
+            object_path=request_path,
+            interface_name="org.freedesktop.portal.Request",
+            info=Utils.load_interface_xml("org.freedesktop.portal.Request"),
+        )
+
+        request_proxy.signal_subscribe(
+            signal_name="Response",
+            callback=callback,
+        )
+
+        return request_token
+
+    def __on_create_session_response(self, *args):
+        response = args[5]
+        response_code = response[0]
+        self._session = response[1]["session_handle"]
+
+        if response_code != 0:
+            return
+
+        request_token = self.__request_response(self.__on_select_sources_response)
+
+        self.__dbus.SelectSources(
+            "(oa{sv})",
+            self._session,
+            {
+                "handle_token": GLib.Variant("s", request_token),
+                "multiple": GLib.Variant("b", False),
+                "types": GLib.Variant("u", 1 | 2),
+            },
+        )
+
+    def __on_select_sources_response(self, *args) -> None:
+        response_code = args[5][0]
+
+        if response_code != 0:
+            return
+
+        request_token = self.__request_response(self.__on_start_response)
+        self.__dbus.Start(
+            "(osa{sv})",
+            self._session,
+            "",
+            {
+                "handle_token": GLib.Variant("s", request_token),
+            },
+        )
+
+    def __on_start_response(self, *args):
+        results = args[5][1]
+        response_code = args[5][0]
+
+        if response_code != 0:
+            return
+
+        for node_id, _stream_properties in results["streams"]:
+            self.__run_callback(node_id)
+
+    def __run_callback(self, node_id: int) -> None:
+        self.__callback(node_id, *self.__calback_args)
+
+
 class RecorderService(IgnisGObject):
     """
     A screen recorder.
@@ -132,23 +242,13 @@ class RecorderService(IgnisGObject):
         super().__init__()
         self.__check_deps()
         Gst.init(None)
-        self.__dbus = DBusProxy(
-            name="org.freedesktop.portal.Desktop",
-            object_path="/org/freedesktop/portal/desktop",
-            interface_name="org.freedesktop.portal.ScreenCast",
-            info=Utils.load_interface_xml("org.freedesktop.portal.ScreenCast"),
-        )
-        self._session_token_counter = 0
-        self._request_token_counter = 0
+
+        self.__manager = SessionManager()
 
         self._active = False
         self._is_paused = False
-        self._pipeline_description = ""
         self.__pipeline = None
 
-        self._sender_name = (
-            self.__dbus.connection.get_unique_name().replace(".", "_").replace(":", "")
-        )
         app.connect("quit", lambda x: self.stop_recording())
 
     def __check_deps(self) -> None:
@@ -213,7 +313,7 @@ class RecorderService(IgnisGObject):
         if path is None:
             path = f"{self.default_file_location}/{datetime.datetime.now().strftime(self.default_filename)}"
 
-        self._pipeline_description = (
+        pipeline_description = (
             PIPELINE_TEMPLATE.replace("{n_threads}", N_THREADS)
             .replace("{path}", path)
             .replace("{bitrate}", str(self.bitrate))
@@ -235,9 +335,9 @@ class RecorderService(IgnisGObject):
             for device in audio_devices:
                 audio_pipeline = self.__combine_audio_pipeline(audio_pipeline, device)
 
-        self._pipeline_description += audio_pipeline
+        pipeline_description += audio_pipeline
 
-        self.__create_session()
+        self.__manager.start_session(self.__play_pipewire_stream, pipeline_description)
 
     def __combine_audio_pipeline(self, audio_pipeline: str, device: str) -> None:
         if audio_pipeline != "":
@@ -280,93 +380,16 @@ class RecorderService(IgnisGObject):
             self.__pipeline.set_state(Gst.State.PLAYING)
             self.notify("is-paused")
 
-    def __create_session(self) -> None:
-        request_token = self.__request_response(self.__on_create_session_response)
-        self._session_token_counter += 1
-        session_token = f"u{self._session_token_counter}"
-        self.__dbus.CreateSession(
-            "(a{sv})",
-            {
-                "session_handle_token": GLib.Variant("s", session_token),
-                "handle_token": GLib.Variant("s", request_token),
-            },
-        )
+    def __play_pipewire_stream(self, node_id: int, pipeline_description: str) -> None:
+        pipeline_description = pipeline_description.replace("{node_id}", str(node_id))
 
-    def __request_response(self, callback: callable) -> str:
-        self._request_token_counter += 1
-        request_token = f"u{self._request_token_counter}"
-        request_path = f"/org/freedesktop/portal/desktop/request/{self._sender_name}/{request_token}"
-        request_proxy = DBusProxy(
-            name="org.freedesktop.portal.Desktop",
-            object_path=request_path,
-            interface_name="org.freedesktop.portal.Request",
-            info=Utils.load_interface_xml("org.freedesktop.portal.Request"),
-        )
-
-        request_proxy.signal_subscribe(
-            signal_name="Response",
-            callback=callback,
-        )
-
-        return request_token
-
-    def __on_create_session_response(self, *args):
-        response = args[5]
-        response_code = response[0]
-        self._session = response[1]["session_handle"]
-
-        if response_code != 0:
-            self.stop_recording()
-            return
-
-        request_token = self.__request_response(self.__on_select_sources_response)
-
-        self.__dbus.SelectSources(
-            "(oa{sv})",
-            self._session,
-            {
-                "handle_token": GLib.Variant("s", request_token),
-                "multiple": GLib.Variant("b", False),
-                "types": GLib.Variant("u", 1 | 2),
-            },
-        )
-
-    def __on_select_sources_response(self, *args) -> None:
-        response_code = args[5][0]
-
-        if response_code != 0:
-            self.stop_recording()
-            return
-
-        request_token = self.__request_response(self.__on_start_response)
-        self.__dbus.Start(
-            "(osa{sv})",
-            self._session,
-            "",
-            {
-                "handle_token": GLib.Variant("s", request_token),
-            },
-        )
-
-    def __on_start_response(self, *args):
-        results = args[5][1]
-        response_code = args[5][0]
-        if response_code != 0:
-            self.stop_recording()
-            return
-
-        for node_id, _stream_properties in results["streams"]:
-            self.__play_pipewire_stream(node_id)
-
-    def __play_pipewire_stream(self, node_id: int) -> None:
-        self._pipeline_description = self._pipeline_description.replace(
-            "{node_id}", str(node_id)
-        )
-        self.__pipeline = Gst.parse_launch(self._pipeline_description)
+        self.__pipeline = Gst.parse_launch(pipeline_description)
         self.__pipeline.set_state(Gst.State.PLAYING)
         self.__pipeline.get_bus().connect("message", self.__on_gst_message)
+
         self._active = True
         self._is_paused = False
+
         self.notify("active")
         self.notify("is-paused")
         self.emit("recording_started")
