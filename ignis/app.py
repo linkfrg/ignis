@@ -314,7 +314,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
 
     def __RunPython(self, invocation, code: str) -> None:
         invocation.return_value(None)
-        eval(code)
+        exec(code)
 
     def __RunFile(self, invocation, path: str) -> None:
         invocation.return_value(None)

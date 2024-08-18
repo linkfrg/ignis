@@ -17,7 +17,7 @@ CLI
     close         Close window
     toggle        Toggle window
     list-windows  List all windows
-    run-python    Execute inline python code
+    run-python    Execute python code
     run-file      Execute python file
     inspector     Open GTK Inspector
     reload        Reload Ignis
