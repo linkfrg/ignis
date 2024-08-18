@@ -238,10 +238,10 @@ class Window(Gtk.Window, BaseWidget):
 
     def __change_input_region(self) -> None:
         if self.input_width < 0:
-            return
+            raise ValueError("The input_width property must be greater than 0")
 
         if self.input_height < 0:
-            return
+            raise ValueError("The input_height property must be greater than 0")
 
         rectangle = cairo.RectangleInt(0, 0, self.input_width, self.input_height)
         region = cairo.Region(rectangle)
