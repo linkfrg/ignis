@@ -89,7 +89,7 @@ def list_windows() -> None:
     call_client_func("ListWindows")
 
 
-@main.command(name="run-python", help="Execute inline python code")
+@main.command(name="run-python", help="Execute python code")
 @click.argument("code")
 def run_python(code: str) -> None:
     call_client_func("RunPython", code)
