@@ -51,6 +51,8 @@ class Window(Gtk.Window, BaseWidget):
         - **layer** (``str``, optional, read-write): The layer of the surface. Default: ``"top"``.
         - **kb_mode** (``str``, optional, read-write): Whether the window should receive keyboard events from the compositor. Default: ``"none"``.
         - **popup** (``bool``, optional, read-write): Whether the window should close on ESC. Works only if ``kb_mode`` is set to ``"exclusive"`` or ``"on_demand"``.
+        - **input_width** (``int``, optional, read-write): The width at which the window can receive keyboard and mouse input. Must be > 0.
+        - **input_height** (``int``, optional, read-write): The width at which the window can receive keyboard and mouse input. Must be > 0.
 
     **Anchors:**
         - **"bottom"**
