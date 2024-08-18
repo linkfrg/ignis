@@ -122,8 +122,8 @@ class Window(Gtk.Window, BaseWidget):
         self._kb_mode = None
         self._popup = None
         self._monitor = None
-        self._input_width = -1
-        self._input_height = -1
+        self._input_width = 0
+        self._input_height = 0
 
         self.anchor = anchor
         self.exclusivity = exclusivity
