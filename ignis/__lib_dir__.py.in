@@ -1,1 +1,1 @@
-LIB_PATH = "@LIBDIR@"
+LIB_DIR = "@LIBDIR@"
