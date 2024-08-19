@@ -1,5 +1,5 @@
 Client
 -------------
 
-.. autoclass:: ignis.app.IgnisClient
+.. autoclass:: ignis.client.IgnisClient
     :members:

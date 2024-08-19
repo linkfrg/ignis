@@ -1,7 +1,28 @@
+import gi
 import os
 import sys
 import shutil
 import inspect
+
+gi.require_version("GIRepository", "2.0")
+from gi.repository import GIRepository  # noqa: E402
+
+
+def find_lib_dir():
+    # Check if in a virtual environment
+    if sys.base_prefix != sys.prefix:
+        return os.path.join(sys.prefix, "lib", "ignis")
+
+    # Check common system-wide bin directories
+    common_lib_dirs = ["/lib/ignis", "/usr/lib/ignis"]
+    for lib_dir in common_lib_dirs:
+        if os.path.isdir(lib_dir):
+            return lib_dir
+
+
+lib_dir = find_lib_dir()
+GIRepository.Repository.prepend_library_path(lib_dir)
+GIRepository.Repository.prepend_search_path(lib_dir)
 
 sys.path.insert(0, os.path.abspath(".."))
 

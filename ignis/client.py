@@ -12,7 +12,7 @@ class IgnisClient:
 
     Useful for scripts that run outside the Ignis process.
 
-    All methods will raise :exception:`~ignis.exceptions.IgnisNotRunningError` if Ignis is not running.
+    All methods will raise :class:`~ignis.exceptions.IgnisNotRunningError` if Ignis is not running.
 
     .. warning::
         Do not use this class inside the main Ignis process (e.g., in the config file).
