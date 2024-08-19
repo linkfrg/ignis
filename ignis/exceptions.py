@@ -211,3 +211,12 @@ class LayerShellNotSupportedError(Exception):
             "zwlr_layer_shell_v1 is not supported! Ensure you are running a Wayland compositor that implements the zwlr_layer_shell_v1 protocol",
             *args,
         )
+
+
+class IgnisNotRunningError(Exception):
+    """
+    Raised when Ignis is not running.
+    """
+
+    def __init__(self, *args: object) -> None:
+        super().__init__("Ignis is not running", *args)

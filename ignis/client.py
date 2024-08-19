@@ -1,8 +1,38 @@
 from ignis.dbus import DBusProxy
 from ignis.utils import Utils
+from ignis.exceptions import WindowNotFoundError, IgnisNotRunningError
+from typing import List
+from typing import Any
 
 
 class IgnisClient:
+    """
+    Class for interacting with Ignis D-Bus interface.
+    Provides the same functionality as the CLI.
+
+    Useful for scripts that run outside the Ignis process.
+
+    All methods will raise :exception:`~ignis.exceptions.IgnisNotRunningError` if Ignis is not running.
+
+    .. warning::
+        Do not use this class inside the main Ignis process (e.g., in the config file).
+        It's unnecessary; use :class:`~ignis.app.IgnisApp` instead.
+
+    Properties:
+        - **has_owner** (``bool``, read-only): Whether D-Bus name has the owner (Whether Ignis is running).
+
+    **Example usage:**
+
+    .. code-block:: python
+
+        from ignis.client import IgnisClient
+
+        client = IgnisClient()
+        print(client.list_windows())
+
+        client.reload()
+    """
+
     def __init__(self):
         self.__dbus = DBusProxy(
             name="com.github.linkfrg.ignis",
@@ -15,36 +45,76 @@ class IgnisClient:
     def has_owner(self) -> bool:
         return self.__dbus.has_owner
 
-    def __call_window_method(self, method_name: str, window_name: str) -> None:
-        window_found = getattr(self.__dbus, method_name)("(s)", window_name)
-        if not window_found:
-            print(f"No such window: {window_name}")
-            exit(1)
+    def __call_dbus_method(self, method_name: str, *args) -> Any:
+        if not self.has_owner:
+            raise IgnisNotRunningError
 
-    def OpenWindow(self, window_name: str) -> None:
+        return getattr(self.__dbus, method_name)(*args)
+
+    def __call_window_method(self, method_name: str, window_name: str) -> None:
+        window_found = self.__call_dbus_method(method_name, "(s)", window_name)
+        if not window_found:
+            raise WindowNotFoundError(window_name)
+
+    def open_window(self, window_name: str) -> None:
+        """
+        Same as :func:`~ignis.app.IgnisApp.open_window`.
+        """
         self.__call_window_method("OpenWindow", window_name)
 
-    def CloseWindow(self, window_name: str) -> None:
+    def close_window(self, window_name: str) -> None:
+        """
+        Same as :func:`~ignis.app.IgnisApp.close_window`.
+        """
         self.__call_window_method("CloseWindow", window_name)
 
-    def ToggleWindow(self, window_name: str) -> None:
+    def toggle_window(self, window_name: str) -> None:
+        """
+        Same as :func:`~ignis.app.IgnisApp.toggle_window`.
+        """
         self.__call_window_method("ToggleWindow", window_name)
 
-    def ListWindows(self) -> None:
-        response = self.__dbus.ListWindows()
-        print("\n".join(response))
+    def list_windows(self) -> List[str]:
+        """
+        Get a list of all window names.
 
-    def Quit(self) -> None:
-        self.__dbus.Quit()
+        Returns:
+            List[str]: A list of all window names.
+        """
+        return self.__call_dbus_method("ListWindows")
 
-    def Inspector(self) -> None:
-        self.__dbus.Inspector()
+    def quit(self) -> None:
+        """
+        Same as :func:`~ignis.app.IgnisApp.quit`.
+        """
+        self.__call_dbus_method("Quit")
 
-    def RunPython(self, code: str) -> None:
-        self.__dbus.RunPython("(s)", code)
+    def inspector(self) -> None:
+        """
+        Same as :func:`~ignis.app.IgnisApp.inspector`.
+        """
+        self.__call_dbus_method("Inspector")
 
-    def RunFile(self, path: str) -> None:
-        self.__dbus.RunFile("(s)", path)
+    def run_python(self, code: str) -> None:
+        """
+        Run a Python code inside the Ignis process.
 
-    def Reload(self) -> None:
-        self.__dbus.Reload()
+        Args:
+            code (``str``): The Python code to execute.
+        """
+        self.__call_dbus_method("RunPython", "(s)", code)
+
+    def run_file(self, path: str) -> None:
+        """
+        Run a Python file inside Ignis daemon.
+
+        Args:
+            path (``str``): The path to the Python file to execute.
+        """
+        self.__call_dbus_method("RunFile", "(s)", path)
+
+    def reload(self) -> None:
+        """
+        Same as :func:`~ignis.app.IgnisApp.reload`.
+        """
+        self.__call_dbus_method("Reload")

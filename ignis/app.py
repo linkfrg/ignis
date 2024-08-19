@@ -7,6 +7,7 @@ from gi.repository import Gtk, Gdk, Gio, GObject, GLib
 from typing import List
 from ignis.gobject import IgnisGObject
 from ignis.exceptions import WindowAddedError, WindowNotFoundError
+from ignis.logging import configure_logger
 
 
 class IgnisApp(Gtk.Application, IgnisGObject):
@@ -334,3 +335,14 @@ class IgnisApp(Gtk.Application, IgnisGObject):
 
 
 app = IgnisApp()
+
+
+def run_app(config_path: str, debug: bool) -> None:
+    configure_logger(debug)
+
+    app._setup(config_path)
+
+    try:
+        app.run(None)
+    except KeyboardInterrupt:
+        pass  # app.quit() will be called automatically

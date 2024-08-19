@@ -8,6 +8,7 @@ This reference manual details functions, modules, and objects included in Ignis,
 
    gobject
    app
+   client
    exceptions
    dbus
    dbus_menu
