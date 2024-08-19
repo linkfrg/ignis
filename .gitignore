@@ -6,4 +6,3 @@ docs/_build
 generated
 .vscode
 build
-ignis/__lib_dir__.py

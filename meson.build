@@ -49,22 +49,17 @@ config = configuration_data()
 config.set('LIBDIR', libdir)
 config.set('COMMIT', run_command('git', 'rev-parse', 'HEAD').stdout().strip())
 
-install_data(
-    files('bin/ignis'),
+configure_file(
+    input: 'bin/ignis.in',
+    output: 'ignis',
+    configuration: config,
     install_dir: bindir,
-    install_mode: 'rwxr-xr-x',
+    install_mode: 'rwxr-xr-x'
 )
 
 configure_file(
     input: 'ignis/__commit__.py.in',
     output: '__commit__.py',
-    configuration: config,
-    install_dir: pkginstalldir
-)
-
-configure_file(
-    input: 'ignis/__lib_dir__.py.in',
-    output: '__lib_dir__.py',
     configuration: config,
     install_dir: pkginstalldir
 )
