@@ -49,15 +49,24 @@ Build and Install Ignis to Virtual Environment
     meson compile -C build
     meson install -C build
 
+Copy ``__lib_dir__.py`` to Ignis sources
+-------------------------------------------
+
+.. code-blocK:: bash
+
+    SITE_PACKAGES=$(python3 -c 'import site; print(site.getsitepackages()[0])')
+    # for fish use this: 
+    # set SITE_PACKAGES $(python3 -c 'import site; print(site.getsitepackages()[0])')
+
+    cp $SITE_PACKAGES/ignis/__lib_dir__.py $(pwd)/ignis
+
 Make a symbolic link to Ignis sources
 -------------------------------------
 
-Replace ``python3.12`` with actual version of python.
-
 .. code-block:: bash
     
-    rm -R venv/lib/python3.12/site-packages/ignis
-    ln -sf $(pwd)/ignis venv/lib/python3.12/site-packages/ignis
+    rm -R $SITE_PACKAGES/ignis
+    ln -sf $(pwd)/ignis $SITE_PACKAGES/ignis
 
 Running Ignis
 -------------
