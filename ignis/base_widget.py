@@ -47,6 +47,9 @@ class BaseWidget(Gtk.Widget, IgnisGObject):
 
     @style.setter
     def style(self, value: str) -> None:
+        if self._css_provider:
+            self.get_style_context().remove_provider(self._css_provider)
+
         if "{" not in value and "}" not in value:
             value = "* {" + value + "}"
 
@@ -56,8 +59,7 @@ class BaseWidget(Gtk.Widget, IgnisGObject):
         self.get_style_context().add_provider(
             css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
         )
-        if self._css_provider:
-            self.get_style_context().remove_provider(self._css_provider)
+
         self._css_provider = css_provider
         self._style = value
 

@@ -1,0 +1,145 @@
+from gi.repository import GObject
+from ignis.widgets.icon import Icon
+from ignis.utils import Utils
+
+DIRECTION = {
+    "right": "pan-end-symbolic",
+    "left": "pan-start-symbolic",
+    "up": "pan-up-symbolic",
+    "down": "pan-down-symbolic"
+}
+
+class Arrow(Icon):
+    """
+    Bases: :class:`~ignis.widgets.icon.Icon`.
+
+    An arrow icon that can rotate (with animation!).
+    Useful for dropdown lists.
+
+    .. hint::
+        If you are looking for button with arrow that rotates on click,
+        see :class:`~ignis.widgets.Widget.ArrowButton`.
+
+    Properties:
+        - **rotated** (``bool``, optional, read-write): Whether arrow is rotated. Default: ``False``.
+        - **degree** (``int``, optional, read-write): Target rotation degree. Must be > 0. Default: ``90``.
+        - **time** (``int``, optional, read-write): Rotation time in milliseconds. Default: ``135``.
+        - **direction** (``str``, optional, read-write): Direction of the arrow. Do not use this property if using custom icon name. Default: ``"right"``.
+        - **counterclockwise** (``bool``, optional, read-write): Whether to rotate counterclockwise. Default: ``False``.
+
+    **Direction:**
+        - **"right"**
+        - **"left"**
+        - **"up"**
+        - **"down"**
+
+    .. hint::
+        You can set your custom icon name using ``icon_name`` property.
+
+    .. code-block:: python
+
+        Widget.Arrow(
+            pixel_size=20, # inherited from Widget.Icon
+            rotated=False,
+            degree=90,
+            time=135,
+            direction="right",
+            counterclockwise=False,
+            # icon_name="some-icon" # if you want custom icon name
+        )
+    """
+
+    __gtype_name__ = "IgnisArrow"
+
+    def __init__(self, **kwargs):
+        self._rotated = False
+        self.__deg = 0  # Current rotation degree
+        self.__step = 0  # How many steps to do
+        self._degree = 90  # Target rotation degree
+        self._time = 135  # Rotation time in milliseconds
+        self._direction = "right"
+        self._counterclockwise = False
+
+        self.__update_step()
+
+        super().__init__(**kwargs)
+
+        if "direction" not in kwargs:
+            self.direction = self._direction
+
+    def __rotate(self, value: bool) -> None:
+        if value:
+            if not self.counterclockwise:
+                self.__deg += self.__step
+            else:
+                self.__deg -= self.__step
+        else:
+            if self.__deg == 0:
+                return
+
+            if not self.counterclockwise:
+                self.__deg -= self.__step
+            else:
+                self.__deg += self.__step
+
+        self.style = f"-gtk-icon-transform: rotate({self.__deg}deg);"
+
+    @GObject.Property
+    def rotated(self) -> bool:
+        return self._rotated
+
+    @rotated.setter
+    def rotated(self, value: bool) -> None:
+        steps = self.degree // self.__step
+        interval = self.time // steps
+
+        for i in range(steps):
+            Utils.Timeout(interval * i, self.__rotate, value)
+
+        self._rotated = value
+
+    def __update_step(self) -> None:
+        min_steps = 9  # Minimum steps for smooth animation
+        steps = max(self.time // 15, min_steps)  # Calculate steps based on time, with a minimum of 9 steps
+        self.__step = max(1, self.degree // steps)  # Ensure step is at least 1 degree
+
+    @GObject.Property
+    def degree(self) -> int:
+        return self._degree
+
+    @degree.setter
+    def degree(self, value: int) -> None:
+        self._degree = value
+        self.__update_step()
+
+    @GObject.Property
+    def time(self) -> int:
+        return self._time
+
+    @time.setter
+    def time(self, value: int) -> None:
+        self._time = value
+        self.__update_step()
+
+    @GObject.Property
+    def direction(self) -> str:
+        return self._direction
+
+    @direction.setter
+    def direction(self, value: str) -> None:
+        self._direction = value
+        self.icon_name = DIRECTION[value]
+
+    @GObject.Property
+    def counterclockwise(self) -> bool:
+        return self._counterclockwise
+
+    @counterclockwise.setter
+    def counterclockwise(self, value: bool) -> None:
+        self._counterclockwise = value
+
+    def toggle(self) -> None:
+        """
+        Rotate arrow.
+        """
+        self.rotated = not self._rotated

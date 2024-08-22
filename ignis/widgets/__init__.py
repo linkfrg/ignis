@@ -28,6 +28,8 @@ from .check_button import CheckButton
 from .spin_button import SpinButton
 from .dropdown import DropDown
 from .overlay import Overlay
+from .arrow import Arrow
+from .arrow_button import ArrowButton
 
 
 class Widget:
@@ -61,3 +63,5 @@ class Widget:
     SpinButton = SpinButton
     DropDown = DropDown
     Overlay = Overlay
+    Arrow = Arrow
+    ArrowButton = ArrowButton
