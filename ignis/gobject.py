@@ -76,6 +76,14 @@ class IgnisGObject(GObject.Object):
                     continue
             self.notify(i.name)
 
+    def notify_list(self, *args) -> None:
+        """
+        Notify list of properties.
+        You can pass unlimited number of property names as *args.
+        """
+        for i in args:
+            self.notify(i)
+
     def set_property(self, property_name: str, value: Any) -> None:
         """
         :meta private:

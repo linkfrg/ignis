@@ -47,6 +47,12 @@ def get_device(client: NM.Client, device_type: NM.DeviceType):
         return latest
 
 
+def get_devices(client: NM.Client, device_type: NM.DeviceType) -> NM.Device:
+    for d in client.get_devices():
+        if d.get_device_type() == device_type:
+            yield d
+
+
 class WifiConnectDialog(Widget.RegularWindow):
     """
     :meta private:
@@ -312,29 +318,15 @@ class ActiveAccessPoint(WifiAccessPoint):
     :meta private:
     """
 
-    def __init__(self, client: NM.Client):
-        self.__client = client
-        super().__init__(NM.AccessPoint(), client, None)
-        self._sync_device()
+    def __init__(self, device: NM.DeviceWifi, client: NM.Client):
+        super().__init__(NM.AccessPoint(), client, device)
+        self.__device = device
+        self.__device.connect(
+            "notify::active-access-point", lambda *args: self.__sync()
+        )
+        self.__sync()
 
-    def _sync_device(self) -> None:
-        """
-        :meta private:
-        """
-        self.__device = get_device(self.__client, NM.DeviceType.WIFI)
-        if self.__device:
-            self.__device.connect(
-                "notify::active-access-point",
-                lambda *args: self.__sync_ap(),
-            )
-        self.__sync_ap()
-
-    def __sync_ap(self) -> None:
-        if not self.__device:
-            self._point = NM.AccessPoint()
-            self.notify_all()
-            return
-
+    def __sync(self) -> None:
         ap = self.__device.get_active_access_point()
         if ap:
             self._setup()
@@ -345,19 +337,19 @@ class ActiveAccessPoint(WifiAccessPoint):
         self.notify_all()
 
 
-class Wifi(IgnisGObject):
+class WifiDevice(IgnisGObject):
     """
     A Wifi device.
 
     Properties:
-        - **access_points** (List[:class:`~ignis.services.network.WifiAccessPoint`], read-only): List of access points (Wi-FI networks).
-        - **ap** (:class:`~ignis.services.network.WifiAccessPoint`, read-only): Current active access point.
-        - **state** (str, read-only): Current state of the device.
-        - **enabled** (bool, read-write): Whether Wi-FI is enabled.
+        - **access_points** (List[:class:`~ignis.services.network.WifiAccessPoint`], read-only): A list of access points (Wi-FI networks).
+        - **ap** (:class:`~ignis.services.network.WifiAccessPoint`, read-only): The currently active access point.
+        - **state** (str, read-only): The current state of the device.
     """
 
-    def __init__(self, client: NM.Client):
+    def __init__(self, device: NM.DeviceWifi, client: NM.Client):
         super().__init__()
+        self.__device = device
         self.__client = client
         self._access_points = []
 
@@ -368,8 +360,13 @@ class Wifi(IgnisGObject):
             "notify::activating-connection", lambda *args: self.ap.notify("icon-name")
         )
 
-        self._ap = ActiveAccessPoint(self.__client)
-        self._sync()
+        self._ap = ActiveAccessPoint(self.__device, self.__client)
+
+        self.__device.connect("access-point-added", self.__sync_access_points)
+        self.__device.connect("access-point-removed", self.__sync_access_points)
+        self.__device.connect("notify::state", lambda x, y: self.notify("state"))
+
+        self.__sync_access_points()
 
     @GObject.Property
     def access_points(self) -> List[WifiAccessPoint]:
@@ -381,42 +378,15 @@ class Wifi(IgnisGObject):
 
     @GObject.Property
     def state(self) -> str:
-        if self.__device:
-            return STATE.get(self.__device.get_state(), None)
-        else:
-            return "unavailable"
-
-    @GObject.Property
-    def enabled(self) -> bool:
-        return self.__client.wireless_get_enabled()
-
-    @enabled.setter
-    def enabled(self, value: bool) -> None:
-        self.__client.wireless_set_enabled(value)
+        return STATE.get(self.__device.get_state(), None)
 
     def scan(self) -> None:
         """
         Scan for Wi-Fi networks.
         """
-        if self.__device and self.state != "unavailable":
-            self.__device.request_scan_async(
-                None, lambda x, result: self.__device.request_scan_finish(result)
-            )
-
-    def _sync(self) -> None:
-        """
-        :meta private:
-        """
-        self.__device = get_device(client=self.__client, device_type=NM.DeviceType.WIFI)
-        if self.__device:
-            self.__device.connect("access-point-added", self.__sync_access_points)
-            self.__device.connect("access-point-removed", self.__sync_access_points)
-            self.__device.connect("notify::state", lambda x, y: self.notify("state"))
-
-            self.__sync_access_points()
-            self._ap._sync_device()
-
-        self.notify_all()
+        self.__device.request_scan_async(
+            None, lambda x, result: self.__device.request_scan_finish(result)
+        )
 
     def __sync_access_points(self, *args) -> None:
         self._access_points = [
@@ -426,7 +396,67 @@ class Wifi(IgnisGObject):
         self.notify("access_points")
 
 
-class Ethernet(IgnisGObject):
+class Wifi(IgnisGObject):
+    """
+    Class for controlling Wi-Fi devices.
+
+    Properties:
+        - **devices** (:class:`~ignis.services.network.EthernetDevice`, read-only): A list of Wi-Fi devices.
+        - **is_connected** (``bool``, read-only): Whether at least one Wi-Fi device is connected to the network.
+        - **icon_name** (``str``, read-only): The icon name of the first device in the list.
+        - **enabled** (``bool``, read-only): Whether Wi-Fi is enabled.
+    """
+    def __init__(self, client: NM.Client):
+        super().__init__()
+        self.__client = client
+        self._devices = []
+        self.__client.connect(
+            "notify::all-devices",
+            lambda *args: GLib.timeout_add_seconds(1, self.__sync),
+        )
+        self.__sync()
+
+    @GObject.Property
+    def devices(self) -> List[WifiDevice]:
+        return self._devices
+
+    @GObject.Property
+    def is_connected(self) -> bool:
+        for i in self._devices:
+            if i.is_connected:
+                return True
+        return False
+
+    @GObject.Property
+    def icon_name(self) -> str:
+        for i in self._devices:
+            return i.ap.icon_name
+
+    @GObject.Property
+    def enabled(self) -> bool:
+        return self.__client.wireless_get_enabled()
+
+    @enabled.setter
+    def enabled(self, value: bool) -> None:
+        self.__client.wireless_set_enabled(value)
+
+    def __sync(self) -> None:
+        self._devices = []
+        for device in get_devices(self.__client, NM.DeviceType.WIFI):
+            self.__add_device(device)
+
+        self.notify_all()
+
+    def __add_device(self, device: NM.DeviceWifi) -> None:
+        dev = WifiDevice(device, self.__client)
+        dev.connect(
+            "notify::icon-name",
+            lambda x, y: self.notify_list("icon-name", "is-connected"),
+        )
+        self._devices.append(dev)
+
+
+class EthernetDevice(IgnisGObject):
     """
     Ethernet device.
 
@@ -434,22 +464,24 @@ class Ethernet(IgnisGObject):
         - **carrier** (``bool``, read-only): Whether the device has a carrier.
         - **perm_hw_address** (``str``, read-only): The permanent hardware (MAC) address of the device.
         - **speed** (``str``, read-only): The speed of the device.
-        - **state** (str, read-only): Current state of the device.
+        - **state** (``str``, read-only): Current state of the device.
+        - **is_connected** (``bool``, read-only): Whether the device is connected to the network.
+        - **name** (``str``, read-only): The name of the connection, e.g., ``"Wired connection 1"``, ``"Wired connection 2"``.
     """
 
-    def __init__(self, client: NM.Client):
+    def __init__(self, device: NM.DeviceEthernet, client: NM.Client):
         super().__init__()
+        self.__device = device
         self.__client = client
-        self._sync()
+        self._name = None
+        self._is_connected = False
 
-    def _sync(self) -> None:
-        """
-        :meta private:
-        """
-        self.__device = get_device(
-            client=self.__client, device_type=NM.DeviceType.ETHERNET
-        )
-        self.notify_all()
+        self._connection = self.__device.get_available_connections()[0]
+        setting_connection = self._connection.get_setting_connection()
+        self._name = setting_connection.props.id
+
+        self.__device.connect("notify::active-connection", self.__update_is_connected)
+        self.__update_is_connected()
 
     @GObject.Property
     def carrier(self) -> bool:
@@ -470,24 +502,115 @@ class Ethernet(IgnisGObject):
         else:
             return "unavailable"
 
+    @GObject.Property
+    def is_connected(self) -> bool:
+        return self._is_connected
+
+    @GObject.Property
+    def name(self) -> str:
+        return self._name
+
+    def connect_to(self) -> None:
+        """
+        Connect this Ethernet device to the network.
+        """
+        self.__client.activate_connection_async(
+            self._connection,
+            self.__device,
+            None,
+            None,
+            lambda x, res: self.__client.activate_connection_finish(res),
+        )
+
+    def disconnect(self) -> None:
+        """
+        Disconnect this Ethernet device from the network.
+        """
+        if not self.is_connected:
+            return
+
+        self.__client.deactivate_connection_async(
+            self.__device.get_active_connection(),
+            None,
+            lambda x, res: self.__client.deactivate_connection_finish(res),
+        )
+
+    def __update_is_connected(self, *args) -> None:
+        if not self.__device.get_active_connection():
+            self._is_connected = False
+        else:
+            self._is_connected = True
+        self.notify("is-connected")
+
+
+class Ethernet(IgnisGObject):
+    """
+    Class for controlling Ethernet devices.
+
+    Properties:
+        - **devices** (:class:`~ignis.services.network.EthernetDevice`, read-only): A list of Ethernet devices.
+        - **is_connected** (``bool``, read-only): Whether at least one Ethernet device is connected to the network.
+        - **icon_name** (``str``, read-only): The general icon name for all devices, depends on ``is_connected`` property.
+    """
+    def __init__(self, client: NM.Client):
+        super().__init__()
+        self.__client = client
+        self._devices = []
+        self.__client.connect(
+            "notify::all-devices",
+            lambda *args: GLib.timeout_add_seconds(1, self.__sync),
+        )
+        self.__sync()
+
+    @GObject.Property
+    def devices(self) -> List[EthernetDevice]:
+        return self._devices
+
+    @GObject.Property
+    def is_connected(self) -> bool:
+        for i in self.devices:
+            if i.is_connected:
+                return True
+        return False
+
+    @GObject.Property
+    def icon_name(self) -> str:
+        if self.is_connected:
+            return "network-wired-symbolic"
+        else:
+            return "network-wired-disconnected-symbolic"
+
+    def __sync(self) -> None:
+        self._devices = []
+        for device in get_devices(self.__client, NM.DeviceType.ETHERNET):
+            self.__add_device(device)
+
+        self.notify_all()
+
+    def __add_device(self, device: NM.DeviceEthernet) -> None:
+        if len(device.get_available_connections()) == 0:
+            return
+
+        dev = EthernetDevice(device, self.__client)
+        dev.connect(
+            "notify::is-connected",
+            lambda x, y: self.notify_list("is-connected", "icon-name"),
+        )
+        self._devices.append(dev)
+
 
 class NetworkService(IgnisGObject):
     """
     A Network service. Uses ``NetworkManager``.
 
     Properties:
-        - **wifi** (:class:`~ignis.services.network.Wifi`, read-only): The WiFi device object.
+        - **wifi** (:class:`~ignis.services.network.Wifi`, read-only): The Wi-Fi object.
         - **ethernet** (:class:`~ignis.services.network.Ethernet`, read-only): The Ethernet device object.
     """
 
     def __init__(self):
         super().__init__()
         self.__client = NM.Client.new(None)
-        self.__client.connect(
-            "notify::all-devices",
-            lambda *args: GLib.timeout_add_seconds(2, self.__sync),
-        )
-
         self._wifi = Wifi(self.__client)
         self._ethernet = Ethernet(self.__client)
 
@@ -498,7 +621,3 @@ class NetworkService(IgnisGObject):
     @GObject.Property
     def ethernet(self) -> Ethernet:
         return self._ethernet
-
-    def __sync(self) -> None:
-        self._wifi._sync()
-        self._ethernet._sync()
