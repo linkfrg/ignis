@@ -47,12 +47,12 @@ class Box(Gtk.Box, BaseWidget):
     @child.setter
     def child(self, child: List[Gtk.Widget]) -> None:
         for c in self._child:
-            self.remove(c)
+            super().remove(c)
+
         self._child = []
         for c in child:
             if c:
                 self.append(c)
-                self._child.append(c)
 
     def append(self, child: Gtk.Widget) -> None:
         self._child.append(child)
