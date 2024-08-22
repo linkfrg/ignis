@@ -5,16 +5,16 @@ class ArrowButton(Button):
     """
     Bases: :class:`~ignis.widgets.button.Button`.
 
-    Simple button with arrow. On click will toggle (rotate) arrow.
+    A simple button with an arrow. On click, it will toggle (rotate) the arrow.
 
     Properties:
-        - **arrow** (:class:`~ignis.widgets.Widget.Arrow`, required, read-only): An arrow instance.
+        - **arrow** (:class:`~ignis.widgets.Widget.Arrow`, required, read-only): An instance of an arrow.
 
     .. code-block:: python
 
         Widget.ArrowButton(
             arrow=Widget.Arrow(
-                ... # arrow specific properties goes here
+                ... # Arrow-specific properties go here
             )
         )
     """

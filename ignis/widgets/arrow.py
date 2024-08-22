@@ -17,11 +17,11 @@ class Arrow(Icon):
     Useful for dropdown lists.
 
     .. hint::
-        If you are looking for button with arrow that rotates on click,
-        see :class:`~ignis.widgets.Widget.ArrowButton`.
+        If you are looking for a button with an arrow that rotates on click,
+    see :class:`~ignis.widgets.Widget.ArrowButton`.
 
     Properties:
-        - **rotated** (``bool``, optional, read-write): Whether arrow is rotated. Default: ``False``.
+        - **rotated** (``bool``, optional, read-write): Whether the arrow is rotated. Default: ``False``.
         - **degree** (``int``, optional, read-write): Target rotation degree. Must be > 0. Default: ``90``.
         - **time** (``int``, optional, read-write): Rotation time in milliseconds. Default: ``135``.
         - **direction** (``str``, optional, read-write): Direction of the arrow. Do not use this property if using custom icon name. Default: ``"right"``.
@@ -34,7 +34,7 @@ class Arrow(Icon):
         - **"down"**
 
     .. hint::
-        You can set your custom icon name using ``icon_name`` property.
+        You can set your custom icon name using the ``icon_name`` property.
 
     .. code-block:: python
 
@@ -45,7 +45,7 @@ class Arrow(Icon):
             time=135,
             direction="right",
             counterclockwise=False,
-            # icon_name="some-icon" # if you want custom icon name
+            # icon_name="some-icon" # if you want a custom icon name
         )
     """
 
