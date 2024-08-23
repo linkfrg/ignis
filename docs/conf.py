@@ -73,6 +73,8 @@ html_theme_options = {
         }
     ],
     "show_version_warning_banner": True,
+    "navbar_align": "left",
+    "navbar_start": ["navbar-logo", "version-switcher"],
     "switcher": {
         "json_url": json_url,
         "version_match": version_match,
