@@ -1,5 +1,7 @@
 # Ignis
 
+[![Documentation Status](https://readthedocs.org/projects/pyignis/badge/?version=latest)](https://pyignis.readthedocs.io/en/latest/?badge=latest)
+
 __Ignis is a Python framework for building desktop shells using GTK4.__
 
 ## Features
