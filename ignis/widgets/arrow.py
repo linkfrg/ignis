@@ -6,8 +6,9 @@ DIRECTION = {
     "right": "pan-end-symbolic",
     "left": "pan-start-symbolic",
     "up": "pan-up-symbolic",
-    "down": "pan-down-symbolic"
+    "down": "pan-down-symbolic",
 }
+
 
 class Arrow(Icon):
     """
@@ -34,7 +35,7 @@ class Arrow(Icon):
         - **"down"**
 
     .. hint::
-        You can set your custom icon name using the ``icon_name`` property.
+        You can set your custom icon name or image using the ``image`` property.
 
     .. code-block:: python
 
@@ -45,7 +46,7 @@ class Arrow(Icon):
             time=135,
             direction="right",
             counterclockwise=False,
-            # icon_name="some-icon" # if you want a custom icon name
+            # image="some-icon/OR/path/to/file" # if you want a custom icon name or image
         )
     """
 
@@ -64,7 +65,7 @@ class Arrow(Icon):
 
         super().__init__(**kwargs)
 
-        if "direction" not in kwargs:
+        if all(key not in kwargs for key in ["direction", "image", "icon_name"]):
             self.direction = self._direction
 
     def __rotate(self, value: bool) -> None:
@@ -100,7 +101,9 @@ class Arrow(Icon):
 
     def __update_step(self) -> None:
         min_steps = 9  # Minimum steps for smooth animation
-        steps = max(self.time // 15, min_steps)  # Calculate steps based on time, with a minimum of 9 steps
+        steps = max(
+            self.time // 15, min_steps
+        )  # Calculate steps based on time, with a minimum of 9 steps
         self.__step = max(1, self.degree // steps)  # Ensure step is at least 1 degree
 
     @GObject.Property
