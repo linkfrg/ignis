@@ -63,6 +63,7 @@ html_theme_options = {
             "type": "fontawesome",
         }
     ],
+    "show_version_warning_banner": True,
 }
 
 html_context = {
