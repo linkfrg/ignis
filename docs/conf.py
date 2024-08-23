@@ -26,6 +26,7 @@ GIRepository.Repository.prepend_search_path(lib_dir)
 
 sys.path.insert(0, os.path.abspath(".."))
 
+import ignis  # noqa: E402
 from ignis.widgets import Widget  # noqa: E402
 from ignis.utils import Utils  # noqa: E402
 
@@ -33,6 +34,7 @@ project = "Ignis"
 copyright = "2024, linkfrg"
 author = "linkfrg"
 REPO_URL = "https://github.com/linkfrg/ignis"
+DOCS_URL = "https://pyignis.readthedocs.io/en/latest"
 
 extensions = ["sphinx.ext.autodoc", "sphinx.ext.napoleon"]
 
@@ -50,6 +52,13 @@ html_title = "Ignis documentation"
 smartquotes = False
 add_module_names = False
 
+json_url = f"{DOCS_URL}/_static/switcher.json"
+
+version_match = os.environ.get("READTHEDOCS_VERSION")
+release = ignis.__version__
+
+version_match = f"v{release}"
+
 html_theme_options = {
     "use_edit_page_button": True,
     "logo": {
@@ -64,6 +73,10 @@ html_theme_options = {
         }
     ],
     "show_version_warning_banner": True,
+    "switcher": {
+        "json_url": json_url,
+        "version_match": version_match,
+    },
 }
 
 html_context = {
