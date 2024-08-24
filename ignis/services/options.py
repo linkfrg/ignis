@@ -3,7 +3,7 @@ import json
 from ignis.gobject import IgnisGObject, Binding
 from gi.repository import GObject
 from typing import Any
-from ignis.settings import CACHE_DIR
+from ignis import CACHE_DIR
 from ignis.exceptions import OptionExistsError, OptionNotFoundError
 
 OPTIONS_FILE = f"{CACHE_DIR}/options.json"

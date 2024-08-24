@@ -6,7 +6,7 @@ from ignis.widgets.picture import Picture
 from ignis.utils import Utils
 from gi.repository import GObject
 from ignis.services import Service
-from ignis.settings import CACHE_DIR
+from ignis import CACHE_DIR
 
 options = Service.get("options")
 

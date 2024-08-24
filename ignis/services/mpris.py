@@ -8,7 +8,7 @@ from ignis.gobject import IgnisGObject
 from ignis.utils import Utils
 from loguru import logger
 from typing import List
-from ignis.settings import CACHE_DIR
+from ignis import CACHE_DIR
 
 ART_URL_CACHE_DIR = f"{CACHE_DIR}/art_url"
 

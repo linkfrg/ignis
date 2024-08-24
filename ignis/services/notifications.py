@@ -9,7 +9,7 @@ from ignis.services import Service
 from ignis.services.options import OptionsService
 from typing import List
 from datetime import datetime
-from ignis.settings import CACHE_DIR
+from ignis import CACHE_DIR
 
 options: OptionsService = Service.get("options")
 
