@@ -1,4 +1,4 @@
-name: Build Latest Documentation
+name: docs
 
 on:
   push:
