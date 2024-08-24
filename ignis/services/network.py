@@ -1,4 +1,5 @@
 import gi
+import sys
 from gi.repository import GObject, GLib
 from ignis.gobject import IgnisGObject
 from typing import List
@@ -7,10 +8,12 @@ from ignis.exceptions import NetworkManagerNotFoundError
 
 
 try:
-    gi.require_version("NM", "1.0")
+    if 'sphinx' not in sys.modules:
+        gi.require_version("NM", "1.0")
     from gi.repository import NM
 except (ImportError, ValueError):
     raise NetworkManagerNotFoundError() from None
+
 
 STATE = {
     NM.DeviceState.UNKNOWN: "unknown",

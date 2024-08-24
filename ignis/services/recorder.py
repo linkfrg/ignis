@@ -1,4 +1,5 @@
 import gi
+import sys
 import subprocess
 import datetime
 from gi.repository import GObject, GLib
@@ -17,21 +18,6 @@ RECORDING_BITRATE_OPTION = "recording_bitrate"
 RECORDING_DEFAULT_FILE_LOCATION_OPTION = "recording_default_file_location"
 RECORDING_DEFAULT_FILENAME_OPTION = "recording_default_filename"
 
-options.create_option(name=RECORDING_BITRATE_OPTION, default=8000, exists_ok=True)
-options.create_option(
-    name=RECORDING_DEFAULT_FILE_LOCATION_OPTION,
-    default=GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_VIDEOS),
-    exists_ok=True,
-)
-options.create_option(
-    name=RECORDING_DEFAULT_FILENAME_OPTION,
-    default="%Y-%m-%d_%H-%M-%S.mp4",
-    exists_ok=True,
-)
-
-N_THREADS = str(min(max(1, GLib.get_num_processors()), 64))
-
-
 def gst_inspect(name: str) -> None:
     try:
         subprocess.run(["gst-inspect-1.0", "--exists", name], check=True)
@@ -39,9 +25,9 @@ def gst_inspect(name: str) -> None:
     except subprocess.CalledProcessError:
         return False
 
-
 try:
-    gi.require_version("Gst", "1.0")
+    if 'sphinx' not in sys.modules:
+        gi.require_version("Gst", "1.0")
     from gi.repository import Gst
 except (ImportError, ValueError):
     raise GstNotFoundError(
@@ -249,6 +235,20 @@ class RecorderService(IgnisGObject):
         self._is_paused = False
         self.__pipeline = None
 
+        self._N_THREADS = str(min(max(1, GLib.get_num_processors()), 64))
+
+        options.create_option(name=RECORDING_BITRATE_OPTION, default=8000, exists_ok=True)
+        options.create_option(
+            name=RECORDING_DEFAULT_FILE_LOCATION_OPTION,
+            default=GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_VIDEOS),
+            exists_ok=True,
+        )
+        options.create_option(
+            name=RECORDING_DEFAULT_FILENAME_OPTION,
+            default="%Y-%m-%d_%H-%M-%S.mp4",
+            exists_ok=True,
+        )
+
         app.connect("quit", lambda x: self.stop_recording())
 
     def __check_deps(self) -> None:
@@ -314,7 +314,7 @@ class RecorderService(IgnisGObject):
             path = f"{self.default_file_location}/{datetime.datetime.now().strftime(self.default_filename)}"
 
         pipeline_description = (
-            PIPELINE_TEMPLATE.replace("{n_threads}", N_THREADS)
+            PIPELINE_TEMPLATE.replace("{n_threads}", self._N_THREADS)
             .replace("{path}", path)
             .replace("{bitrate}", str(self.bitrate))
         )

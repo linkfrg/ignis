@@ -333,8 +333,8 @@ class IgnisApp(Gtk.Application, IgnisGObject):
     def __Quit(self, invocation) -> None:
         self.quit()
 
-
-app = IgnisApp()
+if 'sphinx' not in sys.modules:
+    app = IgnisApp()
 
 
 def run_app(config_path: str, debug: bool) -> None:

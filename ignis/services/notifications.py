@@ -17,17 +17,10 @@ POPUP_TIMEOUT_OPTION = "notification_timeout"
 MAX_POPUPS_COUNT_OPTION = "notification_max_popups_count"
 DND_OPTION = "dnd"
 
-options.create_option(name=DND_OPTION, default=False, exists_ok=True)
-options.create_option(name=POPUP_TIMEOUT_OPTION, default=5, exists_ok=True)
-options.create_option(name=MAX_POPUPS_COUNT_OPTION, default=3, exists_ok=True)
-
 NOTIFICATIONS_CACHE_DIR = f"{CACHE_DIR}/notifications"
 NOTIFICATIONS_CACHE_FILE = f"{NOTIFICATIONS_CACHE_DIR}/notifications.json"
 NOTIFICATIONS_IMAGE_DATA = f"{NOTIFICATIONS_CACHE_DIR}/images"
 NOTIFICATIONS_EMPTY_CACHE_FILE = {"notifications": []}
-
-os.makedirs(NOTIFICATIONS_CACHE_DIR, exist_ok=True)
-os.makedirs(NOTIFICATIONS_IMAGE_DATA, exist_ok=True)
 
 
 class Notification(IgnisGObject):
@@ -260,6 +253,13 @@ class NotificationService(IgnisGObject):
         self._id = 1
         self._notifications = {}
         self._popups = {}
+
+        os.makedirs(NOTIFICATIONS_CACHE_DIR, exist_ok=True)
+        os.makedirs(NOTIFICATIONS_IMAGE_DATA, exist_ok=True)
+
+        options.create_option(name=DND_OPTION, default=False, exists_ok=True)
+        options.create_option(name=POPUP_TIMEOUT_OPTION, default=5, exists_ok=True)
+        options.create_option(name=MAX_POPUPS_COUNT_OPTION, default=3, exists_ok=True)
 
         self.__load_notifications()
 

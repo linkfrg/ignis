@@ -1,4 +1,5 @@
 import gi
+import sys
 from gi.repository import GObject
 from ignis.gobject import IgnisGObject
 from typing import List
@@ -6,7 +7,8 @@ from ignis.exceptions import GvcNotFoundError
 
 
 try:
-    gi.require_version("Gvc", "1.0")
+    if 'sphinx' not in sys.modules:
+        gi.require_version("Gvc", "1.0")
     from gi.repository import Gvc
 except (ImportError, ValueError):
     raise GvcNotFoundError() from None

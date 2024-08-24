@@ -1,3 +1,4 @@
+import sys
 import json
 from ignis.gobject import IgnisGObject, Binding
 from gi.repository import GObject
@@ -64,6 +65,9 @@ class OptionsService(IgnisGObject):
         self.__load_data()
 
     def __load_data(self) -> dict:
+        if 'sphinx' in sys.modules:
+            return
+
         empty = {}
         try:
             with open(OPTIONS_FILE) as file:
