@@ -15,7 +15,7 @@ __Ignis is a Python framework for building desktop shells using GTK4.__
 > API is a subject to change.
 
 ## Getting started
-See [Documentation](https://pyignis.readthedocs.io)
+See [Documentation](https://linkfrg.github.io/ignis)
 
 ## Supported Desktops
 - wlroots-based Wayland compositors (e.g., __Sway__) 
