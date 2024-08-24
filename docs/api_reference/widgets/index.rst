@@ -92,4 +92,4 @@ Here is a list of built-in widgets.
    :glob:
    :maxdepth: 1
 
-   generated/*
+   ./*

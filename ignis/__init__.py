@@ -5,6 +5,7 @@ __version__ = "0.1"
 if "sphinx" not in sys.modules:
     import gi
     from ctypes import CDLL
+
     CDLL("libgtk4-layer-shell.so")
 
     gi.require_version("Gtk", "4.0")

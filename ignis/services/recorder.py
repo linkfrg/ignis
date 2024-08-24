@@ -18,6 +18,7 @@ RECORDING_BITRATE_OPTION = "recording_bitrate"
 RECORDING_DEFAULT_FILE_LOCATION_OPTION = "recording_default_file_location"
 RECORDING_DEFAULT_FILENAME_OPTION = "recording_default_filename"
 
+
 def gst_inspect(name: str) -> None:
     try:
         subprocess.run(["gst-inspect-1.0", "--exists", name], check=True)
@@ -25,8 +26,9 @@ def gst_inspect(name: str) -> None:
     except subprocess.CalledProcessError:
         return False
 
+
 try:
-    if 'sphinx' not in sys.modules:
+    if "sphinx" not in sys.modules:
         gi.require_version("Gst", "1.0")
     from gi.repository import Gst
 except (ImportError, ValueError):
@@ -237,7 +239,9 @@ class RecorderService(IgnisGObject):
 
         self._N_THREADS = str(min(max(1, GLib.get_num_processors()), 64))
 
-        options.create_option(name=RECORDING_BITRATE_OPTION, default=8000, exists_ok=True)
+        options.create_option(
+            name=RECORDING_BITRATE_OPTION, default=8000, exists_ok=True
+        )
         options.create_option(
             name=RECORDING_DEFAULT_FILE_LOCATION_OPTION,
             default=GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_VIDEOS),

@@ -65,7 +65,7 @@ class OptionsService(IgnisGObject):
         self.__load_data()
 
     def __load_data(self) -> dict:
-        if 'sphinx' in sys.modules:
+        if "sphinx" in sys.modules:
             return
 
         empty = {}

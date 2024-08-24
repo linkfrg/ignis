@@ -7,7 +7,7 @@ from ignis.exceptions import GvcNotFoundError
 
 
 try:
-    if 'sphinx' not in sys.modules:
+    if "sphinx" not in sys.modules:
         gi.require_version("Gvc", "1.0")
     from gi.repository import Gvc
 except (ImportError, ValueError):

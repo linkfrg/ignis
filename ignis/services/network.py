@@ -8,7 +8,7 @@ from ignis.exceptions import NetworkManagerNotFoundError
 
 
 try:
-    if 'sphinx' not in sys.modules:
+    if "sphinx" not in sys.modules:
         gi.require_version("NM", "1.0")
     from gi.repository import NM
 except (ImportError, ValueError):
@@ -409,6 +409,7 @@ class Wifi(IgnisGObject):
         - **icon_name** (``str``, read-only): The icon name of the first device in the list.
         - **enabled** (``bool``, read-only): Whether Wi-Fi is enabled.
     """
+
     def __init__(self, client: NM.Client):
         super().__init__()
         self.__client = client
@@ -555,6 +556,7 @@ class Ethernet(IgnisGObject):
         - **is_connected** (``bool``, read-only): Whether at least one Ethernet device is connected to the network.
         - **icon_name** (``str``, read-only): The general icon name for all devices, depends on ``is_connected`` property.
     """
+
     def __init__(self, client: NM.Client):
         super().__init__()
         self.__client = client
