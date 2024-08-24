@@ -7,6 +7,6 @@ on:
 
 jobs:
   build:
-    uses: ./.github/workflows/docs.yaml
+    uses: ./.github/workflows/build_docs.yaml
     with:
       TAG: "latest"
