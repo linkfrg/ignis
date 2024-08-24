@@ -1,0 +1,51 @@
+name: docs
+
+on:
+  workflow_call:
+    inputs:
+      TAG:
+        required: true
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Install Python dependencies
+      run: |
+        pip install -r docs/requirements.txt
+
+    - name: Build documentation
+      run: |
+        cd docs
+        make html
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: docs/_build/html
+        destination_dir: ${{ inputs.TAG }}
+        allow_empty_commit: true
+        force_orphan: false
+        keep_files: true
+
+    - name: Deploy to "stable" directory if TAG matches ref_name
+      if: ${{ inputs.TAG == github.ref_name }}
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: docs/_build/html
+        destination_dir: stable
+        allow_empty_commit: true
+        force_orphan: false
+        keep_files: true
