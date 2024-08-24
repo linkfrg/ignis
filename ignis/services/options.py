@@ -1,8 +1,9 @@
+import sys
 import json
 from ignis.gobject import IgnisGObject, Binding
 from gi.repository import GObject
 from typing import Any
-from ignis.settings import CACHE_DIR
+from ignis import CACHE_DIR
 from ignis.exceptions import OptionExistsError, OptionNotFoundError
 
 OPTIONS_FILE = f"{CACHE_DIR}/options.json"
@@ -64,6 +65,9 @@ class OptionsService(IgnisGObject):
         self.__load_data()
 
     def __load_data(self) -> dict:
+        if "sphinx" in sys.modules:
+            return
+
         empty = {}
         try:
             with open(OPTIONS_FILE) as file:

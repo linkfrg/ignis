@@ -79,7 +79,7 @@ class IgnisGObject(GObject.Object):
     def notify_list(self, *args) -> None:
         """
         Notify list of properties.
-        You can pass unlimited number of property names as *args.
+        You can pass unlimited number of property names as arguments.
         """
         for i in args:
             self.notify(i)

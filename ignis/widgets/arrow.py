@@ -19,7 +19,7 @@ class Arrow(Icon):
 
     .. hint::
         If you are looking for a button with an arrow that rotates on click,
-    see :class:`~ignis.widgets.Widget.ArrowButton`.
+        see :class:`~ignis.widgets.Widget.ArrowButton`.
 
     Properties:
         - **rotated** (``bool``, optional, read-write): Whether the arrow is rotated. Default: ``False``.

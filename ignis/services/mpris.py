@@ -8,11 +8,9 @@ from ignis.gobject import IgnisGObject
 from ignis.utils import Utils
 from loguru import logger
 from typing import List
-from ignis.settings import CACHE_DIR
+from ignis import CACHE_DIR
 
 ART_URL_CACHE_DIR = f"{CACHE_DIR}/art_url"
-
-os.makedirs(ART_URL_CACHE_DIR, exist_ok=True)
 
 
 class MprisPlayer(IgnisGObject):
@@ -327,6 +325,8 @@ class MprisService(IgnisGObject):
             signal_name="NameOwnerChanged",
             callback=lambda *args: self.__init_player(args[5][0]),
         )
+
+        os.makedirs(ART_URL_CACHE_DIR, exist_ok=True)
 
         self.__get_players()
 

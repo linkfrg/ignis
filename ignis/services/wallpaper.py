@@ -6,11 +6,9 @@ from ignis.widgets.picture import Picture
 from ignis.utils import Utils
 from gi.repository import GObject
 from ignis.services import Service
-from ignis.settings import CACHE_DIR
+from ignis import CACHE_DIR
 
 options = Service.get("options")
-
-options.create_option(name="wallpaper", default=None, exists_ok=True)
 
 CACHE_WALLPAPER_PATH = f"{CACHE_DIR}/wallpaper"
 
@@ -39,8 +37,8 @@ class WallpaperService(IgnisGObject):
 
     def __init__(self):
         super().__init__()
-
         self._windows = []
+        options.create_option(name="wallpaper", default=None, exists_ok=True)
 
         self.__sync()
 

@@ -182,7 +182,11 @@ def left() -> Widget.Box:
 
 def center() -> Widget.Box:
     return Widget.Box(
-        child=[current_notification(), Widget.Separator(vertical=True, css_classes=["middle-separator"]), media()],
+        child=[
+            current_notification(),
+            Widget.Separator(vertical=True, css_classes=["middle-separator"]),
+            media(),
+        ],
         spacing=10,
     )
 

@@ -1,0 +1,11 @@
+name: Build Stable Documentation
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    uses: ./.github/workflows/docs.yaml
+    with:
+      TAG: ${{ github.ref_name }}

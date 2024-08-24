@@ -11,8 +11,6 @@ options: OptionsService = Service.get("options")
 
 PINNED_APPS_OPTION = "pinned_apps"
 
-options.create_option(name=PINNED_APPS_OPTION, default=[], exists_ok=True)
-
 
 class ApplicationAction(IgnisGObject):
     """
@@ -193,6 +191,8 @@ class ApplicationsService(IgnisGObject):
         self._apps = {}
         self._pinned = {}
         self._monitor = Gio.AppInfoMonitor.get()
+        options.create_option(name=PINNED_APPS_OPTION, default=[], exists_ok=True)
+
         self._monitor.connect("changed", lambda x: self.__sync())
         self.__sync()
 

@@ -1,6 +1,7 @@
 from ignis.widgets.button import Button
 from ignis.widgets.arrow import Arrow
 
+
 class ArrowButton(Button):
     """
     Bases: :class:`~ignis.widgets.button.Button`.

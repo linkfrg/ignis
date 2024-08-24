@@ -19,4 +19,4 @@ Built-in services
    :glob:
    :maxdepth: 1
 
-   generated/*
+   ./*

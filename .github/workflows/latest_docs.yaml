@@ -1,0 +1,12 @@
+name: Build Latest Documentation
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    uses: ./.github/workflows/docs.yaml
+    with:
+      TAG: "latest"

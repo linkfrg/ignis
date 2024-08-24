@@ -15,4 +15,4 @@ Use the universal ``Utils`` class to access them:
    :glob:
    :maxdepth: 1
 
-   generated/*
+   ./*
