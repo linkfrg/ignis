@@ -9,7 +9,7 @@ project = "Ignis"
 copyright = "2024, linkfrg"
 author = "linkfrg"
 REPO_URL = "https://github.com/linkfrg/ignis"
-DOCS_URL = "https://linkfrg.github.io/linkfrg/latest"
+DOCS_URL = "https://linkfrg.github.io/ignis/latest"
 
 extensions = ["sphinx.ext.autodoc", "sphinx.ext.napoleon"]
 
