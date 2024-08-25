@@ -387,6 +387,9 @@ class WifiDevice(IgnisGObject):
         """
         Scan for Wi-Fi networks.
         """
+        if self.state == "unavailable":
+            return
+
         self.__device.request_scan_async(
             None, lambda x, result: self.__device.request_scan_finish(result)
         )
@@ -417,6 +420,9 @@ class Wifi(IgnisGObject):
         self.__client.connect(
             "notify::all-devices",
             lambda *args: GLib.timeout_add_seconds(1, self.__sync),
+        )
+        self.__client.connect(
+            "notify::wireless-enabled", lambda *args: self.notify("enabled")
         )
         self.__sync()
 
