@@ -530,6 +530,113 @@ document.write(`
                   
   <section id="mpris-media">
 <h1>MPRIS (media)<a class="headerlink" href="#mpris-media" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="ignis.services.mpris.MprisService">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MprisService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.mpris.MprisService" title="Link to this definition">#</a></dt>
+<dd><p>Service for getting and controlling media players using the MPRIS interface (e.g., Spotify, Firefox/Chromium with playing media).</p>
+<dl class="simple">
+<dt><strong>Dependencies:</strong></dt><dd><ul class="simple">
+<li><p><strong>python-requests</strong></p></li>
+</ul>
+</dd>
+<dt>Signals:</dt><dd><ul class="simple">
+<li><p><strong>&quot;player_added&quot;</strong> (<a class="reference internal" href="applications.html#ignis.services.applications.Application" title="ignis.services.applications.Application"><code class="xref py py-class docutils literal notranslate"><span class="pre">Application</span></code></a>): Emitted when a <a class="reference internal" href="applications.html#ignis.services.applications.Application" title="ignis.services.applications.Application"><code class="xref py py-class docutils literal notranslate"><span class="pre">Application</span></code></a> has been added.</p></li>
+</ul>
+</dd>
+<dt>Properties:</dt><dd><ul class="simple">
+<li><p><strong>players</strong> (List[<a class="reference internal" href="applications.html#ignis.services.applications.Application" title="ignis.services.applications.Application"><code class="xref py py-class docutils literal notranslate"><span class="pre">Application</span></code></a>], read-only): List of currently active players.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.service</span> <span class="kn">import</span> <span class="n">Service</span>
+
+<span class="n">mpris</span> <span class="o">=</span> <span class="n">Service</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mpris&quot;</span><span class="p">)</span>
+
+<span class="n">mpris</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;player_added&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">player</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">player</span><span class="o">.</span><span class="n">desktop_entry</span><span class="p">,</span> <span class="n">player</span><span class="o">.</span><span class="n">title</span><span class="p">))</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MprisPlayer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.mpris.MprisPlayer" title="Link to this definition">#</a></dt>
+<dd><p>A media player object.</p>
+<dl class="simple">
+<dt>Signals:</dt><dd><ul class="simple">
+<li><p><strong>&quot;closed&quot;</strong> (): Emitted when a player has been closed or removed.</p></li>
+</ul>
+</dd>
+<dt>Properties:</dt><dd><ul class="simple">
+<li><p><strong>can_control</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-only): Whether the player can be controlled.</p></li>
+<li><p><strong>can_go_next</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-only): Whether the player can go to the next track.</p></li>
+<li><p><strong>can_go_previous</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-only): Whether the player can go to the previous track.</p></li>
+<li><p><strong>can_pause</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-only): Whether the player can pause.</p></li>
+<li><p><strong>can_play</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-only): Whether the player can play.</p></li>
+<li><p><strong>can_seek</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-only): Whether the player can seek (change position on track in seconds).</p></li>
+<li><p><strong>loop_status</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): Loop status.</p></li>
+<li><p><strong>metadata</strong> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>, read-only): Dictionary containing metadata. You typically shouldn't use this property.</p></li>
+<li><p><strong>track_id</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): Track ID.</p></li>
+<li><p><strong>length</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, read-only): Length of media. Returns -1 if not supported by player.</p></li>
+<li><p><strong>art_url</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): Path to cached art image of media.</p></li>
+<li><p><strong>album</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): Album name.</p></li>
+<li><p><strong>artist</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): Artist name.</p></li>
+<li><p><strong>title</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): Current title.</p></li>
+<li><p><strong>url</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): URL address to the media.</p></li>
+<li><p><strong>playback_status</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): Playback status. Can be &quot;Playing&quot; or &quot;Paused&quot;.</p></li>
+<li><p><strong>position</strong> (<code class="docutils literal notranslate"><span class="pre">position</span></code>, read-write): Current position in the track, in seconds.</p></li>
+<li><p><strong>shuffle</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-only): Shuffle status (honestly idk what is that).</p></li>
+<li><p><strong>volume</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>, read-only): Player volume.</p></li>
+<li><p><strong>identity</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-only): Name of the player (e.g. &quot;Spotify&quot;, &quot;firefox&quot;).</p></li>
+<li><p><strong>desktop_entry</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-only): .desktop file of the player.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.next">
+<span class="sig-name descname"><span class="pre">next</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.next" title="Link to this definition">#</a></dt>
+<dd><p>Go to the next track.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.pause">
+<span class="sig-name descname"><span class="pre">pause</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.pause" title="Link to this definition">#</a></dt>
+<dd><p>Pause playback.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.play">
+<span class="sig-name descname"><span class="pre">play</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.play" title="Link to this definition">#</a></dt>
+<dd><p>Start playback.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.play_pause">
+<span class="sig-name descname"><span class="pre">play_pause</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.play_pause" title="Link to this definition">#</a></dt>
+<dd><p>Toggle between playing and pausing.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.previous">
+<span class="sig-name descname"><span class="pre">previous</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.previous" title="Link to this definition">#</a></dt>
+<dd><p>Go to the previous track.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.seek">
+<span class="sig-name descname"><span class="pre">seek</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.seek" title="Link to this definition">#</a></dt>
+<dd><p>Seek to a specific position in the track.
+Positive values move forward, and negative values move backward.
+The offset is in milliseconds.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.stop">
+<span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.stop" title="Link to this definition">#</a></dt>
+<dd><p>Stop playback and remove the MPRIS interface if supported by the player.</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 
@@ -569,6 +676,28 @@ document.write(`
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisService"><code class="docutils literal notranslate"><span class="pre">MprisService</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer"><code class="docutils literal notranslate"><span class="pre">MprisPlayer</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer.next"><code class="docutils literal notranslate"><span class="pre">MprisPlayer.next()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer.pause"><code class="docutils literal notranslate"><span class="pre">MprisPlayer.pause()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer.play"><code class="docutils literal notranslate"><span class="pre">MprisPlayer.play()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer.play_pause"><code class="docutils literal notranslate"><span class="pre">MprisPlayer.play_pause()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer.previous"><code class="docutils literal notranslate"><span class="pre">MprisPlayer.previous()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer.seek"><code class="docutils literal notranslate"><span class="pre">MprisPlayer.seek()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer.stop"><code class="docutils literal notranslate"><span class="pre">MprisPlayer.stop()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
 
   <div class="sidebar-secondary-item">
 

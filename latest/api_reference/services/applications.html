@@ -530,6 +530,109 @@ document.write(`
                   
   <section id="applications">
 <h1>Applications<a class="headerlink" href="#applications" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="ignis.services.applications.ApplicationsService">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ApplicationsService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.applications.ApplicationsService" title="Link to this definition">#</a></dt>
+<dd><p>Provides a list of applications installed on the system.
+It also allows &quot;pinning&quot; of apps and retrieving a list of pinned applications.</p>
+<dl class="simple">
+<dt>Properties:</dt><dd><ul class="simple">
+<li><p><strong>apps</strong> (List[<a class="reference internal" href="#ignis.services.applications.Application" title="ignis.services.applications.Application"><code class="xref py py-class docutils literal notranslate"><span class="pre">Application</span></code></a>], read-only): A list of all installed applications.</p></li>
+<li><p><strong>pinned</strong> (List[<a class="reference internal" href="#ignis.services.applications.Application" title="ignis.services.applications.Application"><code class="xref py py-class docutils literal notranslate"><span class="pre">Application</span></code></a>], read-only): A list of all pinned applications.</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Example usage</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.service</span> <span class="kn">import</span> <span class="n">Service</span>
+
+<span class="n">applications</span> <span class="o">=</span> <span class="n">Service</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;applications&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">applications</span><span class="o">.</span><span class="n">apps</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.applications.ApplicationsService.search">
+<span class="sig-name descname"><span class="pre">search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ignis.services.applications.Application" title="ignis.services.applications.Application"><span class="pre">Application</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ignis.services.applications.ApplicationsService.search" title="Link to this definition">#</a></dt>
+<dd><p>Filter applications by query.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>query</strong> (<em>str</em>) -- the string to be searched for</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of applications filtered by provided query.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="#ignis.services.applications.Application" title="ignis.services.applications.Application">Application</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ignis.services.applications.Application">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Application</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.applications.Application" title="Link to this definition">#</a></dt>
+<dd><p>An application object.</p>
+<dl class="simple">
+<dt>Signals:</dt><dd><ul class="simple">
+<li><p><strong>&quot;pinned&quot;</strong>: Emitted when the application has been pinned.</p></li>
+<li><p><strong>&quot;unpinned&quot;</strong>: Emitted when the application has been unpinned.</p></li>
+</ul>
+</dd>
+<dt>Properties:</dt><dd><ul class="simple">
+<li><p><strong>app</strong> (<a class="reference external" href="https://lazka.github.io/pgi-docs/index.html#Gio-2.0/classes/DesktopAppInfo.html">Gio.DesktopAppInfo</a>, read-only): An instance of <code class="docutils literal notranslate"><span class="pre">Gio.DesktopAppInfo</span></code>. You typically shouldn't use this property.</p></li>
+<li><p><strong>id</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The ID of the application.</p></li>
+<li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The name of the application.</p></li>
+<li><p><strong>description</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The description of the application.</p></li>
+<li><p><strong>icon</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The icon of the application. If the app has no icon, &quot;image-missing&quot; will be returned.</p></li>
+<li><p><strong>keywords</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): Keywords of the application. Ususally, these are words that describe the application.</p></li>
+<li><p><strong>desktop_file</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The .desktop file of the application.</p></li>
+<li><p><strong>executable</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The executable of the application. Usually, this is a binary file of the application.</p></li>
+<li><p><strong>exec_string</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The string that contains the executable with command line arguments, used to launch the application.</p></li>
+<li><p><strong>actions</strong> (List[<a class="reference internal" href="#ignis.services.applications.Application" title="ignis.services.applications.Application"><code class="xref py py-class docutils literal notranslate"><span class="pre">Application</span></code></a>], read-only): A list of actions.</p></li>
+<li><p><strong>is_pinned</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-write): Whether the application is pinned.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.applications.Application.launch">
+<span class="sig-name descname"><span class="pre">launch</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.applications.Application.launch" title="Link to this definition">#</a></dt>
+<dd><p>Launch the application.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.applications.Application.pin">
+<span class="sig-name descname"><span class="pre">pin</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.applications.Application.pin" title="Link to this definition">#</a></dt>
+<dd><p>Pin the application.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.applications.Application.unpin">
+<span class="sig-name descname"><span class="pre">unpin</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.applications.Application.unpin" title="Link to this definition">#</a></dt>
+<dd><p>Unpin the application.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ignis.services.applications.ApplicationAction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ApplicationAction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.applications.ApplicationAction" title="Link to this definition">#</a></dt>
+<dd><p>Application action.</p>
+<dl class="simple">
+<dt>Properties:</dt><dd><ul class="simple">
+<li><p><strong>action</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): ID of the action.</p></li>
+<li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): Human-readable name of the action.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.applications.ApplicationAction.launch">
+<span class="sig-name descname"><span class="pre">launch</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.applications.ApplicationAction.launch" title="Link to this definition">#</a></dt>
+<dd><p>Launch action.</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 
@@ -569,6 +672,31 @@ document.write(`
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.applications.ApplicationsService"><code class="docutils literal notranslate"><span class="pre">ApplicationsService</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.applications.ApplicationsService.search"><code class="docutils literal notranslate"><span class="pre">ApplicationsService.search()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.applications.Application"><code class="docutils literal notranslate"><span class="pre">Application</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.applications.Application.launch"><code class="docutils literal notranslate"><span class="pre">Application.launch()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.applications.Application.pin"><code class="docutils literal notranslate"><span class="pre">Application.pin()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.applications.Application.unpin"><code class="docutils literal notranslate"><span class="pre">Application.unpin()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.applications.ApplicationAction"><code class="docutils literal notranslate"><span class="pre">ApplicationAction</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.applications.ApplicationAction.launch"><code class="docutils literal notranslate"><span class="pre">ApplicationAction.launch()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
 
   <div class="sidebar-secondary-item">
 

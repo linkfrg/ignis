@@ -468,8 +468,8 @@ Pass a callback function that will be called when the signal is emitted.
 Signals always pass the GObject they belong to as the first argument to the callback.
 Services also have their own signals, which are listed on their respective documentation pages.
 Additionally, signals can have custom arguments.
-In example below, <code class="docutils literal notranslate"><span class="pre">&quot;player_added&quot;</span></code> signal passes an instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">MprisPlayer</span></code> as the second argument to the callback.</p>
-<p>Here, we will use the <code class="xref py py-class docutils literal notranslate"><span class="pre">MprisService</span></code> as an example.</p>
+In example below, <code class="docutils literal notranslate"><span class="pre">&quot;player_added&quot;</span></code> signal passes an instance of <a class="reference internal" href="../api_reference/services/mpris.html#ignis.services.mpris.MprisPlayer" title="ignis.services.mpris.MprisPlayer"><code class="xref py py-class docutils literal notranslate"><span class="pre">MprisPlayer</span></code></a> as the second argument to the callback.</p>
+<p>Here, we will use the <a class="reference internal" href="../api_reference/services/mpris.html#ignis.services.mpris.MprisService" title="ignis.services.mpris.MprisService"><code class="xref py py-class docutils literal notranslate"><span class="pre">MprisService</span></code></a> as an example.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.service</span> <span class="kn">import</span> <span class="n">Service</span>
 
 <span class="n">mpris</span> <span class="o">=</span> <span class="n">Service</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mpris&quot;</span><span class="p">)</span>
