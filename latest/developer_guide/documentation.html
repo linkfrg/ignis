@@ -523,15 +523,16 @@ In brackets, indicate the custom arguments that the signal passes to the callbac
 </section>
 <section id="building-documentation">
 <h2>Building documentation<a class="headerlink" href="#building-documentation" title="Link to this heading">#</a></h2>
-<p>Firstly, <a class="reference external" href="env.html">set up development environment</a>, if not done already.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>sphinx<span class="w"> </span>sphinx_book_theme
+<p>Install dependencies</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>docs/requirements.txt
 </pre></div>
 </div>
+<p>Build</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>docs
 make<span class="w"> </span>html
 </pre></div>
 </div>
-<p>Built documentation will be stored at <code class="docutils literal notranslate"><span class="pre">docs/_build/html/</span></code></p>
+<p>Built documentation will be stored at <code class="docutils literal notranslate"><span class="pre">_build/html</span></code>.</p>
 </section>
 </section>
 
