@@ -68,15 +68,17 @@ In brackets, indicate the property type and ``read-only`` or ``read-write``.
 Building documentation
 -------------------------
 
-Firstly, `set up development environment <env.html>`_, if not done already.
+Install dependencies
 
 .. code-block:: bash
 
-    pip install sphinx sphinx_book_theme
+    pip install -r docs/requirements.txt
+
+Build
 
 .. code-block:: bash
 
     cd docs
     make html
 
-Built documentation will be stored at ``docs/_build/html/``
+Built documentation will be stored at ``_build/html``.
