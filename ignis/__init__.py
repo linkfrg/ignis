@@ -2,7 +2,7 @@ import os
 import sys
 
 
-__version__ = "0.1"
+__version__ = "0.1dev0"
 
 if "sphinx" not in sys.modules:
     import gi

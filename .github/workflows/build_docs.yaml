@@ -26,6 +26,7 @@ jobs:
 
     - name: Build documentation
       run: |
+        export DOCS_VERSION=${{ inputs.TAG }}
         cd docs
         make html
 

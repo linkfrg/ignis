@@ -3,8 +3,6 @@ import sys
 
 sys.path.insert(0, os.path.abspath(".."))
 
-import ignis  # noqa: E402
-
 project = "Ignis"
 copyright = "2024, linkfrg"
 author = "linkfrg"
@@ -30,8 +28,12 @@ add_module_names = False
 
 json_url = f"{DOCS_URL}/_static/switcher.json"
 
-release = ignis.__version__
-version_match = f"v{release}"
+version_match = os.getenv("DOCS_VERSION")
+
+if not version_match or version_match == "latest":
+    version_match = "dev"
+
+release = version_match
 
 html_theme_options = {
     "use_edit_page_button": True,
