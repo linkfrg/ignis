@@ -8,7 +8,7 @@ class Poll(IgnisGObject):
     Call a callback every n seconds specefied by the timeout.
 
     Properties:
-        - **timeout** (``int``, read-write): The timeout interval in seconds.
+        - **timeout** (``int``, read-write): The timeout interval in milliseconds.
         - **callback** (``callable``, read-write): The function to call when the timeout is reached. The ``self`` will passed as an argument.
         - **output** (``str``, read-only): The output of the callback. This is not an argument for the constructor.
 
@@ -62,7 +62,7 @@ class Poll(IgnisGObject):
         self._output = self._callback(self, *self._args)
         self.emit("changed")
         self.notify("output")
-        self.__id = GLib.timeout_add_seconds(self._timeout, self.__main)
+        self.__id = GLib.timeout_add(self._timeout, self.__main)
 
     def cancel(self) -> None:
         """
