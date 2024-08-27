@@ -36,7 +36,7 @@ class FileMonitor(IgnisGObject):
         - **"changed"** (``str``, ``str``): Emitted when the file or directory changed. Passes path and event type as arguments.
 
     Properties:
-        - **path** (``str``, read-only): The path to the file or directory to be monitored.
+        - **path** (``str``, required, read-only): The path to the file or directory to be monitored.
         - **recursive** (``bool``, optional, read-only): Whether monitoring is recursive (monitor all subdirectories and files).
         - **flags** (``str``, optional, read-only): What the monitor will watch for.
         - **callback** (``callable``, optional, read-write): A function to call when the file or directory changes.

@@ -7,8 +7,8 @@ class Timeout(IgnisGObject):
     Call a function after a specified interval of time.
 
     Properties:
-        - **ms** (``int``, read-only): Time in milliseconds.
-        - **target** (``callable``, read-only): Function to call.
+        - **ms** (``int``, required, read-only): Time in milliseconds.
+        - **target** (``callable``, required, read-only): Function to call.
 
     **Example usage:**
 

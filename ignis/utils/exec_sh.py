@@ -20,9 +20,9 @@ class AsyncCompletedProcess:
     Completed process object for :func:`~ignis.utils.exec_sh.exec_sh_async`.
 
     Properties:
-        - **returncode** (``int``, read-only): The return code of the process.
-        - **stdout** (``str``, read-only): The output of the process.
-        - **stderr** (``str``, read-only): The errors of the process.
+        - **returncode** (``int``, not argument, read-only): The return code of the process.
+        - **stdout** (``str``, not argument, read-only): The output of the process.
+        - **stderr** (``str``, not argument, read-only): The errors of the process.
     """
 
     def __init__(self, process: Gio.Subprocess) -> None:
