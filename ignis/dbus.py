@@ -111,10 +111,7 @@ class DBusService(IgnisGObject):
     def properties(self) -> Dict[str, callable]:
         return self._properties
 
-
-    def __export_object(
-        self, connection: Gio.DBusConnection, name: str
-    ) -> None:
+    def __export_object(self, connection: Gio.DBusConnection, name: str) -> None:
         self._connection = connection
         self._connection.register_object(
             self._object_path,

@@ -367,7 +367,9 @@ class WifiDevice(IgnisGObject):
         self.__device.connect("access-point-added", self.__sync_access_points)
         self.__device.connect("access-point-removed", self.__sync_access_points)
         self.__device.connect("notify::state", lambda x, y: self.notify("state"))
-        self.__device.connect("notify::active-connection", lambda x, y: self.notify("is-connected"))
+        self.__device.connect(
+            "notify::active-connection", lambda x, y: self.notify("is-connected")
+        )
 
         self.__sync_access_points()
 
@@ -385,7 +387,9 @@ class WifiDevice(IgnisGObject):
 
     @GObject.Property
     def is_connected(self) -> bool:
-        return not not self.__device.get_active_connection() # not not to convert to bool
+        return (
+            not not self.__device.get_active_connection()
+        )  # not not to convert to bool
 
     def scan(self) -> None:
         """
