@@ -19,7 +19,7 @@ class FileDialog(Gtk.FileDialog, BaseWidget):
         - **"file-set"** (``Gio.File``): Emitted when a file or folder is selected.
 
     Properties:
-        - **file** (``Gio.File``, read-only): The selected ``Gio.File``. This is not an argument to the constructor.
+        - **file** (``Gio.File``, not argument, read-only): The selected ``Gio.File``.
         - **on_file_set** (``callable``, optional, read-write): A function to call when user selects a file.
         - **filters** (List[:class:`~ignis.widgets.Widget.FileFilter`], optional, read-write): A list of file filters.
         - **initial_path** (``str``, optional, read-write): The path to the folder or file that will be selected by default.

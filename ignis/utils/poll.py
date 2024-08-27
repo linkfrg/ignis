@@ -8,11 +8,14 @@ class Poll(IgnisGObject):
     Call a callback every n seconds specefied by the timeout.
 
     Properties:
-        - **timeout** (``int``, read-write): The timeout interval in milliseconds.
-        - **callback** (``callable``, read-write): The function to call when the timeout is reached. The ``self`` will passed as an argument.
-        - **output** (``str``, read-only): The output of the callback. This is not an argument for the constructor.
+        - **timeout** (``int``, required, read-write): The timeout interval in milliseconds.
+        - **callback** (``callable``, required, read-write): The function to call when the timeout is reached. The ``self`` will passed as an argument.
+        - **output** (``str``, not argument, read-only): The output of the callback.
 
     You can pass arguments to the constructor, and they will be passed to the callback.
+
+    .. hint::
+        You can use bind() on ``output``.
 
     **Example usage:**
 

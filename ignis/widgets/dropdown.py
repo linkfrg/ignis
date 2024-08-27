@@ -12,7 +12,7 @@ class DropDown(Gtk.DropDown, BaseWidget):
     Properties:
         - **items** (``List[str]``, optional, read-write): List of strings that can be selected in the popover.
         - **on_selected** (``callable``, optional, read-write): Function to call when the user selects an item from the list.
-        - **selected** (``str``, read-only): The selected string. This is not an argument to the constructor; it is a shortcut for ``self.selected_item.props.string``.
+        - **selected** (``str``, not argument, read-only): The selected string. It is a shortcut for ``self.selected_item.props.string``.
 
     .. code-block:: python
 
