@@ -5,7 +5,7 @@ from typing import Any
 
 class Poll(IgnisGObject):
     """
-    Call a callback every n seconds specefied by the timeout.
+    Call a callback every n milliseconds specefied by the timeout.
 
     Properties:
         - **timeout** (``int``, required, read-write): The timeout interval in milliseconds.
