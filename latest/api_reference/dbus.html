@@ -532,24 +532,16 @@ document.write(`
 <dt class="sig sig-object py" id="ignis.dbus.DBusService">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DBusService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.dbus.DBusService" title="Link to this definition">#</a></dt>
 <dd><p>Class to help create DBus services.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The well-known name to own.</p></li>
-<li><p><strong>object_path</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- An object path.</p></li>
-<li><p><strong>info</strong> (<a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/classes/DBusInterfaceInfo.html">Gio.DBusInterfaceInfo</a>) -- A <code class="docutils literal notranslate"><span class="pre">Gio.DBusInterfaceInfo</span></code> instance. You can get it from XML using <a class="reference internal" href="utils/load_interface_xml.html#ignis.utils.Utils.load_interface_xml" title="ignis.utils.Utils.load_interface_xml"><code class="xref py py-class docutils literal notranslate"><span class="pre">load_interface_xml</span></code></a>.</p></li>
-<li><p><strong>on_name_acquired</strong> (<code class="docutils literal notranslate"><span class="pre">callable</span></code>, optional) -- Function to call when <code class="docutils literal notranslate"><span class="pre">name</span></code> is acquired.</p></li>
-<li><p><strong>on_name_lost</strong> (<code class="docutils literal notranslate"><span class="pre">callable</span></code>, optional) -- Function to call when <code class="docutils literal notranslate"><span class="pre">name</span></code> is lost.</p></li>
-</ul>
-</dd>
-</dl>
 <dl class="simple">
 <dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The well-known name to own.</p></li>
-<li><p><strong>object_path</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): An object path.</p></li>
-<li><p><strong>connection</strong> (<a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/classes/DBusConnection.html">Gio.DBusConnection</a>, read-only): The <code class="docutils literal notranslate"><span class="pre">Gio.DBusConnection</span></code> instance.</p></li>
-<li><p><strong>methods</strong> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>, read-only): The dictionary of registred DBus methods. See <a class="reference internal" href="#ignis.dbus.DBusService.register_dbus_method" title="ignis.dbus.DBusService.register_dbus_method"><code class="xref py py-func docutils literal notranslate"><span class="pre">register_dbus_method()</span></code></a>.</p></li>
-<li><p><strong>properties</strong> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>, read-only): The dictionary of registred DBus properties. See <a class="reference internal" href="#ignis.dbus.DBusService.register_dbus_property" title="ignis.dbus.DBusService.register_dbus_property"><code class="xref py py-func docutils literal notranslate"><span class="pre">register_dbus_property()</span></code></a>.</p></li>
+<li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, required, read-only): The well-known name to own.</p></li>
+<li><p><strong>object_path</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, required, read-only): An object path.</p></li>
+<li><p><strong>info</strong> (<a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/classes/DBusInterfaceInfo.html">Gio.DBusInterfaceInfo</a>, required, read-only): A <code class="docutils literal notranslate"><span class="pre">Gio.DBusInterfaceInfo</span></code> instance. You can get it from XML using <a class="reference internal" href="utils/load_interface_xml.html#ignis.utils.Utils.load_interface_xml" title="ignis.utils.Utils.load_interface_xml"><code class="xref py py-class docutils literal notranslate"><span class="pre">load_interface_xml</span></code></a>.</p></li>
+<li><p><strong>on_name_acquired</strong> (<code class="docutils literal notranslate"><span class="pre">callable</span></code>, optional, read-write): Function to call when <code class="docutils literal notranslate"><span class="pre">name</span></code> is acquired.</p></li>
+<li><p><strong>on_name_lost</strong> (<code class="docutils literal notranslate"><span class="pre">callable</span></code>, optional, read-write): Function to call when <code class="docutils literal notranslate"><span class="pre">name</span></code> is lost.</p></li>
+<li><p><strong>connection</strong> (<a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/classes/DBusConnection.html">Gio.DBusConnection</a>, not argument, read-only): The <code class="docutils literal notranslate"><span class="pre">Gio.DBusConnection</span></code> instance.</p></li>
+<li><p><strong>methods</strong> (<code class="docutils literal notranslate"><span class="pre">Dict[str,</span> <span class="pre">callable]</span></code>, not argument, read-only): The dictionary of registred DBus methods. See <a class="reference internal" href="#ignis.dbus.DBusService.register_dbus_method" title="ignis.dbus.DBusService.register_dbus_method"><code class="xref py py-func docutils literal notranslate"><span class="pre">register_dbus_method()</span></code></a>.</p></li>
+<li><p><strong>properties</strong> (<code class="docutils literal notranslate"><span class="pre">Dict[str,</span> <span class="pre">callable]</span></code>, not argument, read-only): The dictionary of registred DBus properties. See <a class="reference internal" href="#ignis.dbus.DBusService.register_dbus_property" title="ignis.dbus.DBusService.register_dbus_property"><code class="xref py py-func docutils literal notranslate"><span class="pre">register_dbus_property()</span></code></a>.</p></li>
 </ul>
 </dd>
 <dt>DBus methods:</dt><dd><ul class="simple">
@@ -632,26 +624,18 @@ document.write(`
 <dt class="sig sig-object py" id="ignis.dbus.DBusProxy">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DBusProxy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.dbus.DBusProxy" title="Link to this definition">#</a></dt>
 <dd><p>Class to interact with D-Bus services (create a D-Bus proxy).
-Unlike <a class="reference external" href="https://lazka.github.io/pgi-docs/index.html#Gio-2.0/classes/DBusProxy.html">Gio.DBusProxy</a>, this class also provides convenient pythonic property access.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- A bus name (well-known or unique).</p></li>
-<li><p><strong>object_path</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- An object path.</p></li>
-<li><p><strong>interface_name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- A D-Bus interface name.</p></li>
-<li><p><strong>info</strong> -- A <code class="docutils literal notranslate"><span class="pre">Gio.DBusInterfaceInfo</span></code> instance. You can get it from XML using <a class="reference internal" href="utils/load_interface_xml.html#ignis.utils.Utils.load_interface_xml" title="ignis.utils.Utils.load_interface_xml"><code class="xref py py-class docutils literal notranslate"><span class="pre">load_interface_xml</span></code></a>.</p></li>
-</ul>
-</dd>
-</dl>
+Unlike <a class="reference external" href="https://lazka.github.io/pgi-docs/index.html#Gio-2.0/classes/DBusProxy.html">Gio.DBusProxy</a>,
+this class also provides convenient pythonic property access.</p>
 <dl class="simple">
 <dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): A bus name (well-known or unique).</p></li>
-<li><p><strong>object_path</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): An object path.</p></li>
-<li><p><strong>interface_name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): A D-Bus interface name.</p></li>
-<li><p><strong>proxy</strong> (<a class="reference external" href="https://lazka.github.io/pgi-docs/index.html#Gio-2.0/classes/DBusProxy.html">Gio.DBusProxy</a>, read-only): The <code class="docutils literal notranslate"><span class="pre">Gio.DBusProxy</span></code> instance.</p></li>
-<li><p><strong>methods</strong> (<code class="docutils literal notranslate"><span class="pre">List[str]</span></code>, read-only): A list of methods exposed by D-Bus service.</p></li>
-<li><p><strong>properties</strong> (<code class="docutils literal notranslate"><span class="pre">List[str]</span></code>, read-only): A list of properties exposed by D-Bus service.</p></li>
-<li><p><strong>has_owner</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-only): Whether the <code class="docutils literal notranslate"><span class="pre">name</span></code> has an owner.</p></li>
+<li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, required, read-only): A bus name (well-known or unique).</p></li>
+<li><p><strong>object_path</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, required, read-only): An object path.</p></li>
+<li><p><strong>interface_name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, required, read-only): A D-Bus interface name.</p></li>
+<li><p><strong>info</strong> (<a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/classes/DBusInterfaceInfo.html">Gio.DBusInterfaceInfo</a>, required, read-only): A <code class="docutils literal notranslate"><span class="pre">Gio.DBusInterfaceInfo</span></code> instance. You can get it from XML using <a class="reference internal" href="utils/load_interface_xml.html#ignis.utils.Utils.load_interface_xml" title="ignis.utils.Utils.load_interface_xml"><code class="xref py py-class docutils literal notranslate"><span class="pre">load_interface_xml</span></code></a>.</p></li>
+<li><p><strong>proxy</strong> (<a class="reference external" href="https://lazka.github.io/pgi-docs/index.html#Gio-2.0/classes/DBusProxy.html">Gio.DBusProxy</a>, not argument, read-only): The <code class="docutils literal notranslate"><span class="pre">Gio.DBusProxy</span></code> instance.</p></li>
+<li><p><strong>methods</strong> (<code class="docutils literal notranslate"><span class="pre">List[str]</span></code>, not argument, read-only): A list of methods exposed by D-Bus service.</p></li>
+<li><p><strong>properties</strong> (<code class="docutils literal notranslate"><span class="pre">List[str]</span></code>, not argument, read-only): A list of properties exposed by D-Bus service.</p></li>
+<li><p><strong>has_owner</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, not argument, read-only): Whether the <code class="docutils literal notranslate"><span class="pre">name</span></code> has an owner.</p></li>
 </ul>
 </dd>
 </dl>

@@ -539,7 +539,7 @@ document.write(`
 <dt>Properties:</dt><dd><ul class="simple">
 <li><p><strong>items</strong> (<code class="docutils literal notranslate"><span class="pre">List[str]</span></code>, optional, read-write): List of strings that can be selected in the popover.</p></li>
 <li><p><strong>on_selected</strong> (<code class="docutils literal notranslate"><span class="pre">callable</span></code>, optional, read-write): Function to call when the user selects an item from the list.</p></li>
-<li><p><strong>selected</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The selected string. This is not an argument to the constructor; it is a shortcut for <code class="docutils literal notranslate"><span class="pre">self.selected_item.props.string</span></code>.</p></li>
+<li><p><strong>selected</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, not argument, read-only): The selected string. It is a shortcut for <code class="docutils literal notranslate"><span class="pre">self.selected_item.props.string</span></code>.</p></li>
 </ul>
 </dd>
 </dl>
