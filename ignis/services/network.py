@@ -177,12 +177,14 @@ class WifiAccessPoint(IgnisGObject):
         """
         self._point.connect(
             "notify::strength",
-            lambda *args: (self.notify("strength"), self.notify("icon-name")),
+            lambda *args: self.notify_list("strength", "icon-name"),
         )
-        if self.__device:
-            self.__device.connect(
-                "notify::active-access-point", lambda x, y: self.notify("is-connected")
-            )
+        self.__device.connect(
+            "notify::active-access-point", lambda x, y: self.notify("is-connected")
+        )
+        self.__client.connect(
+            "notify::activating-connection", lambda *args: self.notify("icon-name")
+        )
 
     @GObject.Property
     def point(self) -> NM.AccessPoint:
@@ -332,8 +334,8 @@ class ActiveAccessPoint(WifiAccessPoint):
     def __sync(self) -> None:
         ap = self.__device.get_active_access_point()
         if ap:
-            self._setup()
             self._point = ap
+            self._setup()
         else:
             self._point = NM.AccessPoint()
 
@@ -359,15 +361,13 @@ class WifiDevice(IgnisGObject):
         self.__client.connect(
             "notify::wireless-enabled", lambda *args: self.notify_all()
         )
-        self.__client.connect(
-            "notify::activating-connection", lambda *args: self.ap.notify("icon-name")
-        )
 
         self._ap = ActiveAccessPoint(self.__device, self.__client)
 
         self.__device.connect("access-point-added", self.__sync_access_points)
         self.__device.connect("access-point-removed", self.__sync_access_points)
         self.__device.connect("notify::state", lambda x, y: self.notify("state"))
+        self.__device.connect("notify::active-connection", lambda x, y: self.notify("is-connected"))
 
         self.__sync_access_points()
 
@@ -382,6 +382,10 @@ class WifiDevice(IgnisGObject):
     @GObject.Property
     def state(self) -> str:
         return STATE.get(self.__device.get_state(), None)
+
+    @GObject.Property
+    def is_connected(self) -> bool:
+        return not not self.__device.get_active_connection() # not not to convert to bool
 
     def scan(self) -> None:
         """
@@ -422,7 +426,8 @@ class Wifi(IgnisGObject):
             lambda *args: GLib.timeout_add_seconds(1, self.__sync),
         )
         self.__client.connect(
-            "notify::wireless-enabled", lambda *args: self.notify("enabled")
+            "notify::wireless-enabled",
+            lambda *args: self.notify_list("enabled", "icon-name", "is-connected"),
         )
         self.__sync()
 
@@ -439,8 +444,15 @@ class Wifi(IgnisGObject):
 
     @GObject.Property
     def icon_name(self) -> str:
+        result = None
         for i in self._devices:
-            return i.ap.icon_name
+            if i.ap.icon_name != "network-wireless-offline-symbolic":
+                result = i.ap.icon_name
+
+        if not result:
+            return "network-wireless-offline-symbolic"
+        else:
+            return result
 
     @GObject.Property
     def enabled(self) -> bool:
@@ -459,9 +471,13 @@ class Wifi(IgnisGObject):
 
     def __add_device(self, device: NM.DeviceWifi) -> None:
         dev = WifiDevice(device, self.__client)
-        dev.connect(
+        dev.ap.connect(
             "notify::icon-name",
-            lambda x, y: self.notify_list("icon-name", "is-connected"),
+            lambda x, y: self.notify("icon-name"),
+        )
+        dev.ap.connect(
+            "notify::is-connected",
+            lambda x, y: self.notify("is-connected"),
         )
         self._devices.append(dev)
 
