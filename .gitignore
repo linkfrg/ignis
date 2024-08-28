@@ -1,0 +1,9 @@
+__pycache__
+venv
+.venv
+dist
+docs/_build
+generated
+.vscode
+build
+subprojects
