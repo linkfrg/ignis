@@ -1,5 +1,6 @@
 from gi.repository import Gtk, GObject
 from ignis.widgets.box import Box
+from typing import Callable
 
 
 class EventBox(Box):
@@ -9,13 +10,13 @@ class EventBox(Box):
     The same :class:`~ignis.widgets.box.Box`, but it can receive events.
 
     Properties:
-        - **on_click** (``callable``, optional, read-write): The function to call on left click.
-        - **on_right_click** (``callable``, optional, read-write): The function to call on right click.
-        - **on_middle_click** (``callable``, optional, read-write): The function to call on middle click.
-        - **on_hover** (``callable``, optional, read-write): The function to call on hover.
-        - **on_hover_lost** (``callable``, optional, read-write): The function to call on hover lost.
-        - **on_scroll_up** (``callable``, optional, read-write): The function to call on scroll up.
-        - **on_scroll_down** (``callable``, optional, read-write): The function to call on scroll down.
+        - **on_click** (``Callable``, optional, read-write): The function to call on left click.
+        - **on_right_click** (``Callable``, optional, read-write): The function to call on right click.
+        - **on_middle_click** (``Callable``, optional, read-write): The function to call on middle click.
+        - **on_hover** (``Callable``, optional, read-write): The function to call on hover.
+        - **on_hover_lost** (``Callable``, optional, read-write): The function to call on hover lost.
+        - **on_scroll_up** (``Callable``, optional, read-write): The function to call on scroll up.
+        - **on_scroll_down** (``Callable``, optional, read-write): The function to call on scroll down.
 
     .. code-block:: python
 
@@ -37,25 +38,25 @@ class EventBox(Box):
     __gtype_name__ = "IgnisEventBox"
 
     def __init__(self, **kwargs):
-        self._on_click = None
-        self._on_right_click = None
-        self._on_middle_click = None
-        self._on_hover = None
-        self._on_hover_lost = None
-        self._on_scroll_up = None
-        self._on_scroll_down = None
+        self._on_click: Callable | None = None
+        self._on_right_click: Callable | None = None
+        self._on_middle_click: Callable | None = None
+        self._on_hover: Callable | None = None
+        self._on_hover_lost: Callable | None = None
+        self._on_scroll_up: Callable | None = None
+        self._on_scroll_down: Callable | None = None
 
-        self.__click_controller = None
-        self.__right_click_controller = None
-        self.__middle_click_controller = None
+        self.__click_controller: Gtk.GestureClick | None = None
+        self.__right_click_controller: Gtk.GestureClick | None = None
+        self.__middle_click_controller: Gtk.GestureClick | None = None
 
-        self.__scroll_controller = None
-        self.__motion_controller = None
+        self.__scroll_controller: Gtk.EventControllerScroll | None = None
+        self.__motion_controller: Gtk.EventControllerMotion | None = None
 
         super().__init__(**kwargs)
 
     def __init_click_controller(
-        self, button: int, callback: callable
+        self, button: int, callback: Callable
     ) -> Gtk.GestureClick:
         def on_pressed(gesture_click: Gtk.GestureClick, n_press, x, y) -> None:
             gesture_click.set_state(Gtk.EventSequenceState.CLAIMED)
@@ -105,22 +106,22 @@ class EventBox(Box):
             self.on_hover_lost(self)
 
     @GObject.Property
-    def on_click(self) -> callable:
+    def on_click(self) -> Callable:
         return self._on_click
 
     @on_click.setter
-    def on_click(self, value: callable) -> None:
+    def on_click(self, value: Callable) -> None:
         self._on_click = value
 
         if not self.__click_controller:
             self.__click_controller = self.__init_click_controller(1, self._on_click)
 
     @GObject.Property
-    def on_right_click(self) -> callable:
+    def on_right_click(self) -> Callable:
         return self._on_right_click
 
     @on_right_click.setter
-    def on_right_click(self, value: callable) -> None:
+    def on_right_click(self, value: Callable) -> None:
         self._on_right_click = value
 
         if not self.__right_click_controller:
@@ -129,11 +130,11 @@ class EventBox(Box):
             )
 
     @GObject.Property
-    def on_middle_click(self) -> callable:
+    def on_middle_click(self) -> Callable:
         return self._on_middle_click
 
     @on_middle_click.setter
-    def on_middle_click(self, value: callable) -> None:
+    def on_middle_click(self, value: Callable) -> None:
         self._on_middle_click = value
 
         if not self.__middle_click_controller:
@@ -142,37 +143,37 @@ class EventBox(Box):
             )
 
     @GObject.Property
-    def on_hover(self) -> callable:
+    def on_hover(self) -> Callable:
         return self._on_hover
 
     @on_hover.setter
-    def on_hover(self, on_hover: callable) -> None:
+    def on_hover(self, on_hover: Callable) -> None:
         self._on_hover = on_hover
         self.__init_motion_controller()
 
     @GObject.Property
-    def on_hover_lost(self) -> callable:
+    def on_hover_lost(self) -> Callable:
         return self._on_hover_lost
 
     @on_hover_lost.setter
-    def on_hover_lost(self, on_hover_lost: callable) -> None:
+    def on_hover_lost(self, on_hover_lost: Callable) -> None:
         self._on_hover_lost = on_hover_lost
         self.__init_motion_controller()
 
     @GObject.Property
-    def on_scroll_up(self) -> callable:
+    def on_scroll_up(self) -> Callable:
         return self._on_scroll_up
 
     @on_scroll_up.setter
-    def on_scroll_up(self, on_scroll_up: callable) -> None:
+    def on_scroll_up(self, on_scroll_up: Callable) -> None:
         self._on_scroll_up = on_scroll_up
         self.__init_scroll_controller()
 
     @GObject.Property
-    def on_scroll_down(self) -> callable:
+    def on_scroll_down(self) -> Callable:
         return self._on_scroll_down
 
     @on_scroll_down.setter
-    def on_scroll_down(self, on_scroll_down: callable) -> None:
+    def on_scroll_down(self, on_scroll_down: Callable) -> None:
         self._on_scroll_down = on_scroll_down
         self.__init_scroll_controller()

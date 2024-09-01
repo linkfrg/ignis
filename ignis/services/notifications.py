@@ -6,12 +6,9 @@ from ignis.utils import Utils
 from ignis.gobject import IgnisGObject
 from loguru import logger
 from ignis.services import Service
-from ignis.services.options import OptionsService
-from typing import List
+from typing import List, Dict
 from datetime import datetime
 from ignis import CACHE_DIR
-
-options: OptionsService = Service.get("options")
 
 POPUP_TIMEOUT_OPTION = "notification_timeout"
 MAX_POPUPS_COUNT_OPTION = "notification_max_popups_count"
@@ -20,7 +17,7 @@ DND_OPTION = "dnd"
 NOTIFICATIONS_CACHE_DIR = f"{CACHE_DIR}/notifications"
 NOTIFICATIONS_CACHE_FILE = f"{NOTIFICATIONS_CACHE_DIR}/notifications.json"
 NOTIFICATIONS_IMAGE_DATA = f"{NOTIFICATIONS_CACHE_DIR}/images"
-NOTIFICATIONS_EMPTY_CACHE_FILE = {"notifications": []}
+NOTIFICATIONS_EMPTY_CACHE_FILE: dict = {"id": 0, "notifications": []}
 
 
 class Notification(IgnisGObject):
@@ -38,7 +35,7 @@ class Notification(IgnisGObject):
         - **summary** (``int``, read-only): Summary text of the notification, usually the title.
         - **body** (``int``, read-only): Body text of the notification, usually containing additional information.
         - **actions** (List[:class:`~ignis.services.notifications.NotificationAction`], read-only): List of actions associated with the notification.
-        - **timeout** (``int``, read-only): Timeout for the notification. Typically, this is -1 and has no effect.
+        - **timeout** (``int``, read-only): Timeout for the notification. Usually equal to ``popup_timeout`` property of the :class:`~ignis.services.NotificationService` unless the notification specifies otherwise
         - **time** (``float``, read-only): Time in POSIX format when the notification was sent.
         - **popup** (``bool``, read-only):Whether the notification is a popup.
 
@@ -71,6 +68,10 @@ class Notification(IgnisGObject):
         self._icon = icon
         self._summary = summary
         self._body = body
+        self._timeout = timeout
+        self._time = time
+        self._urgency = urgency
+        self._popup = popup
         self._actions = [
             NotificationAction(
                 id=str(actions[i]),
@@ -80,13 +81,8 @@ class Notification(IgnisGObject):
             )
             for i in range(0, len(actions), 2)
         ]
-        self._timeout = timeout
-        self._time = time
-        self._urgency = urgency
-        self._popup = popup
 
-        timeout_value = options.get_option(POPUP_TIMEOUT_OPTION)
-        GLib.timeout_add_seconds(timeout_value, self.dismiss)
+        Utils.Timeout(timeout, self.dismiss)
 
     @GObject.Property
     def id(self) -> int:
@@ -109,7 +105,7 @@ class Notification(IgnisGObject):
         return self._body
 
     @GObject.Property
-    def actions(self) -> List[str]:
+    def actions(self) -> List["NotificationAction"]:
         return self._actions
 
     @GObject.Property
@@ -129,7 +125,7 @@ class Notification(IgnisGObject):
         return self._popup
 
     @GObject.Property
-    def json(self) -> None:
+    def json(self) -> dict:
         return {
             "id": self._id,
             "app_name": self._app_name,
@@ -199,9 +195,9 @@ class NotificationService(IgnisGObject):
     Properties:
         - **notifications** (List[:class:`~ignis.services.notifications.Notification`], read-only): A list of all notifications.
         - **popups** (List[:class:`~ignis.services.notifications.Notification`], read-only): A list of currently active popup notifications, sorted from newest to oldest.
-        - **dnd** (``bool``, read-write, default: ``False``): Do Not Disturb mode. If set to ``True``, the ``"new_popup"`` signal will not be emitted, and all new :class:`~ignis.services.notifications.Notification` instances will have ``popup`` set to ``False``.
-        - **popup_timeout** (``int``, read-write, default: ``5``): Timeout before a popup is automatically dismissed, in seconds.
-        - **max_popups_count** (``int``, read-write, default: ``3``): Maximum number of popups. If the length of the ``popups`` list exceeds ``max_popups_count``, the oldest popup will be dismissed.
+        - **dnd** (``bool``, read-write): Do Not Disturb mode. If set to ``True``, the ``"new_popup"`` signal will not be emitted, and all new :class:`~ignis.services.notifications.Notification` instances will have ``popup`` set to ``False``. Default: ``False``.
+        - **popup_timeout** (``int``, read-write): Timeout before a popup is automatically dismissed, in milliseconds. Default: ``5000``.
+        - **max_popups_count** (``int``, read-write): Maximum number of popups. If the length of the ``popups`` list exceeds ``max_popups_count``, the oldest popup will be dismissed. Default: ``3``.
 
     **Example usage:**
 
@@ -250,50 +246,56 @@ class NotificationService(IgnisGObject):
         )
         self.__dbus.register_dbus_method(name="Notify", method=self.__Notify)
 
-        self._id = 1
-        self._notifications = {}
-        self._popups = {}
+        self._id: int = 0
+        self._notifications: Dict[int, Notification] = {}
+        self._popups: Dict[int, Notification] = {}
 
         os.makedirs(NOTIFICATIONS_CACHE_DIR, exist_ok=True)
         os.makedirs(NOTIFICATIONS_IMAGE_DATA, exist_ok=True)
 
-        options.create_option(name=DND_OPTION, default=False, exists_ok=True)
-        options.create_option(name=POPUP_TIMEOUT_OPTION, default=5, exists_ok=True)
-        options.create_option(name=MAX_POPUPS_COUNT_OPTION, default=3, exists_ok=True)
+        self._options = Service.get("options")
+
+        self._options.create_option(name=DND_OPTION, default=False, exists_ok=True)
+        self._options.create_option(
+            name=POPUP_TIMEOUT_OPTION, default=5000, exists_ok=True
+        )
+        self._options.create_option(
+            name=MAX_POPUPS_COUNT_OPTION, default=3, exists_ok=True
+        )
 
         self.__load_notifications()
 
     @GObject.Property
-    def notifications(self) -> list:
+    def notifications(self) -> List[Notification]:
         return sorted(self._notifications.values(), key=lambda x: x.id, reverse=True)
 
     @GObject.Property
-    def popups(self) -> list:
+    def popups(self) -> List[Notification]:
         return sorted(self._popups.values(), key=lambda x: x.id, reverse=True)
 
     @GObject.Property
     def dnd(self) -> bool:
-        return options.get_option(DND_OPTION)
+        return self._options.get_option(DND_OPTION)
 
     @dnd.setter
     def dnd(self, value: bool) -> None:
-        options.set_option(DND_OPTION, value)
+        self._options.set_option(DND_OPTION, value)
 
     @GObject.Property
     def popup_timeout(self) -> int:
-        return options.get_option(POPUP_TIMEOUT_OPTION)
+        return self._options.get_option(POPUP_TIMEOUT_OPTION)
 
     @popup_timeout.setter
     def popup_timeout(self, value: int) -> None:
-        options.set_option(POPUP_TIMEOUT_OPTION, value)
+        self._options.set_option(POPUP_TIMEOUT_OPTION, value)
 
     @GObject.Property
     def max_popups_count(self) -> int:
-        return options.get_option(MAX_POPUPS_COUNT_OPTION)
+        return self._options.get_option(MAX_POPUPS_COUNT_OPTION)
 
     @max_popups_count.setter
     def max_popups_count(self, value: int) -> None:
-        options.set_option(MAX_POPUPS_COUNT_OPTION, value)
+        self._options.set_option(MAX_POPUPS_COUNT_OPTION, value)
 
     def __GetServerInformation(self, *args) -> GLib.Variant:
         return GLib.Variant(
@@ -311,7 +313,7 @@ class NotificationService(IgnisGObject):
         if notification:
             notification.close()
 
-    def get_notification(self, id: int) -> Notification:
+    def get_notification(self, id: int) -> Notification | None:
         """
         Get :class:`~ignis.services.notifications.Notification` by ID.
 
@@ -358,7 +360,7 @@ class NotificationService(IgnisGObject):
             body=body,
             actions=actions,
             urgency=hints.get("urgency", 1),
-            timeout=timeout,
+            timeout=self.popup_timeout if timeout == -1 else timeout,
             time=datetime.now().timestamp(),
             popup=not self.dnd,
         )
@@ -379,12 +381,12 @@ class NotificationService(IgnisGObject):
 
         return GLib.Variant("(u)", (id,))
 
-    def __save_pixbuf(self, px_args, save_path: str) -> None:
+    def __save_pixbuf(self, px_args: list, save_path: str) -> None:
         GdkPixbuf.Pixbuf.new_from_bytes(
             width=px_args[0],
             height=px_args[1],
             has_alpha=px_args[3],
-            data=GLib.Bytes(px_args[6]),
+            data=GLib.Bytes.new(px_args[6]),
             colorspace=GdkPixbuf.Colorspace.RGB,
             rowstride=px_args[2],
             bits_per_sample=px_args[4],

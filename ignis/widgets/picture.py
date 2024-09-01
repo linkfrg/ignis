@@ -1,7 +1,6 @@
 import os
 from ignis.base_widget import BaseWidget
 from gi.repository import Gtk, GObject, GdkPixbuf, Gdk
-from typing import Union
 from ignis.utils import Utils
 
 
@@ -12,7 +11,7 @@ class Picture(Gtk.Picture, BaseWidget):
     A widget that displays an image at its native aspect ratio.
 
     Properties:
-        - **image** (``Union[str, GdkPixbuf.Pixbuf]``, optional, read-write): Icon name, path to an image or ``GdkPixbuf.Pixbuf``.
+        - **image** (``str | GdkPixbuf.Pixbuf | None``, optional, read-write): Icon name, path to an image or ``GdkPixbuf.Pixbuf``.
         - **width** (``int``, optional, read-write): Width of the image.
         - **height** (``int``, optional, read-write): Height of the image.
         - **content_fit** (``str``, optional, read-write): Controls how a content should be made to fit inside an allocation. Default: ``"contain"``.
@@ -44,7 +43,7 @@ class Picture(Gtk.Picture, BaseWidget):
         self.override_enum("content_fit", Gtk.ContentFit)
 
         # avoid custom setters to avoid running the __draw function multiple times during initialization
-        self._image = None
+        self._image: str | GdkPixbuf.Pixbuf | None = None
         self._width = width
         self._height = height
         self.width_request = width
@@ -55,11 +54,11 @@ class Picture(Gtk.Picture, BaseWidget):
         BaseWidget.__init__(self, **kwargs)
 
     @GObject.Property
-    def image(self) -> Union[str, GdkPixbuf.Pixbuf]:
+    def image(self) -> str | GdkPixbuf.Pixbuf | None:
         return self._image
 
     @image.setter
-    def image(self, value: Union[str, GdkPixbuf.Pixbuf]) -> None:
+    def image(self, value: str | GdkPixbuf.Pixbuf) -> None:
         self._image = value
         self.__draw(value)
 
@@ -83,7 +82,7 @@ class Picture(Gtk.Picture, BaseWidget):
         self.height_request = value
         self.__draw(self.image)
 
-    def __draw(self, image: Union[str, GdkPixbuf.Pixbuf]):
+    def __draw(self, image: str | GdkPixbuf.Pixbuf):
         if isinstance(image, GdkPixbuf.Pixbuf):
             self.__set_from_pixbuf(image)
         elif isinstance(image, str):
@@ -97,12 +96,17 @@ class Picture(Gtk.Picture, BaseWidget):
 
     def __set_from_pixbuf(self, pixbuf: GdkPixbuf.Pixbuf) -> None:
         scalled_pixbuf = self.__scale_pixbuf(pixbuf, self.width, self.height)
+        if not scalled_pixbuf:
+            return
 
         paintable = Gdk.Texture.new_for_pixbuf(scalled_pixbuf)
         self.set_paintable(paintable)
 
     def __set_from_file(self, filename: str) -> None:
         pixbuf = GdkPixbuf.Pixbuf.new_from_file(filename)
+        if not pixbuf:
+            return
+
         self.__set_from_pixbuf(pixbuf)
 
     def __set_from_svg(self, filename: str) -> None:
@@ -111,6 +115,9 @@ class Picture(Gtk.Picture, BaseWidget):
         pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
             filename, self.width, self.height, True
         )
+        if not pixbuf:
+            return
+
         paintable = Gdk.Texture.new_for_pixbuf(pixbuf)
         self.set_paintable(paintable)
         return
@@ -121,12 +128,26 @@ class Picture(Gtk.Picture, BaseWidget):
             size = 16
 
         paintable = Utils.get_paintable(self, icon_name, size)
+
+        if not paintable:
+            return
+
+        gfile = paintable.get_file()
+
+        if not gfile:
+            return
+
+        path = gfile.get_path()
+
+        if not isinstance(path, str):
+            return
+
         self.set_paintable(paintable)
-        self.__set_from_svg(paintable.get_file().get_path())
+        self.__set_from_svg(path)
 
     def __scale_pixbuf(
         self, pixbuf: GdkPixbuf.Pixbuf, width: int, height: int
-    ) -> GdkPixbuf.Pixbuf:
+    ) -> GdkPixbuf.Pixbuf | None:
         if width <= 0:
             return pixbuf
 

@@ -1,6 +1,6 @@
 from gi.repository import Gtk, GObject
 from ignis.base_widget import BaseWidget
-from typing import List
+from typing import List, Callable
 
 
 class DropDown(Gtk.DropDown, BaseWidget):
@@ -11,7 +11,7 @@ class DropDown(Gtk.DropDown, BaseWidget):
 
     Properties:
         - **items** (``List[str]``, optional, read-write): List of strings that can be selected in the popover.
-        - **on_selected** (``callable``, optional, read-write): Function to call when the user selects an item from the list.
+        - **on_selected** (``Callable``, optional, read-write): Function to call when the user selects an item from the list.
         - **selected** (``str``, not argument, read-only): The selected string. It is a shortcut for ``self.selected_item.props.string``.
 
     .. code-block:: python
@@ -27,8 +27,8 @@ class DropDown(Gtk.DropDown, BaseWidget):
 
     def __init__(self, **kwargs):
         Gtk.DropDown.__init__(self)
-        self._items = []
-        self._on_selected = None
+        self._items: List[str] = []
+        self._on_selected: Callable | None = None
         BaseWidget.__init__(self, **kwargs)
 
         self.connect("notify::selected-item", self.__invoke_on_selected)
@@ -47,11 +47,11 @@ class DropDown(Gtk.DropDown, BaseWidget):
         self.model = model
 
     @GObject.Property
-    def on_selected(self) -> callable:
+    def on_selected(self) -> Callable | None:
         return self._on_selected
 
     @on_selected.setter
-    def on_selected(self, value: callable) -> None:
+    def on_selected(self, value: Callable) -> None:
         self._on_selected = value
 
     def __invoke_on_selected(self, *args) -> None:

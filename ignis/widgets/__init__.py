@@ -1,3 +1,4 @@
+from typing import TypeAlias
 from .window import Window
 from .label import Label
 from .button import Button
@@ -33,35 +34,35 @@ from .arrow_button import ArrowButton
 
 
 class Widget:
-    Window = Window
-    Label = Label
-    Button = Button
-    Box = Box
-    Calendar = Calendar
-    Scale = Scale
-    Icon = Icon
-    CenterBox = CenterBox
-    Revealer = Revealer
-    Scroll = Scroll
-    Entry = Entry
-    Switch = Switch
-    Separator = Separator
-    ToggleButton = ToggleButton
-    RegularWindow = RegularWindow
-    FileChooserButton = FileChooserButton
-    FileFilter = FileFilter
-    Grid = Grid
-    PopoverMenu = PopoverMenu
-    MenuItem = MenuItem
-    EventBox = EventBox
-    FileDialog = FileDialog
-    HeaderBar = HeaderBar
-    ListBoxRow = ListBoxRow
-    ListBox = ListBox
-    Picture = Picture
-    CheckButton = CheckButton
-    SpinButton = SpinButton
-    DropDown = DropDown
-    Overlay = Overlay
-    Arrow = Arrow
-    ArrowButton = ArrowButton
+    Window: TypeAlias = Window
+    Label: TypeAlias = Label
+    Button: TypeAlias = Button
+    Box: TypeAlias = Box
+    Calendar: TypeAlias = Calendar
+    Scale: TypeAlias = Scale
+    Icon: TypeAlias = Icon
+    CenterBox: TypeAlias = CenterBox
+    Revealer: TypeAlias = Revealer
+    Scroll: TypeAlias = Scroll
+    Entry: TypeAlias = Entry
+    Switch: TypeAlias = Switch
+    Separator: TypeAlias = Separator
+    ToggleButton: TypeAlias = ToggleButton
+    RegularWindow: TypeAlias = RegularWindow
+    FileChooserButton: TypeAlias = FileChooserButton
+    FileFilter: TypeAlias = FileFilter
+    Grid: TypeAlias = Grid
+    PopoverMenu: TypeAlias = PopoverMenu
+    MenuItem: TypeAlias = MenuItem
+    EventBox: TypeAlias = EventBox
+    FileDialog: TypeAlias = FileDialog
+    HeaderBar: TypeAlias = HeaderBar
+    ListBoxRow: TypeAlias = ListBoxRow
+    ListBox: TypeAlias = ListBox
+    Picture: TypeAlias = Picture
+    CheckButton: TypeAlias = CheckButton
+    SpinButton: TypeAlias = SpinButton
+    DropDown: TypeAlias = DropDown
+    Overlay: TypeAlias = Overlay
+    Arrow: TypeAlias = Arrow
+    ArrowButton: TypeAlias = ArrowButton

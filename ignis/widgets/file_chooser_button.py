@@ -66,7 +66,7 @@ class FileChooserButton(Gtk.Button, BaseWidget):
 
         self.connect(
             "clicked",
-            lambda *args: self.dialog.open(),
+            lambda *args: self.dialog.open_dialog(),
         )
 
     @GObject.Property

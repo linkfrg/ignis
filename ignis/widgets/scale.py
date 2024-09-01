@@ -1,5 +1,6 @@
 from gi.repository import Gtk, GObject, Gdk
 from ignis.base_widget import BaseWidget
+from typing import Callable
 
 
 class Scale(Gtk.Scale, BaseWidget):
@@ -14,7 +15,7 @@ class Scale(Gtk.Scale, BaseWidget):
         - **max** (``float``, optional, read-write): Maximum value.
         - **step** (``float``, optional, read-write): Step increment.
         - **value** (``float``, optional, read-write): Current value.
-        - **on_change** (``callable``, optional, read-write): Function to call when the value changes.
+        - **on_change** (``Callable``, optional, read-write): Function to call when the value changes.
         - **draw_value** (``int``, optional, read-write): Whether the current value is displayed.
         - **value_pos** (``str``, optional, read-write): Position where the current value is displayed. Works only if ``draw_value`` is set to ``True``. Default: ``"top"``.
 
@@ -46,8 +47,8 @@ class Scale(Gtk.Scale, BaseWidget):
         self.adjustment = Gtk.Adjustment(
             value=0, lower=0, upper=100, step_increment=1, page_increment=0, page_size=0
         )
-        self._dragging = False
-        self._on_change = None
+        self._dragging: bool = False
+        self._on_change: Callable | None = None
         self.override_enum("value_pos", Gtk.PositionType)
         BaseWidget.__init__(self, **kwargs)
 
@@ -96,11 +97,11 @@ class Scale(Gtk.Scale, BaseWidget):
         self.adjustment.props.upper = value
 
     @GObject.Property
-    def on_change(self) -> callable:
+    def on_change(self) -> Callable:
         return self._on_change
 
     @on_change.setter
-    def on_change(self, value: callable) -> None:
+    def on_change(self, value: Callable) -> None:
         self._on_change = value
 
     @GObject.Property
@@ -128,6 +129,9 @@ class Scale(Gtk.Scale, BaseWidget):
 
     def __on_button_event(self, controller: Gtk.EventControllerLegacy, *args):
         event = controller.get_current_event()
+        if not event:
+            return
+
         if event.get_event_type() == Gdk.EventType.BUTTON_PRESS:
             self._dragging = True
         elif event.get_event_type() == Gdk.EventType.BUTTON_RELEASE:

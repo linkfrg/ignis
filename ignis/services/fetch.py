@@ -1,7 +1,8 @@
 import os
 from ignis.gobject import IgnisGObject
 from gi.repository import GObject, Gtk, Gdk
-from typing import Tuple
+from typing import Tuple, Dict
+from ignis.exceptions import DisplayNotFoundError
 
 
 class FetchService(IgnisGObject):
@@ -26,16 +27,16 @@ class FetchService(IgnisGObject):
         - **current_desktop** (``str``, read-only): Current desktop environment.
         - **hostname** (``str``, read-only): Hostname.
         - **kernel** (``str``, read-only): Kernel version.
-        - **uptime** (``str``, read-only): Current uptime. You can use ``Utils.Poll`` to get the current uptime every minute or second.
+        - **uptime** (``Tuple[int, int, int, int]``, read-only): Current uptime, (days, hours, minutes, seconds). You can use ``Utils.Poll`` to get the current uptime every minute or second.
         - **cpu** (``str``, read-only): CPU model.
-        - **mem_info** (``dict``, read-only): Dictionary with all information about RAM.
-        - **mem_total** (``dict``, read-only): Total amount of RAM.
-        - **mem_available** (``dict``, read-only): Available amount of RAM.
-        - **board_vendor** (``dict``, read-only): Vendor of the motherboard.
-        - **board_name** (``dict``, read-only): Motherboard name.
-        - **bios_version** (``dict``, read-only): BIOS/UEFI version.
-        - **gtk_theme** (``dict``, read-only): Current GTK theme.
-        - **icon_theme** (``dict``, read-only): Current icon theme.
+        - **mem_info** (``Dict[str, int]``, read-only): Dictionary with all information about RAM.
+        - **mem_total** (``int``, read-only): Total amount of RAM.
+        - **mem_available** (``int``, read-only): Available amount of RAM.
+        - **board_vendor** (``str``, read-only): Vendor of the motherboard.
+        - **board_name** (``str``, read-only): Motherboard name.
+        - **bios_version** (``str``, read-only): BIOS/UEFI version.
+        - **gtk_theme** (``str | None``, read-only): Current GTK theme.
+        - **icon_theme** (``str | None``, read-only): Current icon theme.
 
     **Example usage**:
 
@@ -54,7 +55,7 @@ class FetchService(IgnisGObject):
         super().__init__()
         self._os_info = self.__get_os_info()
 
-    def __get_os_info(self):
+    def __get_os_info(self) -> Dict[str, str]:
         os_info = {}
         with open("/etc/os-release") as f:
             for line in f:
@@ -117,11 +118,11 @@ class FetchService(IgnisGObject):
         return f"{self.os_logo}-text-dark"
 
     @GObject.Property
-    def session_type(self) -> str:
+    def session_type(self) -> str | None:
         return os.environ.get("XDG_SESSION_TYPE")
 
     @GObject.Property
-    def current_desktop(self) -> str:
+    def current_desktop(self) -> str | None:
         return os.environ.get("XDG_CURRENT_DESKTOP")
 
     @GObject.Property
@@ -156,15 +157,14 @@ class FetchService(IgnisGObject):
         return cpu_name
 
     @GObject.Property
-    def mem_info(self) -> dict:
+    def mem_info(self) -> Dict[str, int]:
         mem_info = {}
         with open("/proc/meminfo") as file:
             for line in file:
                 key, value = line.split(":")
                 value = value.replace("kB", "")
                 value = value.replace(" ", "")
-                value = int(value)
-                mem_info[key.strip()] = value
+                mem_info[key.strip()] = int(value)
         return mem_info
 
     @GObject.Property
@@ -201,9 +201,17 @@ class FetchService(IgnisGObject):
         return data.strip()
 
     @GObject.Property
-    def gtk_theme(self) -> str:
-        return Gtk.Settings.get_default().get_property("gtk-theme-name")
+    def gtk_theme(self) -> str | None:
+        settings = Gtk.Settings.get_default()
+        if not settings:
+            return None
+
+        return settings.get_property("gtk-theme-name")
 
     @GObject.Property
-    def icon_theme(self) -> str:
-        return Gtk.IconTheme.get_for_display(Gdk.Display.get_default()).get_theme_name()
+    def icon_theme(self) -> str | None:
+        display = Gdk.Display.get_default()
+        if not display:
+            raise DisplayNotFoundError()
+
+        return Gtk.IconTheme.get_for_display(display).get_theme_name()

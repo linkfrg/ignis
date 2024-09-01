@@ -1,5 +1,5 @@
 from gi.repository import GObject, GLib
-from typing import Union, Any, List
+from typing import Any, List, Callable, Optional
 
 
 class Binding(GObject.Object):
@@ -7,14 +7,17 @@ class Binding(GObject.Object):
     An object that describe binding.
 
     Properties:
-        - **target** (``GObject.Object``, read-only): Target GObject.
-        - **target_property** (``GObject.Object``, read-only): Property on target GObject.
-        - **transform** (``GObject.Object``, optional, read-only): The function that accepts a new property value and returns the processed value.
+        - **target** (``GObject.Object``, required, read-only): Target GObject.
+        - **target_property** (``str``, required, read-only): Property on target GObject.
+        - **transform** (``Callable``, optional, read-only): The function that accepts a new property value and returns the processed value.
 
     """
 
     def __init__(
-        self, target: GObject.Object, target_property: str, transform: callable = None
+        self,
+        target: GObject.Object,
+        target_property: str,
+        transform: Optional[Callable] = None,
     ):
         self._target = target
         self._target_property = target_property
@@ -30,7 +33,7 @@ class Binding(GObject.Object):
         return self._target_property
 
     @GObject.Property
-    def transform(self) -> callable:
+    def transform(self) -> Callable | None:
         return self._transform
 
 
@@ -46,8 +49,10 @@ class IgnisGObject(GObject.Object):
 
     """
 
-    def __init__(self):
+    def __init__(self, **kwargs):
         super().__init__()
+        for key in kwargs.keys():
+            self.set_property(key, kwargs[key])
 
     def emit(self, signal_name: str, *args):
         """
@@ -63,12 +68,12 @@ class IgnisGObject(GObject.Object):
         # Same ``notify``, but with ``GLib.idle_add``, to avoid possible segmentation faults due to multithreading.
         GLib.idle_add(super().notify, property_name)
 
-    def notify_all(self, without: Union[List[str], str] = None) -> None:
+    def notify_all(self, without: Optional[List[str] | str] = None) -> None:
         """
         Notify all properties.
 
         Args:
-            without (Union[List[str], str], optional): Property or list of properties that will not be notified.
+            without (List[str] | str, str], optional): Property or list of properties that will not be notified.
         """
         for i in self.list_properties():
             if without:
@@ -91,7 +96,7 @@ class IgnisGObject(GObject.Object):
         if value is None:
             return
         elif isinstance(value, Binding):
-            self.bind_property(
+            self.bind_property2(
                 source_property=property_name,
                 target=value.target,
                 target_property=value.target_property,
@@ -100,12 +105,12 @@ class IgnisGObject(GObject.Object):
         else:
             super().set_property(property_name, value)
 
-    def bind_property(
+    def bind_property2(
         self,
         source_property: str,
         target: GObject.Object,
         target_property: str,
-        transform: callable = None,
+        transform: Optional[Callable] = None,
     ) -> None:
         """
         Bind ``source_property`` on ``self`` with ``target_property`` on ``target``.
@@ -114,7 +119,7 @@ class IgnisGObject(GObject.Object):
             source_property (``str``): The property on ``self`` to bind.
             target (``GObject.Object``): the target ``GObject.Object``.
             target_property (``str``): the property on ``target`` to bind.
-            transform (``callable``, optional): The function that accepts a new property value and returns the processed value.
+            transform (``Callable``, optional): The function that accepts a new property value and returns the processed value.
         """
 
         def callback(*args):
@@ -126,13 +131,13 @@ class IgnisGObject(GObject.Object):
         target.connect(f"notify::{target_property.replace('_', '-')}", callback)
         callback()
 
-    def bind(self, property_name: str, transform: callable = None) -> Binding:
+    def bind(self, property_name: str, transform: Optional[Callable] = None) -> Binding:
         """
         Creates ``Binding`` from property name on ``self``.
 
         Args:
             property_name(``str``): Property name of ``self``.
-            transform (``callable``): The function that accepts a new property value and returns the processed value.
+            transform (``Callable``): The function that accepts a new property value and returns the processed value.
         Returns:
             :class:`~ignis.gobject.Binding`
         """

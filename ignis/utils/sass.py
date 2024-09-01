@@ -1,6 +1,7 @@
 import os
 import subprocess
 from ignis.exceptions import SassCompilationError, DartSassNotFoundError
+from typing import Optional
 
 TEMP_DIR = "/tmp/ignis"
 COMPILED_CSS = f"{TEMP_DIR}/compiled.css"
@@ -32,7 +33,7 @@ def compile_string(string: str) -> str:
         return stdout.decode()
 
 
-def sass_compile(path: str = None, string: str = None) -> str:
+def sass_compile(path: Optional[str] = None, string: Optional[str] = None) -> str:
     """
     Compile a SASS/SCSS file or string.
     Requires `Dart Sass <https://sass-lang.com/dart-sass/>`_.

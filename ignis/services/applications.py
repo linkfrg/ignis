@@ -1,13 +1,9 @@
-import os
-import subprocess
 import re
+import subprocess
 from gi.repository import GObject, Gio
 from ignis.gobject import IgnisGObject
-from typing import List
+from typing import List, Dict
 from ignis.services import Service
-from ignis.services.options import OptionsService
-
-options: OptionsService = Service.get("options")
 
 PINNED_APPS_OPTION = "pinned_apps"
 
@@ -26,7 +22,7 @@ class ApplicationAction(IgnisGObject):
 
         self._app = app
         self._action = action
-        self._name = app.get_action_name(action)
+        self._name: str = app.get_action_name(action)
 
     @GObject.Property
     def action(self) -> str:
@@ -53,13 +49,13 @@ class Application(IgnisGObject):
 
     Properties:
         - **app** (`Gio.DesktopAppInfo <https://lazka.github.io/pgi-docs/index.html#Gio-2.0/classes/DesktopAppInfo.html>`_, read-only): An instance of ``Gio.DesktopAppInfo``. You typically shouldn't use this property.
-        - **id** (``str``, read-only): The ID of the application.
+        - **id** (``str | None``, read-only): The ID of the application.
         - **name** (``str``, read-only): The name of the application.
-        - **description** (``str``, read-only): The description of the application.
+        - **description** (``str | None``, read-only): The description of the application.
         - **icon** (``str``, read-only): The icon of the application. If the app has no icon, "image-missing" will be returned.
-        - **keywords** (``str``, read-only): Keywords of the application. Ususally, these are words that describe the application.
-        - **desktop_file** (``str``, read-only): The .desktop file of the application.
-        - **executable** (``str``, read-only): The executable of the application. Usually, this is a binary file of the application.
+        - **keywords** (``List[str]``, read-only): Keywords of the application. Ususally, these are words that describe the application.
+        - **desktop_file** (``str | None``, read-only): The full path to the ``.desktop`` file of the application.
+        - **executable** (``str | None``, read-only): The executable of the application.
         - **exec_string** (``str``, read-only): The string that contains the executable with command line arguments, used to launch the application.
         - **actions** (List[:class:`~ignis.services.applications.Application`], read-only): A list of actions.
         - **is_pinned** (``bool``, read-write): Whether the application is pinned.
@@ -75,7 +71,7 @@ class Application(IgnisGObject):
 
         self._app = app
         self._is_pinned = is_pinned
-        self._actions = []
+        self._actions: List[ApplicationAction] = []
 
         for action in app.list_actions():
             self._actions.append(ApplicationAction(app=app, action=action))
@@ -85,7 +81,7 @@ class Application(IgnisGObject):
         return self._app
 
     @GObject.Property
-    def id(self) -> str:
+    def id(self) -> str | None:
         return self._app.get_id()
 
     @GObject.Property
@@ -93,7 +89,7 @@ class Application(IgnisGObject):
         return self._app.get_display_name()
 
     @GObject.Property
-    def description(self) -> str:
+    def description(self) -> str | None:
         return self._app.get_description()
 
     @GObject.Property
@@ -105,19 +101,19 @@ class Application(IgnisGObject):
             return icon
 
     @GObject.Property
-    def keywords(self) -> str:
+    def keywords(self) -> List[str]:
         return self._app.get_keywords()
 
     @GObject.Property
-    def desktop_file(self) -> str:
-        return os.path.basename(self._app.get_filename())
+    def desktop_file(self) -> str | None:
+        return self._app.get_filename()
 
     @GObject.Property
     def executable(self) -> str:
         return self._app.get_executable()
 
     @GObject.Property
-    def exec_string(self) -> str:
+    def exec_string(self) -> str | None:
         return self._app.get_string("Exec")
 
     @GObject.Property
@@ -188,12 +184,15 @@ class ApplicationsService(IgnisGObject):
 
     def __init__(self):
         super().__init__()
-        self._apps = {}
-        self._pinned = {}
-        self._monitor = Gio.AppInfoMonitor.get()
-        options.create_option(name=PINNED_APPS_OPTION, default=[], exists_ok=True)
+        self._apps: Dict[str, Application] = {}
+        self._pinned: Dict[str, Application] = {}
 
+        self._monitor = Gio.AppInfoMonitor.get()
         self._monitor.connect("changed", lambda x: self.__sync())
+
+        self._options = Service.get("options")
+        self._options.create_option(name=PINNED_APPS_OPTION, default=[], exists_ok=True)
+
         self.__sync()
 
     @GObject.Property
@@ -211,26 +210,35 @@ class ApplicationsService(IgnisGObject):
     def __sync(self) -> None:
         self._apps = {}
         self._pinned = {}
-        self.__read_pinned_entries()
-        for a in Gio.AppInfo.get_all():
-            if not a.get_nodisplay():
-                if a.get_id() in self._pinned:
-                    entry = Application(app=a, is_pinned=True)
-                else:
-                    entry = Application(app=a, is_pinned=False)
-
-                self.__connect_entry(entry)
-                self._apps[entry.id] = entry
+        self.__read_pinned_apps()
+        for app in Gio.AppInfo.get_all():
+            if isinstance(app, Gio.DesktopAppInfo):
+                self.__add_app(app)
 
         self.notify("apps")
         self.notify("pinned")
 
-    def __read_pinned_entries(self) -> None:
-        for pinned in options.get_option(PINNED_APPS_OPTION):
+    def __add_app(self, app: Gio.DesktopAppInfo) -> None:
+        if app.get_nodisplay():
+            return
+
+        if app.get_id() in self._pinned:
+            entry = Application(app=app, is_pinned=True)
+        else:
+            entry = Application(app=app, is_pinned=False)
+
+        self.__connect_entry(entry)
+        self._apps[entry.id] = entry
+
+    def __read_pinned_apps(self) -> None:
+        for pinned in self._options.get_option(PINNED_APPS_OPTION):
             try:
                 app = Gio.DesktopAppInfo.new(desktop_id=pinned)
             except TypeError:
                 continue
+            if not app:
+                return
+
             entry = Application(app=app, is_pinned=True)
             self.__connect_entry(entry)
             self._pinned[entry.id] = entry
@@ -252,9 +260,9 @@ class ApplicationsService(IgnisGObject):
             if entry.id in result
         ]
 
-    def __sync_pinned(self) -> dict:
+    def __sync_pinned(self) -> None:
         pinned_ids = [p.id for p in self.pinned]
-        options.set_option(PINNED_APPS_OPTION, pinned_ids)
+        self._options.set_option(PINNED_APPS_OPTION, pinned_ids)
         self.notify("pinned")
 
     def __pin_entry(self, entry: Application) -> None:

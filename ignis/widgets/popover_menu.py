@@ -42,8 +42,8 @@ class PopoverMenu(Gtk.PopoverMenu, BaseWidget):
 
     def __init__(self, **kwargs):
         Gtk.PopoverMenu.__init__(self)
-        self._items = []
-        self._sections = []
+        self._items: List[MenuItem] = []
+        self._sections: List[Gio.Menu] = []
         self._menu = Gio.Menu()
         self._current_section = Gio.Menu()
         self._sections.append(self._current_section)

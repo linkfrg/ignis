@@ -1,5 +1,6 @@
 from gi.repository import Gtk, GObject
 from ignis.base_widget import BaseWidget
+from typing import Callable
 
 
 class CheckButton(Gtk.CheckButton, BaseWidget):
@@ -41,9 +42,9 @@ class CheckButton(Gtk.CheckButton, BaseWidget):
         )
 
     @GObject.Property
-    def on_toggled(self) -> callable:
+    def on_toggled(self) -> Callable:
         return self._on_toggled
 
     @on_toggled.setter
-    def on_toggled(self, value: callable) -> None:
+    def on_toggled(self, value: Callable) -> None:
         self._on_toggled = value

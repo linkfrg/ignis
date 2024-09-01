@@ -220,3 +220,52 @@ class IgnisNotRunningError(Exception):
 
     def __init__(self, *args: object) -> None:
         super().__init__("Ignis is not running", *args)
+
+
+class DBusMethodNotFoundError(Exception):
+    """
+    Raised when a D-Bus method is not found or not registered.
+
+    Properties:
+        - **method_name** (``str``, required, read-only): The name of the D-Bus method.
+    """
+
+    def __init__(self, method_name: str, *args: object) -> None:
+        self._method_name = method_name
+        super().__init__(
+            f'No such registered D-Bus method with name: "{method_name}"', *args
+        )
+
+    @property
+    def method_name(self) -> str:
+        return self._method_name
+
+
+class DBusPropertyNotFoundError(Exception):
+    """
+    Raised when a D-Bus property is not found or not registered.
+
+    Properties:
+        - **property_name** (``str``, required, read-only): The name of the D-Bus property.
+    """
+
+    def __init__(self, property_name: str, *args: object) -> None:
+        self._property_name = property_name
+        super().__init__(
+            f'No such registered D-Bus property with name: "{property_name}"', *args
+        )
+
+    @property
+    def property_name(self) -> str:
+        return self._property_name
+
+
+class DisplayNotFoundError(Exception):
+    """
+    Raised when the display is not found (e.g., a Wayland compositor is not running).
+    """
+
+    def __init__(self, *args: object) -> None:
+        super().__init__(
+            "Display not found! Ensure you are running a Wayland compositor", *args
+        )

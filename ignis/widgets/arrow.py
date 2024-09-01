@@ -53,13 +53,13 @@ class Arrow(Icon):
     __gtype_name__ = "IgnisArrow"
 
     def __init__(self, **kwargs):
-        self._rotated = False
-        self.__deg = 0  # Current rotation degree
-        self.__step = 0  # How many steps to do
-        self._degree = 90  # Target rotation degree
-        self._time = 135  # Rotation time in milliseconds
-        self._direction = "right"
-        self._counterclockwise = False
+        self._rotated: bool = False
+        self.__deg: int = 0  # Current rotation degree
+        self.__step: int = 0  # How many steps to do
+        self._degree: int = 90  # Target rotation degree
+        self._time: int = 135  # Rotation time in milliseconds
+        self._direction: str = "right"
+        self._counterclockwise: bool = False
 
         self.__update_step()
 

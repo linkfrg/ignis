@@ -1,5 +1,6 @@
 from gi.repository import GObject
 from ignis.gobject import IgnisGObject
+from typing import Callable
 from .thread import run_in_thread
 
 
@@ -12,7 +13,7 @@ class ThreadTask(IgnisGObject):
         - **"finished"** (``Any``): Emitted when the function has finished. Passes the output from the function as an argument.
 
     Parameters:
-        target (``callable``): The function to execute in another thread.
+        target (``Callable``): The function to execute in another thread.
         callback (``callabke``): The function to call when ``target`` has finished.
 
     """
@@ -21,10 +22,11 @@ class ThreadTask(IgnisGObject):
         "finished": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, (object,)),
     }
 
-    def __init__(self, target: callable, callback: callable):
+    def __init__(self, target: Callable, callback: Callable):
         super().__init__()
         self._target = target
         self._callback = callback
+
         self.connect("finished", lambda x, result: callback(result))
         self.__run()
 

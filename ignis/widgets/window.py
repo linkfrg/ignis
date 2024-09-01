@@ -3,7 +3,7 @@ from ignis.app import app
 from gi.repository import Gtk, GObject
 from ignis.base_widget import BaseWidget
 from ignis.utils import Utils
-from typing import List
+from typing import List, Optional
 from gi.repository import Gtk4LayerShell as GtkLayerShell
 from ignis.exceptions import MonitorNotFoundError, LayerShellNotSupportedError
 
@@ -101,8 +101,8 @@ class Window(Gtk.Window, BaseWidget):
     def __init__(
         self,
         namespace: str,
-        monitor: int = None,
-        anchor: List[str] = None,
+        monitor: Optional[int] = None,
+        anchor: Optional[List[str]] = None,
         exclusivity: str = "normal",
         layer: str = "top",
         kb_mode: str = "none",
@@ -245,4 +245,8 @@ class Window(Gtk.Window, BaseWidget):
 
         rectangle = cairo.RectangleInt(0, 0, self.input_width, self.input_height)
         region = cairo.Region(rectangle)
-        self.get_surface().set_input_region(region)
+        surface = self.get_surface()
+        if not surface:
+            return
+
+        surface.set_input_region(region)

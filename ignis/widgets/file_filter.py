@@ -1,9 +1,9 @@
 from gi.repository import Gtk, GObject
-from ignis.base_widget import BaseWidget
 from typing import List
+from ignis.gobject import IgnisGObject
 
 
-class FileFilter(Gtk.FileFilter, BaseWidget):
+class FileFilter(Gtk.FileFilter, IgnisGObject):
     """
     Bases: `Gtk.FileFilter <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/FileFilter.html>`_.
 
@@ -32,8 +32,8 @@ class FileFilter(Gtk.FileFilter, BaseWidget):
 
     def __init__(self, mime_types: List[str], **kwargs):
         Gtk.FileFilter.__init__(self)
-        self._default = None
-        BaseWidget.__init__(self, **kwargs)
+        self._default: bool = False
+        IgnisGObject.__init__(self, **kwargs)
 
         for i in mime_types:
             self.add_mime_type(i)

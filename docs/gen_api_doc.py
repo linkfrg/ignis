@@ -4,6 +4,7 @@
 import os
 import sys
 import inspect
+from typing import Callable
 
 
 sys.path.insert(0, os.path.abspath(".."))
@@ -57,7 +58,7 @@ def clean(dir_name: str) -> None:
             os.remove(file_path)
 
 
-def _generate(klass: object, dir_name: str, transform: callable) -> None:
+def _generate(klass: object, dir_name: str, transform: Callable) -> None:
     for name in klass.__dict__:
         if name.startswith("__"):
             continue

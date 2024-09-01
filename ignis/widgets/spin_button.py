@@ -1,8 +1,9 @@
 from gi.repository import Gtk, GObject
 from ignis.base_widget import BaseWidget
+from typing import Callable, Optional
 
 
-class SpinButton(Gtk.SpinButton, BaseWidget):
+class SpinButton(Gtk.SpinButton, BaseWidget):  # type: ignore
     """
     Bases: `Gtk.SpinButton <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/SpinButton.html>`_.
 
@@ -13,7 +14,7 @@ class SpinButton(Gtk.SpinButton, BaseWidget):
         - **max** (``float``, optional, read-write): Maximum value.
         - **step** (``float``, optional, read-write): Step increment.
         - **value** (``float``, optional, read-write): Current value.
-        - **on_change** (``callable``, optional, read-write): Function to call when the value changes.
+        - **on_change** (``Callable``, optional, read-write): Function to call when the value changes.
 
     .. code-block:: python
 
@@ -29,9 +30,9 @@ class SpinButton(Gtk.SpinButton, BaseWidget):
     __gtype_name__ = "IgnisSpinButton"
     __gproperties__ = {**BaseWidget.gproperties}
 
-    def __init__(self, min: int = None, max: int = None, **kwargs):
+    def __init__(self, min: Optional[int] = None, max: Optional[int] = None, **kwargs):
         Gtk.SpinButton.__init__(self)
-        self._on_change = None
+        self._on_change: Callable | None = None
         self.adjustment = Gtk.Adjustment(
             value=0, lower=0, upper=100, step_increment=1, page_increment=0, page_size=0
         )
@@ -74,11 +75,11 @@ class SpinButton(Gtk.SpinButton, BaseWidget):
         self.adjustment.props.step_increment = value
 
     @GObject.Property
-    def on_change(self) -> callable:
+    def on_change(self) -> Callable | None:
         return self._on_change
 
     @on_change.setter
-    def on_change(self, value: callable) -> None:
+    def on_change(self, value: Callable) -> None:
         self._on_change = value
 
     def __invoke_on_change(self, *args) -> None:

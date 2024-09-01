@@ -2,7 +2,7 @@ import sys
 import json
 from ignis.gobject import IgnisGObject, Binding
 from gi.repository import GObject
-from typing import Any
+from typing import Any, Callable, Dict, Optional
 from ignis import CACHE_DIR
 from ignis.exceptions import OptionExistsError, OptionNotFoundError
 
@@ -61,14 +61,13 @@ class OptionsService(IgnisGObject):
 
     def __init__(self):
         super().__init__()
-        self.__data = {}
+        self.__data: Dict[str, Option] = {}
         self.__load_data()
 
-    def __load_data(self) -> dict:
+    def __load_data(self) -> None:
         if "sphinx" in sys.modules:
             return
 
-        empty = {}
         try:
             with open(OPTIONS_FILE) as file:
                 data = json.load(file)
@@ -78,7 +77,7 @@ class OptionsService(IgnisGObject):
 
         except FileNotFoundError:
             with open(OPTIONS_FILE, "w") as file:
-                json.dump(empty, file)
+                json.dump({}, file)
 
     def __sync(self) -> None:
         json_dict = {}
@@ -163,13 +162,13 @@ class OptionsService(IgnisGObject):
             raise OptionNotFoundError(name)
         self.__sync()
 
-    def bind_option(self, name: str, transform: callable = None) -> Binding:
+    def bind_option(self, name: str, transform: Optional[Callable] = None) -> Binding:
         """
         Like ``bind()``, but for option.
 
         Args:
             name (``str``): The name of the option to bind.
-            transform (``callable``, optional): A transform function.
+            transform (``Callable``, optional): A transform function.
 
         Returns:
             ``Binding``.
@@ -183,14 +182,14 @@ class OptionsService(IgnisGObject):
 
         return Binding(option, "value", transform)
 
-    def connect_option(self, name: str, callback: callable) -> None:
+    def connect_option(self, name: str, callback: Callable) -> None:
         """
         Associate a callback function with changes to an option value.
         When the option value changes, the callback function will be invoked with the new value.
 
         Args:
             name (``str``): The name of the option.
-            callback (``callable``): A function to call when the option value changes. The new value of the option will be passed to this function.
+            callback (``Callable``): A function to call when the option value changes. The new value of the option will be passed to this function.
 
         Raises:
             OptionNotFoundError: If the option does not exist.

@@ -1,5 +1,6 @@
 from gi.repository import GObject, Gtk
 from ignis.base_widget import BaseWidget
+from typing import Callable
 
 
 class ToggleButton(Gtk.ToggleButton, BaseWidget):
@@ -9,7 +10,7 @@ class ToggleButton(Gtk.ToggleButton, BaseWidget):
     A toggle button widget.
 
     Properties:
-        - **on_toggled** (``callable``, optional, read-write): Function to call when the button is toggled by the user.
+        - **on_toggled** (``Callable``, optional, read-write): Function to call when the button is toggled by the user.
 
     .. code-block:: python
 
@@ -23,6 +24,7 @@ class ToggleButton(Gtk.ToggleButton, BaseWidget):
 
     def __init__(self, **kwargs) -> None:
         Gtk.ToggleButton.__init__(self)
+        self._on_toggled: Callable | None = None
         BaseWidget.__init__(self, **kwargs)
 
         self.connect(
@@ -31,9 +33,9 @@ class ToggleButton(Gtk.ToggleButton, BaseWidget):
         )
 
     @GObject.Property
-    def on_toggled(self) -> callable:
+    def on_toggled(self) -> Callable | None:
         return self._on_toggled
 
     @on_toggled.setter
-    def on_toggled(self, value: callable) -> None:
+    def on_toggled(self, value: Callable | None) -> None:
         self._on_toggled = value

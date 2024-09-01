@@ -1,16 +1,17 @@
 from gi.repository import Gtk, GObject
 from ignis.base_widget import BaseWidget
+from typing import Callable
 
 
-class Entry(Gtk.Entry, BaseWidget):
+class Entry(Gtk.Entry, BaseWidget):  # type: ignore
     """
     Bases: `Gtk.Entry <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Entry.html>`_.
 
     An input field. To make it work, set the ``kb_mode`` property of the window to ``"on_demand"`` or ``"exclusive"``.
 
     Properies:
-        - **on_accept** (``callable``, optional, read-write): The function that will be called when the user hits the Enter key.
-        - **on_change** (``callable``, optional, read-write): The function that will be called when the text in the widget is changed (e.g., when the user types something into the entry).
+        - **on_accept** (``Callable``, optional, read-write): The function that will be called when the user hits the Enter key.
+        - **on_change** (``Callable``, optional, read-write): The function that will be called when the text in the widget is changed (e.g., when the user types something into the entry).
 
     .. code-block:: python
 
@@ -26,8 +27,8 @@ class Entry(Gtk.Entry, BaseWidget):
 
     def __init__(self, **kwargs):
         Gtk.Entry.__init__(self)
-        self._on_accept = None
-        self._on_change = None
+        self._on_accept: Callable | None = None
+        self._on_change: Callable | None = None
         BaseWidget.__init__(self, **kwargs)
 
         self.connect(
@@ -38,17 +39,17 @@ class Entry(Gtk.Entry, BaseWidget):
         )
 
     @GObject.Property
-    def on_accept(self) -> callable:
+    def on_accept(self) -> Callable:
         return self._on_accept
 
     @on_accept.setter
-    def on_accept(self, value: callable) -> None:
+    def on_accept(self, value: Callable) -> None:
         self._on_accept = value
 
     @GObject.Property
-    def on_change(self) -> callable:
+    def on_change(self) -> Callable:
         return self._on_change
 
     @on_change.setter
-    def on_change(self, value: callable) -> None:
+    def on_change(self, value: Callable) -> None:
         self._on_change = value

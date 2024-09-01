@@ -2,7 +2,7 @@ import gi
 import sys
 from gi.repository import GObject
 from ignis.gobject import IgnisGObject
-from typing import List
+from typing import List, Literal, Dict
 from ignis.exceptions import GvcNotFoundError
 
 
@@ -26,14 +26,14 @@ class Stream(IgnisGObject):
         - **"removed"** (): Emitted when the stream has been removed.
 
     Properties:
-        - **stream** (``Gvc.MixerStream``, read-only): An instance of ``Gvc.MixerStream``. You typically shouldn't use this property.
-        - **application_id** (``str``, read-only): Application ID or ``None``. Usually returns ``None`` xD.
-        - **icon_name** (``str``, read-only): Current icon name, depending on ``volume`` and ``is_muted`` properties. Works only for speakers and microphones.
-        - **id** (``int``, read-only): ID of the stream.
-        - **name** (``str``, read-only): Name of the stream.
-        - **description** (``str``, read-only): Description of the stream.
-        - **is_muted** (``bool``, read-write): Whether the stream is muted.
-        - **volume** (``float``, read-write): Volume of the stream.
+        - **stream** (``Gvc.MixerStream | None``, read-only): An instance of ``Gvc.MixerStream``. You typically shouldn't use this property.
+        - **application_id** (``str | None``, read-only): Application ID or ``None``.
+        - **icon_name** (``str | None``, read-only): Current icon name, depending on ``volume`` and ``is_muted`` properties. Works only for speakers and microphones.
+        - **id** (``int | None``, read-only): ID of the stream.
+        - **name** (``str | None``, read-only): Name of the stream.
+        - **description** (``str | None``, read-only): Description of the stream.
+        - **is_muted** (``bool | None``, read-write): Whether the stream is muted.
+        - **volume** (``float | None``, read-write): Volume of the stream.
         - **is_default** (``bool``, read-only): Whether the stream is default. Works only for speakers and microphones.
 
     Raises:
@@ -44,11 +44,11 @@ class Stream(IgnisGObject):
         "removed": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
     }
 
-    def __init__(self, control: Gvc.MixerControl, stream: Gvc.MixerStream):
+    def __init__(self, control: Gvc.MixerControl, stream: Gvc.MixerStream | None):
         super().__init__()
         self._control = control
         self._stream = stream
-        self.__connection_ids = []
+        self._connection_ids: List[int] = []
 
         self._setup()
 
@@ -68,35 +68,38 @@ class Stream(IgnisGObject):
                 f"notify::{property_name}",
                 lambda *args, property_name=property_name: self.notify(property_name),
             )
-            self.__connection_ids.append(id_)
+            self._connection_ids.append(id_)
 
         id_ = self._stream.connect(
             "notify::volume", lambda *args: self.notify("icon_name")
         )
-        self.__connection_ids.append(id_)
+        self._connection_ids.append(id_)
         id_ = self._stream.connect(
             "notify::is-muted", lambda *args: self.notify("icon_name")
         )
-        self.__connection_ids.append(id_)
+        self._connection_ids.append(id_)
 
         self.notify_all()
 
     @GObject.Property
-    def stream(self) -> Gvc.MixerStream:
+    def stream(self) -> Gvc.MixerStream | None:
         return self._stream
 
     @GObject.Property
-    def application_id(self) -> str:
+    def application_id(self) -> str | None:
+        if not self._stream:
+            return None
+
         return self._stream.get_application_id()
 
     @GObject.Property
-    def icon_name(self) -> str:
+    def icon_name(self) -> str | None:
         if isinstance(self.stream, Gvc.MixerSink):
             template = SPEAKER_ICON_TEMPLATE
         elif isinstance(self.stream, Gvc.MixerSource):
             template = MICROPHONE_ICON_TEMPLATE
         else:
-            return
+            return None
 
         if self.is_muted:
             return template.format("muted")
@@ -108,19 +111,31 @@ class Stream(IgnisGObject):
             return template.format("low")
 
     @GObject.Property
-    def id(self) -> int:
+    def id(self) -> int | None:
+        if not self._stream:
+            return None
+
         return self._stream.get_id()
 
     @GObject.Property
-    def name(self) -> str:
+    def name(self) -> str | None:
+        if not self._stream:
+            return None
+
         return self._stream.get_name()
 
     @GObject.Property
-    def description(self) -> str:
+    def description(self) -> str | None:
+        if not self._stream:
+            return None
+
         return self._stream.get_description()
 
     @GObject.Property
-    def is_muted(self) -> bool:
+    def is_muted(self) -> bool | None:
+        if not self._stream:
+            return None
+
         return self._stream.get_is_muted()
 
     @is_muted.setter
@@ -129,11 +144,17 @@ class Stream(IgnisGObject):
         self._stream.change_is_muted(value)
 
     @GObject.Property
-    def volume(self) -> float:
+    def volume(self) -> float | None:
+        if not self._stream:
+            return None
+
         return round(self._stream.get_volume() / self._control.get_vol_max_norm() * 100)
 
     @volume.setter
     def volume(self, value: float):
+        if not self._stream:
+            return None
+
         self._stream.set_volume(value * self._control.get_vol_max_norm() / 100)
         self._stream.push_volume()
 
@@ -144,40 +165,25 @@ class Stream(IgnisGObject):
         elif isinstance(self.stream, Gvc.MixerSource):
             default_stream = self._control.get_default_source()
         else:
-            return
+            return False
 
         if not default_stream:
-            return
+            return False
 
         return default_stream.get_id() == self.id
 
 
-class DefaultSpeaker(Stream):
+class DefaultStream(Stream):
     """
     :meta private:
     """
 
-    def __init__(self, control: Gvc.MixerControl):
+    def __init__(self, control: Gvc.MixerControl, _type: Literal["sink", "source"]):
         super().__init__(control, None)
+        self._type = _type
 
     def _sync(self) -> None:
-        stream = self._control.get_default_sink()
-        if not stream:
-            return
-        self._stream = stream
-        self._setup()
-
-
-class DefaultMicrophone(Stream):
-    """
-    :meta private:
-    """
-
-    def __init__(self, control: Gvc.MixerControl):
-        super().__init__(control, None)
-
-    def _sync(self) -> None:
-        stream = self._control.get_default_source()
+        stream = getattr(self._control, f"get_default_{self._type}")()
         if not stream:
             return
         self._stream = stream
@@ -236,28 +242,26 @@ class AudioService(IgnisGObject):
 
         self._control = Gvc.MixerControl(name="Ignis audio control")
 
-        self._speaker = DefaultSpeaker(control=self._control)
-        self._microphone = DefaultMicrophone(control=self._control)
+        self._speaker = DefaultStream(control=self._control, _type="sink")
+        self._microphone = DefaultStream(control=self._control, _type="source")
 
-        self._streams = {}
+        self._streams: Dict[int, Stream] = {}
 
-        self._speakers = {}
-        self._microphones = {}
-        self._apps = {}
-        self._recorders = {}
+        self._speakers: Dict[int, Stream] = {}
+        self._microphones: Dict[int, Stream] = {}
+        self._apps: Dict[int, Stream] = {}
+        self._recorders: Dict[int, Stream] = {}
 
+        self._control.connect("default-sink-changed", self.__default_changed, "speaker")
         self._control.connect(
-            "default-sink-changed", lambda *args: self.__default_changed("speaker")
-        )
-        self._control.connect(
-            "default-source-changed", lambda *args: self.__default_changed("microphone")
+            "default-source-changed", self.__default_changed, "microphone"
         )
         self._control.connect("stream-added", self.__add_stream)
         self._control.connect("stream-removed", self.__remove_stream)
 
         self._control.open()
 
-    def __default_changed(self, _type: str) -> None:
+    def __default_changed(self, x, y, _type: str) -> None:
         getattr(self, _type)._sync()
         for stream in getattr(self, f"{_type}s"):
             stream.notify("is_default")
@@ -284,23 +288,23 @@ class AudioService(IgnisGObject):
 
     @GObject.Property
     def streams(self) -> List[Stream]:
-        return self._streams.values()
+        return list(self._streams.values())
 
     @GObject.Property
     def speakers(self) -> List[Stream]:
-        return self._speakers.values()
+        return list(self._speakers.values())
 
     @GObject.Property
     def microphones(self) -> List[Stream]:
-        return self._microphones.values()
+        return list(self._microphones.values())
 
     @GObject.Property
     def apps(self) -> List[Stream]:
-        return self._apps.values()
+        return list(self._apps.values())
 
     @GObject.Property
     def recorders(self) -> List[Stream]:
-        return self._recorders.values()
+        return list(self._recorders.values())
 
     def __add_stream(self, control: Gvc.MixerControl, id: int):
         stream = control.lookup_stream_id(id)
@@ -320,7 +324,7 @@ class AudioService(IgnisGObject):
             audio_stream.emit("removed")
             self.notify(f"{stream_type}s")
 
-    def __get_stream_type(self, stream: Gvc.MixerStream) -> None:
+    def __get_stream_type(self, stream: Gvc.MixerStream) -> str | None:
         if isinstance(stream, Gvc.MixerSink):
             return "speaker"
         elif isinstance(stream, Gvc.MixerSource):
@@ -329,3 +333,5 @@ class AudioService(IgnisGObject):
             return "recorder"
         elif isinstance(stream, Gvc.MixerSinkInput):
             return "app"
+        else:
+            return None

@@ -34,9 +34,9 @@ class Grid(Gtk.Grid, BaseWidget):
 
     def __init__(self, **kwargs):
         Gtk.Grid.__init__(self)
-        self._column_num = None
-        self._row_num = None
-        self._child = []
+        self._column_num: int | None = None
+        self._row_num: int | None = None
+        self._child: List[Gtk.Widget] = []
         BaseWidget.__init__(self, **kwargs)
 
     @GObject.Property

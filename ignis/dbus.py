@@ -1,7 +1,8 @@
 from gi.repository import Gio, GLib, GObject
-from typing import Any, List, Dict
+from typing import Any, List, Dict, Callable, Optional
 from ignis.utils import Utils
 from ignis.gobject import IgnisGObject
+from ignis.exceptions import DBusMethodNotFoundError, DBusPropertyNotFoundError
 
 
 class DBusService(IgnisGObject):
@@ -12,11 +13,11 @@ class DBusService(IgnisGObject):
         - **name** (``str``, required, read-only): The well-known name to own.
         - **object_path** (``str``, required, read-only): An object path.
         - **info** (`Gio.DBusInterfaceInfo <https://lazka.github.io/pgi-docs/Gio-2.0/classes/DBusInterfaceInfo.html>`_, required, read-only): A ``Gio.DBusInterfaceInfo`` instance. You can get it from XML using :class:`~ignis.utils.Utils.load_interface_xml`.
-        - **on_name_acquired** (``callable``, optional, read-write): Function to call when ``name`` is acquired.
-        - **on_name_lost** (``callable``, optional, read-write): Function to call when ``name`` is lost.
+        - **on_name_acquired** (``Callable``, optional, read-write): Function to call when ``name`` is acquired.
+        - **on_name_lost** (``Callable``, optional, read-write): Function to call when ``name`` is lost.
         - **connection** (`Gio.DBusConnection <https://lazka.github.io/pgi-docs/Gio-2.0/classes/DBusConnection.html>`_, not argument, read-only): The ``Gio.DBusConnection`` instance.
-        - **methods** (``Dict[str, callable]``, not argument, read-only): The dictionary of registred DBus methods. See :func:`~ignis.dbus.DBusService.register_dbus_method`.
-        - **properties** (``Dict[str, callable]``, not argument, read-only): The dictionary of registred DBus properties. See :func:`~ignis.dbus.DBusService.register_dbus_property`.
+        - **methods** (``Dict[str, Callable]``, not argument, read-only): The dictionary of registred DBus methods. See :func:`~ignis.dbus.DBusService.register_dbus_method`.
+        - **properties** (``Dict[str, Callable]``, not argument, read-only): The dictionary of registred DBus properties. See :func:`~ignis.dbus.DBusService.register_dbus_property`.
 
     DBus methods:
         - Must accept `Gio.DBusMethodInvocation <https://lazka.github.io/pgi-docs/index.html#Gio-2.0/classes/DBusMethodInvocation.html>`_ as the first argument.
@@ -48,8 +49,8 @@ class DBusService(IgnisGObject):
         name: str,
         object_path: str,
         info: Gio.DBusInterfaceInfo,
-        on_name_acquired: callable = None,
-        on_name_lost: callable = None,
+        on_name_acquired: Optional[Callable] = None,
+        on_name_lost: Optional[Callable] = None,
     ):
         super().__init__()
 
@@ -59,10 +60,10 @@ class DBusService(IgnisGObject):
         self._on_name_acquired = on_name_acquired
         self._on_name_lost = on_name_lost
 
-        self._methods = {}
-        self._properties = {}
+        self._methods: Dict[str, Callable] = {}
+        self._properties: Dict[str, Callable] = {}
 
-        self.__id = Gio.bus_own_name(
+        self._id = Gio.bus_own_name(
             Gio.BusType.SESSION,
             name,
             Gio.BusNameOwnerFlags.NONE,
@@ -80,19 +81,19 @@ class DBusService(IgnisGObject):
         return self._object_path
 
     @GObject.Property
-    def on_name_acquired(self) -> callable:
+    def on_name_acquired(self) -> Callable:
         return self._on_name_acquired
 
     @on_name_acquired.setter
-    def on_name_acquired(self, value: callable) -> None:
+    def on_name_acquired(self, value: Callable) -> None:
         self._on_name_acquired = value
 
     @GObject.Property
-    def on_name_lost(self) -> callable:
+    def on_name_lost(self) -> Callable:
         return self._on_name_lost
 
     @on_name_lost.setter
-    def on_name_lost(self, value: callable) -> None:
+    def on_name_lost(self, value: Callable) -> None:
         self._on_name_lost = value
 
     @GObject.Property
@@ -104,11 +105,11 @@ class DBusService(IgnisGObject):
         return self._connection
 
     @GObject.Property
-    def methods(self) -> Dict[str, callable]:
+    def methods(self) -> Dict[str, Callable]:
         return self._methods
 
     @GObject.Property
-    def properties(self) -> Dict[str, callable]:
+    def properties(self) -> Dict[str, Callable]:
         return self._properties
 
     def __export_object(self, connection: Gio.DBusConnection, name: str) -> None:
@@ -131,18 +132,20 @@ class DBusService(IgnisGObject):
         params: GLib.Variant,
         invocation: Gio.DBusMethodInvocation,
     ) -> None:
-        def callback(func: callable, unpacked_params) -> None:
+        def callback(func: Callable, unpacked_params) -> None:
             result = func(invocation, *unpacked_params)
             invocation.return_value(result)
 
         func = self._methods.get(method_name, None)
-        if func:
-            # params can contain pixbuf, very large amount of data
-            # and unpacking may take some time and block the main thread
-            # so we unpack in another thread, and call DBus method when unpacking is finished
-            Utils.ThreadTask(
-                target=params.unpack, callback=lambda result: callback(func, result)
-            )
+        if not func:
+            raise DBusMethodNotFoundError(method_name)
+
+        # params can contain pixbuf, very large amount of data
+        # and unpacking may take some time and block the main thread
+        # so we unpack in another thread, and call DBus method when unpacking is finished
+        Utils.ThreadTask(
+            target=params.unpack, callback=lambda result: callback(func, result)
+        )
 
     def __handle_get_property(
         self,
@@ -153,30 +156,34 @@ class DBusService(IgnisGObject):
         value: str,
     ) -> GLib.Variant:
         func = self._properties.get(value, None)
-        if func:
-            return func()
+        if not func:
+            raise DBusPropertyNotFoundError(value)
 
-    def register_dbus_method(self, name: str, method: callable) -> None:
+        return func()
+
+    def register_dbus_method(self, name: str, method: Callable) -> None:
         """
         Register a D-Bus method for this service.
 
         Args:
             name (``str``): The name of the method to register.
-            method (``callable``): A function to call when the method is invoked (from D-Bus).
+            method (``Callable``): A function to call when the method is invoked (from D-Bus).
         """
         self._methods[name] = method
 
-    def register_dbus_property(self, name: str, method: callable) -> None:
+    def register_dbus_property(self, name: str, method: Callable) -> None:
         """
         Register D-Bus property for this service.
 
         Args:
             name (``str``): The name of the property to register.
-            method (``callable``): A function to call when the property is accessed (from DBus).
+            method (``Callable``): A function to call when the property is accessed (from DBus).
         """
         self._properties[name] = method
 
-    def emit_signal(self, signal_name: str, parameters: GLib.Variant = None) -> None:
+    def emit_signal(
+        self, signal_name: str, parameters: Optional[GLib.Variant] = None
+    ) -> None:
         """
         Emit a D-Bus signal on this service.
 
@@ -197,7 +204,7 @@ class DBusService(IgnisGObject):
         """
         Release ownership of the name.
         """
-        Gio.bus_unown_name(self.__id)
+        Gio.bus_unown_name(self._id)
 
 
 class DBusProxy(IgnisGObject):
@@ -250,8 +257,8 @@ class DBusProxy(IgnisGObject):
         self._interface_name = interface_name
         self._info = info
 
-        self._methods = []
-        self._properties = []
+        self._methods: List[str] = []
+        self._properties: List[str] = []
 
         self._proxy = Gio.DBusProxy.new_for_bus_sync(
             Gio.BusType.SESSION,
@@ -266,7 +273,7 @@ class DBusProxy(IgnisGObject):
         for i in info.methods:
             self._methods.append(i.name)
 
-        for i in info.properties:
+        for i in info.properties:  # type: ignore
             self._properties.append(i.name)
 
     @GObject.Property
@@ -286,7 +293,7 @@ class DBusProxy(IgnisGObject):
         return self._info
 
     @GObject.Property
-    def connection(self) -> str:
+    def connection(self) -> Gio.DBusConnection:
         return self._proxy.get_connection()
 
     @GObject.Property
@@ -322,14 +329,14 @@ class DBusProxy(IgnisGObject):
     def signal_subscribe(
         self,
         signal_name: str,
-        callback: callable = None,
+        callback: Optional[Callable] = None,
     ) -> int:
         """
         Subscribe to D-Bus signal.
 
         Args:
             signal_name (``str``): The signal name to subscribe.
-            callback (``callable``, optional): A function to call when signal is emitted.
+            callback (``Callable``, optional): A function to call when signal is emitted.
         Returns:
             ``int``: a subscription ID that can be used with :func:`~ignis.dbus.DBusProxy.signal_unsubscribe`
         """
@@ -352,7 +359,7 @@ class DBusProxy(IgnisGObject):
         """
         self.connection.signal_unsubscribe(id)
 
-    def __get_dbus_property(self, property_name: str) -> bool:
+    def __get_dbus_property(self, property_name: str) -> Any:
         try:
             return self.connection.call_sync(
                 self.name,
@@ -368,18 +375,20 @@ class DBusProxy(IgnisGObject):
                 -1,
                 None,
             )[0]
-        except GLib.GError:
+        except GLib.GError:  # type: ignore
             return None
 
     def watch_name(
-        self, on_name_appeared: callable = None, on_name_vanished: callable = None
+        self,
+        on_name_appeared: Optional[Callable] = None,
+        on_name_vanished: Optional[Callable] = None,
     ) -> None:
         """
         Watch ``name``.
 
         Args:
-            on_name_appeared (``callable``, optional): A function to call when ``name`` appeared.
-            on_name_vanished (``callable``, optional): A function to call when ``name`` vanished.
+            on_name_appeared (``Callable``, optional): A function to call when ``name`` appeared.
+            on_name_vanished (``Callable``, optional): A function to call when ``name`` vanished.
         """
         self._watcher = Gio.bus_watch_name(
             Gio.BusType.SESSION,

@@ -30,7 +30,7 @@ class Overlay(Gtk.Overlay, BaseWidget):
 
     def __init__(self, **kwargs):
         Gtk.Overlay.__init__(self)
-        self._overlays = []
+        self._overlays: List[Gtk.Widget] = []
         BaseWidget.__init__(self, **kwargs)
 
     @GObject.Property

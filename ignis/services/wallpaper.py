@@ -7,8 +7,7 @@ from ignis.utils import Utils
 from gi.repository import GObject
 from ignis.services import Service
 from ignis import CACHE_DIR
-
-options = Service.get("options")
+from typing import List
 
 CACHE_WALLPAPER_PATH = f"{CACHE_DIR}/wallpaper"
 
@@ -37,14 +36,16 @@ class WallpaperService(IgnisGObject):
 
     def __init__(self):
         super().__init__()
-        self._windows = []
-        options.create_option(name="wallpaper", default=None, exists_ok=True)
+        self._windows: List[Window] = []
+
+        self._options = Service.get("options")
+        self._options.create_option(name="wallpaper", default=None, exists_ok=True)
 
         self.__sync()
 
     @GObject.Property
     def wallpaper(self) -> str:
-        return options.get_option("wallpaper")
+        return self._options.get_option("wallpaper")
 
     @wallpaper.setter
     def wallpaper(self, value: str) -> None:
@@ -53,7 +54,7 @@ class WallpaperService(IgnisGObject):
         except shutil.SameFileError:
             return
 
-        options.set_option("wallpaper", value)
+        self._options.set_option("wallpaper", value)
         self.__sync()
 
     def __sync(self) -> None:
@@ -67,6 +68,9 @@ class WallpaperService(IgnisGObject):
 
         for monitor_id in range(Utils.get_n_monitors()):
             monitor = Utils.get_monitor(monitor_id)
+            if not monitor:
+                return
+
             geometry = monitor.get_geometry()
             window = Window(
                 layer="background",

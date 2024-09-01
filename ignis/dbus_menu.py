@@ -13,7 +13,7 @@ class MenuItem(GObject.Object):
         self,
         proxy: DBusProxy,
         item_id: int,
-        enabled: False,
+        enabled: bool = False,
     ):
         self.__proxy = proxy
         self._uniq_name = hex(id(self))

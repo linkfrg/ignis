@@ -23,13 +23,13 @@ class ArrowButton(Button):
     __gtype_name__ = "IgnisArrowButton"
 
     def __init__(self, arrow: Arrow, **kwargs):
-        self.__arrow = arrow
+        self._arrow = arrow
 
-        super().__init__(child=self.__arrow, **kwargs)
-        self.connect("clicked", lambda x: self.__arrow.toggle())
+        super().__init__(child=self._arrow, **kwargs)
+        self.connect("clicked", lambda x: self._arrow.toggle())
 
     def toggle(self) -> None:
         """
         Same as :func:`~ignis.widgets.Widget.Arrow.toggle`
         """
-        self.__arrow.toggle()
+        self._arrow.toggle()

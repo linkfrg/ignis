@@ -1,5 +1,6 @@
 from gi.repository import GLib, GObject
 from ignis.gobject import IgnisGObject
+from typing import Callable
 
 
 class Timeout(IgnisGObject):
@@ -8,7 +9,7 @@ class Timeout(IgnisGObject):
 
     Properties:
         - **ms** (``int``, required, read-only): Time in milliseconds.
-        - **target** (``callable``, required, read-only): Function to call.
+        - **target** (``Callable``, required, read-only): Function to call.
 
     **Example usage:**
 
@@ -19,10 +20,11 @@ class Timeout(IgnisGObject):
         Utils.Timeout(ms=3000, target=lambda: print("Hello"))
     """
 
-    def __init__(self, ms: int, target: callable, *args):
+    def __init__(self, ms: int, target: Callable, *args):
         super().__init__()
         self._ms = ms
         self._target = target
+
         self._id = GLib.timeout_add(ms, target, *args)
 
     @GObject.Property
@@ -30,7 +32,7 @@ class Timeout(IgnisGObject):
         return self._ms
 
     @GObject.Property
-    def target(self) -> callable:
+    def target(self) -> Callable:
         return self._target
 
     def cancel(self) -> None:

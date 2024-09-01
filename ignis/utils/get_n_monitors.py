@@ -1,4 +1,5 @@
 from gi.repository import Gdk
+from ignis.exceptions import DisplayNotFoundError
 
 
 def get_n_monitors() -> int:
@@ -8,4 +9,8 @@ def get_n_monitors() -> int:
     Returns:
         ``int``: The number of monitors.
     """
-    return len(Gdk.Display.get_default().get_monitors())
+    display = Gdk.Display.get_default()
+    if not display:
+        raise DisplayNotFoundError()
+
+    return len(display.get_monitors())

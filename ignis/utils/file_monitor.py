@@ -1,6 +1,7 @@
 import os
 from gi.repository import GObject, Gio
 from ignis.gobject import IgnisGObject
+from typing import Callable, List, Optional
 
 FLAGS = {
     None: Gio.FileMonitorFlags.NONE,
@@ -37,9 +38,9 @@ class FileMonitor(IgnisGObject):
 
     Properties:
         - **path** (``str``, required, read-only): The path to the file or directory to be monitored.
-        - **recursive** (``bool``, optional, read-only): Whether monitoring is recursive (monitor all subdirectories and files).
-        - **flags** (``str``, optional, read-only): What the monitor will watch for.
-        - **callback** (``callable``, optional, read-write): A function to call when the file or directory changes.
+        - **recursive** (``bool``, optional, read-only): Whether monitoring is recursive (monitor all subdirectories and files). Default: ``False``.
+        - **flags** (``str | None``, optional, read-only): What the monitor will watch for. Default: ``None``.
+        - **callback** (``Callable | None``, optional, read-write): A function to call when the file or directory changes. Default: ``None``.
 
     **Flags:**
         - **"none"**
@@ -84,8 +85,8 @@ class FileMonitor(IgnisGObject):
         self,
         path: str,
         recursive: bool = False,
-        flags: str = None,
-        callback: callable = None,
+        flags: Optional[str] = None,
+        callback: Optional[Callable] = None,
     ):
         super().__init__()
         self._file = Gio.File.new_for_path(path)
@@ -97,8 +98,8 @@ class FileMonitor(IgnisGObject):
         self._callback = callback
         self._recursive = recursive
 
-        self._sub_monitors = []
-        self._sub_paths = []
+        self._sub_monitors: List[Gio.FileMonitor] = []
+        self._sub_paths: List[str] = []
 
         if recursive:
             for root, dirs, _files in os.walk(path):
@@ -108,7 +109,7 @@ class FileMonitor(IgnisGObject):
 
         file_monitors.append(
             self
-        )  # to prevent the garbage collector from collecting self
+        )  # to prevent the garbage collector from collecting "self"
 
     def __on_change(self, file_monitor, file, other_file, event_type) -> None:
         path = file.get_path()
@@ -134,11 +135,11 @@ class FileMonitor(IgnisGObject):
         return self._path
 
     @GObject.Property
-    def flags(self) -> str:
+    def flags(self) -> str | None:
         return self._flags
 
     @GObject.Property
-    def callback(self) -> callable:
+    def callback(self) -> Callable | None:
         return self._callback
 
     @GObject.Property
@@ -146,7 +147,7 @@ class FileMonitor(IgnisGObject):
         return self._recursive
 
     @callback.setter
-    def callback(self, value: callable) -> None:
+    def callback(self, value: Callable) -> None:
         self._callback = value
 
     def cancel(self) -> None:

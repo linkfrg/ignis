@@ -1,9 +1,9 @@
 on: [push, pull_request]
 
-name: Linter Analysis
+name: Static Analysis
 jobs:
-  ruff-check:
-    name: Ruff
+  mypy-check:
+    name: Mypy
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -14,12 +14,8 @@ jobs:
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install ruff
+          pip install -r dev.txt
 
-      - name: Check code
-        run:
-          ruff check ignis/
-
-      - name: Check format
-        continue-on-error: true
-        run: ruff format ignis/ --check
+      - name: Run mypy analysis
+        run: |
+          mypy

@@ -7,7 +7,7 @@ from gi.repository import GObject, GLib
 from ignis.gobject import IgnisGObject
 from ignis.utils import Utils
 from loguru import logger
-from typing import List
+from typing import List, Dict
 from ignis import CACHE_DIR
 
 ART_URL_CACHE_DIR = f"{CACHE_DIR}/art_url"
@@ -52,8 +52,8 @@ class MprisPlayer(IgnisGObject):
 
     def __init__(self, name: str):
         super().__init__()
-        self._position = -1
-        self._art_url = None
+        self._position: int = -1
+        self._art_url: str | None = None
 
         self.__mpris_proxy = DBusProxy(
             name=name,
@@ -182,7 +182,7 @@ class MprisPlayer(IgnisGObject):
             return -1
 
     @GObject.Property
-    def art_url(self) -> str:
+    def art_url(self) -> str | None:
         return self._art_url
 
     @GObject.Property
@@ -313,13 +313,14 @@ class MprisService(IgnisGObject):
 
     def __init__(self):
         super().__init__()
+        self._players: Dict[str, MprisPlayer] = {}
+
         self.__dbus = DBusProxy(
             name="org.freedesktop.DBus",
             object_path="/org/freedesktop/DBus",
             interface_name="org.freedesktop.DBus",
             info=Utils.load_interface_xml("org.freedesktop.DBus"),
         )
-        self.__players = {}
 
         self.__dbus.signal_subscribe(
             signal_name="NameOwnerChanged",
@@ -338,23 +339,23 @@ class MprisService(IgnisGObject):
     def __init_player(self, name: str) -> None:
         if (
             name.startswith("org.mpris.MediaPlayer2")
-            and name not in self.__players
+            and name not in self._players
             and name != "org.mpris.MediaPlayer2.playerctld"
         ):
             player = MprisPlayer(name)
             player.connect("ready", self.__add_player, name)
 
     def __add_player(self, player: MprisPlayer, name: str) -> None:
-        self.__players[name] = player
+        self._players[name] = player
         player.connect("closed", lambda x: self.__remove_player(name))
         self.emit("player_added", player)
         self.notify("players")
 
     def __remove_player(self, name: str) -> None:
-        if name in self.__players:
-            self.__players.pop(name)
+        if name in self._players:
+            self._players.pop(name)
             self.notify("players")
 
     @GObject.Property
     def players(self) -> List[MprisPlayer]:
-        return list(self.__players.values())
+        return list(self._players.values())

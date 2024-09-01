@@ -1,5 +1,5 @@
 from gi.repository import Gtk, GObject
-from typing import Any
+from typing import Any, Dict, Callable, Optional
 from ignis.gobject import IgnisGObject
 
 
@@ -11,22 +11,21 @@ class BaseWidget(Gtk.Widget, IgnisGObject):
     Provides ``style`` property and allows overriding enums.
     """
 
-    gproperties = __gproperties__ = {}
-    _overrided_enums = {}
+    gproperties = __gproperties__ = {}  # type: ignore
+    _overrided_enums: Dict[str, GObject.GEnum] = {}
 
     def __init__(
         self,
-        setup: callable = None,
+        setup: Optional[Callable] = None,
         vexpand: bool = False,
         hexpand: bool = False,
         visible: bool = True,
         **kwargs,
     ):
         Gtk.Widget.__init__(self)
-        IgnisGObject.__init__(self)
 
-        self._style = None
-        self._css_provider = None
+        self._style: str | None = None
+        self._css_provider: Gtk.CssProvider | None = None
 
         self.vexpand = vexpand
         self.hexpand = hexpand
@@ -35,14 +34,13 @@ class BaseWidget(Gtk.Widget, IgnisGObject):
         self.override_enum("halign", Gtk.Align)
         self.override_enum("valign", Gtk.Align)
 
-        for key in kwargs.keys():
-            self.set_property(key, kwargs[key])
+        IgnisGObject.__init__(self, **kwargs)
 
         if setup:
             setup(self)
 
     @GObject.property
-    def style(self) -> str:
+    def style(self) -> str | None:
         return self._style
 
     @style.setter
@@ -96,12 +94,12 @@ class BaseWidget(Gtk.Widget, IgnisGObject):
         else:
             super().__getattribute__(name)
 
-    def override_enum(self, property_name: str, enum: GObject.GEnum) -> None:
+    def override_enum(self, property_name: str, enum: Any) -> None:
         """
         Override an enum.
 
         Args:
             property_name (``str``): The name of the property to override.
-            enum (``str``): An enum that accepts the property to be overridden. For example, for ``valign`` it will be ``Gtk.Align``.
+            enum (``GObject.GEnum``): An enum that accepts the property to be overridden. For example, for ``valign`` it will be ``Gtk.Align``.
         """
         self._overrided_enums[property_name] = enum

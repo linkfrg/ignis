@@ -1,11 +1,11 @@
 import os
 from gi.repository import Gtk, GObject, Gio, GLib
-from typing import List
+from typing import List, Callable
 from ignis.widgets.file_filter import FileFilter
-from ignis.base_widget import BaseWidget
+from ignis.gobject import IgnisGObject
 
 
-class FileDialog(Gtk.FileDialog, BaseWidget):
+class FileDialog(Gtk.FileDialog, IgnisGObject):
     """
     Bases: `Gtk.FileDialog <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/FileDialog.html>`_.
 
@@ -19,8 +19,8 @@ class FileDialog(Gtk.FileDialog, BaseWidget):
         - **"file-set"** (``Gio.File``): Emitted when a file or folder is selected.
 
     Properties:
-        - **file** (``Gio.File``, not argument, read-only): The selected ``Gio.File``.
-        - **on_file_set** (``callable``, optional, read-write): A function to call when user selects a file.
+        - **file** (``Gio.File | None``, not argument, read-only): The selected ``Gio.File``.
+        - **on_file_set** (``Callable``, optional, read-write): A function to call when user selects a file.
         - **filters** (List[:class:`~ignis.widgets.Widget.FileFilter`], optional, read-write): A list of file filters.
         - **initial_path** (``str``, optional, read-write): The path to the folder or file that will be selected by default.
         - **select_folder** (``bool``, optional, read-write): Whether the dialog should allow selecting folders instead of files.
@@ -51,21 +51,24 @@ class FileDialog(Gtk.FileDialog, BaseWidget):
 
     def __init__(self, **kwargs):
         Gtk.FileDialog.__init__(self)
-        self._file = None
+        self._file: Gio.File | None = None
         self._list_store = Gio.ListStore.new(Gtk.FileFilter)
 
-        self._filters = []
-        self._on_file_set = None
-        self._initial_path = None
-        self._select_folder = False
-        BaseWidget.__init__(self, **kwargs)
+        self._filters: List[FileFilter] = []
+        self._on_file_set: Callable | None = None
+        self._initial_path: str | None = None
+        self._select_folder: bool = False
+        IgnisGObject.__init__(self, **kwargs)
 
         self.connect(
             "file-set",
             lambda x, file: self.on_file_set(x, file) if self.on_file_set else None,
         )
 
-    def open(self) -> None:
+    def open_dialog(self) -> None:
+        """
+        Open dialog.
+        """
         if self.select_folder:
             super().select_folder(Gtk.Window(), None, self.__open_callback)
         else:
@@ -77,7 +80,7 @@ class FileDialog(Gtk.FileDialog, BaseWidget):
                 file = self.select_folder_finish(result)
             else:
                 file = dialog.open_finish(result)
-        except GLib.GError:
+        except GLib.GError:  # type: ignore
             return
 
         if file is not None:
@@ -86,15 +89,15 @@ class FileDialog(Gtk.FileDialog, BaseWidget):
             self.notify("file")
 
     @GObject.Property
-    def file(self) -> Gio.File:
+    def file(self) -> Gio.File | None:
         return self._file
 
     @GObject.Property
-    def on_file_set(self) -> callable:
+    def on_file_set(self) -> Callable:
         return self._on_file_set
 
     @on_file_set.setter
-    def on_file_set(self, value: callable) -> None:
+    def on_file_set(self, value: Callable) -> None:
         self._on_file_set = value
 
     def add_filter(self, filter: FileFilter) -> None:

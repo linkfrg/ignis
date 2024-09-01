@@ -1,13 +1,14 @@
 import threading
+from typing import Callable
 
 
-def thread(target: callable, *args, **kwargs) -> threading.Thread:
+def thread(target: Callable, *args, **kwargs) -> threading.Thread:
     """
     Simply run the given function in a thread.
     The provided args and kwargs will be passed to the function.
 
     Args:
-        target (``callable``): The function to run.
+        target (``Callable``): The function to run.
     Returns:
         `threading.Thread``: The thread in which the function is running.
     """
@@ -16,7 +17,7 @@ def thread(target: callable, *args, **kwargs) -> threading.Thread:
     return th
 
 
-def run_in_thread(func: callable) -> callable:
+def run_in_thread(func: Callable) -> Callable:
     """
     Decorator to run the decorated function in a thread.
     """

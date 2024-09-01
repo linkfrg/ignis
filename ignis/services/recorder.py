@@ -8,24 +8,8 @@ from ignis.dbus import DBusProxy
 from ignis.app import app
 from ignis.services import Service
 from ignis.utils import Utils
-from typing import List
+from typing import List, Callable, Optional
 from ignis.exceptions import GstNotFoundError, GstPluginNotFoundError
-
-options = Service.get("options")
-audio = Service.get("audio")
-
-RECORDING_BITRATE_OPTION = "recording_bitrate"
-RECORDING_DEFAULT_FILE_LOCATION_OPTION = "recording_default_file_location"
-RECORDING_DEFAULT_FILENAME_OPTION = "recording_default_filename"
-
-
-def gst_inspect(name: str) -> None:
-    try:
-        subprocess.run(["gst-inspect-1.0", "--exists", name], check=True)
-        return True
-    except subprocess.CalledProcessError:
-        return False
-
 
 try:
     if "sphinx" not in sys.modules:
@@ -35,6 +19,10 @@ except (ImportError, ValueError):
     raise GstNotFoundError(
         "GStreamer not found! To use the recorder service, install GStreamer."
     ) from None
+
+RECORDING_BITRATE_OPTION = "recording_bitrate"
+RECORDING_DEFAULT_FILE_LOCATION_OPTION = "recording_default_file_location"
+RECORDING_DEFAULT_FILENAME_OPTION = "recording_default_filename"
 
 PIPELINE_TEMPLATE = """
     pipewiresrc path={node_id} do-timestamp=true keepalive-time=1000 resend-last=true !
@@ -67,6 +55,14 @@ AUDIO_DEVICE_PIPELINE = """
 """
 
 
+def gst_inspect(name: str) -> bool:
+    try:
+        subprocess.run(["gst-inspect-1.0", "--exists", name], check=True)
+        return True
+    except subprocess.CalledProcessError:
+        return False
+
+
 class SessionManager:
     """
     :meta private:
@@ -82,19 +78,19 @@ class SessionManager:
             info=Utils.load_interface_xml("org.freedesktop.portal.ScreenCast"),
         )
 
-        self._session_token_counter = 0
-        self._request_token_counter = 0
-        self.__callback = None
-        self.__calback_args = None
-        self._session = None
+        self._session_token_counter: int = 0
+        self._request_token_counter: int = 0
+        self._callback: Callable | None = None
+        self._calback_args: tuple = ()
+        self._session: str | None = None
 
         self._sender_name = (
             self.__dbus.connection.get_unique_name().replace(".", "_").replace(":", "")
         )
 
-    def start_session(self, callback: callable, *args) -> None:
-        self.__callback = callback
-        self.__calback_args = args
+    def start_session(self, callback: Callable, *args) -> None:
+        self._callback = callback
+        self._calback_args = args
         self.__create_session()
 
     def __create_session(self) -> None:
@@ -109,7 +105,7 @@ class SessionManager:
             },
         )
 
-    def __request_response(self, callback: callable) -> str:
+    def __request_response(self, callback: Callable) -> str:
         self._request_token_counter += 1
         request_token = f"u{self._request_token_counter}"
         request_path = f"/org/freedesktop/portal/desktop/request/{self._sender_name}/{request_token}"
@@ -174,7 +170,8 @@ class SessionManager:
             self.__run_callback(node_id)
 
     def __run_callback(self, node_id: int) -> None:
-        self.__callback(node_id, *self.__calback_args)
+        if self._callback:
+            self._callback(node_id, *self._calback_args)
 
 
 class RecorderService(IgnisGObject):
@@ -233,21 +230,24 @@ class RecorderService(IgnisGObject):
 
         self.__manager = SessionManager()
 
-        self._active = False
-        self._is_paused = False
-        self.__pipeline = None
+        self._active: bool = False
+        self._is_paused: bool = False
+        self.__pipeline: Gst.Element | None = None
 
-        self._N_THREADS = str(min(max(1, GLib.get_num_processors()), 64))
+        self._N_THREADS: str = str(min(max(1, GLib.get_num_processors()), 64))
 
-        options.create_option(
+        self._options = Service.get("options")
+        self._audio = Service.get("audio")
+
+        self._options.create_option(
             name=RECORDING_BITRATE_OPTION, default=8000, exists_ok=True
         )
-        options.create_option(
+        self._options.create_option(
             name=RECORDING_DEFAULT_FILE_LOCATION_OPTION,
             default=GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_VIDEOS),
             exists_ok=True,
         )
-        options.create_option(
+        self._options.create_option(
             name=RECORDING_DEFAULT_FILENAME_OPTION,
             default="%Y-%m-%d_%H-%M-%S.mp4",
             exists_ok=True,
@@ -275,34 +275,34 @@ class RecorderService(IgnisGObject):
 
     @GObject.Property
     def bitrate(self) -> int:
-        return options.get_option(RECORDING_BITRATE_OPTION)
+        return self._options.get_option(RECORDING_BITRATE_OPTION)
 
     @bitrate.setter
     def bitrate(self, value: int) -> None:
-        options.set_option(RECORDING_BITRATE_OPTION, value)
+        self._options.set_option(RECORDING_BITRATE_OPTION, value)
 
     @GObject.Property
     def default_file_location(self) -> str:
-        return options.get_option(RECORDING_DEFAULT_FILE_LOCATION_OPTION)
+        return self._options.get_option(RECORDING_DEFAULT_FILE_LOCATION_OPTION)
 
     @default_file_location.setter
     def default_file_location(self, value: str) -> None:
-        options.set_option(RECORDING_DEFAULT_FILE_LOCATION_OPTION, value)
+        self._options.set_option(RECORDING_DEFAULT_FILE_LOCATION_OPTION, value)
 
     @GObject.Property
     def default_filename(self) -> str:
-        return options.get_option(RECORDING_DEFAULT_FILENAME_OPTION)
+        return self._options.get_option(RECORDING_DEFAULT_FILENAME_OPTION)
 
     @default_filename.setter
     def default_filename(self, value: str) -> None:
-        options.set_option(RECORDING_DEFAULT_FILENAME_OPTION, value)
+        self._options.set_option(RECORDING_DEFAULT_FILENAME_OPTION, value)
 
     def start_recording(
         self,
-        path: str = None,
+        path: Optional[str] = None,
         record_microphone: bool = False,
         record_internal_audio: bool = False,
-        audio_devices: List[str] = None,
+        audio_devices: Optional[List[str]] = None,
     ) -> None:
         """
         Start recording.
@@ -327,12 +327,12 @@ class RecorderService(IgnisGObject):
 
         if record_microphone:
             audio_pipeline = self.__combine_audio_pipeline(
-                audio_pipeline, audio.microphone.name
+                audio_pipeline, self._audio.microphone.name
             )
 
         if record_internal_audio:
             audio_pipeline = self.__combine_audio_pipeline(
-                audio_pipeline, audio.speaker.name + ".monitor"
+                audio_pipeline, self._audio.speaker.name + ".monitor"
             )
 
         if audio_devices:
@@ -343,7 +343,7 @@ class RecorderService(IgnisGObject):
 
         self.__manager.start_session(self.__play_pipewire_stream, pipeline_description)
 
-    def __combine_audio_pipeline(self, audio_pipeline: str, device: str) -> None:
+    def __combine_audio_pipeline(self, audio_pipeline: str, device: str) -> str:
         if audio_pipeline != "":
             template = AUDIO_DEVICE_PIPELINE
         else:
@@ -390,7 +390,11 @@ class RecorderService(IgnisGObject):
 
         self.__pipeline = Gst.parse_launch(pipeline_description)
         self.__pipeline.set_state(Gst.State.PLAYING)
-        self.__pipeline.get_bus().connect("message", self.__on_gst_message)
+        bus = self.__pipeline.get_bus()
+        if not bus:
+            return
+
+        bus.connect("message", self.__on_gst_message)
 
         self._active = True
         self._is_paused = False

@@ -1,6 +1,6 @@
 from ignis.gobject import IgnisGObject
 from gi.repository import GLib, GObject
-from typing import Any
+from typing import Any, Callable
 
 
 class Poll(IgnisGObject):
@@ -9,7 +9,7 @@ class Poll(IgnisGObject):
 
     Properties:
         - **timeout** (``int``, required, read-write): The timeout interval in milliseconds.
-        - **callback** (``callable``, required, read-write): The function to call when the timeout is reached. The ``self`` will passed as an argument.
+        - **callback** (``Callable``, required, read-write): The function to call when the timeout is reached. The ``self`` will passed as an argument.
         - **output** (``str``, not argument, read-only): The output of the callback.
 
     You can pass arguments to the constructor, and they will be passed to the callback.
@@ -31,14 +31,15 @@ class Poll(IgnisGObject):
         "changed": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
     }
 
-    def __init__(self, timeout: int, callback: callable, *args):
+    def __init__(self, timeout: int, callback: Callable, *args):
         super().__init__()
-        self.__id = None
+        self._id: int | None = None
+        self._output: Any = None
 
-        self._output = None
         self._timeout = timeout
         self._callback = callback
         self._args = args
+
         self.__main()
 
     @GObject.Property
@@ -54,22 +55,25 @@ class Poll(IgnisGObject):
         self._timeout = value
 
     @GObject.Property
-    def callback(self) -> callable:
+    def callback(self) -> Callable:
         return self._callback
 
     @callback.setter
-    def callback(self, value: callable) -> None:
+    def callback(self, value: Callable) -> None:
         self._callback = value
 
     def __main(self) -> None:
         self._output = self._callback(self, *self._args)
         self.emit("changed")
         self.notify("output")
-        self.__id = GLib.timeout_add(self._timeout, self.__main)
+        self._id = GLib.timeout_add(self._timeout, self.__main)
 
     def cancel(self) -> None:
         """
         Cancel polling.
         """
-        if GLib.MainContext.default().find_source_by_id(self.__id):
-            GLib.source_remove(self.__id)
+        if not self._id:
+            return
+
+        if GLib.MainContext.default().find_source_by_id(self._id):
+            GLib.source_remove(self._id)

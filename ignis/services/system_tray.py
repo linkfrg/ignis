@@ -1,10 +1,10 @@
 from ignis.utils import Utils
 from ignis.dbus import DBusService, DBusProxy
 from gi.repository import Gio, GLib, GObject, GdkPixbuf
-from typing import Union
 from ignis.gobject import IgnisGObject
 from ignis.dbus_menu import DBusMenu
 from loguru import logger
+from typing import Dict, List
 
 
 class SystemTrayItem(IgnisGObject):
@@ -29,9 +29,9 @@ class SystemTrayItem(IgnisGObject):
         - **title** (``str``, read-only): The title of the item.
         - **status** (``str``, read-only): The status of the item.
         - **window_id** (``int``, read-only): The window ID.
-        - **icon** (``Union[str, GdkPixbuf.Pixbuf]``, read-only): The icon name or a ``GdkPixbuf.Pixbuf``.
+        - **icon** (``str | GdkPixbuf.Pixbuf | None``, read-only): The icon name or a ``GdkPixbuf.Pixbuf``.
         - **item_is_menu** (``bool``, read-only): Whether the item has a menu.
-        - **menu** (``DBusMenu``, read-only): A ``Gtk.PopoverMenu`` or ``None``. Add it to a container, and call the ``popup()`` method on it to display the menu.
+        - **menu** (``DBusMenu | None``, read-only): A :class:`~ignis.dbus_menu.DBusMenu` or ``None``. Add it to a container, and call the ``popup()`` method on it to display the menu.
         - **tooltip** (``str``, read-only): Tooltip, the text should be displayed when you hover cursor over the icon.
 
     """
@@ -48,12 +48,13 @@ class SystemTrayItem(IgnisGObject):
     def __init__(self, name: str, object_path: str):
         super().__init__()
 
-        self._title = None
-        self._icon = None
-        self._tooltip = None
-        self._status = None
+        self._title: str | None = None
+        self._icon: str | GdkPixbuf.Pixbuf | None = None
+        self._tooltip: str | None = None
+        self._status: str | None = None
+        self._menu: DBusMenu | None = None
 
-        self.__dbus = DBusProxy(
+        self.__dbus: DBusProxy = DBusProxy(
             name=name,
             object_path=object_path,
             interface_name="org.kde.StatusNotifierItem",
@@ -67,11 +68,9 @@ class SystemTrayItem(IgnisGObject):
             "notify::g-name-owner", lambda *args: self.emit("removed")
         )
 
-        menu_path = self.__dbus.Menu
+        menu_path: str = self.__dbus.Menu
         if menu_path:
             self._menu = DBusMenu(name=self.__dbus.name, object_path=menu_path)
-        else:
-            self._menu = None
 
         for signal_name in [
             "NewIcon",
@@ -146,7 +145,7 @@ class SystemTrayItem(IgnisGObject):
         return self.__dbus.WindowId
 
     @GObject.Property
-    def icon(self) -> Union[str, GdkPixbuf.Pixbuf]:
+    def icon(self) -> str | GdkPixbuf.Pixbuf | None:
         return self._icon
 
     @GObject.Property
@@ -154,7 +153,7 @@ class SystemTrayItem(IgnisGObject):
         return self.__dbus.ItemIsMenu
 
     @GObject.Property
-    def menu(self) -> DBusMenu:
+    def menu(self) -> DBusMenu | None:
         return self._menu
 
     @GObject.Property
@@ -211,9 +210,9 @@ class SystemTrayService(IgnisGObject):
 
     def __init__(self):
         super().__init__()
-        self._items = {}
+        self._items: Dict[str, SystemTrayItem] = {}
 
-        self.__dbus = DBusService(
+        self.__dbus: DBusService = DBusService(
             name="org.kde.StatusNotifierWatcher",
             object_path="/StatusNotifierWatcher",
             info=Utils.load_interface_xml("org.kde.StatusNotifierWatcher"),
@@ -239,7 +238,7 @@ class SystemTrayService(IgnisGObject):
         )
 
     @GObject.Property
-    def items(self) -> list:
+    def items(self) -> List[SystemTrayItem]:
         return list(self._items.values())
 
     def __ProtocolVersion(self) -> GLib.Variant:

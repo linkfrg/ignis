@@ -1,6 +1,6 @@
 from gi.repository import Gtk, GObject
 from ignis.base_widget import BaseWidget
-from typing import Any
+from typing import Any, Callable
 
 
 class Switch(Gtk.Switch, BaseWidget):
@@ -10,7 +10,7 @@ class Switch(Gtk.Switch, BaseWidget):
     A switch widget.
 
     Properties:
-        - **on_change** (``callable``, optional, read-write): Function to call when the position of the switch changes (e.g., when the user toggles the switch).
+        - **on_change** (``Callable``, optional, read-write): Function to call when the position of the switch changes (e.g., when the user toggles the switch).
 
     .. code-block:: python
 
@@ -25,18 +25,18 @@ class Switch(Gtk.Switch, BaseWidget):
 
     def __init__(self, **kwargs):
         Gtk.Switch.__init__(self)
-        self._on_change = None
-        self._can_activate = True
+        self._on_change: Callable | None = None
+        self._can_activate: bool = True
         BaseWidget.__init__(self, **kwargs)
 
         self.connect("state-set", self.__invoke_on_change)
 
     @GObject.Property
-    def on_change(self) -> callable:
+    def on_change(self) -> Callable | None:
         return self._on_change
 
     @on_change.setter
-    def on_change(self, value: callable) -> None:
+    def on_change(self, value: Callable) -> None:
         self._on_change = value
 
     def __invoke_on_change(self, *args) -> None:

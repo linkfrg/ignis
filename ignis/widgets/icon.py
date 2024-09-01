@@ -1,7 +1,6 @@
 import os
 from ignis.base_widget import BaseWidget
 from gi.repository import Gtk, GObject, GdkPixbuf, Gdk
-from typing import Union
 from ignis.utils import Utils
 
 
@@ -14,7 +13,7 @@ class Icon(Gtk.Image, BaseWidget):
     If you want to display an image at its native aspect ratio, see :class:`~ignis.widgets.picture.Picture`.
 
     Properties:
-        - **image** (``Union[str, GdkPixbuf.Pixbuf]``, optional, read-write): The icon name, path to the file, or a ``GdkPixbuf.Pixbuf``.
+        - **image** (``str | GdkPixbuf.Pixbuf``, optional, read-write): The icon name, path to the file, or a ``GdkPixbuf.Pixbuf``.
 
     .. code-block:: python
 
@@ -34,11 +33,11 @@ class Icon(Gtk.Image, BaseWidget):
         BaseWidget.__init__(self, **kwargs)
 
     @GObject.Property
-    def image(self) -> Union[str, GdkPixbuf.Pixbuf]:
+    def image(self) -> str | GdkPixbuf.Pixbuf:
         return self._image
 
     @image.setter
-    def image(self, value: Union[str, GdkPixbuf.Pixbuf]) -> None:
+    def image(self, value: str | GdkPixbuf.Pixbuf) -> None:
         self._image = value
 
         pixbuf = None

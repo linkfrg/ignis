@@ -1,7 +1,10 @@
 from gi.repository import Gtk, Gdk, Gio
+from ignis.exceptions import DisplayNotFoundError
 
 
-def get_paintable(widget: Gtk.Widget, icon_name: str, size: int) -> Gdk.Paintable:
+def get_paintable(
+    widget: Gtk.Widget, icon_name: str, size: int
+) -> Gtk.IconPaintable | None:
     """
     Get a ``Gdk.Paintable`` by icon name.
 
@@ -11,10 +14,18 @@ def get_paintable(widget: Gtk.Widget, icon_name: str, size: int) -> Gdk.Paintabl
         size (``int``): The size of the icon.
 
     Returns:
-        ``Gdk.Paintable``: The paintable object for the icon.
+        ``Gdk.Paintable | None``: The paintable object for the icon or ``None`` if no such icon exists.
     """
+    display = Gdk.Display.get_default()
+    if not display:
+        raise DisplayNotFoundError()
+
     icon = Gio.ThemedIcon.new(icon_name)
-    icon_theme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default())
+    icon_theme = Gtk.IconTheme.get_for_display(display)
     return icon_theme.lookup_by_gicon(
-        icon, size, widget.get_scale_factor(), widget.get_direction(), 0
+        icon,
+        size,
+        widget.get_scale_factor(),
+        widget.get_direction(),
+        Gtk.IconLookupFlags.PRELOAD,
     )

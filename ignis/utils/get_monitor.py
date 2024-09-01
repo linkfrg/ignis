@@ -1,7 +1,8 @@
 from gi.repository import Gdk
+from ignis.exceptions import DisplayNotFoundError
 
 
-def get_monitor(monitor_id: int) -> Gdk.Monitor:
+def get_monitor(monitor_id: int) -> Gdk.Monitor | None:
     """
     Get the ``Gdk.Monitor`` by its ID.
 
@@ -9,6 +10,10 @@ def get_monitor(monitor_id: int) -> Gdk.Monitor:
         monitor_id (``int``): The ID of the monitor.
 
     Returns:
-        ``Gdk.Monitor`` or ``None``: The monitor with the given ID, or ``None`` if no such monitor exists.
+        ``Gdk.Monitor | None``: The monitor with the given ID, or ``None`` if no such monitor exists.
     """
-    return Gdk.Display.get_default().get_monitors().get_item(monitor_id)
+    display = Gdk.Display.get_default()
+    if not display:
+        raise DisplayNotFoundError()
+
+    return display.get_monitors().get_item(monitor_id)  # type: ignore

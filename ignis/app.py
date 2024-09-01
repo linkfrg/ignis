@@ -4,9 +4,9 @@ from ignis.dbus import DBusService
 from ignis.utils import Utils
 from loguru import logger
 from gi.repository import Gtk, Gdk, Gio, GObject, GLib
-from typing import List
+from typing import List, Dict
 from ignis.gobject import IgnisGObject
-from ignis.exceptions import WindowAddedError, WindowNotFoundError
+from ignis.exceptions import WindowAddedError, WindowNotFoundError, DisplayNotFoundError
 from ignis.logging import configure_logger
 
 
@@ -64,12 +64,12 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         self.__dbus.register_dbus_method(name="Reload", method=self.__Reload)
         self.__dbus.register_dbus_method(name="ListWindows", method=self.__ListWindows)
 
-        self._config_path = None
-        self._css_provider = None
-        self._style_path = None
-        self._windows = {}
-        self._autoreload_config = True
-        self._autoreload_css = True
+        self._config_path: str | None = None
+        self._css_provider: Gtk.CssProvider | None = None
+        self._style_path: str | None = None
+        self._windows: Dict[str, Gtk.Window] = {}
+        self._autoreload_config: bool = True
+        self._autoreload_css: bool = True
 
     def __watch_config(self, path: str, event_type: str) -> None:
         if event_type == "changed":  # "changed" event is called multiple times
@@ -84,7 +84,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
 
     @GObject.Property
     def windows(self) -> List[Gtk.Window]:
-        return self._windows.values()
+        return list(self._windows.values())
 
     @GObject.Property
     def autoreload_config(self) -> bool:
@@ -118,6 +118,11 @@ class IgnisApp(Gtk.Application, IgnisGObject):
             style_path (``str``): Path to the .css/.scss/.sass file.
         """
 
+        display = Gdk.Display.get_default()
+
+        if not display:
+            raise DisplayNotFoundError()
+
         if not os.path.exists(style_path):
             raise FileNotFoundError(
                 f"Provided style path doesn't exists: '{style_path}'"
@@ -125,16 +130,20 @@ class IgnisApp(Gtk.Application, IgnisGObject):
 
         if style_path.endswith(".scss") or style_path.endswith(".sass"):
             css_style = Utils.sass_compile(path=style_path)
-        else:
+        elif style_path.endswith(".css"):
             with open(style_path) as file:
                 css_style = file.read()
+        else:
+            raise ValueError(
+                'The "style_path" argument must be a path to a CSS, SASS, or SCSS file'
+            )
 
         self._style_path = style_path
         self._css_provider = Gtk.CssProvider()
         self._css_provider.load_from_string(css_style)
 
         Gtk.StyleContext.add_provider_for_display(
-            Gdk.Display.get_default(),
+            display,
             self._css_provider,
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION,
         )
@@ -145,9 +154,13 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         """
         Remove CSS/SCSS/SASS style that were applied using :func:`~ignis.app.IgnisApp.apply_css`.
         """
+        display = Gdk.Display.get_default()
+        if not display:
+            raise DisplayNotFoundError()
+
         if self._css_provider:
             Gtk.StyleContext.remove_provider_for_display(
-                Gdk.Display.get_default(),
+                display,
                 self._css_provider,
             )
 
@@ -155,7 +168,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         """
         Reapply CSS/SCSS/SASS style that were applied using :func:`~ignis.app.IgnisApp.apply_css`.
         """
-        if self._css_provider:
+        if self._css_provider and self._style_path:
             self.remove_css()
             self.apply_css(self._style_path)
 
@@ -164,6 +177,9 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         :meta private:
         """
         self.hold()
+
+        if not self._config_path:
+            raise ValueError("Set up config_path before trying to run application")
 
         if not os.path.exists(self._config_path):
             raise FileNotFoundError(
@@ -213,7 +229,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
             WindowNotFoundError: If a window with the given namespace does not exist.
         """
         window = self.get_window(window_name)
-        window.visible = True
+        window.set_visible(True)
 
     def close_window(self, window_name: str) -> None:
         """
@@ -225,7 +241,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
             WindowNotFoundError: If a window with the given namespace does not exist.
         """
         window = self.get_window(window_name)
-        window.visible = False
+        window.set_visible(False)
 
     def toggle_window(self, window_name: str) -> None:
         """
@@ -237,10 +253,9 @@ class IgnisApp(Gtk.Application, IgnisGObject):
             WindowNotFoundError: If a window with the given namespace does not exist.
         """
         window = self.get_window(window_name)
-        window.visible = not window.visible
-        return window.visible
+        window.set_visible(not window.get_visible())
 
-    def add_window(self, window_name: str, window: Gtk.Window) -> None:
+    def add_window(self, window_name: str, window: Gtk.Window) -> None:  # type: ignore
         """
         Add a window.
         You typically shouldn't use this method, as windows are added to the app automatically.
@@ -258,7 +273,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         self._windows[window_name] = window
         window.connect("unrealize", lambda x: self.remove_window(window_name))
 
-    def remove_window(self, window_name: str) -> None:
+    def remove_window(self, window_name: str) -> None:  # type: ignore
         """
         Remove a window by its name.
         The window will be removed from the application.
@@ -294,23 +309,23 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         """
         Gtk.Window.set_interactive_debugging(True)
 
-    def __call_window_method(self, _type: str, window_name: str) -> bool:
+    def __call_window_method(self, _type: str, window_name: str) -> GLib.Variant:
         try:
             getattr(self, f"{_type}_window")(window_name)
             return GLib.Variant("(b)", (True,))
         except WindowNotFoundError:
             return GLib.Variant("(b)", (False,))
 
-    def __OpenWindow(self, invocation, window_name: str) -> None:
+    def __OpenWindow(self, invocation, window_name: str) -> GLib.Variant:
         return self.__call_window_method("open", window_name)
 
-    def __CloseWindow(self, invocation, window_name: str) -> None:
+    def __CloseWindow(self, invocation, window_name: str) -> GLib.Variant:
         return self.__call_window_method("close", window_name)
 
     def __ToggleWindow(self, invocation, window_name: str) -> GLib.Variant:
         return self.__call_window_method("toggle", window_name)
 
-    def __ListWindows(self, invocation) -> str:
+    def __ListWindows(self, invocation) -> GLib.Variant:
         return GLib.Variant("(as)", (tuple(self._windows),))
 
     def __RunPython(self, invocation, code: str) -> None:
@@ -337,7 +352,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
 if "sphinx" not in sys.modules:
     app = IgnisApp()
 else:
-    app = None
+    app = None  # type: ignore
 
 
 def run_app(config_path: str, debug: bool) -> None:

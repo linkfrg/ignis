@@ -28,7 +28,7 @@ class ListBox(Gtk.ListBox, BaseWidget):
 
     def __init__(self, **kwargs):
         Gtk.ListBox.__init__(self)
-        self._rows = []
+        self._rows: List[ListBoxRow] = []
         BaseWidget.__init__(self, **kwargs)
 
         self.connect("row_activated", self.__on_row_activated)
@@ -38,7 +38,7 @@ class ListBox(Gtk.ListBox, BaseWidget):
             if row.on_activate:
                 row.on_activate(row)
 
-    def select_row(self, row: ListBoxRow) -> None:
+    def select_row(self, row: ListBoxRow) -> None:  # type: ignore
         super().select_row(row)
         self.__on_row_activated(None, row)
 

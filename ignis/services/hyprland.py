@@ -4,7 +4,7 @@ import socket
 from gi.repository import GObject
 from ignis.gobject import IgnisGObject
 from ignis.utils import Utils
-from typing import List
+from typing import List, Dict, Any
 from ignis.exceptions import HyprlandIPCNotFoundError
 
 HYPRLAND_INSTANCE_SIGNATURE = os.getenv("HYPRLAND_INSTANCE_SIGNATURE")
@@ -17,13 +17,67 @@ class HyprlandService(IgnisGObject):
     Hyprland IPC client.
 
     Properties:
-        - **workspaces** (``List[dict]``, read-only): List of workspaces.
-        - **active_workspace** (``dict``, read-only): Currently active workspace.
+        - **workspaces** (``List[Dict[str, Any]]``, read-only): List of workspaces.
+        - **active_workspace** (``Dict[str, Any]``, read-only): Currently active workspace.
         - **kb_layout** (``str``, read-only): Currenly active keyboard layout.
-        - **active_window** (``dict``, read-only): Currenly focused window.
+        - **active_window** (``Dict[str, Any]``, read-only): Currenly focused window.
 
     Raises:
         HyprlandIPCNotFoundError: If Hyprland IPC is not found.
+
+    .. note::
+        The contents of "dictionary" (``Dict``) properties are not described here.
+        To find out their contents just print them into the terminal.
+
+        >>> print(hyprland.workspaces)
+        [
+            {
+                "id": 1,
+                "name": "1",
+                "monitor": "DP-1",
+                "monitorID": 1,
+                "windows": 1,
+                "hasfullscreen": False,
+                "lastwindow": "0x561dc35d2e80",
+                "lastwindowtitle": "hyprland.py - ignis - Visual Studio Code",
+            },
+            {
+                "id": 10,
+                "name": "10",
+                "monitor": "HDMI-A-1",
+                "monitorID": 0,
+                "windows": 1,
+                "hasfullscreen": False,
+                "lastwindow": "0x561dc3845f30",
+                "lastwindowtitle": "Type hints cheat sheet - mypy 1.11.2 documentation — Mozilla Firefox",
+            },
+        ]
+
+        >>> print(hyprland.active_window)
+        {
+            "address": "0x561dc35d2e80",
+            "mapped": True,
+            "hidden": False,
+            "at": [1942, 22],
+            "size": [1876, 1036],
+            "workspace": {"id": 1, "name": "1"},
+            "floating": False,
+            "pseudo": False,
+            "monitor": 1,
+            "class": "code-url-handler",
+            "title": "hyprland.py - ignis - Visual Studio Code",
+            "initialClass": "code-url-handler",
+            "initialTitle": "Visual Studio Code",
+            "pid": 1674,
+            "xwayland": False,
+            "pinned": False,
+            "fullscreen": 0,
+            "fullscreenClient": 0,
+            "grouped": [],
+            "tags": [],
+            "swallowing": "0x0",
+            "focusHistoryID": 0,
+        }
 
     **Example usage:**
 
@@ -44,10 +98,10 @@ class HyprlandService(IgnisGObject):
         if not os.path.exists(SOCKET_DIR):
             raise HyprlandIPCNotFoundError()
 
-        self._workspaces = []
-        self._active_workspace = {}
-        self._kb_layout = ""
-        self._active_window = ""
+        self._workspaces: List[Dict[str, Any]] = []
+        self._active_workspace: Dict[str, Any] = {}
+        self._kb_layout: str = ""
+        self._active_window: Dict[str, Any] = {}
 
         self.__listen_socket()
         self.__sync_kb_layout()
@@ -55,11 +109,11 @@ class HyprlandService(IgnisGObject):
         self.__sync_active_window()
 
     @GObject.Property
-    def workspaces(self) -> List[dict]:
+    def workspaces(self) -> List[Dict[str, Any]]:
         return self._workspaces
 
     @GObject.Property
-    def active_workspace(self) -> dict:
+    def active_workspace(self) -> Dict[str, Any]:
         return self._active_workspace
 
     @GObject.Property
@@ -67,7 +121,7 @@ class HyprlandService(IgnisGObject):
         return self._kb_layout
 
     @GObject.Property
-    def active_window(self) -> dict:
+    def active_window(self) -> Dict[str, Any]:
         return self._active_window
 
     @Utils.run_in_thread

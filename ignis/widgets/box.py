@@ -37,7 +37,7 @@ class Box(Gtk.Box, BaseWidget):
 
     def __init__(self, **kwargs):
         Gtk.Box.__init__(self)
-        self._child = []
+        self._child: List[Gtk.Widget] = []
         BaseWidget.__init__(self, **kwargs)
 
     @GObject.Property
