@@ -1,3 +1,4 @@
+from __future__ import annotations
 import os
 from ignis.base_widget import BaseWidget
 from gi.repository import Gtk, GObject, GdkPixbuf, Gdk
