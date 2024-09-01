@@ -1,4 +1,4 @@
-from gi.repository import GObject, GLib
+from gi.repository import GObject, GLib  # type: ignore
 from typing import Any, List, Callable, Optional
 
 

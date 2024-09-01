@@ -1,7 +1,8 @@
-from gi.repository import GObject, Gio, Gtk
+from __future__ import annotations
+from gi.repository import GObject, Gio, Gtk  # type: ignore
 from ignis.gobject import IgnisGObject
 from ignis.app import app
-from typing import Callable, Optional
+from typing import Callable
 
 
 class MenuItem(IgnisGObject):
@@ -37,8 +38,8 @@ class MenuItem(IgnisGObject):
         self,
         label: str,
         enabled: bool = True,
-        on_activate: Optional[Callable] = None,
-        submenu: Optional[Gtk.PopoverMenu] = None,
+        on_activate: Callable | None = None,
+        submenu: Gtk.PopoverMenu | None = None,
     ):
         super().__init__()
         self._label = label

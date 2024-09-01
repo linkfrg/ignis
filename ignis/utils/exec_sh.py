@@ -1,5 +1,5 @@
 import subprocess
-from gi.repository import Gio
+from gi.repository import Gio  # type: ignore
 from typing import Callable, Optional
 
 

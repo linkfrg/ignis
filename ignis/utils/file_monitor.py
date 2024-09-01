@@ -1,5 +1,5 @@
 import os
-from gi.repository import GObject, Gio
+from gi.repository import GObject, Gio  # type: ignore
 from ignis.gobject import IgnisGObject
 from typing import Callable, List, Optional
 

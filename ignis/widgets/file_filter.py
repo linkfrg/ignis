@@ -1,4 +1,4 @@
-from gi.repository import Gtk, GObject
+from gi.repository import Gtk, GObject  # type: ignore
 from typing import List
 from ignis.gobject import IgnisGObject
 

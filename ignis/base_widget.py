@@ -1,5 +1,6 @@
-from gi.repository import Gtk, GObject
-from typing import Any, Dict, Callable, Optional
+from __future__ import annotations
+from gi.repository import Gtk, GObject  # type: ignore
+from typing import Any, Callable
 from ignis.gobject import IgnisGObject
 
 
@@ -12,11 +13,11 @@ class BaseWidget(Gtk.Widget, IgnisGObject):
     """
 
     gproperties = __gproperties__ = {}  # type: ignore
-    _overrided_enums: Dict[str, GObject.GEnum] = {}
+    _overrided_enums: dict[str, GObject.GEnum] = {}
 
     def __init__(
         self,
-        setup: Optional[Callable] = None,
+        setup: Callable | None = None,
         vexpand: bool = False,
         hexpand: bool = False,
         visible: bool = True,

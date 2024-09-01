@@ -1,6 +1,7 @@
+from __future__ import annotations
 import os
-from gi.repository import Gtk, GObject, Gio, GLib
-from typing import List, Callable
+from gi.repository import Gtk, GObject, Gio, GLib  # type: ignore
+from typing import Callable
 from ignis.widgets.file_filter import FileFilter
 from ignis.gobject import IgnisGObject
 
@@ -54,7 +55,7 @@ class FileDialog(Gtk.FileDialog, IgnisGObject):
         self._file: Gio.File | None = None
         self._list_store = Gio.ListStore.new(Gtk.FileFilter)
 
-        self._filters: List[FileFilter] = []
+        self._filters: list[FileFilter] = []
         self._on_file_set: Callable | None = None
         self._initial_path: str | None = None
         self._select_folder: bool = False
@@ -110,11 +111,11 @@ class FileDialog(Gtk.FileDialog, IgnisGObject):
         self._filters.append(filter)
 
     @GObject.Property
-    def filters(self) -> List[FileFilter]:
+    def filters(self) -> list[FileFilter]:
         return self._filters
 
     @filters.setter
-    def filters(self, value: List[FileFilter]) -> None:
+    def filters(self, value: list[FileFilter]) -> None:
         self._list_store.remove_all()
         super().set_filters(self._list_store)
         for i in value:

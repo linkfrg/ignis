@@ -1,4 +1,4 @@
-from gi.repository import Gtk, GObject, Gio
+from gi.repository import Gtk, GObject, Gio  # type: ignore
 from ignis.base_widget import BaseWidget
 from typing import List
 from ignis.widgets.menuitem import MenuItem

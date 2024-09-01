@@ -1,4 +1,5 @@
-from gi.repository import GdkPixbuf
+from __future__ import annotations
+from gi.repository import GdkPixbuf  # type: ignore
 
 
 def scale_pixbuf(

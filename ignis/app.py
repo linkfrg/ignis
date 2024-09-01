@@ -1,10 +1,10 @@
+from __future__ import annotations
 import os
 import sys
 from ignis.dbus import DBusService
 from ignis.utils import Utils
 from loguru import logger
-from gi.repository import Gtk, Gdk, Gio, GObject, GLib
-from typing import List, Dict
+from gi.repository import Gtk, Gdk, Gio, GObject, GLib  # type: ignore
 from ignis.gobject import IgnisGObject
 from ignis.exceptions import WindowAddedError, WindowNotFoundError, DisplayNotFoundError
 from ignis.logging import configure_logger
@@ -28,7 +28,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         - **"quit"** (): Emitted when Ignis has finished running.
 
     Properties:
-        - **windows** (``List[Gtk.Window]``, read-only): List of windows.
+        - **windows** (``list[Gtk.Window]``, read-only): List of windows.
         - **autoreload_config** (``bool``, read-write, default: ``True``): Whether to automatically reload the configuration when it changes (only .py files).
         - **autoreload_css** (``bool``, read-write, default: ``True``): Whether to automatically reload the CSS style when it changes (only .css/.scss/.sass files).
     """
@@ -67,7 +67,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         self._config_path: str | None = None
         self._css_provider: Gtk.CssProvider | None = None
         self._style_path: str | None = None
-        self._windows: Dict[str, Gtk.Window] = {}
+        self._windows: dict[str, Gtk.Window] = {}
         self._autoreload_config: bool = True
         self._autoreload_css: bool = True
 
@@ -83,7 +83,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
                 self.reload_css()
 
     @GObject.Property
-    def windows(self) -> List[Gtk.Window]:
+    def windows(self) -> list[Gtk.Window]:
         return list(self._windows.values())
 
     @GObject.Property

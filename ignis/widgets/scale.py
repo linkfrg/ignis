@@ -1,4 +1,4 @@
-from gi.repository import Gtk, GObject, Gdk
+from gi.repository import Gtk, GObject, Gdk  # type: ignore
 from ignis.base_widget import BaseWidget
 from typing import Callable
 

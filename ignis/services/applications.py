@@ -1,6 +1,6 @@
 import re
 import subprocess
-from gi.repository import GObject, Gio
+from gi.repository import GObject, Gio  # type: ignore
 from ignis.gobject import IgnisGObject
 from typing import List, Dict
 from ignis.services import Service

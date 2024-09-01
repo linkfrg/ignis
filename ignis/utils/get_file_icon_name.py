@@ -1,5 +1,5 @@
 import os
-from gi.repository import Gio
+from gi.repository import Gio  # type: ignore
 
 
 def get_file_icon_name(path: str, symbolic: bool = False) -> str | None:
@@ -11,7 +11,7 @@ def get_file_icon_name(path: str, symbolic: bool = False) -> str | None:
         symbolic (``bool``, optional): Whether the icon should be symbolic.
 
     Returns:
-        ``str`` | ``None``: The name of the icon. ``None`` if the icon with the given name is not found.
+        ``str | None``: The name of the icon. ``None`` if the icon with the given name is not found.
     """
     file = Gio.File.new_for_path(path)
     if not os.path.exists(path):

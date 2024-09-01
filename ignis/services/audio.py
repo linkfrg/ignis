@@ -1,8 +1,9 @@
+from __future__ import annotations
 import gi
 import sys
-from gi.repository import GObject
+from gi.repository import GObject  # type: ignore
 from ignis.gobject import IgnisGObject
-from typing import List, Literal, Dict
+from typing import Literal
 from ignis.exceptions import GvcNotFoundError
 
 
@@ -48,7 +49,7 @@ class Stream(IgnisGObject):
         super().__init__()
         self._control = control
         self._stream = stream
-        self._connection_ids: List[int] = []
+        self._connection_ids: list[int] = []
 
         self._setup()
 
@@ -245,12 +246,12 @@ class AudioService(IgnisGObject):
         self._speaker = DefaultStream(control=self._control, _type="sink")
         self._microphone = DefaultStream(control=self._control, _type="source")
 
-        self._streams: Dict[int, Stream] = {}
+        self._streams: dict[int, Stream] = {}
 
-        self._speakers: Dict[int, Stream] = {}
-        self._microphones: Dict[int, Stream] = {}
-        self._apps: Dict[int, Stream] = {}
-        self._recorders: Dict[int, Stream] = {}
+        self._speakers: dict[int, Stream] = {}
+        self._microphones: dict[int, Stream] = {}
+        self._apps: dict[int, Stream] = {}
+        self._recorders: dict[int, Stream] = {}
 
         self._control.connect("default-sink-changed", self.__default_changed, "speaker")
         self._control.connect(
@@ -287,23 +288,23 @@ class AudioService(IgnisGObject):
         self._control.set_default_source(value.stream)
 
     @GObject.Property
-    def streams(self) -> List[Stream]:
+    def streams(self) -> list[Stream]:
         return list(self._streams.values())
 
     @GObject.Property
-    def speakers(self) -> List[Stream]:
+    def speakers(self) -> list[Stream]:
         return list(self._speakers.values())
 
     @GObject.Property
-    def microphones(self) -> List[Stream]:
+    def microphones(self) -> list[Stream]:
         return list(self._microphones.values())
 
     @GObject.Property
-    def apps(self) -> List[Stream]:
+    def apps(self) -> list[Stream]:
         return list(self._apps.values())
 
     @GObject.Property
-    def recorders(self) -> List[Stream]:
+    def recorders(self) -> list[Stream]:
         return list(self._recorders.values())
 
     def __add_stream(self, control: Gvc.MixerControl, id: int):

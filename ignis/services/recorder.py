@@ -1,20 +1,21 @@
+from __future__ import annotations
 import gi
 import sys
 import subprocess
 import datetime
-from gi.repository import GObject, GLib
+from gi.repository import GObject, GLib  # type: ignore
 from ignis.gobject import IgnisGObject
 from ignis.dbus import DBusProxy
 from ignis.app import app
 from ignis.services import Service
 from ignis.utils import Utils
-from typing import List, Callable, Optional
+from typing import Callable
 from ignis.exceptions import GstNotFoundError, GstPluginNotFoundError
 
 try:
     if "sphinx" not in sys.modules:
         gi.require_version("Gst", "1.0")
-    from gi.repository import Gst
+    from gi.repository import Gst  # type: ignore
 except (ImportError, ValueError):
     raise GstNotFoundError(
         "GStreamer not found! To use the recorder service, install GStreamer."
@@ -299,10 +300,10 @@ class RecorderService(IgnisGObject):
 
     def start_recording(
         self,
-        path: Optional[str] = None,
+        path: str | None = None,
         record_microphone: bool = False,
         record_internal_audio: bool = False,
-        audio_devices: Optional[List[str]] = None,
+        audio_devices: list[str] | None = None,
     ) -> None:
         """
         Start recording.

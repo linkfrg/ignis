@@ -1,6 +1,6 @@
 import cairo
 from ignis.app import app
-from gi.repository import Gtk, GObject
+from gi.repository import Gtk, GObject  # type: ignore
 from ignis.base_widget import BaseWidget
 from ignis.utils import Utils
 from typing import List, Optional

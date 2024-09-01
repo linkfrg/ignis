@@ -3,7 +3,7 @@ import time
 import shutil
 import requests
 from ignis.dbus import DBusProxy
-from gi.repository import GObject, GLib
+from gi.repository import GObject, GLib  # type: ignore
 from ignis.gobject import IgnisGObject
 from ignis.utils import Utils
 from loguru import logger

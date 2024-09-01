@@ -1,4 +1,4 @@
-from gi.repository import Gio, GLib, GObject
+from gi.repository import Gio, GLib, GObject  # type: ignore
 from typing import Any, List, Dict, Callable, Optional
 from ignis.utils import Utils
 from ignis.gobject import IgnisGObject

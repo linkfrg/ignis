@@ -1,4 +1,5 @@
-from gi.repository import Gtk, Gdk, Gio
+from __future__ import annotations
+from gi.repository import Gtk, Gdk, Gio  # type: ignore
 from ignis.exceptions import DisplayNotFoundError
 
 

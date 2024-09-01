@@ -1,7 +1,7 @@
 import os
 import json
 from ignis.dbus import DBusService
-from gi.repository import GLib, GObject, GdkPixbuf
+from gi.repository import GLib, GObject, GdkPixbuf  # type: ignore
 from ignis.utils import Utils
 from ignis.gobject import IgnisGObject
 from loguru import logger

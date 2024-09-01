@@ -1,8 +1,9 @@
+from __future__ import annotations
 import gi
 import sys
-from gi.repository import GObject, GLib
+from gi.repository import GObject, GLib  # type: ignore
 from ignis.gobject import IgnisGObject
-from typing import List, Iterator, Optional
+from typing import Iterator
 from ignis.widgets import Widget
 from ignis.exceptions import NetworkManagerNotFoundError
 
@@ -45,7 +46,7 @@ class WifiConnectDialog(Widget.RegularWindow):
     :meta private:
     """
 
-    def __init__(self, access_point: "WifiAccessPoint") -> None:
+    def __init__(self, access_point: WifiAccessPoint) -> None:
         self._password_entry = Widget.Entry(
             visibility=False, hexpand=True, on_accept=lambda x: self.__connect_to()
         )
@@ -255,7 +256,7 @@ class WifiAccessPoint(IgnisGObject):
 
         return ap.props.bssid == self.bssid
 
-    def connect_to(self, password: Optional[str] = None) -> None:
+    def connect_to(self, password: str | None = None) -> None:
         """
         Connect to this access point.
 
@@ -356,7 +357,7 @@ class WifiDevice(IgnisGObject):
         super().__init__()
         self._device = device
         self._client = client
-        self._access_points: List[WifiAccessPoint] = []
+        self._access_points: list[WifiAccessPoint] = []
 
         self._client.connect(
             "notify::wireless-enabled", lambda *args: self.notify_all()
@@ -374,7 +375,7 @@ class WifiDevice(IgnisGObject):
         self.__sync_access_points()
 
     @GObject.Property
-    def access_points(self) -> List[WifiAccessPoint]:
+    def access_points(self) -> list[WifiAccessPoint]:
         return self._access_points
 
     @GObject.Property
@@ -426,7 +427,7 @@ class Wifi(IgnisGObject):
     def __init__(self, client: NM.Client):
         super().__init__()
         self._client = client
-        self._devices: List[WifiDevice] = []
+        self._devices: list[WifiDevice] = []
         self._client.connect(
             "notify::all-devices",
             lambda *args: GLib.timeout_add_seconds(1, self.__sync),
@@ -438,7 +439,7 @@ class Wifi(IgnisGObject):
         self.__sync()
 
     @GObject.Property
-    def devices(self) -> List[WifiDevice]:
+    def devices(self) -> list[WifiDevice]:
         return self._devices
 
     @GObject.Property
@@ -596,7 +597,7 @@ class Ethernet(IgnisGObject):
     def __init__(self, client: NM.Client):
         super().__init__()
         self._client = client
-        self._devices: List[EthernetDevice] = []
+        self._devices: list[EthernetDevice] = []
         self._client.connect(
             "notify::all-devices",
             lambda *args: GLib.timeout_add_seconds(1, self.__sync),
@@ -604,7 +605,7 @@ class Ethernet(IgnisGObject):
         self.__sync()
 
     @GObject.Property
-    def devices(self) -> List[EthernetDevice]:
+    def devices(self) -> list[EthernetDevice]:
         return self._devices
 
     @GObject.Property

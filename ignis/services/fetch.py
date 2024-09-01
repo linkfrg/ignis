@@ -1,6 +1,6 @@
 import os
 from ignis.gobject import IgnisGObject
-from gi.repository import GObject, Gtk, Gdk
+from gi.repository import GObject, Gtk, Gdk  # type: ignore
 from typing import Tuple, Dict
 from ignis.exceptions import DisplayNotFoundError
 

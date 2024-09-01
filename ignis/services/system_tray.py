@@ -1,10 +1,10 @@
+from __future__ import annotations
 from ignis.utils import Utils
 from ignis.dbus import DBusService, DBusProxy
-from gi.repository import Gio, GLib, GObject, GdkPixbuf
+from gi.repository import Gio, GLib, GObject, GdkPixbuf  # type: ignore
 from ignis.gobject import IgnisGObject
 from ignis.dbus_menu import DBusMenu
 from loguru import logger
-from typing import Dict, List
 
 
 class SystemTrayItem(IgnisGObject):
@@ -210,7 +210,7 @@ class SystemTrayService(IgnisGObject):
 
     def __init__(self):
         super().__init__()
-        self._items: Dict[str, SystemTrayItem] = {}
+        self._items: dict[str, SystemTrayItem] = {}
 
         self.__dbus: DBusService = DBusService(
             name="org.kde.StatusNotifierWatcher",
@@ -238,7 +238,7 @@ class SystemTrayService(IgnisGObject):
         )
 
     @GObject.Property
-    def items(self) -> List[SystemTrayItem]:
+    def items(self) -> list[SystemTrayItem]:
         return list(self._items.values())
 
     def __ProtocolVersion(self) -> GLib.Variant:
