@@ -553,16 +553,16 @@ document.write(`
 <li><p><strong>current_desktop</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): Current desktop environment.</p></li>
 <li><p><strong>hostname</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): Hostname.</p></li>
 <li><p><strong>kernel</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): Kernel version.</p></li>
-<li><p><strong>uptime</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): Current uptime. You can use <code class="docutils literal notranslate"><span class="pre">Utils.Poll</span></code> to get the current uptime every minute or second.</p></li>
+<li><p><strong>uptime</strong> (<code class="docutils literal notranslate"><span class="pre">Tuple[int,</span> <span class="pre">int,</span> <span class="pre">int,</span> <span class="pre">int]</span></code>, read-only): Current uptime, (days, hours, minutes, seconds). You can use <code class="docutils literal notranslate"><span class="pre">Utils.Poll</span></code> to get the current uptime every minute or second.</p></li>
 <li><p><strong>cpu</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): CPU model.</p></li>
-<li><p><strong>mem_info</strong> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>, read-only): Dictionary with all information about RAM.</p></li>
-<li><p><strong>mem_total</strong> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>, read-only): Total amount of RAM.</p></li>
-<li><p><strong>mem_available</strong> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>, read-only): Available amount of RAM.</p></li>
-<li><p><strong>board_vendor</strong> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>, read-only): Vendor of the motherboard.</p></li>
-<li><p><strong>board_name</strong> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>, read-only): Motherboard name.</p></li>
-<li><p><strong>bios_version</strong> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>, read-only): BIOS/UEFI version.</p></li>
-<li><p><strong>gtk_theme</strong> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>, read-only): Current GTK theme.</p></li>
-<li><p><strong>icon_theme</strong> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>, read-only): Current icon theme.</p></li>
+<li><p><strong>mem_info</strong> (<code class="docutils literal notranslate"><span class="pre">Dict[str,</span> <span class="pre">int]</span></code>, read-only): Dictionary with all information about RAM.</p></li>
+<li><p><strong>mem_total</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, read-only): Total amount of RAM.</p></li>
+<li><p><strong>mem_available</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, read-only): Available amount of RAM.</p></li>
+<li><p><strong>board_vendor</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): Vendor of the motherboard.</p></li>
+<li><p><strong>board_name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): Motherboard name.</p></li>
+<li><p><strong>bios_version</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): BIOS/UEFI version.</p></li>
+<li><p><strong>gtk_theme</strong> (<code class="docutils literal notranslate"><span class="pre">str</span> <span class="pre">|</span> <span class="pre">None</span></code>, read-only): Current GTK theme.</p></li>
+<li><p><strong>icon_theme</strong> (<code class="docutils literal notranslate"><span class="pre">str</span> <span class="pre">|</span> <span class="pre">None</span></code>, read-only): Current icon theme.</p></li>
 </ul>
 </dd>
 </dl>

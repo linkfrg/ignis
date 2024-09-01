@@ -533,9 +533,39 @@ document.write(`
 </pre></div>
 </div>
 <dl class="py exception" id="module-ignis.exceptions">
+<dt class="sig sig-object py" id="ignis.exceptions.DBusMethodNotFoundError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DBusMethodNotFoundError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.exceptions.DBusMethodNotFoundError" title="Link to this definition">#</a></dt>
+<dd><p>Raised when a D-Bus method is not found or not registered.</p>
+<dl class="simple">
+<dt>Properties:</dt><dd><ul class="simple">
+<li><p><strong>method_name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, required, read-only): The name of the D-Bus method.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="ignis.exceptions.DBusPropertyNotFoundError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DBusPropertyNotFoundError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">property_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.exceptions.DBusPropertyNotFoundError" title="Link to this definition">#</a></dt>
+<dd><p>Raised when a D-Bus property is not found or not registered.</p>
+<dl class="simple">
+<dt>Properties:</dt><dd><ul class="simple">
+<li><p><strong>property_name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, required, read-only): The name of the D-Bus property.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py exception">
 <dt class="sig sig-object py" id="ignis.exceptions.DartSassNotFoundError">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DartSassNotFoundError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.exceptions.DartSassNotFoundError" title="Link to this definition">#</a></dt>
 <dd><p>Raised when Dart Sass is not found.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="ignis.exceptions.DisplayNotFoundError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DisplayNotFoundError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.exceptions.DisplayNotFoundError" title="Link to this definition">#</a></dt>
+<dd><p>Raised when the display is not found (e.g., a Wayland compositor is not running).</p>
 </dd></dl>
 
 <dl class="py exception">
@@ -719,7 +749,10 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.DBusMethodNotFoundError"><code class="docutils literal notranslate"><span class="pre">DBusMethodNotFoundError</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.DBusPropertyNotFoundError"><code class="docutils literal notranslate"><span class="pre">DBusPropertyNotFoundError</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.DartSassNotFoundError"><code class="docutils literal notranslate"><span class="pre">DartSassNotFoundError</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.DisplayNotFoundError"><code class="docutils literal notranslate"><span class="pre">DisplayNotFoundError</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.GstNotFoundError"><code class="docutils literal notranslate"><span class="pre">GstNotFoundError</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.GstPluginNotFoundError"><code class="docutils literal notranslate"><span class="pre">GstPluginNotFoundError</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.GvcNotFoundError"><code class="docutils literal notranslate"><span class="pre">GvcNotFoundError</span></code></a></li>

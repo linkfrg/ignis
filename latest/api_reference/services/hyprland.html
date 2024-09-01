@@ -536,10 +536,10 @@ document.write(`
 <dd><p>Hyprland IPC client.</p>
 <dl class="simple">
 <dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>workspaces</strong> (<code class="docutils literal notranslate"><span class="pre">List[dict]</span></code>, read-only): List of workspaces.</p></li>
-<li><p><strong>active_workspace</strong> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>, read-only): Currently active workspace.</p></li>
+<li><p><strong>workspaces</strong> (<code class="docutils literal notranslate"><span class="pre">List[Dict[str,</span> <span class="pre">Any]]</span></code>, read-only): List of workspaces.</p></li>
+<li><p><strong>active_workspace</strong> (<code class="docutils literal notranslate"><span class="pre">Dict[str,</span> <span class="pre">Any]</span></code>, read-only): Currently active workspace.</p></li>
 <li><p><strong>kb_layout</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): Currenly active keyboard layout.</p></li>
-<li><p><strong>active_window</strong> (<code class="docutils literal notranslate"><span class="pre">dict</span></code>, read-only): Currenly focused window.</p></li>
+<li><p><strong>active_window</strong> (<code class="docutils literal notranslate"><span class="pre">Dict[str,</span> <span class="pre">Any]</span></code>, read-only): Currenly focused window.</p></li>
 </ul>
 </dd>
 </dl>
@@ -548,6 +548,63 @@ document.write(`
 <dd class="field-odd"><p><a class="reference internal" href="../exceptions.html#ignis.exceptions.HyprlandIPCNotFoundError" title="ignis.exceptions.HyprlandIPCNotFoundError"><strong>HyprlandIPCNotFoundError</strong></a> -- If Hyprland IPC is not found.</p>
 </dd>
 </dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The contents of &quot;dictionary&quot; (<code class="docutils literal notranslate"><span class="pre">Dict</span></code>) properties are not described here.
+To find out their contents just print them into the terminal.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">hyprland</span><span class="o">.</span><span class="n">workspaces</span><span class="p">)</span>
+<span class="go">[</span>
+<span class="go">    {</span>
+<span class="go">        &quot;id&quot;: 1,</span>
+<span class="go">        &quot;name&quot;: &quot;1&quot;,</span>
+<span class="go">        &quot;monitor&quot;: &quot;DP-1&quot;,</span>
+<span class="go">        &quot;monitorID&quot;: 1,</span>
+<span class="go">        &quot;windows&quot;: 1,</span>
+<span class="go">        &quot;hasfullscreen&quot;: False,</span>
+<span class="go">        &quot;lastwindow&quot;: &quot;0x561dc35d2e80&quot;,</span>
+<span class="go">        &quot;lastwindowtitle&quot;: &quot;hyprland.py - ignis - Visual Studio Code&quot;,</span>
+<span class="go">    },</span>
+<span class="go">    {</span>
+<span class="go">        &quot;id&quot;: 10,</span>
+<span class="go">        &quot;name&quot;: &quot;10&quot;,</span>
+<span class="go">        &quot;monitor&quot;: &quot;HDMI-A-1&quot;,</span>
+<span class="go">        &quot;monitorID&quot;: 0,</span>
+<span class="go">        &quot;windows&quot;: 1,</span>
+<span class="go">        &quot;hasfullscreen&quot;: False,</span>
+<span class="go">        &quot;lastwindow&quot;: &quot;0x561dc3845f30&quot;,</span>
+<span class="go">        &quot;lastwindowtitle&quot;: &quot;Type hints cheat sheet - mypy 1.11.2 documentation — Mozilla Firefox&quot;,</span>
+<span class="go">    },</span>
+<span class="go">]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">hyprland</span><span class="o">.</span><span class="n">active_window</span><span class="p">)</span>
+<span class="go">{</span>
+<span class="go">    &quot;address&quot;: &quot;0x561dc35d2e80&quot;,</span>
+<span class="go">    &quot;mapped&quot;: True,</span>
+<span class="go">    &quot;hidden&quot;: False,</span>
+<span class="go">    &quot;at&quot;: [1942, 22],</span>
+<span class="go">    &quot;size&quot;: [1876, 1036],</span>
+<span class="go">    &quot;workspace&quot;: {&quot;id&quot;: 1, &quot;name&quot;: &quot;1&quot;},</span>
+<span class="go">    &quot;floating&quot;: False,</span>
+<span class="go">    &quot;pseudo&quot;: False,</span>
+<span class="go">    &quot;monitor&quot;: 1,</span>
+<span class="go">    &quot;class&quot;: &quot;code-url-handler&quot;,</span>
+<span class="go">    &quot;title&quot;: &quot;hyprland.py - ignis - Visual Studio Code&quot;,</span>
+<span class="go">    &quot;initialClass&quot;: &quot;code-url-handler&quot;,</span>
+<span class="go">    &quot;initialTitle&quot;: &quot;Visual Studio Code&quot;,</span>
+<span class="go">    &quot;pid&quot;: 1674,</span>
+<span class="go">    &quot;xwayland&quot;: False,</span>
+<span class="go">    &quot;pinned&quot;: False,</span>
+<span class="go">    &quot;fullscreen&quot;: 0,</span>
+<span class="go">    &quot;fullscreenClient&quot;: 0,</span>
+<span class="go">    &quot;grouped&quot;: [],</span>
+<span class="go">    &quot;tags&quot;: [],</span>
+<span class="go">    &quot;swallowing&quot;: &quot;0x0&quot;,</span>
+<span class="go">    &quot;focusHistoryID&quot;: 0,</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
 <p><strong>Example usage:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.service</span> <span class="kn">import</span> <span class="n">Service</span>
 

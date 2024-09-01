@@ -555,13 +555,13 @@ Use this service instead.</p>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.options.OptionsService.bind_option">
-<span class="sig-name descname"><span class="pre">bind_option</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../gobject.html#ignis.gobject.Binding" title="ignis.gobject.Binding"><span class="pre">Binding</span></a></span></span><a class="headerlink" href="#ignis.services.options.OptionsService.bind_option" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">bind_option</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../gobject.html#ignis.gobject.Binding" title="ignis.gobject.Binding"><span class="pre">Binding</span></a></span></span><a class="headerlink" href="#ignis.services.options.OptionsService.bind_option" title="Link to this definition">#</a></dt>
 <dd><p>Like <code class="docutils literal notranslate"><span class="pre">bind()</span></code>, but for option.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The name of the option to bind.</p></li>
-<li><p><strong>transform</strong> (<code class="docutils literal notranslate"><span class="pre">callable</span></code>, optional) -- A transform function.</p></li>
+<li><p><strong>transform</strong> (<code class="docutils literal notranslate"><span class="pre">Callable</span></code>, optional) -- A transform function.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -575,14 +575,14 @@ Use this service instead.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.options.OptionsService.connect_option">
-<span class="sig-name descname"><span class="pre">connect_option</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.options.OptionsService.connect_option" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">connect_option</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.options.OptionsService.connect_option" title="Link to this definition">#</a></dt>
 <dd><p>Associate a callback function with changes to an option value.
 When the option value changes, the callback function will be invoked with the new value.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The name of the option.</p></li>
-<li><p><strong>callback</strong> (<code class="docutils literal notranslate"><span class="pre">callable</span></code>) -- A function to call when the option value changes. The new value of the option will be passed to this function.</p></li>
+<li><p><strong>callback</strong> (<code class="docutils literal notranslate"><span class="pre">Callable</span></code>) -- A function to call when the option value changes. The new value of the option will be passed to this function.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>

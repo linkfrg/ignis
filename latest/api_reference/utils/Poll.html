@@ -532,12 +532,12 @@ document.write(`
 <h1>Poll<a class="headerlink" href="#poll" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="ignis.utils.Utils.Poll">
-<span class="sig-name descname"><span class="pre">Poll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.utils.Utils.Poll" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">Poll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.utils.Utils.Poll" title="Link to this definition">#</a></dt>
 <dd><p>Call a callback every n milliseconds specefied by the timeout.</p>
 <dl class="simple">
 <dt>Properties:</dt><dd><ul class="simple">
 <li><p><strong>timeout</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, required, read-write): The timeout interval in milliseconds.</p></li>
-<li><p><strong>callback</strong> (<code class="docutils literal notranslate"><span class="pre">callable</span></code>, required, read-write): The function to call when the timeout is reached. The <code class="docutils literal notranslate"><span class="pre">self</span></code> will passed as an argument.</p></li>
+<li><p><strong>callback</strong> (<code class="docutils literal notranslate"><span class="pre">Callable</span></code>, required, read-write): The function to call when the timeout is reached. The <code class="docutils literal notranslate"><span class="pre">self</span></code> will passed as an argument.</p></li>
 <li><p><strong>output</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, not argument, read-only): The output of the callback.</p></li>
 </ul>
 </dd>

@@ -532,7 +532,7 @@ document.write(`
 <h1>ThreadTask<a class="headerlink" href="#threadtask" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="ignis.utils.Utils.ThreadTask">
-<span class="sig-name descname"><span class="pre">ThreadTask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.utils.Utils.ThreadTask" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">ThreadTask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.utils.Utils.ThreadTask" title="Link to this definition">#</a></dt>
 <dd><p>Execute a function in another thread and call a callback when it's finished.
 The output from the function is passed to the callback.</p>
 <dl class="simple">
@@ -544,7 +544,7 @@ The output from the function is passed to the callback.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>target</strong> (<code class="docutils literal notranslate"><span class="pre">callable</span></code>) -- The function to execute in another thread.</p></li>
+<li><p><strong>target</strong> (<code class="docutils literal notranslate"><span class="pre">Callable</span></code>) -- The function to execute in another thread.</p></li>
 <li><p><strong>callback</strong> (<code class="docutils literal notranslate"><span class="pre">callabke</span></code>) -- The function to call when <code class="docutils literal notranslate"><span class="pre">target</span></code> has finished.</p></li>
 </ul>
 </dd>

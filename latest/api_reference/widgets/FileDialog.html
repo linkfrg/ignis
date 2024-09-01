@@ -546,8 +546,8 @@ It doesn't support common widget properties and cannot be added as a child to a 
 </ul>
 </dd>
 <dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>file</strong> (<code class="docutils literal notranslate"><span class="pre">Gio.File</span></code>, not argument, read-only): The selected <code class="docutils literal notranslate"><span class="pre">Gio.File</span></code>.</p></li>
-<li><p><strong>on_file_set</strong> (<code class="docutils literal notranslate"><span class="pre">callable</span></code>, optional, read-write): A function to call when user selects a file.</p></li>
+<li><p><strong>file</strong> (<code class="docutils literal notranslate"><span class="pre">Gio.File</span> <span class="pre">|</span> <span class="pre">None</span></code>, not argument, read-only): The selected <code class="docutils literal notranslate"><span class="pre">Gio.File</span></code>.</p></li>
+<li><p><strong>on_file_set</strong> (<code class="docutils literal notranslate"><span class="pre">Callable</span></code>, optional, read-write): A function to call when user selects a file.</p></li>
 <li><p><strong>filters</strong> (List[<a class="reference internal" href="FileFilter.html#ignis.widgets.Widget.FileFilter" title="ignis.widgets.Widget.FileFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileFilter</span></code></a>], optional, read-write): A list of file filters.</p></li>
 <li><p><strong>initial_path</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, optional, read-write): The path to the folder or file that will be selected by default.</p></li>
 <li><p><strong>select_folder</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, optional, read-write): Whether the dialog should allow selecting folders instead of files.</p></li>
@@ -572,6 +572,12 @@ It doesn't support common widget properties and cannot be added as a child to a 
 <span class="p">)</span>
 </pre></div>
 </div>
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.widgets.Widget.FileDialog.open_dialog">
+<span class="sig-name descname"><span class="pre">open_dialog</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.widgets.Widget.FileDialog.open_dialog" title="Link to this definition">#</a></dt>
+<dd><p>Open dialog.</p>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -622,7 +628,10 @@ It doesn't support common widget properties and cannot be added as a child to a 
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.FileDialog"><code class="docutils literal notranslate"><span class="pre">FileDialog</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.FileDialog"><code class="docutils literal notranslate"><span class="pre">FileDialog</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.FileDialog.open_dialog"><code class="docutils literal notranslate"><span class="pre">FileDialog.open_dialog()</span></code></a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

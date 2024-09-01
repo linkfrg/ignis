@@ -581,14 +581,14 @@ A general class for speakers, microphones, applications, and recorders.</p>
 </ul>
 </dd>
 <dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>stream</strong> (<code class="docutils literal notranslate"><span class="pre">Gvc.MixerStream</span></code>, read-only): An instance of <code class="docutils literal notranslate"><span class="pre">Gvc.MixerStream</span></code>. You typically shouldn't use this property.</p></li>
-<li><p><strong>application_id</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): Application ID or <code class="docutils literal notranslate"><span class="pre">None</span></code>. Usually returns <code class="docutils literal notranslate"><span class="pre">None</span></code> xD.</p></li>
-<li><p><strong>icon_name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): Current icon name, depending on <code class="docutils literal notranslate"><span class="pre">volume</span></code> and <code class="docutils literal notranslate"><span class="pre">is_muted</span></code> properties. Works only for speakers and microphones.</p></li>
-<li><p><strong>id</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, read-only): ID of the stream.</p></li>
-<li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): Name of the stream.</p></li>
-<li><p><strong>description</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): Description of the stream.</p></li>
-<li><p><strong>is_muted</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-write): Whether the stream is muted.</p></li>
-<li><p><strong>volume</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>, read-write): Volume of the stream.</p></li>
+<li><p><strong>stream</strong> (<code class="docutils literal notranslate"><span class="pre">Gvc.MixerStream</span> <span class="pre">|</span> <span class="pre">None</span></code>, read-only): An instance of <code class="docutils literal notranslate"><span class="pre">Gvc.MixerStream</span></code>. You typically shouldn't use this property.</p></li>
+<li><p><strong>application_id</strong> (<code class="docutils literal notranslate"><span class="pre">str</span> <span class="pre">|</span> <span class="pre">None</span></code>, read-only): Application ID or <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>icon_name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span> <span class="pre">|</span> <span class="pre">None</span></code>, read-only): Current icon name, depending on <code class="docutils literal notranslate"><span class="pre">volume</span></code> and <code class="docutils literal notranslate"><span class="pre">is_muted</span></code> properties. Works only for speakers and microphones.</p></li>
+<li><p><strong>id</strong> (<code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">|</span> <span class="pre">None</span></code>, read-only): ID of the stream.</p></li>
+<li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span> <span class="pre">|</span> <span class="pre">None</span></code>, read-only): Name of the stream.</p></li>
+<li><p><strong>description</strong> (<code class="docutils literal notranslate"><span class="pre">str</span> <span class="pre">|</span> <span class="pre">None</span></code>, read-only): Description of the stream.</p></li>
+<li><p><strong>is_muted</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span> <span class="pre">|</span> <span class="pre">None</span></code>, read-write): Whether the stream is muted.</p></li>
+<li><p><strong>volume</strong> (<code class="docutils literal notranslate"><span class="pre">float</span> <span class="pre">|</span> <span class="pre">None</span></code>, read-write): Volume of the stream.</p></li>
 <li><p><strong>is_default</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-only): Whether the stream is default. Works only for speakers and microphones.</p></li>
 </ul>
 </dd>
