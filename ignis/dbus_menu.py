@@ -64,21 +64,25 @@ class DBusMenu(Gtk.PopoverMenu):
         self.__update_menu()
 
     def __update_menu(self) -> None:
-        layout = self.__proxy.GetLayout(
-            "(iias)",
-            0,
-            -1,
-            [
-                "type",
-                "children-display",
-                "submenu",
-                "type",
-                "label",
-                "visible",
-                "enabled",
-                "accessible-desc",
-            ],
-        )
+        try:
+            layout = self.__proxy.GetLayout(
+                "(iias)",
+                0,
+                -1,
+                [
+                    "type",
+                    "children-display",
+                    "submenu",
+                    "type",
+                    "label",
+                    "visible",
+                    "enabled",
+                    "accessible-desc",
+                ],
+            )
+        except GLib.GError:
+            return
+
         items = layout[1][2]
         menu = self.__parse(items=items)
         self.set_menu_model(menu)
