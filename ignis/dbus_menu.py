@@ -80,7 +80,7 @@ class DBusMenu(Gtk.PopoverMenu):
                     "accessible-desc",
                 ],
             )
-        except GLib.GError:
+        except GLib.GError:  # type: ignore
             return
 
         items = layout[1][2]
