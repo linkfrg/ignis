@@ -4,7 +4,7 @@ from ignis.gobject import IgnisGObject
 from ignis.widgets.window import Window
 from ignis.widgets.picture import Picture
 from ignis.utils import Utils
-from gi.repository import GObject
+from gi.repository import GObject  # type: ignore
 from ignis.services import Service
 from ignis import CACHE_DIR
 from typing import List

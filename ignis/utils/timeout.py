@@ -1,4 +1,4 @@
-from gi.repository import GLib, GObject
+from gi.repository import GLib, GObject  # type: ignore
 from ignis.gobject import IgnisGObject
 from typing import Callable
 

@@ -1,4 +1,4 @@
-from gi.repository import GObject
+from gi.repository import GObject  # type: ignore
 from ignis.widgets.icon import Icon
 from ignis.utils import Utils
 

@@ -1,7 +1,7 @@
 import json
 import os
 import socket
-from gi.repository import GObject
+from gi.repository import GObject  # type: ignore
 from ignis.gobject import IgnisGObject
 from ignis.utils import Utils
 from typing import List, Dict, Any

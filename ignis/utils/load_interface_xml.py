@@ -1,5 +1,5 @@
 import os
-from gi.repository import Gio
+from gi.repository import Gio  # type: ignore
 
 DBUS_DIR = f"{os.path.dirname(os.path.abspath(__file__))}/../dbus"
 

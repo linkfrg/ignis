@@ -1,4 +1,4 @@
-from gi.repository import Gtk, Pango
+from gi.repository import Gtk, Pango  # type: ignore
 from ignis.base_widget import BaseWidget
 
 

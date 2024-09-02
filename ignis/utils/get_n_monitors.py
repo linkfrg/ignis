@@ -1,4 +1,4 @@
-from gi.repository import Gdk
+from gi.repository import Gdk  # type: ignore
 from ignis.exceptions import DisplayNotFoundError
 
 

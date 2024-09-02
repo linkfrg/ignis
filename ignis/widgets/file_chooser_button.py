@@ -1,5 +1,5 @@
 import os
-from gi.repository import Gtk, GObject
+from gi.repository import Gtk, GObject  # type: ignore
 from ignis.base_widget import BaseWidget
 from ignis.widgets.label import Label
 from ignis.widgets.box import Box

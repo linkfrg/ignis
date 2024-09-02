@@ -1,4 +1,4 @@
-from gi.repository import Gtk
+from gi.repository import Gtk  # type: ignore
 from ignis.base_widget import BaseWidget
 
 

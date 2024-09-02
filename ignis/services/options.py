@@ -1,7 +1,7 @@
 import sys
 import json
 from ignis.gobject import IgnisGObject, Binding
-from gi.repository import GObject
+from gi.repository import GObject  # type: ignore
 from typing import Any, Callable, Dict, Optional
 from ignis import CACHE_DIR
 from ignis.exceptions import OptionExistsError, OptionNotFoundError

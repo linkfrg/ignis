@@ -1,7 +1,7 @@
 from __future__ import annotations
 import os
 from ignis.base_widget import BaseWidget
-from gi.repository import Gtk, GObject, GdkPixbuf, Gdk
+from gi.repository import Gtk, GObject, GdkPixbuf, Gdk  # type: ignore
 from ignis.utils import Utils
 
 

@@ -1,4 +1,4 @@
-from gi.repository import GdkPixbuf
+from gi.repository import GdkPixbuf  # type: ignore
 
 
 def crop_pixbuf(pixbuf: GdkPixbuf.Pixbuf, width: int, height: int) -> GdkPixbuf.Pixbuf:
