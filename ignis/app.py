@@ -29,6 +29,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
 
     Properties:
         - **windows** (``list[Gtk.Window]``, read-only): List of windows.
+        - **is_ready** (``bool``, read-only): Whether configuration is parsed and app is ready.
         - **autoreload_config** (``bool``, read-write, default: ``True``): Whether to automatically reload the configuration when it changes (only .py files).
         - **autoreload_css** (``bool``, read-write, default: ``True``): Whether to automatically reload the CSS style when it changes (only .css/.scss/.sass files).
     """
@@ -70,6 +71,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         self._windows: dict[str, Gtk.Window] = {}
         self._autoreload_config: bool = True
         self._autoreload_css: bool = True
+        self._is_ready = False
 
     def __watch_config(self, path: str, event_type: str) -> None:
         if event_type == "changed":  # "changed" event is called multiple times
@@ -81,6 +83,10 @@ class IgnisApp(Gtk.Application, IgnisGObject):
                 self.reload()
             elif extension in (".css", ".scss", ".sass") and self.autoreload_css:
                 self.reload_css()
+
+    @GObject.Property
+    def is_ready(self) -> bool:
+        return self._is_ready
 
     @GObject.Property
     def windows(self) -> list[Gtk.Window]:
@@ -198,6 +204,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         sys.path.append(config_dir)
         __import__(config_filename)
 
+        self._is_ready = True
         self.emit("ready")
         logger.info("Ready.")
 
