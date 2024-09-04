@@ -291,7 +291,6 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         Raises:
             WindowNotFoundError: If a window with the given namespace does not exist.
         """
-        print("PIZDEC")
         window = self._windows.pop(window_name, None)
         if not window:
             raise WindowNotFoundError(window_name)
