@@ -278,7 +278,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
             raise WindowAddedError(window_name)
 
         self._windows[window_name] = window
-        window.connect("unrealize", lambda x: self.remove_window(window_name))
+        window.connect("close-request", lambda x: self.remove_window(window_name))
 
     def remove_window(self, window_name: str) -> None:  # type: ignore
         """
@@ -291,6 +291,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         Raises:
             WindowNotFoundError: If a window with the given namespace does not exist.
         """
+        print("PIZDEC")
         window = self._windows.pop(window_name, None)
         if not window:
             raise WindowNotFoundError(window_name)
