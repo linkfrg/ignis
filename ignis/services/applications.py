@@ -2,7 +2,6 @@ import re
 import subprocess
 from gi.repository import GObject, Gio  # type: ignore
 from ignis.gobject import IgnisGObject
-from typing import List, Dict
 from ignis.services import Service
 
 PINNED_APPS_OPTION = "pinned_apps"
@@ -53,11 +52,11 @@ class Application(IgnisGObject):
         - **name** (``str``, read-only): The name of the application.
         - **description** (``str | None``, read-only): The description of the application.
         - **icon** (``str``, read-only): The icon of the application. If the app has no icon, "image-missing" will be returned.
-        - **keywords** (``List[str]``, read-only): Keywords of the application. Ususally, these are words that describe the application.
+        - **keywords** (``list[str]``, read-only): Keywords of the application. Ususally, these are words that describe the application.
         - **desktop_file** (``str | None``, read-only): The full path to the ``.desktop`` file of the application.
         - **executable** (``str | None``, read-only): The executable of the application.
         - **exec_string** (``str``, read-only): The string that contains the executable with command line arguments, used to launch the application.
-        - **actions** (List[:class:`~ignis.services.applications.Application`], read-only): A list of actions.
+        - **actions** (list[:class:`~ignis.services.applications.Application`], read-only): A list of actions.
         - **is_pinned** (``bool``, read-write): Whether the application is pinned.
     """
 
@@ -71,7 +70,7 @@ class Application(IgnisGObject):
 
         self._app = app
         self._is_pinned = is_pinned
-        self._actions: List[ApplicationAction] = []
+        self._actions: list[ApplicationAction] = []
 
         for action in app.list_actions():
             self._actions.append(ApplicationAction(app=app, action=action))
@@ -101,7 +100,7 @@ class Application(IgnisGObject):
             return icon
 
     @GObject.Property
-    def keywords(self) -> List[str]:
+    def keywords(self) -> list[str]:
         return self._app.get_keywords()
 
     @GObject.Property
@@ -117,7 +116,7 @@ class Application(IgnisGObject):
         return self._app.get_string("Exec")
 
     @GObject.Property
-    def actions(self) -> List[ApplicationAction]:
+    def actions(self) -> list[ApplicationAction]:
         return self._actions
 
     @GObject.Property
@@ -167,8 +166,8 @@ class ApplicationsService(IgnisGObject):
     It also allows "pinning" of apps and retrieving a list of pinned applications.
 
     Properties:
-        - **apps** (List[:class:`~ignis.services.applications.Application`], read-only): A list of all installed applications.
-        - **pinned** (List[:class:`~ignis.services.applications.Application`], read-only): A list of all pinned applications.
+        - **apps** (list[:class:`~ignis.services.applications.Application`], read-only): A list of all installed applications.
+        - **pinned** (list[:class:`~ignis.services.applications.Application`], read-only): A list of all pinned applications.
 
     **Example usage**:
 
@@ -184,8 +183,8 @@ class ApplicationsService(IgnisGObject):
 
     def __init__(self):
         super().__init__()
-        self._apps: Dict[str, Application] = {}
-        self._pinned: Dict[str, Application] = {}
+        self._apps: dict[str, Application] = {}
+        self._pinned: dict[str, Application] = {}
 
         self._monitor = Gio.AppInfoMonitor.get()
         self._monitor.connect("changed", lambda x: self.__sync())
@@ -196,11 +195,11 @@ class ApplicationsService(IgnisGObject):
         self.__sync()
 
     @GObject.Property
-    def apps(self) -> List[Application]:
+    def apps(self) -> list[Application]:
         return sorted(self._apps.values(), key=lambda x: x.name)
 
     @GObject.Property
-    def pinned(self) -> List[Application]:
+    def pinned(self) -> list[Application]:
         return list(self._pinned.values())
 
     def __connect_entry(self, entry: Application) -> None:
@@ -243,7 +242,7 @@ class ApplicationsService(IgnisGObject):
             self.__connect_entry(entry)
             self._pinned[entry.id] = entry
 
-    def search(self, query: str) -> List[Application]:
+    def search(self, query: str) -> list[Application]:
         """
         Filter applications by query.
 
@@ -251,7 +250,7 @@ class ApplicationsService(IgnisGObject):
             query (str): the string to be searched for
 
         Returns:
-            List[Application]: List of applications filtered by provided query.
+            list[Application]: A list of applications filtered by provided query.
         """
         return [
             entry

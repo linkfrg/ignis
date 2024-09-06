@@ -1,6 +1,5 @@
 from gi.repository import Gtk, GObject  # type: ignore
 from ignis.base_widget import BaseWidget
-from typing import List
 from ignis.widgets.listboxrow import ListBoxRow
 
 
@@ -11,7 +10,7 @@ class ListBox(Gtk.ListBox, BaseWidget):
     A vertical list that allows selecting rows. Well suited, for example, for a navigation bar.
 
     Properties:
-        - **rows** (List[:class:`~ignis.widgets.listboxrow.ListBoxRow`], optional, read-write): List of rows.
+        - **rows** (list[:class:`~ignis.widgets.listboxrow.ListBoxRow`], optional, read-write): A list of rows.
 
     .. code-block:: python
 
@@ -28,7 +27,7 @@ class ListBox(Gtk.ListBox, BaseWidget):
 
     def __init__(self, **kwargs):
         Gtk.ListBox.__init__(self)
-        self._rows: List[ListBoxRow] = []
+        self._rows: list[ListBoxRow] = []
         BaseWidget.__init__(self, **kwargs)
 
         self.connect("row_activated", self.__on_row_activated)
@@ -43,11 +42,11 @@ class ListBox(Gtk.ListBox, BaseWidget):
         self.__on_row_activated(None, row)
 
     @GObject.Property
-    def rows(self) -> List[ListBoxRow]:
+    def rows(self) -> list[ListBoxRow]:
         return self._rows
 
     @rows.setter
-    def rows(self, value: List[ListBoxRow]) -> None:
+    def rows(self, value: list[ListBoxRow]) -> None:
         for i in self._rows:
             self.remove(i)
 

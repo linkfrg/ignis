@@ -1,7 +1,6 @@
 import os
 from ignis.gobject import IgnisGObject
 from gi.repository import GObject, Gtk, Gdk  # type: ignore
-from typing import Tuple, Dict
 from ignis.exceptions import DisplayNotFoundError
 
 
@@ -55,7 +54,7 @@ class FetchService(IgnisGObject):
         super().__init__()
         self._os_info = self.__get_os_info()
 
-    def __get_os_info(self) -> Dict[str, str]:
+    def __get_os_info(self) -> dict[str, str]:
         os_info = {}
         with open("/etc/os-release") as f:
             for line in f:
@@ -136,7 +135,7 @@ class FetchService(IgnisGObject):
         return os.uname().release
 
     @GObject.Property
-    def uptime(self) -> Tuple[int, int, int, int]:
+    def uptime(self) -> tuple[int, int, int, int]:
         with open("/proc/uptime") as f:
             uptime_seconds = float(f.readline().split()[0])
 
@@ -157,7 +156,7 @@ class FetchService(IgnisGObject):
         return cpu_name
 
     @GObject.Property
-    def mem_info(self) -> Dict[str, int]:
+    def mem_info(self) -> dict[str, int]:
         mem_info = {}
         with open("/proc/meminfo") as file:
             for line in file:

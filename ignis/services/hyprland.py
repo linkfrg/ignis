@@ -4,7 +4,7 @@ import socket
 from gi.repository import GObject  # type: ignore
 from ignis.gobject import IgnisGObject
 from ignis.utils import Utils
-from typing import List, Dict, Any
+from typing import Any
 from ignis.exceptions import HyprlandIPCNotFoundError
 
 HYPRLAND_INSTANCE_SIGNATURE = os.getenv("HYPRLAND_INSTANCE_SIGNATURE")
@@ -17,10 +17,10 @@ class HyprlandService(IgnisGObject):
     Hyprland IPC client.
 
     Properties:
-        - **workspaces** (``List[Dict[str, Any]]``, read-only): List of workspaces.
-        - **active_workspace** (``Dict[str, Any]``, read-only): Currently active workspace.
-        - **kb_layout** (``str``, read-only): Currenly active keyboard layout.
-        - **active_window** (``Dict[str, Any]``, read-only): Currenly focused window.
+        - **workspaces** (``list[dict[str, Any]]``, read-only): A list of workspaces.
+        - **active_workspace** (``Dict[str, Any]``, read-only): The currently active workspace.
+        - **kb_layout** (``str``, read-only): The currenly active keyboard layout.
+        - **active_window** (``Dict[str, Any]``, read-only): The currenly focused window.
 
     Raises:
         HyprlandIPCNotFoundError: If Hyprland IPC is not found.
@@ -98,10 +98,10 @@ class HyprlandService(IgnisGObject):
         if not os.path.exists(SOCKET_DIR):
             raise HyprlandIPCNotFoundError()
 
-        self._workspaces: List[Dict[str, Any]] = []
-        self._active_workspace: Dict[str, Any] = {}
+        self._workspaces: list[dict[str, Any]] = []
+        self._active_workspace: dict[str, Any] = {}
         self._kb_layout: str = ""
-        self._active_window: Dict[str, Any] = {}
+        self._active_window: dict[str, Any] = {}
 
         self.__listen_socket()
         self.__sync_kb_layout()
@@ -109,11 +109,11 @@ class HyprlandService(IgnisGObject):
         self.__sync_active_window()
 
     @GObject.Property
-    def workspaces(self) -> List[Dict[str, Any]]:
+    def workspaces(self) -> list[dict[str, Any]]:
         return self._workspaces
 
     @GObject.Property
-    def active_workspace(self) -> Dict[str, Any]:
+    def active_workspace(self) -> dict[str, Any]:
         return self._active_workspace
 
     @GObject.Property
@@ -121,7 +121,7 @@ class HyprlandService(IgnisGObject):
         return self._kb_layout
 
     @GObject.Property
-    def active_window(self) -> Dict[str, Any]:
+    def active_window(self) -> dict[str, Any]:
         return self._active_window
 
     @Utils.run_in_thread

@@ -1,5 +1,4 @@
 from gi.repository import Gtk, GObject  # type: ignore
-from typing import List
 from ignis.gobject import IgnisGObject
 
 
@@ -16,7 +15,7 @@ class FileFilter(Gtk.FileFilter, IgnisGObject):
     Uses MIME types. `Here <https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types>`_ is a list of common MIME types.
 
     Properties:
-        - **mime_types** (``List[str]``, required, read-only): A list of MIME types.
+        - **mime_types** (``list[str]``, required, read-only): A list of MIME types.
         - **default** (``bool``, optional, read-write): Whether the filter will be selected by default.
 
     .. code-block :: python
@@ -30,7 +29,7 @@ class FileFilter(Gtk.FileFilter, IgnisGObject):
 
     __gtype_name__ = "IgnisFileFilter"
 
-    def __init__(self, mime_types: List[str], **kwargs):
+    def __init__(self, mime_types: list[str], **kwargs):
         Gtk.FileFilter.__init__(self)
         self._default: bool = False
         IgnisGObject.__init__(self, **kwargs)

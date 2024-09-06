@@ -1,7 +1,7 @@
 import os
 from gi.repository import GObject, Gio  # type: ignore
 from ignis.gobject import IgnisGObject
-from typing import Callable, List, Optional
+from typing import Callable
 
 FLAGS = {
     None: Gio.FileMonitorFlags.NONE,
@@ -85,8 +85,8 @@ class FileMonitor(IgnisGObject):
         self,
         path: str,
         recursive: bool = False,
-        flags: Optional[str] = None,
-        callback: Optional[Callable] = None,
+        flags: str | None = None,
+        callback: Callable | None = None,
     ):
         super().__init__()
         self._file = Gio.File.new_for_path(path)
@@ -98,8 +98,8 @@ class FileMonitor(IgnisGObject):
         self._callback = callback
         self._recursive = recursive
 
-        self._sub_monitors: List[Gio.FileMonitor] = []
-        self._sub_paths: List[str] = []
+        self._sub_monitors: list[Gio.FileMonitor] = []
+        self._sub_paths: list[str] = []
 
         if recursive:
             for root, dirs, _files in os.walk(path):

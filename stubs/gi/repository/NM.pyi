@@ -1,4 +1,4 @@
-from typing import Any, Callable, Literal, Optional, Tuple, Type, TypeVar, Sequence
+from typing import Any, Callable, Optional, Tuple, Type, Sequence
 
 from gi.repository import GLib
 from gi.repository import GObject

@@ -3,7 +3,6 @@ from ignis.app import app
 from gi.repository import Gtk, GObject  # type: ignore
 from ignis.base_widget import BaseWidget
 from ignis.utils import Utils
-from typing import List, Optional
 from gi.repository import Gtk4LayerShell as GtkLayerShell
 from ignis.exceptions import MonitorNotFoundError, LayerShellNotSupportedError
 
@@ -45,8 +44,8 @@ class Window(Gtk.Window, BaseWidget):
 
     Properties:
         - **namespace** (``str``, required, read-only): The name of the window, used to access it from the CLI and :class:`~ignis.app.ignisApp`. It must be unique. It is also the name of the layer.
-        - **monitor** (``int``, optional, read-write): The monitor number on which to display the window. Raises :class:`~ignis.exceptions.MonitorNotFoundError` if the monitor with the given ID is not found.
-        - **anchor** (``List[str]``, optional, read-write): A list of anchors. If the list is empty, the window will be centered on the screen. Default: ``[]``.
+        - **monitor** (``int | None``, optional, read-write): The monitor number on which to display the window. Raises :class:`~ignis.exceptions.MonitorNotFoundError` if the monitor with the given ID is not found.
+        - **anchor** (``list[str] | None``, optional, read-write): A list of anchors. If the list is empty, the window will be centered on the screen. Default: ``[]``.
         - **exclusivity** (``str``, optional, read-write): Defines how the compositor should avoid occluding a window area with other surfaces/layers. Default: ``"normal"``.
         - **layer** (``str``, optional, read-write): The layer of the surface. Default: ``"top"``.
         - **kb_mode** (``str``, optional, read-write): Whether the window should receive keyboard events from the compositor. Default: ``"none"``.
@@ -101,8 +100,8 @@ class Window(Gtk.Window, BaseWidget):
     def __init__(
         self,
         namespace: str,
-        monitor: Optional[int] = None,
-        anchor: Optional[List[str]] = None,
+        monitor: int | None = None,
+        anchor: list[str] | None = None,
         exclusivity: str = "normal",
         layer: str = "top",
         kb_mode: str = "none",

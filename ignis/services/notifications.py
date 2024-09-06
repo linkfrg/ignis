@@ -6,7 +6,6 @@ from ignis.utils import Utils
 from ignis.gobject import IgnisGObject
 from loguru import logger
 from ignis.services import Service
-from typing import List, Dict
 from datetime import datetime
 from ignis import CACHE_DIR
 
@@ -34,7 +33,7 @@ class Notification(IgnisGObject):
         - **icon** (``str``, read-only): Icon name, path to image or ``None``.
         - **summary** (``int``, read-only): Summary text of the notification, usually the title.
         - **body** (``int``, read-only): Body text of the notification, usually containing additional information.
-        - **actions** (List[:class:`~ignis.services.notifications.NotificationAction`], read-only): List of actions associated with the notification.
+        - **actions** (list[:class:`~ignis.services.notifications.NotificationAction`], read-only): A list of actions associated with the notification.
         - **timeout** (``int``, read-only): Timeout for the notification. Usually equal to ``popup_timeout`` property of the :class:`~ignis.services.NotificationService` unless the notification specifies otherwise
         - **time** (``float``, read-only): Time in POSIX format when the notification was sent.
         - **popup** (``bool``, read-only):Whether the notification is a popup.
@@ -54,7 +53,7 @@ class Notification(IgnisGObject):
         icon: str,
         summary: str,
         body: str,
-        actions: List[str],
+        actions: list[str],
         urgency: int,
         timeout: int,
         time: float,
@@ -105,7 +104,7 @@ class Notification(IgnisGObject):
         return self._body
 
     @GObject.Property
-    def actions(self) -> List["NotificationAction"]:
+    def actions(self) -> list["NotificationAction"]:
         return self._actions
 
     @GObject.Property
@@ -193,8 +192,8 @@ class NotificationService(IgnisGObject):
         - **"new_popup"** (:class:`~ignis.services.notifications.Notification`): Emitted when a new popup notification appears. Only emitted if ``dnd`` is set to ``False``.
 
     Properties:
-        - **notifications** (List[:class:`~ignis.services.notifications.Notification`], read-only): A list of all notifications.
-        - **popups** (List[:class:`~ignis.services.notifications.Notification`], read-only): A list of currently active popup notifications, sorted from newest to oldest.
+        - **notifications** (list[:class:`~ignis.services.notifications.Notification`], read-only): A list of all notifications.
+        - **popups** (list[:class:`~ignis.services.notifications.Notification`], read-only): A list of currently active popup notifications, sorted from newest to oldest.
         - **dnd** (``bool``, read-write): Do Not Disturb mode. If set to ``True``, the ``"new_popup"`` signal will not be emitted, and all new :class:`~ignis.services.notifications.Notification` instances will have ``popup`` set to ``False``. Default: ``False``.
         - **popup_timeout** (``int``, read-write): Timeout before a popup is automatically dismissed, in milliseconds. Default: ``5000``.
         - **max_popups_count** (``int``, read-write): Maximum number of popups. If the length of the ``popups`` list exceeds ``max_popups_count``, the oldest popup will be dismissed. Default: ``3``.
@@ -247,8 +246,8 @@ class NotificationService(IgnisGObject):
         self.__dbus.register_dbus_method(name="Notify", method=self.__Notify)
 
         self._id: int = 0
-        self._notifications: Dict[int, Notification] = {}
-        self._popups: Dict[int, Notification] = {}
+        self._notifications: dict[int, Notification] = {}
+        self._popups: dict[int, Notification] = {}
 
         os.makedirs(NOTIFICATIONS_CACHE_DIR, exist_ok=True)
         os.makedirs(NOTIFICATIONS_IMAGE_DATA, exist_ok=True)
@@ -266,11 +265,11 @@ class NotificationService(IgnisGObject):
         self.__load_notifications()
 
     @GObject.Property
-    def notifications(self) -> List[Notification]:
+    def notifications(self) -> list[Notification]:
         return sorted(self._notifications.values(), key=lambda x: x.id, reverse=True)
 
     @GObject.Property
-    def popups(self) -> List[Notification]:
+    def popups(self) -> list[Notification]:
         return sorted(self._popups.values(), key=lambda x: x.id, reverse=True)
 
     @GObject.Property

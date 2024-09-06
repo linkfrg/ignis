@@ -1,6 +1,6 @@
 import subprocess
 from gi.repository import Gio  # type: ignore
-from typing import Callable, Optional
+from typing import Callable
 
 
 def exec_sh(command: str) -> subprocess.CompletedProcess:
@@ -56,7 +56,7 @@ class AsyncCompletedProcess:
 
 
 def exec_sh_async(
-    command: str, on_finished: Optional[Callable] = None
+    command: str, on_finished: Callable | None = None
 ) -> Gio.Subprocess:
     """
     Execute a shell (bash) command asynchronously.

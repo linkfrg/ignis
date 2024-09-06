@@ -7,7 +7,6 @@ from ignis.utils import Utils
 from gi.repository import GObject  # type: ignore
 from ignis.services import Service
 from ignis import CACHE_DIR
-from typing import List
 
 CACHE_WALLPAPER_PATH = f"{CACHE_DIR}/wallpaper"
 
@@ -36,7 +35,7 @@ class WallpaperService(IgnisGObject):
 
     def __init__(self):
         super().__init__()
-        self._windows: List[Window] = []
+        self._windows: list[Window] = []
 
         self._options = Service.get("options")
         self._options.create_option(name="wallpaper", default=None, exists_ok=True)

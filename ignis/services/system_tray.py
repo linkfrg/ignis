@@ -191,7 +191,7 @@ class SystemTrayService(IgnisGObject):
         - **"added"** (:class:`~ignis.services.system_tray.SystemTrayItem`): Emitted when a new item is added.
 
     Properties:
-        - **items** (List[:class:`~ignis.services.system_tray.SystemTrayItem`], read-only): A list of items.
+        - **items** (list[:class:`~ignis.services.system_tray.SystemTrayItem`], read-only): A list of items.
 
     **Example usage:**
 

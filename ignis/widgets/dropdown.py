@@ -1,6 +1,6 @@
 from gi.repository import Gtk, GObject  # type: ignore
 from ignis.base_widget import BaseWidget
-from typing import List, Callable
+from typing import Callable
 
 
 class DropDown(Gtk.DropDown, BaseWidget):
@@ -10,7 +10,7 @@ class DropDown(Gtk.DropDown, BaseWidget):
     A widget that allows the user to choose an item from a list of options.
 
     Properties:
-        - **items** (``List[str]``, optional, read-write): List of strings that can be selected in the popover.
+        - **items** (``list[str]``, optional, read-write): A list of strings that can be selected in the popover.
         - **on_selected** (``Callable``, optional, read-write): Function to call when the user selects an item from the list.
         - **selected** (``str``, not argument, read-only): The selected string. It is a shortcut for ``self.selected_item.props.string``.
 
@@ -27,18 +27,18 @@ class DropDown(Gtk.DropDown, BaseWidget):
 
     def __init__(self, **kwargs):
         Gtk.DropDown.__init__(self)
-        self._items: List[str] = []
+        self._items: list[str] = []
         self._on_selected: Callable | None = None
         BaseWidget.__init__(self, **kwargs)
 
         self.connect("notify::selected-item", self.__invoke_on_selected)
 
     @GObject.Property
-    def items(self) -> List[str]:
+    def items(self) -> list[str]:
         return self._items
 
     @items.setter
-    def items(self, value: List[str]) -> None:
+    def items(self, value: list[str]) -> None:
         self._items = value
         model = Gtk.StringList()
         for i in value:

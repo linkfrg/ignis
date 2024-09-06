@@ -210,11 +210,11 @@ class AudioService(IgnisGObject):
         - **control** (``Gvc.MixerControl``, read-only): A instance of ``Gvc.MixerControl``. You typically shouldn't use this property.
         - **speaker** (:class:`~ignis.services.audio.Stream`, read-write): The default speaker.
         - **microphone** (:class:`~ignis.services.audio.Stream`, read-write): The default microphone.
-        - **streams** (List[:class:`~ignis.services.audio.Stream`], read-only): List of all streams.
-        - **speakers** (List[:class:`~ignis.services.audio.Stream`], read-only): List of speakers.
-        - **microphones** (List[:class:`~ignis.services.audio.Stream`], read-only): List of microphones.
-        - **apps** (List[:class:`~ignis.services.audio.Stream`], read-only): List of applications currently playing sound.
-        - **recorders** (List[:class:`~ignis.services.audio.Stream`], read-only): List of audio recorders.
+        - **streams** (list[:class:`~ignis.services.audio.Stream`], read-only): A list of all streams.
+        - **speakers** (list[:class:`~ignis.services.audio.Stream`], read-only): A list of speakers.
+        - **microphones** (list[:class:`~ignis.services.audio.Stream`], read-only): A list of microphones.
+        - **apps** (list[:class:`~ignis.services.audio.Stream`], read-only): A list of applications currently playing sound.
+        - **recorders** (list[:class:`~ignis.services.audio.Stream`], read-only): A list of audio recorders.
 
     **Example usage:**
 

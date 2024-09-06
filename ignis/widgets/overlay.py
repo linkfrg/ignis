@@ -1,6 +1,5 @@
 from gi.repository import Gtk, GObject  # type: ignore
 from ignis.base_widget import BaseWidget
-from typing import List
 
 
 class Overlay(Gtk.Overlay, BaseWidget):
@@ -11,7 +10,7 @@ class Overlay(Gtk.Overlay, BaseWidget):
     The ``child`` property is the main child, on which other widgets defined in ``overlays`` will be placed on top.
 
     Properties:
-        - **overlays** (List[``Gtk.Widget``, optional, read-write]): List of overlay widgets.
+        - **overlays** (list[``Gtk.Widget``, optional, read-write]): A list of overlay widgets.
 
     .. code-block:: python
 
@@ -30,15 +29,15 @@ class Overlay(Gtk.Overlay, BaseWidget):
 
     def __init__(self, **kwargs):
         Gtk.Overlay.__init__(self)
-        self._overlays: List[Gtk.Widget] = []
+        self._overlays: list[Gtk.Widget] = []
         BaseWidget.__init__(self, **kwargs)
 
     @GObject.Property
-    def overlays(self) -> List[Gtk.Widget]:
+    def overlays(self) -> list[Gtk.Widget]:
         return self._overlays
 
     @overlays.setter
-    def overlays(self, value: List[Gtk.Widget]) -> None:
+    def overlays(self, value: list[Gtk.Widget]) -> None:
         for i in self._overlays:
             self.remove_overlay(i)
 

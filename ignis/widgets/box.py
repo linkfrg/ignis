@@ -1,6 +1,5 @@
 from gi.repository import Gtk, GObject  # type: ignore
 from ignis.base_widget import BaseWidget
-from typing import List
 
 
 class Box(Gtk.Box, BaseWidget):
@@ -19,7 +18,7 @@ class Box(Gtk.Box, BaseWidget):
             )
 
     Properties:
-        - **child** (``List[Gtk.Widget]``, optional, read-write): The list of child widgets.
+        - **child** (``list[Gtk.Widget]``, optional, read-write): A list of child widgets.
         - **vertical** (``bool``, optional, read-write): Whether the box arranges children vertically.
 
     .. code-block:: python
@@ -37,15 +36,15 @@ class Box(Gtk.Box, BaseWidget):
 
     def __init__(self, **kwargs):
         Gtk.Box.__init__(self)
-        self._child: List[Gtk.Widget] = []
+        self._child: list[Gtk.Widget] = []
         BaseWidget.__init__(self, **kwargs)
 
     @GObject.Property
-    def child(self) -> List[Gtk.Widget]:
+    def child(self) -> list[Gtk.Widget]:
         return self._child
 
     @child.setter
-    def child(self, child: List[Gtk.Widget]) -> None:
+    def child(self, child: list[Gtk.Widget]) -> None:
         for c in self._child:
             super().remove(c)
 

@@ -7,7 +7,6 @@ from gi.repository import GObject, GLib  # type: ignore
 from ignis.gobject import IgnisGObject
 from ignis.utils import Utils
 from loguru import logger
-from typing import List, Dict
 from ignis import CACHE_DIR
 
 ART_URL_CACHE_DIR = f"{CACHE_DIR}/art_url"
@@ -292,7 +291,7 @@ class MprisService(IgnisGObject):
         - **"player_added"** (:class:`~ignis.services.applications.Application`): Emitted when a :class:`~ignis.services.applications.Application` has been added.
 
     Properties:
-        - **players** (List[:class:`~ignis.services.applications.Application`], read-only): List of currently active players.
+        - **players** (list[:class:`~ignis.services.applications.Application`], read-only): A list of currently active players.
 
     .. code-block:: python
 
@@ -313,7 +312,7 @@ class MprisService(IgnisGObject):
 
     def __init__(self):
         super().__init__()
-        self._players: Dict[str, MprisPlayer] = {}
+        self._players: dict[str, MprisPlayer] = {}
 
         self.__dbus = DBusProxy(
             name="org.freedesktop.DBus",
@@ -357,5 +356,5 @@ class MprisService(IgnisGObject):
             self.notify("players")
 
     @GObject.Property
-    def players(self) -> List[MprisPlayer]:
+    def players(self) -> list[MprisPlayer]:
         return list(self._players.values())

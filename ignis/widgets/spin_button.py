@@ -1,6 +1,6 @@
 from gi.repository import Gtk, GObject  # type: ignore
 from ignis.base_widget import BaseWidget
-from typing import Callable, Optional
+from typing import Callable
 
 
 class SpinButton(Gtk.SpinButton, BaseWidget):  # type: ignore
@@ -30,7 +30,7 @@ class SpinButton(Gtk.SpinButton, BaseWidget):  # type: ignore
     __gtype_name__ = "IgnisSpinButton"
     __gproperties__ = {**BaseWidget.gproperties}
 
-    def __init__(self, min: Optional[int] = None, max: Optional[int] = None, **kwargs):
+    def __init__(self, min: int | None = None, max: int | None = None, **kwargs):
         Gtk.SpinButton.__init__(self)
         self._on_change: Callable | None = None
         self.adjustment = Gtk.Adjustment(

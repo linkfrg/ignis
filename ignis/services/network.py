@@ -348,7 +348,7 @@ class WifiDevice(IgnisGObject):
     A Wifi device.
 
     Properties:
-        - **access_points** (List[:class:`~ignis.services.network.WifiAccessPoint`], read-only): A list of access points (Wi-FI networks).
+        - **access_points** (list[:class:`~ignis.services.network.WifiAccessPoint`], read-only): A list of access points (Wi-FI networks).
         - **ap** (:class:`~ignis.services.network.WifiAccessPoint`, read-only): The currently active access point.
         - **state** (``str | None``, read-only): The current state of the device or ``None`` if unknown.
     """

@@ -1,7 +1,6 @@
 from ignis.dbus import DBusProxy
 from ignis.utils import Utils
 from ignis.exceptions import WindowNotFoundError, IgnisNotRunningError
-from typing import List
 from typing import Any
 
 
@@ -74,12 +73,12 @@ class IgnisClient:
         """
         self.__call_window_method("ToggleWindow", window_name)
 
-    def list_windows(self) -> List[str]:
+    def list_windows(self) -> list[str]:
         """
         Get a list of all window names.
 
         Returns:
-            List[str]: A list of all window names.
+            list[str]: A list of all window names.
         """
         return self.__call_dbus_method("ListWindows")
 

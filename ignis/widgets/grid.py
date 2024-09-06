@@ -1,6 +1,5 @@
 from gi.repository import Gtk, GObject  # type: ignore
 from ignis.base_widget import BaseWidget
-from typing import List
 
 
 class Grid(Gtk.Grid, BaseWidget):
@@ -10,7 +9,7 @@ class Grid(Gtk.Grid, BaseWidget):
     A container that arranges its child widgets in rows and columns.
 
     Properties:
-        - **child** (``List[Gtk.Widget]``, optional, read-write): The list of child widgets.
+        - **child** (``list[Gtk.Widget]``, optional, read-write): A list of child widgets.
         - **column_num** (``int``, optional, read-write): The number of columns.
         - **row_num** (``int``, optional, read-write): The number of rows. This will not take effect if ``column_num`` is specified.
 
@@ -36,7 +35,7 @@ class Grid(Gtk.Grid, BaseWidget):
         Gtk.Grid.__init__(self)
         self._column_num: int | None = None
         self._row_num: int | None = None
-        self._child: List[Gtk.Widget] = []
+        self._child: list[Gtk.Widget] = []
         BaseWidget.__init__(self, **kwargs)
 
     @GObject.Property
@@ -58,11 +57,11 @@ class Grid(Gtk.Grid, BaseWidget):
         self.__apply()
 
     @GObject.Property
-    def child(self) -> List[Gtk.Widget]:
+    def child(self) -> list[Gtk.Widget]:
         return self._child
 
     @child.setter
-    def child(self, child: List[Gtk.Widget]) -> None:
+    def child(self, child: list[Gtk.Widget]) -> None:
         for c in self._child:
             self.remove(c)
         self._child = child

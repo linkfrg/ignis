@@ -312,7 +312,7 @@ class RecorderService(IgnisGObject):
             path (``str``, optional): Recording path. It will override ``default_file_location`` and ``default_filename`` properties.
             record_microphone (``bool``, optional): Whether record audio from microphone.
             record_internal_audio (``bool``, optional): Whether record internal audio.
-            audio_devices (``List[str]``, optional): List of audio devices names from which audio should be recorded.
+            audio_devices (``list[str]``, optional): A list of audio devices names from which audio should be recorded.
         """
 
         if path is None:

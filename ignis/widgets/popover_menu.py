@@ -1,6 +1,5 @@
 from gi.repository import Gtk, GObject, Gio  # type: ignore
 from ignis.base_widget import BaseWidget
-from typing import List
 from ignis.widgets.menuitem import MenuItem
 
 
@@ -13,7 +12,7 @@ class PopoverMenu(Gtk.PopoverMenu, BaseWidget):
     To display it, call the ``popup()`` method.
 
     Properties:
-        - **items** (List[:class:`~ignis.widgets.Widget.MenuItem`], optional, read-write): A list of :class:`~ignis.widgets.Widget.MenuItem`.
+        - **items** (list[:class:`~ignis.widgets.Widget.MenuItem`], optional, read-write): A list of :class:`~ignis.widgets.Widget.MenuItem`.
 
     .. code-block:: python
 
@@ -42,8 +41,8 @@ class PopoverMenu(Gtk.PopoverMenu, BaseWidget):
 
     def __init__(self, **kwargs):
         Gtk.PopoverMenu.__init__(self)
-        self._items: List[MenuItem] = []
-        self._sections: List[Gio.Menu] = []
+        self._items: list[MenuItem] = []
+        self._sections: list[Gio.Menu] = []
         self._menu = Gio.Menu()
         self._current_section = Gio.Menu()
         self._sections.append(self._current_section)
@@ -70,11 +69,11 @@ class PopoverMenu(Gtk.PopoverMenu, BaseWidget):
         self.set_menu_model(self._menu)
 
     @GObject.Property
-    def items(self) -> List[MenuItem]:
+    def items(self) -> list[MenuItem]:
         return self._items
 
     @items.setter
-    def items(self, value: List[MenuItem]) -> None:
+    def items(self, value: list[MenuItem]) -> None:
         self._menu = Gio.Menu()
         self.set_menu_model(self._menu)
 

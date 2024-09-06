@@ -22,7 +22,7 @@ class FileDialog(Gtk.FileDialog, IgnisGObject):
     Properties:
         - **file** (``Gio.File | None``, not argument, read-only): The selected ``Gio.File``.
         - **on_file_set** (``Callable``, optional, read-write): A function to call when user selects a file.
-        - **filters** (List[:class:`~ignis.widgets.Widget.FileFilter`], optional, read-write): A list of file filters.
+        - **filters** (list[:class:`~ignis.widgets.Widget.FileFilter`], optional, read-write): A list of file filters.
         - **initial_path** (``str``, optional, read-write): The path to the folder or file that will be selected by default.
         - **select_folder** (``bool``, optional, read-write): Whether the dialog should allow selecting folders instead of files.
 

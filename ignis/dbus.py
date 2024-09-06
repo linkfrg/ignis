@@ -1,5 +1,6 @@
+from __future__ import annotations
 from gi.repository import Gio, GLib, GObject  # type: ignore
-from typing import Any, List, Dict, Callable, Optional
+from typing import Any, Callable
 from ignis.utils import Utils
 from ignis.gobject import IgnisGObject
 from ignis.exceptions import DBusMethodNotFoundError, DBusPropertyNotFoundError
@@ -49,8 +50,8 @@ class DBusService(IgnisGObject):
         name: str,
         object_path: str,
         info: Gio.DBusInterfaceInfo,
-        on_name_acquired: Optional[Callable] = None,
-        on_name_lost: Optional[Callable] = None,
+        on_name_acquired: Callable | None = None,
+        on_name_lost: Callable | None = None,
     ):
         super().__init__()
 
@@ -60,8 +61,8 @@ class DBusService(IgnisGObject):
         self._on_name_acquired = on_name_acquired
         self._on_name_lost = on_name_lost
 
-        self._methods: Dict[str, Callable] = {}
-        self._properties: Dict[str, Callable] = {}
+        self._methods: dict[str, Callable] = {}
+        self._properties: dict[str, Callable] = {}
 
         self._id = Gio.bus_own_name(
             Gio.BusType.SESSION,
@@ -105,11 +106,11 @@ class DBusService(IgnisGObject):
         return self._connection
 
     @GObject.Property
-    def methods(self) -> Dict[str, Callable]:
+    def methods(self) -> dict[str, Callable]:
         return self._methods
 
     @GObject.Property
-    def properties(self) -> Dict[str, Callable]:
+    def properties(self) -> dict[str, Callable]:
         return self._properties
 
     def __export_object(self, connection: Gio.DBusConnection, name: str) -> None:
@@ -182,7 +183,7 @@ class DBusService(IgnisGObject):
         self._properties[name] = method
 
     def emit_signal(
-        self, signal_name: str, parameters: Optional[GLib.Variant] = None
+        self, signal_name: str, parameters: GLib.Variant | None = None
     ) -> None:
         """
         Emit a D-Bus signal on this service.
@@ -219,8 +220,8 @@ class DBusProxy(IgnisGObject):
         - **interface_name** (``str``, required, read-only): A D-Bus interface name.
         - **info** (`Gio.DBusInterfaceInfo <https://lazka.github.io/pgi-docs/Gio-2.0/classes/DBusInterfaceInfo.html>`_, required, read-only): A ``Gio.DBusInterfaceInfo`` instance. You can get it from XML using :class:`~ignis.utils.Utils.load_interface_xml`.
         - **proxy** (`Gio.DBusProxy <https://lazka.github.io/pgi-docs/index.html#Gio-2.0/classes/DBusProxy.html>`_, not argument, read-only): The ``Gio.DBusProxy`` instance.
-        - **methods** (``List[str]``, not argument, read-only): A list of methods exposed by D-Bus service.
-        - **properties** (``List[str]``, not argument, read-only): A list of properties exposed by D-Bus service.
+        - **methods** (``list[str]``, not argument, read-only): A list of methods exposed by D-Bus service.
+        - **properties** (``list[str]``, not argument, read-only): A list of properties exposed by D-Bus service.
         - **has_owner** (``bool``, not argument, read-only): Whether the ``name`` has an owner.
 
     To call a D-Bus method, use the standart pythonic way.
@@ -257,8 +258,8 @@ class DBusProxy(IgnisGObject):
         self._interface_name = interface_name
         self._info = info
 
-        self._methods: List[str] = []
-        self._properties: List[str] = []
+        self._methods: list[str] = []
+        self._properties: list[str] = []
 
         self._proxy = Gio.DBusProxy.new_for_bus_sync(
             Gio.BusType.SESSION,
@@ -301,11 +302,11 @@ class DBusProxy(IgnisGObject):
         return self._proxy
 
     @GObject.Property
-    def methods(self) -> List[str]:
+    def methods(self) -> list[str]:
         return self._methods
 
     @GObject.Property
-    def properties(self) -> List[str]:
+    def properties(self) -> list[str]:
         return self._properties
 
     @GObject.Property
@@ -329,7 +330,7 @@ class DBusProxy(IgnisGObject):
     def signal_subscribe(
         self,
         signal_name: str,
-        callback: Optional[Callable] = None,
+        callback: Callable | None = None,
     ) -> int:
         """
         Subscribe to D-Bus signal.
@@ -380,8 +381,8 @@ class DBusProxy(IgnisGObject):
 
     def watch_name(
         self,
-        on_name_appeared: Optional[Callable] = None,
-        on_name_vanished: Optional[Callable] = None,
+        on_name_appeared: Callable | None = None,
+        on_name_vanished: Callable | None = None,
     ) -> None:
         """
         Watch ``name``.

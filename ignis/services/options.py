@@ -2,7 +2,7 @@ import sys
 import json
 from ignis.gobject import IgnisGObject, Binding
 from gi.repository import GObject  # type: ignore
-from typing import Any, Callable, Dict, Optional
+from typing import Any, Callable
 from ignis import CACHE_DIR
 from ignis.exceptions import OptionExistsError, OptionNotFoundError
 
@@ -61,7 +61,7 @@ class OptionsService(IgnisGObject):
 
     def __init__(self):
         super().__init__()
-        self.__data: Dict[str, Option] = {}
+        self.__data: dict[str, Option] = {}
         self.__load_data()
 
     def __load_data(self) -> None:
@@ -162,7 +162,7 @@ class OptionsService(IgnisGObject):
             raise OptionNotFoundError(name)
         self.__sync()
 
-    def bind_option(self, name: str, transform: Optional[Callable] = None) -> Binding:
+    def bind_option(self, name: str, transform: Callable | None = None) -> Binding:
         """
         Like ``bind()``, but for option.
 
