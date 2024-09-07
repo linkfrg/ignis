@@ -95,14 +95,12 @@ class MprisPlayer(IgnisGObject):
         art_url = self.metadata.get("mpris:artUrl", None)
         result = None
 
-        if art_url.startswith("file://"):
-            result = self.__copy_art_url(art_url)
+        if art_url:
+            if art_url.startswith("file://"):
+                result = self.__copy_art_url(art_url)
 
-        elif art_url.startswith("https://") or art_url.startswith("http://"):
-            result = self.__download_art_url(art_url)
-
-        if result is True:
-            return
+            elif art_url.startswith("https://") or art_url.startswith("http://"):
+                result = self.__download_art_url(art_url)
 
         self._art_url = result
         self.notify("art_url")
