@@ -30,7 +30,7 @@ class MprisPlayer(IgnisGObject):
         - **metadata** (``dict``, read-only): Dictionary containing metadata. You typically shouldn't use this property.
         - **track_id** (``str``, read-only): Track ID.
         - **length** (``int``, read-only): Length of media. Returns -1 if not supported by player.
-        - **art_url** (``str``, read-only): Path to cached art image of media.
+        - **art_url** (``str | None``, read-only): Path to cached art image of media.
         - **album** (``str``, read-only): Album name.
         - **artist** (``str``, read-only): Artist name.
         - **title** (``str``, read-only): Current title.
@@ -93,35 +93,52 @@ class MprisPlayer(IgnisGObject):
     @Utils.run_in_thread
     def __cache_art_url(self) -> None:
         art_url = self.metadata.get("mpris:artUrl", None)
-        if not art_url:
-            return
+        result = None
 
         if art_url.startswith("file://"):
-            path = art_url.replace("file://", "")
-            result = ART_URL_CACHE_DIR + "/" + os.path.basename(path)
-            if not os.path.exists(result):
-                shutil.copy(path, result)
+            result = self.__copy_art_url(art_url)
 
         elif art_url.startswith("https://") or art_url.startswith("http://"):
-            result = ART_URL_CACHE_DIR + "/" + os.path.basename(art_url)
-            if not os.path.exists(result):
-                try:
-                    response = requests.get(art_url)
-                except requests.exceptions.ConnectionError:
-                    logger.warning("Failed to download the art image of media.")
-                    return
+            result = self.__download_art_url(art_url)
 
-                if response.status_code == 200:
-                    with open(
-                        os.path.join(ART_URL_CACHE_DIR, os.path.basename(art_url)),
-                        "wb",
-                    ) as file:
-                        file.write(response.content)
-                else:
-                    logger.warning("Failed to download the art image of media.")
+        if result is True:
+            return
 
         self._art_url = result
         self.notify("art_url")
+
+    def __copy_art_url(self, art_url: str | None) -> str:
+        path = art_url.replace("file://", "")
+        result = ART_URL_CACHE_DIR + "/" + os.path.basename(path)
+        if os.path.exists(result):
+            return result
+
+        shutil.copy(path, result)
+
+        return result
+
+    def __download_art_url(self, art_url: str | None) -> str | None:
+        result = ART_URL_CACHE_DIR + "/" + os.path.basename(art_url)
+        if os.path.exists(result):
+            return result
+
+        try:
+            status_code = Utils.download_image(art_url, result, timeout=1)
+            if status_code != 200:
+                logger.warning(
+                    f"Failed to download the art image of media. (Status code: {status_code})"
+                )
+                result = None
+        except requests.exceptions.ConnectionError:
+            logger.warning(
+                "Failed to download the art image of media. (Connection Error)"
+            )
+            result = None
+        except requests.exceptions.Timeout:
+            logger.warning("Failed to download the art image of media. (Timeout)")
+            result = None
+
+        return result
 
     @Utils.run_in_thread
     def __sync_position(self) -> None:

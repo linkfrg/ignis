@@ -13,6 +13,7 @@ from .crop_pixbuf import crop_pixbuf
 from .get_paintable import get_paintable
 from .get_file_icon_name import get_file_icon_name
 from .thread_task import ThreadTask
+from .download_image import download_image
 
 
 class Utils:
@@ -34,3 +35,4 @@ class Utils:
     get_file_icon_name = get_file_icon_name
     ThreadTask = ThreadTask
     get_ignis_commit = get_ignis_commit
+    download_image = download_image
