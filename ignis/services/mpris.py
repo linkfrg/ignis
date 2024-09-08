@@ -105,7 +105,7 @@ class MprisPlayer(IgnisGObject):
         self._art_url = result
         self.notify("art_url")
 
-    def __copy_art_url(self, art_url: str | None) -> str:
+    def __copy_art_url(self, art_url: str) -> str:
         path = art_url.replace("file://", "")
         result = ART_URL_CACHE_DIR + "/" + os.path.basename(path)
         if os.path.exists(result):
@@ -115,7 +115,7 @@ class MprisPlayer(IgnisGObject):
 
         return result
 
-    def __download_art_url(self, art_url: str | None) -> str | None:
+    def __download_art_url(self, art_url: str) -> str | None:
         result = ART_URL_CACHE_DIR + "/" + os.path.basename(art_url)
         if os.path.exists(result):
             return result
@@ -126,15 +126,15 @@ class MprisPlayer(IgnisGObject):
                 logger.warning(
                     f"Failed to download the art image of media. (Status code: {status_code})"
                 )
-                result = None
+                return None
         except requests.exceptions.ConnectionError:
             logger.warning(
                 "Failed to download the art image of media. (Connection Error)"
             )
-            result = None
+            return None
         except requests.exceptions.Timeout:
             logger.warning("Failed to download the art image of media. (Timeout)")
-            result = None
+            return None
 
         return result
 
