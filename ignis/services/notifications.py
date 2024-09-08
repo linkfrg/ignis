@@ -266,11 +266,11 @@ class NotificationService(IgnisGObject):
 
     @GObject.Property
     def notifications(self) -> list[Notification]:
-        return sorted(self._notifications.values(), key=lambda x: x.id, reverse=True)
+        return list(self._notifications.values())
 
     @GObject.Property
     def popups(self) -> list[Notification]:
-        return sorted(self._popups.values(), key=lambda x: x.id, reverse=True)
+        return list(self._popups.values())
 
     @GObject.Property
     def dnd(self) -> bool:
