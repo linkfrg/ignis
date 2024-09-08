@@ -336,23 +336,56 @@ class NotificationService(IgnisGObject):
         hints: dict,
         timeout: int,
     ) -> GLib.Variant:
-        if replaces_id != 0:
-            id = replaces_id
-        else:
-            id = self._id = self._id + 1
+        def _init(_id: int) -> None:
+            self.__init_notification(
+                _id=_id,
+                app_name=app_name,
+                app_icon=app_icon,
+                summary=summary,
+                body=body,
+                actions=actions,
+                hints=hints,
+                timeout=timeout,
+            )
 
+        if replaces_id == 0:
+            _id = self._id = self._id + 1
+            _init(_id)
+
+        else:
+            _id = replaces_id
+            old_notification = self.get_notification(replaces_id)
+            if old_notification:
+                old_notification.close()
+                old_notification.connect("closed", lambda x: _init(_id))
+            else:
+                _init(_id)
+
+        return GLib.Variant("(u)", (_id,))
+
+    def __init_notification(
+        self,
+        _id: int,
+        app_name: str,
+        app_icon: str,
+        summary: str,
+        body: str,
+        actions: list,
+        hints: dict,
+        timeout: int,
+    ) -> None:
         icon = None
 
         if isinstance(app_icon, str):
             icon = app_icon
 
         if "image-data" in hints:
-            icon = f"{NOTIFICATIONS_IMAGE_DATA}/{id}"
+            icon = f"{NOTIFICATIONS_IMAGE_DATA}/{_id}"
             self.__save_pixbuf(hints["image-data"], icon)
 
         notification = Notification(
             dbus=self.__dbus,
-            id=id,
+            id=_id,
             app_name=app_name,
             icon=icon,
             summary=summary,
@@ -377,8 +410,6 @@ class NotificationService(IgnisGObject):
         self.__sync()
         self.emit("notified", notification)
         self.notify("notifications")
-
-        return GLib.Variant("(u)", (id,))
 
     def __save_pixbuf(self, px_args: list, save_path: str) -> None:
         GdkPixbuf.Pixbuf.new_from_bytes(
