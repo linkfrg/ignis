@@ -1,4 +1,5 @@
 import os
+import re
 import time
 import shutil
 import requests
@@ -84,16 +85,19 @@ class MprisPlayer(IgnisGObject):
 
     def __sync(self, proxy, properties: GLib.Variant, invalidated_properties) -> None:
         prop_dict = properties.unpack()
-        for key in prop_dict.keys():
-            if key == "Metadata":
-                self.__cache_art_url()
 
-        self.notify_all()
+        if "Metadata" in prop_dict.keys():
+            self.__cache_art_url()
+
+        self.notify_all(without="art-url")
 
     @Utils.run_in_thread
     def __cache_art_url(self) -> None:
         art_url = self.metadata.get("mpris:artUrl", None)
         result = None
+
+        if art_url == self._art_url:
+            return
 
         if art_url:
             if art_url.startswith("file://"):
