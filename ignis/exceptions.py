@@ -269,3 +269,37 @@ class DisplayNotFoundError(Exception):
         super().__init__(
             "Display not found! Ensure you are running a Wayland compositor", *args
         )
+
+
+class StylePathNotFoundError(Exception):
+    """
+    Raised when the style path is not found / not applied to the application.
+
+    Properties:
+        - **style_path** (``str``, required, read-only): Path to the .css/.scss/.sass file.
+    """
+
+    def __init__(self, style_path: str, *args: object) -> None:
+        self._style_path = style_path
+        super().__init__(f'Style path is not found: "{style_path}"', *args)
+
+    @property
+    def style_path(self) -> str:
+        return self._style_path
+
+
+class StylePathAppliedError(Exception):
+    """
+    Raised when the style path is already applied to the application.
+
+    Properties:
+        - **style_path** (``str``, required, read-only): Path to the .css/.scss/.sass file.
+    """
+
+    def __init__(self, style_path: str, *args: object) -> None:
+        self._style_path = style_path
+        super().__init__(f'Style path is already added: "{style_path}"', *args)
+
+    @property
+    def style_path(self) -> str:
+        return self._style_path

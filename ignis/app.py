@@ -6,7 +6,7 @@ from ignis.utils import Utils
 from loguru import logger
 from gi.repository import Gtk, Gdk, Gio, GObject, GLib  # type: ignore
 from ignis.gobject import IgnisGObject
-from ignis.exceptions import WindowAddedError, WindowNotFoundError, DisplayNotFoundError
+from ignis.exceptions import WindowAddedError, WindowNotFoundError, DisplayNotFoundError, StylePathNotFoundError, StylePathAppliedError
 from ignis.logging import configure_logger
 
 
@@ -66,8 +66,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         self.__dbus.register_dbus_method(name="ListWindows", method=self.__ListWindows)
 
         self._config_path: str | None = None
-        self._css_provider: Gtk.CssProvider | None = None
-        self._style_path: str | None = None
+        self._css_providers: dict[str, Gtk.CssProvider] = {} # {style_path: Gtk.CssProvider}
         self._windows: dict[str, Gtk.Window] = {}
         self._autoreload_config: bool = True
         self._autoreload_css: bool = True
@@ -122,12 +121,19 @@ class IgnisApp(Gtk.Application, IgnisGObject):
 
         Args:
             style_path (``str``): Path to the .css/.scss/.sass file.
+
+        Raises:
+            StylePathAppliedError: if the given style path is already to the application.
+            DisplayNotFoundError
         """
 
         display = Gdk.Display.get_default()
 
         if not display:
             raise DisplayNotFoundError()
+
+        if style_path in self._css_providers:
+            raise StylePathAppliedError(style_path)
 
         if not os.path.exists(style_path):
             raise FileNotFoundError(
@@ -144,39 +150,67 @@ class IgnisApp(Gtk.Application, IgnisGObject):
                 'The "style_path" argument must be a path to a CSS, SASS, or SCSS file'
             )
 
-        self._style_path = style_path
-        self._css_provider = Gtk.CssProvider()
-        self._css_provider.load_from_string(css_style)
+        provider = Gtk.CssProvider()
+        provider.load_from_string(css_style)
 
         Gtk.StyleContext.add_provider_for_display(
             display,
-            self._css_provider,
+            provider,
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION,
         )
 
+        self._css_providers[style_path] = provider
+
         logger.info(f"Applied css: {style_path}")
 
-    def remove_css(self) -> None:
+    def remove_css(self, style_path: str) -> None:
         """
-        Remove CSS/SCSS/SASS style that were applied using :func:`~ignis.app.IgnisApp.apply_css`.
+        Remove applied CSS/SCSS/SASS style.
+
+        Args:
+            style_path (``str``): Path to the applied .css/.scss/.sass file.
+
+        Raises:
+            StylePathNotFoundError: if the given style path is not applied to the application.
+            DisplayNotFoundError
         """
+
         display = Gdk.Display.get_default()
         if not display:
             raise DisplayNotFoundError()
 
-        if self._css_provider:
-            Gtk.StyleContext.remove_provider_for_display(
+        provider = self._css_providers.pop(style_path, None)
+
+        if provider is None:
+            raise StylePathNotFoundError(style_path)
+
+        Gtk.StyleContext.remove_provider_for_display(
                 display,
-                self._css_provider,
+                provider,
             )
+
+    def reset_css(self) -> None:
+        """
+        Reset all applied CSS/SCSS/SASS styles.
+
+        Raises:
+            DisplayNotFoundError
+        """
+        for style_path in self._css_providers.copy().keys():
+            self.remove_css(style_path)
 
     def reload_css(self) -> None:
         """
-        Reapply CSS/SCSS/SASS style that were applied using :func:`~ignis.app.IgnisApp.apply_css`.
+        Reload all applied CSS/SCSS/SASS styles.
+
+        Raises:
+            DisplayNotFoundError
         """
-        if self._css_provider and self._style_path:
-            self.remove_css()
-            self.apply_css(self._style_path)
+        style_paths = self._css_providers.copy().keys()
+        self.reset_css()
+
+        for i in style_paths:
+            self.apply_css(i)
 
     def do_activate(self) -> None:
         """
