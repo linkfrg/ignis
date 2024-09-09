@@ -18,5 +18,5 @@ if "sphinx" not in sys.modules:
 
     from gi.repository import GLib  # type: ignore
 
-    CACHE_DIR = f"{GLib.get_user_cache_dir()}/ignis/"
+    CACHE_DIR = f"{GLib.get_user_cache_dir()}/ignis"
     os.makedirs(CACHE_DIR, exist_ok=True)
