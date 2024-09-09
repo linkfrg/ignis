@@ -115,7 +115,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
 
     def apply_css(self, style_path: str) -> None:
         """
-        Apply CSS/SCSS/SASS style from a path.
+        Apply a CSS/SCSS/SASS style from a path.
         If ``style_path`` has a ``.sass`` or ``.scss`` extension, it will be automatically compiled.
         Requires ``dart-sass`` for SASS/SCSS compilation.
 
@@ -165,7 +165,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
 
     def remove_css(self, style_path: str) -> None:
         """
-        Remove applied CSS/SCSS/SASS style.
+        Remove the applied CSS/SCSS/SASS style by its path.
 
         Args:
             style_path (``str``): Path to the applied .css/.scss/.sass file.
