@@ -16,6 +16,8 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 
 autodoc_mock_imports = ["gi", "loguru", "setuptools", "click", "cairo", "requests"]
+autodoc_member_order = "bysource"
+
 html_theme = "pydata_sphinx_theme"
 html_static_path = ["_static"]
 
