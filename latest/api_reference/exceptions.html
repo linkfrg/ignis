@@ -678,6 +678,30 @@ document.write(`
 </dd></dl>
 
 <dl class="py exception">
+<dt class="sig sig-object py" id="ignis.exceptions.StylePathAppliedError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">StylePathAppliedError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">style_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.exceptions.StylePathAppliedError" title="Link to this definition">#</a></dt>
+<dd><p>Raised when the style path is already applied to the application.</p>
+<dl class="simple">
+<dt>Properties:</dt><dd><ul class="simple">
+<li><p><strong>style_path</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, required, read-only): Path to the .css/.scss/.sass file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="ignis.exceptions.StylePathNotFoundError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">StylePathNotFoundError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">style_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.exceptions.StylePathNotFoundError" title="Link to this definition">#</a></dt>
+<dd><p>Raised when the style path is not found / not applied to the application.</p>
+<dl class="simple">
+<dt>Properties:</dt><dd><ul class="simple">
+<li><p><strong>style_path</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, required, read-only): Path to the .css/.scss/.sass file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py exception">
 <dt class="sig sig-object py" id="ignis.exceptions.WindowAddedError">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">WindowAddedError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.exceptions.WindowAddedError" title="Link to this definition">#</a></dt>
 <dd><p>Raised when a window is already added to the application.</p>
@@ -765,6 +789,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.OptionNotFoundError"><code class="docutils literal notranslate"><span class="pre">OptionNotFoundError</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.SassCompilationError"><code class="docutils literal notranslate"><span class="pre">SassCompilationError</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.ServiceNotFoundError"><code class="docutils literal notranslate"><span class="pre">ServiceNotFoundError</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.StylePathAppliedError"><code class="docutils literal notranslate"><span class="pre">StylePathAppliedError</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.StylePathNotFoundError"><code class="docutils literal notranslate"><span class="pre">StylePathNotFoundError</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.WindowAddedError"><code class="docutils literal notranslate"><span class="pre">WindowAddedError</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.WindowNotFoundError"><code class="docutils literal notranslate"><span class="pre">WindowNotFoundError</span></code></a></li>
 </ul>
