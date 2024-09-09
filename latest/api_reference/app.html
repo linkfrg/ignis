@@ -554,24 +554,6 @@ Instead, import the already initialized instance as shown below.</p>
 </dd>
 </dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="ignis.app.IgnisApp.add_window">
-<span class="sig-name descname"><span class="pre">add_window</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.Gtk.Window</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.app.IgnisApp.add_window" title="Link to this definition">#</a></dt>
-<dd><p>Add a window.
-You typically shouldn't use this method, as windows are added to the app automatically.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>window_name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The window's namespace.</p></li>
-<li><p><strong>window</strong> (<code class="docutils literal notranslate"><span class="pre">Gtk.Window</span></code>) -- The window instance.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="exceptions.html#ignis.exceptions.WindowAddedError" title="ignis.exceptions.WindowAddedError"><strong>WindowAddedError</strong></a> -- If a window with the given namespace already exists.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="ignis.app.IgnisApp.apply_css">
 <span class="sig-name descname"><span class="pre">apply_css</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">style_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.app.IgnisApp.apply_css" title="Link to this definition">#</a></dt>
 <dd><p>Apply a CSS/SCSS/SASS style from a path.
@@ -591,15 +573,40 @@ Requires <code class="docutils literal notranslate"><span class="pre">dart-sass<
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ignis.app.IgnisApp.close_window">
-<span class="sig-name descname"><span class="pre">close_window</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.app.IgnisApp.close_window" title="Link to this definition">#</a></dt>
-<dd><p>Close (hide) a window by its name.</p>
+<dt class="sig sig-object py" id="ignis.app.IgnisApp.remove_css">
+<span class="sig-name descname"><span class="pre">remove_css</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">style_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.app.IgnisApp.remove_css" title="Link to this definition">#</a></dt>
+<dd><p>Remove the applied CSS/SCSS/SASS style by its path.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>window_name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The window's namespace.</p>
+<dd class="field-odd"><p><strong>style_path</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- Path to the applied .css/.scss/.sass file.</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="exceptions.html#ignis.exceptions.WindowNotFoundError" title="ignis.exceptions.WindowNotFoundError"><strong>WindowNotFoundError</strong></a> -- If a window with the given namespace does not exist.</p>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="exceptions.html#ignis.exceptions.StylePathNotFoundError" title="ignis.exceptions.StylePathNotFoundError"><strong>StylePathNotFoundError</strong></a> -- if the given style path is not applied to the application.</p></li>
+<li><p><a class="reference internal" href="exceptions.html#ignis.exceptions.DisplayNotFoundError" title="ignis.exceptions.DisplayNotFoundError"><strong>DisplayNotFoundError</strong></a> -- </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.app.IgnisApp.reset_css">
+<span class="sig-name descname"><span class="pre">reset_css</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.app.IgnisApp.reset_css" title="Link to this definition">#</a></dt>
+<dd><p>Reset all applied CSS/SCSS/SASS styles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="exceptions.html#ignis.exceptions.DisplayNotFoundError" title="ignis.exceptions.DisplayNotFoundError"><strong>DisplayNotFoundError</strong></a> -- </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.app.IgnisApp.reload_css">
+<span class="sig-name descname"><span class="pre">reload_css</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.app.IgnisApp.reload_css" title="Link to this definition">#</a></dt>
+<dd><p>Reload all applied CSS/SCSS/SASS styles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="exceptions.html#ignis.exceptions.DisplayNotFoundError" title="ignis.exceptions.DisplayNotFoundError"><strong>DisplayNotFoundError</strong></a> -- </p>
 </dd>
 </dl>
 </dd></dl>
@@ -625,12 +632,6 @@ Requires <code class="docutils literal notranslate"><span class="pre">dart-sass<
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ignis.app.IgnisApp.inspector">
-<span class="sig-name descname"><span class="pre">inspector</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.app.IgnisApp.inspector" title="Link to this definition">#</a></dt>
-<dd><p>Open GTK Inspector.</p>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="ignis.app.IgnisApp.open_window">
 <span class="sig-name descname"><span class="pre">open_window</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.app.IgnisApp.open_window" title="Link to this definition">#</a></dt>
 <dd><p>Open (show) a window by its name.</p>
@@ -645,41 +646,47 @@ Requires <code class="docutils literal notranslate"><span class="pre">dart-sass<
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ignis.app.IgnisApp.quit">
-<span class="sig-name descname"><span class="pre">quit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.app.IgnisApp.quit" title="Link to this definition">#</a></dt>
-<dd><p>Quit Ignis.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ignis.app.IgnisApp.reload">
-<span class="sig-name descname"><span class="pre">reload</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.app.IgnisApp.reload" title="Link to this definition">#</a></dt>
-<dd><p>Reload Ignis.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ignis.app.IgnisApp.reload_css">
-<span class="sig-name descname"><span class="pre">reload_css</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.app.IgnisApp.reload_css" title="Link to this definition">#</a></dt>
-<dd><p>Reload all applied CSS/SCSS/SASS styles.</p>
+<dt class="sig sig-object py" id="ignis.app.IgnisApp.close_window">
+<span class="sig-name descname"><span class="pre">close_window</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.app.IgnisApp.close_window" title="Link to this definition">#</a></dt>
+<dd><p>Close (hide) a window by its name.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="exceptions.html#ignis.exceptions.DisplayNotFoundError" title="ignis.exceptions.DisplayNotFoundError"><strong>DisplayNotFoundError</strong></a> -- </p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>window_name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The window's namespace.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="exceptions.html#ignis.exceptions.WindowNotFoundError" title="ignis.exceptions.WindowNotFoundError"><strong>WindowNotFoundError</strong></a> -- If a window with the given namespace does not exist.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ignis.app.IgnisApp.remove_css">
-<span class="sig-name descname"><span class="pre">remove_css</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">style_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.app.IgnisApp.remove_css" title="Link to this definition">#</a></dt>
-<dd><p>Remove the applied CSS/SCSS/SASS style by its path.</p>
+<dt class="sig sig-object py" id="ignis.app.IgnisApp.toggle_window">
+<span class="sig-name descname"><span class="pre">toggle_window</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.app.IgnisApp.toggle_window" title="Link to this definition">#</a></dt>
+<dd><p>Toggle (change visibility to opposite state) a window by its name.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>style_path</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- Path to the applied .css/.scss/.sass file.</p>
+<dd class="field-odd"><p><strong>window_name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The window's namespace.</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><a class="reference internal" href="exceptions.html#ignis.exceptions.StylePathNotFoundError" title="ignis.exceptions.StylePathNotFoundError"><strong>StylePathNotFoundError</strong></a> -- if the given style path is not applied to the application.</p></li>
-<li><p><a class="reference internal" href="exceptions.html#ignis.exceptions.DisplayNotFoundError" title="ignis.exceptions.DisplayNotFoundError"><strong>DisplayNotFoundError</strong></a> -- </p></li>
+<dd class="field-even"><p><a class="reference internal" href="exceptions.html#ignis.exceptions.WindowNotFoundError" title="ignis.exceptions.WindowNotFoundError"><strong>WindowNotFoundError</strong></a> -- If a window with the given namespace does not exist.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.app.IgnisApp.add_window">
+<span class="sig-name descname"><span class="pre">add_window</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.Gtk.Window</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.app.IgnisApp.add_window" title="Link to this definition">#</a></dt>
+<dd><p>Add a window.
+You typically shouldn't use this method, as windows are added to the app automatically.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window_name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The window's namespace.</p></li>
+<li><p><strong>window</strong> (<code class="docutils literal notranslate"><span class="pre">Gtk.Window</span></code>) -- The window instance.</p></li>
 </ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="exceptions.html#ignis.exceptions.WindowAddedError" title="ignis.exceptions.WindowAddedError"><strong>WindowAddedError</strong></a> -- If a window with the given namespace already exists.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -700,28 +707,21 @@ The window will be removed from the application.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ignis.app.IgnisApp.reset_css">
-<span class="sig-name descname"><span class="pre">reset_css</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.app.IgnisApp.reset_css" title="Link to this definition">#</a></dt>
-<dd><p>Reset all applied CSS/SCSS/SASS styles.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="exceptions.html#ignis.exceptions.DisplayNotFoundError" title="ignis.exceptions.DisplayNotFoundError"><strong>DisplayNotFoundError</strong></a> -- </p>
-</dd>
-</dl>
+<dt class="sig sig-object py" id="ignis.app.IgnisApp.reload">
+<span class="sig-name descname"><span class="pre">reload</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.app.IgnisApp.reload" title="Link to this definition">#</a></dt>
+<dd><p>Reload Ignis.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ignis.app.IgnisApp.toggle_window">
-<span class="sig-name descname"><span class="pre">toggle_window</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.app.IgnisApp.toggle_window" title="Link to this definition">#</a></dt>
-<dd><p>Toggle (change visibility to opposite state) a window by its name.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>window_name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The window's namespace.</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="exceptions.html#ignis.exceptions.WindowNotFoundError" title="ignis.exceptions.WindowNotFoundError"><strong>WindowNotFoundError</strong></a> -- If a window with the given namespace does not exist.</p>
-</dd>
-</dl>
+<dt class="sig sig-object py" id="ignis.app.IgnisApp.quit">
+<span class="sig-name descname"><span class="pre">quit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.app.IgnisApp.quit" title="Link to this definition">#</a></dt>
+<dd><p>Quit Ignis.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.app.IgnisApp.inspector">
+<span class="sig-name descname"><span class="pre">inspector</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.app.IgnisApp.inspector" title="Link to this definition">#</a></dt>
+<dd><p>Open GTK Inspector.</p>
 </dd></dl>
 
 </dd></dl>
@@ -775,19 +775,19 @@ The window will be removed from the application.</p>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.app.IgnisApp"><code class="docutils literal notranslate"><span class="pre">IgnisApp</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.app.IgnisApp.add_window"><code class="docutils literal notranslate"><span class="pre">IgnisApp.add_window()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.app.IgnisApp.apply_css"><code class="docutils literal notranslate"><span class="pre">IgnisApp.apply_css()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.app.IgnisApp.close_window"><code class="docutils literal notranslate"><span class="pre">IgnisApp.close_window()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.app.IgnisApp.get_window"><code class="docutils literal notranslate"><span class="pre">IgnisApp.get_window()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.app.IgnisApp.inspector"><code class="docutils literal notranslate"><span class="pre">IgnisApp.inspector()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.app.IgnisApp.open_window"><code class="docutils literal notranslate"><span class="pre">IgnisApp.open_window()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.app.IgnisApp.quit"><code class="docutils literal notranslate"><span class="pre">IgnisApp.quit()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.app.IgnisApp.reload"><code class="docutils literal notranslate"><span class="pre">IgnisApp.reload()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.app.IgnisApp.reload_css"><code class="docutils literal notranslate"><span class="pre">IgnisApp.reload_css()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.app.IgnisApp.remove_css"><code class="docutils literal notranslate"><span class="pre">IgnisApp.remove_css()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.app.IgnisApp.remove_window"><code class="docutils literal notranslate"><span class="pre">IgnisApp.remove_window()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.app.IgnisApp.reset_css"><code class="docutils literal notranslate"><span class="pre">IgnisApp.reset_css()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.app.IgnisApp.reload_css"><code class="docutils literal notranslate"><span class="pre">IgnisApp.reload_css()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.app.IgnisApp.get_window"><code class="docutils literal notranslate"><span class="pre">IgnisApp.get_window()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.app.IgnisApp.open_window"><code class="docutils literal notranslate"><span class="pre">IgnisApp.open_window()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.app.IgnisApp.close_window"><code class="docutils literal notranslate"><span class="pre">IgnisApp.close_window()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.app.IgnisApp.toggle_window"><code class="docutils literal notranslate"><span class="pre">IgnisApp.toggle_window()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.app.IgnisApp.add_window"><code class="docutils literal notranslate"><span class="pre">IgnisApp.add_window()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.app.IgnisApp.remove_window"><code class="docutils literal notranslate"><span class="pre">IgnisApp.remove_window()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.app.IgnisApp.reload"><code class="docutils literal notranslate"><span class="pre">IgnisApp.reload()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.app.IgnisApp.quit"><code class="docutils literal notranslate"><span class="pre">IgnisApp.quit()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.app.IgnisApp.inspector"><code class="docutils literal notranslate"><span class="pre">IgnisApp.inspector()</span></code></a></li>
 </ul>
 </li>
 </ul>

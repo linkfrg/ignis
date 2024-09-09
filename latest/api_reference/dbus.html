@@ -571,20 +571,6 @@ document.write(`
 </pre></div>
 </div>
 <dl class="py method">
-<dt class="sig sig-object py" id="ignis.dbus.DBusService.emit_signal">
-<span class="sig-name descname"><span class="pre">emit_signal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GLib.Variant</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.dbus.DBusService.emit_signal" title="Link to this definition">#</a></dt>
-<dd><p>Emit a D-Bus signal on this service.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>signal_name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The name of the signal to emit.</p></li>
-<li><p><strong>parameters</strong> -- The <code class="docutils literal notranslate"><span class="pre">GLib.Variant</span></code> containing paramaters to pass with the signal.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="ignis.dbus.DBusService.register_dbus_method">
 <span class="sig-name descname"><span class="pre">register_dbus_method</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.dbus.DBusService.register_dbus_method" title="Link to this definition">#</a></dt>
 <dd><p>Register a D-Bus method for this service.</p>
@@ -607,6 +593,20 @@ document.write(`
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The name of the property to register.</p></li>
 <li><p><strong>method</strong> (<code class="docutils literal notranslate"><span class="pre">Callable</span></code>) -- A function to call when the property is accessed (from DBus).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.dbus.DBusService.emit_signal">
+<span class="sig-name descname"><span class="pre">emit_signal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GLib.Variant</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.dbus.DBusService.emit_signal" title="Link to this definition">#</a></dt>
+<dd><p>Emit a D-Bus signal on this service.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>signal_name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The name of the signal to emit.</p></li>
+<li><p><strong>parameters</strong> -- The <code class="docutils literal notranslate"><span class="pre">GLib.Variant</span></code> containing paramaters to pass with the signal.</p></li>
 </ul>
 </dd>
 </dl>
@@ -687,12 +687,6 @@ If the D-Bus method does not accept any arguments, do not pass arguments.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ignis.dbus.DBusProxy.unwatch_name">
-<span class="sig-name descname"><span class="pre">unwatch_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.dbus.DBusProxy.unwatch_name" title="Link to this definition">#</a></dt>
-<dd><p>Unwatch name.</p>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="ignis.dbus.DBusProxy.watch_name">
 <span class="sig-name descname"><span class="pre">watch_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">on_name_appeared</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">on_name_vanished</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.dbus.DBusProxy.watch_name" title="Link to this definition">#</a></dt>
 <dd><p>Watch <code class="docutils literal notranslate"><span class="pre">name</span></code>.</p>
@@ -704,6 +698,12 @@ If the D-Bus method does not accept any arguments, do not pass arguments.</p>
 </ul>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.dbus.DBusProxy.unwatch_name">
+<span class="sig-name descname"><span class="pre">unwatch_name</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.dbus.DBusProxy.unwatch_name" title="Link to this definition">#</a></dt>
+<dd><p>Unwatch name.</p>
 </dd></dl>
 
 </dd></dl>
@@ -757,17 +757,17 @@ If the D-Bus method does not accept any arguments, do not pass arguments.</p>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus.DBusService"><code class="docutils literal notranslate"><span class="pre">DBusService</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus.DBusService.emit_signal"><code class="docutils literal notranslate"><span class="pre">DBusService.emit_signal()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus.DBusService.register_dbus_method"><code class="docutils literal notranslate"><span class="pre">DBusService.register_dbus_method()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus.DBusService.register_dbus_property"><code class="docutils literal notranslate"><span class="pre">DBusService.register_dbus_property()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus.DBusService.emit_signal"><code class="docutils literal notranslate"><span class="pre">DBusService.emit_signal()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus.DBusService.unown_name"><code class="docutils literal notranslate"><span class="pre">DBusService.unown_name()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus.DBusProxy"><code class="docutils literal notranslate"><span class="pre">DBusProxy</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus.DBusProxy.signal_subscribe"><code class="docutils literal notranslate"><span class="pre">DBusProxy.signal_subscribe()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus.DBusProxy.signal_unsubscribe"><code class="docutils literal notranslate"><span class="pre">DBusProxy.signal_unsubscribe()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus.DBusProxy.unwatch_name"><code class="docutils literal notranslate"><span class="pre">DBusProxy.unwatch_name()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus.DBusProxy.watch_name"><code class="docutils literal notranslate"><span class="pre">DBusProxy.watch_name()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus.DBusProxy.unwatch_name"><code class="docutils literal notranslate"><span class="pre">DBusProxy.unwatch_name()</span></code></a></li>
 </ul>
 </li>
 </ul>

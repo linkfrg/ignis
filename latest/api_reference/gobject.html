@@ -538,20 +538,21 @@ Mainly, it is the same GObject.Object, but with some improvements.</p>
 <li><p>It offers easier control over properties (without the need for the <code class="docutils literal notranslate"><span class="pre">.props</span></code> attribute).</p></li>
 </ol>
 <dl class="py method">
-<dt class="sig sig-object py" id="ignis.gobject.IgnisGObject.bind">
-<span class="sig-name descname"><span class="pre">bind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">property_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#ignis.gobject.Binding" title="ignis.gobject.Binding"><span class="pre">Binding</span></a></span></span><a class="headerlink" href="#ignis.gobject.IgnisGObject.bind" title="Link to this definition">#</a></dt>
-<dd><p>Creates <code class="docutils literal notranslate"><span class="pre">Binding</span></code> from property name on <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
+<dt class="sig sig-object py" id="ignis.gobject.IgnisGObject.notify_all">
+<span class="sig-name descname"><span class="pre">notify_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">without</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.gobject.IgnisGObject.notify_all" title="Link to this definition">#</a></dt>
+<dd><p>Notify all properties.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>property_name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- Property name of <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p></li>
-<li><p><strong>transform</strong> (<code class="docutils literal notranslate"><span class="pre">Callable</span> <span class="pre">|</span> <span class="pre">None</span></code>) -- The function that accepts a new property value and returns the processed value.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#ignis.gobject.Binding" title="ignis.gobject.Binding"><code class="xref py py-class docutils literal notranslate"><span class="pre">Binding</span></code></a></p>
+<dd class="field-odd"><p><strong>without</strong> (<em>list</em><em>[</em><em>str</em><em>] </em><em>| </em><em>str</em><em> | </em><em>None</em><em>, </em><em>optional</em>) -- Property or list of properties that will not be notified.</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.gobject.IgnisGObject.notify_list">
+<span class="sig-name descname"><span class="pre">notify_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.gobject.IgnisGObject.notify_list" title="Link to this definition">#</a></dt>
+<dd><p>Notify list of properties.
+You can pass unlimited number of property names as arguments.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -571,21 +572,20 @@ Mainly, it is the same GObject.Object, but with some improvements.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ignis.gobject.IgnisGObject.notify_all">
-<span class="sig-name descname"><span class="pre">notify_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">without</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.gobject.IgnisGObject.notify_all" title="Link to this definition">#</a></dt>
-<dd><p>Notify all properties.</p>
+<dt class="sig sig-object py" id="ignis.gobject.IgnisGObject.bind">
+<span class="sig-name descname"><span class="pre">bind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">property_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#ignis.gobject.Binding" title="ignis.gobject.Binding"><span class="pre">Binding</span></a></span></span><a class="headerlink" href="#ignis.gobject.IgnisGObject.bind" title="Link to this definition">#</a></dt>
+<dd><p>Creates <code class="docutils literal notranslate"><span class="pre">Binding</span></code> from property name on <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>without</strong> (<em>list</em><em>[</em><em>str</em><em>] </em><em>| </em><em>str</em><em> | </em><em>None</em><em>, </em><em>optional</em>) -- Property or list of properties that will not be notified.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>property_name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- Property name of <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p></li>
+<li><p><strong>transform</strong> (<code class="docutils literal notranslate"><span class="pre">Callable</span> <span class="pre">|</span> <span class="pre">None</span></code>) -- The function that accepts a new property value and returns the processed value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#ignis.gobject.Binding" title="ignis.gobject.Binding"><code class="xref py py-class docutils literal notranslate"><span class="pre">Binding</span></code></a></p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ignis.gobject.IgnisGObject.notify_list">
-<span class="sig-name descname"><span class="pre">notify_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.gobject.IgnisGObject.notify_list" title="Link to this definition">#</a></dt>
-<dd><p>Notify list of properties.
-You can pass unlimited number of property names as arguments.</p>
 </dd></dl>
 
 </dd></dl>
@@ -653,10 +653,10 @@ You can pass unlimited number of property names as arguments.</p>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.gobject.IgnisGObject"><code class="docutils literal notranslate"><span class="pre">IgnisGObject</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.gobject.IgnisGObject.bind"><code class="docutils literal notranslate"><span class="pre">IgnisGObject.bind()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.gobject.IgnisGObject.bind_property2"><code class="docutils literal notranslate"><span class="pre">IgnisGObject.bind_property2()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.gobject.IgnisGObject.notify_all"><code class="docutils literal notranslate"><span class="pre">IgnisGObject.notify_all()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.gobject.IgnisGObject.notify_list"><code class="docutils literal notranslate"><span class="pre">IgnisGObject.notify_list()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.gobject.IgnisGObject.bind_property2"><code class="docutils literal notranslate"><span class="pre">IgnisGObject.bind_property2()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.gobject.IgnisGObject.bind"><code class="docutils literal notranslate"><span class="pre">IgnisGObject.bind()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.gobject.Binding"><code class="docutils literal notranslate"><span class="pre">Binding</span></code></a></li>

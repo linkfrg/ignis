@@ -581,18 +581,6 @@ Allow record screen with microphone audio and internal system audio.</p>
 </pre></div>
 </div>
 <dl class="py method">
-<dt class="sig sig-object py" id="ignis.services.recorder.RecorderService.continue_recording">
-<span class="sig-name descname"><span class="pre">continue_recording</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.recorder.RecorderService.continue_recording" title="Link to this definition">#</a></dt>
-<dd><p>Continue recording. This has an effect only if the recording is active and paused.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ignis.services.recorder.RecorderService.pause_recording">
-<span class="sig-name descname"><span class="pre">pause_recording</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.recorder.RecorderService.pause_recording" title="Link to this definition">#</a></dt>
-<dd><p>Pause recording. This has an effect only if the recording is active and not already paused.</p>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.recorder.RecorderService.start_recording">
 <span class="sig-name descname"><span class="pre">start_recording</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">record_microphone</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">record_internal_audio</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">audio_devices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.recorder.RecorderService.start_recording" title="Link to this definition">#</a></dt>
 <dd><p>Start recording.</p>
@@ -612,6 +600,18 @@ Allow record screen with microphone audio and internal system audio.</p>
 <dt class="sig sig-object py" id="ignis.services.recorder.RecorderService.stop_recording">
 <span class="sig-name descname"><span class="pre">stop_recording</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.recorder.RecorderService.stop_recording" title="Link to this definition">#</a></dt>
 <dd><p>Stop recording.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.recorder.RecorderService.pause_recording">
+<span class="sig-name descname"><span class="pre">pause_recording</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.recorder.RecorderService.pause_recording" title="Link to this definition">#</a></dt>
+<dd><p>Pause recording. This has an effect only if the recording is active and not already paused.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.recorder.RecorderService.continue_recording">
+<span class="sig-name descname"><span class="pre">continue_recording</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.recorder.RecorderService.continue_recording" title="Link to this definition">#</a></dt>
+<dd><p>Continue recording. This has an effect only if the recording is active and paused.</p>
 </dd></dl>
 
 </dd></dl>
@@ -665,10 +665,10 @@ Allow record screen with microphone audio and internal system audio.</p>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService"><code class="docutils literal notranslate"><span class="pre">RecorderService</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.continue_recording"><code class="docutils literal notranslate"><span class="pre">RecorderService.continue_recording()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.pause_recording"><code class="docutils literal notranslate"><span class="pre">RecorderService.pause_recording()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.start_recording"><code class="docutils literal notranslate"><span class="pre">RecorderService.start_recording()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.stop_recording"><code class="docutils literal notranslate"><span class="pre">RecorderService.stop_recording()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.pause_recording"><code class="docutils literal notranslate"><span class="pre">RecorderService.pause_recording()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.continue_recording"><code class="docutils literal notranslate"><span class="pre">RecorderService.continue_recording()</span></code></a></li>
 </ul>
 </li>
 </ul>

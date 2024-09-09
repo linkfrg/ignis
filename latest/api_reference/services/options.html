@@ -554,6 +554,72 @@ Use this service instead.</p>
 </pre></div>
 </div>
 <dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.options.OptionsService.create_option">
+<span class="sig-name descname"><span class="pre">create_option</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exists_ok</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.options.OptionsService.create_option" title="Link to this definition">#</a></dt>
+<dd><p>Create an option.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The name of the option.</p></li>
+<li><p><strong>default</strong> (<code class="docutils literal notranslate"><span class="pre">Any</span></code>) -- The default value for the option.</p></li>
+<li><p><strong>exists_ok</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, optional) -- If <code class="docutils literal notranslate"><span class="pre">True</span></code>, do not raise <code class="docutils literal notranslate"><span class="pre">OptionExistsError</span></code> if the option already exists. Default: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="../exceptions.html#ignis.exceptions.OptionExistsError" title="ignis.exceptions.OptionExistsError"><strong>OptionExistsError</strong></a> -- If the option already exists and <code class="docutils literal notranslate"><span class="pre">exists_ok</span></code> is set to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.options.OptionsService.remove_option">
+<span class="sig-name descname"><span class="pre">remove_option</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.options.OptionsService.remove_option" title="Link to this definition">#</a></dt>
+<dd><p>Remove an option.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The name of the option to be removed.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="../exceptions.html#ignis.exceptions.OptionNotFoundError" title="ignis.exceptions.OptionNotFoundError"><strong>OptionNotFoundError</strong></a> -- If the option does not exist.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.options.OptionsService.get_option">
+<span class="sig-name descname"><span class="pre">get_option</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ignis.services.options.OptionsService.get_option" title="Link to this definition">#</a></dt>
+<dd><p>Retrieve the value of an option by its name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The name of the option.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The value of the option.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../exceptions.html#ignis.exceptions.OptionNotFoundError" title="ignis.exceptions.OptionNotFoundError"><strong>OptionNotFoundError</strong></a> -- If the option does not exist.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.options.OptionsService.set_option">
+<span class="sig-name descname"><span class="pre">set_option</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.options.OptionsService.set_option" title="Link to this definition">#</a></dt>
+<dd><p>Set the value of an option by its name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The name of the option.</p></li>
+<li><p><strong>value</strong> (<code class="docutils literal notranslate"><span class="pre">Any</span></code>) -- The value to set for the option.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="../exceptions.html#ignis.exceptions.OptionNotFoundError" title="ignis.exceptions.OptionNotFoundError"><strong>OptionNotFoundError</strong></a> -- If the option does not exist.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.options.OptionsService.bind_option">
 <span class="sig-name descname"><span class="pre">bind_option</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../gobject.html#ignis.gobject.Binding" title="ignis.gobject.Binding"><span class="pre">Binding</span></a></span></span><a class="headerlink" href="#ignis.services.options.OptionsService.bind_option" title="Link to this definition">#</a></dt>
 <dd><p>Like <code class="docutils literal notranslate"><span class="pre">bind()</span></code>, but for option.</p>
@@ -583,72 +649,6 @@ When the option value changes, the callback function will be invoked with the ne
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The name of the option.</p></li>
 <li><p><strong>callback</strong> (<code class="docutils literal notranslate"><span class="pre">Callable</span></code>) -- A function to call when the option value changes. The new value of the option will be passed to this function.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="../exceptions.html#ignis.exceptions.OptionNotFoundError" title="ignis.exceptions.OptionNotFoundError"><strong>OptionNotFoundError</strong></a> -- If the option does not exist.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ignis.services.options.OptionsService.create_option">
-<span class="sig-name descname"><span class="pre">create_option</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exists_ok</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.options.OptionsService.create_option" title="Link to this definition">#</a></dt>
-<dd><p>Create an option.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The name of the option.</p></li>
-<li><p><strong>default</strong> (<code class="docutils literal notranslate"><span class="pre">Any</span></code>) -- The default value for the option.</p></li>
-<li><p><strong>exists_ok</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, optional) -- If <code class="docutils literal notranslate"><span class="pre">True</span></code>, do not raise <code class="docutils literal notranslate"><span class="pre">OptionExistsError</span></code> if the option already exists. Default: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="../exceptions.html#ignis.exceptions.OptionExistsError" title="ignis.exceptions.OptionExistsError"><strong>OptionExistsError</strong></a> -- If the option already exists and <code class="docutils literal notranslate"><span class="pre">exists_ok</span></code> is set to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ignis.services.options.OptionsService.get_option">
-<span class="sig-name descname"><span class="pre">get_option</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#ignis.services.options.OptionsService.get_option" title="Link to this definition">#</a></dt>
-<dd><p>Retrieve the value of an option by its name.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The name of the option.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The value of the option.</p>
-</dd>
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="../exceptions.html#ignis.exceptions.OptionNotFoundError" title="ignis.exceptions.OptionNotFoundError"><strong>OptionNotFoundError</strong></a> -- If the option does not exist.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ignis.services.options.OptionsService.remove_option">
-<span class="sig-name descname"><span class="pre">remove_option</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.options.OptionsService.remove_option" title="Link to this definition">#</a></dt>
-<dd><p>Remove an option.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The name of the option to be removed.</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="../exceptions.html#ignis.exceptions.OptionNotFoundError" title="ignis.exceptions.OptionNotFoundError"><strong>OptionNotFoundError</strong></a> -- If the option does not exist.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ignis.services.options.OptionsService.set_option">
-<span class="sig-name descname"><span class="pre">set_option</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.options.OptionsService.set_option" title="Link to this definition">#</a></dt>
-<dd><p>Set the value of an option by its name.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The name of the option.</p></li>
-<li><p><strong>value</strong> (<code class="docutils literal notranslate"><span class="pre">Any</span></code>) -- The value to set for the option.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
@@ -708,12 +708,12 @@ When the option value changes, the callback function will be invoked with the ne
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.OptionsService"><code class="docutils literal notranslate"><span class="pre">OptionsService</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.OptionsService.create_option"><code class="docutils literal notranslate"><span class="pre">OptionsService.create_option()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.OptionsService.remove_option"><code class="docutils literal notranslate"><span class="pre">OptionsService.remove_option()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.OptionsService.get_option"><code class="docutils literal notranslate"><span class="pre">OptionsService.get_option()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.OptionsService.set_option"><code class="docutils literal notranslate"><span class="pre">OptionsService.set_option()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.OptionsService.bind_option"><code class="docutils literal notranslate"><span class="pre">OptionsService.bind_option()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.OptionsService.connect_option"><code class="docutils literal notranslate"><span class="pre">OptionsService.connect_option()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.OptionsService.create_option"><code class="docutils literal notranslate"><span class="pre">OptionsService.create_option()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.OptionsService.get_option"><code class="docutils literal notranslate"><span class="pre">OptionsService.get_option()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.OptionsService.remove_option"><code class="docutils literal notranslate"><span class="pre">OptionsService.remove_option()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.OptionsService.set_option"><code class="docutils literal notranslate"><span class="pre">OptionsService.set_option()</span></code></a></li>
 </ul>
 </li>
 </ul>
