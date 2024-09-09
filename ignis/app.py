@@ -6,7 +6,13 @@ from ignis.utils import Utils
 from loguru import logger
 from gi.repository import Gtk, Gdk, Gio, GObject, GLib  # type: ignore
 from ignis.gobject import IgnisGObject
-from ignis.exceptions import WindowAddedError, WindowNotFoundError, DisplayNotFoundError, StylePathNotFoundError, StylePathAppliedError
+from ignis.exceptions import (
+    WindowAddedError,
+    WindowNotFoundError,
+    DisplayNotFoundError,
+    StylePathNotFoundError,
+    StylePathAppliedError,
+)
 from ignis.logging import configure_logger
 
 
@@ -66,7 +72,9 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         self.__dbus.register_dbus_method(name="ListWindows", method=self.__ListWindows)
 
         self._config_path: str | None = None
-        self._css_providers: dict[str, Gtk.CssProvider] = {} # {style_path: Gtk.CssProvider}
+        self._css_providers: dict[
+            str, Gtk.CssProvider
+        ] = {}  # {style_path: Gtk.CssProvider}
         self._windows: dict[str, Gtk.Window] = {}
         self._autoreload_config: bool = True
         self._autoreload_css: bool = True
@@ -185,9 +193,9 @@ class IgnisApp(Gtk.Application, IgnisGObject):
             raise StylePathNotFoundError(style_path)
 
         Gtk.StyleContext.remove_provider_for_display(
-                display,
-                provider,
-            )
+            display,
+            provider,
+        )
 
     def reset_css(self) -> None:
         """
@@ -391,6 +399,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
 
 
 app = IgnisApp()
+
 
 def run_app(config_path: str, debug: bool) -> None:
     configure_logger(debug)

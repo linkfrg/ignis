@@ -55,9 +55,7 @@ class AsyncCompletedProcess:
         return self._stderr
 
 
-def exec_sh_async(
-    command: str, on_finished: Callable | None = None
-) -> Gio.Subprocess:
+def exec_sh_async(command: str, on_finished: Callable | None = None) -> Gio.Subprocess:
     """
     Execute a shell (bash) command asynchronously.
 
