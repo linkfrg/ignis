@@ -4,11 +4,47 @@ from ignis.gobject import IgnisGObject
 from ignis.widgets.window import Window
 from ignis.widgets.picture import Picture
 from ignis.utils import Utils
-from gi.repository import GObject  # type: ignore
+from gi.repository import GObject, Gtk, Gdk  # type: ignore
+from gi.repository import Gtk4LayerShell as GtkLayerShell
+from ignis.exceptions import LayerShellNotSupportedError
 from ignis.services import Service
 from ignis import CACHE_DIR
+from ignis.app import app
 
 CACHE_WALLPAPER_PATH = f"{CACHE_DIR}/wallpaper"
+
+
+class WallpaperLayerWindow(Gtk.Window):
+    def __init__(
+        self, wallpaper_path: str, gdkmonitor: Gdk.Monitor, width: int, height: int
+    ) -> None:
+        if not GtkLayerShell.is_supported():
+            raise LayerShellNotSupportedError()
+
+        Gtk.Window.__init__(self, application=app)
+        GtkLayerShell.init_for_window(self)
+
+        for anchor in ["LEFT", "RIGHT", "TOP", "BOTTOM"]:
+            GtkLayerShell.set_anchor(self, getattr(GtkLayerShell.Edge, anchor), 1)
+
+        GtkLayerShell.set_exclusive_zone(self, -1)  # ignore other layers
+
+        GtkLayerShell.set_namespace(
+            self, name_space=f"ignis_wallpaper_service_{gdkmonitor.get_model()}"
+        )
+
+        GtkLayerShell.set_layer(self, GtkLayerShell.Layer.BACKGROUND)
+
+        GtkLayerShell.set_monitor(self, gdkmonitor)
+
+        self.set_child(Picture(
+            image=wallpaper_path,
+            content_fit="cover",
+            width=width,
+            height=height,
+        ))
+
+        self.set_visible(True)
 
 
 class WallpaperService(IgnisGObject):
@@ -66,22 +102,15 @@ class WallpaperService(IgnisGObject):
         self._windows = []
 
         for monitor_id in range(Utils.get_n_monitors()):
-            monitor = Utils.get_monitor(monitor_id)
-            if not monitor:
+            gdkmonitor = Utils.get_monitor(monitor_id)
+            if not gdkmonitor:
                 return
 
-            geometry = monitor.get_geometry()
-            window = Window(
-                layer="background",
-                exclusivity="ignore",
-                monitor=monitor_id,
-                namespace=f"ignis_wallpaper_service_{monitor_id}",
-                anchor=["left", "right", "top", "bottom"],
-                child=Picture(
-                    image=CACHE_WALLPAPER_PATH,
-                    content_fit="cover",
-                    width=geometry.width,
-                    height=geometry.height,
-                ),
+            geometry = gdkmonitor.get_geometry()
+            window = WallpaperLayerWindow(
+                wallpaper_path=CACHE_WALLPAPER_PATH,
+                gdkmonitor=gdkmonitor,
+                width=geometry.width,
+                height=geometry.height,
             )
             self._windows.append(window)
