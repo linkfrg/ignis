@@ -1,7 +1,6 @@
 import os
 import shutil
 from ignis.gobject import IgnisGObject
-from ignis.widgets.window import Window
 from ignis.widgets.picture import Picture
 from ignis.utils import Utils
 from gi.repository import GObject, Gtk, Gdk  # type: ignore
@@ -25,7 +24,7 @@ class WallpaperLayerWindow(Gtk.Window):
         GtkLayerShell.init_for_window(self)
 
         for anchor in ["LEFT", "RIGHT", "TOP", "BOTTOM"]:
-            GtkLayerShell.set_anchor(self, getattr(GtkLayerShell.Edge, anchor), 1)
+            GtkLayerShell.set_anchor(self, getattr(GtkLayerShell.Edge, anchor), True)
 
         GtkLayerShell.set_exclusive_zone(self, -1)  # ignore other layers
 
@@ -37,12 +36,14 @@ class WallpaperLayerWindow(Gtk.Window):
 
         GtkLayerShell.set_monitor(self, gdkmonitor)
 
-        self.set_child(Picture(
-            image=wallpaper_path,
-            content_fit="cover",
-            width=width,
-            height=height,
-        ))
+        self.set_child(
+            Picture(
+                image=wallpaper_path,
+                content_fit="cover",
+                width=width,
+                height=height,
+            )
+        )
 
         self.set_visible(True)
 
@@ -71,7 +72,7 @@ class WallpaperService(IgnisGObject):
 
     def __init__(self):
         super().__init__()
-        self._windows: list[Window] = []
+        self._windows: list[WallpaperLayerWindow] = []
 
         self._options = Service.get("options")
         self._options.create_option(name="wallpaper", default=None, exists_ok=True)

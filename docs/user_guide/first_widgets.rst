@@ -18,22 +18,19 @@ Now, let's create the first window and display some text on it.
     from ignis.widgets import Widget
     
     Widget.Window(
-        namespace="some-window",
-        child=Widget.Label(
-            label="Hello world!"
+        namespace="some-window",  # the name of the window (not title!)
+        child=Widget.Label(  # we set Widget.Label as the child widget of the window
+            label="Hello world!"  # define text here
         ),
     )
+
+.. info::
+    Window is a top-level widget that contains all other widgets.
 
 A list of all parameters  is provided here: :class:`~ignis.widgets.Widget.Window`. 
 Feel free to experiment with them.
 
 In this example, we used the ``Widget`` class, which provides access to all other widgets.
-
-What is widget?
-------------------
-Widget - is a graphical component, an element we see on screen. Buttons, text, switches, icons, sliders, etc.
-
-A window is a top-level widget that contains all other widgets.
 
 Some common widgets
 ---------------------
