@@ -29,6 +29,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=5dc8be31" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -39,6 +40,7 @@
     <script src="../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'user_guide/first_widgets';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
@@ -48,7 +50,7 @@
         </script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Styling" href="styling.html" />
+    <link rel="next" title="Dynamic content" href="dynamic_content.html" />
     <link rel="prev" title="Installation" href="installation.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -394,9 +396,8 @@ document.write(`
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">First widgets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="styling.html">Styling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="properties.html">Properties</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dynamic_content.html">Dynamic content</a></li>
+<li class="toctree-l1"><a class="reference internal" href="styling.html">Styling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cli.html">CLI</a></li>
 </ul>
 </div>
@@ -457,80 +458,192 @@ document.write(`
                   
   <section id="first-widgets">
 <h1>First widgets<a class="headerlink" href="#first-widgets" title="Link to this heading">#</a></h1>
-<p>First of all, let's create a config file in the default location.
+<p>Once you have installed Ignis, it's time to create your first widget!</p>
+<p>First, create a configuration file in the default location.
 The default config file is located at <code class="docutils literal notranslate"><span class="pre">~/.config/ignis/config.py</span></code>.
-You can create it using your file manager or the terminal with the command below.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>touch<span class="w"> </span>~/.config/ignis/config.py
-</pre></div>
-</div>
-<p>Open this file with your code editor.</p>
-<p>Now, let's create the first window and display some text on it.</p>
+Create this file and open it using your favorite code editor.</p>
+<section id="the-window">
+<h2>The window<a class="headerlink" href="#the-window" title="Link to this heading">#</a></h2>
+<p>The window is the top-level widget that holds all other widgets.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.widgets</span> <span class="kn">import</span> <span class="n">Widget</span>
 
 <span class="n">Widget</span><span class="o">.</span><span class="n">Window</span><span class="p">(</span>
-    <span class="n">namespace</span><span class="o">=</span><span class="s2">&quot;some-window&quot;</span><span class="p">,</span>
-    <span class="n">child</span><span class="o">=</span><span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span>
-        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Hello world!&quot;</span>
+    <span class="n">namespace</span><span class="o">=</span><span class="s2">&quot;some-window&quot;</span><span class="p">,</span>  <span class="c1"># the name of the window (not title!)</span>
+    <span class="n">child</span><span class="o">=</span><span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span>  <span class="c1"># we set Widget.Label as the child widget of the window</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Hello world!&quot;</span>  <span class="c1"># define text here</span>
     <span class="p">),</span>
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>A list of all parameters  is provided here: <a class="reference internal" href="../api_reference/widgets/Window.html#ignis.widgets.Widget.Window" title="ignis.widgets.Widget.Window"><code class="xref py py-class docutils literal notranslate"><span class="pre">Window</span></code></a>.
+<p>Copy and paste this code into your config file,
+and then run Ignis using <code class="docutils literal notranslate"><span class="pre">ignis</span> <span class="pre">init</span></code>.</p>
+<p>You should see a window that looks like this:</p>
+<img alt="&quot;Hello world!&quot; window" src="../_images/hello_world.png" />
+<p>This code imports the universal <code class="docutils literal notranslate"><span class="pre">Widget</span></code> class, which is used to access all widgets available in Ignis.
+To initialize a widget, simply call it: <code class="docutils literal notranslate"><span class="pre">Widget.WIDGET_NAME()</span></code>.
+Using keyword arguments (kwargs), you can set properties of the widget.</p>
+<p>A list of all properties is provided here: <a class="reference internal" href="../api_reference/widgets/Window.html#ignis.widgets.Widget.Window" title="ignis.widgets.Widget.Window"><code class="xref py py-class docutils literal notranslate"><span class="pre">Window</span></code></a>.
 Feel free to experiment with them.</p>
-<p>In this example, we used the <code class="docutils literal notranslate"><span class="pre">Widget</span></code> class, which provides access to all other widgets.</p>
-<section id="what-is-widget">
-<h2>What is widget?<a class="headerlink" href="#what-is-widget" title="Link to this heading">#</a></h2>
-<p>Widget - is a graphical component, an element we see on screen. Buttons, text, switches, icons, sliders, etc.</p>
-<p>A window is a top-level widget that contains all other widgets.</p>
 </section>
-<section id="some-common-widgets">
-<h2>Some common widgets<a class="headerlink" href="#some-common-widgets" title="Link to this heading">#</a></h2>
-</section>
-<section id="label">
-<h2><a class="reference internal" href="../api_reference/widgets/Label.html#ignis.widgets.Widget.Label" title="ignis.widgets.Widget.Label"><code class="xref py py-class docutils literal notranslate"><span class="pre">Label</span></code></a><a class="headerlink" href="#label" title="Link to this heading">#</a></h2>
-<p>A widget that displays text.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;some text&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="box">
-<h2><a class="reference internal" href="../api_reference/widgets/Box.html#ignis.widgets.Widget.Box" title="ignis.widgets.Widget.Box"><code class="xref py py-class docutils literal notranslate"><span class="pre">Box</span></code></a><a class="headerlink" href="#box" title="Link to this heading">#</a></h2>
-<p>A layout container that can contain multiple child widgets and arrange them either vertically or horizontally.
-By default, it places children horizontally. To place them vertically, set <code class="docutils literal notranslate"><span class="pre">vertical</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Widget</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span>
-    <span class="n">vertical</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="c1"># or True</span>
-    <span class="n">spacing</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-    <span class="n">child</span><span class="o">=</span><span class="p">[</span><span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;first label&quot;</span><span class="p">),</span> <span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;second label&quot;</span><span class="p">)]</span>
+<section id="boxes">
+<h2>Boxes<a class="headerlink" href="#boxes" title="Link to this heading">#</a></h2>
+<p>A box is a layout container that can hold multiple child widgets and arrange them either vertically or horizontally.
+By default, it arranges children horizontally. To arrange them vertically, set <code class="docutils literal notranslate"><span class="pre">vertical</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+<p>Let's add some boxes to the window.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.widgets</span> <span class="kn">import</span> <span class="n">Widget</span>
+
+<span class="n">Widget</span><span class="o">.</span><span class="n">Window</span><span class="p">(</span>
+    <span class="n">namespace</span><span class="o">=</span><span class="s2">&quot;some-window&quot;</span><span class="p">,</span>
+    <span class="n">child</span><span class="o">=</span><span class="n">Widget</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span>
+        <span class="n">vertical</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># this box is vertical</span>
+        <span class="n">spacing</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>  <span class="c1"># add some spacing between widgets</span>
+        <span class="n">child</span><span class="o">=</span><span class="p">[</span>  <span class="c1"># define list of child widgets here</span>
+            <span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;This is the first child of the first box&quot;</span><span class="p">),</span>
+            <span class="n">Widget</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span>
+                <span class="n">spacing</span><span class="o">=</span><span class="mi">26</span><span class="p">,</span>
+                <span class="n">child</span><span class="o">=</span><span class="p">[</span>
+                    <span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;This is the first child of the second box&quot;</span><span class="p">),</span>
+                    <span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Second child (by default this box child will be added horizontally)&quot;</span><span class="p">),</span>
+                <span class="p">]</span>
+            <span class="p">),</span>
+        <span class="p">],</span>
+    <span class="p">),</span>
 <span class="p">)</span>
 </pre></div>
 </div>
+<p>Result:</p>
+<img alt="Boxes example image" src="../_images/boxes.png" />
 </section>
-<section id="button">
-<h2><a class="reference internal" href="../api_reference/widgets/Button.html#ignis.widgets.Widget.Button" title="ignis.widgets.Widget.Button"><code class="xref py py-class docutils literal notranslate"><span class="pre">Button</span></code></a><a class="headerlink" href="#button" title="Link to this heading">#</a></h2>
-<p>I think from the name it's clear what kind of widget this is.
-You can set a label for the button or use a custom child.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Widget</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
-    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;click me&quot;</span><span class="p">,</span>
-    <span class="n">on_click</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;clicked!&quot;</span><span class="p">)</span>
+<section id="buttons-and-callbacks">
+<h2>Buttons (and Callbacks!)<a class="headerlink" href="#buttons-and-callbacks" title="Link to this heading">#</a></h2>
+<p>Let's add a couple of buttons to our window that will perform actions when pressed.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.widgets</span> <span class="kn">import</span> <span class="n">Widget</span>
+
+<span class="k">def</span> <span class="nf">complex_operation</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Doing something 1&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Doing something 2&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Doing something 3&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># you can assign widgets to variables</span>
+<span class="n">button1</span> <span class="o">=</span> <span class="n">Widget</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+    <span class="n">child</span><span class="o">=</span><span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Click me!&quot;</span><span class="p">),</span>
+    <span class="n">on_click</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;you clicked the button 1&quot;</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="n">button2</span> <span class="o">=</span> <span class="n">Widget</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+    <span class="n">child</span><span class="o">=</span><span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Don&#39;t listen him! Click me!&quot;</span><span class="p">),</span> <span class="n">on_click</span><span class="o">=</span><span class="n">complex_operation</span>
+<span class="p">)</span>
+<span class="n">button3</span> <span class="o">=</span> <span class="n">Widget</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+    <span class="n">child</span><span class="o">=</span><span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Click me and text will change&quot;</span><span class="p">),</span>
+    <span class="n">on_click</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s2">&quot;Text changed!&quot;</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">Widget</span><span class="o">.</span><span class="n">Window</span><span class="p">(</span>
+    <span class="n">namespace</span><span class="o">=</span><span class="s2">&quot;some-window&quot;</span><span class="p">,</span>
+    <span class="n">child</span><span class="o">=</span><span class="n">Widget</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span>
+        <span class="n">vertical</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">spacing</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="n">child</span><span class="o">=</span><span class="p">[</span>
+            <span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Click buttons)))&quot;</span><span class="p">),</span>
+            <span class="n">Widget</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span>
+                <span class="n">spacing</span><span class="o">=</span><span class="mi">26</span><span class="p">,</span>
+                <span class="n">child</span><span class="o">=</span><span class="p">[</span>
+                    <span class="n">button1</span><span class="p">,</span>
+                    <span class="n">button2</span><span class="p">,</span>
+                    <span class="n">button3</span><span class="p">,</span>
+                <span class="p">],</span>
+            <span class="p">),</span>
+        <span class="p">],</span>
+    <span class="p">),</span>
 <span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Widget</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
-    <span class="n">child</span><span class="o">=</span><span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">),</span>
-    <span class="n">on_click</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;clicked22!&quot;</span><span class="p">)</span>
-<span class="p">)</span>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">lambda</span></code> functions for simple operations</p>
+</div>
+<p>In this example, <code class="docutils literal notranslate"><span class="pre">x</span></code> is just an argument.
+For callbacks, an instance of the class is often passed as the first argument (in our case, it is the button itself).
+Of course, you can interact with this instance in some way (as shown with button number 3).</p>
+</section>
+<section id="reusable-widgets">
+<h2>Reusable Widgets<a class="headerlink" href="#reusable-widgets" title="Link to this heading">#</a></h2>
+<p>In previous examples, widgets are declared as single instances.
+One <code class="docutils literal notranslate"><span class="pre">Widget.Label</span></code> cannot be added to two boxes at the same time.
+But what if you have two monitors and want to display the bar on both?
+The solution is to create functions that return widget instances.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.widgets</span> <span class="kn">import</span> <span class="n">Widget</span>
+
+<span class="k">def</span> <span class="nf">complex_operation</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Doing something 1&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Doing something 2&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Doing something 3&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">bar</span><span class="p">(</span><span class="n">monitor</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Widget</span><span class="o">.</span><span class="n">Window</span><span class="p">:</span>  <span class="c1"># type hinting is good practice!</span>
+    <span class="n">button1</span> <span class="o">=</span> <span class="n">Widget</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+        <span class="n">child</span><span class="o">=</span><span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Click me!&quot;</span><span class="p">),</span>
+        <span class="n">on_click</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;you clicked the button 1&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">button2</span> <span class="o">=</span> <span class="n">Widget</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+        <span class="n">child</span><span class="o">=</span><span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Don&#39;t listen him! Click me!&quot;</span><span class="p">),</span> <span class="n">on_click</span><span class="o">=</span><span class="n">complex_operation</span>
+    <span class="p">)</span>
+    <span class="n">button3</span> <span class="o">=</span> <span class="n">Widget</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span>
+        <span class="n">child</span><span class="o">=</span><span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Click me and text will change&quot;</span><span class="p">),</span>
+        <span class="n">on_click</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s2">&quot;Text changed!&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">Widget</span><span class="o">.</span><span class="n">Window</span><span class="p">(</span>
+        <span class="n">namespace</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;some-window-</span><span class="si">{</span><span class="n">monitor</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>  <span class="c1"># the namespace must be unique</span>
+        <span class="n">monitor</span><span class="o">=</span><span class="n">monitor</span><span class="p">,</span>
+        <span class="n">child</span><span class="o">=</span><span class="n">Widget</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span>
+            <span class="n">vertical</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">spacing</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+            <span class="n">child</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Click buttons)))&quot;</span><span class="p">),</span>
+                <span class="n">Widget</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span>
+                    <span class="n">spacing</span><span class="o">=</span><span class="mi">26</span><span class="p">,</span>
+                    <span class="n">child</span><span class="o">=</span><span class="p">[</span>
+                        <span class="n">button1</span><span class="p">,</span>
+                        <span class="n">button2</span><span class="p">,</span>
+                        <span class="n">button3</span><span class="p">,</span>
+                    <span class="p">],</span>
+                <span class="p">),</span>
+            <span class="p">],</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+
+<span class="c1"># initialize two bars for two monitors</span>
+<span class="n">bar</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">bar</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Need more widgets? See them in the <a class="reference external" href="../api_reference/widgets/index.html">API Reference</a>.</p>
+</div>
+</section>
+<section id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Link to this heading">#</a></h2>
+<p>GObject properties can be accessed or set using the standard Python approach.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">widget</span> <span class="o">=</span> <span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">widget</span><span class="o">.</span><span class="n">label</span><span class="p">)</span> <span class="c1"># prints: &quot;Hello world!&quot;</span>
+</pre></div>
+</div>
+<p>To set a property, you can use the assignment operator <code class="docutils literal notranslate"><span class="pre">=</span></code> or a method that starts with <code class="docutils literal notranslate"><span class="pre">set_</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">widget</span> <span class="o">=</span> <span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">()</span>
+
+<span class="n">widget</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;test&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">widget</span><span class="o">.</span><span class="n">label</span><span class="p">)</span> <span class="c1"># prints: &quot;test&quot;</span>
+<span class="n">widget</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s2">&quot;ignis&quot;</span><span class="p">)</span> <span class="c1"># this also works</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">widget</span><span class="o">.</span><span class="n">label</span><span class="p">)</span> <span class="c1"># prints: &quot;ignis&quot;</span>
 </pre></div>
 </div>
 </section>
-<section id="icon">
-<h2><a class="reference internal" href="../api_reference/widgets/Icon.html#ignis.widgets.Widget.Icon" title="ignis.widgets.Widget.Icon"><code class="xref py py-class docutils literal notranslate"><span class="pre">Icon</span></code></a><a class="headerlink" href="#icon" title="Link to this heading">#</a></h2>
-<p>In GTK, there are built-in icons that you can access by name, so you probably won't need icons from nerd fonts.
-To find out the names of the icons, you can use <code class="docutils literal notranslate"><span class="pre">gtk4-icon-browser</span></code> (you need to install <code class="docutils literal notranslate"><span class="pre">gtk4-demos</span></code> package).</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Widget</span><span class="o">.</span><span class="n">Icon</span><span class="p">(</span>
-    <span class="n">image</span><span class="o">=</span><span class="s2">&quot;audio-volume-high-symbolic&quot;</span>
-<span class="p">)</span>
-</pre></div>
-</div>
+<section id="services">
+<h2>Services<a class="headerlink" href="#services" title="Link to this heading">#</a></h2>
+<p>Ignis includes built-in <a class="reference external" href="../api_reference/services/index.html">Services</a>,
+which allow you to interact with various system components,
+such as controlling audio, managing networks, handling notifications, and more.</p>
 </section>
 </section>
 
@@ -554,11 +667,11 @@ To find out the names of the icons, you can use <code class="docutils literal no
       </div>
     </a>
     <a class="right-next"
-       href="styling.html"
+       href="dynamic_content.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Styling</p>
+        <p class="prev-next-title">Dynamic content</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -580,12 +693,12 @@ To find out the names of the icons, you can use <code class="docutils literal no
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-widget">What is widget?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#some-common-widgets">Some common widgets</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#label"><code class="xref py py-class docutils literal notranslate"><span class="pre">Label</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#box"><code class="xref py py-class docutils literal notranslate"><span class="pre">Box</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#button"><code class="xref py py-class docutils literal notranslate"><span class="pre">Button</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#icon"><code class="xref py py-class docutils literal notranslate"><span class="pre">Icon</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-window">The window</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boxes">Boxes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#buttons-and-callbacks">Buttons (and Callbacks!)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reusable-widgets">Reusable Widgets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties">Properties</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#services">Services</a></li>
 </ul>
   </nav></div>
 

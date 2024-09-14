@@ -29,6 +29,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=5dc8be31" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -39,6 +40,7 @@
     <script src="../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'user_guide/dynamic_content';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
@@ -48,8 +50,8 @@
         </script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="CLI" href="cli.html" />
-    <link rel="prev" title="Properties" href="properties.html" />
+    <link rel="next" title="Styling" href="styling.html" />
+    <link rel="prev" title="First widgets" href="first_widgets.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -394,9 +396,8 @@ document.write(`
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="first_widgets.html">First widgets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="styling.html">Styling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="properties.html">Properties</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Dynamic content</a></li>
+<li class="toctree-l1"><a class="reference internal" href="styling.html">Styling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cli.html">CLI</a></li>
 </ul>
 </div>
@@ -457,29 +458,82 @@ document.write(`
                   
   <section id="dynamic-content">
 <h1>Dynamic content<a class="headerlink" href="#dynamic-content" title="Link to this heading">#</a></h1>
+<p>Static text can be boring, so let's add some dynamic elements!</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">from</span> <span class="nn">ignis.widgets</span> <span class="kn">import</span> <span class="n">Widget</span>
+<span class="kn">from</span> <span class="nn">ignis.utils</span> <span class="kn">import</span> <span class="n">Utils</span>
+
+<span class="k">def</span> <span class="nf">update_label</span><span class="p">(</span><span class="n">clock_label</span><span class="p">:</span> <span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H:%M:%S&quot;</span><span class="p">)</span>
+    <span class="n">clock_label</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">bar</span><span class="p">(</span><span class="n">monitor</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Widget</span><span class="o">.</span><span class="n">Window</span><span class="p">:</span>
+    <span class="n">clock_label</span> <span class="o">=</span> <span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">()</span>
+
+    <span class="n">Utils</span><span class="o">.</span><span class="n">Poll</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">update_label</span><span class="p">(</span><span class="n">clock_label</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">Widget</span><span class="o">.</span><span class="n">Window</span><span class="p">(</span>
+        <span class="n">namespace</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;some-window-</span><span class="si">{</span><span class="n">monitor</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="n">monitor</span><span class="o">=</span><span class="n">monitor</span><span class="p">,</span>
+        <span class="n">child</span><span class="o">=</span><span class="n">Widget</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span>
+            <span class="n">vertical</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">spacing</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+            <span class="n">child</span><span class="o">=</span><span class="p">[</span><span class="n">clock_label</span><span class="p">],</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>This code updates label every second with the current time (using built-in Python module <code class="docutils literal notranslate"><span class="pre">datetime</span></code>).</p>
 <section id="signals">
 <h2>Signals<a class="headerlink" href="#signals" title="Link to this heading">#</a></h2>
-<p>In GObject, we have a concept called &quot;signals&quot;.</p>
-<p>Signals are system for registering callbacks for specific events.
-For example, when a user clicks a button, the program can perform a specific action.
-Similarly, when a property of an object changes, the program can respond accordingly.</p>
-<p>To connect to signals, use <code class="docutils literal notranslate"><span class="pre">.connect()</span></code> method on GObject that has the signal you need.
-Pass a callback function that will be called when the signal is emitted.
-Signals always pass the GObject they belong to as the first argument to the callback.
-Services also have their own signals, which are listed on their respective documentation pages.
-Additionally, signals can have custom arguments.
-In example below, <code class="docutils literal notranslate"><span class="pre">&quot;player_added&quot;</span></code> signal passes an instance of <a class="reference internal" href="../api_reference/services/mpris.html#ignis.services.mpris.MprisPlayer" title="ignis.services.mpris.MprisPlayer"><code class="xref py py-class docutils literal notranslate"><span class="pre">MprisPlayer</span></code></a> as the second argument to the callback.</p>
-<p>Here, we will use the <a class="reference internal" href="../api_reference/services/mpris.html#ignis.services.mpris.MprisService" title="ignis.services.mpris.MprisService"><code class="xref py py-class docutils literal notranslate"><span class="pre">MprisService</span></code></a> as an example.</p>
+<p>Polling data every second isn't always ideal, as it can negatively impact performance.
+This is where <strong>signals</strong> are useful.
+Signals let us call a callback only when an event occurs (like <code class="docutils literal notranslate"><span class="pre">on_click</span></code> in <code class="docutils literal notranslate"><span class="pre">Widget.Button</span></code>).</p>
+<p>Let's consider services, which often have both <strong>signals</strong> and <strong>properties</strong>.</p>
+<p>Here's an example using the <a class="reference internal" href="../api_reference/services/mpris.html#ignis.services.mpris.MprisService" title="ignis.services.mpris.MprisService"><code class="xref py py-class docutils literal notranslate"><span class="pre">MprisService</span></code></a>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.service</span> <span class="kn">import</span> <span class="n">Service</span>
 
 <span class="n">mpris</span> <span class="o">=</span> <span class="n">Service</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mpris&quot;</span><span class="p">)</span>
 
 <span class="n">mpris</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;player_added&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">player</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">player</span><span class="o">.</span><span class="n">desktop_entry</span><span class="p">,</span> <span class="n">player</span><span class="o">.</span><span class="n">title</span><span class="p">))</span>
+<span class="c1">#                                    ^    ^</span>
+<span class="c1"># Signals always pass the GObject they belong to as the first argument to the callback.</span>
+<span class="c1"># In this case, MprisPlayer is the second argument of the signal.</span>
 </pre></div>
 </div>
-<p>Now, try opening any media player (for example, video on youtube or music in spotify).
+<p>Now, open any media player (like a video on YouTube or music on Spotify).
 Magic! The player name and title will be printed.</p>
-<p>To emit (call) signal manually, use the <code class="docutils literal notranslate"><span class="pre">.emit()</span></code> method and pass the signal name to it.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>To manually emit (trigger) a signal, use the <code class="docutils literal notranslate"><span class="pre">.emit()</span></code> method and pass the signal name to it.</p>
+</div>
+</section>
+<section id="binding">
+<h2>Binding<a class="headerlink" href="#binding" title="Link to this heading">#</a></h2>
+<p>Next, let's <strong>bind</strong> a property.
+Use the <code class="docutils literal notranslate"><span class="pre">.bind()</span></code> method, passing the property name as the first argument, and optionally a <strong>transform</strong> function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.services</span> <span class="kn">import</span> <span class="n">Service</span>
+<span class="kn">from</span> <span class="nn">ignis.widgets</span> <span class="kn">import</span> <span class="n">Widget</span>
+
+<span class="n">audio</span> <span class="o">=</span> <span class="n">Service</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;audio&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">bar</span><span class="p">(</span><span class="n">monitor</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Widget</span><span class="o">.</span><span class="n">Window</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">Widget</span><span class="o">.</span><span class="n">Window</span><span class="p">(</span>
+        <span class="n">namespace</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;some-window-</span><span class="si">{</span><span class="n">monitor</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="n">monitor</span><span class="o">=</span><span class="n">monitor</span><span class="p">,</span>
+        <span class="n">child</span><span class="o">=</span><span class="n">Widget</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span>
+            <span class="n">child</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Current volume: &quot;</span><span class="p">),</span>
+                <span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span>
+                    <span class="n">label</span><span class="o">=</span><span class="n">audio</span><span class="o">.</span><span class="n">speaker</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s2">&quot;volume&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>  <span class="c1"># this function converts the value to a string</span>
+                <span class="p">)</span>
+            <span class="p">]</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>Try changing the speaker volume using a tool like <code class="docutils literal notranslate"><span class="pre">pavucontrol</span></code>.</p>
+<p>When the property changes, the transform function (if provided) will be called with the new value, and it should return the processed result.</p>
 </section>
 <section id="notify-signal">
 <h2><code class="docutils literal notranslate"><span class="pre">notify</span></code> signal<a class="headerlink" href="#notify-signal" title="Link to this heading">#</a></h2>
@@ -487,29 +541,12 @@ Magic! The player name and title will be printed.</p>
 To connect to it, use the following syntax: <code class="docutils literal notranslate"><span class="pre">&quot;notify::PROPERTY-NAME&quot;</span></code>.</p>
 <div class="admonition danger">
 <p class="admonition-title">Danger</p>
-<p>Use <code class="docutils literal notranslate"><span class="pre">-</span></code> instead of <code class="docutils literal notranslate"><span class="pre">_</span></code>. Otherwise, signal callback will never be called.</p>
+<p>Make sure to use <code class="docutils literal notranslate"><span class="pre">-</span></code> instead of <code class="docutils literal notranslate"><span class="pre">_</span></code> in the property name.
+Otherwise, the signal will not be triggered.</p>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mpris</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;notify::players&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">players</span><span class="p">))</span>
 </pre></div>
 </div>
-</section>
-<section id="binding">
-<h2>Binding<a class="headerlink" href="#binding" title="Link to this heading">#</a></h2>
-<p>You can call the <code class="docutils literal notranslate"><span class="pre">.bind()</span></code> method on widgets, services, or utils and pass a property name.
-This method returns a <a class="reference internal" href="../api_reference/gobject.html#ignis.gobject.Binding" title="ignis.gobject.Binding"><code class="xref py py-class docutils literal notranslate"><span class="pre">Binding</span></code></a>, which you can use to set a property value for a widget.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.services</span> <span class="kn">import</span> <span class="n">Service</span>
-<span class="kn">from</span> <span class="nn">ignis.widgets</span> <span class="kn">import</span> <span class="n">Widget</span>
-
-<span class="n">audio</span> <span class="o">=</span> <span class="n">Service</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;audio&quot;</span><span class="p">)</span>
-
-<span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="n">audio</span><span class="o">.</span><span class="n">speaker</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s2">&quot;volume&quot;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="k">lambda</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
-</pre></div>
-</div>
-<p>This code creates a binding.
-Now, the label of <code class="docutils literal notranslate"><span class="pre">Widget.Label</span></code> will depend on the speaker's volume.
-The <code class="docutils literal notranslate"><span class="pre">label</span></code> property accepts a <code class="docutils literal notranslate"><span class="pre">str</span></code>, but <code class="docutils literal notranslate"><span class="pre">speaker.volume</span></code> is an <code class="docutils literal notranslate"><span class="pre">int</span></code>.
-So, we provide a transform function to <code class="docutils literal notranslate"><span class="pre">.bind()</span></code>,
-which converts the speaker volume to a string.</p>
 </section>
 </section>
 
@@ -524,20 +561,20 @@ which converts the speaker volume to a string.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="properties.html"
+       href="first_widgets.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Properties</p>
+        <p class="prev-next-title">First widgets</p>
       </div>
     </a>
     <a class="right-next"
-       href="cli.html"
+       href="styling.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">CLI</p>
+        <p class="prev-next-title">Styling</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -560,8 +597,8 @@ which converts the speaker volume to a string.</p>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#signals">Signals</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notify-signal"><code class="docutils literal notranslate"><span class="pre">notify</span></code> signal</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binding">Binding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notify-signal"><code class="docutils literal notranslate"><span class="pre">notify</span></code> signal</a></li>
 </ul>
   </nav></div>
 
