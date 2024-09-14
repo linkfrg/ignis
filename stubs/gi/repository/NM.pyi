@@ -1,4 +1,5 @@
-from typing import Any, Callable, Optional, Tuple, Type, Sequence
+import enum
+from typing import Any, Callable, Sequence
 
 from gi.repository import GLib
 from gi.repository import GObject
@@ -434,7 +435,7 @@ LLDP_DEST_NEAREST_BRIDGE: str = "nearest-bridge"
 LLDP_DEST_NEAREST_CUSTOMER_BRIDGE: str = "nearest-customer-bridge"
 LLDP_DEST_NEAREST_NON_TPMR_BRIDGE: str = "nearest-non-tpmr-bridge"
 MAJOR_VERSION: int = 1
-MICRO_VERSION: int = 8
+MICRO_VERSION: int = 10
 MINOR_VERSION: int = 48
 OBJECT_CLIENT: str = "client"
 OBJECT_PATH: str = "path"
@@ -1154,6 +1155,16 @@ _lock = ... # FIXME Constant
 _namespace: str = "NM"
 _version: str = "1.0"
 
+
+class _80211ApFlags:
+    ...
+
+class _80211ApSecurityFlags:
+    ...
+
+class _80211Mode:
+    ...
+
 def agent_manager_error_quark() -> int: ...
 def bridge_vlan_from_str(str: str) -> BridgeVlan: ...
 def client_error_quark() -> int: ...
@@ -1161,37 +1172,37 @@ def conn_wireguard_import(filename: str) -> Connection: ...
 def connection_error_quark() -> int: ...
 def crypto_error_quark() -> int: ...
 def device_error_quark() -> int: ...
-def ethtool_optname_is_channels(optname: Optional[str] = None) -> bool: ...
-def ethtool_optname_is_coalesce(optname: Optional[str] = None) -> bool: ...
-def ethtool_optname_is_eee(optname: Optional[str] = None) -> bool: ...
-def ethtool_optname_is_feature(optname: Optional[str] = None) -> bool: ...
-def ethtool_optname_is_pause(optname: Optional[str] = None) -> bool: ...
-def ethtool_optname_is_ring(optname: Optional[str] = None) -> bool: ...
-def ip_route_attribute_validate(name: str, value: GLib.Variant, family: int) -> Tuple[bool, bool]: ...
+def ethtool_optname_is_channels(optname: str | None = None) -> bool: ...
+def ethtool_optname_is_coalesce(optname: str | None = None) -> bool: ...
+def ethtool_optname_is_eee(optname: str | None = None) -> bool: ...
+def ethtool_optname_is_feature(optname: str | None = None) -> bool: ...
+def ethtool_optname_is_pause(optname: str | None = None) -> bool: ...
+def ethtool_optname_is_ring(optname: str | None = None) -> bool: ...
+def ip_route_attribute_validate(name: str, value: GLib.Variant, family: int) -> tuple[bool, bool]: ...
 def ip_route_get_variant_attribute_spec() -> VariantAttributeSpec: ...
-def ip_routing_rule_from_string(str: str, to_string_flags: IPRoutingRuleAsStringFlags, extra_args: Optional[dict[None, None]] = None) -> IPRoutingRule: ...
-def keyfile_read(keyfile: GLib.KeyFile, base_dir: str, handler_flags: KeyfileHandlerFlags, handler: Optional[Callable[..., bool]] = None, *user_data: Any) -> Connection: ...
-def keyfile_write(connection: Connection, handler_flags: KeyfileHandlerFlags, handler: Optional[Callable[..., bool]] = None, *user_data: Any) -> GLib.KeyFile: ...
+def ip_routing_rule_from_string(str: str, to_string_flags: IPRoutingRuleAsStringFlags, extra_args: dict[None, None] | None = None) -> IPRoutingRule: ...
+def keyfile_read(keyfile: GLib.KeyFile, base_dir: str, handler_flags: KeyfileHandlerFlags, handler: Callable[..., bool] | None = None, *user_data: Any) -> Connection: ...
+def keyfile_write(connection: Connection, handler_flags: KeyfileHandlerFlags, handler: Callable[..., bool] | None = None, *user_data: Any) -> GLib.KeyFile: ...
 def manager_error_quark() -> int: ...
 def range_from_str(str: str) -> Range: ...
 def secret_agent_error_quark() -> int: ...
 def settings_error_quark() -> int: ...
-def sriov_vf_attribute_validate(name: str, value: GLib.Variant) -> Tuple[bool, bool]: ...
+def sriov_vf_attribute_validate(name: str, value: GLib.Variant) -> tuple[bool, bool]: ...
 def utils_ap_mode_security_valid(type: UtilsSecurityType, wifi_caps: DeviceWifiCapabilities) -> bool: ...
-def utils_base64secret_decode(base64_key: str, required_key_len: int) -> Tuple[bool, int]: ...
+def utils_base64secret_decode(base64_key: str, required_key_len: int) -> tuple[bool, int]: ...
 def utils_bin2hexstr(src: Sequence[int], final_len: int) -> str: ...
 def utils_bond_mode_int_to_string(mode: int) -> str: ...
 def utils_bond_mode_string_to_int(mode: str) -> int: ...
-def utils_check_virtual_device_compatibility(virtual_type: Type, other_type: Type) -> bool: ...
+def utils_check_virtual_device_compatibility(virtual_type: type, other_type: type) -> bool: ...
 def utils_ensure_gtypes() -> None: ...
-def utils_enum_from_str(type: Type, str: str) -> Tuple[bool, int, str]: ...
-def utils_enum_get_values(type: Type, from_: int, to: int) -> list[str]: ...
-def utils_enum_to_str(type: Type, value: int) -> str: ...
+def utils_enum_from_str(type: type, str: str) -> tuple[bool, int, str]: ...
+def utils_enum_get_values(type: type, from_: int, to: int) -> list[str]: ...
+def utils_enum_to_str(type: type, value: int) -> str: ...
 def utils_escape_ssid(ssid: Sequence[int]) -> str: ...
 def utils_file_is_certificate(filename: str) -> bool: ...
 def utils_file_is_pkcs12(filename: str) -> bool: ...
-def utils_file_is_private_key(filename: str) -> Tuple[bool, bool]: ...
-def utils_file_search_in_paths(progname: str, try_first: Optional[str], paths: Optional[str], file_test_flags: GLib.FileTest, predicate: Callable[..., bool], *user_data: Any) -> str: ...
+def utils_file_is_private_key(filename: str) -> tuple[bool, bool]: ...
+def utils_file_search_in_paths(progname: str, try_first: str | None, paths: str | None, file_test_flags: GLib.FileTest, predicate: Callable[..., bool], *user_data: Any) -> str: ...
 def utils_format_variant_attributes(attributes: dict[str, GLib.Variant], attr_separator: int, key_value_separator: int) -> str: ...
 def utils_get_timestamp_msec() -> int: ...
 def utils_hexstr2bin(hex: str) -> GLib.Bytes: ...
@@ -1202,9 +1213,9 @@ def utils_hwaddr_len(type: int) -> int: ...
 def utils_hwaddr_matches(hwaddr1: None, hwaddr1_len: int, hwaddr2: None, hwaddr2_len: int) -> bool: ...
 def utils_hwaddr_ntoa(addr: Sequence[int]) -> str: ...
 def utils_hwaddr_valid(asc: str, length: int) -> bool: ...
-def utils_iface_valid_name(name: Optional[str] = None) -> bool: ...
-def utils_ip4_addresses_from_variant(value: GLib.Variant) -> Tuple[list[IPAddress], str]: ...
-def utils_ip4_addresses_to_variant(addresses: Sequence[IPAddress], gateway: Optional[str] = None) -> GLib.Variant: ...
+def utils_iface_valid_name(name: str | None = None) -> bool: ...
+def utils_ip4_addresses_from_variant(value: GLib.Variant) -> tuple[list[IPAddress], str]: ...
+def utils_ip4_addresses_to_variant(addresses: Sequence[IPAddress], gateway: str | None = None) -> GLib.Variant: ...
 def utils_ip4_dns_from_variant(value: GLib.Variant) -> str: ...
 def utils_ip4_dns_to_variant(dns: str) -> GLib.Variant: ...
 def utils_ip4_get_default_prefix(ip: int) -> int: ...
@@ -1212,8 +1223,8 @@ def utils_ip4_netmask_to_prefix(netmask: int) -> int: ...
 def utils_ip4_prefix_to_netmask(prefix: int) -> int: ...
 def utils_ip4_routes_from_variant(value: GLib.Variant) -> list[IPRoute]: ...
 def utils_ip4_routes_to_variant(routes: Sequence[IPRoute]) -> GLib.Variant: ...
-def utils_ip6_addresses_from_variant(value: GLib.Variant) -> Tuple[list[IPAddress], str]: ...
-def utils_ip6_addresses_to_variant(addresses: Sequence[IPAddress], gateway: Optional[str] = None) -> GLib.Variant: ...
+def utils_ip6_addresses_from_variant(value: GLib.Variant) -> tuple[list[IPAddress], str]: ...
+def utils_ip6_addresses_to_variant(addresses: Sequence[IPAddress], gateway: str | None = None) -> GLib.Variant: ...
 def utils_ip6_dns_from_variant(value: GLib.Variant) -> str: ...
 def utils_ip6_dns_to_variant(dns: str) -> GLib.Variant: ...
 def utils_ip6_routes_from_variant(value: GLib.Variant) -> list[IPRoute]: ...
@@ -1225,12 +1236,12 @@ def utils_ip_routes_to_variant(routes: Sequence[IPRoute]) -> GLib.Variant: ...
 def utils_ipaddr_valid(family: int, ip: str) -> bool: ...
 def utils_is_empty_ssid(ssid: Sequence[int]) -> bool: ...
 def utils_is_json_object(str: str) -> bool: ...
-def utils_is_uuid(str: Optional[str] = None) -> bool: ...
-def utils_is_valid_iface_name(name: Optional[str] = None) -> bool: ...
+def utils_is_uuid(str: str | None = None) -> bool: ...
+def utils_is_valid_iface_name(name: str | None = None) -> bool: ...
 def utils_parse_variant_attributes(string: str, attr_separator: int, key_value_separator: int, ignore_unknown: bool, spec: VariantAttributeSpec) -> dict[str, GLib.Variant]: ...
 def utils_print(output_mode: int, msg: str) -> None: ...
 def utils_same_ssid(ssid1: Sequence[int], ssid2: Sequence[int], ignore_trailing_null: bool) -> bool: ...
-def utils_security_valid(type: UtilsSecurityType, wifi_caps: DeviceWifiCapabilities, have_ap: bool, adhoc: bool, ap_flags: Any, ap_wpa: Any, ap_rsn: Any) -> bool: ...
+def utils_security_valid(type: UtilsSecurityType, wifi_caps: DeviceWifiCapabilities, have_ap: bool, adhoc: bool, ap_flags: _80211ApFlags, ap_wpa: _80211ApSecurityFlags, ap_rsn: _80211ApSecurityFlags) -> bool: ...
 def utils_sriov_vf_from_str(str: str) -> SriovVF: ...
 def utils_sriov_vf_to_str(vf: SriovVF, omit_index: bool) -> str: ...
 def utils_ssid_to_utf8(ssid: Sequence[int]) -> str: ...
@@ -1266,36 +1277,36 @@ class AccessPoint(Object):
     Object NMAccessPoint
 
     Properties from NMAccessPoint:
-      flags -> NMAny: 
-    
-      wpa-flags -> NMAny: 
-    
-      rsn-flags -> NMAny: 
-    
-      ssid -> GBytes: 
-    
-      frequency -> guint: 
-    
-      hw-address -> gchararray: 
-    
-      mode -> NMAny: 
-    
-      max-bitrate -> guint: 
-    
-      bandwidth -> guint: 
-    
-      strength -> guchar: 
-    
-      bssid -> gchararray: 
-    
-      last-seen -> gint: 
-    
+      flags -> NM80211ApFlags:
+
+      wpa-flags -> NM80211ApSecurityFlags:
+
+      rsn-flags -> NM80211ApSecurityFlags:
+
+      ssid -> GBytes:
+
+      frequency -> guint:
+
+      hw-address -> gchararray:
+
+      mode -> NM80211Mode:
+
+      max-bitrate -> guint:
+
+      bandwidth -> guint:
+
+      strength -> guchar:
+
+      bssid -> gchararray:
+
+      last-seen -> gint:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -1303,33 +1314,33 @@ class AccessPoint(Object):
     class Props:
         bandwidth: int
         bssid: str
-        flags: Any
+        flags: _80211ApFlags
         frequency: int
         hw_address: str
         last_seen: int
         max_bitrate: int
-        mode: Any
-        rsn_flags: Any
+        mode: _80211Mode
+        rsn_flags: _80211ApSecurityFlags
         ssid: GLib.Bytes
         strength: int
-        wpa_flags: Any
-        client: Optional[Client]
+        wpa_flags: _80211ApSecurityFlags
+        client: Client | None
         path: str
     props: Props = ...
     def connection_valid(self, connection: Connection) -> bool: ...
     def filter_connections(self, connections: Sequence[Connection]) -> list[Connection]: ...
     def get_bandwidth(self) -> int: ...
     def get_bssid(self) -> str: ...
-    def get_flags(self) -> Any: ...
+    def get_flags(self) -> _80211ApFlags: ...
     def get_frequency(self) -> int: ...
     def get_last_seen(self) -> int: ...
     def get_max_bitrate(self) -> int: ...
-    def get_mode(self) -> Any: ...
-    def get_rsn_flags(self) -> Any: ...
+    def get_mode(self) -> _80211Mode: ...
+    def get_rsn_flags(self) -> _80211ApSecurityFlags: ...
     def get_ssid(self) -> GLib.Bytes: ...
     def get_strength(self) -> int: ...
-    def get_wpa_flags(self) -> Any: ...
-    
+    def get_wpa_flags(self) -> _80211ApSecurityFlags: ...
+
 
 class AccessPointClass(GObject.GPointer): ...
 
@@ -1347,53 +1358,53 @@ class ActiveConnection(Object):
       state-changed (guint, guint)
 
     Properties from NMActiveConnection:
-      connection -> NMRemoteConnection: 
-    
-      id -> gchararray: 
-    
-      uuid -> gchararray: 
-    
-      type -> gchararray: 
-    
-      specific-object-path -> gchararray: 
-    
-      devices -> GPtrArray: 
-    
-      state -> NMActiveConnectionState: 
-    
-      state-flags -> guint: 
-    
-      default -> gboolean: 
-    
-      ip4-config -> NMIPConfig: 
-    
-      dhcp4-config -> NMDhcpConfig: 
-    
-      default6 -> gboolean: 
-    
-      ip6-config -> NMIPConfig: 
-    
-      dhcp6-config -> NMDhcpConfig: 
-    
-      vpn -> gboolean: 
-    
-      master -> NMDevice: 
-    
-      controller -> NMDevice: 
-    
+      connection -> NMRemoteConnection:
+
+      id -> gchararray:
+
+      uuid -> gchararray:
+
+      type -> gchararray:
+
+      specific-object-path -> gchararray:
+
+      devices -> GPtrArray:
+
+      state -> NMActiveConnectionState:
+
+      state-flags -> guint:
+
+      default -> gboolean:
+
+      ip4-config -> NMIPConfig:
+
+      dhcp4-config -> NMDhcpConfig:
+
+      default6 -> gboolean:
+
+      ip6-config -> NMIPConfig:
+
+      dhcp6-config -> NMDhcpConfig:
+
+      vpn -> gboolean:
+
+      master -> NMDevice:
+
+      controller -> NMDevice:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
     """
     class Props:
         connection: RemoteConnection
-        controller: Optional[Device]
+        controller: Device | None
         default: bool
         default6: bool
         devices: list[Device]
@@ -1402,14 +1413,14 @@ class ActiveConnection(Object):
         id: str
         ip4_config: IPConfig
         ip6_config: IPConfig
-        master: Optional[Device]
+        master: Device | None
         specific_object_path: str
         state: ActiveConnectionState
         state_flags: int
         type: str
         uuid: str
         vpn: bool
-        client: Optional[Client]
+        client: Client | None
         path: str
     props: Props = ...
     def get_connection(self) -> RemoteConnection: ...
@@ -1430,7 +1441,7 @@ class ActiveConnection(Object):
     def get_state_reason(self) -> ActiveConnectionStateReason: ...
     def get_uuid(self) -> str: ...
     def get_vpn(self) -> bool: ...
-    
+
 
 class ActiveConnectionClass(GObject.GPointer): ...
 
@@ -1445,7 +1456,7 @@ class BridgeVlan(GObject.GBoxed):
     def cmp(self, b: BridgeVlan) -> int: ...
     @staticmethod
     def from_str(str: str) -> BridgeVlan: ...
-    def get_vid_range(self) -> Tuple[bool, int, int]: ...
+    def get_vid_range(self) -> tuple[bool, int, int]: ...
     def is_pvid(self) -> bool: ...
     def is_sealed(self) -> bool: ...
     def is_untagged(self) -> bool: ...
@@ -1458,7 +1469,7 @@ class BridgeVlan(GObject.GBoxed):
     def set_untagged(self, value: bool) -> None: ...
     def to_str(self) -> str: ...
     def unref(self) -> None: ...
-    
+
 
 class Checkpoint(Object):
     """
@@ -1471,18 +1482,18 @@ class Checkpoint(Object):
     Object NMCheckpoint
 
     Properties from NMCheckpoint:
-      devices -> GPtrArray: 
-    
-      created -> gint64: 
-    
-      rollback-timeout -> guint: 
-    
+      devices -> GPtrArray:
+
+      created -> gint64:
+
+      rollback-timeout -> guint:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -1491,13 +1502,13 @@ class Checkpoint(Object):
         created: int
         devices: list[Device]
         rollback_timeout: int
-        client: Optional[Client]
+        client: Client | None
         path: str
     props: Props = ...
     def get_created(self) -> int: ...
     def get_devices(self) -> list[Device]: ...
     def get_rollback_timeout(self) -> int: ...
-    
+
 
 class CheckpointClass(GObject.GPointer): ...
 
@@ -1525,76 +1536,76 @@ class Client(GObject.Object, Gio.AsyncInitable, Gio.Initable):  # type: ignore
       active-connection-removed (NMActiveConnection)
 
     Properties from NMClient:
-      dbus-connection -> GDBusConnection: 
-    
-      dbus-name-owner -> gchararray: 
-    
-      version -> gchararray: 
-    
-      instance-flags -> guint: 
-    
-      state -> NMState: 
-    
-      startup -> gboolean: 
-    
-      nm-running -> gboolean: 
-    
-      networking-enabled -> gboolean: 
-    
-      wireless-enabled -> gboolean: 
-    
-      wireless-hardware-enabled -> gboolean: 
-    
-      wwan-enabled -> gboolean: 
-    
-      wwan-hardware-enabled -> gboolean: 
-    
-      wimax-enabled -> gboolean: 
-    
-      wimax-hardware-enabled -> gboolean: 
-    
-      radio-flags -> guint: 
-    
-      active-connections -> GPtrArray: 
-    
-      connectivity -> NMConnectivityState: 
-    
-      connectivity-check-uri -> gchararray: 
-    
-      connectivity-check-available -> gboolean: 
-    
-      connectivity-check-enabled -> gboolean: 
-    
-      primary-connection -> NMActiveConnection: 
-    
-      activating-connection -> NMActiveConnection: 
-    
-      devices -> GPtrArray: 
-    
-      all-devices -> GPtrArray: 
-    
-      connections -> GPtrArray: 
-    
-      hostname -> gchararray: 
-    
-      can-modify -> gboolean: 
-    
-      metered -> guint: 
-    
-      dns-mode -> gchararray: 
-    
-      dns-rc-manager -> gchararray: 
-    
-      dns-configuration -> GPtrArray: 
-    
-      checkpoints -> GPtrArray: 
-    
-      version-info -> GArray: 
-    
-      capabilities -> GArray: 
-    
-      permissions-state -> NMTernary: 
-    
+      dbus-connection -> GDBusConnection:
+
+      dbus-name-owner -> gchararray:
+
+      version -> gchararray:
+
+      instance-flags -> guint:
+
+      state -> NMState:
+
+      startup -> gboolean:
+
+      nm-running -> gboolean:
+
+      networking-enabled -> gboolean:
+
+      wireless-enabled -> gboolean:
+
+      wireless-hardware-enabled -> gboolean:
+
+      wwan-enabled -> gboolean:
+
+      wwan-hardware-enabled -> gboolean:
+
+      wimax-enabled -> gboolean:
+
+      wimax-hardware-enabled -> gboolean:
+
+      radio-flags -> guint:
+
+      active-connections -> GPtrArray:
+
+      connectivity -> NMConnectivityState:
+
+      connectivity-check-uri -> gchararray:
+
+      connectivity-check-available -> gboolean:
+
+      connectivity-check-enabled -> gboolean:
+
+      primary-connection -> NMActiveConnection:
+
+      activating-connection -> NMActiveConnection:
+
+      devices -> GPtrArray:
+
+      all-devices -> GPtrArray:
+
+      connections -> GPtrArray:
+
+      hostname -> gchararray:
+
+      can-modify -> gboolean:
+
+      metered -> guint:
+
+      dns-mode -> gchararray:
+
+      dns-rc-manager -> gchararray:
+
+      dns-configuration -> GPtrArray:
+
+      checkpoints -> GPtrArray:
+
+      version-info -> GArray:
+
+      capabilities -> GArray:
+
+      permissions-state -> NMTernary:
+
 
     Signals from GObject:
       notify (GParam)
@@ -1643,37 +1654,37 @@ class Client(GObject.Object, Gio.AsyncInitable, Gio.Initable):  # type: ignore
                  wimax_enabled: bool = ...,
                  wireless_enabled: bool = ...,
                  wwan_enabled: bool = ...): ...
-    def activate_connection_async(self, connection: Optional[Connection] = None, device: Optional[Device] = None, specific_object: Optional[str] = None, cancellable: Optional[Gio.Cancellable] = None, callback: Optional[Callable[..., None]] = None, *user_data: Any) -> None: ...
+    def activate_connection_async(self, connection: Connection | None = None, device: Device | None = None, specific_object: str | None = None, cancellable: Gio.Cancellable | None = None, callback: Callable[..., None] | None = None, *user_data: Any) -> None: ...
     def activate_connection_finish(self, result: Gio.AsyncResult) -> ActiveConnection: ...
-    def add_and_activate_connection2(self, partial: Optional[Connection], device: Optional[Device], specific_object: Optional[str], options: GLib.Variant, cancellable: Optional[Gio.Cancellable] = None, callback: Optional[Callable[..., None]] = None, *user_data: Any) -> None: ...
-    def add_and_activate_connection2_finish(self, result: Gio.AsyncResult) -> Tuple[ActiveConnection, GLib.Variant]: ...
-    def add_and_activate_connection_async(self, partial: Optional[Connection] = None, device: Optional[Device] = None, specific_object: Optional[str] = None, cancellable: Optional[Gio.Cancellable] = None, callback: Optional[Callable[..., None]] = None, *user_data: Any) -> None: ...
+    def add_and_activate_connection2(self, partial: Connection | None, device: Device | None, specific_object: str | None, options: GLib.Variant, cancellable: Gio.Cancellable | None = None, callback: Callable[..., None] | None = None, *user_data: Any) -> None: ...
+    def add_and_activate_connection2_finish(self, result: Gio.AsyncResult) -> tuple[ActiveConnection, GLib.Variant]: ...
+    def add_and_activate_connection_async(self, partial: Connection | None = None, device: Device | None = None, specific_object: str | None = None, cancellable: Gio.Cancellable | None = None, callback: Callable[..., None] | None = None, *user_data: Any) -> None: ...
     def add_and_activate_connection_finish(self, result: Gio.AsyncResult) -> ActiveConnection: ...
-    def add_connection2(self, settings: GLib.Variant, flags: SettingsAddConnection2Flags, args: Optional[GLib.Variant], ignore_out_result: bool, cancellable: Optional[Gio.Cancellable] = None, callback: Optional[Callable[..., None]] = None, *user_data: Any) -> None: ...
-    def add_connection2_finish(self, result: Gio.AsyncResult) -> Tuple[RemoteConnection, GLib.Variant]: ...
-    def add_connection_async(self, connection: Connection, save_to_disk: bool, cancellable: Optional[Gio.Cancellable] = None, callback: Optional[Callable[..., None]] = None, *user_data: Any) -> None: ...
+    def add_connection2(self, settings: GLib.Variant, flags: SettingsAddConnection2Flags, args: GLib.Variant | None, ignore_out_result: bool, cancellable: Gio.Cancellable | None = None, callback: Callable[..., None] | None = None, *user_data: Any) -> None: ...
+    def add_connection2_finish(self, result: Gio.AsyncResult) -> tuple[RemoteConnection, GLib.Variant]: ...
+    def add_connection_async(self, connection: Connection, save_to_disk: bool, cancellable: Gio.Cancellable | None = None, callback: Callable[..., None] | None = None, *user_data: Any) -> None: ...
     def add_connection_finish(self, result: Gio.AsyncResult) -> RemoteConnection: ...
-    def check_connectivity(self, cancellable: Optional[Gio.Cancellable] = None) -> ConnectivityState: ...
-    def check_connectivity_async(self, cancellable: Optional[Gio.Cancellable] = None, callback: Optional[Callable[..., None]] = None, *user_data: Any) -> None: ...
+    def check_connectivity(self, cancellable: Gio.Cancellable | None = None) -> ConnectivityState: ...
+    def check_connectivity_async(self, cancellable: Gio.Cancellable | None = None, callback: Callable[..., None] | None = None, *user_data: Any) -> None: ...
     def check_connectivity_finish(self, result: Gio.AsyncResult) -> ConnectivityState: ...
-    def checkpoint_adjust_rollback_timeout(self, checkpoint_path: str, add_timeout: int, cancellable: Optional[Gio.Cancellable] = None, callback: Optional[Callable[..., None]] = None, *user_data: Any) -> None: ...
+    def checkpoint_adjust_rollback_timeout(self, checkpoint_path: str, add_timeout: int, cancellable: Gio.Cancellable | None = None, callback: Callable[..., None] | None = None, *user_data: Any) -> None: ...
     def checkpoint_adjust_rollback_timeout_finish(self, result: Gio.AsyncResult) -> bool: ...
-    def checkpoint_create(self, devices: Sequence[Device], rollback_timeout: int, flags: CheckpointCreateFlags, cancellable: Optional[Gio.Cancellable] = None, callback: Optional[Callable[..., None]] = None, *user_data: Any) -> None: ...
+    def checkpoint_create(self, devices: Sequence[Device], rollback_timeout: int, flags: CheckpointCreateFlags, cancellable: Gio.Cancellable | None = None, callback: Callable[..., None] | None = None, *user_data: Any) -> None: ...
     def checkpoint_create_finish(self, result: Gio.AsyncResult) -> Checkpoint: ...
-    def checkpoint_destroy(self, checkpoint_path: str, cancellable: Optional[Gio.Cancellable] = None, callback: Optional[Callable[..., None]] = None, *user_data: Any) -> None: ...
+    def checkpoint_destroy(self, checkpoint_path: str, cancellable: Gio.Cancellable | None = None, callback: Callable[..., None] | None = None, *user_data: Any) -> None: ...
     def checkpoint_destroy_finish(self, result: Gio.AsyncResult) -> bool: ...
-    def checkpoint_rollback(self, checkpoint_path: str, cancellable: Optional[Gio.Cancellable] = None, callback: Optional[Callable[..., None]] = None, *user_data: Any) -> None: ...
+    def checkpoint_rollback(self, checkpoint_path: str, cancellable: Gio.Cancellable | None = None, callback: Callable[..., None] | None = None, *user_data: Any) -> None: ...
     def checkpoint_rollback_finish(self, result: Gio.AsyncResult) -> dict[str, int]: ...
     def connectivity_check_get_available(self) -> bool: ...
     def connectivity_check_get_enabled(self) -> bool: ...
     def connectivity_check_get_uri(self) -> str: ...
     def connectivity_check_set_enabled(self, enabled: bool) -> None: ...
-    def dbus_call(self, object_path: str, interface_name: str, method_name: str, parameters: Optional[GLib.Variant], reply_type: Optional[GLib.VariantType], timeout_msec: int, cancellable: Optional[Gio.Cancellable] = None, callback: Optional[Callable[..., None]] = None, *user_data: Any) -> None: ...
+    def dbus_call(self, object_path: str, interface_name: str, method_name: str, parameters: GLib.Variant | None, reply_type: GLib.VariantType | None, timeout_msec: int, cancellable: Gio.Cancellable | None = None, callback: Callable[..., None] | None = None, *user_data: Any) -> None: ...
     def dbus_call_finish(self, result: Gio.AsyncResult) -> GLib.Variant: ...
-    def dbus_set_property(self, object_path: str, interface_name: str, property_name: str, value: GLib.Variant, timeout_msec: int, cancellable: Optional[Gio.Cancellable] = None, callback: Optional[Callable[..., None]] = None, *user_data: Any) -> None: ...
+    def dbus_set_property(self, object_path: str, interface_name: str, property_name: str, value: GLib.Variant, timeout_msec: int, cancellable: Gio.Cancellable | None = None, callback: Callable[..., None] | None = None, *user_data: Any) -> None: ...
     def dbus_set_property_finish(self, result: Gio.AsyncResult) -> bool: ...
-    def deactivate_connection(self, active: ActiveConnection, cancellable: Optional[Gio.Cancellable] = None) -> bool: ...
-    def deactivate_connection_async(self, active: ActiveConnection, cancellable: Optional[Gio.Cancellable] = None, callback: Optional[Callable[..., None]] = None, *user_data: Any) -> None: ...
+    def deactivate_connection(self, active: ActiveConnection, cancellable: Gio.Cancellable | None = None) -> bool: ...
+    def deactivate_connection_async(self, active: ActiveConnection, cancellable: Gio.Cancellable | None = None, callback: Callable[..., None] | None = None, *user_data: Any) -> None: ...
     def deactivate_connection_finish(self, result: Gio.AsyncResult) -> bool: ...
     def get_activating_connection(self) -> ActiveConnection: ...
     def get_active_connections(self) -> list[ActiveConnection]: ...
@@ -1695,7 +1706,7 @@ class Client(GObject.Object, Gio.AsyncInitable, Gio.Initable):  # type: ignore
     def get_dns_mode(self) -> str: ...
     def get_dns_rc_manager(self) -> str: ...
     def get_instance_flags(self) -> ClientInstanceFlags: ...
-    def get_logging(self) -> Tuple[bool, str, str]: ...
+    def get_logging(self) -> tuple[bool, str, str]: ...
     def get_main_context(self) -> GLib.MainContext: ...
     def get_metered(self) -> Metered: ...
     def get_nm_running(self) -> bool: ...
@@ -1708,27 +1719,27 @@ class Client(GObject.Object, Gio.AsyncInitable, Gio.Initable):  # type: ignore
     def get_state(self) -> State: ...
     def get_version(self) -> str: ...
     def get_version_info(self) -> list[int]: ...
-    def load_connections(self, filenames: Sequence[str], cancellable: Optional[Gio.Cancellable] = None) -> Tuple[bool, str]: ...
-    def load_connections_async(self, filenames: Sequence[str], cancellable: Optional[Gio.Cancellable] = None, callback: Optional[Callable[..., None]] = None, *user_data: Any) -> None: ...
-    def load_connections_finish(self, result: Gio.AsyncResult) -> Tuple[bool, list[str]]: ...
+    def load_connections(self, filenames: Sequence[str], cancellable: Gio.Cancellable | None = None) -> tuple[bool, str]: ...
+    def load_connections_async(self, filenames: Sequence[str], cancellable: Gio.Cancellable | None = None, callback: Callable[..., None] | None = None, *user_data: Any) -> None: ...
+    def load_connections_finish(self, result: Gio.AsyncResult) -> tuple[bool, list[str]]: ...
     def networking_get_enabled(self) -> bool: ...
     def networking_set_enabled(self, enabled: bool) -> bool: ...
     @classmethod
-    def new(cls, cancellable: Optional[Gio.Cancellable] = None) -> Client: ...
+    def new(cls, cancellable: Gio.Cancellable | None = None) -> Client: ...
     @staticmethod
-    def new_async(cancellable: Optional[Gio.Cancellable] = None, callback: Optional[Callable[..., None]] = None, *user_data: Any) -> None: ...
+    def new_async(cancellable: Gio.Cancellable | None = None, callback: Callable[..., None] | None = None, *user_data: Any) -> None: ...
     @classmethod
     def new_finish(cls, result: Gio.AsyncResult) -> Client: ...
-    def reload(self, flags: ManagerReloadFlags, cancellable: Optional[Gio.Cancellable] = None, callback: Optional[Callable[..., None]] = None, *user_data: Any) -> None: ...
-    def reload_connections(self, cancellable: Optional[Gio.Cancellable] = None) -> bool: ...
-    def reload_connections_async(self, cancellable: Optional[Gio.Cancellable] = None, callback: Optional[Callable[..., None]] = None, *user_data: Any) -> None: ...
+    def reload(self, flags: ManagerReloadFlags, cancellable: Gio.Cancellable | None = None, callback: Callable[..., None] | None = None, *user_data: Any) -> None: ...
+    def reload_connections(self, cancellable: Gio.Cancellable | None = None) -> bool: ...
+    def reload_connections_async(self, cancellable: Gio.Cancellable | None = None, callback: Callable[..., None] | None = None, *user_data: Any) -> None: ...
     def reload_connections_finish(self, result: Gio.AsyncResult) -> bool: ...
     def reload_finish(self, result: Gio.AsyncResult) -> bool: ...
-    def save_hostname(self, hostname: Optional[str] = None, cancellable: Optional[Gio.Cancellable] = None) -> bool: ...
-    def save_hostname_async(self, hostname: Optional[str] = None, cancellable: Optional[Gio.Cancellable] = None, callback: Optional[Callable[..., None]] = None, *user_data: Any) -> None: ...
+    def save_hostname(self, hostname: str | None = None, cancellable: Gio.Cancellable | None = None) -> bool: ...
+    def save_hostname_async(self, hostname: str | None = None, cancellable: Gio.Cancellable | None = None, callback: Callable[..., None] | None = None, *user_data: Any) -> None: ...
     def save_hostname_finish(self, result: Gio.AsyncResult) -> bool: ...
-    def set_logging(self, level: Optional[str] = None, domains: Optional[str] = None) -> bool: ...
-    def wait_shutdown(self, integrate_maincontext: bool, cancellable: Optional[Gio.Cancellable] = None, callback: Optional[Callable[..., None]] = None, *user_data: Any) -> None: ...
+    def set_logging(self, level: str | None = None, domains: str | None = None) -> bool: ...
+    def wait_shutdown(self, integrate_maincontext: bool, cancellable: Gio.Cancellable | None = None, callback: Callable[..., None] | None = None, *user_data: Any) -> None: ...
     @staticmethod
     def wait_shutdown_finish(result: Gio.AsyncResult) -> bool: ...
     def wimax_get_enabled(self) -> bool: ...
@@ -1740,7 +1751,7 @@ class Client(GObject.Object, Gio.AsyncInitable, Gio.Initable):  # type: ignore
     def wwan_get_enabled(self) -> bool: ...
     def wwan_hardware_get_enabled(self) -> bool: ...
     def wwan_set_enabled(self, enabled: bool) -> None: ...
-    
+
 
 class ClientClass(GObject.GPointer): ...
 
@@ -1753,7 +1764,7 @@ class Connection(GObject.GInterface):
     """
     def add_setting(self, setting: Setting) -> None: ...
     def clear_secrets(self) -> None: ...
-    def clear_secrets_with_flags(self, func: Optional[Callable[..., bool]] = None, *user_data: Any) -> None: ...
+    def clear_secrets_with_flags(self, func: Callable[..., bool] | None = None, *user_data: Any) -> None: ...
     def clear_settings(self) -> None: ...
     def compare(self, b: Connection, flags: SettingCompareFlags) -> bool: ...
     def dump(self) -> None: ...
@@ -1762,7 +1773,7 @@ class Connection(GObject.GInterface):
     def get_id(self) -> str: ...
     def get_interface_name(self) -> str: ...
     def get_path(self) -> str: ...
-    def get_setting(self, setting_type: Type) -> Setting: ...
+    def get_setting(self, setting_type: type) -> Setting: ...
     def get_setting_802_1x(self) -> Setting8021x: ...
     def get_setting_adsl(self) -> SettingAdsl: ...
     def get_setting_bluetooth(self) -> SettingBluetooth: ...
@@ -1802,14 +1813,14 @@ class Connection(GObject.GInterface):
     def get_setting_wired(self) -> SettingWired: ...
     def get_setting_wireless(self) -> SettingWireless: ...
     def get_setting_wireless_security(self) -> SettingWirelessSecurity: ...
-    def get_settings(self) -> Optional[list[Setting]]: ...
+    def get_settings(self) -> list[Setting] | None: ...
     def get_uuid(self) -> str: ...
     def get_virtual_device_description(self) -> str: ...
     def is_type(self, type: str) -> bool: ...
     def is_virtual(self) -> bool: ...
-    def need_secrets(self) -> Tuple[Optional[str], list[str]]: ...
-    def normalize(self, parameters: Optional[dict[str, None]] = None) -> Tuple[bool, bool]: ...
-    def remove_setting(self, setting_type: Type) -> None: ...
+    def need_secrets(self) -> tuple[str | None, list[str]]: ...
+    def normalize(self, parameters: dict[str, None] | None = None) -> tuple[bool, bool]: ...
+    def remove_setting(self, setting_type: type) -> None: ...
     def replace_settings(self, new_settings: GLib.Variant) -> bool: ...
     def replace_settings_from_connection(self, new_connection: Connection) -> None: ...
     def set_path(self, path: str) -> None: ...
@@ -1817,7 +1828,7 @@ class Connection(GObject.GInterface):
     def update_secrets(self, setting_name: str, secrets: GLib.Variant) -> bool: ...
     def verify(self) -> bool: ...
     def verify_secrets(self) -> bool: ...
-    
+
 
 class ConnectionInterface(GObject.GPointer):
     """
@@ -1846,78 +1857,78 @@ class Device(Object):
       state-changed (guint, guint, guint)
 
     Properties from NMDevice:
-      interface -> gchararray: 
-    
-      udi -> gchararray: 
-    
-      path -> gchararray: 
-    
-      driver -> gchararray: 
-    
-      driver-version -> gchararray: 
-    
-      firmware-version -> gchararray: 
-    
-      capabilities -> NMDeviceCapabilities: 
-    
-      real -> gboolean: 
-    
-      managed -> gboolean: 
-    
-      autoconnect -> gboolean: 
-    
-      firmware-missing -> gboolean: 
-    
-      nm-plugin-missing -> gboolean: 
-    
-      ip4-config -> NMIPConfig: 
-    
-      dhcp4-config -> NMDhcpConfig: 
-    
-      ip6-config -> NMIPConfig: 
-    
-      state -> NMDeviceState: 
-    
-      state-reason -> guint: 
-    
-      product -> gchararray: 
-    
-      vendor -> gchararray: 
-    
-      dhcp6-config -> NMDhcpConfig: 
-    
-      ip-interface -> gchararray: 
-    
-      device-type -> NMDeviceType: 
-    
-      active-connection -> NMActiveConnection: 
-    
-      available-connections -> GPtrArray: 
-    
-      physical-port-id -> gchararray: 
-    
-      mtu -> guint: 
-    
-      metered -> guint: 
-    
-      lldp-neighbors -> GPtrArray: 
-    
-      ip4-connectivity -> NMConnectivityState: 
-    
-      ip6-connectivity -> NMConnectivityState: 
-    
-      interface-flags -> guint: 
-    
-      hw-address -> gchararray: 
-    
-      ports -> GPtrArray: 
-    
+      interface -> gchararray:
+
+      udi -> gchararray:
+
+      path -> gchararray:
+
+      driver -> gchararray:
+
+      driver-version -> gchararray:
+
+      firmware-version -> gchararray:
+
+      capabilities -> NMDeviceCapabilities:
+
+      real -> gboolean:
+
+      managed -> gboolean:
+
+      autoconnect -> gboolean:
+
+      firmware-missing -> gboolean:
+
+      nm-plugin-missing -> gboolean:
+
+      ip4-config -> NMIPConfig:
+
+      dhcp4-config -> NMDhcpConfig:
+
+      ip6-config -> NMIPConfig:
+
+      state -> NMDeviceState:
+
+      state-reason -> guint:
+
+      product -> gchararray:
+
+      vendor -> gchararray:
+
+      dhcp6-config -> NMDhcpConfig:
+
+      ip-interface -> gchararray:
+
+      device-type -> NMDeviceType:
+
+      active-connection -> NMActiveConnection:
+
+      available-connections -> GPtrArray:
+
+      physical-port-id -> gchararray:
+
+      mtu -> guint:
+
+      metered -> guint:
+
+      lldp-neighbors -> GPtrArray:
+
+      ip4-connectivity -> NMConnectivityState:
+
+      ip6-connectivity -> NMConnectivityState:
+
+      interface-flags -> guint:
+
+      hw-address -> gchararray:
+
+      ports -> GPtrArray:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -1956,24 +1967,24 @@ class Device(Object):
         state_reason: int
         udi: str
         vendor: str
-        client: Optional[Client]
+        client: Client | None
     props: Props = ...
     def __init__(self, autoconnect: bool = ...): ...
     def connection_compatible(self, connection: Connection) -> bool: ...
     def connection_valid(self, connection: Connection) -> bool: ...
-    def delete(self, cancellable: Optional[Gio.Cancellable] = None) -> bool: ...
-    def delete_async(self, cancellable: Optional[Gio.Cancellable] = None, callback: Optional[Callable[..., None]] = None, *user_data: Any) -> None: ...
+    def delete(self, cancellable: Gio.Cancellable | None = None) -> bool: ...
+    def delete_async(self, cancellable: Gio.Cancellable | None = None, callback: Callable[..., None] | None = None, *user_data: Any) -> None: ...
     def delete_finish(self, result: Gio.AsyncResult) -> bool: ...
     @staticmethod
     def disambiguate_names(devices: Sequence[Device]) -> list[str]: ...
-    def disconnect(self, cancellable: Optional[Gio.Cancellable] = None) -> bool: ...  # type: ignore
-    def disconnect_async(self, cancellable: Optional[Gio.Cancellable] = None, callback: Optional[Callable[..., None]] = None, *user_data: Any) -> None: ...
+    def disconnect(self, cancellable: Gio.Cancellable | None = None) -> bool: ...  # type: ignore
+    def disconnect_async(self, cancellable: Gio.Cancellable | None = None, callback: Callable[..., None] | None = None, *user_data: Any) -> None: ...
     def disconnect_finish(self, result: Gio.AsyncResult) -> bool: ...
     def filter_connections(self, connections: Sequence[Connection]) -> list[Connection]: ...
     def get_active_connection(self) -> ActiveConnection: ...
-    def get_applied_connection(self, flags: int, cancellable: Optional[Gio.Cancellable] = None) -> Tuple[Connection, int]: ...
-    def get_applied_connection_async(self, flags: int, cancellable: Optional[Gio.Cancellable] = None, callback: Optional[Callable[..., None]] = None, *user_data: Any) -> None: ...
-    def get_applied_connection_finish(self, result: Gio.AsyncResult) -> Tuple[Connection, int]: ...
+    def get_applied_connection(self, flags: int, cancellable: Gio.Cancellable | None = None) -> tuple[Connection, int]: ...
+    def get_applied_connection_async(self, flags: int, cancellable: Gio.Cancellable | None = None, callback: Callable[..., None] | None = None, *user_data: Any) -> None: ...
+    def get_applied_connection_finish(self, result: Gio.AsyncResult) -> tuple[Connection, int]: ...
     def get_autoconnect(self) -> bool: ...
     def get_available_connections(self) -> list[RemoteConnection]: ...
     def get_capabilities(self) -> DeviceCapabilities: ...
@@ -2001,7 +2012,7 @@ class Device(Object):
     def get_physical_port_id(self) -> str: ...
     def get_ports(self) -> list[Device]: ...
     def get_product(self) -> str: ...
-    def get_setting_type(self) -> Type: ...
+    def get_setting_type(self) -> type: ...
     def get_state(self) -> DeviceState: ...
     def get_state_reason(self) -> DeviceStateReason: ...
     def get_type_description(self) -> str: ...
@@ -2009,12 +2020,12 @@ class Device(Object):
     def get_vendor(self) -> str: ...
     def is_real(self) -> bool: ...
     def is_software(self) -> bool: ...
-    def reapply(self, connection: Optional[Connection], version_id: int, flags: int, cancellable: Optional[Gio.Cancellable] = None) -> bool: ...
-    def reapply_async(self, connection: Optional[Connection], version_id: int, flags: int, cancellable: Optional[Gio.Cancellable] = None, callback: Optional[Callable[..., None]] = None, *user_data: Any) -> None: ...
+    def reapply(self, connection: Connection | None, version_id: int, flags: int, cancellable: Gio.Cancellable | None = None) -> bool: ...
+    def reapply_async(self, connection: Connection | None, version_id: int, flags: int, cancellable: Gio.Cancellable | None = None, callback: Callable[..., None] | None = None, *user_data: Any) -> None: ...
     def reapply_finish(self, result: Gio.AsyncResult) -> bool: ...
     def set_autoconnect(self, autoconnect: bool) -> None: ...
     def set_managed(self, managed: bool) -> None: ...
-    
+
 
 class Device6Lowpan(Device):
     """
@@ -2027,85 +2038,85 @@ class Device6Lowpan(Device):
     Object NMDevice6Lowpan
 
     Properties from NMDevice6Lowpan:
-      parent -> NMDevice: 
-    
+      parent -> NMDevice:
+
 
     Signals from NMDevice:
       state-changed (guint, guint, guint)
 
     Properties from NMDevice:
-      interface -> gchararray: 
-    
-      udi -> gchararray: 
-    
-      path -> gchararray: 
-    
-      driver -> gchararray: 
-    
-      driver-version -> gchararray: 
-    
-      firmware-version -> gchararray: 
-    
-      capabilities -> NMDeviceCapabilities: 
-    
-      real -> gboolean: 
-    
-      managed -> gboolean: 
-    
-      autoconnect -> gboolean: 
-    
-      firmware-missing -> gboolean: 
-    
-      nm-plugin-missing -> gboolean: 
-    
-      ip4-config -> NMIPConfig: 
-    
-      dhcp4-config -> NMDhcpConfig: 
-    
-      ip6-config -> NMIPConfig: 
-    
-      state -> NMDeviceState: 
-    
-      state-reason -> guint: 
-    
-      product -> gchararray: 
-    
-      vendor -> gchararray: 
-    
-      dhcp6-config -> NMDhcpConfig: 
-    
-      ip-interface -> gchararray: 
-    
-      device-type -> NMDeviceType: 
-    
-      active-connection -> NMActiveConnection: 
-    
-      available-connections -> GPtrArray: 
-    
-      physical-port-id -> gchararray: 
-    
-      mtu -> guint: 
-    
-      metered -> guint: 
-    
-      lldp-neighbors -> GPtrArray: 
-    
-      ip4-connectivity -> NMConnectivityState: 
-    
-      ip6-connectivity -> NMConnectivityState: 
-    
-      interface-flags -> guint: 
-    
-      hw-address -> gchararray: 
-    
-      ports -> GPtrArray: 
-    
+      interface -> gchararray:
+
+      udi -> gchararray:
+
+      path -> gchararray:
+
+      driver -> gchararray:
+
+      driver-version -> gchararray:
+
+      firmware-version -> gchararray:
+
+      capabilities -> NMDeviceCapabilities:
+
+      real -> gboolean:
+
+      managed -> gboolean:
+
+      autoconnect -> gboolean:
+
+      firmware-missing -> gboolean:
+
+      nm-plugin-missing -> gboolean:
+
+      ip4-config -> NMIPConfig:
+
+      dhcp4-config -> NMDhcpConfig:
+
+      ip6-config -> NMIPConfig:
+
+      state -> NMDeviceState:
+
+      state-reason -> guint:
+
+      product -> gchararray:
+
+      vendor -> gchararray:
+
+      dhcp6-config -> NMDhcpConfig:
+
+      ip-interface -> gchararray:
+
+      device-type -> NMDeviceType:
+
+      active-connection -> NMActiveConnection:
+
+      available-connections -> GPtrArray:
+
+      physical-port-id -> gchararray:
+
+      mtu -> guint:
+
+      metered -> guint:
+
+      lldp-neighbors -> GPtrArray:
+
+      ip4-connectivity -> NMConnectivityState:
+
+      ip6-connectivity -> NMConnectivityState:
+
+      interface-flags -> guint:
+
+      hw-address -> gchararray:
+
+      ports -> GPtrArray:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -2145,11 +2156,11 @@ class Device6Lowpan(Device):
         state_reason: int
         udi: str
         vendor: str
-        client: Optional[Client]
+        client: Client | None
     props: Props = ...
     def __init__(self, autoconnect: bool = ...): ...
     def get_parent(self) -> Device: ...
-    
+
 
 class Device6LowpanClass(GObject.GPointer): ...
 
@@ -2164,85 +2175,85 @@ class DeviceAdsl(Device):
     Object NMDeviceAdsl
 
     Properties from NMDeviceAdsl:
-      carrier -> gboolean: 
-    
+      carrier -> gboolean:
+
 
     Signals from NMDevice:
       state-changed (guint, guint, guint)
 
     Properties from NMDevice:
-      interface -> gchararray: 
-    
-      udi -> gchararray: 
-    
-      path -> gchararray: 
-    
-      driver -> gchararray: 
-    
-      driver-version -> gchararray: 
-    
-      firmware-version -> gchararray: 
-    
-      capabilities -> NMDeviceCapabilities: 
-    
-      real -> gboolean: 
-    
-      managed -> gboolean: 
-    
-      autoconnect -> gboolean: 
-    
-      firmware-missing -> gboolean: 
-    
-      nm-plugin-missing -> gboolean: 
-    
-      ip4-config -> NMIPConfig: 
-    
-      dhcp4-config -> NMDhcpConfig: 
-    
-      ip6-config -> NMIPConfig: 
-    
-      state -> NMDeviceState: 
-    
-      state-reason -> guint: 
-    
-      product -> gchararray: 
-    
-      vendor -> gchararray: 
-    
-      dhcp6-config -> NMDhcpConfig: 
-    
-      ip-interface -> gchararray: 
-    
-      device-type -> NMDeviceType: 
-    
-      active-connection -> NMActiveConnection: 
-    
-      available-connections -> GPtrArray: 
-    
-      physical-port-id -> gchararray: 
-    
-      mtu -> guint: 
-    
-      metered -> guint: 
-    
-      lldp-neighbors -> GPtrArray: 
-    
-      ip4-connectivity -> NMConnectivityState: 
-    
-      ip6-connectivity -> NMConnectivityState: 
-    
-      interface-flags -> guint: 
-    
-      hw-address -> gchararray: 
-    
-      ports -> GPtrArray: 
-    
+      interface -> gchararray:
+
+      udi -> gchararray:
+
+      path -> gchararray:
+
+      driver -> gchararray:
+
+      driver-version -> gchararray:
+
+      firmware-version -> gchararray:
+
+      capabilities -> NMDeviceCapabilities:
+
+      real -> gboolean:
+
+      managed -> gboolean:
+
+      autoconnect -> gboolean:
+
+      firmware-missing -> gboolean:
+
+      nm-plugin-missing -> gboolean:
+
+      ip4-config -> NMIPConfig:
+
+      dhcp4-config -> NMDhcpConfig:
+
+      ip6-config -> NMIPConfig:
+
+      state -> NMDeviceState:
+
+      state-reason -> guint:
+
+      product -> gchararray:
+
+      vendor -> gchararray:
+
+      dhcp6-config -> NMDhcpConfig:
+
+      ip-interface -> gchararray:
+
+      device-type -> NMDeviceType:
+
+      active-connection -> NMActiveConnection:
+
+      available-connections -> GPtrArray:
+
+      physical-port-id -> gchararray:
+
+      mtu -> guint:
+
+      metered -> guint:
+
+      lldp-neighbors -> GPtrArray:
+
+      ip4-connectivity -> NMConnectivityState:
+
+      ip6-connectivity -> NMConnectivityState:
+
+      interface-flags -> guint:
+
+      hw-address -> gchararray:
+
+      ports -> GPtrArray:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -2282,11 +2293,11 @@ class DeviceAdsl(Device):
         state_reason: int
         udi: str
         vendor: str
-        client: Optional[Client]
+        client: Client | None
     props: Props = ...
     def __init__(self, autoconnect: bool = ...): ...
     def get_carrier(self) -> bool: ...
-    
+
 
 class DeviceAdslClass(GObject.GPointer): ...
 
@@ -2301,87 +2312,87 @@ class DeviceBond(Device):
     Object NMDeviceBond
 
     Properties from NMDeviceBond:
-      carrier -> gboolean: 
-    
-      slaves -> GPtrArray: 
-    
+      carrier -> gboolean:
+
+      slaves -> GPtrArray:
+
 
     Signals from NMDevice:
       state-changed (guint, guint, guint)
 
     Properties from NMDevice:
-      interface -> gchararray: 
-    
-      udi -> gchararray: 
-    
-      path -> gchararray: 
-    
-      driver -> gchararray: 
-    
-      driver-version -> gchararray: 
-    
-      firmware-version -> gchararray: 
-    
-      capabilities -> NMDeviceCapabilities: 
-    
-      real -> gboolean: 
-    
-      managed -> gboolean: 
-    
-      autoconnect -> gboolean: 
-    
-      firmware-missing -> gboolean: 
-    
-      nm-plugin-missing -> gboolean: 
-    
-      ip4-config -> NMIPConfig: 
-    
-      dhcp4-config -> NMDhcpConfig: 
-    
-      ip6-config -> NMIPConfig: 
-    
-      state -> NMDeviceState: 
-    
-      state-reason -> guint: 
-    
-      product -> gchararray: 
-    
-      vendor -> gchararray: 
-    
-      dhcp6-config -> NMDhcpConfig: 
-    
-      ip-interface -> gchararray: 
-    
-      device-type -> NMDeviceType: 
-    
-      active-connection -> NMActiveConnection: 
-    
-      available-connections -> GPtrArray: 
-    
-      physical-port-id -> gchararray: 
-    
-      mtu -> guint: 
-    
-      metered -> guint: 
-    
-      lldp-neighbors -> GPtrArray: 
-    
-      ip4-connectivity -> NMConnectivityState: 
-    
-      ip6-connectivity -> NMConnectivityState: 
-    
-      interface-flags -> guint: 
-    
-      hw-address -> gchararray: 
-    
-      ports -> GPtrArray: 
-    
+      interface -> gchararray:
+
+      udi -> gchararray:
+
+      path -> gchararray:
+
+      driver -> gchararray:
+
+      driver-version -> gchararray:
+
+      firmware-version -> gchararray:
+
+      capabilities -> NMDeviceCapabilities:
+
+      real -> gboolean:
+
+      managed -> gboolean:
+
+      autoconnect -> gboolean:
+
+      firmware-missing -> gboolean:
+
+      nm-plugin-missing -> gboolean:
+
+      ip4-config -> NMIPConfig:
+
+      dhcp4-config -> NMDhcpConfig:
+
+      ip6-config -> NMIPConfig:
+
+      state -> NMDeviceState:
+
+      state-reason -> guint:
+
+      product -> gchararray:
+
+      vendor -> gchararray:
+
+      dhcp6-config -> NMDhcpConfig:
+
+      ip-interface -> gchararray:
+
+      device-type -> NMDeviceType:
+
+      active-connection -> NMActiveConnection:
+
+      available-connections -> GPtrArray:
+
+      physical-port-id -> gchararray:
+
+      mtu -> guint:
+
+      metered -> guint:
+
+      lldp-neighbors -> GPtrArray:
+
+      ip4-connectivity -> NMConnectivityState:
+
+      ip6-connectivity -> NMConnectivityState:
+
+      interface-flags -> guint:
+
+      hw-address -> gchararray:
+
+      ports -> GPtrArray:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -2422,12 +2433,12 @@ class DeviceBond(Device):
         state_reason: int
         udi: str
         vendor: str
-        client: Optional[Client]
+        client: Client | None
     props: Props = ...
     def __init__(self, autoconnect: bool = ...): ...
     def get_carrier(self) -> bool: ...
     def get_slaves(self) -> list[Device]: ...
-    
+
 
 class DeviceBondClass(GObject.GPointer): ...
 
@@ -2442,87 +2453,87 @@ class DeviceBridge(Device):
     Object NMDeviceBridge
 
     Properties from NMDeviceBridge:
-      carrier -> gboolean: 
-    
-      slaves -> GPtrArray: 
-    
+      carrier -> gboolean:
+
+      slaves -> GPtrArray:
+
 
     Signals from NMDevice:
       state-changed (guint, guint, guint)
 
     Properties from NMDevice:
-      interface -> gchararray: 
-    
-      udi -> gchararray: 
-    
-      path -> gchararray: 
-    
-      driver -> gchararray: 
-    
-      driver-version -> gchararray: 
-    
-      firmware-version -> gchararray: 
-    
-      capabilities -> NMDeviceCapabilities: 
-    
-      real -> gboolean: 
-    
-      managed -> gboolean: 
-    
-      autoconnect -> gboolean: 
-    
-      firmware-missing -> gboolean: 
-    
-      nm-plugin-missing -> gboolean: 
-    
-      ip4-config -> NMIPConfig: 
-    
-      dhcp4-config -> NMDhcpConfig: 
-    
-      ip6-config -> NMIPConfig: 
-    
-      state -> NMDeviceState: 
-    
-      state-reason -> guint: 
-    
-      product -> gchararray: 
-    
-      vendor -> gchararray: 
-    
-      dhcp6-config -> NMDhcpConfig: 
-    
-      ip-interface -> gchararray: 
-    
-      device-type -> NMDeviceType: 
-    
-      active-connection -> NMActiveConnection: 
-    
-      available-connections -> GPtrArray: 
-    
-      physical-port-id -> gchararray: 
-    
-      mtu -> guint: 
-    
-      metered -> guint: 
-    
-      lldp-neighbors -> GPtrArray: 
-    
-      ip4-connectivity -> NMConnectivityState: 
-    
-      ip6-connectivity -> NMConnectivityState: 
-    
-      interface-flags -> guint: 
-    
-      hw-address -> gchararray: 
-    
-      ports -> GPtrArray: 
-    
+      interface -> gchararray:
+
+      udi -> gchararray:
+
+      path -> gchararray:
+
+      driver -> gchararray:
+
+      driver-version -> gchararray:
+
+      firmware-version -> gchararray:
+
+      capabilities -> NMDeviceCapabilities:
+
+      real -> gboolean:
+
+      managed -> gboolean:
+
+      autoconnect -> gboolean:
+
+      firmware-missing -> gboolean:
+
+      nm-plugin-missing -> gboolean:
+
+      ip4-config -> NMIPConfig:
+
+      dhcp4-config -> NMDhcpConfig:
+
+      ip6-config -> NMIPConfig:
+
+      state -> NMDeviceState:
+
+      state-reason -> guint:
+
+      product -> gchararray:
+
+      vendor -> gchararray:
+
+      dhcp6-config -> NMDhcpConfig:
+
+      ip-interface -> gchararray:
+
+      device-type -> NMDeviceType:
+
+      active-connection -> NMActiveConnection:
+
+      available-connections -> GPtrArray:
+
+      physical-port-id -> gchararray:
+
+      mtu -> guint:
+
+      metered -> guint:
+
+      lldp-neighbors -> GPtrArray:
+
+      ip4-connectivity -> NMConnectivityState:
+
+      ip6-connectivity -> NMConnectivityState:
+
+      interface-flags -> guint:
+
+      hw-address -> gchararray:
+
+      ports -> GPtrArray:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -2563,12 +2574,12 @@ class DeviceBridge(Device):
         state_reason: int
         udi: str
         vendor: str
-        client: Optional[Client]
+        client: Client | None
     props: Props = ...
     def __init__(self, autoconnect: bool = ...): ...
     def get_carrier(self) -> bool: ...
     def get_slaves(self) -> list[Device]: ...
-    
+
 
 class DeviceBridgeClass(GObject.GPointer): ...
 
@@ -2583,87 +2594,87 @@ class DeviceBt(Device):
     Object NMDeviceBt
 
     Properties from NMDeviceBt:
-      name -> gchararray: 
-    
-      bt-capabilities -> NMBluetoothCapabilities: 
-    
+      name -> gchararray:
+
+      bt-capabilities -> NMBluetoothCapabilities:
+
 
     Signals from NMDevice:
       state-changed (guint, guint, guint)
 
     Properties from NMDevice:
-      interface -> gchararray: 
-    
-      udi -> gchararray: 
-    
-      path -> gchararray: 
-    
-      driver -> gchararray: 
-    
-      driver-version -> gchararray: 
-    
-      firmware-version -> gchararray: 
-    
-      capabilities -> NMDeviceCapabilities: 
-    
-      real -> gboolean: 
-    
-      managed -> gboolean: 
-    
-      autoconnect -> gboolean: 
-    
-      firmware-missing -> gboolean: 
-    
-      nm-plugin-missing -> gboolean: 
-    
-      ip4-config -> NMIPConfig: 
-    
-      dhcp4-config -> NMDhcpConfig: 
-    
-      ip6-config -> NMIPConfig: 
-    
-      state -> NMDeviceState: 
-    
-      state-reason -> guint: 
-    
-      product -> gchararray: 
-    
-      vendor -> gchararray: 
-    
-      dhcp6-config -> NMDhcpConfig: 
-    
-      ip-interface -> gchararray: 
-    
-      device-type -> NMDeviceType: 
-    
-      active-connection -> NMActiveConnection: 
-    
-      available-connections -> GPtrArray: 
-    
-      physical-port-id -> gchararray: 
-    
-      mtu -> guint: 
-    
-      metered -> guint: 
-    
-      lldp-neighbors -> GPtrArray: 
-    
-      ip4-connectivity -> NMConnectivityState: 
-    
-      ip6-connectivity -> NMConnectivityState: 
-    
-      interface-flags -> guint: 
-    
-      hw-address -> gchararray: 
-    
-      ports -> GPtrArray: 
-    
+      interface -> gchararray:
+
+      udi -> gchararray:
+
+      path -> gchararray:
+
+      driver -> gchararray:
+
+      driver-version -> gchararray:
+
+      firmware-version -> gchararray:
+
+      capabilities -> NMDeviceCapabilities:
+
+      real -> gboolean:
+
+      managed -> gboolean:
+
+      autoconnect -> gboolean:
+
+      firmware-missing -> gboolean:
+
+      nm-plugin-missing -> gboolean:
+
+      ip4-config -> NMIPConfig:
+
+      dhcp4-config -> NMDhcpConfig:
+
+      ip6-config -> NMIPConfig:
+
+      state -> NMDeviceState:
+
+      state-reason -> guint:
+
+      product -> gchararray:
+
+      vendor -> gchararray:
+
+      dhcp6-config -> NMDhcpConfig:
+
+      ip-interface -> gchararray:
+
+      device-type -> NMDeviceType:
+
+      active-connection -> NMActiveConnection:
+
+      available-connections -> GPtrArray:
+
+      physical-port-id -> gchararray:
+
+      mtu -> guint:
+
+      metered -> guint:
+
+      lldp-neighbors -> GPtrArray:
+
+      ip4-connectivity -> NMConnectivityState:
+
+      ip6-connectivity -> NMConnectivityState:
+
+      interface-flags -> guint:
+
+      hw-address -> gchararray:
+
+      ports -> GPtrArray:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -2704,12 +2715,12 @@ class DeviceBt(Device):
         state_reason: int
         udi: str
         vendor: str
-        client: Optional[Client]
+        client: Client | None
     props: Props = ...
     def __init__(self, autoconnect: bool = ...): ...
     def get_capabilities(self) -> BluetoothCapabilities: ...  # type: ignore
     def get_name(self) -> str: ...
-    
+
 
 class DeviceBtClass(GObject.GPointer): ...
 
@@ -2729,78 +2740,78 @@ class DeviceDummy(Device):
       state-changed (guint, guint, guint)
 
     Properties from NMDevice:
-      interface -> gchararray: 
-    
-      udi -> gchararray: 
-    
-      path -> gchararray: 
-    
-      driver -> gchararray: 
-    
-      driver-version -> gchararray: 
-    
-      firmware-version -> gchararray: 
-    
-      capabilities -> NMDeviceCapabilities: 
-    
-      real -> gboolean: 
-    
-      managed -> gboolean: 
-    
-      autoconnect -> gboolean: 
-    
-      firmware-missing -> gboolean: 
-    
-      nm-plugin-missing -> gboolean: 
-    
-      ip4-config -> NMIPConfig: 
-    
-      dhcp4-config -> NMDhcpConfig: 
-    
-      ip6-config -> NMIPConfig: 
-    
-      state -> NMDeviceState: 
-    
-      state-reason -> guint: 
-    
-      product -> gchararray: 
-    
-      vendor -> gchararray: 
-    
-      dhcp6-config -> NMDhcpConfig: 
-    
-      ip-interface -> gchararray: 
-    
-      device-type -> NMDeviceType: 
-    
-      active-connection -> NMActiveConnection: 
-    
-      available-connections -> GPtrArray: 
-    
-      physical-port-id -> gchararray: 
-    
-      mtu -> guint: 
-    
-      metered -> guint: 
-    
-      lldp-neighbors -> GPtrArray: 
-    
-      ip4-connectivity -> NMConnectivityState: 
-    
-      ip6-connectivity -> NMConnectivityState: 
-    
-      interface-flags -> guint: 
-    
-      hw-address -> gchararray: 
-    
-      ports -> GPtrArray: 
-    
+      interface -> gchararray:
+
+      udi -> gchararray:
+
+      path -> gchararray:
+
+      driver -> gchararray:
+
+      driver-version -> gchararray:
+
+      firmware-version -> gchararray:
+
+      capabilities -> NMDeviceCapabilities:
+
+      real -> gboolean:
+
+      managed -> gboolean:
+
+      autoconnect -> gboolean:
+
+      firmware-missing -> gboolean:
+
+      nm-plugin-missing -> gboolean:
+
+      ip4-config -> NMIPConfig:
+
+      dhcp4-config -> NMDhcpConfig:
+
+      ip6-config -> NMIPConfig:
+
+      state -> NMDeviceState:
+
+      state-reason -> guint:
+
+      product -> gchararray:
+
+      vendor -> gchararray:
+
+      dhcp6-config -> NMDhcpConfig:
+
+      ip-interface -> gchararray:
+
+      device-type -> NMDeviceType:
+
+      active-connection -> NMActiveConnection:
+
+      available-connections -> GPtrArray:
+
+      physical-port-id -> gchararray:
+
+      mtu -> guint:
+
+      metered -> guint:
+
+      lldp-neighbors -> GPtrArray:
+
+      ip4-connectivity -> NMConnectivityState:
+
+      ip6-connectivity -> NMConnectivityState:
+
+      interface-flags -> guint:
+
+      hw-address -> gchararray:
+
+      ports -> GPtrArray:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -2839,7 +2850,7 @@ class DeviceDummy(Device):
         state_reason: int
         udi: str
         vendor: str
-        client: Optional[Client]
+        client: Client | None
     props: Props = ...
     def __init__(self, autoconnect: bool = ...): ...
 
@@ -2856,91 +2867,91 @@ class DeviceEthernet(Device):
     Object NMDeviceEthernet
 
     Properties from NMDeviceEthernet:
-      perm-hw-address -> gchararray: 
-    
-      speed -> guint: 
-    
-      carrier -> gboolean: 
-    
-      s390-subchannels -> GStrv: 
-    
+      perm-hw-address -> gchararray:
+
+      speed -> guint:
+
+      carrier -> gboolean:
+
+      s390-subchannels -> GStrv:
+
 
     Signals from NMDevice:
       state-changed (guint, guint, guint)
 
     Properties from NMDevice:
-      interface -> gchararray: 
-    
-      udi -> gchararray: 
-    
-      path -> gchararray: 
-    
-      driver -> gchararray: 
-    
-      driver-version -> gchararray: 
-    
-      firmware-version -> gchararray: 
-    
-      capabilities -> NMDeviceCapabilities: 
-    
-      real -> gboolean: 
-    
-      managed -> gboolean: 
-    
-      autoconnect -> gboolean: 
-    
-      firmware-missing -> gboolean: 
-    
-      nm-plugin-missing -> gboolean: 
-    
-      ip4-config -> NMIPConfig: 
-    
-      dhcp4-config -> NMDhcpConfig: 
-    
-      ip6-config -> NMIPConfig: 
-    
-      state -> NMDeviceState: 
-    
-      state-reason -> guint: 
-    
-      product -> gchararray: 
-    
-      vendor -> gchararray: 
-    
-      dhcp6-config -> NMDhcpConfig: 
-    
-      ip-interface -> gchararray: 
-    
-      device-type -> NMDeviceType: 
-    
-      active-connection -> NMActiveConnection: 
-    
-      available-connections -> GPtrArray: 
-    
-      physical-port-id -> gchararray: 
-    
-      mtu -> guint: 
-    
-      metered -> guint: 
-    
-      lldp-neighbors -> GPtrArray: 
-    
-      ip4-connectivity -> NMConnectivityState: 
-    
-      ip6-connectivity -> NMConnectivityState: 
-    
-      interface-flags -> guint: 
-    
-      hw-address -> gchararray: 
-    
-      ports -> GPtrArray: 
-    
+      interface -> gchararray:
+
+      udi -> gchararray:
+
+      path -> gchararray:
+
+      driver -> gchararray:
+
+      driver-version -> gchararray:
+
+      firmware-version -> gchararray:
+
+      capabilities -> NMDeviceCapabilities:
+
+      real -> gboolean:
+
+      managed -> gboolean:
+
+      autoconnect -> gboolean:
+
+      firmware-missing -> gboolean:
+
+      nm-plugin-missing -> gboolean:
+
+      ip4-config -> NMIPConfig:
+
+      dhcp4-config -> NMDhcpConfig:
+
+      ip6-config -> NMIPConfig:
+
+      state -> NMDeviceState:
+
+      state-reason -> guint:
+
+      product -> gchararray:
+
+      vendor -> gchararray:
+
+      dhcp6-config -> NMDhcpConfig:
+
+      ip-interface -> gchararray:
+
+      device-type -> NMDeviceType:
+
+      active-connection -> NMActiveConnection:
+
+      available-connections -> GPtrArray:
+
+      physical-port-id -> gchararray:
+
+      mtu -> guint:
+
+      metered -> guint:
+
+      lldp-neighbors -> GPtrArray:
+
+      ip4-connectivity -> NMConnectivityState:
+
+      ip6-connectivity -> NMConnectivityState:
+
+      interface-flags -> guint:
+
+      hw-address -> gchararray:
+
+      ports -> GPtrArray:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -2983,14 +2994,14 @@ class DeviceEthernet(Device):
         state_reason: int
         udi: str
         vendor: str
-        client: Optional[Client]
+        client: Client | None
     props: Props = ...
     def __init__(self, autoconnect: bool = ...): ...
     def get_carrier(self) -> bool: ...
     def get_permanent_hw_address(self) -> str: ...
     def get_s390_subchannels(self) -> list[str]: ...
     def get_speed(self) -> int: ...
-    
+
 
 class DeviceEthernetClass(GObject.GPointer): ...
 
@@ -3005,85 +3016,85 @@ class DeviceGeneric(Device):
     Object NMDeviceGeneric
 
     Properties from NMDeviceGeneric:
-      type-description -> gchararray: 
-    
+      type-description -> gchararray:
+
 
     Signals from NMDevice:
       state-changed (guint, guint, guint)
 
     Properties from NMDevice:
-      interface -> gchararray: 
-    
-      udi -> gchararray: 
-    
-      path -> gchararray: 
-    
-      driver -> gchararray: 
-    
-      driver-version -> gchararray: 
-    
-      firmware-version -> gchararray: 
-    
-      capabilities -> NMDeviceCapabilities: 
-    
-      real -> gboolean: 
-    
-      managed -> gboolean: 
-    
-      autoconnect -> gboolean: 
-    
-      firmware-missing -> gboolean: 
-    
-      nm-plugin-missing -> gboolean: 
-    
-      ip4-config -> NMIPConfig: 
-    
-      dhcp4-config -> NMDhcpConfig: 
-    
-      ip6-config -> NMIPConfig: 
-    
-      state -> NMDeviceState: 
-    
-      state-reason -> guint: 
-    
-      product -> gchararray: 
-    
-      vendor -> gchararray: 
-    
-      dhcp6-config -> NMDhcpConfig: 
-    
-      ip-interface -> gchararray: 
-    
-      device-type -> NMDeviceType: 
-    
-      active-connection -> NMActiveConnection: 
-    
-      available-connections -> GPtrArray: 
-    
-      physical-port-id -> gchararray: 
-    
-      mtu -> guint: 
-    
-      metered -> guint: 
-    
-      lldp-neighbors -> GPtrArray: 
-    
-      ip4-connectivity -> NMConnectivityState: 
-    
-      ip6-connectivity -> NMConnectivityState: 
-    
-      interface-flags -> guint: 
-    
-      hw-address -> gchararray: 
-    
-      ports -> GPtrArray: 
-    
+      interface -> gchararray:
+
+      udi -> gchararray:
+
+      path -> gchararray:
+
+      driver -> gchararray:
+
+      driver-version -> gchararray:
+
+      firmware-version -> gchararray:
+
+      capabilities -> NMDeviceCapabilities:
+
+      real -> gboolean:
+
+      managed -> gboolean:
+
+      autoconnect -> gboolean:
+
+      firmware-missing -> gboolean:
+
+      nm-plugin-missing -> gboolean:
+
+      ip4-config -> NMIPConfig:
+
+      dhcp4-config -> NMDhcpConfig:
+
+      ip6-config -> NMIPConfig:
+
+      state -> NMDeviceState:
+
+      state-reason -> guint:
+
+      product -> gchararray:
+
+      vendor -> gchararray:
+
+      dhcp6-config -> NMDhcpConfig:
+
+      ip-interface -> gchararray:
+
+      device-type -> NMDeviceType:
+
+      active-connection -> NMActiveConnection:
+
+      available-connections -> GPtrArray:
+
+      physical-port-id -> gchararray:
+
+      mtu -> guint:
+
+      metered -> guint:
+
+      lldp-neighbors -> GPtrArray:
+
+      ip4-connectivity -> NMConnectivityState:
+
+      ip6-connectivity -> NMConnectivityState:
+
+      interface-flags -> guint:
+
+      hw-address -> gchararray:
+
+      ports -> GPtrArray:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -3123,7 +3134,7 @@ class DeviceGeneric(Device):
         state_reason: int
         udi: str
         vendor: str
-        client: Optional[Client]
+        client: Client | None
     props: Props = ...
     def __init__(self, autoconnect: bool = ...): ...
 
@@ -3140,93 +3151,93 @@ class DeviceHsr(Device):
     Object NMDeviceHsr
 
     Properties from NMDeviceHsr:
-      port1 -> NMDevice: 
-    
-      port2 -> NMDevice: 
-    
-      supervision-address -> gchararray: 
-    
-      multicast-spec -> guchar: 
-    
-      prp -> gboolean: 
-    
+      port1 -> NMDevice:
+
+      port2 -> NMDevice:
+
+      supervision-address -> gchararray:
+
+      multicast-spec -> guchar:
+
+      prp -> gboolean:
+
 
     Signals from NMDevice:
       state-changed (guint, guint, guint)
 
     Properties from NMDevice:
-      interface -> gchararray: 
-    
-      udi -> gchararray: 
-    
-      path -> gchararray: 
-    
-      driver -> gchararray: 
-    
-      driver-version -> gchararray: 
-    
-      firmware-version -> gchararray: 
-    
-      capabilities -> NMDeviceCapabilities: 
-    
-      real -> gboolean: 
-    
-      managed -> gboolean: 
-    
-      autoconnect -> gboolean: 
-    
-      firmware-missing -> gboolean: 
-    
-      nm-plugin-missing -> gboolean: 
-    
-      ip4-config -> NMIPConfig: 
-    
-      dhcp4-config -> NMDhcpConfig: 
-    
-      ip6-config -> NMIPConfig: 
-    
-      state -> NMDeviceState: 
-    
-      state-reason -> guint: 
-    
-      product -> gchararray: 
-    
-      vendor -> gchararray: 
-    
-      dhcp6-config -> NMDhcpConfig: 
-    
-      ip-interface -> gchararray: 
-    
-      device-type -> NMDeviceType: 
-    
-      active-connection -> NMActiveConnection: 
-    
-      available-connections -> GPtrArray: 
-    
-      physical-port-id -> gchararray: 
-    
-      mtu -> guint: 
-    
-      metered -> guint: 
-    
-      lldp-neighbors -> GPtrArray: 
-    
-      ip4-connectivity -> NMConnectivityState: 
-    
-      ip6-connectivity -> NMConnectivityState: 
-    
-      interface-flags -> guint: 
-    
-      hw-address -> gchararray: 
-    
-      ports -> GPtrArray: 
-    
+      interface -> gchararray:
+
+      udi -> gchararray:
+
+      path -> gchararray:
+
+      driver -> gchararray:
+
+      driver-version -> gchararray:
+
+      firmware-version -> gchararray:
+
+      capabilities -> NMDeviceCapabilities:
+
+      real -> gboolean:
+
+      managed -> gboolean:
+
+      autoconnect -> gboolean:
+
+      firmware-missing -> gboolean:
+
+      nm-plugin-missing -> gboolean:
+
+      ip4-config -> NMIPConfig:
+
+      dhcp4-config -> NMDhcpConfig:
+
+      ip6-config -> NMIPConfig:
+
+      state -> NMDeviceState:
+
+      state-reason -> guint:
+
+      product -> gchararray:
+
+      vendor -> gchararray:
+
+      dhcp6-config -> NMDhcpConfig:
+
+      ip-interface -> gchararray:
+
+      device-type -> NMDeviceType:
+
+      active-connection -> NMActiveConnection:
+
+      available-connections -> GPtrArray:
+
+      physical-port-id -> gchararray:
+
+      mtu -> guint:
+
+      metered -> guint:
+
+      lldp-neighbors -> GPtrArray:
+
+      ip4-connectivity -> NMConnectivityState:
+
+      ip6-connectivity -> NMConnectivityState:
+
+      interface-flags -> guint:
+
+      hw-address -> gchararray:
+
+      ports -> GPtrArray:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -3270,7 +3281,7 @@ class DeviceHsr(Device):
         state_reason: int
         udi: str
         vendor: str
-        client: Optional[Client]
+        client: Client | None
     props: Props = ...
     def __init__(self, autoconnect: bool = ...): ...
     def get_multicast_spec(self) -> int: ...
@@ -3278,7 +3289,7 @@ class DeviceHsr(Device):
     def get_port2(self) -> Device: ...
     def get_prp(self) -> bool: ...
     def get_supervision_address(self) -> str: ...
-    
+
 
 class DeviceHsrClass(GObject.GPointer): ...
 
@@ -3293,109 +3304,109 @@ class DeviceIPTunnel(Device):
     Object NMDeviceIPTunnel
 
     Properties from NMDeviceIPTunnel:
-      mode -> guint: 
-    
-      parent -> NMDevice: 
-    
-      local -> gchararray: 
-    
-      remote -> gchararray: 
-    
-      ttl -> guchar: 
-    
-      tos -> guchar: 
-    
-      path-mtu-discovery -> gboolean: 
-    
-      input-key -> gchararray: 
-    
-      output-key -> gchararray: 
-    
-      encapsulation-limit -> guchar: 
-    
-      flow-label -> guint: 
-    
-      fwmark -> guint: 
-    
-      flags -> guint: 
-    
+      mode -> guint:
+
+      parent -> NMDevice:
+
+      local -> gchararray:
+
+      remote -> gchararray:
+
+      ttl -> guchar:
+
+      tos -> guchar:
+
+      path-mtu-discovery -> gboolean:
+
+      input-key -> gchararray:
+
+      output-key -> gchararray:
+
+      encapsulation-limit -> guchar:
+
+      flow-label -> guint:
+
+      fwmark -> guint:
+
+      flags -> guint:
+
 
     Signals from NMDevice:
       state-changed (guint, guint, guint)
 
     Properties from NMDevice:
-      interface -> gchararray: 
-    
-      udi -> gchararray: 
-    
-      path -> gchararray: 
-    
-      driver -> gchararray: 
-    
-      driver-version -> gchararray: 
-    
-      firmware-version -> gchararray: 
-    
-      capabilities -> NMDeviceCapabilities: 
-    
-      real -> gboolean: 
-    
-      managed -> gboolean: 
-    
-      autoconnect -> gboolean: 
-    
-      firmware-missing -> gboolean: 
-    
-      nm-plugin-missing -> gboolean: 
-    
-      ip4-config -> NMIPConfig: 
-    
-      dhcp4-config -> NMDhcpConfig: 
-    
-      ip6-config -> NMIPConfig: 
-    
-      state -> NMDeviceState: 
-    
-      state-reason -> guint: 
-    
-      product -> gchararray: 
-    
-      vendor -> gchararray: 
-    
-      dhcp6-config -> NMDhcpConfig: 
-    
-      ip-interface -> gchararray: 
-    
-      device-type -> NMDeviceType: 
-    
-      active-connection -> NMActiveConnection: 
-    
-      available-connections -> GPtrArray: 
-    
-      physical-port-id -> gchararray: 
-    
-      mtu -> guint: 
-    
-      metered -> guint: 
-    
-      lldp-neighbors -> GPtrArray: 
-    
-      ip4-connectivity -> NMConnectivityState: 
-    
-      ip6-connectivity -> NMConnectivityState: 
-    
-      interface-flags -> guint: 
-    
-      hw-address -> gchararray: 
-    
-      ports -> GPtrArray: 
-    
+      interface -> gchararray:
+
+      udi -> gchararray:
+
+      path -> gchararray:
+
+      driver -> gchararray:
+
+      driver-version -> gchararray:
+
+      firmware-version -> gchararray:
+
+      capabilities -> NMDeviceCapabilities:
+
+      real -> gboolean:
+
+      managed -> gboolean:
+
+      autoconnect -> gboolean:
+
+      firmware-missing -> gboolean:
+
+      nm-plugin-missing -> gboolean:
+
+      ip4-config -> NMIPConfig:
+
+      dhcp4-config -> NMDhcpConfig:
+
+      ip6-config -> NMIPConfig:
+
+      state -> NMDeviceState:
+
+      state-reason -> guint:
+
+      product -> gchararray:
+
+      vendor -> gchararray:
+
+      dhcp6-config -> NMDhcpConfig:
+
+      ip-interface -> gchararray:
+
+      device-type -> NMDeviceType:
+
+      active-connection -> NMActiveConnection:
+
+      available-connections -> GPtrArray:
+
+      physical-port-id -> gchararray:
+
+      mtu -> guint:
+
+      metered -> guint:
+
+      lldp-neighbors -> GPtrArray:
+
+      ip4-connectivity -> NMConnectivityState:
+
+      ip6-connectivity -> NMConnectivityState:
+
+      interface-flags -> guint:
+
+      hw-address -> gchararray:
+
+      ports -> GPtrArray:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -3447,7 +3458,7 @@ class DeviceIPTunnel(Device):
         state_reason: int
         udi: str
         vendor: str
-        client: Optional[Client]
+        client: Client | None
     props: Props = ...
     def __init__(self, autoconnect: bool = ...): ...
     def get_encapsulation_limit(self) -> int: ...
@@ -3463,7 +3474,7 @@ class DeviceIPTunnel(Device):
     def get_remote(self) -> str: ...
     def get_tos(self) -> int: ...
     def get_ttl(self) -> int: ...
-    
+
 
 class DeviceIPTunnelClass(GObject.GPointer): ...
 
@@ -3478,85 +3489,85 @@ class DeviceInfiniband(Device):
     Object NMDeviceInfiniband
 
     Properties from NMDeviceInfiniband:
-      carrier -> gboolean: 
-    
+      carrier -> gboolean:
+
 
     Signals from NMDevice:
       state-changed (guint, guint, guint)
 
     Properties from NMDevice:
-      interface -> gchararray: 
-    
-      udi -> gchararray: 
-    
-      path -> gchararray: 
-    
-      driver -> gchararray: 
-    
-      driver-version -> gchararray: 
-    
-      firmware-version -> gchararray: 
-    
-      capabilities -> NMDeviceCapabilities: 
-    
-      real -> gboolean: 
-    
-      managed -> gboolean: 
-    
-      autoconnect -> gboolean: 
-    
-      firmware-missing -> gboolean: 
-    
-      nm-plugin-missing -> gboolean: 
-    
-      ip4-config -> NMIPConfig: 
-    
-      dhcp4-config -> NMDhcpConfig: 
-    
-      ip6-config -> NMIPConfig: 
-    
-      state -> NMDeviceState: 
-    
-      state-reason -> guint: 
-    
-      product -> gchararray: 
-    
-      vendor -> gchararray: 
-    
-      dhcp6-config -> NMDhcpConfig: 
-    
-      ip-interface -> gchararray: 
-    
-      device-type -> NMDeviceType: 
-    
-      active-connection -> NMActiveConnection: 
-    
-      available-connections -> GPtrArray: 
-    
-      physical-port-id -> gchararray: 
-    
-      mtu -> guint: 
-    
-      metered -> guint: 
-    
-      lldp-neighbors -> GPtrArray: 
-    
-      ip4-connectivity -> NMConnectivityState: 
-    
-      ip6-connectivity -> NMConnectivityState: 
-    
-      interface-flags -> guint: 
-    
-      hw-address -> gchararray: 
-    
-      ports -> GPtrArray: 
-    
+      interface -> gchararray:
+
+      udi -> gchararray:
+
+      path -> gchararray:
+
+      driver -> gchararray:
+
+      driver-version -> gchararray:
+
+      firmware-version -> gchararray:
+
+      capabilities -> NMDeviceCapabilities:
+
+      real -> gboolean:
+
+      managed -> gboolean:
+
+      autoconnect -> gboolean:
+
+      firmware-missing -> gboolean:
+
+      nm-plugin-missing -> gboolean:
+
+      ip4-config -> NMIPConfig:
+
+      dhcp4-config -> NMDhcpConfig:
+
+      ip6-config -> NMIPConfig:
+
+      state -> NMDeviceState:
+
+      state-reason -> guint:
+
+      product -> gchararray:
+
+      vendor -> gchararray:
+
+      dhcp6-config -> NMDhcpConfig:
+
+      ip-interface -> gchararray:
+
+      device-type -> NMDeviceType:
+
+      active-connection -> NMActiveConnection:
+
+      available-connections -> GPtrArray:
+
+      physical-port-id -> gchararray:
+
+      mtu -> guint:
+
+      metered -> guint:
+
+      lldp-neighbors -> GPtrArray:
+
+      ip4-connectivity -> NMConnectivityState:
+
+      ip6-connectivity -> NMConnectivityState:
+
+      interface-flags -> guint:
+
+      hw-address -> gchararray:
+
+      ports -> GPtrArray:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -3596,11 +3607,11 @@ class DeviceInfiniband(Device):
         state_reason: int
         udi: str
         vendor: str
-        client: Optional[Client]
+        client: Client | None
     props: Props = ...
     def __init__(self, autoconnect: bool = ...): ...
     def get_carrier(self) -> bool: ...
-    
+
 
 class DeviceInfinibandClass(GObject.GPointer): ...
 
@@ -3618,78 +3629,78 @@ class DeviceLoopback(Device):
       state-changed (guint, guint, guint)
 
     Properties from NMDevice:
-      interface -> gchararray: 
-    
-      udi -> gchararray: 
-    
-      path -> gchararray: 
-    
-      driver -> gchararray: 
-    
-      driver-version -> gchararray: 
-    
-      firmware-version -> gchararray: 
-    
-      capabilities -> NMDeviceCapabilities: 
-    
-      real -> gboolean: 
-    
-      managed -> gboolean: 
-    
-      autoconnect -> gboolean: 
-    
-      firmware-missing -> gboolean: 
-    
-      nm-plugin-missing -> gboolean: 
-    
-      ip4-config -> NMIPConfig: 
-    
-      dhcp4-config -> NMDhcpConfig: 
-    
-      ip6-config -> NMIPConfig: 
-    
-      state -> NMDeviceState: 
-    
-      state-reason -> guint: 
-    
-      product -> gchararray: 
-    
-      vendor -> gchararray: 
-    
-      dhcp6-config -> NMDhcpConfig: 
-    
-      ip-interface -> gchararray: 
-    
-      device-type -> NMDeviceType: 
-    
-      active-connection -> NMActiveConnection: 
-    
-      available-connections -> GPtrArray: 
-    
-      physical-port-id -> gchararray: 
-    
-      mtu -> guint: 
-    
-      metered -> guint: 
-    
-      lldp-neighbors -> GPtrArray: 
-    
-      ip4-connectivity -> NMConnectivityState: 
-    
-      ip6-connectivity -> NMConnectivityState: 
-    
-      interface-flags -> guint: 
-    
-      hw-address -> gchararray: 
-    
-      ports -> GPtrArray: 
-    
+      interface -> gchararray:
+
+      udi -> gchararray:
+
+      path -> gchararray:
+
+      driver -> gchararray:
+
+      driver-version -> gchararray:
+
+      firmware-version -> gchararray:
+
+      capabilities -> NMDeviceCapabilities:
+
+      real -> gboolean:
+
+      managed -> gboolean:
+
+      autoconnect -> gboolean:
+
+      firmware-missing -> gboolean:
+
+      nm-plugin-missing -> gboolean:
+
+      ip4-config -> NMIPConfig:
+
+      dhcp4-config -> NMDhcpConfig:
+
+      ip6-config -> NMIPConfig:
+
+      state -> NMDeviceState:
+
+      state-reason -> guint:
+
+      product -> gchararray:
+
+      vendor -> gchararray:
+
+      dhcp6-config -> NMDhcpConfig:
+
+      ip-interface -> gchararray:
+
+      device-type -> NMDeviceType:
+
+      active-connection -> NMActiveConnection:
+
+      available-connections -> GPtrArray:
+
+      physical-port-id -> gchararray:
+
+      mtu -> guint:
+
+      metered -> guint:
+
+      lldp-neighbors -> GPtrArray:
+
+      ip4-connectivity -> NMConnectivityState:
+
+      ip6-connectivity -> NMConnectivityState:
+
+      interface-flags -> guint:
+
+      hw-address -> gchararray:
+
+      ports -> GPtrArray:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -3728,7 +3739,7 @@ class DeviceLoopback(Device):
         state_reason: int
         udi: str
         vendor: str
-        client: Optional[Client]
+        client: Client | None
     props: Props = ...
     def __init__(self, autoconnect: bool = ...): ...
 
@@ -3745,109 +3756,109 @@ class DeviceMacsec(Device):
     Object NMDeviceMacsec
 
     Properties from NMDeviceMacsec:
-      parent -> NMDevice: 
-    
-      sci -> guint64: 
-    
-      cipher-suite -> guint64: 
-    
-      icv-length -> guchar: 
-    
-      window -> guint: 
-    
-      encoding-sa -> guchar: 
-    
-      encrypt -> gboolean: 
-    
-      protect -> gboolean: 
-    
-      include-sci -> gboolean: 
-    
-      es -> gboolean: 
-    
-      scb -> gboolean: 
-    
-      replay-protect -> gboolean: 
-    
-      validation -> gchararray: 
-    
+      parent -> NMDevice:
+
+      sci -> guint64:
+
+      cipher-suite -> guint64:
+
+      icv-length -> guchar:
+
+      window -> guint:
+
+      encoding-sa -> guchar:
+
+      encrypt -> gboolean:
+
+      protect -> gboolean:
+
+      include-sci -> gboolean:
+
+      es -> gboolean:
+
+      scb -> gboolean:
+
+      replay-protect -> gboolean:
+
+      validation -> gchararray:
+
 
     Signals from NMDevice:
       state-changed (guint, guint, guint)
 
     Properties from NMDevice:
-      interface -> gchararray: 
-    
-      udi -> gchararray: 
-    
-      path -> gchararray: 
-    
-      driver -> gchararray: 
-    
-      driver-version -> gchararray: 
-    
-      firmware-version -> gchararray: 
-    
-      capabilities -> NMDeviceCapabilities: 
-    
-      real -> gboolean: 
-    
-      managed -> gboolean: 
-    
-      autoconnect -> gboolean: 
-    
-      firmware-missing -> gboolean: 
-    
-      nm-plugin-missing -> gboolean: 
-    
-      ip4-config -> NMIPConfig: 
-    
-      dhcp4-config -> NMDhcpConfig: 
-    
-      ip6-config -> NMIPConfig: 
-    
-      state -> NMDeviceState: 
-    
-      state-reason -> guint: 
-    
-      product -> gchararray: 
-    
-      vendor -> gchararray: 
-    
-      dhcp6-config -> NMDhcpConfig: 
-    
-      ip-interface -> gchararray: 
-    
-      device-type -> NMDeviceType: 
-    
-      active-connection -> NMActiveConnection: 
-    
-      available-connections -> GPtrArray: 
-    
-      physical-port-id -> gchararray: 
-    
-      mtu -> guint: 
-    
-      metered -> guint: 
-    
-      lldp-neighbors -> GPtrArray: 
-    
-      ip4-connectivity -> NMConnectivityState: 
-    
-      ip6-connectivity -> NMConnectivityState: 
-    
-      interface-flags -> guint: 
-    
-      hw-address -> gchararray: 
-    
-      ports -> GPtrArray: 
-    
+      interface -> gchararray:
+
+      udi -> gchararray:
+
+      path -> gchararray:
+
+      driver -> gchararray:
+
+      driver-version -> gchararray:
+
+      firmware-version -> gchararray:
+
+      capabilities -> NMDeviceCapabilities:
+
+      real -> gboolean:
+
+      managed -> gboolean:
+
+      autoconnect -> gboolean:
+
+      firmware-missing -> gboolean:
+
+      nm-plugin-missing -> gboolean:
+
+      ip4-config -> NMIPConfig:
+
+      dhcp4-config -> NMDhcpConfig:
+
+      ip6-config -> NMIPConfig:
+
+      state -> NMDeviceState:
+
+      state-reason -> guint:
+
+      product -> gchararray:
+
+      vendor -> gchararray:
+
+      dhcp6-config -> NMDhcpConfig:
+
+      ip-interface -> gchararray:
+
+      device-type -> NMDeviceType:
+
+      active-connection -> NMActiveConnection:
+
+      available-connections -> GPtrArray:
+
+      physical-port-id -> gchararray:
+
+      mtu -> guint:
+
+      metered -> guint:
+
+      lldp-neighbors -> GPtrArray:
+
+      ip4-connectivity -> NMConnectivityState:
+
+      ip6-connectivity -> NMConnectivityState:
+
+      interface-flags -> guint:
+
+      hw-address -> gchararray:
+
+      ports -> GPtrArray:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -3899,7 +3910,7 @@ class DeviceMacsec(Device):
         state_reason: int
         udi: str
         vendor: str
-        client: Optional[Client]
+        client: Client | None
     props: Props = ...
     def __init__(self, autoconnect: bool = ...): ...
     def get_cipher_suite(self) -> int: ...
@@ -3915,7 +3926,7 @@ class DeviceMacsec(Device):
     def get_sci(self) -> int: ...
     def get_validation(self) -> str: ...
     def get_window(self) -> int: ...
-    
+
 
 class DeviceMacsecClass(GObject.GPointer): ...
 
@@ -3930,91 +3941,91 @@ class DeviceMacvlan(Device):
     Object NMDeviceMacvlan
 
     Properties from NMDeviceMacvlan:
-      parent -> NMDevice: 
-    
-      mode -> gchararray: 
-    
-      no-promisc -> gboolean: 
-    
-      tap -> gboolean: 
-    
+      parent -> NMDevice:
+
+      mode -> gchararray:
+
+      no-promisc -> gboolean:
+
+      tap -> gboolean:
+
 
     Signals from NMDevice:
       state-changed (guint, guint, guint)
 
     Properties from NMDevice:
-      interface -> gchararray: 
-    
-      udi -> gchararray: 
-    
-      path -> gchararray: 
-    
-      driver -> gchararray: 
-    
-      driver-version -> gchararray: 
-    
-      firmware-version -> gchararray: 
-    
-      capabilities -> NMDeviceCapabilities: 
-    
-      real -> gboolean: 
-    
-      managed -> gboolean: 
-    
-      autoconnect -> gboolean: 
-    
-      firmware-missing -> gboolean: 
-    
-      nm-plugin-missing -> gboolean: 
-    
-      ip4-config -> NMIPConfig: 
-    
-      dhcp4-config -> NMDhcpConfig: 
-    
-      ip6-config -> NMIPConfig: 
-    
-      state -> NMDeviceState: 
-    
-      state-reason -> guint: 
-    
-      product -> gchararray: 
-    
-      vendor -> gchararray: 
-    
-      dhcp6-config -> NMDhcpConfig: 
-    
-      ip-interface -> gchararray: 
-    
-      device-type -> NMDeviceType: 
-    
-      active-connection -> NMActiveConnection: 
-    
-      available-connections -> GPtrArray: 
-    
-      physical-port-id -> gchararray: 
-    
-      mtu -> guint: 
-    
-      metered -> guint: 
-    
-      lldp-neighbors -> GPtrArray: 
-    
-      ip4-connectivity -> NMConnectivityState: 
-    
-      ip6-connectivity -> NMConnectivityState: 
-    
-      interface-flags -> guint: 
-    
-      hw-address -> gchararray: 
-    
-      ports -> GPtrArray: 
-    
+      interface -> gchararray:
+
+      udi -> gchararray:
+
+      path -> gchararray:
+
+      driver -> gchararray:
+
+      driver-version -> gchararray:
+
+      firmware-version -> gchararray:
+
+      capabilities -> NMDeviceCapabilities:
+
+      real -> gboolean:
+
+      managed -> gboolean:
+
+      autoconnect -> gboolean:
+
+      firmware-missing -> gboolean:
+
+      nm-plugin-missing -> gboolean:
+
+      ip4-config -> NMIPConfig:
+
+      dhcp4-config -> NMDhcpConfig:
+
+      ip6-config -> NMIPConfig:
+
+      state -> NMDeviceState:
+
+      state-reason -> guint:
+
+      product -> gchararray:
+
+      vendor -> gchararray:
+
+      dhcp6-config -> NMDhcpConfig:
+
+      ip-interface -> gchararray:
+
+      device-type -> NMDeviceType:
+
+      active-connection -> NMActiveConnection:
+
+      available-connections -> GPtrArray:
+
+      physical-port-id -> gchararray:
+
+      mtu -> guint:
+
+      metered -> guint:
+
+      lldp-neighbors -> GPtrArray:
+
+      ip4-connectivity -> NMConnectivityState:
+
+      ip6-connectivity -> NMConnectivityState:
+
+      interface-flags -> guint:
+
+      hw-address -> gchararray:
+
+      ports -> GPtrArray:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -4057,14 +4068,14 @@ class DeviceMacvlan(Device):
         state_reason: int
         udi: str
         vendor: str
-        client: Optional[Client]
+        client: Client | None
     props: Props = ...
     def __init__(self, autoconnect: bool = ...): ...
     def get_mode(self) -> str: ...
     def get_no_promisc(self) -> bool: ...
     def get_parent(self) -> Device: ...
     def get_tap(self) -> bool: ...
-    
+
 
 class DeviceMacvlanClass(GObject.GPointer): ...
 
@@ -4079,93 +4090,93 @@ class DeviceModem(Device):
     Object NMDeviceModem
 
     Properties from NMDeviceModem:
-      modem-capabilities -> NMDeviceModemCapabilities: 
-    
-      current-capabilities -> NMDeviceModemCapabilities: 
-    
-      device-id -> gchararray: 
-    
-      operator-code -> gchararray: 
-    
-      apn -> gchararray: 
-    
+      modem-capabilities -> NMDeviceModemCapabilities:
+
+      current-capabilities -> NMDeviceModemCapabilities:
+
+      device-id -> gchararray:
+
+      operator-code -> gchararray:
+
+      apn -> gchararray:
+
 
     Signals from NMDevice:
       state-changed (guint, guint, guint)
 
     Properties from NMDevice:
-      interface -> gchararray: 
-    
-      udi -> gchararray: 
-    
-      path -> gchararray: 
-    
-      driver -> gchararray: 
-    
-      driver-version -> gchararray: 
-    
-      firmware-version -> gchararray: 
-    
-      capabilities -> NMDeviceCapabilities: 
-    
-      real -> gboolean: 
-    
-      managed -> gboolean: 
-    
-      autoconnect -> gboolean: 
-    
-      firmware-missing -> gboolean: 
-    
-      nm-plugin-missing -> gboolean: 
-    
-      ip4-config -> NMIPConfig: 
-    
-      dhcp4-config -> NMDhcpConfig: 
-    
-      ip6-config -> NMIPConfig: 
-    
-      state -> NMDeviceState: 
-    
-      state-reason -> guint: 
-    
-      product -> gchararray: 
-    
-      vendor -> gchararray: 
-    
-      dhcp6-config -> NMDhcpConfig: 
-    
-      ip-interface -> gchararray: 
-    
-      device-type -> NMDeviceType: 
-    
-      active-connection -> NMActiveConnection: 
-    
-      available-connections -> GPtrArray: 
-    
-      physical-port-id -> gchararray: 
-    
-      mtu -> guint: 
-    
-      metered -> guint: 
-    
-      lldp-neighbors -> GPtrArray: 
-    
-      ip4-connectivity -> NMConnectivityState: 
-    
-      ip6-connectivity -> NMConnectivityState: 
-    
-      interface-flags -> guint: 
-    
-      hw-address -> gchararray: 
-    
-      ports -> GPtrArray: 
-    
+      interface -> gchararray:
+
+      udi -> gchararray:
+
+      path -> gchararray:
+
+      driver -> gchararray:
+
+      driver-version -> gchararray:
+
+      firmware-version -> gchararray:
+
+      capabilities -> NMDeviceCapabilities:
+
+      real -> gboolean:
+
+      managed -> gboolean:
+
+      autoconnect -> gboolean:
+
+      firmware-missing -> gboolean:
+
+      nm-plugin-missing -> gboolean:
+
+      ip4-config -> NMIPConfig:
+
+      dhcp4-config -> NMDhcpConfig:
+
+      ip6-config -> NMIPConfig:
+
+      state -> NMDeviceState:
+
+      state-reason -> guint:
+
+      product -> gchararray:
+
+      vendor -> gchararray:
+
+      dhcp6-config -> NMDhcpConfig:
+
+      ip-interface -> gchararray:
+
+      device-type -> NMDeviceType:
+
+      active-connection -> NMActiveConnection:
+
+      available-connections -> GPtrArray:
+
+      physical-port-id -> gchararray:
+
+      mtu -> guint:
+
+      metered -> guint:
+
+      lldp-neighbors -> GPtrArray:
+
+      ip4-connectivity -> NMConnectivityState:
+
+      ip6-connectivity -> NMConnectivityState:
+
+      interface-flags -> guint:
+
+      hw-address -> gchararray:
+
+      ports -> GPtrArray:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -4209,7 +4220,7 @@ class DeviceModem(Device):
         state_reason: int
         udi: str
         vendor: str
-        client: Optional[Client]
+        client: Client | None
     props: Props = ...
     def __init__(self, autoconnect: bool = ...): ...
     def get_apn(self) -> str: ...
@@ -4217,7 +4228,7 @@ class DeviceModem(Device):
     def get_device_id(self) -> str: ...
     def get_modem_capabilities(self) -> DeviceModemCapabilities: ...
     def get_operator_code(self) -> str: ...
-    
+
 
 class DeviceModemClass(GObject.GPointer): ...
 
@@ -4232,87 +4243,87 @@ class DeviceOlpcMesh(Device):
     Object NMDeviceOlpcMesh
 
     Properties from NMDeviceOlpcMesh:
-      companion -> NMDeviceWifi: 
-    
-      active-channel -> guint: 
-    
+      companion -> NMDeviceWifi:
+
+      active-channel -> guint:
+
 
     Signals from NMDevice:
       state-changed (guint, guint, guint)
 
     Properties from NMDevice:
-      interface -> gchararray: 
-    
-      udi -> gchararray: 
-    
-      path -> gchararray: 
-    
-      driver -> gchararray: 
-    
-      driver-version -> gchararray: 
-    
-      firmware-version -> gchararray: 
-    
-      capabilities -> NMDeviceCapabilities: 
-    
-      real -> gboolean: 
-    
-      managed -> gboolean: 
-    
-      autoconnect -> gboolean: 
-    
-      firmware-missing -> gboolean: 
-    
-      nm-plugin-missing -> gboolean: 
-    
-      ip4-config -> NMIPConfig: 
-    
-      dhcp4-config -> NMDhcpConfig: 
-    
-      ip6-config -> NMIPConfig: 
-    
-      state -> NMDeviceState: 
-    
-      state-reason -> guint: 
-    
-      product -> gchararray: 
-    
-      vendor -> gchararray: 
-    
-      dhcp6-config -> NMDhcpConfig: 
-    
-      ip-interface -> gchararray: 
-    
-      device-type -> NMDeviceType: 
-    
-      active-connection -> NMActiveConnection: 
-    
-      available-connections -> GPtrArray: 
-    
-      physical-port-id -> gchararray: 
-    
-      mtu -> guint: 
-    
-      metered -> guint: 
-    
-      lldp-neighbors -> GPtrArray: 
-    
-      ip4-connectivity -> NMConnectivityState: 
-    
-      ip6-connectivity -> NMConnectivityState: 
-    
-      interface-flags -> guint: 
-    
-      hw-address -> gchararray: 
-    
-      ports -> GPtrArray: 
-    
+      interface -> gchararray:
+
+      udi -> gchararray:
+
+      path -> gchararray:
+
+      driver -> gchararray:
+
+      driver-version -> gchararray:
+
+      firmware-version -> gchararray:
+
+      capabilities -> NMDeviceCapabilities:
+
+      real -> gboolean:
+
+      managed -> gboolean:
+
+      autoconnect -> gboolean:
+
+      firmware-missing -> gboolean:
+
+      nm-plugin-missing -> gboolean:
+
+      ip4-config -> NMIPConfig:
+
+      dhcp4-config -> NMDhcpConfig:
+
+      ip6-config -> NMIPConfig:
+
+      state -> NMDeviceState:
+
+      state-reason -> guint:
+
+      product -> gchararray:
+
+      vendor -> gchararray:
+
+      dhcp6-config -> NMDhcpConfig:
+
+      ip-interface -> gchararray:
+
+      device-type -> NMDeviceType:
+
+      active-connection -> NMActiveConnection:
+
+      available-connections -> GPtrArray:
+
+      physical-port-id -> gchararray:
+
+      mtu -> guint:
+
+      metered -> guint:
+
+      lldp-neighbors -> GPtrArray:
+
+      ip4-connectivity -> NMConnectivityState:
+
+      ip6-connectivity -> NMConnectivityState:
+
+      interface-flags -> guint:
+
+      hw-address -> gchararray:
+
+      ports -> GPtrArray:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -4353,12 +4364,12 @@ class DeviceOlpcMesh(Device):
         state_reason: int
         udi: str
         vendor: str
-        client: Optional[Client]
+        client: Client | None
     props: Props = ...
     def __init__(self, autoconnect: bool = ...): ...
     def get_active_channel(self) -> int: ...
     def get_companion(self) -> DeviceWifi: ...
-    
+
 
 class DeviceOlpcMeshClass(GObject.GPointer): ...
 
@@ -4373,85 +4384,85 @@ class DeviceOvsBridge(Device):
     Object NMDeviceOvsBridge
 
     Properties from NMDeviceOvsBridge:
-      slaves -> GPtrArray: 
-    
+      slaves -> GPtrArray:
+
 
     Signals from NMDevice:
       state-changed (guint, guint, guint)
 
     Properties from NMDevice:
-      interface -> gchararray: 
-    
-      udi -> gchararray: 
-    
-      path -> gchararray: 
-    
-      driver -> gchararray: 
-    
-      driver-version -> gchararray: 
-    
-      firmware-version -> gchararray: 
-    
-      capabilities -> NMDeviceCapabilities: 
-    
-      real -> gboolean: 
-    
-      managed -> gboolean: 
-    
-      autoconnect -> gboolean: 
-    
-      firmware-missing -> gboolean: 
-    
-      nm-plugin-missing -> gboolean: 
-    
-      ip4-config -> NMIPConfig: 
-    
-      dhcp4-config -> NMDhcpConfig: 
-    
-      ip6-config -> NMIPConfig: 
-    
-      state -> NMDeviceState: 
-    
-      state-reason -> guint: 
-    
-      product -> gchararray: 
-    
-      vendor -> gchararray: 
-    
-      dhcp6-config -> NMDhcpConfig: 
-    
-      ip-interface -> gchararray: 
-    
-      device-type -> NMDeviceType: 
-    
-      active-connection -> NMActiveConnection: 
-    
-      available-connections -> GPtrArray: 
-    
-      physical-port-id -> gchararray: 
-    
-      mtu -> guint: 
-    
-      metered -> guint: 
-    
-      lldp-neighbors -> GPtrArray: 
-    
-      ip4-connectivity -> NMConnectivityState: 
-    
-      ip6-connectivity -> NMConnectivityState: 
-    
-      interface-flags -> guint: 
-    
-      hw-address -> gchararray: 
-    
-      ports -> GPtrArray: 
-    
+      interface -> gchararray:
+
+      udi -> gchararray:
+
+      path -> gchararray:
+
+      driver -> gchararray:
+
+      driver-version -> gchararray:
+
+      firmware-version -> gchararray:
+
+      capabilities -> NMDeviceCapabilities:
+
+      real -> gboolean:
+
+      managed -> gboolean:
+
+      autoconnect -> gboolean:
+
+      firmware-missing -> gboolean:
+
+      nm-plugin-missing -> gboolean:
+
+      ip4-config -> NMIPConfig:
+
+      dhcp4-config -> NMDhcpConfig:
+
+      ip6-config -> NMIPConfig:
+
+      state -> NMDeviceState:
+
+      state-reason -> guint:
+
+      product -> gchararray:
+
+      vendor -> gchararray:
+
+      dhcp6-config -> NMDhcpConfig:
+
+      ip-interface -> gchararray:
+
+      device-type -> NMDeviceType:
+
+      active-connection -> NMActiveConnection:
+
+      available-connections -> GPtrArray:
+
+      physical-port-id -> gchararray:
+
+      mtu -> guint:
+
+      metered -> guint:
+
+      lldp-neighbors -> GPtrArray:
+
+      ip4-connectivity -> NMConnectivityState:
+
+      ip6-connectivity -> NMConnectivityState:
+
+      interface-flags -> guint:
+
+      hw-address -> gchararray:
+
+      ports -> GPtrArray:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -4491,11 +4502,11 @@ class DeviceOvsBridge(Device):
         state_reason: int
         udi: str
         vendor: str
-        client: Optional[Client]
+        client: Client | None
     props: Props = ...
     def __init__(self, autoconnect: bool = ...): ...
     def get_slaves(self) -> list[Device]: ...
-    
+
 
 class DeviceOvsBridgeClass(GObject.GPointer): ...
 
@@ -4513,78 +4524,78 @@ class DeviceOvsInterface(Device):
       state-changed (guint, guint, guint)
 
     Properties from NMDevice:
-      interface -> gchararray: 
-    
-      udi -> gchararray: 
-    
-      path -> gchararray: 
-    
-      driver -> gchararray: 
-    
-      driver-version -> gchararray: 
-    
-      firmware-version -> gchararray: 
-    
-      capabilities -> NMDeviceCapabilities: 
-    
-      real -> gboolean: 
-    
-      managed -> gboolean: 
-    
-      autoconnect -> gboolean: 
-    
-      firmware-missing -> gboolean: 
-    
-      nm-plugin-missing -> gboolean: 
-    
-      ip4-config -> NMIPConfig: 
-    
-      dhcp4-config -> NMDhcpConfig: 
-    
-      ip6-config -> NMIPConfig: 
-    
-      state -> NMDeviceState: 
-    
-      state-reason -> guint: 
-    
-      product -> gchararray: 
-    
-      vendor -> gchararray: 
-    
-      dhcp6-config -> NMDhcpConfig: 
-    
-      ip-interface -> gchararray: 
-    
-      device-type -> NMDeviceType: 
-    
-      active-connection -> NMActiveConnection: 
-    
-      available-connections -> GPtrArray: 
-    
-      physical-port-id -> gchararray: 
-    
-      mtu -> guint: 
-    
-      metered -> guint: 
-    
-      lldp-neighbors -> GPtrArray: 
-    
-      ip4-connectivity -> NMConnectivityState: 
-    
-      ip6-connectivity -> NMConnectivityState: 
-    
-      interface-flags -> guint: 
-    
-      hw-address -> gchararray: 
-    
-      ports -> GPtrArray: 
-    
+      interface -> gchararray:
+
+      udi -> gchararray:
+
+      path -> gchararray:
+
+      driver -> gchararray:
+
+      driver-version -> gchararray:
+
+      firmware-version -> gchararray:
+
+      capabilities -> NMDeviceCapabilities:
+
+      real -> gboolean:
+
+      managed -> gboolean:
+
+      autoconnect -> gboolean:
+
+      firmware-missing -> gboolean:
+
+      nm-plugin-missing -> gboolean:
+
+      ip4-config -> NMIPConfig:
+
+      dhcp4-config -> NMDhcpConfig:
+
+      ip6-config -> NMIPConfig:
+
+      state -> NMDeviceState:
+
+      state-reason -> guint:
+
+      product -> gchararray:
+
+      vendor -> gchararray:
+
+      dhcp6-config -> NMDhcpConfig:
+
+      ip-interface -> gchararray:
+
+      device-type -> NMDeviceType:
+
+      active-connection -> NMActiveConnection:
+
+      available-connections -> GPtrArray:
+
+      physical-port-id -> gchararray:
+
+      mtu -> guint:
+
+      metered -> guint:
+
+      lldp-neighbors -> GPtrArray:
+
+      ip4-connectivity -> NMConnectivityState:
+
+      ip6-connectivity -> NMConnectivityState:
+
+      interface-flags -> guint:
+
+      hw-address -> gchararray:
+
+      ports -> GPtrArray:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -4623,7 +4634,7 @@ class DeviceOvsInterface(Device):
         state_reason: int
         udi: str
         vendor: str
-        client: Optional[Client]
+        client: Client | None
     props: Props = ...
     def __init__(self, autoconnect: bool = ...): ...
 
@@ -4640,85 +4651,85 @@ class DeviceOvsPort(Device):
     Object NMDeviceOvsPort
 
     Properties from NMDeviceOvsPort:
-      slaves -> GPtrArray: 
-    
+      slaves -> GPtrArray:
+
 
     Signals from NMDevice:
       state-changed (guint, guint, guint)
 
     Properties from NMDevice:
-      interface -> gchararray: 
-    
-      udi -> gchararray: 
-    
-      path -> gchararray: 
-    
-      driver -> gchararray: 
-    
-      driver-version -> gchararray: 
-    
-      firmware-version -> gchararray: 
-    
-      capabilities -> NMDeviceCapabilities: 
-    
-      real -> gboolean: 
-    
-      managed -> gboolean: 
-    
-      autoconnect -> gboolean: 
-    
-      firmware-missing -> gboolean: 
-    
-      nm-plugin-missing -> gboolean: 
-    
-      ip4-config -> NMIPConfig: 
-    
-      dhcp4-config -> NMDhcpConfig: 
-    
-      ip6-config -> NMIPConfig: 
-    
-      state -> NMDeviceState: 
-    
-      state-reason -> guint: 
-    
-      product -> gchararray: 
-    
-      vendor -> gchararray: 
-    
-      dhcp6-config -> NMDhcpConfig: 
-    
-      ip-interface -> gchararray: 
-    
-      device-type -> NMDeviceType: 
-    
-      active-connection -> NMActiveConnection: 
-    
-      available-connections -> GPtrArray: 
-    
-      physical-port-id -> gchararray: 
-    
-      mtu -> guint: 
-    
-      metered -> guint: 
-    
-      lldp-neighbors -> GPtrArray: 
-    
-      ip4-connectivity -> NMConnectivityState: 
-    
-      ip6-connectivity -> NMConnectivityState: 
-    
-      interface-flags -> guint: 
-    
-      hw-address -> gchararray: 
-    
-      ports -> GPtrArray: 
-    
+      interface -> gchararray:
+
+      udi -> gchararray:
+
+      path -> gchararray:
+
+      driver -> gchararray:
+
+      driver-version -> gchararray:
+
+      firmware-version -> gchararray:
+
+      capabilities -> NMDeviceCapabilities:
+
+      real -> gboolean:
+
+      managed -> gboolean:
+
+      autoconnect -> gboolean:
+
+      firmware-missing -> gboolean:
+
+      nm-plugin-missing -> gboolean:
+
+      ip4-config -> NMIPConfig:
+
+      dhcp4-config -> NMDhcpConfig:
+
+      ip6-config -> NMIPConfig:
+
+      state -> NMDeviceState:
+
+      state-reason -> guint:
+
+      product -> gchararray:
+
+      vendor -> gchararray:
+
+      dhcp6-config -> NMDhcpConfig:
+
+      ip-interface -> gchararray:
+
+      device-type -> NMDeviceType:
+
+      active-connection -> NMActiveConnection:
+
+      available-connections -> GPtrArray:
+
+      physical-port-id -> gchararray:
+
+      mtu -> guint:
+
+      metered -> guint:
+
+      lldp-neighbors -> GPtrArray:
+
+      ip4-connectivity -> NMConnectivityState:
+
+      ip6-connectivity -> NMConnectivityState:
+
+      interface-flags -> guint:
+
+      hw-address -> gchararray:
+
+      ports -> GPtrArray:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -4758,11 +4769,11 @@ class DeviceOvsPort(Device):
         state_reason: int
         udi: str
         vendor: str
-        client: Optional[Client]
+        client: Client | None
     props: Props = ...
     def __init__(self, autoconnect: bool = ...): ...
     def get_slaves(self) -> list[Device]: ...
-    
+
 
 class DeviceOvsPortClass(GObject.GPointer): ...
 
@@ -4780,78 +4791,78 @@ class DevicePpp(Device):
       state-changed (guint, guint, guint)
 
     Properties from NMDevice:
-      interface -> gchararray: 
-    
-      udi -> gchararray: 
-    
-      path -> gchararray: 
-    
-      driver -> gchararray: 
-    
-      driver-version -> gchararray: 
-    
-      firmware-version -> gchararray: 
-    
-      capabilities -> NMDeviceCapabilities: 
-    
-      real -> gboolean: 
-    
-      managed -> gboolean: 
-    
-      autoconnect -> gboolean: 
-    
-      firmware-missing -> gboolean: 
-    
-      nm-plugin-missing -> gboolean: 
-    
-      ip4-config -> NMIPConfig: 
-    
-      dhcp4-config -> NMDhcpConfig: 
-    
-      ip6-config -> NMIPConfig: 
-    
-      state -> NMDeviceState: 
-    
-      state-reason -> guint: 
-    
-      product -> gchararray: 
-    
-      vendor -> gchararray: 
-    
-      dhcp6-config -> NMDhcpConfig: 
-    
-      ip-interface -> gchararray: 
-    
-      device-type -> NMDeviceType: 
-    
-      active-connection -> NMActiveConnection: 
-    
-      available-connections -> GPtrArray: 
-    
-      physical-port-id -> gchararray: 
-    
-      mtu -> guint: 
-    
-      metered -> guint: 
-    
-      lldp-neighbors -> GPtrArray: 
-    
-      ip4-connectivity -> NMConnectivityState: 
-    
-      ip6-connectivity -> NMConnectivityState: 
-    
-      interface-flags -> guint: 
-    
-      hw-address -> gchararray: 
-    
-      ports -> GPtrArray: 
-    
+      interface -> gchararray:
+
+      udi -> gchararray:
+
+      path -> gchararray:
+
+      driver -> gchararray:
+
+      driver-version -> gchararray:
+
+      firmware-version -> gchararray:
+
+      capabilities -> NMDeviceCapabilities:
+
+      real -> gboolean:
+
+      managed -> gboolean:
+
+      autoconnect -> gboolean:
+
+      firmware-missing -> gboolean:
+
+      nm-plugin-missing -> gboolean:
+
+      ip4-config -> NMIPConfig:
+
+      dhcp4-config -> NMDhcpConfig:
+
+      ip6-config -> NMIPConfig:
+
+      state -> NMDeviceState:
+
+      state-reason -> guint:
+
+      product -> gchararray:
+
+      vendor -> gchararray:
+
+      dhcp6-config -> NMDhcpConfig:
+
+      ip-interface -> gchararray:
+
+      device-type -> NMDeviceType:
+
+      active-connection -> NMActiveConnection:
+
+      available-connections -> GPtrArray:
+
+      physical-port-id -> gchararray:
+
+      mtu -> guint:
+
+      metered -> guint:
+
+      lldp-neighbors -> GPtrArray:
+
+      ip4-connectivity -> NMConnectivityState:
+
+      ip6-connectivity -> NMConnectivityState:
+
+      interface-flags -> guint:
+
+      hw-address -> gchararray:
+
+      ports -> GPtrArray:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -4890,7 +4901,7 @@ class DevicePpp(Device):
         state_reason: int
         udi: str
         vendor: str
-        client: Optional[Client]
+        client: Client | None
     props: Props = ...
     def __init__(self, autoconnect: bool = ...): ...
 
@@ -4907,89 +4918,89 @@ class DeviceTeam(Device):
     Object NMDeviceTeam
 
     Properties from NMDeviceTeam:
-      carrier -> gboolean: 
-    
-      slaves -> GPtrArray: 
-    
-      config -> gchararray: 
-    
+      carrier -> gboolean:
+
+      slaves -> GPtrArray:
+
+      config -> gchararray:
+
 
     Signals from NMDevice:
       state-changed (guint, guint, guint)
 
     Properties from NMDevice:
-      interface -> gchararray: 
-    
-      udi -> gchararray: 
-    
-      path -> gchararray: 
-    
-      driver -> gchararray: 
-    
-      driver-version -> gchararray: 
-    
-      firmware-version -> gchararray: 
-    
-      capabilities -> NMDeviceCapabilities: 
-    
-      real -> gboolean: 
-    
-      managed -> gboolean: 
-    
-      autoconnect -> gboolean: 
-    
-      firmware-missing -> gboolean: 
-    
-      nm-plugin-missing -> gboolean: 
-    
-      ip4-config -> NMIPConfig: 
-    
-      dhcp4-config -> NMDhcpConfig: 
-    
-      ip6-config -> NMIPConfig: 
-    
-      state -> NMDeviceState: 
-    
-      state-reason -> guint: 
-    
-      product -> gchararray: 
-    
-      vendor -> gchararray: 
-    
-      dhcp6-config -> NMDhcpConfig: 
-    
-      ip-interface -> gchararray: 
-    
-      device-type -> NMDeviceType: 
-    
-      active-connection -> NMActiveConnection: 
-    
-      available-connections -> GPtrArray: 
-    
-      physical-port-id -> gchararray: 
-    
-      mtu -> guint: 
-    
-      metered -> guint: 
-    
-      lldp-neighbors -> GPtrArray: 
-    
-      ip4-connectivity -> NMConnectivityState: 
-    
-      ip6-connectivity -> NMConnectivityState: 
-    
-      interface-flags -> guint: 
-    
-      hw-address -> gchararray: 
-    
-      ports -> GPtrArray: 
-    
+      interface -> gchararray:
+
+      udi -> gchararray:
+
+      path -> gchararray:
+
+      driver -> gchararray:
+
+      driver-version -> gchararray:
+
+      firmware-version -> gchararray:
+
+      capabilities -> NMDeviceCapabilities:
+
+      real -> gboolean:
+
+      managed -> gboolean:
+
+      autoconnect -> gboolean:
+
+      firmware-missing -> gboolean:
+
+      nm-plugin-missing -> gboolean:
+
+      ip4-config -> NMIPConfig:
+
+      dhcp4-config -> NMDhcpConfig:
+
+      ip6-config -> NMIPConfig:
+
+      state -> NMDeviceState:
+
+      state-reason -> guint:
+
+      product -> gchararray:
+
+      vendor -> gchararray:
+
+      dhcp6-config -> NMDhcpConfig:
+
+      ip-interface -> gchararray:
+
+      device-type -> NMDeviceType:
+
+      active-connection -> NMActiveConnection:
+
+      available-connections -> GPtrArray:
+
+      physical-port-id -> gchararray:
+
+      mtu -> guint:
+
+      metered -> guint:
+
+      lldp-neighbors -> GPtrArray:
+
+      ip4-connectivity -> NMConnectivityState:
+
+      ip6-connectivity -> NMConnectivityState:
+
+      interface-flags -> guint:
+
+      hw-address -> gchararray:
+
+      ports -> GPtrArray:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -5031,13 +5042,13 @@ class DeviceTeam(Device):
         state_reason: int
         udi: str
         vendor: str
-        client: Optional[Client]
+        client: Client | None
     props: Props = ...
     def __init__(self, autoconnect: bool = ...): ...
     def get_carrier(self) -> bool: ...
     def get_config(self) -> str: ...
     def get_slaves(self) -> list[Device]: ...
-    
+
 
 class DeviceTeamClass(GObject.GPointer): ...
 
@@ -5052,95 +5063,95 @@ class DeviceTun(Device):
     Object NMDeviceTun
 
     Properties from NMDeviceTun:
-      mode -> gchararray: 
-    
-      owner -> gint64: 
-    
-      group -> gint64: 
-    
-      no-pi -> gboolean: 
-    
-      vnet-hdr -> gboolean: 
-    
-      multi-queue -> gboolean: 
-    
+      mode -> gchararray:
+
+      owner -> gint64:
+
+      group -> gint64:
+
+      no-pi -> gboolean:
+
+      vnet-hdr -> gboolean:
+
+      multi-queue -> gboolean:
+
 
     Signals from NMDevice:
       state-changed (guint, guint, guint)
 
     Properties from NMDevice:
-      interface -> gchararray: 
-    
-      udi -> gchararray: 
-    
-      path -> gchararray: 
-    
-      driver -> gchararray: 
-    
-      driver-version -> gchararray: 
-    
-      firmware-version -> gchararray: 
-    
-      capabilities -> NMDeviceCapabilities: 
-    
-      real -> gboolean: 
-    
-      managed -> gboolean: 
-    
-      autoconnect -> gboolean: 
-    
-      firmware-missing -> gboolean: 
-    
-      nm-plugin-missing -> gboolean: 
-    
-      ip4-config -> NMIPConfig: 
-    
-      dhcp4-config -> NMDhcpConfig: 
-    
-      ip6-config -> NMIPConfig: 
-    
-      state -> NMDeviceState: 
-    
-      state-reason -> guint: 
-    
-      product -> gchararray: 
-    
-      vendor -> gchararray: 
-    
-      dhcp6-config -> NMDhcpConfig: 
-    
-      ip-interface -> gchararray: 
-    
-      device-type -> NMDeviceType: 
-    
-      active-connection -> NMActiveConnection: 
-    
-      available-connections -> GPtrArray: 
-    
-      physical-port-id -> gchararray: 
-    
-      mtu -> guint: 
-    
-      metered -> guint: 
-    
-      lldp-neighbors -> GPtrArray: 
-    
-      ip4-connectivity -> NMConnectivityState: 
-    
-      ip6-connectivity -> NMConnectivityState: 
-    
-      interface-flags -> guint: 
-    
-      hw-address -> gchararray: 
-    
-      ports -> GPtrArray: 
-    
+      interface -> gchararray:
+
+      udi -> gchararray:
+
+      path -> gchararray:
+
+      driver -> gchararray:
+
+      driver-version -> gchararray:
+
+      firmware-version -> gchararray:
+
+      capabilities -> NMDeviceCapabilities:
+
+      real -> gboolean:
+
+      managed -> gboolean:
+
+      autoconnect -> gboolean:
+
+      firmware-missing -> gboolean:
+
+      nm-plugin-missing -> gboolean:
+
+      ip4-config -> NMIPConfig:
+
+      dhcp4-config -> NMDhcpConfig:
+
+      ip6-config -> NMIPConfig:
+
+      state -> NMDeviceState:
+
+      state-reason -> guint:
+
+      product -> gchararray:
+
+      vendor -> gchararray:
+
+      dhcp6-config -> NMDhcpConfig:
+
+      ip-interface -> gchararray:
+
+      device-type -> NMDeviceType:
+
+      active-connection -> NMActiveConnection:
+
+      available-connections -> GPtrArray:
+
+      physical-port-id -> gchararray:
+
+      mtu -> guint:
+
+      metered -> guint:
+
+      lldp-neighbors -> GPtrArray:
+
+      ip4-connectivity -> NMConnectivityState:
+
+      ip6-connectivity -> NMConnectivityState:
+
+      interface-flags -> guint:
+
+      hw-address -> gchararray:
+
+      ports -> GPtrArray:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -5185,7 +5196,7 @@ class DeviceTun(Device):
         state_reason: int
         udi: str
         vendor: str
-        client: Optional[Client]
+        client: Client | None
     props: Props = ...
     def __init__(self, autoconnect: bool = ...): ...
     def get_group(self) -> int: ...
@@ -5194,7 +5205,7 @@ class DeviceTun(Device):
     def get_no_pi(self) -> bool: ...
     def get_owner(self) -> int: ...
     def get_vnet_hdr(self) -> bool: ...
-    
+
 
 class DeviceTunClass(GObject.GPointer): ...
 
@@ -5209,95 +5220,95 @@ class DeviceVeth(DeviceEthernet):
     Object NMDeviceVeth
 
     Properties from NMDeviceVeth:
-      peer -> NMDevice: 
-    
+      peer -> NMDevice:
+
 
     Properties from NMDeviceEthernet:
-      perm-hw-address -> gchararray: 
-    
-      speed -> guint: 
-    
-      carrier -> gboolean: 
-    
-      s390-subchannels -> GStrv: 
-    
+      perm-hw-address -> gchararray:
+
+      speed -> guint:
+
+      carrier -> gboolean:
+
+      s390-subchannels -> GStrv:
+
 
     Signals from NMDevice:
       state-changed (guint, guint, guint)
 
     Properties from NMDevice:
-      interface -> gchararray: 
-    
-      udi -> gchararray: 
-    
-      path -> gchararray: 
-    
-      driver -> gchararray: 
-    
-      driver-version -> gchararray: 
-    
-      firmware-version -> gchararray: 
-    
-      capabilities -> NMDeviceCapabilities: 
-    
-      real -> gboolean: 
-    
-      managed -> gboolean: 
-    
-      autoconnect -> gboolean: 
-    
-      firmware-missing -> gboolean: 
-    
-      nm-plugin-missing -> gboolean: 
-    
-      ip4-config -> NMIPConfig: 
-    
-      dhcp4-config -> NMDhcpConfig: 
-    
-      ip6-config -> NMIPConfig: 
-    
-      state -> NMDeviceState: 
-    
-      state-reason -> guint: 
-    
-      product -> gchararray: 
-    
-      vendor -> gchararray: 
-    
-      dhcp6-config -> NMDhcpConfig: 
-    
-      ip-interface -> gchararray: 
-    
-      device-type -> NMDeviceType: 
-    
-      active-connection -> NMActiveConnection: 
-    
-      available-connections -> GPtrArray: 
-    
-      physical-port-id -> gchararray: 
-    
-      mtu -> guint: 
-    
-      metered -> guint: 
-    
-      lldp-neighbors -> GPtrArray: 
-    
-      ip4-connectivity -> NMConnectivityState: 
-    
-      ip6-connectivity -> NMConnectivityState: 
-    
-      interface-flags -> guint: 
-    
-      hw-address -> gchararray: 
-    
-      ports -> GPtrArray: 
-    
+      interface -> gchararray:
+
+      udi -> gchararray:
+
+      path -> gchararray:
+
+      driver -> gchararray:
+
+      driver-version -> gchararray:
+
+      firmware-version -> gchararray:
+
+      capabilities -> NMDeviceCapabilities:
+
+      real -> gboolean:
+
+      managed -> gboolean:
+
+      autoconnect -> gboolean:
+
+      firmware-missing -> gboolean:
+
+      nm-plugin-missing -> gboolean:
+
+      ip4-config -> NMIPConfig:
+
+      dhcp4-config -> NMDhcpConfig:
+
+      ip6-config -> NMIPConfig:
+
+      state -> NMDeviceState:
+
+      state-reason -> guint:
+
+      product -> gchararray:
+
+      vendor -> gchararray:
+
+      dhcp6-config -> NMDhcpConfig:
+
+      ip-interface -> gchararray:
+
+      device-type -> NMDeviceType:
+
+      active-connection -> NMActiveConnection:
+
+      available-connections -> GPtrArray:
+
+      physical-port-id -> gchararray:
+
+      mtu -> guint:
+
+      metered -> guint:
+
+      lldp-neighbors -> GPtrArray:
+
+      ip4-connectivity -> NMConnectivityState:
+
+      ip6-connectivity -> NMConnectivityState:
+
+      interface-flags -> guint:
+
+      hw-address -> gchararray:
+
+      ports -> GPtrArray:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -5341,11 +5352,11 @@ class DeviceVeth(DeviceEthernet):
         state_reason: int
         udi: str
         vendor: str
-        client: Optional[Client]
+        client: Client | None
     props: Props = ...
     def __init__(self, autoconnect: bool = ...): ...
     def get_peer(self) -> Device: ...
-    
+
 
 class DeviceVethClass(GObject.GPointer): ...
 
@@ -5360,89 +5371,89 @@ class DeviceVlan(Device):
     Object NMDeviceVlan
 
     Properties from NMDeviceVlan:
-      carrier -> gboolean: 
-    
-      parent -> NMDevice: 
-    
-      vlan-id -> guint: 
-    
+      carrier -> gboolean:
+
+      parent -> NMDevice:
+
+      vlan-id -> guint:
+
 
     Signals from NMDevice:
       state-changed (guint, guint, guint)
 
     Properties from NMDevice:
-      interface -> gchararray: 
-    
-      udi -> gchararray: 
-    
-      path -> gchararray: 
-    
-      driver -> gchararray: 
-    
-      driver-version -> gchararray: 
-    
-      firmware-version -> gchararray: 
-    
-      capabilities -> NMDeviceCapabilities: 
-    
-      real -> gboolean: 
-    
-      managed -> gboolean: 
-    
-      autoconnect -> gboolean: 
-    
-      firmware-missing -> gboolean: 
-    
-      nm-plugin-missing -> gboolean: 
-    
-      ip4-config -> NMIPConfig: 
-    
-      dhcp4-config -> NMDhcpConfig: 
-    
-      ip6-config -> NMIPConfig: 
-    
-      state -> NMDeviceState: 
-    
-      state-reason -> guint: 
-    
-      product -> gchararray: 
-    
-      vendor -> gchararray: 
-    
-      dhcp6-config -> NMDhcpConfig: 
-    
-      ip-interface -> gchararray: 
-    
-      device-type -> NMDeviceType: 
-    
-      active-connection -> NMActiveConnection: 
-    
-      available-connections -> GPtrArray: 
-    
-      physical-port-id -> gchararray: 
-    
-      mtu -> guint: 
-    
-      metered -> guint: 
-    
-      lldp-neighbors -> GPtrArray: 
-    
-      ip4-connectivity -> NMConnectivityState: 
-    
-      ip6-connectivity -> NMConnectivityState: 
-    
-      interface-flags -> guint: 
-    
-      hw-address -> gchararray: 
-    
-      ports -> GPtrArray: 
-    
+      interface -> gchararray:
+
+      udi -> gchararray:
+
+      path -> gchararray:
+
+      driver -> gchararray:
+
+      driver-version -> gchararray:
+
+      firmware-version -> gchararray:
+
+      capabilities -> NMDeviceCapabilities:
+
+      real -> gboolean:
+
+      managed -> gboolean:
+
+      autoconnect -> gboolean:
+
+      firmware-missing -> gboolean:
+
+      nm-plugin-missing -> gboolean:
+
+      ip4-config -> NMIPConfig:
+
+      dhcp4-config -> NMDhcpConfig:
+
+      ip6-config -> NMIPConfig:
+
+      state -> NMDeviceState:
+
+      state-reason -> guint:
+
+      product -> gchararray:
+
+      vendor -> gchararray:
+
+      dhcp6-config -> NMDhcpConfig:
+
+      ip-interface -> gchararray:
+
+      device-type -> NMDeviceType:
+
+      active-connection -> NMActiveConnection:
+
+      available-connections -> GPtrArray:
+
+      physical-port-id -> gchararray:
+
+      mtu -> guint:
+
+      metered -> guint:
+
+      lldp-neighbors -> GPtrArray:
+
+      ip4-connectivity -> NMConnectivityState:
+
+      ip6-connectivity -> NMConnectivityState:
+
+      interface-flags -> guint:
+
+      hw-address -> gchararray:
+
+      ports -> GPtrArray:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -5484,13 +5495,13 @@ class DeviceVlan(Device):
         state_reason: int
         udi: str
         vendor: str
-        client: Optional[Client]
+        client: Client | None
     props: Props = ...
     def __init__(self, autoconnect: bool = ...): ...
     def get_carrier(self) -> bool: ...
     def get_parent(self) -> Device: ...
     def get_vlan_id(self) -> int: ...
-    
+
 
 class DeviceVlanClass(GObject.GPointer): ...
 
@@ -5505,85 +5516,85 @@ class DeviceVrf(Device):
     Object NMDeviceVrf
 
     Properties from NMDeviceVrf:
-      table -> guint: 
-    
+      table -> guint:
+
 
     Signals from NMDevice:
       state-changed (guint, guint, guint)
 
     Properties from NMDevice:
-      interface -> gchararray: 
-    
-      udi -> gchararray: 
-    
-      path -> gchararray: 
-    
-      driver -> gchararray: 
-    
-      driver-version -> gchararray: 
-    
-      firmware-version -> gchararray: 
-    
-      capabilities -> NMDeviceCapabilities: 
-    
-      real -> gboolean: 
-    
-      managed -> gboolean: 
-    
-      autoconnect -> gboolean: 
-    
-      firmware-missing -> gboolean: 
-    
-      nm-plugin-missing -> gboolean: 
-    
-      ip4-config -> NMIPConfig: 
-    
-      dhcp4-config -> NMDhcpConfig: 
-    
-      ip6-config -> NMIPConfig: 
-    
-      state -> NMDeviceState: 
-    
-      state-reason -> guint: 
-    
-      product -> gchararray: 
-    
-      vendor -> gchararray: 
-    
-      dhcp6-config -> NMDhcpConfig: 
-    
-      ip-interface -> gchararray: 
-    
-      device-type -> NMDeviceType: 
-    
-      active-connection -> NMActiveConnection: 
-    
-      available-connections -> GPtrArray: 
-    
-      physical-port-id -> gchararray: 
-    
-      mtu -> guint: 
-    
-      metered -> guint: 
-    
-      lldp-neighbors -> GPtrArray: 
-    
-      ip4-connectivity -> NMConnectivityState: 
-    
-      ip6-connectivity -> NMConnectivityState: 
-    
-      interface-flags -> guint: 
-    
-      hw-address -> gchararray: 
-    
-      ports -> GPtrArray: 
-    
+      interface -> gchararray:
+
+      udi -> gchararray:
+
+      path -> gchararray:
+
+      driver -> gchararray:
+
+      driver-version -> gchararray:
+
+      firmware-version -> gchararray:
+
+      capabilities -> NMDeviceCapabilities:
+
+      real -> gboolean:
+
+      managed -> gboolean:
+
+      autoconnect -> gboolean:
+
+      firmware-missing -> gboolean:
+
+      nm-plugin-missing -> gboolean:
+
+      ip4-config -> NMIPConfig:
+
+      dhcp4-config -> NMDhcpConfig:
+
+      ip6-config -> NMIPConfig:
+
+      state -> NMDeviceState:
+
+      state-reason -> guint:
+
+      product -> gchararray:
+
+      vendor -> gchararray:
+
+      dhcp6-config -> NMDhcpConfig:
+
+      ip-interface -> gchararray:
+
+      device-type -> NMDeviceType:
+
+      active-connection -> NMActiveConnection:
+
+      available-connections -> GPtrArray:
+
+      physical-port-id -> gchararray:
+
+      mtu -> guint:
+
+      metered -> guint:
+
+      lldp-neighbors -> GPtrArray:
+
+      ip4-connectivity -> NMConnectivityState:
+
+      ip6-connectivity -> NMConnectivityState:
+
+      interface-flags -> guint:
+
+      hw-address -> gchararray:
+
+      ports -> GPtrArray:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -5623,11 +5634,11 @@ class DeviceVrf(Device):
         state_reason: int
         udi: str
         vendor: str
-        client: Optional[Client]
+        client: Client | None
     props: Props = ...
     def __init__(self, autoconnect: bool = ...): ...
     def get_table(self) -> int: ...
-    
+
 
 class DeviceVrfClass(GObject.GPointer): ...
 
@@ -5642,117 +5653,117 @@ class DeviceVxlan(Device):
     Object NMDeviceVxlan
 
     Properties from NMDeviceVxlan:
-      carrier -> gboolean: 
-    
-      parent -> NMDevice: 
-    
-      id -> guint: 
-    
-      group -> gchararray: 
-    
-      local -> gchararray: 
-    
-      tos -> guchar: 
-    
-      ttl -> guchar: 
-    
-      limit -> guint: 
-    
-      learning -> gboolean: 
-    
-      ageing -> guint: 
-    
-      dst-port -> guint: 
-    
-      src-port-min -> guint: 
-    
-      src-port-max -> guint: 
-    
-      proxy -> gboolean: 
-    
-      rsc -> gboolean: 
-    
-      l2miss -> gboolean: 
-    
-      l3miss -> gboolean: 
-    
+      carrier -> gboolean:
+
+      parent -> NMDevice:
+
+      id -> guint:
+
+      group -> gchararray:
+
+      local -> gchararray:
+
+      tos -> guchar:
+
+      ttl -> guchar:
+
+      limit -> guint:
+
+      learning -> gboolean:
+
+      ageing -> guint:
+
+      dst-port -> guint:
+
+      src-port-min -> guint:
+
+      src-port-max -> guint:
+
+      proxy -> gboolean:
+
+      rsc -> gboolean:
+
+      l2miss -> gboolean:
+
+      l3miss -> gboolean:
+
 
     Signals from NMDevice:
       state-changed (guint, guint, guint)
 
     Properties from NMDevice:
-      interface -> gchararray: 
-    
-      udi -> gchararray: 
-    
-      path -> gchararray: 
-    
-      driver -> gchararray: 
-    
-      driver-version -> gchararray: 
-    
-      firmware-version -> gchararray: 
-    
-      capabilities -> NMDeviceCapabilities: 
-    
-      real -> gboolean: 
-    
-      managed -> gboolean: 
-    
-      autoconnect -> gboolean: 
-    
-      firmware-missing -> gboolean: 
-    
-      nm-plugin-missing -> gboolean: 
-    
-      ip4-config -> NMIPConfig: 
-    
-      dhcp4-config -> NMDhcpConfig: 
-    
-      ip6-config -> NMIPConfig: 
-    
-      state -> NMDeviceState: 
-    
-      state-reason -> guint: 
-    
-      product -> gchararray: 
-    
-      vendor -> gchararray: 
-    
-      dhcp6-config -> NMDhcpConfig: 
-    
-      ip-interface -> gchararray: 
-    
-      device-type -> NMDeviceType: 
-    
-      active-connection -> NMActiveConnection: 
-    
-      available-connections -> GPtrArray: 
-    
-      physical-port-id -> gchararray: 
-    
-      mtu -> guint: 
-    
-      metered -> guint: 
-    
-      lldp-neighbors -> GPtrArray: 
-    
-      ip4-connectivity -> NMConnectivityState: 
-    
-      ip6-connectivity -> NMConnectivityState: 
-    
-      interface-flags -> guint: 
-    
-      hw-address -> gchararray: 
-    
-      ports -> GPtrArray: 
-    
+      interface -> gchararray:
+
+      udi -> gchararray:
+
+      path -> gchararray:
+
+      driver -> gchararray:
+
+      driver-version -> gchararray:
+
+      firmware-version -> gchararray:
+
+      capabilities -> NMDeviceCapabilities:
+
+      real -> gboolean:
+
+      managed -> gboolean:
+
+      autoconnect -> gboolean:
+
+      firmware-missing -> gboolean:
+
+      nm-plugin-missing -> gboolean:
+
+      ip4-config -> NMIPConfig:
+
+      dhcp4-config -> NMDhcpConfig:
+
+      ip6-config -> NMIPConfig:
+
+      state -> NMDeviceState:
+
+      state-reason -> guint:
+
+      product -> gchararray:
+
+      vendor -> gchararray:
+
+      dhcp6-config -> NMDhcpConfig:
+
+      ip-interface -> gchararray:
+
+      device-type -> NMDeviceType:
+
+      active-connection -> NMActiveConnection:
+
+      available-connections -> GPtrArray:
+
+      physical-port-id -> gchararray:
+
+      mtu -> guint:
+
+      metered -> guint:
+
+      lldp-neighbors -> GPtrArray:
+
+      ip4-connectivity -> NMConnectivityState:
+
+      ip6-connectivity -> NMConnectivityState:
+
+      interface-flags -> guint:
+
+      hw-address -> gchararray:
+
+      ports -> GPtrArray:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -5808,7 +5819,7 @@ class DeviceVxlan(Device):
         state_reason: int
         udi: str
         vendor: str
-        client: Optional[Client]
+        client: Client | None
     props: Props = ...
     def __init__(self, autoconnect: bool = ...): ...
     def get_ageing(self) -> int: ...
@@ -5828,7 +5839,7 @@ class DeviceVxlan(Device):
     def get_src_port_min(self) -> int: ...
     def get_tos(self) -> int: ...
     def get_ttl(self) -> int: ...
-    
+
 
 class DeviceVxlanClass(GObject.GPointer): ...
 
@@ -5847,97 +5858,97 @@ class DeviceWifi(Device):
       access-point-removed (GObject)
 
     Properties from NMDeviceWifi:
-      perm-hw-address -> gchararray: 
-    
-      mode -> NMAny: 
-    
-      bitrate -> guint: 
-    
-      access-points -> GPtrArray: 
-    
-      active-access-point -> NMAccessPoint: 
-    
-      wireless-capabilities -> NMDeviceWifiCapabilities: 
-    
-      last-scan -> gint64: 
-    
+      perm-hw-address -> gchararray:
+
+      mode -> NM80211Mode:
+
+      bitrate -> guint:
+
+      access-points -> GPtrArray:
+
+      active-access-point -> NMAccessPoint:
+
+      wireless-capabilities -> NMDeviceWifiCapabilities:
+
+      last-scan -> gint64:
+
 
     Signals from NMDevice:
       state-changed (guint, guint, guint)
 
     Properties from NMDevice:
-      interface -> gchararray: 
-    
-      udi -> gchararray: 
-    
-      path -> gchararray: 
-    
-      driver -> gchararray: 
-    
-      driver-version -> gchararray: 
-    
-      firmware-version -> gchararray: 
-    
-      capabilities -> NMDeviceCapabilities: 
-    
-      real -> gboolean: 
-    
-      managed -> gboolean: 
-    
-      autoconnect -> gboolean: 
-    
-      firmware-missing -> gboolean: 
-    
-      nm-plugin-missing -> gboolean: 
-    
-      ip4-config -> NMIPConfig: 
-    
-      dhcp4-config -> NMDhcpConfig: 
-    
-      ip6-config -> NMIPConfig: 
-    
-      state -> NMDeviceState: 
-    
-      state-reason -> guint: 
-    
-      product -> gchararray: 
-    
-      vendor -> gchararray: 
-    
-      dhcp6-config -> NMDhcpConfig: 
-    
-      ip-interface -> gchararray: 
-    
-      device-type -> NMDeviceType: 
-    
-      active-connection -> NMActiveConnection: 
-    
-      available-connections -> GPtrArray: 
-    
-      physical-port-id -> gchararray: 
-    
-      mtu -> guint: 
-    
-      metered -> guint: 
-    
-      lldp-neighbors -> GPtrArray: 
-    
-      ip4-connectivity -> NMConnectivityState: 
-    
-      ip6-connectivity -> NMConnectivityState: 
-    
-      interface-flags -> guint: 
-    
-      hw-address -> gchararray: 
-    
-      ports -> GPtrArray: 
-    
+      interface -> gchararray:
+
+      udi -> gchararray:
+
+      path -> gchararray:
+
+      driver -> gchararray:
+
+      driver-version -> gchararray:
+
+      firmware-version -> gchararray:
+
+      capabilities -> NMDeviceCapabilities:
+
+      real -> gboolean:
+
+      managed -> gboolean:
+
+      autoconnect -> gboolean:
+
+      firmware-missing -> gboolean:
+
+      nm-plugin-missing -> gboolean:
+
+      ip4-config -> NMIPConfig:
+
+      dhcp4-config -> NMDhcpConfig:
+
+      ip6-config -> NMIPConfig:
+
+      state -> NMDeviceState:
+
+      state-reason -> guint:
+
+      product -> gchararray:
+
+      vendor -> gchararray:
+
+      dhcp6-config -> NMDhcpConfig:
+
+      ip-interface -> gchararray:
+
+      device-type -> NMDeviceType:
+
+      active-connection -> NMActiveConnection:
+
+      available-connections -> GPtrArray:
+
+      physical-port-id -> gchararray:
+
+      mtu -> guint:
+
+      metered -> guint:
+
+      lldp-neighbors -> GPtrArray:
+
+      ip4-connectivity -> NMConnectivityState:
+
+      ip6-connectivity -> NMConnectivityState:
+
+      interface-flags -> guint:
+
+      hw-address -> gchararray:
+
+      ports -> GPtrArray:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -5947,7 +5958,7 @@ class DeviceWifi(Device):
         active_access_point: AccessPoint
         bitrate: int
         last_scan: int
-        mode: Any
+        mode: _80211Mode
         perm_hw_address: str
         wireless_capabilities: DeviceWifiCapabilities
         active_connection: ActiveConnection
@@ -5983,7 +5994,7 @@ class DeviceWifi(Device):
         state_reason: int
         udi: str
         vendor: str
-        client: Optional[Client]
+        client: Client | None
     props: Props = ...
     def __init__(self, autoconnect: bool = ...): ...
     def get_access_point_by_path(self, path: str) -> AccessPoint: ...
@@ -5992,14 +6003,14 @@ class DeviceWifi(Device):
     def get_bitrate(self) -> int: ...
     def get_capabilities(self) -> DeviceWifiCapabilities: ...  # type: ignore
     def get_last_scan(self) -> int: ...
-    def get_mode(self) -> Any: ...
+    def get_mode(self) -> _80211Mode: ...
     def get_permanent_hw_address(self) -> str: ...
-    def request_scan(self, cancellable: Optional[Gio.Cancellable] = None) -> bool: ...
-    def request_scan_async(self, cancellable: Optional[Gio.Cancellable] = None, callback: Optional[Callable[..., None]] = None, *user_data: Any) -> None: ...
+    def request_scan(self, cancellable: Gio.Cancellable | None = None) -> bool: ...
+    def request_scan_async(self, cancellable: Gio.Cancellable | None = None, callback: Callable[..., None] | None = None, *user_data: Any) -> None: ...
     def request_scan_finish(self, result: Gio.AsyncResult) -> bool: ...
-    def request_scan_options(self, options: GLib.Variant, cancellable: Optional[Gio.Cancellable] = None) -> bool: ...
-    def request_scan_options_async(self, options: GLib.Variant, cancellable: Optional[Gio.Cancellable] = None, callback: Optional[Callable[..., None]] = None, *user_data: Any) -> None: ...
-    
+    def request_scan_options(self, options: GLib.Variant, cancellable: Gio.Cancellable | None = None) -> bool: ...
+    def request_scan_options_async(self, options: GLib.Variant, cancellable: Gio.Cancellable | None = None, callback: Callable[..., None] | None = None, *user_data: Any) -> None: ...
+
 
 class DeviceWifiClass(GObject.GPointer): ...
 
@@ -6018,85 +6029,85 @@ class DeviceWifiP2P(Device):
       peer-removed (GObject)
 
     Properties from NMDeviceWifiP2P:
-      peers -> GPtrArray: 
-    
+      peers -> GPtrArray:
+
 
     Signals from NMDevice:
       state-changed (guint, guint, guint)
 
     Properties from NMDevice:
-      interface -> gchararray: 
-    
-      udi -> gchararray: 
-    
-      path -> gchararray: 
-    
-      driver -> gchararray: 
-    
-      driver-version -> gchararray: 
-    
-      firmware-version -> gchararray: 
-    
-      capabilities -> NMDeviceCapabilities: 
-    
-      real -> gboolean: 
-    
-      managed -> gboolean: 
-    
-      autoconnect -> gboolean: 
-    
-      firmware-missing -> gboolean: 
-    
-      nm-plugin-missing -> gboolean: 
-    
-      ip4-config -> NMIPConfig: 
-    
-      dhcp4-config -> NMDhcpConfig: 
-    
-      ip6-config -> NMIPConfig: 
-    
-      state -> NMDeviceState: 
-    
-      state-reason -> guint: 
-    
-      product -> gchararray: 
-    
-      vendor -> gchararray: 
-    
-      dhcp6-config -> NMDhcpConfig: 
-    
-      ip-interface -> gchararray: 
-    
-      device-type -> NMDeviceType: 
-    
-      active-connection -> NMActiveConnection: 
-    
-      available-connections -> GPtrArray: 
-    
-      physical-port-id -> gchararray: 
-    
-      mtu -> guint: 
-    
-      metered -> guint: 
-    
-      lldp-neighbors -> GPtrArray: 
-    
-      ip4-connectivity -> NMConnectivityState: 
-    
-      ip6-connectivity -> NMConnectivityState: 
-    
-      interface-flags -> guint: 
-    
-      hw-address -> gchararray: 
-    
-      ports -> GPtrArray: 
-    
+      interface -> gchararray:
+
+      udi -> gchararray:
+
+      path -> gchararray:
+
+      driver -> gchararray:
+
+      driver-version -> gchararray:
+
+      firmware-version -> gchararray:
+
+      capabilities -> NMDeviceCapabilities:
+
+      real -> gboolean:
+
+      managed -> gboolean:
+
+      autoconnect -> gboolean:
+
+      firmware-missing -> gboolean:
+
+      nm-plugin-missing -> gboolean:
+
+      ip4-config -> NMIPConfig:
+
+      dhcp4-config -> NMDhcpConfig:
+
+      ip6-config -> NMIPConfig:
+
+      state -> NMDeviceState:
+
+      state-reason -> guint:
+
+      product -> gchararray:
+
+      vendor -> gchararray:
+
+      dhcp6-config -> NMDhcpConfig:
+
+      ip-interface -> gchararray:
+
+      device-type -> NMDeviceType:
+
+      active-connection -> NMActiveConnection:
+
+      available-connections -> GPtrArray:
+
+      physical-port-id -> gchararray:
+
+      mtu -> guint:
+
+      metered -> guint:
+
+      lldp-neighbors -> GPtrArray:
+
+      ip4-connectivity -> NMConnectivityState:
+
+      ip6-connectivity -> NMConnectivityState:
+
+      interface-flags -> guint:
+
+      hw-address -> gchararray:
+
+      ports -> GPtrArray:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -6136,16 +6147,16 @@ class DeviceWifiP2P(Device):
         state_reason: int
         udi: str
         vendor: str
-        client: Optional[Client]
+        client: Client | None
     props: Props = ...
     def __init__(self, autoconnect: bool = ...): ...
     def get_peer_by_path(self, path: str) -> WifiP2PPeer: ...
     def get_peers(self) -> list[WifiP2PPeer]: ...
-    def start_find(self, options: Optional[GLib.Variant] = None, cancellable: Optional[Gio.Cancellable] = None, callback: Optional[Callable[..., None]] = None, *user_data: Any) -> None: ...
+    def start_find(self, options: GLib.Variant | None = None, cancellable: Gio.Cancellable | None = None, callback: Callable[..., None] | None = None, *user_data: Any) -> None: ...
     def start_find_finish(self, result: Gio.AsyncResult) -> bool: ...
-    def stop_find(self, cancellable: Optional[Gio.Cancellable] = None, callback: Optional[Callable[..., None]] = None, *user_data: Any) -> None: ...
+    def stop_find(self, cancellable: Gio.Cancellable | None = None, callback: Callable[..., None] | None = None, *user_data: Any) -> None: ...
     def stop_find_finish(self, result: Gio.AsyncResult) -> bool: ...
-    
+
 
 class DeviceWifiP2PClass(GObject.GPointer): ...
 
@@ -6164,99 +6175,99 @@ class DeviceWimax(Device):
       nsp-removed (GObject)
 
     Properties from NMDeviceWimax:
-      hw-address -> gchararray: 
-    
-      active-nsp -> NMWimaxNsp: 
-    
-      center-frequency -> guint: 
-    
-      rssi -> gint: 
-    
-      cinr -> gint: 
-    
-      tx-power -> gint: 
-    
-      bsid -> gchararray: 
-    
-      nsps -> GPtrArray: 
-    
+      hw-address -> gchararray:
+
+      active-nsp -> NMWimaxNsp:
+
+      center-frequency -> guint:
+
+      rssi -> gint:
+
+      cinr -> gint:
+
+      tx-power -> gint:
+
+      bsid -> gchararray:
+
+      nsps -> GPtrArray:
+
 
     Signals from NMDevice:
       state-changed (guint, guint, guint)
 
     Properties from NMDevice:
-      interface -> gchararray: 
-    
-      udi -> gchararray: 
-    
-      path -> gchararray: 
-    
-      driver -> gchararray: 
-    
-      driver-version -> gchararray: 
-    
-      firmware-version -> gchararray: 
-    
-      capabilities -> NMDeviceCapabilities: 
-    
-      real -> gboolean: 
-    
-      managed -> gboolean: 
-    
-      autoconnect -> gboolean: 
-    
-      firmware-missing -> gboolean: 
-    
-      nm-plugin-missing -> gboolean: 
-    
-      ip4-config -> NMIPConfig: 
-    
-      dhcp4-config -> NMDhcpConfig: 
-    
-      ip6-config -> NMIPConfig: 
-    
-      state -> NMDeviceState: 
-    
-      state-reason -> guint: 
-    
-      product -> gchararray: 
-    
-      vendor -> gchararray: 
-    
-      dhcp6-config -> NMDhcpConfig: 
-    
-      ip-interface -> gchararray: 
-    
-      device-type -> NMDeviceType: 
-    
-      active-connection -> NMActiveConnection: 
-    
-      available-connections -> GPtrArray: 
-    
-      physical-port-id -> gchararray: 
-    
-      mtu -> guint: 
-    
-      metered -> guint: 
-    
-      lldp-neighbors -> GPtrArray: 
-    
-      ip4-connectivity -> NMConnectivityState: 
-    
-      ip6-connectivity -> NMConnectivityState: 
-    
-      interface-flags -> guint: 
-    
-      hw-address -> gchararray: 
-    
-      ports -> GPtrArray: 
-    
+      interface -> gchararray:
+
+      udi -> gchararray:
+
+      path -> gchararray:
+
+      driver -> gchararray:
+
+      driver-version -> gchararray:
+
+      firmware-version -> gchararray:
+
+      capabilities -> NMDeviceCapabilities:
+
+      real -> gboolean:
+
+      managed -> gboolean:
+
+      autoconnect -> gboolean:
+
+      firmware-missing -> gboolean:
+
+      nm-plugin-missing -> gboolean:
+
+      ip4-config -> NMIPConfig:
+
+      dhcp4-config -> NMDhcpConfig:
+
+      ip6-config -> NMIPConfig:
+
+      state -> NMDeviceState:
+
+      state-reason -> guint:
+
+      product -> gchararray:
+
+      vendor -> gchararray:
+
+      dhcp6-config -> NMDhcpConfig:
+
+      ip-interface -> gchararray:
+
+      device-type -> NMDeviceType:
+
+      active-connection -> NMActiveConnection:
+
+      available-connections -> GPtrArray:
+
+      physical-port-id -> gchararray:
+
+      mtu -> guint:
+
+      metered -> guint:
+
+      lldp-neighbors -> GPtrArray:
+
+      ip4-connectivity -> NMConnectivityState:
+
+      ip6-connectivity -> NMConnectivityState:
+
+      interface-flags -> guint:
+
+      hw-address -> gchararray:
+
+      ports -> GPtrArray:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -6302,7 +6313,7 @@ class DeviceWimax(Device):
         state_reason: int
         udi: str
         vendor: str
-        client: Optional[Client]
+        client: Client | None
     props: Props = ...
     def __init__(self, autoconnect: bool = ...): ...
     def get_active_nsp(self) -> WimaxNsp: ...
@@ -6314,7 +6325,7 @@ class DeviceWimax(Device):
     def get_nsps(self) -> list[WimaxNsp]: ...
     def get_rssi(self) -> int: ...
     def get_tx_power(self) -> int: ...
-    
+
 
 class DeviceWimaxClass(GObject.GPointer): ...
 
@@ -6329,89 +6340,89 @@ class DeviceWireGuard(Device):
     Object NMDeviceWireGuard
 
     Properties from NMDeviceWireGuard:
-      public-key -> GBytes: 
-    
-      listen-port -> guint: 
-    
-      fwmark -> guint: 
-    
+      public-key -> GBytes:
+
+      listen-port -> guint:
+
+      fwmark -> guint:
+
 
     Signals from NMDevice:
       state-changed (guint, guint, guint)
 
     Properties from NMDevice:
-      interface -> gchararray: 
-    
-      udi -> gchararray: 
-    
-      path -> gchararray: 
-    
-      driver -> gchararray: 
-    
-      driver-version -> gchararray: 
-    
-      firmware-version -> gchararray: 
-    
-      capabilities -> NMDeviceCapabilities: 
-    
-      real -> gboolean: 
-    
-      managed -> gboolean: 
-    
-      autoconnect -> gboolean: 
-    
-      firmware-missing -> gboolean: 
-    
-      nm-plugin-missing -> gboolean: 
-    
-      ip4-config -> NMIPConfig: 
-    
-      dhcp4-config -> NMDhcpConfig: 
-    
-      ip6-config -> NMIPConfig: 
-    
-      state -> NMDeviceState: 
-    
-      state-reason -> guint: 
-    
-      product -> gchararray: 
-    
-      vendor -> gchararray: 
-    
-      dhcp6-config -> NMDhcpConfig: 
-    
-      ip-interface -> gchararray: 
-    
-      device-type -> NMDeviceType: 
-    
-      active-connection -> NMActiveConnection: 
-    
-      available-connections -> GPtrArray: 
-    
-      physical-port-id -> gchararray: 
-    
-      mtu -> guint: 
-    
-      metered -> guint: 
-    
-      lldp-neighbors -> GPtrArray: 
-    
-      ip4-connectivity -> NMConnectivityState: 
-    
-      ip6-connectivity -> NMConnectivityState: 
-    
-      interface-flags -> guint: 
-    
-      hw-address -> gchararray: 
-    
-      ports -> GPtrArray: 
-    
+      interface -> gchararray:
+
+      udi -> gchararray:
+
+      path -> gchararray:
+
+      driver -> gchararray:
+
+      driver-version -> gchararray:
+
+      firmware-version -> gchararray:
+
+      capabilities -> NMDeviceCapabilities:
+
+      real -> gboolean:
+
+      managed -> gboolean:
+
+      autoconnect -> gboolean:
+
+      firmware-missing -> gboolean:
+
+      nm-plugin-missing -> gboolean:
+
+      ip4-config -> NMIPConfig:
+
+      dhcp4-config -> NMDhcpConfig:
+
+      ip6-config -> NMIPConfig:
+
+      state -> NMDeviceState:
+
+      state-reason -> guint:
+
+      product -> gchararray:
+
+      vendor -> gchararray:
+
+      dhcp6-config -> NMDhcpConfig:
+
+      ip-interface -> gchararray:
+
+      device-type -> NMDeviceType:
+
+      active-connection -> NMActiveConnection:
+
+      available-connections -> GPtrArray:
+
+      physical-port-id -> gchararray:
+
+      mtu -> guint:
+
+      metered -> guint:
+
+      lldp-neighbors -> GPtrArray:
+
+      ip4-connectivity -> NMConnectivityState:
+
+      ip6-connectivity -> NMConnectivityState:
+
+      interface-flags -> guint:
+
+      hw-address -> gchararray:
+
+      ports -> GPtrArray:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -6453,13 +6464,13 @@ class DeviceWireGuard(Device):
         state_reason: int
         udi: str
         vendor: str
-        client: Optional[Client]
+        client: Client | None
     props: Props = ...
     def __init__(self, autoconnect: bool = ...): ...
     def get_fwmark(self) -> int: ...
     def get_listen_port(self) -> int: ...
     def get_public_key(self) -> GLib.Bytes: ...
-    
+
 
 class DeviceWireGuardClass(GObject.GPointer): ...
 
@@ -6477,78 +6488,78 @@ class DeviceWpan(Device):
       state-changed (guint, guint, guint)
 
     Properties from NMDevice:
-      interface -> gchararray: 
-    
-      udi -> gchararray: 
-    
-      path -> gchararray: 
-    
-      driver -> gchararray: 
-    
-      driver-version -> gchararray: 
-    
-      firmware-version -> gchararray: 
-    
-      capabilities -> NMDeviceCapabilities: 
-    
-      real -> gboolean: 
-    
-      managed -> gboolean: 
-    
-      autoconnect -> gboolean: 
-    
-      firmware-missing -> gboolean: 
-    
-      nm-plugin-missing -> gboolean: 
-    
-      ip4-config -> NMIPConfig: 
-    
-      dhcp4-config -> NMDhcpConfig: 
-    
-      ip6-config -> NMIPConfig: 
-    
-      state -> NMDeviceState: 
-    
-      state-reason -> guint: 
-    
-      product -> gchararray: 
-    
-      vendor -> gchararray: 
-    
-      dhcp6-config -> NMDhcpConfig: 
-    
-      ip-interface -> gchararray: 
-    
-      device-type -> NMDeviceType: 
-    
-      active-connection -> NMActiveConnection: 
-    
-      available-connections -> GPtrArray: 
-    
-      physical-port-id -> gchararray: 
-    
-      mtu -> guint: 
-    
-      metered -> guint: 
-    
-      lldp-neighbors -> GPtrArray: 
-    
-      ip4-connectivity -> NMConnectivityState: 
-    
-      ip6-connectivity -> NMConnectivityState: 
-    
-      interface-flags -> guint: 
-    
-      hw-address -> gchararray: 
-    
-      ports -> GPtrArray: 
-    
+      interface -> gchararray:
+
+      udi -> gchararray:
+
+      path -> gchararray:
+
+      driver -> gchararray:
+
+      driver-version -> gchararray:
+
+      firmware-version -> gchararray:
+
+      capabilities -> NMDeviceCapabilities:
+
+      real -> gboolean:
+
+      managed -> gboolean:
+
+      autoconnect -> gboolean:
+
+      firmware-missing -> gboolean:
+
+      nm-plugin-missing -> gboolean:
+
+      ip4-config -> NMIPConfig:
+
+      dhcp4-config -> NMDhcpConfig:
+
+      ip6-config -> NMIPConfig:
+
+      state -> NMDeviceState:
+
+      state-reason -> guint:
+
+      product -> gchararray:
+
+      vendor -> gchararray:
+
+      dhcp6-config -> NMDhcpConfig:
+
+      ip-interface -> gchararray:
+
+      device-type -> NMDeviceType:
+
+      active-connection -> NMActiveConnection:
+
+      available-connections -> GPtrArray:
+
+      physical-port-id -> gchararray:
+
+      mtu -> guint:
+
+      metered -> guint:
+
+      lldp-neighbors -> GPtrArray:
+
+      ip4-connectivity -> NMConnectivityState:
+
+      ip6-connectivity -> NMConnectivityState:
+
+      interface-flags -> guint:
+
+      hw-address -> gchararray:
+
+      ports -> GPtrArray:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -6587,7 +6598,7 @@ class DeviceWpan(Device):
         state_reason: int
         udi: str
         vendor: str
-        client: Optional[Client]
+        client: Client | None
     props: Props = ...
     def __init__(self, autoconnect: bool = ...): ...
 
@@ -6604,16 +6615,16 @@ class DhcpConfig(Object):
     Object NMDhcpConfig
 
     Properties from NMDhcpConfig:
-      family -> gint: 
-    
-      options -> GHashTable: 
-    
+      family -> gint:
+
+      options -> GHashTable:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -6621,13 +6632,13 @@ class DhcpConfig(Object):
     class Props:
         family: int
         options: dict[str, str]
-        client: Optional[Client]
+        client: Client | None
         path: str
     props: Props = ...
     def get_family(self) -> int: ...
     def get_one_option(self, option: str) -> str: ...
     def get_options(self) -> dict[str, str]: ...
-    
+
 
 class DhcpConfigClass(GObject.GPointer): ...
 
@@ -6638,7 +6649,7 @@ class DnsEntry(GObject.GBoxed):
     def get_priority(self) -> int: ...
     def get_vpn(self) -> bool: ...
     def unref(self) -> None: ...
-    
+
 
 class IPAddress(GObject.GBoxed):
     """
@@ -6663,10 +6674,10 @@ class IPAddress(GObject.GBoxed):
     def new_binary(cls, family: int, addr: None, prefix: int) -> IPAddress: ...
     def ref(self) -> None: ...
     def set_address(self, addr: str) -> None: ...
-    def set_attribute(self, name: str, value: Optional[GLib.Variant] = None) -> None: ...
+    def set_attribute(self, name: str, value: GLib.Variant | None = None) -> None: ...
     def set_prefix(self, prefix: int) -> None: ...
     def unref(self) -> None: ...
-    
+
 
 class IPConfig(Object):
     """
@@ -6679,28 +6690,28 @@ class IPConfig(Object):
     Object NMIPConfig
 
     Properties from NMIPConfig:
-      family -> gint: 
-    
-      gateway -> gchararray: 
-    
-      addresses -> GPtrArray: 
-    
-      routes -> GPtrArray: 
-    
-      nameservers -> GStrv: 
-    
-      domains -> GStrv: 
-    
-      searches -> GStrv: 
-    
-      wins-servers -> GStrv: 
-    
+      family -> gint:
+
+      gateway -> gchararray:
+
+      addresses -> GPtrArray:
+
+      routes -> GPtrArray:
+
+      nameservers -> GStrv:
+
+      domains -> GStrv:
+
+      searches -> GStrv:
+
+      wins-servers -> GStrv:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -6714,7 +6725,7 @@ class IPConfig(Object):
         routes: list[IPRoute]
         searches: list[str]
         wins_servers: list[str]
-        client: Optional[Client]
+        client: Client | None
         path: str
     props: Props = ...
     def get_addresses(self) -> list[IPAddress]: ...
@@ -6725,7 +6736,7 @@ class IPConfig(Object):
     def get_routes(self) -> list[IPRoute]: ...
     def get_searches(self) -> list[str]: ...
     def get_wins_servers(self) -> list[str]: ...
-    
+
 
 class IPConfigClass(GObject.GPointer): ...
 
@@ -6739,7 +6750,7 @@ class IPRoute(GObject.GBoxed):
         new_binary(family:int, dest=None, prefix:int, next_hop=None, metric:int) -> NM.IPRoute
     """
     @staticmethod
-    def attribute_validate(name: str, value: GLib.Variant, family: int) -> Tuple[bool, bool]: ...
+    def attribute_validate(name: str, value: GLib.Variant, family: int) -> tuple[bool, bool]: ...
     def dup(self) -> IPRoute: ...
     def equal(self, other: IPRoute) -> bool: ...
     def equal_full(self, other: IPRoute, cmp_flags: int) -> bool: ...
@@ -6753,17 +6764,17 @@ class IPRoute(GObject.GBoxed):
     @staticmethod
     def get_variant_attribute_spec() -> VariantAttributeSpec: ...
     @classmethod
-    def new(cls, family: int, dest: str, prefix: int, next_hop: Optional[str], metric: int) -> IPRoute: ...
+    def new(cls, family: int, dest: str, prefix: int, next_hop: str | None, metric: int) -> IPRoute: ...
     @classmethod
     def new_binary(cls, family: int, dest: None, prefix: int, next_hop: None, metric: int) -> IPRoute: ...
     def ref(self) -> None: ...
-    def set_attribute(self, name: str, value: Optional[GLib.Variant] = None) -> None: ...
+    def set_attribute(self, name: str, value: GLib.Variant | None = None) -> None: ...
     def set_dest(self, dest: str) -> None: ...
     def set_metric(self, metric: int) -> None: ...
-    def set_next_hop(self, next_hop: Optional[str] = None) -> None: ...
+    def set_next_hop(self, next_hop: str | None = None) -> None: ...
     def set_prefix(self, prefix: int) -> None: ...
     def unref(self) -> None: ...
-    
+
 
 class IPRoutingRule(GObject.GBoxed):
     """
@@ -6773,9 +6784,9 @@ class IPRoutingRule(GObject.GBoxed):
 
         new(addr_family:int) -> NM.IPRoutingRule
     """
-    def cmp(self, other: Optional[IPRoutingRule] = None) -> int: ...
+    def cmp(self, other: IPRoutingRule | None = None) -> int: ...
     @staticmethod
-    def from_string(str: str, to_string_flags: IPRoutingRuleAsStringFlags, extra_args: Optional[dict[None, None]] = None) -> IPRoutingRule: ...
+    def from_string(str: str, to_string_flags: IPRoutingRuleAsStringFlags, extra_args: dict[None, None] | None = None) -> IPRoutingRule: ...
     def get_action(self) -> int: ...
     def get_addr_family(self) -> int: ...
     def get_destination_port_end(self) -> int: ...
@@ -6796,7 +6807,7 @@ class IPRoutingRule(GObject.GBoxed):
     def get_to(self) -> str: ...
     def get_to_len(self) -> int: ...
     def get_tos(self) -> int: ...
-    def get_uid_range(self) -> Tuple[bool, int, int]: ...
+    def get_uid_range(self) -> tuple[bool, int, int]: ...
     def is_sealed(self) -> bool: ...
     @classmethod
     def new(cls, addr_family: int) -> IPRoutingRule: ...
@@ -6805,29 +6816,29 @@ class IPRoutingRule(GObject.GBoxed):
     def seal(self) -> None: ...
     def set_action(self, action: int) -> None: ...
     def set_destination_port(self, start: int, end: int) -> None: ...
-    def set_from(self, from_: Optional[str], len: int) -> None: ...
+    def set_from(self, from_: str | None, len: int) -> None: ...
     def set_fwmark(self, fwmark: int, fwmask: int) -> None: ...
-    def set_iifname(self, iifname: Optional[str] = None) -> None: ...
+    def set_iifname(self, iifname: str | None = None) -> None: ...
     def set_invert(self, invert: bool) -> None: ...
     def set_ipproto(self, ipproto: int) -> None: ...
-    def set_oifname(self, oifname: Optional[str] = None) -> None: ...
+    def set_oifname(self, oifname: str | None = None) -> None: ...
     def set_priority(self, priority: int) -> None: ...
     def set_source_port(self, start: int, end: int) -> None: ...
     def set_suppress_prefixlength(self, suppress_prefixlength: int) -> None: ...
     def set_table(self, table: int) -> None: ...
-    def set_to(self, to: Optional[str], len: int) -> None: ...
+    def set_to(self, to: str | None, len: int) -> None: ...
     def set_tos(self, tos: int) -> None: ...
     def set_uid_range(self, uid_range_start: int, uid_range_end: int) -> None: ...
-    def to_string(self, to_string_flags: IPRoutingRuleAsStringFlags, extra_args: Optional[dict[None, None]] = None) -> str: ...
+    def to_string(self, to_string_flags: IPRoutingRuleAsStringFlags, extra_args: dict[None, None] | None = None) -> str: ...
     def unref(self) -> None: ...
     def validate(self) -> bool: ...
-    
+
 
 class KeyfileHandlerData(GObject.GPointer):
     def fail_with_error(self, src: GLib.Error) -> None: ...
-    def get_context(self) -> Tuple[str, str, Setting, str]: ...
-    def warn_get(self) -> Tuple[str, KeyfileWarnSeverity]: ...
-    
+    def get_context(self) -> tuple[str, str, Setting, str]: ...
+    def warn_get(self) -> tuple[str, KeyfileWarnSeverity]: ...
+
 
 class LldpNeighbor(GObject.GBoxed):
     """
@@ -6838,15 +6849,15 @@ class LldpNeighbor(GObject.GBoxed):
         new() -> NM.LldpNeighbor
     """
     def get_attr_names(self) -> list[str]: ...
-    def get_attr_string_value(self, name: str) -> Tuple[bool, str]: ...
+    def get_attr_string_value(self, name: str) -> tuple[bool, str]: ...
     def get_attr_type(self, name: str) -> GLib.VariantType: ...
-    def get_attr_uint_value(self, name: str) -> Tuple[bool, int]: ...
+    def get_attr_uint_value(self, name: str) -> tuple[bool, int]: ...
     def get_attr_value(self, name: str) -> GLib.Variant: ...
     @classmethod
     def new(cls) -> LldpNeighbor: ...
     def ref(self) -> None: ...
     def unref(self) -> None: ...
-    
+
 
 class Object(GObject.Object):
     """
@@ -6859,21 +6870,21 @@ class Object(GObject.Object):
     Object NMObject
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
     """
     class Props:
-        client: Optional[Client]
+        client: Client | None
         path: str
     props: Props = ...
     def get_client(self) -> None: ...
     def get_path(self) -> str: ...
-    
+
 
 class ObjectClass(GObject.GPointer): ...
 
@@ -6888,13 +6899,13 @@ class Range(GObject.GBoxed):
     def cmp(self, b: Range) -> int: ...
     @staticmethod
     def from_str(str: str) -> Range: ...
-    def get_range(self) -> Tuple[bool, int, int]: ...
+    def get_range(self) -> tuple[bool, int, int]: ...
     @classmethod
     def new(cls, start: int, end: int) -> Range: ...
     def ref(self) -> Range: ...
     def to_str(self) -> str: ...
     def unref(self) -> None: ...
-    
+
 
 class RemoteConnection(Object, Connection):
     """
@@ -6907,16 +6918,16 @@ class RemoteConnection(Object, Connection):
     Object NMRemoteConnection
 
     Properties from NMRemoteConnection:
-      unsaved -> gboolean: 
-    
-      flags -> guint: 
-    
-      filename -> gchararray: 
-    
-      version-id -> guint64: 
-    
-      visible -> gboolean: 
-    
+      unsaved -> gboolean:
+
+      flags -> guint:
+
+      filename -> gchararray:
+
+      version-id -> guint64:
+
+      visible -> gboolean:
+
 
     Signals from NMConnection:
       secrets-updated (gchararray)
@@ -6924,10 +6935,10 @@ class RemoteConnection(Object, Connection):
       changed ()
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -6938,29 +6949,29 @@ class RemoteConnection(Object, Connection):
         unsaved: bool
         version_id: int
         visible: bool
-        client: Optional[Client]
+        client: Client | None
         path: str
     props: Props = ...
-    def commit_changes(self, save_to_disk: bool, cancellable: Optional[Gio.Cancellable] = None) -> bool: ...
-    def commit_changes_async(self, save_to_disk: bool, cancellable: Optional[Gio.Cancellable] = None, callback: Optional[Callable[..., None]] = None, *user_data: Any) -> None: ...
+    def commit_changes(self, save_to_disk: bool, cancellable: Gio.Cancellable | None = None) -> bool: ...
+    def commit_changes_async(self, save_to_disk: bool, cancellable: Gio.Cancellable | None = None, callback: Callable[..., None] | None = None, *user_data: Any) -> None: ...
     def commit_changes_finish(self, result: Gio.AsyncResult) -> bool: ...
-    def delete(self, cancellable: Optional[Gio.Cancellable] = None) -> bool: ...
-    def delete_async(self, cancellable: Optional[Gio.Cancellable] = None, callback: Optional[Callable[..., None]] = None, *user_data: Any) -> None: ...
+    def delete(self, cancellable: Gio.Cancellable | None = None) -> bool: ...
+    def delete_async(self, cancellable: Gio.Cancellable | None = None, callback: Callable[..., None] | None = None, *user_data: Any) -> None: ...
     def delete_finish(self, result: Gio.AsyncResult) -> bool: ...
     def get_filename(self) -> str: ...
     def get_flags(self) -> SettingsConnectionFlags: ...
-    def get_secrets(self, setting_name: str, cancellable: Optional[Gio.Cancellable] = None) -> GLib.Variant: ...
-    def get_secrets_async(self, setting_name: str, cancellable: Optional[Gio.Cancellable] = None, callback: Optional[Callable[..., None]] = None, *user_data: Any) -> None: ...
+    def get_secrets(self, setting_name: str, cancellable: Gio.Cancellable | None = None) -> GLib.Variant: ...
+    def get_secrets_async(self, setting_name: str, cancellable: Gio.Cancellable | None = None, callback: Callable[..., None] | None = None, *user_data: Any) -> None: ...
     def get_secrets_finish(self, result: Gio.AsyncResult) -> GLib.Variant: ...
     def get_unsaved(self) -> bool: ...
     def get_version_id(self) -> int: ...
     def get_visible(self) -> bool: ...
-    def save(self, cancellable: Optional[Gio.Cancellable] = None) -> bool: ...
-    def save_async(self, cancellable: Optional[Gio.Cancellable] = None, callback: Optional[Callable[..., None]] = None, *user_data: Any) -> None: ...
+    def save(self, cancellable: Gio.Cancellable | None = None) -> bool: ...
+    def save_async(self, cancellable: Gio.Cancellable | None = None, callback: Callable[..., None] | None = None, *user_data: Any) -> None: ...
     def save_finish(self, result: Gio.AsyncResult) -> bool: ...
-    def update2(self, settings: Optional[GLib.Variant], flags: SettingsUpdate2Flags, args: Optional[GLib.Variant] = None, cancellable: Optional[Gio.Cancellable] = None, callback: Optional[Callable[..., None]] = None, *user_data: Any) -> None: ...
+    def update2(self, settings: GLib.Variant | None, flags: SettingsUpdate2Flags, args: GLib.Variant | None = None, cancellable: Gio.Cancellable | None = None, callback: Callable[..., None] | None = None, *user_data: Any) -> None: ...
     def update2_finish(self, result: Gio.AsyncResult) -> GLib.Variant: ...
-    
+
 
 class RemoteConnectionClass(GObject.GPointer): ...
 
@@ -6975,16 +6986,16 @@ class SecretAgentOld(GObject.Object, Gio.AsyncInitable, Gio.Initable):  # type: 
     Object NMSecretAgentOld
 
     Properties from NMSecretAgentOld:
-      identifier -> gchararray: 
-    
-      auto-register -> gboolean: 
-    
-      registered -> gboolean: 
-    
-      capabilities -> NMSecretAgentCapabilities: 
-    
-      dbus-connection -> GDBusConnection: 
-    
+      identifier -> gchararray:
+
+      auto-register -> gboolean:
+
+      registered -> gboolean:
+
+      capabilities -> NMSecretAgentCapabilities:
+
+      dbus-connection -> GDBusConnection:
+
 
     Signals from GObject:
       notify (GParam)
@@ -7014,14 +7025,14 @@ class SecretAgentOld(GObject.Object, Gio.AsyncInitable, Gio.Initable):  # type: 
     def get_main_context(self) -> GLib.MainContext: ...
     def get_registered(self) -> bool: ...
     def get_secrets(self, connection: Connection, setting_name: str, hints: Sequence[str], flags: SecretAgentGetSecretsFlags, callback: Callable[..., None], *user_data: Any) -> None: ...
-    def register(self, cancellable: Optional[Gio.Cancellable] = None) -> bool: ...
-    def register_async(self, cancellable: Optional[Gio.Cancellable] = None, callback: Optional[Callable[..., None]] = None, *user_data: Any) -> None: ...
+    def register(self, cancellable: Gio.Cancellable | None = None) -> bool: ...
+    def register_async(self, cancellable: Gio.Cancellable | None = None, callback: Callable[..., None] | None = None, *user_data: Any) -> None: ...
     def register_finish(self, result: Gio.AsyncResult) -> bool: ...
     def save_secrets(self, connection: Connection, callback: Callable[..., None], *user_data: Any) -> None: ...
-    def unregister(self, cancellable: Optional[Gio.Cancellable] = None) -> bool: ...
-    def unregister_async(self, cancellable: Optional[Gio.Cancellable] = None, callback: Optional[Callable[..., None]] = None, *user_data: Any) -> None: ...
+    def unregister(self, cancellable: Gio.Cancellable | None = None) -> bool: ...
+    def unregister_async(self, cancellable: Gio.Cancellable | None = None, callback: Callable[..., None] | None = None, *user_data: Any) -> None: ...
     def unregister_finish(self, result: Gio.AsyncResult) -> bool: ...
-    
+
 
 class SecretAgentOldClass(GObject.GPointer):
     """
@@ -7049,8 +7060,8 @@ class Setting(GObject.Object):
     Object NMSetting
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -7059,29 +7070,29 @@ class Setting(GObject.Object):
         name: str
     props: Props = ...
     def compare(self, b: Setting, flags: SettingCompareFlags) -> bool: ...
-    def diff(self, b: Setting, flags: SettingCompareFlags, invert_results: bool) -> Tuple[bool, dict[str, int]]: ...
+    def diff(self, b: Setting, flags: SettingCompareFlags, invert_results: bool) -> tuple[bool, dict[str, int]]: ...
     def duplicate(self) -> Setting: ...
     def enumerate_values(self, func: Callable[..., None], *user_data: Any) -> None: ...
     def get_dbus_property_type(self, property_name: str) -> GLib.VariantType: ...
     @staticmethod
-    def get_enum_property_type(setting_type: Type, property_name: str) -> Type: ...
+    def get_enum_property_type(setting_type: type, property_name: str) -> type: ...
     def get_name(self) -> str: ...
     def get_secret_flags(self, secret_name: str, out_flags: SettingSecretFlags) -> bool: ...
     @staticmethod
-    def lookup_type(name: str) -> Type: ...
-    def option_clear_by_name(self, predicate: Optional[Callable[[str], bool]] = None) -> None: ...
+    def lookup_type(name: str) -> type: ...
+    def option_clear_by_name(self, predicate: Callable[[str], bool] | None = None) -> None: ...
     def option_get(self, opt_name: str) -> GLib.Variant: ...
-    def option_get_all_names(self) -> Optional[list[str]]: ...
-    def option_get_boolean(self, opt_name: str) -> Tuple[bool, bool]: ...
-    def option_get_uint32(self, opt_name: str) -> Tuple[bool, int]: ...
-    def option_set(self, opt_name: str, variant: Optional[GLib.Variant] = None) -> None: ...
+    def option_get_all_names(self) -> list[str] | None: ...
+    def option_get_boolean(self, opt_name: str) -> tuple[bool, bool]: ...
+    def option_get_uint32(self, opt_name: str) -> tuple[bool, int]: ...
+    def option_set(self, opt_name: str, variant: GLib.Variant | None = None) -> None: ...
     def option_set_boolean(self, opt_name: str, value: bool) -> None: ...
     def option_set_uint32(self, opt_name: str, value: int) -> None: ...
     def set_secret_flags(self, secret_name: str, flags: SettingSecretFlags) -> bool: ...
     def to_string(self) -> str: ...
-    def verify(self, connection: Optional[Connection] = None) -> bool: ...
-    def verify_secrets(self, connection: Optional[Connection] = None) -> bool: ...
-    
+    def verify(self, connection: Connection | None = None) -> bool: ...
+    def verify_secrets(self, connection: Connection | None = None) -> bool: ...
+
 
 class Setting6Lowpan(Setting):
     """
@@ -7095,12 +7106,12 @@ class Setting6Lowpan(Setting):
     Object NMSetting6Lowpan
 
     Properties from NMSetting6Lowpan:
-      parent -> gchararray: 
-    
+      parent -> gchararray:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -7113,7 +7124,7 @@ class Setting6Lowpan(Setting):
     def get_parent(self) -> str: ...
     @classmethod
     def new(cls) -> Setting6Lowpan: ...
-    
+
 
 class Setting6LowpanClass(GObject.GPointer): ...
 
@@ -7129,106 +7140,106 @@ class Setting8021x(Setting):
     Object NMSetting8021x
 
     Properties from NMSetting8021x:
-      eap -> GStrv: 
-    
-      identity -> gchararray: 
-    
-      anonymous-identity -> gchararray: 
-    
-      pac-file -> gchararray: 
-    
-      ca-cert -> GBytes: 
-    
-      ca-cert-password -> gchararray: 
-    
-      ca-cert-password-flags -> NMSettingSecretFlags: 
-    
-      ca-path -> gchararray: 
-    
-      subject-match -> gchararray: 
-    
-      altsubject-matches -> GStrv: 
-    
-      domain-suffix-match -> gchararray: 
-    
-      domain-match -> gchararray: 
-    
-      client-cert -> GBytes: 
-    
-      client-cert-password -> gchararray: 
-    
-      client-cert-password-flags -> NMSettingSecretFlags: 
-    
-      phase1-peapver -> gchararray: 
-    
-      phase1-peaplabel -> gchararray: 
-    
-      phase1-fast-provisioning -> gchararray: 
-    
-      phase1-auth-flags -> guint: 
-    
-      phase2-auth -> gchararray: 
-    
-      phase2-autheap -> gchararray: 
-    
-      phase2-ca-cert -> GBytes: 
-    
-      phase2-ca-cert-password -> gchararray: 
-    
-      phase2-ca-cert-password-flags -> NMSettingSecretFlags: 
-    
-      phase2-ca-path -> gchararray: 
-    
-      phase2-subject-match -> gchararray: 
-    
-      phase2-altsubject-matches -> GStrv: 
-    
-      phase2-domain-suffix-match -> gchararray: 
-    
-      phase2-domain-match -> gchararray: 
-    
-      phase2-client-cert -> GBytes: 
-    
-      phase2-client-cert-password -> gchararray: 
-    
-      phase2-client-cert-password-flags -> NMSettingSecretFlags: 
-    
-      password -> gchararray: 
-    
-      password-flags -> NMSettingSecretFlags: 
-    
-      password-raw -> GBytes: 
-    
-      password-raw-flags -> NMSettingSecretFlags: 
-    
-      private-key -> GBytes: 
-    
-      private-key-password -> gchararray: 
-    
-      private-key-password-flags -> NMSettingSecretFlags: 
-    
-      phase2-private-key -> GBytes: 
-    
-      phase2-private-key-password -> gchararray: 
-    
-      phase2-private-key-password-flags -> NMSettingSecretFlags: 
-    
-      pin -> gchararray: 
-    
-      pin-flags -> NMSettingSecretFlags: 
-    
-      system-ca-certs -> gboolean: 
-    
-      optional -> gboolean: 
-    
-      auth-timeout -> gint: 
-    
-      openssl-ciphers -> gchararray: 
-    
+      eap -> GStrv:
+
+      identity -> gchararray:
+
+      anonymous-identity -> gchararray:
+
+      pac-file -> gchararray:
+
+      ca-cert -> GBytes:
+
+      ca-cert-password -> gchararray:
+
+      ca-cert-password-flags -> NMSettingSecretFlags:
+
+      ca-path -> gchararray:
+
+      subject-match -> gchararray:
+
+      altsubject-matches -> GStrv:
+
+      domain-suffix-match -> gchararray:
+
+      domain-match -> gchararray:
+
+      client-cert -> GBytes:
+
+      client-cert-password -> gchararray:
+
+      client-cert-password-flags -> NMSettingSecretFlags:
+
+      phase1-peapver -> gchararray:
+
+      phase1-peaplabel -> gchararray:
+
+      phase1-fast-provisioning -> gchararray:
+
+      phase1-auth-flags -> guint:
+
+      phase2-auth -> gchararray:
+
+      phase2-autheap -> gchararray:
+
+      phase2-ca-cert -> GBytes:
+
+      phase2-ca-cert-password -> gchararray:
+
+      phase2-ca-cert-password-flags -> NMSettingSecretFlags:
+
+      phase2-ca-path -> gchararray:
+
+      phase2-subject-match -> gchararray:
+
+      phase2-altsubject-matches -> GStrv:
+
+      phase2-domain-suffix-match -> gchararray:
+
+      phase2-domain-match -> gchararray:
+
+      phase2-client-cert -> GBytes:
+
+      phase2-client-cert-password -> gchararray:
+
+      phase2-client-cert-password-flags -> NMSettingSecretFlags:
+
+      password -> gchararray:
+
+      password-flags -> NMSettingSecretFlags:
+
+      password-raw -> GBytes:
+
+      password-raw-flags -> NMSettingSecretFlags:
+
+      private-key -> GBytes:
+
+      private-key-password -> gchararray:
+
+      private-key-password-flags -> NMSettingSecretFlags:
+
+      phase2-private-key -> GBytes:
+
+      phase2-private-key-password -> gchararray:
+
+      phase2-private-key-password-flags -> NMSettingSecretFlags:
+
+      pin -> gchararray:
+
+      pin-flags -> NMSettingSecretFlags:
+
+      system-ca-certs -> gboolean:
+
+      optional -> gboolean:
+
+      auth-timeout -> gint:
+
+      openssl-ciphers -> gchararray:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -7425,7 +7436,7 @@ class Setting8021x(Setting):
     def set_phase2_client_cert(self, value: str, scheme: Setting8021xCKScheme, out_format: Setting8021xCKFormat) -> bool: ...
     def set_phase2_private_key(self, value: str, password: str, scheme: Setting8021xCKScheme, out_format: Setting8021xCKFormat) -> bool: ...
     def set_private_key(self, value: str, password: str, scheme: Setting8021xCKScheme, out_format: Setting8021xCKFormat) -> bool: ...
-    
+
 
 class Setting8021xClass(GObject.GPointer): ...
 
@@ -7441,24 +7452,24 @@ class SettingAdsl(Setting):
     Object NMSettingAdsl
 
     Properties from NMSettingAdsl:
-      username -> gchararray: 
-    
-      password -> gchararray: 
-    
-      password-flags -> NMSettingSecretFlags: 
-    
-      protocol -> gchararray: 
-    
-      encapsulation -> gchararray: 
-    
-      vpi -> guint: 
-    
-      vci -> guint: 
-    
+      username -> gchararray:
+
+      password -> gchararray:
+
+      password-flags -> NMSettingSecretFlags:
+
+      protocol -> gchararray:
+
+      encapsulation -> gchararray:
+
+      vpi -> guint:
+
+      vci -> guint:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -7489,7 +7500,7 @@ class SettingAdsl(Setting):
     def get_vpi(self) -> int: ...
     @classmethod
     def new(cls) -> SettingAdsl: ...
-    
+
 
 class SettingAdslClass(GObject.GPointer): ...
 
@@ -7505,14 +7516,14 @@ class SettingBluetooth(Setting):
     Object NMSettingBluetooth
 
     Properties from NMSettingBluetooth:
-      bdaddr -> gchararray: 
-    
-      type -> gchararray: 
-    
+      bdaddr -> gchararray:
+
+      type -> gchararray:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -7528,7 +7539,7 @@ class SettingBluetooth(Setting):
     def get_connection_type(self) -> str: ...
     @classmethod
     def new(cls) -> SettingBluetooth: ...
-    
+
 
 class SettingBluetoothClass(GObject.GPointer): ...
 
@@ -7544,12 +7555,12 @@ class SettingBond(Setting):
     Object NMSettingBond
 
     Properties from NMSettingBond:
-      options -> GHashTable: 
-    
+      options -> GHashTable:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -7561,17 +7572,17 @@ class SettingBond(Setting):
     def __init__(self, options: dict[str, str] = ...): ...
     def add_option(self, name: str, value: str) -> bool: ...
     def get_num_options(self) -> int: ...
-    def get_option(self, idx: int) -> Tuple[bool, str, str]: ...
+    def get_option(self, idx: int) -> tuple[bool, str, str]: ...
     def get_option_by_name(self, name: str) -> str: ...
     def get_option_default(self, name: str) -> str: ...
     def get_option_normalized(self, name: str) -> str: ...
-    def get_valid_options(self) -> Optional[list[str]]: ...
+    def get_valid_options(self) -> list[str] | None: ...
     @classmethod
     def new(cls) -> SettingBond: ...
     def remove_option(self, name: str) -> bool: ...
     @staticmethod
-    def validate_option(name: str, value: Optional[str] = None) -> bool: ...
-    
+    def validate_option(name: str, value: str | None = None) -> bool: ...
+
 
 class SettingBondClass(GObject.GPointer): ...
 
@@ -7587,14 +7598,14 @@ class SettingBondPort(Setting):
     Object NMSettingBondPort
 
     Properties from NMSettingBondPort:
-      queue-id -> guint: 
-    
-      prio -> gint: 
-    
+      queue-id -> guint:
+
+      prio -> gint:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -7610,7 +7621,7 @@ class SettingBondPort(Setting):
     def get_queue_id(self) -> int: ...
     @classmethod
     def new(cls) -> SettingBondPort: ...
-    
+
 
 class SettingBondPortClass(GObject.GPointer): ...
 
@@ -7626,64 +7637,64 @@ class SettingBridge(Setting):
     Object NMSettingBridge
 
     Properties from NMSettingBridge:
-      mac-address -> gchararray: 
-    
-      stp -> gboolean: 
-    
-      priority -> guint: 
-    
-      forward-delay -> guint: 
-    
-      hello-time -> guint: 
-    
-      max-age -> guint: 
-    
-      ageing-time -> guint: 
-    
-      group-address -> gchararray: 
-    
-      group-forward-mask -> guint: 
-    
-      multicast-hash-max -> guint: 
-    
-      multicast-last-member-count -> guint: 
-    
-      multicast-last-member-interval -> guint64: 
-    
-      multicast-membership-interval -> guint64: 
-    
-      multicast-router -> gchararray: 
-    
-      multicast-querier -> gboolean: 
-    
-      multicast-querier-interval -> guint64: 
-    
-      multicast-query-interval -> guint64: 
-    
-      multicast-query-response-interval -> guint64: 
-    
-      multicast-query-use-ifaddr -> gboolean: 
-    
-      multicast-snooping -> gboolean: 
-    
-      multicast-startup-query-count -> guint: 
-    
-      multicast-startup-query-interval -> guint64: 
-    
-      vlan-filtering -> gboolean: 
-    
-      vlan-default-pvid -> guint: 
-    
-      vlan-protocol -> gchararray: 
-    
-      vlan-stats-enabled -> gboolean: 
-    
-      vlans -> GPtrArray: 
-    
+      mac-address -> gchararray:
+
+      stp -> gboolean:
+
+      priority -> guint:
+
+      forward-delay -> guint:
+
+      hello-time -> guint:
+
+      max-age -> guint:
+
+      ageing-time -> guint:
+
+      group-address -> gchararray:
+
+      group-forward-mask -> guint:
+
+      multicast-hash-max -> guint:
+
+      multicast-last-member-count -> guint:
+
+      multicast-last-member-interval -> guint64:
+
+      multicast-membership-interval -> guint64:
+
+      multicast-router -> gchararray:
+
+      multicast-querier -> gboolean:
+
+      multicast-querier-interval -> guint64:
+
+      multicast-query-interval -> guint64:
+
+      multicast-query-response-interval -> guint64:
+
+      multicast-query-use-ifaddr -> gboolean:
+
+      multicast-snooping -> gboolean:
+
+      multicast-startup-query-count -> guint:
+
+      multicast-startup-query-interval -> guint64:
+
+      vlan-filtering -> gboolean:
+
+      vlan-default-pvid -> guint:
+
+      vlan-protocol -> gchararray:
+
+      vlan-stats-enabled -> gboolean:
+
+      vlans -> GPtrArray:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -7779,7 +7790,7 @@ class SettingBridge(Setting):
     def new(cls) -> SettingBridge: ...
     def remove_vlan(self, idx: int) -> None: ...
     def remove_vlan_by_vid(self, vid_start: int, vid_end: int) -> bool: ...
-    
+
 
 class SettingBridgeClass(GObject.GPointer): ...
 
@@ -7795,18 +7806,18 @@ class SettingBridgePort(Setting):
     Object NMSettingBridgePort
 
     Properties from NMSettingBridgePort:
-      priority -> guint: 
-    
-      path-cost -> guint: 
-    
-      hairpin-mode -> gboolean: 
-    
-      vlans -> GPtrArray: 
-    
+      priority -> guint:
+
+      path-cost -> guint:
+
+      hairpin-mode -> gboolean:
+
+      vlans -> GPtrArray:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -7833,7 +7844,7 @@ class SettingBridgePort(Setting):
     def new(cls) -> SettingBridgePort: ...
     def remove_vlan(self, idx: int) -> None: ...
     def remove_vlan_by_vid(self, vid_start: int, vid_end: int) -> bool: ...
-    
+
 
 class SettingBridgePortClass(GObject.GPointer): ...
 
@@ -7849,20 +7860,20 @@ class SettingCdma(Setting):
     Object NMSettingCdma
 
     Properties from NMSettingCdma:
-      number -> gchararray: 
-    
-      username -> gchararray: 
-    
-      password -> gchararray: 
-    
-      password-flags -> NMSettingSecretFlags: 
-    
-      mtu -> guint: 
-    
+      number -> gchararray:
+
+      username -> gchararray:
+
+      password -> gchararray:
+
+      password-flags -> NMSettingSecretFlags:
+
+      mtu -> guint:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -7887,7 +7898,7 @@ class SettingCdma(Setting):
     def get_username(self) -> str: ...
     @classmethod
     def new(cls) -> SettingCdma: ...
-    
+
 
 class SettingCdmaClass(GObject.GPointer): ...
 
@@ -7905,74 +7916,74 @@ class SettingConnection(Setting):
     Object NMSettingConnection
 
     Properties from NMSettingConnection:
-      id -> gchararray: 
-    
-      uuid -> gchararray: 
-    
-      interface-name -> gchararray: 
-    
-      type -> gchararray: 
-    
-      permissions -> GStrv: 
-    
-      autoconnect -> gboolean: 
-    
-      autoconnect-priority -> gint: 
-    
-      autoconnect-retries -> gint: 
-    
-      multi-connect -> gint: 
-    
-      timestamp -> guint64: 
-    
-      read-only -> gboolean: 
-    
-      zone -> gchararray: 
-    
-      master -> gchararray: 
-    
-      controller -> gchararray: 
-    
-      slave-type -> gchararray: 
-    
-      port-type -> gchararray: 
-    
-      autoconnect-slaves -> NMSettingConnectionAutoconnectSlaves: 
-    
-      autoconnect-ports -> gint: 
-    
-      secondaries -> GStrv: 
-    
-      gateway-ping-timeout -> guint: 
-    
-      metered -> NMMetered: 
-    
-      lldp -> gint: 
-    
-      mdns -> gint: 
-    
-      llmnr -> gint: 
-    
-      dns-over-tls -> gint: 
-    
-      mptcp-flags -> guint: 
-    
-      stable-id -> gchararray: 
-    
-      auth-retries -> gint: 
-    
-      wait-device-timeout -> gint: 
-    
-      mud-url -> gchararray: 
-    
-      wait-activation-delay -> gint: 
-    
-      down-on-poweroff -> gint: 
-    
+      id -> gchararray:
+
+      uuid -> gchararray:
+
+      interface-name -> gchararray:
+
+      type -> gchararray:
+
+      permissions -> GStrv:
+
+      autoconnect -> gboolean:
+
+      autoconnect-priority -> gint:
+
+      autoconnect-retries -> gint:
+
+      multi-connect -> gint:
+
+      timestamp -> guint64:
+
+      read-only -> gboolean:
+
+      zone -> gchararray:
+
+      master -> gchararray:
+
+      controller -> gchararray:
+
+      slave-type -> gchararray:
+
+      port-type -> gchararray:
+
+      autoconnect-slaves -> NMSettingConnectionAutoconnectSlaves:
+
+      autoconnect-ports -> gint:
+
+      secondaries -> GStrv:
+
+      gateway-ping-timeout -> guint:
+
+      metered -> NMMetered:
+
+      lldp -> gint:
+
+      mdns -> gint:
+
+      llmnr -> gint:
+
+      dns-over-tls -> gint:
+
+      mptcp-flags -> guint:
+
+      stable-id -> gchararray:
+
+      auth-retries -> gint:
+
+      wait-device-timeout -> gint:
+
+      mud-url -> gchararray:
+
+      wait-activation-delay -> gint:
+
+      down-on-poweroff -> gint:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -8044,7 +8055,7 @@ class SettingConnection(Setting):
                  wait_activation_delay: int = ...,
                  wait_device_timeout: int = ...,
                  zone: str = ...): ...
-    def add_permission(self, ptype: str, pitem: str, detail: Optional[str] = None) -> bool: ...
+    def add_permission(self, ptype: str, pitem: str, detail: str | None = None) -> bool: ...
     def add_secondary(self, sec_uuid: str) -> bool: ...
     def get_auth_retries(self) -> int: ...
     def get_autoconnect(self) -> bool: ...
@@ -8085,10 +8096,10 @@ class SettingConnection(Setting):
     def new(cls) -> SettingConnection: ...
     def permissions_user_allowed(self, uname: str) -> bool: ...
     def remove_permission(self, idx: int) -> None: ...
-    def remove_permission_by_value(self, ptype: str, pitem: str, detail: Optional[str] = None) -> bool: ...
+    def remove_permission_by_value(self, ptype: str, pitem: str, detail: str | None = None) -> bool: ...
     def remove_secondary(self, idx: int) -> None: ...
     def remove_secondary_by_value(self, sec_uuid: str) -> bool: ...
-    
+
 
 class SettingConnectionClass(GObject.GPointer): ...
 
@@ -8104,40 +8115,40 @@ class SettingDcb(Setting):
     Object NMSettingDcb
 
     Properties from NMSettingDcb:
-      app-fcoe-flags -> NMSettingDcbFlags: 
-    
-      app-fcoe-priority -> gint: 
-    
-      app-fcoe-mode -> gchararray: 
-    
-      app-iscsi-flags -> NMSettingDcbFlags: 
-    
-      app-iscsi-priority -> gint: 
-    
-      app-fip-flags -> NMSettingDcbFlags: 
-    
-      app-fip-priority -> gint: 
-    
-      priority-flow-control-flags -> NMSettingDcbFlags: 
-    
-      priority-flow-control -> GArray: 
-    
-      priority-group-flags -> NMSettingDcbFlags: 
-    
-      priority-group-id -> GArray: 
-    
-      priority-group-bandwidth -> GArray: 
-    
-      priority-bandwidth -> GArray: 
-    
-      priority-strict-bandwidth -> GArray: 
-    
-      priority-traffic-class -> GArray: 
-    
+      app-fcoe-flags -> NMSettingDcbFlags:
+
+      app-fcoe-priority -> gint:
+
+      app-fcoe-mode -> gchararray:
+
+      app-iscsi-flags -> NMSettingDcbFlags:
+
+      app-iscsi-priority -> gint:
+
+      app-fip-flags -> NMSettingDcbFlags:
+
+      app-fip-priority -> gint:
+
+      priority-flow-control-flags -> NMSettingDcbFlags:
+
+      priority-flow-control -> GArray:
+
+      priority-group-flags -> NMSettingDcbFlags:
+
+      priority-group-id -> GArray:
+
+      priority-group-bandwidth -> GArray:
+
+      priority-bandwidth -> GArray:
+
+      priority-strict-bandwidth -> GArray:
+
+      priority-traffic-class -> GArray:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -8198,7 +8209,7 @@ class SettingDcb(Setting):
     def set_priority_group_id(self, user_priority: int, group_id: int) -> None: ...
     def set_priority_strict_bandwidth(self, user_priority: int, strict: bool) -> None: ...
     def set_priority_traffic_class(self, user_priority: int, traffic_class: int) -> None: ...
-    
+
 
 class SettingDcbClass(GObject.GPointer): ...
 
@@ -8214,8 +8225,8 @@ class SettingDummy(Setting):
     Object NMSettingDummy
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -8225,7 +8236,7 @@ class SettingDummy(Setting):
     props: Props = ...
     @classmethod
     def new(cls) -> SettingDummy: ...
-    
+
 
 class SettingDummyClass(GObject.GPointer): ...
 
@@ -8241,8 +8252,8 @@ class SettingEthtool(Setting):
     Object NMSettingEthtool
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -8252,11 +8263,11 @@ class SettingEthtool(Setting):
     props: Props = ...
     def clear_features(self) -> None: ...
     def get_feature(self, optname: str) -> Ternary: ...
-    def get_optnames(self) -> Tuple[list[str], int]: ...
+    def get_optnames(self) -> tuple[list[str], int]: ...
     @classmethod
     def new(cls) -> SettingEthtool: ...
     def set_feature(self, optname: str, value: Ternary) -> None: ...
-    
+
 
 class SettingEthtoolClass(GObject.GPointer): ...
 
@@ -8272,12 +8283,12 @@ class SettingGeneric(Setting):
     Object NMSettingGeneric
 
     Properties from NMSettingGeneric:
-      device-handler -> gchararray: 
-    
+      device-handler -> gchararray:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -8290,7 +8301,7 @@ class SettingGeneric(Setting):
     def get_device_handler(self) -> str: ...
     @classmethod
     def new(cls) -> SettingGeneric: ...
-    
+
 
 class SettingGenericClass(GObject.GPointer): ...
 
@@ -8306,42 +8317,42 @@ class SettingGsm(Setting):
     Object NMSettingGsm
 
     Properties from NMSettingGsm:
-      auto-config -> gboolean: 
-    
-      number -> gchararray: 
-    
-      username -> gchararray: 
-    
-      password -> gchararray: 
-    
-      password-flags -> NMSettingSecretFlags: 
-    
-      apn -> gchararray: 
-    
-      network-id -> gchararray: 
-    
-      pin -> gchararray: 
-    
-      pin-flags -> NMSettingSecretFlags: 
-    
-      home-only -> gboolean: 
-    
-      device-id -> gchararray: 
-    
-      sim-id -> gchararray: 
-    
-      sim-operator-id -> gchararray: 
-    
-      mtu -> guint: 
-    
-      initial-eps-bearer-configure -> gboolean: 
-    
-      initial-eps-bearer-apn -> gchararray: 
-    
+      auto-config -> gboolean:
+
+      number -> gchararray:
+
+      username -> gchararray:
+
+      password -> gchararray:
+
+      password-flags -> NMSettingSecretFlags:
+
+      apn -> gchararray:
+
+      network-id -> gchararray:
+
+      pin -> gchararray:
+
+      pin-flags -> NMSettingSecretFlags:
+
+      home-only -> gboolean:
+
+      device-id -> gchararray:
+
+      sim-id -> gchararray:
+
+      sim-operator-id -> gchararray:
+
+      mtu -> guint:
+
+      initial-eps-bearer-configure -> gboolean:
+
+      initial-eps-bearer-apn -> gchararray:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -8399,7 +8410,7 @@ class SettingGsm(Setting):
     def get_username(self) -> str: ...
     @classmethod
     def new(cls) -> SettingGsm: ...
-    
+
 
 class SettingGsmClass(GObject.GPointer): ...
 
@@ -8415,18 +8426,18 @@ class SettingHostname(Setting):
     Object NMSettingHostname
 
     Properties from NMSettingHostname:
-      priority -> gint: 
-    
-      from-dhcp -> NMTernary: 
-    
-      from-dns-lookup -> NMTernary: 
-    
-      only-from-default -> NMTernary: 
-    
+      priority -> gint:
+
+      from-dhcp -> NMTernary:
+
+      from-dns-lookup -> NMTernary:
+
+      only-from-default -> NMTernary:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -8448,7 +8459,7 @@ class SettingHostname(Setting):
     def get_priority(self) -> int: ...
     @classmethod
     def new(cls) -> SettingHostname: ...
-    
+
 
 class SettingHostnameClass(GObject.GPointer): ...
 
@@ -8464,18 +8475,18 @@ class SettingHsr(Setting):
     Object NMSettingHsr
 
     Properties from NMSettingHsr:
-      port1 -> gchararray: 
-    
-      port2 -> gchararray: 
-    
-      multicast-spec -> guint: 
-    
-      prp -> gboolean: 
-    
+      port1 -> gchararray:
+
+      port2 -> gchararray:
+
+      multicast-spec -> guint:
+
+      prp -> gboolean:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -8497,7 +8508,7 @@ class SettingHsr(Setting):
     def get_prp(self) -> bool: ...
     @classmethod
     def new(cls) -> SettingHsr: ...
-    
+
 
 class SettingHsrClass(GObject.GPointer): ...
 
@@ -8513,72 +8524,72 @@ class SettingIP4Config(SettingIPConfig):
     Object NMSettingIP4Config
 
     Properties from NMSettingIP4Config:
-      dhcp-client-id -> gchararray: 
-    
-      dhcp-fqdn -> gchararray: 
-    
-      dhcp-vendor-class-identifier -> gchararray: 
-    
-      link-local -> gint: 
-    
+      dhcp-client-id -> gchararray:
+
+      dhcp-fqdn -> gchararray:
+
+      dhcp-vendor-class-identifier -> gchararray:
+
+      link-local -> gint:
+
 
     Properties from NMSettingIPConfig:
-      method -> gchararray: 
-    
-      dns -> GStrv: 
-    
-      dns-search -> GStrv: 
-    
-      dns-options -> GStrv: 
-    
-      dns-priority -> gint: 
-    
-      addresses -> GPtrArray: 
-    
-      gateway -> gchararray: 
-    
-      routes -> GPtrArray: 
-    
-      route-metric -> gint64: 
-    
-      route-table -> guint: 
-    
-      ignore-auto-routes -> gboolean: 
-    
-      ignore-auto-dns -> gboolean: 
-    
-      dhcp-hostname -> gchararray: 
-    
-      dhcp-dscp -> gchararray: 
-    
-      dhcp-hostname-flags -> guint: 
-    
-      dhcp-send-hostname -> gboolean: 
-    
-      never-default -> gboolean: 
-    
-      may-fail -> gboolean: 
-    
-      dad-timeout -> gint: 
-    
-      dhcp-timeout -> gint: 
-    
-      required-timeout -> gint: 
-    
-      dhcp-iaid -> gchararray: 
-    
-      dhcp-reject-servers -> GStrv: 
-    
-      auto-route-ext-gw -> NMTernary: 
-    
-      replace-local-rule -> NMTernary: 
-    
-      dhcp-send-release -> NMTernary: 
-    
+      method -> gchararray:
+
+      dns -> GStrv:
+
+      dns-search -> GStrv:
+
+      dns-options -> GStrv:
+
+      dns-priority -> gint:
+
+      addresses -> GPtrArray:
+
+      gateway -> gchararray:
+
+      routes -> GPtrArray:
+
+      route-metric -> gint64:
+
+      route-table -> guint:
+
+      ignore-auto-routes -> gboolean:
+
+      ignore-auto-dns -> gboolean:
+
+      dhcp-hostname -> gchararray:
+
+      dhcp-dscp -> gchararray:
+
+      dhcp-hostname-flags -> guint:
+
+      dhcp-send-hostname -> gboolean:
+
+      never-default -> gboolean:
+
+      may-fail -> gboolean:
+
+      dad-timeout -> gint:
+
+      dhcp-timeout -> gint:
+
+      required-timeout -> gint:
+
+      dhcp-iaid -> gchararray:
+
+      dhcp-reject-servers -> GStrv:
+
+      auto-route-ext-gw -> NMTernary:
+
+      replace-local-rule -> NMTernary:
+
+      dhcp-send-release -> NMTernary:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -8652,7 +8663,7 @@ class SettingIP4Config(SettingIPConfig):
     def get_link_local(self) -> SettingIP4LinkLocal: ...
     @classmethod
     def new(cls) -> SettingIP4Config: ...
-    
+
 
 class SettingIP4ConfigClass(GObject.GPointer): ...
 
@@ -8668,82 +8679,82 @@ class SettingIP6Config(SettingIPConfig):
     Object NMSettingIP6Config
 
     Properties from NMSettingIP6Config:
-      ip6-privacy -> NMSettingIP6ConfigPrivacy: 
-    
-      temp-valid-lifetime -> gint: 
-    
-      temp-preferred-lifetime -> gint: 
-    
-      addr-gen-mode -> gint: 
-    
-      token -> gchararray: 
-    
-      dhcp-duid -> gchararray: 
-    
-      ra-timeout -> gint: 
-    
-      mtu -> guint: 
-    
-      dhcp-pd-hint -> gchararray: 
-    
+      ip6-privacy -> NMSettingIP6ConfigPrivacy:
+
+      temp-valid-lifetime -> gint:
+
+      temp-preferred-lifetime -> gint:
+
+      addr-gen-mode -> gint:
+
+      token -> gchararray:
+
+      dhcp-duid -> gchararray:
+
+      ra-timeout -> gint:
+
+      mtu -> guint:
+
+      dhcp-pd-hint -> gchararray:
+
 
     Properties from NMSettingIPConfig:
-      method -> gchararray: 
-    
-      dns -> GStrv: 
-    
-      dns-search -> GStrv: 
-    
-      dns-options -> GStrv: 
-    
-      dns-priority -> gint: 
-    
-      addresses -> GPtrArray: 
-    
-      gateway -> gchararray: 
-    
-      routes -> GPtrArray: 
-    
-      route-metric -> gint64: 
-    
-      route-table -> guint: 
-    
-      ignore-auto-routes -> gboolean: 
-    
-      ignore-auto-dns -> gboolean: 
-    
-      dhcp-hostname -> gchararray: 
-    
-      dhcp-dscp -> gchararray: 
-    
-      dhcp-hostname-flags -> guint: 
-    
-      dhcp-send-hostname -> gboolean: 
-    
-      never-default -> gboolean: 
-    
-      may-fail -> gboolean: 
-    
-      dad-timeout -> gint: 
-    
-      dhcp-timeout -> gint: 
-    
-      required-timeout -> gint: 
-    
-      dhcp-iaid -> gchararray: 
-    
-      dhcp-reject-servers -> GStrv: 
-    
-      auto-route-ext-gw -> NMTernary: 
-    
-      replace-local-rule -> NMTernary: 
-    
-      dhcp-send-release -> NMTernary: 
-    
+      method -> gchararray:
+
+      dns -> GStrv:
+
+      dns-search -> GStrv:
+
+      dns-options -> GStrv:
+
+      dns-priority -> gint:
+
+      addresses -> GPtrArray:
+
+      gateway -> gchararray:
+
+      routes -> GPtrArray:
+
+      route-metric -> gint64:
+
+      route-table -> guint:
+
+      ignore-auto-routes -> gboolean:
+
+      ignore-auto-dns -> gboolean:
+
+      dhcp-hostname -> gchararray:
+
+      dhcp-dscp -> gchararray:
+
+      dhcp-hostname-flags -> guint:
+
+      dhcp-send-hostname -> gboolean:
+
+      never-default -> gboolean:
+
+      may-fail -> gboolean:
+
+      dad-timeout -> gint:
+
+      dhcp-timeout -> gint:
+
+      required-timeout -> gint:
+
+      dhcp-iaid -> gchararray:
+
+      dhcp-reject-servers -> GStrv:
+
+      auto-route-ext-gw -> NMTernary:
+
+      replace-local-rule -> NMTernary:
+
+      dhcp-send-release -> NMTernary:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -8832,7 +8843,7 @@ class SettingIP6Config(SettingIPConfig):
     def get_token(self) -> str: ...
     @classmethod
     def new(cls) -> SettingIP6Config: ...
-    
+
 
 class SettingIP6ConfigClass(GObject.GPointer): ...
 
@@ -8847,62 +8858,62 @@ class SettingIPConfig(Setting):
     Object NMSettingIPConfig
 
     Properties from NMSettingIPConfig:
-      method -> gchararray: 
-    
-      dns -> GStrv: 
-    
-      dns-search -> GStrv: 
-    
-      dns-options -> GStrv: 
-    
-      dns-priority -> gint: 
-    
-      addresses -> GPtrArray: 
-    
-      gateway -> gchararray: 
-    
-      routes -> GPtrArray: 
-    
-      route-metric -> gint64: 
-    
-      route-table -> guint: 
-    
-      ignore-auto-routes -> gboolean: 
-    
-      ignore-auto-dns -> gboolean: 
-    
-      dhcp-hostname -> gchararray: 
-    
-      dhcp-dscp -> gchararray: 
-    
-      dhcp-hostname-flags -> guint: 
-    
-      dhcp-send-hostname -> gboolean: 
-    
-      never-default -> gboolean: 
-    
-      may-fail -> gboolean: 
-    
-      dad-timeout -> gint: 
-    
-      dhcp-timeout -> gint: 
-    
-      required-timeout -> gint: 
-    
-      dhcp-iaid -> gchararray: 
-    
-      dhcp-reject-servers -> GStrv: 
-    
-      auto-route-ext-gw -> NMTernary: 
-    
-      replace-local-rule -> NMTernary: 
-    
-      dhcp-send-release -> NMTernary: 
-    
+      method -> gchararray:
+
+      dns -> GStrv:
+
+      dns-search -> GStrv:
+
+      dns-options -> GStrv:
+
+      dns-priority -> gint:
+
+      addresses -> GPtrArray:
+
+      gateway -> gchararray:
+
+      routes -> GPtrArray:
+
+      route-metric -> gint64:
+
+      route-table -> guint:
+
+      ignore-auto-routes -> gboolean:
+
+      ignore-auto-dns -> gboolean:
+
+      dhcp-hostname -> gchararray:
+
+      dhcp-dscp -> gchararray:
+
+      dhcp-hostname-flags -> guint:
+
+      dhcp-send-hostname -> gboolean:
+
+      never-default -> gboolean:
+
+      may-fail -> gboolean:
+
+      dad-timeout -> gint:
+
+      dhcp-timeout -> gint:
+
+      required-timeout -> gint:
+
+      dhcp-iaid -> gchararray:
+
+      dhcp-reject-servers -> GStrv:
+
+      auto-route-ext-gw -> NMTernary:
+
+      replace-local-rule -> NMTernary:
+
+      dhcp-send-release -> NMTernary:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -9022,7 +9033,7 @@ class SettingIPConfig(Setting):
     def remove_route(self, idx: int) -> None: ...
     def remove_route_by_value(self, route: IPRoute) -> bool: ...
     def remove_routing_rule(self, idx: int) -> None: ...
-    
+
 
 class SettingIPConfigClass(GObject.GPointer): ...
 
@@ -9038,38 +9049,38 @@ class SettingIPTunnel(Setting):
     Object NMSettingIPTunnel
 
     Properties from NMSettingIPTunnel:
-      parent -> gchararray: 
-    
-      mode -> guint: 
-    
-      local -> gchararray: 
-    
-      remote -> gchararray: 
-    
-      ttl -> guint: 
-    
-      tos -> guint: 
-    
-      path-mtu-discovery -> gboolean: 
-    
-      input-key -> gchararray: 
-    
-      output-key -> gchararray: 
-    
-      encapsulation-limit -> guint: 
-    
-      flow-label -> guint: 
-    
-      fwmark -> guint: 
-    
-      mtu -> guint: 
-    
-      flags -> guint: 
-    
+      parent -> gchararray:
+
+      mode -> guint:
+
+      local -> gchararray:
+
+      remote -> gchararray:
+
+      ttl -> guint:
+
+      tos -> guint:
+
+      path-mtu-discovery -> gboolean:
+
+      input-key -> gchararray:
+
+      output-key -> gchararray:
+
+      encapsulation-limit -> guint:
+
+      flow-label -> guint:
+
+      fwmark -> guint:
+
+      mtu -> guint:
+
+      flags -> guint:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -9121,7 +9132,7 @@ class SettingIPTunnel(Setting):
     def get_ttl(self) -> int: ...
     @classmethod
     def new(cls) -> SettingIPTunnel: ...
-    
+
 
 class SettingIPTunnelClass(GObject.GPointer): ...
 
@@ -9137,20 +9148,20 @@ class SettingInfiniband(Setting):
     Object NMSettingInfiniband
 
     Properties from NMSettingInfiniband:
-      mac-address -> gchararray: 
-    
-      mtu -> guint: 
-    
-      transport-mode -> gchararray: 
-    
-      p-key -> gint: 
-    
-      parent -> gchararray: 
-    
+      mac-address -> gchararray:
+
+      mtu -> guint:
+
+      transport-mode -> gchararray:
+
+      p-key -> gint:
+
+      parent -> gchararray:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -9176,7 +9187,7 @@ class SettingInfiniband(Setting):
     def get_virtual_interface_name(self) -> str: ...
     @classmethod
     def new(cls) -> SettingInfiniband: ...
-    
+
 
 class SettingInfinibandClass(GObject.GPointer): ...
 
@@ -9192,18 +9203,18 @@ class SettingLink(Setting):
     Object NMSettingLink
 
     Properties from NMSettingLink:
-      tx-queue-length -> gint64: 
-    
-      gso-max-size -> gint64: 
-    
-      gso-max-segments -> gint64: 
-    
-      gro-max-size -> gint64: 
-    
+      tx-queue-length -> gint64:
+
+      gso-max-size -> gint64:
+
+      gso-max-segments -> gint64:
+
+      gro-max-size -> gint64:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -9225,7 +9236,7 @@ class SettingLink(Setting):
     def get_tx_queue_length(self) -> int: ...
     @classmethod
     def new(cls) -> SettingLink: ...
-    
+
 
 class SettingLinkClass(GObject.GPointer): ...
 
@@ -9241,12 +9252,12 @@ class SettingLoopback(Setting):
     Object NMSettingLoopback
 
     Properties from NMSettingLoopback:
-      mtu -> guint: 
-    
+      mtu -> guint:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -9259,7 +9270,7 @@ class SettingLoopback(Setting):
     def get_mtu(self) -> int: ...
     @classmethod
     def new(cls) -> SettingLoopback: ...
-    
+
 
 class SettingLoopbackClass(GObject.GPointer): ...
 
@@ -9275,30 +9286,30 @@ class SettingMacsec(Setting):
     Object NMSettingMacsec
 
     Properties from NMSettingMacsec:
-      parent -> gchararray: 
-    
-      mode -> gint: 
-    
-      encrypt -> gboolean: 
-    
-      mka-cak -> gchararray: 
-    
-      mka-cak-flags -> NMSettingSecretFlags: 
-    
-      mka-ckn -> gchararray: 
-    
-      port -> gint: 
-    
-      validation -> gint: 
-    
-      send-sci -> gboolean: 
-    
-      offload -> gint: 
-    
+      parent -> gchararray:
+
+      mode -> gint:
+
+      encrypt -> gboolean:
+
+      mka-cak -> gchararray:
+
+      mka-cak-flags -> NMSettingSecretFlags:
+
+      mka-ckn -> gchararray:
+
+      port -> gint:
+
+      validation -> gint:
+
+      send-sci -> gboolean:
+
+      offload -> gint:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -9338,7 +9349,7 @@ class SettingMacsec(Setting):
     def get_validation(self) -> SettingMacsecValidation: ...
     @classmethod
     def new(cls) -> SettingMacsec: ...
-    
+
 
 class SettingMacsecClass(GObject.GPointer): ...
 
@@ -9354,18 +9365,18 @@ class SettingMacvlan(Setting):
     Object NMSettingMacvlan
 
     Properties from NMSettingMacvlan:
-      parent -> gchararray: 
-    
-      mode -> guint: 
-    
-      promiscuous -> gboolean: 
-    
-      tap -> gboolean: 
-    
+      parent -> gchararray:
+
+      mode -> guint:
+
+      promiscuous -> gboolean:
+
+      tap -> gboolean:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -9387,7 +9398,7 @@ class SettingMacvlan(Setting):
     def get_tap(self) -> bool: ...
     @classmethod
     def new(cls) -> SettingMacvlan: ...
-    
+
 
 class SettingMacvlanClass(GObject.GPointer): ...
 
@@ -9403,18 +9414,18 @@ class SettingMatch(Setting):
     Object NMSettingMatch
 
     Properties from NMSettingMatch:
-      interface-name -> GStrv: 
-    
-      kernel-command-line -> GStrv: 
-    
-      driver -> GStrv: 
-    
-      path -> GStrv: 
-    
+      interface-name -> GStrv:
+
+      kernel-command-line -> GStrv:
+
+      driver -> GStrv:
+
+      path -> GStrv:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -9460,7 +9471,7 @@ class SettingMatch(Setting):
     def remove_kernel_command_line_by_value(self, kernel_command_line: str) -> bool: ...
     def remove_path(self, idx: int) -> None: ...
     def remove_path_by_value(self, path: str) -> bool: ...
-    
+
 
 class SettingMatchClass(GObject.GPointer): ...
 
@@ -9476,16 +9487,16 @@ class SettingOlpcMesh(Setting):
     Object NMSettingOlpcMesh
 
     Properties from NMSettingOlpcMesh:
-      ssid -> GBytes: 
-    
-      channel -> guint: 
-    
-      dhcp-anycast-address -> gchararray: 
-    
+      ssid -> GBytes:
+
+      channel -> guint:
+
+      dhcp-anycast-address -> gchararray:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -9504,7 +9515,7 @@ class SettingOlpcMesh(Setting):
     def get_ssid(self) -> GLib.Bytes: ...
     @classmethod
     def new(cls) -> SettingOlpcMesh: ...
-    
+
 
 class SettingOlpcMeshClass(GObject.GPointer): ...
 
@@ -9520,20 +9531,20 @@ class SettingOvsBridge(Setting):
     Object NMSettingOvsBridge
 
     Properties from NMSettingOvsBridge:
-      fail-mode -> gchararray: 
-    
-      mcast-snooping-enable -> gboolean: 
-    
-      rstp-enable -> gboolean: 
-    
-      stp-enable -> gboolean: 
-    
-      datapath-type -> gchararray: 
-    
+      fail-mode -> gchararray:
+
+      mcast-snooping-enable -> gboolean:
+
+      rstp-enable -> gboolean:
+
+      stp-enable -> gboolean:
+
+      datapath-type -> gchararray:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -9558,7 +9569,7 @@ class SettingOvsBridge(Setting):
     def get_stp_enable(self) -> bool: ...
     @classmethod
     def new(cls) -> SettingOvsBridge: ...
-    
+
 
 class SettingOvsBridgeClass(GObject.GPointer): ...
 
@@ -9574,18 +9585,18 @@ class SettingOvsDpdk(Setting):
     Object NMSettingOvsDpdk
 
     Properties from NMSettingOvsDpdk:
-      devargs -> gchararray: 
-    
-      n-rxq -> guint: 
-    
-      n-rxq-desc -> guint: 
-    
-      n-txq-desc -> guint: 
-    
+      devargs -> gchararray:
+
+      n-rxq -> guint:
+
+      n-rxq-desc -> guint:
+
+      n-txq-desc -> guint:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -9607,7 +9618,7 @@ class SettingOvsDpdk(Setting):
     def get_n_txq_desc(self) -> int: ...
     @classmethod
     def new(cls) -> SettingOvsDpdk: ...
-    
+
 
 class SettingOvsDpdkClass(GObject.GPointer): ...
 
@@ -9623,12 +9634,12 @@ class SettingOvsExternalIDs(Setting):
     Object NMSettingOvsExternalIDs
 
     Properties from NMSettingOvsExternalIDs:
-      data -> GHashTable: 
-    
+      data -> GHashTable:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -9639,15 +9650,15 @@ class SettingOvsExternalIDs(Setting):
     props: Props = ...
     def __init__(self, data: dict[str, str] = ...): ...
     @staticmethod
-    def check_key(key: Optional[str] = None) -> bool: ...
+    def check_key(key: str | None = None) -> bool: ...
     @staticmethod
-    def check_val(val: Optional[str] = None) -> bool: ...
+    def check_val(val: str | None = None) -> bool: ...
     def get_data(self, key: str) -> str: ...
     def get_data_keys(self) -> list[str]: ...
     @classmethod
     def new(cls) -> SettingOvsExternalIDs: ...
-    def set_data(self, key: str, val: Optional[str] = None) -> None: ...
-    
+    def set_data(self, key: str, val: str | None = None) -> None: ...
+
 
 class SettingOvsExternalIDsClass(GObject.GPointer): ...
 
@@ -9663,14 +9674,14 @@ class SettingOvsInterface(Setting):
     Object NMSettingOvsInterface
 
     Properties from NMSettingOvsInterface:
-      type -> gchararray: 
-    
-      ofport-request -> guint: 
-    
+      type -> gchararray:
+
+      ofport-request -> guint:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -9686,7 +9697,7 @@ class SettingOvsInterface(Setting):
     def get_ofport_request(self) -> int: ...
     @classmethod
     def new(cls) -> SettingOvsInterface: ...
-    
+
 
 class SettingOvsInterfaceClass(GObject.GPointer): ...
 
@@ -9702,12 +9713,12 @@ class SettingOvsOtherConfig(Setting):
     Object NMSettingOvsOtherConfig
 
     Properties from NMSettingOvsOtherConfig:
-      data -> GHashTable: 
-    
+      data -> GHashTable:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -9721,8 +9732,8 @@ class SettingOvsOtherConfig(Setting):
     def get_data_keys(self) -> list[str]: ...
     @classmethod
     def new(cls) -> SettingOvsOtherConfig: ...
-    def set_data(self, key: str, val: Optional[str] = None) -> None: ...
-    
+    def set_data(self, key: str, val: str | None = None) -> None: ...
+
 
 class SettingOvsOtherConfigClass(GObject.GPointer): ...
 
@@ -9738,12 +9749,12 @@ class SettingOvsPatch(Setting):
     Object NMSettingOvsPatch
 
     Properties from NMSettingOvsPatch:
-      peer -> gchararray: 
-    
+      peer -> gchararray:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -9756,7 +9767,7 @@ class SettingOvsPatch(Setting):
     def get_peer(self) -> str: ...
     @classmethod
     def new(cls) -> SettingOvsPatch: ...
-    
+
 
 class SettingOvsPatchClass(GObject.GPointer): ...
 
@@ -9772,24 +9783,24 @@ class SettingOvsPort(Setting):
     Object NMSettingOvsPort
 
     Properties from NMSettingOvsPort:
-      vlan-mode -> gchararray: 
-    
-      tag -> guint: 
-    
-      trunks -> GPtrArray: 
-    
-      lacp -> gchararray: 
-    
-      bond-mode -> gchararray: 
-    
-      bond-updelay -> guint: 
-    
-      bond-downdelay -> guint: 
-    
+      vlan-mode -> gchararray:
+
+      tag -> guint:
+
+      trunks -> GPtrArray:
+
+      lacp -> gchararray:
+
+      bond-mode -> gchararray:
+
+      bond-updelay -> guint:
+
+      bond-downdelay -> guint:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -9825,7 +9836,7 @@ class SettingOvsPort(Setting):
     def new(cls) -> SettingOvsPort: ...
     def remove_trunk(self, idx: int) -> None: ...
     def remove_trunk_by_value(self, start: int, end: int) -> bool: ...
-    
+
 
 class SettingOvsPortClass(GObject.GPointer): ...
 
@@ -9841,46 +9852,46 @@ class SettingPpp(Setting):
     Object NMSettingPpp
 
     Properties from NMSettingPpp:
-      noauth -> gboolean: 
-    
-      refuse-eap -> gboolean: 
-    
-      refuse-pap -> gboolean: 
-    
-      refuse-chap -> gboolean: 
-    
-      refuse-mschap -> gboolean: 
-    
-      refuse-mschapv2 -> gboolean: 
-    
-      nobsdcomp -> gboolean: 
-    
-      nodeflate -> gboolean: 
-    
-      no-vj-comp -> gboolean: 
-    
-      require-mppe -> gboolean: 
-    
-      require-mppe-128 -> gboolean: 
-    
-      mppe-stateful -> gboolean: 
-    
-      crtscts -> gboolean: 
-    
-      baud -> guint: 
-    
-      mru -> guint: 
-    
-      mtu -> guint: 
-    
-      lcp-echo-failure -> guint: 
-    
-      lcp-echo-interval -> guint: 
-    
+      noauth -> gboolean:
+
+      refuse-eap -> gboolean:
+
+      refuse-pap -> gboolean:
+
+      refuse-chap -> gboolean:
+
+      refuse-mschap -> gboolean:
+
+      refuse-mschapv2 -> gboolean:
+
+      nobsdcomp -> gboolean:
+
+      nodeflate -> gboolean:
+
+      no-vj-comp -> gboolean:
+
+      require-mppe -> gboolean:
+
+      require-mppe-128 -> gboolean:
+
+      mppe-stateful -> gboolean:
+
+      crtscts -> gboolean:
+
+      baud -> guint:
+
+      mru -> guint:
+
+      mtu -> guint:
+
+      lcp-echo-failure -> guint:
+
+      lcp-echo-interval -> guint:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -9944,7 +9955,7 @@ class SettingPpp(Setting):
     def get_require_mppe_128(self) -> bool: ...
     @classmethod
     def new(cls) -> SettingPpp: ...
-    
+
 
 class SettingPppClass(GObject.GPointer): ...
 
@@ -9960,20 +9971,20 @@ class SettingPppoe(Setting):
     Object NMSettingPppoe
 
     Properties from NMSettingPppoe:
-      parent -> gchararray: 
-    
-      service -> gchararray: 
-    
-      username -> gchararray: 
-    
-      password -> gchararray: 
-    
-      password-flags -> NMSettingSecretFlags: 
-    
+      parent -> gchararray:
+
+      service -> gchararray:
+
+      username -> gchararray:
+
+      password -> gchararray:
+
+      password-flags -> NMSettingSecretFlags:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -9998,7 +10009,7 @@ class SettingPppoe(Setting):
     def get_username(self) -> str: ...
     @classmethod
     def new(cls) -> SettingPppoe: ...
-    
+
 
 class SettingPppoeClass(GObject.GPointer): ...
 
@@ -10014,18 +10025,18 @@ class SettingProxy(Setting):
     Object NMSettingProxy
 
     Properties from NMSettingProxy:
-      method -> gint: 
-    
-      browser-only -> gboolean: 
-    
-      pac-url -> gchararray: 
-    
-      pac-script -> gchararray: 
-    
+      method -> gint:
+
+      browser-only -> gboolean:
+
+      pac-url -> gchararray:
+
+      pac-script -> gchararray:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -10047,7 +10058,7 @@ class SettingProxy(Setting):
     def get_pac_url(self) -> str: ...
     @classmethod
     def new(cls) -> SettingProxy: ...
-    
+
 
 class SettingProxyClass(GObject.GPointer): ...
 
@@ -10063,20 +10074,20 @@ class SettingSerial(Setting):
     Object NMSettingSerial
 
     Properties from NMSettingSerial:
-      baud -> guint: 
-    
-      bits -> guint: 
-    
-      parity -> NMSettingSerialParity: 
-    
-      stopbits -> guint: 
-    
-      send-delay -> guint64: 
-    
+      baud -> guint:
+
+      bits -> guint:
+
+      parity -> NMSettingSerialParity:
+
+      stopbits -> guint:
+
+      send-delay -> guint64:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -10101,7 +10112,7 @@ class SettingSerial(Setting):
     def get_stopbits(self) -> int: ...
     @classmethod
     def new(cls) -> SettingSerial: ...
-    
+
 
 class SettingSerialClass(GObject.GPointer): ...
 
@@ -10117,22 +10128,22 @@ class SettingSriov(Setting):
     Object NMSettingSriov
 
     Properties from NMSettingSriov:
-      total-vfs -> guint: 
-    
-      vfs -> GPtrArray: 
-    
-      autoprobe-drivers -> NMTernary: 
-    
-      eswitch-mode -> gint: 
-    
-      eswitch-inline-mode -> gint: 
-    
-      eswitch-encap-mode -> gint: 
-    
+      total-vfs -> guint:
+
+      vfs -> GPtrArray:
+
+      autoprobe-drivers -> NMTernary:
+
+      eswitch-mode -> gint:
+
+      eswitch-inline-mode -> gint:
+
+      eswitch-encap-mode -> gint:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -10165,7 +10176,7 @@ class SettingSriov(Setting):
     def new(cls) -> SettingSriov: ...
     def remove_vf(self, idx: int) -> None: ...
     def remove_vf_by_index(self, index: int) -> bool: ...
-    
+
 
 class SettingSriovClass(GObject.GPointer): ...
 
@@ -10181,14 +10192,14 @@ class SettingTCConfig(Setting):
     Object NMSettingTCConfig
 
     Properties from NMSettingTCConfig:
-      qdiscs -> GPtrArray: 
-    
-      tfilters -> GPtrArray: 
-    
+      qdiscs -> GPtrArray:
+
+      tfilters -> GPtrArray:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -10214,7 +10225,7 @@ class SettingTCConfig(Setting):
     def remove_qdisc_by_value(self, qdisc: TCQdisc) -> bool: ...
     def remove_tfilter(self, idx: int) -> None: ...
     def remove_tfilter_by_value(self, tfilter: TCTfilter) -> bool: ...
-    
+
 
 class SettingTCConfigClass(GObject.GPointer): ...
 
@@ -10230,42 +10241,42 @@ class SettingTeam(Setting):
     Object NMSettingTeam
 
     Properties from NMSettingTeam:
-      config -> gchararray: 
-    
-      link-watchers -> GPtrArray: 
-    
-      notify-peers-count -> gint: 
-    
-      notify-peers-interval -> gint: 
-    
-      mcast-rejoin-count -> gint: 
-    
-      mcast-rejoin-interval -> gint: 
-    
-      runner -> gchararray: 
-    
-      runner-hwaddr-policy -> gchararray: 
-    
-      runner-tx-hash -> GStrv: 
-    
-      runner-tx-balancer -> gchararray: 
-    
-      runner-tx-balancer-interval -> gint: 
-    
-      runner-active -> gboolean: 
-    
-      runner-fast-rate -> gboolean: 
-    
-      runner-sys-prio -> gint: 
-    
-      runner-min-ports -> gint: 
-    
-      runner-agg-select-policy -> gchararray: 
-    
+      config -> gchararray:
+
+      link-watchers -> GPtrArray:
+
+      notify-peers-count -> gint:
+
+      notify-peers-interval -> gint:
+
+      mcast-rejoin-count -> gint:
+
+      mcast-rejoin-interval -> gint:
+
+      runner -> gchararray:
+
+      runner-hwaddr-policy -> gchararray:
+
+      runner-tx-hash -> GStrv:
+
+      runner-tx-balancer -> gchararray:
+
+      runner-tx-balancer-interval -> gint:
+
+      runner-active -> gboolean:
+
+      runner-fast-rate -> gboolean:
+
+      runner-sys-prio -> gint:
+
+      runner-min-ports -> gint:
+
+      runner-agg-select-policy -> gchararray:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -10332,7 +10343,7 @@ class SettingTeam(Setting):
     def remove_link_watcher_by_value(self, link_watcher: TeamLinkWatcher) -> bool: ...
     def remove_runner_tx_hash(self, idx: int) -> None: ...
     def remove_runner_tx_hash_by_value(self, txhash: str) -> bool: ...
-    
+
 
 class SettingTeamClass(GObject.GPointer): ...
 
@@ -10348,24 +10359,24 @@ class SettingTeamPort(Setting):
     Object NMSettingTeamPort
 
     Properties from NMSettingTeamPort:
-      config -> gchararray: 
-    
-      link-watchers -> GPtrArray: 
-    
-      queue-id -> gint: 
-    
-      prio -> gint: 
-    
-      sticky -> gboolean: 
-    
-      lacp-prio -> gint: 
-    
-      lacp-key -> gint: 
-    
+      config -> gchararray:
+
+      link-watchers -> GPtrArray:
+
+      queue-id -> gint:
+
+      prio -> gint:
+
+      sticky -> gboolean:
+
+      lacp-prio -> gint:
+
+      lacp-key -> gint:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -10401,7 +10412,7 @@ class SettingTeamPort(Setting):
     def new(cls) -> SettingTeamPort: ...
     def remove_link_watcher(self, idx: int) -> None: ...
     def remove_link_watcher_by_value(self, link_watcher: TeamLinkWatcher) -> bool: ...
-    
+
 
 class SettingTeamPortClass(GObject.GPointer): ...
 
@@ -10417,22 +10428,22 @@ class SettingTun(Setting):
     Object NMSettingTun
 
     Properties from NMSettingTun:
-      mode -> guint: 
-    
-      owner -> gchararray: 
-    
-      group -> gchararray: 
-    
-      pi -> gboolean: 
-    
-      vnet-hdr -> gboolean: 
-    
-      multi-queue -> gboolean: 
-    
+      mode -> guint:
+
+      owner -> gchararray:
+
+      group -> gchararray:
+
+      pi -> gboolean:
+
+      vnet-hdr -> gboolean:
+
+      multi-queue -> gboolean:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -10460,7 +10471,7 @@ class SettingTun(Setting):
     def get_vnet_hdr(self) -> bool: ...
     @classmethod
     def new(cls) -> SettingTun: ...
-    
+
 
 class SettingTunClass(GObject.GPointer): ...
 
@@ -10476,12 +10487,12 @@ class SettingUser(Setting):
     Object NMSettingUser
 
     Properties from NMSettingUser:
-      data -> GHashTable: 
-    
+      data -> GHashTable:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -10499,8 +10510,8 @@ class SettingUser(Setting):
     def get_keys(self) -> list[str]: ...
     @classmethod
     def new(cls) -> SettingUser: ...
-    def set_data(self, key: str, val: Optional[str] = None) -> bool: ...
-    
+    def set_data(self, key: str, val: str | None = None) -> bool: ...
+
 
 class SettingUserClass(GObject.GPointer): ...
 
@@ -10516,12 +10527,12 @@ class SettingVeth(Setting):
     Object NMSettingVeth
 
     Properties from NMSettingVeth:
-      peer -> gchararray: 
-    
+      peer -> gchararray:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -10534,7 +10545,7 @@ class SettingVeth(Setting):
     def get_peer(self) -> str: ...
     @classmethod
     def new(cls) -> SettingVeth: ...
-    
+
 
 class SettingVethClass(GObject.GPointer): ...
 
@@ -10550,22 +10561,22 @@ class SettingVlan(Setting):
     Object NMSettingVlan
 
     Properties from NMSettingVlan:
-      parent -> gchararray: 
-    
-      id -> guint: 
-    
-      flags -> NMVlanFlags: 
-    
-      protocol -> gchararray: 
-    
-      ingress-priority-map -> GStrv: 
-    
-      egress-priority-map -> GStrv: 
-    
+      parent -> gchararray:
+
+      id -> guint:
+
+      flags -> NMVlanFlags:
+
+      protocol -> gchararray:
+
+      ingress-priority-map -> GStrv:
+
+      egress-priority-map -> GStrv:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -10592,14 +10603,14 @@ class SettingVlan(Setting):
     def get_id(self) -> int: ...
     def get_num_priorities(self, map: VlanPriorityMap) -> int: ...
     def get_parent(self) -> str: ...
-    def get_priority(self, map: VlanPriorityMap, idx: int) -> Tuple[bool, int, int]: ...
+    def get_priority(self, map: VlanPriorityMap, idx: int) -> tuple[bool, int, int]: ...
     def get_protocol(self) -> str: ...
     @classmethod
     def new(cls) -> SettingVlan: ...
     def remove_priority(self, map: VlanPriorityMap, idx: int) -> None: ...
     def remove_priority_by_value(self, map: VlanPriorityMap, from_: int, to: int) -> bool: ...
     def remove_priority_str_by_value(self, map: VlanPriorityMap, str: str) -> bool: ...
-    
+
 
 class SettingVlanClass(GObject.GPointer): ...
 
@@ -10615,22 +10626,22 @@ class SettingVpn(Setting):
     Object NMSettingVpn
 
     Properties from NMSettingVpn:
-      service-type -> gchararray: 
-    
-      user-name -> gchararray: 
-    
-      persistent -> gboolean: 
-    
-      data -> GHashTable: 
-    
-      secrets -> GHashTable: 
-    
-      timeout -> guint: 
-    
+      service-type -> gchararray:
+
+      user-name -> gchararray:
+
+      persistent -> gboolean:
+
+      data -> GHashTable:
+
+      secrets -> GHashTable:
+
+      timeout -> guint:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -10650,17 +10661,17 @@ class SettingVpn(Setting):
                  service_type: str = ...,
                  timeout: int = ...,
                  user_name: str = ...): ...
-    def add_data_item(self, key: str, item: Optional[str] = None) -> None: ...
-    def add_secret(self, key: str, secret: Optional[str] = None) -> None: ...
+    def add_data_item(self, key: str, item: str | None = None) -> None: ...
+    def add_secret(self, key: str, secret: str | None = None) -> None: ...
     def foreach_data_item(self, func: Callable[..., None], *user_data: Any) -> None: ...
     def foreach_secret(self, func: Callable[..., None], *user_data: Any) -> None: ...
     def get_data_item(self, key: str) -> str: ...
-    def get_data_keys(self) -> Optional[list[str]]: ...
+    def get_data_keys(self) -> list[str] | None: ...
     def get_num_data_items(self) -> int: ...
     def get_num_secrets(self) -> int: ...
     def get_persistent(self) -> bool: ...
     def get_secret(self, key: str) -> str: ...
-    def get_secret_keys(self) -> Optional[list[str]]: ...
+    def get_secret_keys(self) -> list[str] | None: ...
     def get_service_type(self) -> str: ...
     def get_timeout(self) -> int: ...
     def get_user_name(self) -> str: ...
@@ -10668,7 +10679,7 @@ class SettingVpn(Setting):
     def new(cls) -> SettingVpn: ...
     def remove_data_item(self, key: str) -> bool: ...
     def remove_secret(self, key: str) -> bool: ...
-    
+
 
 class SettingVpnClass(GObject.GPointer): ...
 
@@ -10684,12 +10695,12 @@ class SettingVrf(Setting):
     Object NMSettingVrf
 
     Properties from NMSettingVrf:
-      table -> guint: 
-    
+      table -> guint:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -10702,7 +10713,7 @@ class SettingVrf(Setting):
     def get_table(self) -> int: ...
     @classmethod
     def new(cls) -> SettingVrf: ...
-    
+
 
 class SettingVrfClass(GObject.GPointer): ...
 
@@ -10718,42 +10729,42 @@ class SettingVxlan(Setting):
     Object NMSettingVxlan
 
     Properties from NMSettingVxlan:
-      parent -> gchararray: 
-    
-      id -> guint: 
-    
-      local -> gchararray: 
-    
-      remote -> gchararray: 
-    
-      source-port-min -> guint: 
-    
-      source-port-max -> guint: 
-    
-      destination-port -> guint: 
-    
-      tos -> guint: 
-    
-      ttl -> guint: 
-    
-      ageing -> guint: 
-    
-      limit -> guint: 
-    
-      learning -> gboolean: 
-    
-      proxy -> gboolean: 
-    
-      rsc -> gboolean: 
-    
-      l2-miss -> gboolean: 
-    
-      l3-miss -> gboolean: 
-    
+      parent -> gchararray:
+
+      id -> guint:
+
+      local -> gchararray:
+
+      remote -> gchararray:
+
+      source-port-min -> guint:
+
+      source-port-max -> guint:
+
+      destination-port -> guint:
+
+      tos -> guint:
+
+      ttl -> guint:
+
+      ageing -> guint:
+
+      limit -> guint:
+
+      learning -> gboolean:
+
+      proxy -> gboolean:
+
+      rsc -> gboolean:
+
+      l2-miss -> gboolean:
+
+      l3-miss -> gboolean:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -10811,7 +10822,7 @@ class SettingVxlan(Setting):
     def get_ttl(self) -> int: ...
     @classmethod
     def new(cls) -> SettingVxlan: ...
-    
+
 
 class SettingVxlanClass(GObject.GPointer): ...
 
@@ -10827,16 +10838,16 @@ class SettingWifiP2P(Setting):
     Object NMSettingWifiP2P
 
     Properties from NMSettingWifiP2P:
-      peer -> gchararray: 
-    
-      wps-method -> guint: 
-    
-      wfd-ies -> GBytes: 
-    
+      peer -> gchararray:
+
+      wps-method -> guint:
+
+      wfd-ies -> GBytes:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -10855,7 +10866,7 @@ class SettingWifiP2P(Setting):
     def get_wps_method(self) -> SettingWirelessSecurityWpsMethod: ...
     @classmethod
     def new(cls) -> SettingWifiP2P: ...
-    
+
 
 class SettingWifiP2PClass(GObject.GPointer): ...
 
@@ -10871,14 +10882,14 @@ class SettingWimax(Setting):
     Object NMSettingWimax
 
     Properties from NMSettingWimax:
-      network-name -> gchararray: 
-    
-      mac-address -> gchararray: 
-    
+      network-name -> gchararray:
+
+      mac-address -> gchararray:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -10894,7 +10905,7 @@ class SettingWimax(Setting):
     def get_network_name(self) -> str: ...
     @classmethod
     def new(cls) -> SettingWimax: ...
-    
+
 
 class SettingWimaxClass(GObject.GPointer): ...
 
@@ -10910,26 +10921,26 @@ class SettingWireGuard(Setting):
     Object NMSettingWireGuard
 
     Properties from NMSettingWireGuard:
-      fwmark -> guint: 
-    
-      ip4-auto-default-route -> NMTernary: 
-    
-      ip6-auto-default-route -> NMTernary: 
-    
-      listen-port -> guint: 
-    
-      mtu -> guint: 
-    
-      peer-routes -> gboolean: 
-    
-      private-key -> gchararray: 
-    
-      private-key-flags -> NMSettingSecretFlags: 
-    
+      fwmark -> guint:
+
+      ip4-auto-default-route -> NMTernary:
+
+      ip6-auto-default-route -> NMTernary:
+
+      listen-port -> guint:
+
+      mtu -> guint:
+
+      peer-routes -> gboolean:
+
+      private-key -> gchararray:
+
+      private-key-flags -> NMSettingSecretFlags:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -10961,7 +10972,7 @@ class SettingWireGuard(Setting):
     def get_listen_port(self) -> int: ...
     def get_mtu(self) -> int: ...
     def get_peer(self, idx: int) -> WireGuardPeer: ...
-    def get_peer_by_public_key(self, public_key: str) -> Tuple[Optional[WireGuardPeer], int]: ...
+    def get_peer_by_public_key(self, public_key: str) -> tuple[WireGuardPeer | None, int]: ...
     def get_peer_routes(self) -> bool: ...
     def get_peers_len(self) -> int: ...
     def get_private_key(self) -> str: ...
@@ -10970,7 +10981,7 @@ class SettingWireGuard(Setting):
     def new(cls) -> SettingWireGuard: ...
     def remove_peer(self, idx: int) -> bool: ...
     def set_peer(self, peer: WireGuardPeer, idx: int) -> None: ...
-    
+
 
 class SettingWireGuardClass(GObject.GPointer): ...
 
@@ -10986,42 +10997,42 @@ class SettingWired(Setting):
     Object NMSettingWired
 
     Properties from NMSettingWired:
-      port -> gchararray: 
-    
-      speed -> guint: 
-    
-      duplex -> gchararray: 
-    
-      auto-negotiate -> gboolean: 
-    
-      mac-address -> gchararray: 
-    
-      cloned-mac-address -> gchararray: 
-    
-      generate-mac-address-mask -> gchararray: 
-    
-      mac-address-blacklist -> GStrv: 
-    
-      mac-address-denylist -> GStrv: 
-    
-      mtu -> guint: 
-    
-      s390-subchannels -> GStrv: 
-    
-      s390-nettype -> gchararray: 
-    
-      s390-options -> GHashTable: 
-    
-      wake-on-lan -> guint: 
-    
-      wake-on-lan-password -> gchararray: 
-    
-      accept-all-mac-addresses -> NMTernary: 
-    
+      port -> gchararray:
+
+      speed -> guint:
+
+      duplex -> gchararray:
+
+      auto-negotiate -> gboolean:
+
+      mac-address -> gchararray:
+
+      cloned-mac-address -> gchararray:
+
+      generate-mac-address-mask -> gchararray:
+
+      mac-address-blacklist -> GStrv:
+
+      mac-address-denylist -> GStrv:
+
+      mtu -> guint:
+
+      s390-subchannels -> GStrv:
+
+      s390-nettype -> gchararray:
+
+      s390-options -> GHashTable:
+
+      wake-on-lan -> guint:
+
+      wake-on-lan-password -> gchararray:
+
+      accept-all-mac-addresses -> NMTernary:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -11082,7 +11093,7 @@ class SettingWired(Setting):
     def get_num_s390_options(self) -> int: ...
     def get_port(self) -> str: ...
     def get_s390_nettype(self) -> str: ...
-    def get_s390_option(self, idx: int) -> Tuple[bool, str, str]: ...
+    def get_s390_option(self, idx: int) -> tuple[bool, str, str]: ...
     def get_s390_option_by_key(self, key: str) -> str: ...
     def get_s390_subchannels(self) -> list[str]: ...
     def get_speed(self) -> int: ...
@@ -11096,7 +11107,7 @@ class SettingWired(Setting):
     def remove_mac_denylist_item(self, idx: int) -> None: ...
     def remove_mac_denylist_item_by_value(self, mac: str) -> bool: ...
     def remove_s390_option(self, key: str) -> bool: ...
-    
+
 
 class SettingWiredClass(GObject.GPointer): ...
 
@@ -11112,48 +11123,48 @@ class SettingWireless(Setting):
     Object NMSettingWireless
 
     Properties from NMSettingWireless:
-      ssid -> GBytes: 
-    
-      mode -> gchararray: 
-    
-      band -> gchararray: 
-    
-      channel -> guint: 
-    
-      bssid -> gchararray: 
-    
-      rate -> guint: 
-    
-      tx-power -> guint: 
-    
-      mac-address -> gchararray: 
-    
-      cloned-mac-address -> gchararray: 
-    
-      generate-mac-address-mask -> gchararray: 
-    
-      mac-address-blacklist -> GStrv: 
-    
-      mac-address-denylist -> GStrv: 
-    
-      mtu -> guint: 
-    
-      seen-bssids -> GStrv: 
-    
-      hidden -> gboolean: 
-    
-      powersave -> guint: 
-    
-      mac-address-randomization -> guint: 
-    
-      wake-on-wlan -> guint: 
-    
-      ap-isolation -> NMTernary: 
-    
+      ssid -> GBytes:
+
+      mode -> gchararray:
+
+      band -> gchararray:
+
+      channel -> guint:
+
+      bssid -> gchararray:
+
+      rate -> guint:
+
+      tx-power -> guint:
+
+      mac-address -> gchararray:
+
+      cloned-mac-address -> gchararray:
+
+      generate-mac-address-mask -> gchararray:
+
+      mac-address-blacklist -> GStrv:
+
+      mac-address-denylist -> GStrv:
+
+      mtu -> guint:
+
+      seen-bssids -> GStrv:
+
+      hidden -> gboolean:
+
+      powersave -> guint:
+
+      mac-address-randomization -> guint:
+
+      wake-on-wlan -> guint:
+
+      ap-isolation -> NMTernary:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -11202,7 +11213,7 @@ class SettingWireless(Setting):
     def add_mac_blacklist_item(self, mac: str) -> bool: ...
     def add_mac_denylist_item(self, mac: str) -> bool: ...
     def add_seen_bssid(self, bssid: str) -> bool: ...
-    def ap_security_compatible(self, s_wireless_sec: SettingWirelessSecurity, ap_flags: Any, ap_wpa: Any, ap_rsn: Any, ap_mode: Any) -> bool: ...
+    def ap_security_compatible(self, s_wireless_sec: SettingWirelessSecurity, ap_flags: _80211ApFlags, ap_wpa: _80211ApSecurityFlags, ap_rsn: _80211ApSecurityFlags, ap_mode: _80211Mode) -> bool: ...
     def clear_mac_blacklist_items(self) -> None: ...
     def clear_mac_denylist_items(self) -> None: ...
     def get_ap_isolation(self) -> Ternary: ...
@@ -11235,7 +11246,7 @@ class SettingWireless(Setting):
     def remove_mac_blacklist_item_by_value(self, mac: str) -> bool: ...
     def remove_mac_denylist_item(self, idx: int) -> None: ...
     def remove_mac_denylist_item_by_value(self, mac: str) -> bool: ...
-    
+
 
 class SettingWirelessClass(GObject.GPointer): ...
 
@@ -11251,50 +11262,50 @@ class SettingWirelessSecurity(Setting):
     Object NMSettingWirelessSecurity
 
     Properties from NMSettingWirelessSecurity:
-      key-mgmt -> gchararray: 
-    
-      wep-tx-keyidx -> guint: 
-    
-      auth-alg -> gchararray: 
-    
-      proto -> GStrv: 
-    
-      pairwise -> GStrv: 
-    
-      group -> GStrv: 
-    
-      pmf -> gint: 
-    
-      leap-username -> gchararray: 
-    
-      wep-key0 -> gchararray: 
-    
-      wep-key1 -> gchararray: 
-    
-      wep-key2 -> gchararray: 
-    
-      wep-key3 -> gchararray: 
-    
-      wep-key-flags -> NMSettingSecretFlags: 
-    
-      wep-key-type -> NMWepKeyType: 
-    
-      psk -> gchararray: 
-    
-      psk-flags -> NMSettingSecretFlags: 
-    
-      leap-password -> gchararray: 
-    
-      leap-password-flags -> NMSettingSecretFlags: 
-    
-      wps-method -> guint: 
-    
-      fils -> gint: 
-    
+      key-mgmt -> gchararray:
+
+      wep-tx-keyidx -> guint:
+
+      auth-alg -> gchararray:
+
+      proto -> GStrv:
+
+      pairwise -> GStrv:
+
+      group -> GStrv:
+
+      pmf -> gint:
+
+      leap-username -> gchararray:
+
+      wep-key0 -> gchararray:
+
+      wep-key1 -> gchararray:
+
+      wep-key2 -> gchararray:
+
+      wep-key3 -> gchararray:
+
+      wep-key-flags -> NMSettingSecretFlags:
+
+      wep-key-type -> NMWepKeyType:
+
+      psk -> gchararray:
+
+      psk-flags -> NMSettingSecretFlags:
+
+      leap-password -> gchararray:
+
+      leap-password-flags -> NMSettingSecretFlags:
+
+      wps-method -> guint:
+
+      fils -> gint:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -11377,7 +11388,7 @@ class SettingWirelessSecurity(Setting):
     def remove_proto(self, i: int) -> None: ...
     def remove_proto_by_value(self, proto: str) -> bool: ...
     def set_wep_key(self, idx: int, key: str) -> None: ...
-    
+
 
 class SettingWirelessSecurityClass(GObject.GPointer): ...
 
@@ -11393,20 +11404,20 @@ class SettingWpan(Setting):
     Object NMSettingWpan
 
     Properties from NMSettingWpan:
-      mac-address -> gchararray: 
-    
-      pan-id -> guint: 
-    
-      short-address -> guint: 
-    
-      page -> gint: 
-    
-      channel -> gint: 
-    
+      mac-address -> gchararray:
+
+      pan-id -> guint:
+
+      short-address -> guint:
+
+      page -> gint:
+
+      channel -> gint:
+
 
     Properties from NMSetting:
-      name -> gchararray: 
-    
+      name -> gchararray:
+
 
     Signals from GObject:
       notify (GParam)
@@ -11431,7 +11442,7 @@ class SettingWpan(Setting):
     def get_short_address(self) -> int: ...
     @classmethod
     def new(cls) -> SettingWpan: ...
-    
+
 
 class SettingWpanClass(GObject.GPointer): ...
 
@@ -11459,7 +11470,7 @@ class SimpleConnection(GObject.Object, Connection):
     def new_clone(connection: Connection) -> Connection: ...
     @staticmethod
     def new_from_dbus(dict: GLib.Variant) -> Connection: ...
-    
+
 
 class SimpleConnectionClass(GObject.GPointer): ...
 
@@ -11473,7 +11484,7 @@ class SriovVF(GObject.GBoxed):
     """
     def add_vlan(self, vlan_id: int) -> bool: ...
     @staticmethod
-    def attribute_validate(name: str, value: GLib.Variant) -> Tuple[bool, bool]: ...
+    def attribute_validate(name: str, value: GLib.Variant) -> tuple[bool, bool]: ...
     def dup(self) -> SriovVF: ...
     def equal(self, other: SriovVF) -> bool: ...
     def get_attribute(self, name: str) -> GLib.Variant: ...
@@ -11486,11 +11497,11 @@ class SriovVF(GObject.GBoxed):
     def new(cls, index: int) -> SriovVF: ...
     def ref(self) -> None: ...
     def remove_vlan(self, vlan_id: int) -> bool: ...
-    def set_attribute(self, name: str, value: Optional[GLib.Variant] = None) -> None: ...
+    def set_attribute(self, name: str, value: GLib.Variant | None = None) -> None: ...
     def set_vlan_protocol(self, vlan_id: int, protocol: SriovVFVlanProtocol) -> None: ...
     def set_vlan_qos(self, vlan_id: int, qos: int) -> None: ...
     def unref(self) -> None: ...
-    
+
 
 class TCAction(GObject.GBoxed):
     """
@@ -11508,9 +11519,9 @@ class TCAction(GObject.GBoxed):
     @classmethod
     def new(cls, kind: str) -> TCAction: ...
     def ref(self) -> None: ...
-    def set_attribute(self, name: str, value: Optional[GLib.Variant] = None) -> None: ...
+    def set_attribute(self, name: str, value: GLib.Variant | None = None) -> None: ...
     def unref(self) -> None: ...
-    
+
 
 class TCQdisc(GObject.GBoxed):
     """
@@ -11530,10 +11541,10 @@ class TCQdisc(GObject.GBoxed):
     @classmethod
     def new(cls, kind: str, parent: int) -> TCQdisc: ...
     def ref(self) -> None: ...
-    def set_attribute(self, name: str, value: Optional[GLib.Variant] = None) -> None: ...
+    def set_attribute(self, name: str, value: GLib.Variant | None = None) -> None: ...
     def set_handle(self, handle: int) -> None: ...
     def unref(self) -> None: ...
-    
+
 
 class TCTfilter(GObject.GBoxed):
     """
@@ -11555,7 +11566,7 @@ class TCTfilter(GObject.GBoxed):
     def set_action(self, action: TCAction) -> None: ...
     def set_handle(self, handle: int) -> None: ...
     def unref(self) -> None: ...
-    
+
 
 class TeamLinkWatcher(GObject.GBoxed):
     """
@@ -11590,7 +11601,7 @@ class TeamLinkWatcher(GObject.GBoxed):
     def new_nsna_ping(cls, init_wait: int, interval: int, missed_max: int, target_host: str) -> TeamLinkWatcher: ...
     def ref(self) -> None: ...
     def unref(self) -> None: ...
-    
+
 
 class VariantAttributeSpec(GObject.GPointer): ...
 
@@ -11608,55 +11619,55 @@ class VpnConnection(ActiveConnection):
       vpn-state-changed (guint, guint)
 
     Properties from NMVpnConnection:
-      vpn-state -> NMVpnConnectionState: 
-    
-      banner -> gchararray: 
-    
+      vpn-state -> NMVpnConnectionState:
+
+      banner -> gchararray:
+
 
     Signals from NMActiveConnection:
       state-changed (guint, guint)
 
     Properties from NMActiveConnection:
-      connection -> NMRemoteConnection: 
-    
-      id -> gchararray: 
-    
-      uuid -> gchararray: 
-    
-      type -> gchararray: 
-    
-      specific-object-path -> gchararray: 
-    
-      devices -> GPtrArray: 
-    
-      state -> NMActiveConnectionState: 
-    
-      state-flags -> guint: 
-    
-      default -> gboolean: 
-    
-      ip4-config -> NMIPConfig: 
-    
-      dhcp4-config -> NMDhcpConfig: 
-    
-      default6 -> gboolean: 
-    
-      ip6-config -> NMIPConfig: 
-    
-      dhcp6-config -> NMDhcpConfig: 
-    
-      vpn -> gboolean: 
-    
-      master -> NMDevice: 
-    
-      controller -> NMDevice: 
-    
+      connection -> NMRemoteConnection:
+
+      id -> gchararray:
+
+      uuid -> gchararray:
+
+      type -> gchararray:
+
+      specific-object-path -> gchararray:
+
+      devices -> GPtrArray:
+
+      state -> NMActiveConnectionState:
+
+      state-flags -> guint:
+
+      default -> gboolean:
+
+      ip4-config -> NMIPConfig:
+
+      dhcp4-config -> NMDhcpConfig:
+
+      default6 -> gboolean:
+
+      ip6-config -> NMIPConfig:
+
+      dhcp6-config -> NMDhcpConfig:
+
+      vpn -> gboolean:
+
+      master -> NMDevice:
+
+      controller -> NMDevice:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -11665,7 +11676,7 @@ class VpnConnection(ActiveConnection):
         banner: str
         vpn_state: VpnConnectionState
         connection: RemoteConnection
-        controller: Optional[Device]
+        controller: Device | None
         default: bool
         default6: bool
         devices: list[Device]
@@ -11674,19 +11685,19 @@ class VpnConnection(ActiveConnection):
         id: str
         ip4_config: IPConfig
         ip6_config: IPConfig
-        master: Optional[Device]
+        master: Device | None
         specific_object_path: str
         state: ActiveConnectionState
         state_flags: int
         type: str
         uuid: str
         vpn: bool
-        client: Optional[Client]
+        client: Client | None
         path: str
     props: Props = ...
     def get_banner(self) -> str: ...
     def get_vpn_state(self) -> VpnConnectionState: ...
-    
+
 
 class VpnConnectionClass(GObject.GPointer): ...
 
@@ -11699,7 +11710,7 @@ class VpnEditor(GObject.GInterface):
     """
     def get_widget(self) -> GObject.Object: ...
     def update_connection(self, connection: Connection) -> bool: ...
-    
+
 
 class VpnEditorInterface(GObject.GPointer):
     """
@@ -11727,14 +11738,14 @@ class VpnEditorPlugin(GObject.GInterface):
     def get_editor(self, connection: Connection) -> VpnEditor: ...
     def get_plugin_info(self) -> VpnPluginInfo: ...
     def get_suggested_filename(self, connection: Connection) -> str: ...
-    def get_vt(self, vt_size: int) -> Tuple[int, VpnEditorPluginVT]: ...
+    def get_vt(self, vt_size: int) -> tuple[int, VpnEditorPluginVT]: ...
     def import_(self, path: str) -> Connection: ...
     @staticmethod
     def load(plugin_name: str, check_service: str) -> VpnEditorPlugin: ...
     @staticmethod
     def load_from_file(plugin_name: str, check_service: str, check_owner: int, check_file: Callable[..., bool], *user_data: Any) -> VpnEditorPlugin: ...
-    def set_plugin_info(self, plugin_info: Optional[VpnPluginInfo] = None) -> None: ...
-    
+    def set_plugin_info(self, plugin_info: VpnPluginInfo | None = None) -> None: ...
+
 
 class VpnEditorPluginInterface(GObject.GPointer):
     """
@@ -11769,12 +11780,12 @@ class VpnPluginInfo(GObject.Object, Gio.Initable):  # type: ignore
     Object NMVpnPluginInfo
 
     Properties from NMVpnPluginInfo:
-      name -> gchararray: 
-    
-      filename -> gchararray: 
-    
-      keyfile -> GKeyFile: 
-    
+      name -> gchararray:
+
+      filename -> gchararray:
+
+      keyfile -> GKeyFile:
+
 
     Signals from GObject:
       notify (GParam)
@@ -11815,15 +11826,15 @@ class VpnPluginInfo(GObject.Object, Gio.Initable):  # type: ignore
     @classmethod
     def new_from_file(cls, filename: str) -> VpnPluginInfo: ...
     @classmethod
-    def new_search_file(cls, name: Optional[str] = None, service: Optional[str] = None) -> Optional[VpnPluginInfo]: ...
+    def new_search_file(cls, name: str | None = None, service: str | None = None) -> VpnPluginInfo | None: ...
     @classmethod
     def new_with_data(cls, filename: str, keyfile: GLib.KeyFile) -> VpnPluginInfo: ...
-    def set_editor_plugin(self, plugin: Optional[VpnEditorPlugin] = None) -> None: ...
+    def set_editor_plugin(self, plugin: VpnEditorPlugin | None = None) -> None: ...
     def supports_hints(self) -> bool: ...
     def supports_multiple(self) -> bool: ...
     @staticmethod
     def validate_filename(filename: str) -> bool: ...
-    
+
 
 class VpnPluginInfoClass(GObject.GPointer): ...
 
@@ -11848,10 +11859,10 @@ class VpnPluginOld(GObject.Object, Gio.Initable):  # type: ignore
       quit ()
 
     Properties from NMVpnPluginOld:
-      service-name -> gchararray: 
-    
-      state -> NMVpnServiceState: 
-    
+      service-name -> gchararray:
+
+      state -> NMVpnServiceState:
+
 
     Signals from GObject:
       notify (GParam)
@@ -11879,15 +11890,15 @@ class VpnPluginOld(GObject.Object, Gio.Initable):  # type: ignore
     def failure(self, reason: VpnPluginFailure) -> None: ...
     def get_connection(self) -> Gio.DBusConnection: ...
     @staticmethod
-    def get_secret_flags(data: dict[None, None], secret_name: str) -> Tuple[bool, SettingSecretFlags]: ...
+    def get_secret_flags(data: dict[None, None], secret_name: str) -> tuple[bool, SettingSecretFlags]: ...
     def get_state(self) -> VpnServiceState: ...
     @staticmethod
-    def read_vpn_details(fd: int) -> Tuple[bool, dict[None, None], dict[None, None]]: ...
+    def read_vpn_details(fd: int) -> tuple[bool, dict[None, None], dict[None, None]]: ...
     def secrets_required(self, message: str, hints: str) -> None: ...
     def set_ip4_config(self, ip4_config: GLib.Variant) -> None: ...
     def set_login_banner(self, banner: str) -> None: ...
     def set_state(self, state: VpnServiceState) -> None: ...
-    
+
 
 class VpnPluginOldClass(GObject.GPointer):
     """
@@ -11933,12 +11944,12 @@ class VpnServicePlugin(GObject.Object, Gio.Initable):  # type: ignore
       quit ()
 
     Properties from NMVpnServicePlugin:
-      service-name -> gchararray: 
-    
-      watch-peer -> gboolean: 
-    
-      state -> NMVpnServiceState: 
-    
+      service-name -> gchararray:
+
+      watch-peer -> gboolean:
+
+      state -> NMVpnServiceState:
+
 
     Signals from GObject:
       notify (GParam)
@@ -11968,16 +11979,16 @@ class VpnServicePlugin(GObject.Object, Gio.Initable):  # type: ignore
     def failure(self, reason: VpnPluginFailure) -> None: ...
     def get_connection(self) -> Gio.DBusConnection: ...
     @staticmethod
-    def get_secret_flags(data: dict[None, None], secret_name: str) -> Tuple[bool, SettingSecretFlags]: ...
+    def get_secret_flags(data: dict[None, None], secret_name: str) -> tuple[bool, SettingSecretFlags]: ...
     @staticmethod
-    def read_vpn_details(fd: int) -> Tuple[bool, dict[None, None], dict[None, None]]: ...
+    def read_vpn_details(fd: int) -> tuple[bool, dict[None, None], dict[None, None]]: ...
     def secrets_required(self, message: str, hints: str) -> None: ...
     def set_config(self, config: GLib.Variant) -> None: ...
     def set_ip4_config(self, ip4_config: GLib.Variant) -> None: ...
     def set_ip6_config(self, ip6_config: GLib.Variant) -> None: ...
     def set_login_banner(self, banner: str) -> None: ...
     def shutdown(self) -> None: ...
-    
+
 
 class VpnServicePluginClass(GObject.GPointer):
     """
@@ -12013,38 +12024,38 @@ class WifiP2PPeer(Object):
     Object NMWifiP2PPeer
 
     Properties from NMWifiP2PPeer:
-      flags -> NMAny: 
-    
-      name -> gchararray: 
-    
-      manufacturer -> gchararray: 
-    
-      model -> gchararray: 
-    
-      model-number -> gchararray: 
-    
-      serial -> gchararray: 
-    
-      wfd-ies -> GBytes: 
-    
-      hw-address -> gchararray: 
-    
-      strength -> guchar: 
-    
-      last-seen -> gint: 
-    
+      flags -> NM80211ApFlags:
+
+      name -> gchararray:
+
+      manufacturer -> gchararray:
+
+      model -> gchararray:
+
+      model-number -> gchararray:
+
+      serial -> gchararray:
+
+      wfd-ies -> GBytes:
+
+      hw-address -> gchararray:
+
+      strength -> guchar:
+
+      last-seen -> gint:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
     """
     class Props:
-        flags: Any
+        flags: _80211ApFlags
         hw_address: str
         last_seen: int
         manufacturer: str
@@ -12054,12 +12065,12 @@ class WifiP2PPeer(Object):
         serial: str
         strength: int
         wfd_ies: GLib.Bytes
-        client: Optional[Client]
+        client: Client | None
         path: str
     props: Props = ...
     def connection_valid(self, connection: Connection) -> bool: ...
     def filter_connections(self, connections: Sequence[Connection]) -> list[Connection]: ...
-    def get_flags(self) -> Any: ...
+    def get_flags(self) -> _80211ApFlags: ...
     def get_hw_address(self) -> str: ...
     def get_last_seen(self) -> int: ...
     def get_manufacturer(self) -> str: ...
@@ -12069,7 +12080,7 @@ class WifiP2PPeer(Object):
     def get_serial(self) -> str: ...
     def get_strength(self) -> int: ...
     def get_wfd_ies(self) -> GLib.Bytes: ...
-    
+
 
 class WifiP2PPeerClass(GObject.GPointer): ...
 
@@ -12084,18 +12095,18 @@ class WimaxNsp(Object):
     Object NMWimaxNsp
 
     Properties from NMWimaxNsp:
-      name -> gchararray: 
-    
-      signal-quality -> guint: 
-    
-      network-type -> NMWimaxNspNetworkType: 
-    
+      name -> gchararray:
+
+      signal-quality -> guint:
+
+      network-type -> NMWimaxNspNetworkType:
+
 
     Properties from NMObject:
-      path -> gchararray: 
-    
-      client -> NMClient: 
-    
+      path -> gchararray:
+
+      client -> NMClient:
+
 
     Signals from GObject:
       notify (GParam)
@@ -12104,7 +12115,7 @@ class WimaxNsp(Object):
         name: str
         network_type: WimaxNspNetworkType
         signal_quality: int
-        client: Optional[Client]
+        client: Client | None
         path: str
     props: Props = ...
     def connection_valid(self, connection: Connection) -> bool: ...
@@ -12112,7 +12123,7 @@ class WimaxNsp(Object):
     def get_name(self) -> str: ...
     def get_network_type(self) -> WimaxNspNetworkType: ...
     def get_signal_quality(self) -> int: ...
-    
+
 
 class WimaxNspClass(GObject.GPointer): ...
 
@@ -12126,8 +12137,8 @@ class WireGuardPeer(GObject.GBoxed):
     """
     def append_allowed_ip(self, allowed_ip: str, accept_invalid: bool) -> bool: ...
     def clear_allowed_ips(self) -> None: ...
-    def cmp(self, b: Optional[WireGuardPeer], compare_flags: SettingCompareFlags) -> int: ...
-    def get_allowed_ip(self, idx: int, out_is_valid: Optional[bool] = None) -> Optional[str]: ...
+    def cmp(self, b: WireGuardPeer | None, compare_flags: SettingCompareFlags) -> int: ...
+    def get_allowed_ip(self, idx: int, out_is_valid: bool | None = None) -> str | None: ...
     def get_allowed_ips_len(self) -> int: ...
     def get_endpoint(self) -> str: ...
     def get_persistent_keepalive(self) -> int: ...
@@ -12144,13 +12155,13 @@ class WireGuardPeer(GObject.GBoxed):
     def seal(self) -> None: ...
     def set_endpoint(self, endpoint: str, allow_invalid: bool) -> bool: ...
     def set_persistent_keepalive(self, persistent_keepalive: int) -> None: ...
-    def set_preshared_key(self, preshared_key: Optional[str], accept_invalid: bool) -> bool: ...
+    def set_preshared_key(self, preshared_key: str | None, accept_invalid: bool) -> bool: ...
     def set_preshared_key_flags(self, preshared_key_flags: SettingSecretFlags) -> None: ...
-    def set_public_key(self, public_key: Optional[str], accept_invalid: bool) -> bool: ...
+    def set_public_key(self, public_key: str | None, accept_invalid: bool) -> bool: ...
     def unref(self) -> None: ...
-    
 
-class ActivationStateFlags(GObject.GFlags):  # type: ignore
+
+class ActivationStateFlags(enum.Enum):
     CONTROLLER_HAS_PORTS = 32
     EXTERNAL = 128
     IP4_READY = 8
@@ -12161,12 +12172,12 @@ class ActivationStateFlags(GObject.GFlags):  # type: ignore
     LIFETIME_BOUND_TO_PROFILE_VISIBILITY = 64
     NONE = 0
 
-class BluetoothCapabilities(GObject.GFlags):  # type: ignore
+class BluetoothCapabilities(enum.Enum):
     DUN = 1
     NAP = 2
     NONE = 0
 
-class CheckpointCreateFlags(GObject.GFlags):  # type: ignore
+class CheckpointCreateFlags(enum.Enum):
     ALLOW_OVERLAPPING = 8
     DELETE_NEW_CONNECTIONS = 2
     DESTROY_ALL = 1
@@ -12175,13 +12186,13 @@ class CheckpointCreateFlags(GObject.GFlags):  # type: ignore
     NO_PRESERVE_EXTERNAL_PORTS = 16
     TRACK_INTERNAL_GLOBAL_DNS = 32
 
-class ClientInstanceFlags(GObject.GFlags):  # type: ignore
+class ClientInstanceFlags(enum.Enum):
     INITIALIZED_BAD = 4
     INITIALIZED_GOOD = 2
     NONE = 0
     NO_AUTO_FETCH_PERMISSIONS = 1
 
-class ConnectionSerializationFlags(GObject.GFlags):  # type: ignore
+class ConnectionSerializationFlags(enum.Enum):
     ALL = 0
     NO_SECRETS = 1
     ONLY_SECRETS = 2
@@ -12191,32 +12202,32 @@ class ConnectionSerializationFlags(GObject.GFlags):  # type: ignore
     WITH_SECRETS_NOT_SAVED = 16
     WITH_SECRETS_SYSTEM_OWNED = 8
 
-class DeviceCapabilities(GObject.GFlags):  # type: ignore
+class DeviceCapabilities(enum.Enum):
     CARRIER_DETECT = 2
     IS_SOFTWARE = 4
     NM_SUPPORTED = 1
     NONE = 0
     SRIOV = 8
 
-class DeviceInterfaceFlags(GObject.GFlags):  # type: ignore
+class DeviceInterfaceFlags(enum.Enum):
     CARRIER = 65536
     LLDP_CLIENT_ENABLED = 131072
     LOWER_UP = 2
     PROMISC = 4
     UP = 1
 
-class DeviceModemCapabilities(GObject.GFlags):  # type: ignore
+class DeviceModemCapabilities(enum.Enum):
     CDMA_EVDO = 2
     GSM_UMTS = 4
     LTE = 8
     NONE = 0
     POTS = 1
 
-class DeviceReapplyFlags(GObject.GFlags):  # type: ignore
+class DeviceReapplyFlags(enum.Enum):
     NONE = 0
     PRESERVE_EXTERNAL_IP = 1
 
-class DeviceWifiCapabilities(GObject.GFlags):  # type: ignore
+class DeviceWifiCapabilities(enum.Enum):
     ADHOC = 128
     AP = 64
     CIPHER_CCMP = 8
@@ -12233,24 +12244,24 @@ class DeviceWifiCapabilities(GObject.GFlags):  # type: ignore
     RSN = 32
     WPA = 16
 
-class DhcpHostnameFlags(GObject.GFlags):  # type: ignore
+class DhcpHostnameFlags(enum.Enum):
     FQDN_CLEAR_FLAGS = 8
     FQDN_ENCODED = 2
     FQDN_NO_UPDATE = 4
     FQDN_SERV_UPDATE = 1
     NONE = 0
 
-class IPAddressCmpFlags(GObject.GFlags):  # type: ignore
+class IPAddressCmpFlags(enum.Enum):
     NONE = 0
     WITH_ATTRS = 1
 
-class IPRoutingRuleAsStringFlags(GObject.GFlags):  # type: ignore
+class IPRoutingRuleAsStringFlags(enum.Enum):
     AF_INET = 1
     AF_INET6 = 2
     NONE = 0
     VALIDATE = 4
 
-class IPTunnelFlags(GObject.GFlags):  # type: ignore
+class IPTunnelFlags(enum.Enum):
     IP6_IGN_ENCAP_LIMIT = 1
     IP6_MIP6_DEV = 8
     IP6_RCV_DSCP_COPY = 16
@@ -12259,15 +12270,15 @@ class IPTunnelFlags(GObject.GFlags):  # type: ignore
     IP6_USE_ORIG_TCLASS = 2
     NONE = 0
 
-class KeyfileHandlerFlags(GObject.GFlags):  # type: ignore
+class KeyfileHandlerFlags(enum.Enum):
     NONE = 0
 
-class ManagerReloadFlags(GObject.GFlags):  # type: ignore
+class ManagerReloadFlags(enum.Enum):
     CONF = 1
     DNS_FULL = 4
     DNS_RC = 2
 
-class MptcpFlags(GObject.GFlags):  # type: ignore
+class MptcpFlags(enum.Enum):
     ALSO_WITHOUT_DEFAULT_ROUTE = 8
     ALSO_WITHOUT_SYSCTL = 4
     BACKUP = 64
@@ -12278,17 +12289,17 @@ class MptcpFlags(GObject.GFlags):  # type: ignore
     SIGNAL = 16
     SUBFLOW = 32
 
-class RadioFlags(GObject.GFlags):  # type: ignore
+class RadioFlags(enum.Enum):
     NONE = 0
     WLAN_AVAILABLE = 1
     WWAN_AVAILABLE = 2
 
-class SecretAgentCapabilities(GObject.GFlags):  # type: ignore
+class SecretAgentCapabilities(enum.Enum):
     LAST = 1
     NONE = 0
     VPN_HINTS = 1
 
-class SecretAgentGetSecretsFlags(GObject.GFlags):  # type: ignore
+class SecretAgentGetSecretsFlags(enum.Enum):
     ALLOW_INTERACTION = 1
     NONE = 0
     NO_ERRORS = 1073741824
@@ -12297,7 +12308,7 @@ class SecretAgentGetSecretsFlags(GObject.GFlags):  # type: ignore
     USER_REQUESTED = 4
     WPS_PBC_ACTIVE = 8
 
-class Setting8021xAuthFlags(GObject.GFlags):  # type: ignore
+class Setting8021xAuthFlags(enum.Enum):
     ALL = 511
     NONE = 0
     TLS_1_0_DISABLE = 1
@@ -12310,19 +12321,19 @@ class Setting8021xAuthFlags(GObject.GFlags):  # type: ignore
     TLS_1_3_ENABLE = 256
     TLS_DISABLE_TIME_CHECKS = 8
 
-class SettingDcbFlags(GObject.GFlags):  # type: ignore
+class SettingDcbFlags(enum.Enum):
     ADVERTISE = 2
     ENABLE = 1
     NONE = 0
     WILLING = 4
 
-class SettingSecretFlags(GObject.GFlags):  # type: ignore
+class SettingSecretFlags(enum.Enum):
     AGENT_OWNED = 1
     NONE = 0
     NOT_REQUIRED = 4
     NOT_SAVED = 2
 
-class SettingWiredWakeOnLan(GObject.GFlags):  # type: ignore
+class SettingWiredWakeOnLan(enum.Enum):
     ARP = 32
     BROADCAST = 16
     DEFAULT = 1
@@ -12332,14 +12343,14 @@ class SettingWiredWakeOnLan(GObject.GFlags):  # type: ignore
     PHY = 2
     UNICAST = 4
 
-class SettingWirelessSecurityWpsMethod(GObject.GFlags):  # type: ignore
+class SettingWirelessSecurityWpsMethod(enum.Enum):
     AUTO = 2
     DEFAULT = 0
     DISABLED = 1
     PBC = 4
     PIN = 8
 
-class SettingWirelessWakeOnWLan(GObject.GFlags):  # type: ignore
+class SettingWirelessWakeOnWLan(enum.Enum):
     ALL = 510
     ANY = 2
     DEFAULT = 1
@@ -12351,20 +12362,20 @@ class SettingWirelessWakeOnWLan(GObject.GFlags):  # type: ignore
     RFKILL_RELEASE = 128
     TCP = 256
 
-class SettingsAddConnection2Flags(GObject.GFlags):  # type: ignore
+class SettingsAddConnection2Flags(enum.Enum):
     BLOCK_AUTOCONNECT = 32
     IN_MEMORY = 2
     NONE = 0
     TO_DISK = 1
 
-class SettingsConnectionFlags(GObject.GFlags):  # type: ignore
+class SettingsConnectionFlags(enum.Enum):
     EXTERNAL = 8
     NM_GENERATED = 2
     NONE = 0
     UNSAVED = 1
     VOLATILE = 4
 
-class SettingsUpdate2Flags(GObject.GFlags):  # type: ignore
+class SettingsUpdate2Flags(enum.Enum):
     BLOCK_AUTOCONNECT = 32
     IN_MEMORY = 2
     IN_MEMORY_DETACHED = 4
@@ -12374,31 +12385,31 @@ class SettingsUpdate2Flags(GObject.GFlags):  # type: ignore
     TO_DISK = 1
     VOLATILE = 16
 
-class TeamLinkWatcherArpPingFlags(GObject.GFlags):  # type: ignore
+class TeamLinkWatcherArpPingFlags(enum.Enum):
     SEND_ALWAYS = 8
     VALIDATE_ACTIVE = 2
     VALIDATE_INACTIVE = 4
 
-class VlanFlags(GObject.GFlags):  # type: ignore
+class VlanFlags(enum.Enum):
     GVRP = 2
     LOOSE_BINDING = 4
     MVRP = 8
     REORDER_HEADERS = 1
 
-class VpnEditorPluginCapability(GObject.GFlags):  # type: ignore
+class VpnEditorPluginCapability(enum.Enum):
     EXPORT = 2
     IMPORT = 1
     IPV6 = 4
     NONE = 0
 
-class ActiveConnectionState(GObject.GEnum):  # type: ignore
+class ActiveConnectionState(enum.Enum):
     ACTIVATED = 2
     ACTIVATING = 1
     DEACTIVATED = 4
     DEACTIVATING = 3
     UNKNOWN = 0
 
-class ActiveConnectionStateReason(GObject.GEnum):  # type: ignore
+class ActiveConnectionStateReason(enum.Enum):
     CONNECTION_REMOVED = 11
     CONNECT_TIMEOUT = 6
     DEPENDENCY_FAILED = 12
@@ -12415,7 +12426,7 @@ class ActiveConnectionStateReason(GObject.GEnum):  # type: ignore
     UNKNOWN = 0
     USER_DISCONNECTED = 2
 
-class AgentManagerError(GObject.GEnum):  # type: ignore
+class AgentManagerError(enum.Enum):
     FAILED = 0
     INVALIDIDENTIFIER = 2
     NOSECRETS = 4
@@ -12425,18 +12436,18 @@ class AgentManagerError(GObject.GEnum):  # type: ignore
     @staticmethod
     def quark() -> int: ...
 
-class Capability(GObject.GEnum):  # type: ignore
+class Capability(enum.Enum):
     OVS = 2
     TEAM = 1
 
-class ClientError(GObject.GEnum):  # type: ignore
+class ClientError(enum.Enum):
     FAILED = 0
     MANAGER_NOT_RUNNING = 1
     OBJECT_CREATION_FAILED = 2
     @staticmethod
     def quark() -> int: ...
 
-class ClientPermission(GObject.GEnum):  # type: ignore
+class ClientPermission(enum.Enum):
     CHECKPOINT_ROLLBACK = 14
     ENABLE_DISABLE_CONNECTIVITY_CHECK = 16
     ENABLE_DISABLE_NETWORK = 1
@@ -12457,13 +12468,13 @@ class ClientPermission(GObject.GEnum):  # type: ignore
     WIFI_SHARE_OPEN = 8
     WIFI_SHARE_PROTECTED = 7
 
-class ClientPermissionResult(GObject.GEnum):  # type: ignore
+class ClientPermissionResult(enum.Enum):
     AUTH = 2
     NO = 3
     UNKNOWN = 0
     YES = 1
 
-class ConnectionError(GObject.GEnum):  # type: ignore
+class ConnectionError(enum.Enum):
     FAILED = 0
     INVALIDPROPERTY = 7
     INVALIDSETTING = 5
@@ -12475,20 +12486,20 @@ class ConnectionError(GObject.GEnum):  # type: ignore
     @staticmethod
     def quark() -> int: ...
 
-class ConnectionMultiConnect(GObject.GEnum):  # type: ignore
+class ConnectionMultiConnect(enum.Enum):
     DEFAULT = 0
     MANUAL_MULTIPLE = 2
     MULTIPLE = 3
     SINGLE = 1
 
-class ConnectivityState(GObject.GEnum):  # type: ignore
+class ConnectivityState(enum.Enum):
     FULL = 4
     LIMITED = 3
     NONE = 1
     PORTAL = 2
     UNKNOWN = 0
 
-class CryptoError(GObject.GEnum):  # type: ignore
+class CryptoError(enum.Enum):
     DECRYPTION_FAILED = 4
     ENCRYPTION_FAILED = 5
     FAILED = 0
@@ -12498,7 +12509,7 @@ class CryptoError(GObject.GEnum):  # type: ignore
     @staticmethod
     def quark() -> int: ...
 
-class DeviceError(GObject.GEnum):  # type: ignore
+class DeviceError(enum.Enum):
     CREATIONFAILED = 1
     FAILED = 0
     INCOMPATIBLECONNECTION = 3
@@ -12513,7 +12524,7 @@ class DeviceError(GObject.GEnum):  # type: ignore
     @staticmethod
     def quark() -> int: ...
 
-class DeviceState(GObject.GEnum):  # type: ignore
+class DeviceState(enum.Enum):
     ACTIVATED = 100
     CONFIG = 50
     DEACTIVATING = 110
@@ -12528,7 +12539,7 @@ class DeviceState(GObject.GEnum):  # type: ignore
     UNKNOWN = 0
     UNMANAGED = 10
 
-class DeviceStateReason(GObject.GEnum):  # type: ignore
+class DeviceStateReason(enum.Enum):
     AUTOIP_ERROR = 21
     AUTOIP_FAILED = 22
     AUTOIP_START_FAILED = 20
@@ -12608,7 +12619,7 @@ class DeviceStateReason(GObject.GEnum):  # type: ignore
     UNMANAGED_USER_UDEV = 77
     USER_REQUESTED = 39
 
-class DeviceType(GObject.GEnum):  # type: ignore
+class DeviceType(enum.Enum):
     ADSL = 12
     BOND = 10
     BRIDGE = 13
@@ -12643,7 +12654,7 @@ class DeviceType(GObject.GEnum):  # type: ignore
     WIREGUARD = 29
     WPAN = 27
 
-class IPTunnelMode(GObject.GEnum):  # type: ignore
+class IPTunnelMode(enum.Enum):
     GRE = 2
     GRETAP = 10
     IP6GRE = 8
@@ -12657,17 +12668,17 @@ class IPTunnelMode(GObject.GEnum):  # type: ignore
     VTI = 5
     VTI6 = 9
 
-class KeyfileHandlerType(GObject.GEnum):  # type: ignore
+class KeyfileHandlerType(enum.Enum):
     WARN = 1
     WRITE_CERT = 2
 
-class KeyfileWarnSeverity(GObject.GEnum):  # type: ignore
+class KeyfileWarnSeverity(enum.Enum):
     DEBUG = 1000
     INFO = 2000
     INFO_MISSING_FILE = 2901
     WARN = 3000
 
-class ManagerError(GObject.GEnum):  # type: ignore
+class ManagerError(enum.Enum):
     ALREADYASLEEPORAWAKE = 8
     ALREADYENABLEDORDISABLED = 9
     CONNECTIONALREADYACTIVE = 6
@@ -12685,20 +12696,20 @@ class ManagerError(GObject.GEnum):  # type: ignore
     @staticmethod
     def quark() -> int: ...
 
-class Metered(GObject.GEnum):  # type: ignore
+class Metered(enum.Enum):
     GUESS_NO = 4
     GUESS_YES = 3
     NO = 2
     UNKNOWN = 0
     YES = 1
 
-class RollbackResult(GObject.GEnum):  # type: ignore
+class RollbackResult(enum.Enum):
     ERR_DEVICE_UNMANAGED = 2
     ERR_FAILED = 3
     ERR_NO_DEVICE = 1
     OK = 0
 
-class SecretAgentError(GObject.GEnum):  # type: ignore
+class SecretAgentError(enum.Enum):
     AGENTCANCELED = 4
     FAILED = 0
     INVALIDCONNECTION = 2
@@ -12708,19 +12719,19 @@ class SecretAgentError(GObject.GEnum):  # type: ignore
     @staticmethod
     def quark() -> int: ...
 
-class Setting8021xCKFormat(GObject.GEnum):  # type: ignore
+class Setting8021xCKFormat(enum.Enum):
     PKCS12 = 3
     RAW_KEY = 2
     UNKNOWN = 0
     X509 = 1
 
-class Setting8021xCKScheme(GObject.GEnum):  # type: ignore
+class Setting8021xCKScheme(enum.Enum):
     BLOB = 1
     PATH = 2
     PKCS11 = 3
     UNKNOWN = 0
 
-class SettingCompareFlags(GObject.GEnum):  # type: ignore
+class SettingCompareFlags(enum.Enum):
     DIFF_RESULT_NO_DEFAULT = 64
     DIFF_RESULT_WITH_DEFAULT = 32
     EXACT = 0
@@ -12731,85 +12742,85 @@ class SettingCompareFlags(GObject.GEnum):  # type: ignore
     IGNORE_SECRETS = 4
     IGNORE_TIMESTAMP = 128
 
-class SettingConnectionAutoconnectSlaves(GObject.GEnum):  # type: ignore
+class SettingConnectionAutoconnectSlaves(enum.Enum):
     DEFAULT = -1
     NO = 0
     YES = 1
 
-class SettingConnectionDnsOverTls(GObject.GEnum):  # type: ignore
+class SettingConnectionDnsOverTls(enum.Enum):
     DEFAULT = -1
     NO = 0
     OPPORTUNISTIC = 1
     YES = 2
 
-class SettingConnectionDownOnPoweroff(GObject.GEnum):  # type: ignore
+class SettingConnectionDownOnPoweroff(enum.Enum):
     DEFAULT = -1
     NO = 0
     YES = 1
 
-class SettingConnectionLldp(GObject.GEnum):  # type: ignore
+class SettingConnectionLldp(enum.Enum):
     DEFAULT = -1
     DISABLE = 0
     ENABLE_RX = 1
 
-class SettingConnectionLlmnr(GObject.GEnum):  # type: ignore
+class SettingConnectionLlmnr(enum.Enum):
     DEFAULT = -1
     NO = 0
     RESOLVE = 1
     YES = 2
 
-class SettingConnectionMdns(GObject.GEnum):  # type: ignore
+class SettingConnectionMdns(enum.Enum):
     DEFAULT = -1
     NO = 0
     RESOLVE = 1
     YES = 2
 
-class SettingDiffResult(GObject.GEnum):  # type: ignore
+class SettingDiffResult(enum.Enum):
     IN_A = 1
     IN_A_DEFAULT = 4
     IN_B = 2
     IN_B_DEFAULT = 8
     UNKNOWN = 0
 
-class SettingIP4LinkLocal(GObject.GEnum):  # type: ignore
+class SettingIP4LinkLocal(enum.Enum):
     AUTO = 1
     DEFAULT = 0
     DISABLED = 2
     ENABLED = 3
 
-class SettingIP6ConfigAddrGenMode(GObject.GEnum):  # type: ignore
+class SettingIP6ConfigAddrGenMode(enum.Enum):
     DEFAULT = 3
     DEFAULT_OR_EUI64 = 2
     EUI64 = 0
     STABLE_PRIVACY = 1
 
-class SettingIP6ConfigPrivacy(GObject.GEnum):  # type: ignore
+class SettingIP6ConfigPrivacy(enum.Enum):
     DISABLED = 0
     PREFER_PUBLIC_ADDR = 1
     PREFER_TEMP_ADDR = 2
     UNKNOWN = -1
 
-class SettingMacRandomization(GObject.GEnum):  # type: ignore
+class SettingMacRandomization(enum.Enum):
     ALWAYS = 2
     DEFAULT = 0
     NEVER = 1
 
-class SettingMacsecMode(GObject.GEnum):  # type: ignore
+class SettingMacsecMode(enum.Enum):
     EAP = 1
     PSK = 0
 
-class SettingMacsecOffload(GObject.GEnum):  # type: ignore
+class SettingMacsecOffload(enum.Enum):
     DEFAULT = -1
     MAC = 2
     OFF = 0
     PHY = 1
 
-class SettingMacsecValidation(GObject.GEnum):  # type: ignore
+class SettingMacsecValidation(enum.Enum):
     CHECK = 1
     DISABLE = 0
     STRICT = 2
 
-class SettingMacvlanMode(GObject.GEnum):  # type: ignore
+class SettingMacvlanMode(enum.Enum):
     BRIDGE = 2
     PASSTHRU = 4
     PRIVATE = 3
@@ -12817,39 +12828,39 @@ class SettingMacvlanMode(GObject.GEnum):  # type: ignore
     UNKNOWN = 0
     VEPA = 1
 
-class SettingProxyMethod(GObject.GEnum):  # type: ignore
+class SettingProxyMethod(enum.Enum):
     AUTO = 1
     NONE = 0
 
-class SettingSerialParity(GObject.GEnum):  # type: ignore
+class SettingSerialParity(enum.Enum):
     EVEN = 1
     NONE = 0
     ODD = 2
 
-class SettingTunMode(GObject.GEnum):  # type: ignore
+class SettingTunMode(enum.Enum):
     TAP = 2
     TUN = 1
     UNKNOWN = 0
 
-class SettingWirelessPowersave(GObject.GEnum):  # type: ignore
+class SettingWirelessPowersave(enum.Enum):
     DEFAULT = 0
     DISABLE = 2
     ENABLE = 3
     IGNORE = 1
 
-class SettingWirelessSecurityFils(GObject.GEnum):  # type: ignore
+class SettingWirelessSecurityFils(enum.Enum):
     DEFAULT = 0
     DISABLE = 1
     OPTIONAL = 2
     REQUIRED = 3
 
-class SettingWirelessSecurityPmf(GObject.GEnum):  # type: ignore
+class SettingWirelessSecurityPmf(enum.Enum):
     DEFAULT = 0
     DISABLE = 1
     OPTIONAL = 2
     REQUIRED = 3
 
-class SettingsError(GObject.GEnum):  # type: ignore
+class SettingsError(enum.Enum):
     FAILED = 0
     INVALIDARGUMENTS = 7
     INVALIDCONNECTION = 3
@@ -12863,27 +12874,27 @@ class SettingsError(GObject.GEnum):  # type: ignore
     @staticmethod
     def quark() -> int: ...
 
-class SriovEswitchEncapMode(GObject.GEnum):  # type: ignore
+class SriovEswitchEncapMode(enum.Enum):
     BASIC = 1
     NONE = 0
     PRESERVE = -1
 
-class SriovEswitchInlineMode(GObject.GEnum):  # type: ignore
+class SriovEswitchInlineMode(enum.Enum):
     LINK = 1
     NETWORK = 2
     NONE = 0
     PRESERVE = -1
     TRANSPORT = 3
 
-class SriovEswitchMode(GObject.GEnum):  # type: ignore
+class SriovEswitchMode(enum.Enum):
     LEGACY = 0
     PRESERVE = -1
     SWITCHDEV = 1
 
-class SriovVFVlanProtocol(GObject.GEnum):  # type: ignore
+class SriovVFVlanProtocol(enum.Enum):
     ...
 
-class State(GObject.GEnum):  # type: ignore
+class State(enum.Enum):
     ASLEEP = 10
     CONNECTED_GLOBAL = 70
     CONNECTED_LOCAL = 50
@@ -12893,12 +12904,12 @@ class State(GObject.GEnum):  # type: ignore
     DISCONNECTING = 30
     UNKNOWN = 0
 
-class Ternary(GObject.GEnum):  # type: ignore
+class Ternary(enum.Enum):
     DEFAULT = -1
     FALSE = 0
     TRUE = 1
 
-class UtilsSecurityType(GObject.GEnum):  # type: ignore
+class UtilsSecurityType(enum.Enum):
     DYNAMIC_WEP = 4
     INVALID = 0
     LEAP = 3
@@ -12912,14 +12923,14 @@ class UtilsSecurityType(GObject.GEnum):  # type: ignore
     WPA_ENTERPRISE = 6
     WPA_PSK = 5
 
-class VersionInfoCapability(GObject.GEnum):  # type: ignore
+class VersionInfoCapability(enum.Enum):
     UNUSED = 2147483647
 
-class VlanPriorityMap(GObject.GEnum):  # type: ignore
+class VlanPriorityMap(enum.Enum):
     EGRESS_MAP = 1
     INGRESS_MAP = 0
 
-class VpnConnectionState(GObject.GEnum):  # type: ignore
+class VpnConnectionState(enum.Enum):
     ACTIVATED = 5
     CONNECT = 3
     DISCONNECTED = 7
@@ -12929,7 +12940,7 @@ class VpnConnectionState(GObject.GEnum):  # type: ignore
     PREPARE = 1
     UNKNOWN = 0
 
-class VpnConnectionStateReason(GObject.GEnum):  # type: ignore
+class VpnConnectionStateReason(enum.Enum):
     CONNECTION_REMOVED = 11
     CONNECT_TIMEOUT = 6
     DEVICE_DISCONNECTED = 3
@@ -12943,7 +12954,7 @@ class VpnConnectionStateReason(GObject.GEnum):  # type: ignore
     UNKNOWN = 0
     USER_DISCONNECTED = 2
 
-class VpnPluginError(GObject.GEnum):  # type: ignore
+class VpnPluginError(enum.Enum):
     ALREADYSTARTED = 2
     ALREADYSTOPPED = 4
     BADARGUMENTS = 6
@@ -12957,12 +12968,12 @@ class VpnPluginError(GObject.GEnum):  # type: ignore
     @staticmethod
     def quark() -> int: ...
 
-class VpnPluginFailure(GObject.GEnum):  # type: ignore
+class VpnPluginFailure(enum.Enum):
     BAD_IP_CONFIG = 2
     CONNECT_FAILED = 1
     LOGIN_FAILED = 0
 
-class VpnServiceState(GObject.GEnum):  # type: ignore
+class VpnServiceState(enum.Enum):
     INIT = 1
     SHUTDOWN = 2
     STARTED = 4
@@ -12971,13 +12982,15 @@ class VpnServiceState(GObject.GEnum):  # type: ignore
     STOPPING = 5
     UNKNOWN = 0
 
-class WepKeyType(GObject.GEnum):  # type: ignore
+class WepKeyType(enum.Enum):
     KEY = 1
     PASSPHRASE = 2
     UNKNOWN = 0
 
-class WimaxNspNetworkType(GObject.GEnum):  # type: ignore
+class WimaxNspNetworkType(enum.Enum):
     HOME = 1
     PARTNER = 2
     ROAMING_PARTNER = 3
     UNKNOWN = 0
+
+

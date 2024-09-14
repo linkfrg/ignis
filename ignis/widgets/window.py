@@ -3,7 +3,7 @@ from ignis.app import app
 from gi.repository import Gtk, GObject  # type: ignore
 from ignis.base_widget import BaseWidget
 from ignis.utils import Utils
-from gi.repository import Gtk4LayerShell as GtkLayerShell
+from gi.repository import Gtk4LayerShell as GtkLayerShell  # type: ignore
 from ignis.exceptions import MonitorNotFoundError, LayerShellNotSupportedError
 
 

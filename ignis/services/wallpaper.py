@@ -4,7 +4,7 @@ from ignis.gobject import IgnisGObject
 from ignis.widgets.picture import Picture
 from ignis.utils import Utils
 from gi.repository import GObject, Gtk, Gdk  # type: ignore
-from gi.repository import Gtk4LayerShell as GtkLayerShell
+from gi.repository import Gtk4LayerShell as GtkLayerShell  # type: ignore
 from ignis.exceptions import LayerShellNotSupportedError
 from ignis.services import Service
 from ignis import CACHE_DIR

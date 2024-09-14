@@ -1,10 +1,13 @@
+import enum
+
 from typing import Callable
 
 from gi.repository import GObject
 from gi.repository import Gio
 
+
 MIXER_UI_DEVICE_INVALID: int = 0
-_lock = ...  # FIXME Constant
+_lock = ... # FIXME Constant
 _namespace: str = "Gvc"
 _version: str = "1.0"
 
@@ -25,7 +28,6 @@ class ChannelMap(GObject.Object):
     Signals from GObject:
       notify (GParam)
     """
-
     parent: GObject.Object = ...
     priv: ChannelMapPrivate = ...
     def can_balance(self) -> bool: ...
@@ -37,6 +39,7 @@ class ChannelMap(GObject.Object):
     @classmethod
     def new(cls) -> ChannelMap: ...
 
+
 class ChannelMapClass(GObject.GPointer):
     """
     :Constructors:
@@ -45,7 +48,6 @@ class ChannelMapClass(GObject.GPointer):
 
         ChannelMapClass()
     """
-
     parent_class: GObject.ObjectClass = ...
     volume_changed: Callable[[ChannelMap, bool], None] = ...
 
@@ -88,19 +90,15 @@ class MixerCard(GObject.Object):
         name: str
         pa_context: None
         profile: str
-
     props: Props = ...
     parent: GObject.Object = ...
     priv: MixerCardPrivate = ...
-    def __init__(
-        self,
-        icon_name: str = ...,
-        id: int = ...,
-        index: int = ...,
-        name: str = ...,
-        pa_context: None = ...,
-        profile: str = ...,
-    ): ...
+    def __init__(self, icon_name: str = ...,
+                 id: int = ...,
+                 index: int = ...,
+                 name: str = ...,
+                 pa_context: None = ...,
+                 profile: str = ...): ...
     def change_profile(self, profile: str | None = None) -> bool: ...
     def get_gicon(self) -> Gio.Icon: ...
     def get_icon_name(self) -> str: ...
@@ -115,6 +113,7 @@ class MixerCard(GObject.Object):
     def set_profile(self, profile: str) -> bool: ...
     def set_profiles(self, profiles: list[MixerCardProfile]) -> bool: ...
 
+
 class MixerCardClass(GObject.GPointer):
     """
     :Constructors:
@@ -123,7 +122,6 @@ class MixerCardClass(GObject.GPointer):
 
         MixerCardClass()
     """
-
     parent_class: GObject.ObjectClass = ...
 
 class MixerCardPort(GObject.GPointer):
@@ -134,7 +132,6 @@ class MixerCardPort(GObject.GPointer):
 
         MixerCardPort()
     """
-
     port: str = ...
     human_port: str = ...
     icon_name: str = ...
@@ -153,7 +150,6 @@ class MixerCardProfile(GObject.GPointer):
 
         MixerCardProfile()
     """
-
     profile: str = ...
     human_profile: str = ...
     status: str = ...
@@ -161,6 +157,7 @@ class MixerCardProfile(GObject.GPointer):
     n_sinks: int = ...
     n_sources: int = ...
     def compare(self, b: MixerCardProfile) -> int: ...
+
 
 class MixerControl(GObject.Object):
     """
@@ -199,22 +196,17 @@ class MixerControl(GObject.Object):
     """
     class Props:
         name: str
-
     props: Props = ...
     parent: GObject.Object = ...
     priv: MixerControlPrivate = ...
     def __init__(self, name: str = ...): ...
     def change_input(self, input: MixerUIDevice) -> None: ...
     def change_output(self, output: MixerUIDevice) -> None: ...
-    def change_profile_on_selected_device(
-        self, device: MixerUIDevice, profile: str | None = None
-    ) -> bool: ...
+    def change_profile_on_selected_device(self, device: MixerUIDevice, profile: str | None = None) -> bool: ...
     def close(self) -> bool: ...
     def do_active_input_update(self, id: int) -> None: ...
     def do_active_output_update(self, id: int) -> None: ...
-    def do_audio_device_selection_needed(
-        self, id: int, show_dialog: bool, choices: HeadsetPortChoice
-    ) -> None: ...
+    def do_audio_device_selection_needed(self, id: int, show_dialog: bool, choices: HeadsetPortChoice) -> None: ...
     def do_card_added(self, id: int) -> None: ...
     def do_card_removed(self, id: int) -> None: ...
     def do_default_sink_changed(self, id: int) -> None: ...
@@ -252,6 +244,7 @@ class MixerControl(GObject.Object):
     def set_default_source(self, stream: MixerStream) -> bool: ...
     def set_headset_port(self, id: int, choices: HeadsetPortChoice) -> None: ...
 
+
 class MixerControlClass(GObject.GPointer):
     """
     :Constructors:
@@ -260,7 +253,6 @@ class MixerControlClass(GObject.GPointer):
 
         MixerControlClass()
     """
-
     parent_class: GObject.ObjectClass = ...
     state_changed: Callable[[MixerControl, MixerControlState], None] = ...
     stream_added: Callable[[MixerControl, int], None] = ...
@@ -276,9 +268,7 @@ class MixerControlClass(GObject.GPointer):
     input_added: Callable[[MixerControl, int], None] = ...
     output_removed: Callable[[MixerControl, int], None] = ...
     input_removed: Callable[[MixerControl, int], None] = ...
-    audio_device_selection_needed: Callable[
-        [MixerControl, int, bool, HeadsetPortChoice], None
-    ] = ...
+    audio_device_selection_needed: Callable[[MixerControl, int, bool, HeadsetPortChoice], None] = ...
 
 class MixerControlPrivate(GObject.GPointer): ...
 
@@ -360,33 +350,29 @@ class MixerEventRole(MixerStream):
         state: MixerStreamState
         sysfs_path: str
         volume: int
-
     props: Props = ...
     parent: MixerStream = ...
     priv: MixerEventRolePrivate = ...
-    def __init__(
-        self,
-        device: str = ...,
-        application_id: str = ...,
-        can_decibel: bool = ...,
-        card_index: int = ...,
-        channel_map: ChannelMap = ...,
-        decibel: float = ...,
-        description: str = ...,
-        form_factor: str = ...,
-        icon_name: str = ...,
-        id: int = ...,
-        index: int = ...,
-        is_event_stream: bool = ...,
-        is_muted: bool = ...,
-        is_virtual: bool = ...,
-        name: str = ...,
-        pa_context: None = ...,
-        port: str = ...,
-        state: MixerStreamState = ...,
-        sysfs_path: str = ...,
-        volume: int = ...,
-    ): ...
+    def __init__(self, device: str = ...,
+                 application_id: str = ...,
+                 can_decibel: bool = ...,
+                 card_index: int = ...,
+                 channel_map: ChannelMap = ...,
+                 decibel: float = ...,
+                 description: str = ...,
+                 form_factor: str = ...,
+                 icon_name: str = ...,
+                 id: int = ...,
+                 index: int = ...,
+                 is_event_stream: bool = ...,
+                 is_muted: bool = ...,
+                 is_virtual: bool = ...,
+                 name: str = ...,
+                 pa_context: None = ...,
+                 port: str = ...,
+                 state: MixerStreamState = ...,
+                 sysfs_path: str = ...,
+                 volume: int = ...): ...
 
 class MixerEventRoleClass(GObject.GPointer):
     """
@@ -396,7 +382,6 @@ class MixerEventRoleClass(GObject.GPointer):
 
         MixerEventRoleClass()
     """
-
     parent_class: MixerStreamClass = ...
 
 class MixerEventRolePrivate(GObject.GPointer): ...
@@ -474,32 +459,28 @@ class MixerSink(MixerStream):
         state: MixerStreamState
         sysfs_path: str
         volume: int
-
     props: Props = ...
     parent: MixerStream = ...
     priv: MixerSinkPrivate = ...
-    def __init__(
-        self,
-        application_id: str = ...,
-        can_decibel: bool = ...,
-        card_index: int = ...,
-        channel_map: ChannelMap = ...,
-        decibel: float = ...,
-        description: str = ...,
-        form_factor: str = ...,
-        icon_name: str = ...,
-        id: int = ...,
-        index: int = ...,
-        is_event_stream: bool = ...,
-        is_muted: bool = ...,
-        is_virtual: bool = ...,
-        name: str = ...,
-        pa_context: None = ...,
-        port: str = ...,
-        state: MixerStreamState = ...,
-        sysfs_path: str = ...,
-        volume: int = ...,
-    ): ...
+    def __init__(self, application_id: str = ...,
+                 can_decibel: bool = ...,
+                 card_index: int = ...,
+                 channel_map: ChannelMap = ...,
+                 decibel: float = ...,
+                 description: str = ...,
+                 form_factor: str = ...,
+                 icon_name: str = ...,
+                 id: int = ...,
+                 index: int = ...,
+                 is_event_stream: bool = ...,
+                 is_muted: bool = ...,
+                 is_virtual: bool = ...,
+                 name: str = ...,
+                 pa_context: None = ...,
+                 port: str = ...,
+                 state: MixerStreamState = ...,
+                 sysfs_path: str = ...,
+                 volume: int = ...): ...
 
 class MixerSinkClass(GObject.GPointer):
     """
@@ -509,7 +490,6 @@ class MixerSinkClass(GObject.GPointer):
 
         MixerSinkClass()
     """
-
     parent_class: MixerStreamClass = ...
 
 class MixerSinkInput(MixerStream):
@@ -585,32 +565,28 @@ class MixerSinkInput(MixerStream):
         state: MixerStreamState
         sysfs_path: str
         volume: int
-
     props: Props = ...
     parent: MixerStream = ...
     priv: MixerSinkInputPrivate = ...
-    def __init__(
-        self,
-        application_id: str = ...,
-        can_decibel: bool = ...,
-        card_index: int = ...,
-        channel_map: ChannelMap = ...,
-        decibel: float = ...,
-        description: str = ...,
-        form_factor: str = ...,
-        icon_name: str = ...,
-        id: int = ...,
-        index: int = ...,
-        is_event_stream: bool = ...,
-        is_muted: bool = ...,
-        is_virtual: bool = ...,
-        name: str = ...,
-        pa_context: None = ...,
-        port: str = ...,
-        state: MixerStreamState = ...,
-        sysfs_path: str = ...,
-        volume: int = ...,
-    ): ...
+    def __init__(self, application_id: str = ...,
+                 can_decibel: bool = ...,
+                 card_index: int = ...,
+                 channel_map: ChannelMap = ...,
+                 decibel: float = ...,
+                 description: str = ...,
+                 form_factor: str = ...,
+                 icon_name: str = ...,
+                 id: int = ...,
+                 index: int = ...,
+                 is_event_stream: bool = ...,
+                 is_muted: bool = ...,
+                 is_virtual: bool = ...,
+                 name: str = ...,
+                 pa_context: None = ...,
+                 port: str = ...,
+                 state: MixerStreamState = ...,
+                 sysfs_path: str = ...,
+                 volume: int = ...): ...
 
 class MixerSinkInputClass(GObject.GPointer):
     """
@@ -620,10 +596,10 @@ class MixerSinkInputClass(GObject.GPointer):
 
         MixerSinkInputClass()
     """
-
     parent_class: MixerStreamClass = ...
 
 class MixerSinkInputPrivate(GObject.GPointer): ...
+
 class MixerSinkPrivate(GObject.GPointer): ...
 
 class MixerSource(MixerStream):
@@ -699,32 +675,28 @@ class MixerSource(MixerStream):
         state: MixerStreamState
         sysfs_path: str
         volume: int
-
     props: Props = ...
     parent: MixerStream = ...
     priv: MixerSourcePrivate = ...
-    def __init__(
-        self,
-        application_id: str = ...,
-        can_decibel: bool = ...,
-        card_index: int = ...,
-        channel_map: ChannelMap = ...,
-        decibel: float = ...,
-        description: str = ...,
-        form_factor: str = ...,
-        icon_name: str = ...,
-        id: int = ...,
-        index: int = ...,
-        is_event_stream: bool = ...,
-        is_muted: bool = ...,
-        is_virtual: bool = ...,
-        name: str = ...,
-        pa_context: None = ...,
-        port: str = ...,
-        state: MixerStreamState = ...,
-        sysfs_path: str = ...,
-        volume: int = ...,
-    ): ...
+    def __init__(self, application_id: str = ...,
+                 can_decibel: bool = ...,
+                 card_index: int = ...,
+                 channel_map: ChannelMap = ...,
+                 decibel: float = ...,
+                 description: str = ...,
+                 form_factor: str = ...,
+                 icon_name: str = ...,
+                 id: int = ...,
+                 index: int = ...,
+                 is_event_stream: bool = ...,
+                 is_muted: bool = ...,
+                 is_virtual: bool = ...,
+                 name: str = ...,
+                 pa_context: None = ...,
+                 port: str = ...,
+                 state: MixerStreamState = ...,
+                 sysfs_path: str = ...,
+                 volume: int = ...): ...
 
 class MixerSourceClass(GObject.GPointer):
     """
@@ -734,7 +706,6 @@ class MixerSourceClass(GObject.GPointer):
 
         MixerSourceClass()
     """
-
     parent_class: MixerStreamClass = ...
 
 class MixerSourceOutput(MixerStream):
@@ -810,32 +781,28 @@ class MixerSourceOutput(MixerStream):
         state: MixerStreamState
         sysfs_path: str
         volume: int
-
     props: Props = ...
     parent: MixerStream = ...
     priv: MixerSourceOutputPrivate = ...
-    def __init__(
-        self,
-        application_id: str = ...,
-        can_decibel: bool = ...,
-        card_index: int = ...,
-        channel_map: ChannelMap = ...,
-        decibel: float = ...,
-        description: str = ...,
-        form_factor: str = ...,
-        icon_name: str = ...,
-        id: int = ...,
-        index: int = ...,
-        is_event_stream: bool = ...,
-        is_muted: bool = ...,
-        is_virtual: bool = ...,
-        name: str = ...,
-        pa_context: None = ...,
-        port: str = ...,
-        state: MixerStreamState = ...,
-        sysfs_path: str = ...,
-        volume: int = ...,
-    ): ...
+    def __init__(self, application_id: str = ...,
+                 can_decibel: bool = ...,
+                 card_index: int = ...,
+                 channel_map: ChannelMap = ...,
+                 decibel: float = ...,
+                 description: str = ...,
+                 form_factor: str = ...,
+                 icon_name: str = ...,
+                 id: int = ...,
+                 index: int = ...,
+                 is_event_stream: bool = ...,
+                 is_muted: bool = ...,
+                 is_virtual: bool = ...,
+                 name: str = ...,
+                 pa_context: None = ...,
+                 port: str = ...,
+                 state: MixerStreamState = ...,
+                 sysfs_path: str = ...,
+                 volume: int = ...): ...
 
 class MixerSourceOutputClass(GObject.GPointer):
     """
@@ -845,10 +812,10 @@ class MixerSourceOutputClass(GObject.GPointer):
 
         MixerSourceOutputClass()
     """
-
     parent_class: MixerStreamClass = ...
 
 class MixerSourceOutputPrivate(GObject.GPointer): ...
+
 class MixerSourcePrivate(GObject.GPointer): ...
 
 class MixerStream(GObject.Object):
@@ -924,32 +891,28 @@ class MixerStream(GObject.Object):
         state: MixerStreamState
         sysfs_path: str
         volume: int
-
     props: Props = ...
     parent: GObject.Object = ...
     priv: MixerStreamPrivate = ...
-    def __init__(
-        self,
-        application_id: str = ...,
-        can_decibel: bool = ...,
-        card_index: int = ...,
-        channel_map: ChannelMap = ...,
-        decibel: float = ...,
-        description: str = ...,
-        form_factor: str = ...,
-        icon_name: str = ...,
-        id: int = ...,
-        index: int = ...,
-        is_event_stream: bool = ...,
-        is_muted: bool = ...,
-        is_virtual: bool = ...,
-        name: str = ...,
-        pa_context: None = ...,
-        port: str = ...,
-        state: MixerStreamState = ...,
-        sysfs_path: str = ...,
-        volume: int = ...,
-    ): ...
+    def __init__(self, application_id: str = ...,
+                 can_decibel: bool = ...,
+                 card_index: int = ...,
+                 channel_map: ChannelMap = ...,
+                 decibel: float = ...,
+                 description: str = ...,
+                 form_factor: str = ...,
+                 icon_name: str = ...,
+                 id: int = ...,
+                 index: int = ...,
+                 is_event_stream: bool = ...,
+                 is_muted: bool = ...,
+                 is_virtual: bool = ...,
+                 name: str = ...,
+                 pa_context: None = ...,
+                 port: str = ...,
+                 state: MixerStreamState = ...,
+                 sysfs_path: str = ...,
+                 volume: int = ...): ...
     def change_is_muted(self, is_muted: bool) -> bool: ...
     def change_port(self, port: str) -> bool: ...
     def do_change_is_muted(self, is_muted: bool) -> bool: ...
@@ -996,6 +959,7 @@ class MixerStream(GObject.Object):
     def set_sysfs_path(self, sysfs_path: str) -> bool: ...
     def set_volume(self, volume: int) -> bool: ...
 
+
 class MixerStreamClass(GObject.GPointer):
     """
     :Constructors:
@@ -1004,7 +968,6 @@ class MixerStreamClass(GObject.GPointer):
 
         MixerStreamClass()
     """
-
     parent_class: GObject.ObjectClass = ...
     push_volume: Callable[[MixerStream, None], bool] = ...
     change_is_muted: Callable[[MixerStream, bool], bool] = ...
@@ -1018,7 +981,6 @@ class MixerStreamPort(GObject.GBoxed):
 
         MixerStreamPort()
     """
-
     port: str = ...
     human_port: str = ...
     priority: int = ...
@@ -1066,21 +1028,17 @@ class MixerUIDevice(GObject.Object):
         port_name: str
         stream_id: int
         type: int
-
     props: Props = ...
     parent_instance: GObject.Object = ...
     priv: MixerUIDevicePrivate = ...
-    def __init__(
-        self,
-        card: None = ...,
-        description: str = ...,
-        icon_name: str = ...,
-        origin: str = ...,
-        port_available: bool = ...,
-        port_name: str = ...,
-        stream_id: int = ...,
-        type: int = ...,
-    ): ...
+    def __init__(self, card: None = ...,
+                 description: str = ...,
+                 icon_name: str = ...,
+                 origin: str = ...,
+                 port_available: bool = ...,
+                 port_name: str = ...,
+                 stream_id: int = ...,
+                 type: int = ...): ...
     def get_active_profile(self) -> str: ...
     def get_best_profile(self, selected: str | None, current: str) -> str: ...
     def get_description(self) -> str: ...
@@ -1102,6 +1060,7 @@ class MixerUIDevice(GObject.Object):
     def set_user_preferred_profile(self, profile: str) -> None: ...
     def should_profiles_be_hidden(self) -> bool: ...
 
+
 class MixerUIDeviceClass(GObject.GPointer):
     """
     :Constructors:
@@ -1110,29 +1069,30 @@ class MixerUIDeviceClass(GObject.GPointer):
 
         MixerUIDeviceClass()
     """
-
     parent_class: GObject.ObjectClass = ...
 
 class MixerUIDevicePrivate(GObject.GPointer): ...
 
-class HeadsetPortChoice(GObject.GFlags):  # type: ignore
+class HeadsetPortChoice(enum.Enum):
     HEADPHONES = 1
     HEADSET = 2
     MIC = 4
     NONE = 0
 
-class MixerControlState(GObject.GEnum):  # type: ignore
+class MixerControlState(enum.Enum):
     CLOSED = 0
     CONNECTING = 2
     FAILED = 3
     READY = 1
 
-class MixerStreamState(GObject.GEnum):  # type: ignore
+class MixerStreamState(enum.Enum):
     IDLE = 2
     INVALID = 0
     RUNNING = 1
     SUSPENDED = 3
 
-class MixerUIDeviceDirection(GObject.GEnum):  # type: ignore
+class MixerUIDeviceDirection(enum.Enum):
     INPUT = 0
     OUTPUT = 1
+
+

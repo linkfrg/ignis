@@ -1,8 +1,9 @@
-from gi.repository import GObject
+import enum
 from gi.repository import Gdk
 from gi.repository import Gtk
 
-_lock = ...  # FIXME Constant
+
+_lock = ... # FIXME Constant
 _namespace: str = "Gtk4LayerShell"
 _version: str = "1.0"
 
@@ -31,20 +32,20 @@ def set_margin(window: Gtk.Window, edge: Edge, margin_size: int) -> None: ...
 def set_monitor(window: Gtk.Window, monitor: Gdk.Monitor) -> None: ...
 def set_namespace(window: Gtk.Window, name_space: str) -> None: ...
 
-class Edge(GObject.GEnum):  # type: ignore
+class Edge(enum.Enum):
     BOTTOM = 3
     ENTRY_NUMBER = 4
     LEFT = 0
     RIGHT = 1
     TOP = 2
 
-class KeyboardMode(GObject.GEnum):  # type: ignore
+class KeyboardMode(enum.Enum):
     ENTRY_NUMBER = 3
     EXCLUSIVE = 1
     NONE = 0
     ON_DEMAND = 2
 
-class Layer(GObject.GEnum):  # type: ignore
+class Layer(enum.Enum):
     BACKGROUND = 0
     BOTTOM = 1
     ENTRY_NUMBER = 4

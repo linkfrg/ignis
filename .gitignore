@@ -4,5 +4,6 @@ venv
 dist
 docs/_build
 generated
-.vscode
 build
+.vscode/*
+!.vscode/settings.json
