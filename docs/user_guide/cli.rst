@@ -1,6 +1,8 @@
 CLI
 ==============
 
+I'm too lazy to describe everything in detail, so here's a help message for you
+
 .. code-block:: bash
 
     $ ignis --help

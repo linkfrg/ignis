@@ -13,7 +13,6 @@ Get started
 
    installation
    first_widgets
-   styling
-   properties
    dynamic_content
+   styling
    cli

@@ -9,7 +9,7 @@ author = "linkfrg"
 REPO_URL = "https://github.com/linkfrg/ignis"
 DOCS_URL = "https://linkfrg.github.io/ignis/latest"
 
-extensions = ["sphinx.ext.autodoc", "sphinx.ext.napoleon"]
+extensions = ["sphinx.ext.autodoc", "sphinx.ext.napoleon", "sphinx_design"]
 
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
