@@ -2,8 +2,7 @@ import enum
 from gi.repository import Gdk
 from gi.repository import Gtk
 
-
-_lock = ... # FIXME Constant
+_lock = ...  # FIXME Constant
 _namespace: str = "Gtk4LayerShell"
 _version: str = "1.0"
 
