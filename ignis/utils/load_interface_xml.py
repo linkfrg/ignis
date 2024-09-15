@@ -1,7 +1,7 @@
-import os
 from gi.repository import Gio  # type: ignore
+from .get_current_dir import get_current_dir
 
-DBUS_DIR = f"{os.path.dirname(os.path.abspath(__file__))}/../dbus"
+DBUS_DIR = get_current_dir() + "/../dbus"
 
 
 def load_interface_xml(interface_name: str) -> Gio.DBusInterfaceInfo:

@@ -14,6 +14,7 @@ from .get_paintable import get_paintable
 from .get_file_icon_name import get_file_icon_name
 from .thread_task import ThreadTask
 from .download_image import download_image
+from .get_current_dir import get_current_dir
 
 
 class Utils:
@@ -36,3 +37,4 @@ class Utils:
     ThreadTask = ThreadTask
     get_ignis_commit = get_ignis_commit
     download_image = download_image
+    get_current_dir = get_current_dir

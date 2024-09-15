@@ -1,4 +1,3 @@
-import os
 import datetime
 from ignis.widgets import Widget
 from ignis.utils import Utils
@@ -11,8 +10,7 @@ from ignis.services.mpris import MprisService, MprisPlayer
 
 app = IgnisApp.get_default()
 
-CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
-app.apply_css(f"{CURRENT_DIR}/style.scss")
+app.apply_css(f"{Utils.get_current_dir()}/style.scss")
 
 
 audio = AudioService.get_default()

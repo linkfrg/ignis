@@ -4,6 +4,7 @@ from ignis.app import IgnisApp
 
 app = IgnisApp.get_default()
 
+
 class RegularWindow(Gtk.Window, BaseWidget):
     """
     Bases: `Gtk.Window <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Window.html>`_.

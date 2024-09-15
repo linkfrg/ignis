@@ -311,4 +311,6 @@ class Gtk4LayerShellNotFoundError(Exception):
     """
 
     def __init__(self, *args: object) -> None:
-        super().__init__("GTK4 Layer Shell is not found! To use Ignis, first install it", *args)
+        super().__init__(
+            "GTK4 Layer Shell is not found! To use Ignis, first install it", *args
+        )

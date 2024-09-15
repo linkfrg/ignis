@@ -8,7 +8,7 @@ from ignis.exceptions import Gtk4LayerShellNotFoundError
 __version__ = "0.1dev0"
 CACHE_DIR = f"{GLib.get_user_cache_dir()}/ignis"
 
-if 'sphinx' not in sys.modules:
+if "sphinx" not in sys.modules:
     os.makedirs(CACHE_DIR, exist_ok=True)
 
     try:

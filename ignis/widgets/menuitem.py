@@ -6,6 +6,7 @@ from typing import Callable
 
 app = IgnisApp.get_default()
 
+
 class MenuItem(IgnisGObject):
     """
     Bases: :class:``ignis.gobject.IgnisGObject``.
