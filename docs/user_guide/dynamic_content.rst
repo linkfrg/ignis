@@ -43,9 +43,9 @@ Here's an example using the :class:`~ignis.services.mpris.MprisService`:
 
 .. code-block:: python
 
-    from ignis.service import Service
+    from ignis.service.mpris import MprisService
 
-    mpris = Service.get("mpris")
+    mpris = MprisService.get_default()
 
     mpris.connect("player_added", lambda x, player: print(player.desktop_entry, player.title))
     #                                    ^    ^
@@ -67,10 +67,10 @@ Use the ``.bind()`` method, passing the property name as the first argument, and
 
 .. code-block:: python
 
-    from ignis.services import Service
+    from ignis.services.audio import AudioService
     from ignis.widgets import Widget
 
-    audio = Service.get("audio")
+    audio = AudioService.get_default()
 
     def bar(monitor: int) -> Widget.Window:
         return Widget.Window(

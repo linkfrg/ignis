@@ -1,8 +1,10 @@
 from __future__ import annotations
 from gi.repository import Gtk, Gio, GObject, GLib  # type: ignore
 from ignis.dbus import DBusProxy
-from ignis.app import app
+from ignis.app import IgnisApp
 from ignis.utils import Utils
+
+app = IgnisApp.get_default()
 
 
 class MenuItem(GObject.Object):

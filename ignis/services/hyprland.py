@@ -2,17 +2,17 @@ import json
 import os
 import socket
 from gi.repository import GObject  # type: ignore
-from ignis.gobject import IgnisGObject
 from ignis.utils import Utils
 from typing import Any
 from ignis.exceptions import HyprlandIPCNotFoundError
+from ignis.base_service import BaseService
 
 HYPRLAND_INSTANCE_SIGNATURE = os.getenv("HYPRLAND_INSTANCE_SIGNATURE")
 XDG_RUNTIME_DIR = os.getenv("XDG_RUNTIME_DIR")
 SOCKET_DIR = f"{XDG_RUNTIME_DIR}/hypr/{HYPRLAND_INSTANCE_SIGNATURE}"
 
 
-class HyprlandService(IgnisGObject):
+class HyprlandService(BaseService):
     """
     Hyprland IPC client.
 
@@ -83,9 +83,9 @@ class HyprlandService(IgnisGObject):
 
     .. code-block:: python
 
-        from ignis.service import Service
+        from ignis.service import HyprlandService
 
-        hyprland = Service.get("hyprland")
+        hyprland = HyprlandService.get_default()
 
         print(hyprland.workspaces)
         print(hyprland.kb_layout)

@@ -23,11 +23,13 @@ class IgnisApp(Gtk.Application, IgnisGObject):
     .. danger::
 
         Do not initialize this class!
-        Instead, import the already initialized instance as shown below.
+        Instead, use the already initialized instance as shown below.
 
     .. code-block:: python
 
-        from ignis.app import app
+        from ignis.app import IgnisApp
+
+        app = IgnisApp.get_default()
 
     Signals:
         - **"ready"** (): Emitted when the configuration has been parsed.
@@ -44,6 +46,8 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         "ready": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
         "quit": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
     }
+
+    _instance: IgnisApp | None = None  # type: ignore
 
     def __init__(self):
         Gtk.Application.__init__(
@@ -90,6 +94,12 @@ class IgnisApp(Gtk.Application, IgnisGObject):
                 self.reload()
             elif extension in (".css", ".scss", ".sass") and self.autoreload_css:
                 self.reload_css()
+
+    @classmethod
+    def get_default(cls: type[IgnisApp]) -> IgnisApp:
+        if cls._instance is None:
+            cls._instance = cls()
+        return cls._instance
 
     @GObject.Property
     def is_ready(self) -> bool:
@@ -398,11 +408,10 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         self.quit()
 
 
-app = IgnisApp()
-
-
 def run_app(config_path: str, debug: bool) -> None:
     configure_logger(debug)
+
+    app = IgnisApp.get_default()
 
     app._setup(config_path)
 

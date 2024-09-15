@@ -5,6 +5,7 @@ from gi.repository import Gio, GLib, GObject, GdkPixbuf  # type: ignore
 from ignis.gobject import IgnisGObject
 from ignis.dbus_menu import DBusMenu
 from loguru import logger
+from ignis.base_service import BaseService
 
 
 class SystemTrayItem(IgnisGObject):
@@ -183,7 +184,7 @@ class SystemTrayItem(IgnisGObject):
         )
 
 
-class SystemTrayService(IgnisGObject):
+class SystemTrayService(BaseService):
     """
     A system tray, where application icons are placed.
 
@@ -197,9 +198,9 @@ class SystemTrayService(IgnisGObject):
 
     .. code-block:: python
 
-        from ignis.services import Service
+        from ignis.services.system_tray import SystemTrayService
 
-        system_tray = Service.get("system_tray")
+        system_tray = SystemTrayService.get_default()
 
         system_tray.connect("added", lambda x, item: print(item.title))
     """

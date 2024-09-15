@@ -1,8 +1,10 @@
 from __future__ import annotations
 from gi.repository import GObject, Gio, Gtk  # type: ignore
 from ignis.gobject import IgnisGObject
-from ignis.app import app
+from ignis.app import IgnisApp
 from typing import Callable
+
+app = IgnisApp.get_default()
 
 
 class MenuItem(IgnisGObject):
@@ -51,6 +53,7 @@ class MenuItem(IgnisGObject):
         action = Gio.SimpleAction.new(self._uniq_name, None)
         action.set_enabled(enabled)
         action.connect("activate", self.__on_activate)
+
         app.add_action(action)
 
     @GObject.Property

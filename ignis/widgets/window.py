@@ -1,11 +1,12 @@
 import cairo
-from ignis.app import app
+from ignis.app import IgnisApp
 from gi.repository import Gtk, GObject  # type: ignore
 from ignis.base_widget import BaseWidget
 from ignis.utils import Utils
 from gi.repository import Gtk4LayerShell as GtkLayerShell  # type: ignore
 from ignis.exceptions import MonitorNotFoundError, LayerShellNotSupportedError
 
+app = IgnisApp.get_default()
 
 LAYER = {
     "background": GtkLayerShell.Layer.BACKGROUND,
@@ -111,7 +112,7 @@ class Window(Gtk.Window, BaseWidget):
         if not GtkLayerShell.is_supported():
             raise LayerShellNotSupportedError()
 
-        Gtk.Window.__init__(self, application=app)
+        Gtk.Window.__init__(self, application=app)  # type: ignore
         GtkLayerShell.init_for_window(self)
 
         self._anchor = None

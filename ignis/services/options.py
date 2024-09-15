@@ -5,6 +5,7 @@ from gi.repository import GObject  # type: ignore
 from typing import Any, Callable
 from ignis import CACHE_DIR
 from ignis.exceptions import OptionExistsError, OptionNotFoundError
+from ignis.base_service import BaseService
 
 OPTIONS_FILE = f"{CACHE_DIR}/options.json"
 
@@ -32,7 +33,7 @@ class Option(IgnisGObject):
         self._value = value
 
 
-class OptionsService(IgnisGObject):
+class OptionsService(BaseService):
     """
     Service to manage options.
     This service stores options and their values in the ``~/.cache/ignis/options.json`` file.
@@ -46,9 +47,9 @@ class OptionsService(IgnisGObject):
 
     .. code-block:: python
 
-        from ignis.services import Service
+        from ignis.services.options import OptionsService
 
-        options = Service.get("options")
+        options = OptionsService.get_default()
 
         SOME_OPTION = "some_option"
 

@@ -1,21 +1,25 @@
 import os
 import datetime
 from ignis.widgets import Widget
-from ignis.services import Service
 from ignis.utils import Utils
-from ignis.app import app
-from ignis.services.system_tray import SystemTrayItem
-from ignis.services.mpris import MprisPlayer
+from ignis.app import IgnisApp
+from ignis.services.audio import AudioService
+from ignis.services.system_tray import SystemTrayService, SystemTrayItem
+from ignis.services.hyprland import HyprlandService
+from ignis.services.notifications import NotificationService
+from ignis.services.mpris import MprisService, MprisPlayer
+
+app = IgnisApp.get_default()
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 app.apply_css(f"{CURRENT_DIR}/style.scss")
 
 
-audio = Service.get("audio")
-system_tray = Service.get("system_tray")
-hyprland = Service.get("hyprland")
-notifications = Service.get("notifications")
-mpris = Service.get("mpris")
+audio = AudioService.get_default()
+system_tray = SystemTrayService.get_default()
+hyprland = HyprlandService.get_default()
+notifications = NotificationService.get_default()
+mpris = MprisService.get_default()
 
 
 def workspace_button(workspace: dict) -> Widget.Button:

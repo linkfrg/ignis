@@ -1,8 +1,10 @@
+from __future__ import annotations
 import re
 import subprocess
 from gi.repository import GObject, Gio  # type: ignore
 from ignis.gobject import IgnisGObject
-from ignis.services import Service
+from ignis.base_service import BaseService
+from ignis.services.options import OptionsService
 
 PINNED_APPS_OPTION = "pinned_apps"
 
@@ -160,7 +162,7 @@ class Application(IgnisGObject):
         )
 
 
-class ApplicationsService(IgnisGObject):
+class ApplicationsService(BaseService):
     """
     Provides a list of applications installed on the system.
     It also allows "pinning" of apps and retrieving a list of pinned applications.
@@ -173,9 +175,9 @@ class ApplicationsService(IgnisGObject):
 
     .. code-block:: python
 
-        from ignis.service import Service
+        from ignis.service.applications import ApplicationsService
 
-        applications = Service.get("applications")
+        applications = ApplicationsService.get_default()
         for i in applications.apps:
             print(i.name)
 
@@ -189,7 +191,7 @@ class ApplicationsService(IgnisGObject):
         self._monitor = Gio.AppInfoMonitor.get()
         self._monitor.connect("changed", lambda x: self.__sync())
 
-        self._options = Service.get("options")
+        self._options = OptionsService.get_default()
         self._options.create_option(name=PINNED_APPS_OPTION, default=[], exists_ok=True)
 
         self.__sync()

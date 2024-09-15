@@ -1,13 +1,7 @@
 Subclassing Widgets
 =======================
 
-All widgets inherit from the :class:`~ignis.base_widget.BaseWidget` class.
-
-BaseWidget
------------
-
-.. autoclass:: ignis.base_widget.BaseWidget
-    :members:
+All widgets should inherit from the :class:`~ignis.base_widget.BaseWidget` class.
 
 Widget Class Template
 -----------------------

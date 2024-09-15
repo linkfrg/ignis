@@ -1,10 +1,10 @@
 import os
-from ignis.gobject import IgnisGObject
 from gi.repository import GObject, Gtk, Gdk  # type: ignore
 from ignis.exceptions import DisplayNotFoundError
+from ignis.base_service import BaseService
 
 
-class FetchService(IgnisGObject):
+class FetchService(BaseService):
     """
     System info service.
 
@@ -41,9 +41,9 @@ class FetchService(IgnisGObject):
 
     .. code-block:: python
 
-        from ignis.service import Service
+        from ignis.service import FetchService
 
-        fetch = Service.get("fetch")
+        fetch = FetchService.get_default()
 
         print(fetch.os_name)
         print(fetch.hostname)

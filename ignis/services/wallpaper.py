@@ -1,14 +1,16 @@
 import os
 import shutil
-from ignis.gobject import IgnisGObject
 from ignis.widgets.picture import Picture
 from ignis.utils import Utils
 from gi.repository import GObject, Gtk, Gdk  # type: ignore
 from gi.repository import Gtk4LayerShell as GtkLayerShell  # type: ignore
 from ignis.exceptions import LayerShellNotSupportedError
-from ignis.services import Service
+from ignis.services.options import OptionsService
 from ignis import CACHE_DIR
-from ignis.app import app
+from ignis.app import IgnisApp
+from ignis.base_service import BaseService
+
+app = IgnisApp.get_default()
 
 CACHE_WALLPAPER_PATH = f"{CACHE_DIR}/wallpaper"
 
@@ -48,7 +50,7 @@ class WallpaperLayerWindow(Gtk.Window):
         self.set_visible(True)
 
 
-class WallpaperService(IgnisGObject):
+class WallpaperService(BaseService):
     """
     A simple service to set the wallpaper.
     Supports multiple monitors.
@@ -62,9 +64,9 @@ class WallpaperService(IgnisGObject):
 
         .. code-block:: python
 
-        from ignis.services import Service
+        from ignis.services.wallpaper import WallpaperService
 
-        wallpaper = Service.get("wallpaper")
+        wallpaper = WallpaperService.get_default()
 
         wallpaper.set_wallpaper("path/to/image")
 
@@ -74,7 +76,7 @@ class WallpaperService(IgnisGObject):
         super().__init__()
         self._windows: list[WallpaperLayerWindow] = []
 
-        self._options = Service.get("options")
+        self._options = OptionsService.get_default()
         self._options.create_option(name="wallpaper", default=None, exists_ok=True)
 
         self.__sync()

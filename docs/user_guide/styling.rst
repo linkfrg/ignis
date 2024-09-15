@@ -9,7 +9,9 @@ To get started, add the following to your config:
 
 .. code-block:: python
 
-    from ignis.app import app
+    from ignis.app import IgnisApp
+
+    app = IgnisApp.get_default()
 
     app.apply_css("PATH/TO/CSS_FILE")
 
@@ -18,7 +20,9 @@ For example, we will use ``~/.config/ignis/style.scss``:
 .. code-block:: python
 
     import os
-    from ignis.app import app
+    from ignis.app import IgnisApp
+
+    app = IgnisApp.get_default()
 
     app.apply_css(os.path.expanduser("~/.config/ignis/style.scss"))
 

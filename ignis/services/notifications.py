@@ -5,9 +5,10 @@ from gi.repository import GLib, GObject, GdkPixbuf  # type: ignore
 from ignis.utils import Utils
 from ignis.gobject import IgnisGObject
 from loguru import logger
-from ignis.services import Service
+from ignis.services.options import OptionsService
 from datetime import datetime
 from ignis import CACHE_DIR
+from ignis.base_service import BaseService
 
 POPUP_TIMEOUT_OPTION = "notification_timeout"
 MAX_POPUPS_COUNT_OPTION = "notification_max_popups_count"
@@ -182,7 +183,7 @@ class NotificationAction(IgnisGObject):
         )
 
 
-class NotificationService(IgnisGObject):
+class NotificationService(BaseService):
     """
     A notification daemon.
     Allow receiving notifications and perform actions on them.
@@ -202,9 +203,9 @@ class NotificationService(IgnisGObject):
 
     .. code-block:: python
 
-        from ignis.services import Service
+        from ignis.services.notifications import NotificationsService
 
-        notifications = Service.get("notifications")
+        notifications = NotificationsService.get_default()
 
         notifications.connect("notified", lambda x, notification: print(notification.app_name, notification.summary))
     """
@@ -252,7 +253,7 @@ class NotificationService(IgnisGObject):
         os.makedirs(NOTIFICATIONS_CACHE_DIR, exist_ok=True)
         os.makedirs(NOTIFICATIONS_IMAGE_DATA, exist_ok=True)
 
-        self._options = Service.get("options")
+        self._options = OptionsService.get_default()
 
         self._options.create_option(name=DND_OPTION, default=False, exists_ok=True)
         self._options.create_option(

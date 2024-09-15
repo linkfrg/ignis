@@ -5,6 +5,7 @@ from gi.repository import GObject  # type: ignore
 from ignis.gobject import IgnisGObject
 from typing import Literal
 from ignis.exceptions import GvcNotFoundError
+from ignis.base_service import BaseService
 
 
 try:
@@ -191,7 +192,7 @@ class DefaultStream(Stream):
         self._setup()
 
 
-class AudioService(IgnisGObject):
+class AudioService(BaseService):
     """
     An audio service.
     Allow controlling audio devices.
@@ -220,9 +221,9 @@ class AudioService(IgnisGObject):
 
     .. code-block:: python
 
-        from ignis.service import Service
+        from ignis.service.audio import AudioService
 
-        audio = Service.get("audio")
+        audio = AudioService.get_default()
 
         audio.connect("speaker-added", lambda x, speaker: print(speaker.description))
     """

@@ -8,6 +8,7 @@ from ignis.gobject import IgnisGObject
 from ignis.utils import Utils
 from loguru import logger
 from ignis import CACHE_DIR
+from ignis.base_service import BaseService
 
 ART_URL_CACHE_DIR = f"{CACHE_DIR}/art_url"
 
@@ -298,7 +299,7 @@ class MprisPlayer(IgnisGObject):
         self.__player_proxy.Seek("(x)", offset * 1_000_100)
 
 
-class MprisService(IgnisGObject):
+class MprisService(BaseService):
     """
     Service for getting and controlling media players using the MPRIS interface (e.g., Spotify, Firefox/Chromium with playing media).
 
@@ -311,11 +312,13 @@ class MprisService(IgnisGObject):
     Properties:
         - **players** (list[:class:`~ignis.services.applications.Application`], read-only): A list of currently active players.
 
+    **Example usage:**
+
     .. code-block:: python
 
-        from ignis.service import Service
+        from ignis.service import MprisService
 
-        mpris = Service.get("mpris")
+        mpris = MprisService.get_default()
 
         mpris.connect("player_added", lambda x, player: print(player.desktop_entry, player.title))
     """

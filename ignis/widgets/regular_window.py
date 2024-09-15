@@ -1,6 +1,8 @@
-from ignis.app import app
+from ignis.app import IgnisApp
 from gi.repository import Gtk, GObject  # type: ignore
 from ignis.base_widget import BaseWidget
+
+app = IgnisApp.get_default()
 
 
 class RegularWindow(Gtk.Window, BaseWidget):
@@ -16,7 +18,7 @@ class RegularWindow(Gtk.Window, BaseWidget):
 
         Widget.RegularWindow(
             child=Widget.Label(label="this is regular window"),
-            title="ЭЩКЕРЕЕЕ",
+            title="This is title",
             namespace='some-regular-window',
             titlebar=Widget.HeaderBar(show_title_buttons=True),
         )

@@ -6,6 +6,7 @@ from ignis.gobject import IgnisGObject
 from typing import Iterator
 from ignis.widgets import Widget
 from ignis.exceptions import NetworkManagerNotFoundError
+from ignis.base_service import BaseService
 
 
 try:
@@ -641,7 +642,7 @@ class Ethernet(IgnisGObject):
         self._devices.append(dev)
 
 
-class NetworkService(IgnisGObject):
+class NetworkService(BaseService):
     """
     A Network service. Uses ``NetworkManager``.
 

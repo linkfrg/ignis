@@ -4,13 +4,14 @@ import sys
 import subprocess
 import datetime
 from gi.repository import GObject, GLib  # type: ignore
-from ignis.gobject import IgnisGObject
 from ignis.dbus import DBusProxy
-from ignis.app import app
-from ignis.services import Service
+from ignis.app import IgnisApp
+from ignis.services.options import OptionsService
+from ignis.services.audio import AudioService
 from ignis.utils import Utils
 from typing import Callable
 from ignis.exceptions import GstNotFoundError, GstPluginNotFoundError
+from ignis.base_service import BaseService
 
 try:
     if "sphinx" not in sys.modules:
@@ -20,6 +21,8 @@ except (ImportError, ValueError):
     raise GstNotFoundError(
         "GStreamer not found! To use the recorder service, install GStreamer."
     ) from None
+
+app = IgnisApp.get_default()
 
 RECORDING_BITRATE_OPTION = "recording_bitrate"
 RECORDING_DEFAULT_FILE_LOCATION_OPTION = "recording_default_file_location"
@@ -175,7 +178,7 @@ class SessionManager:
             self._callback(node_id, *self._calback_args)
 
 
-class RecorderService(IgnisGObject):
+class RecorderService(BaseService):
     """
     A screen recorder.
     Uses XDG Desktop portal and PipeWire.
@@ -208,10 +211,10 @@ class RecorderService(IgnisGObject):
 
     .. code-block:: python
 
-        from ignis.services import Service
+        from ignis.services.recorder import RecorderService
         from ignis.utils import Utils
 
-        recorder = Service.get("recorder")
+        recorder = RecorderService.get_default()
 
         recorder.start_recording(record_internal_audio=True)
 
@@ -237,8 +240,8 @@ class RecorderService(IgnisGObject):
 
         self._N_THREADS: str = str(min(max(1, GLib.get_num_processors()), 64))
 
-        self._options = Service.get("options")
-        self._audio = Service.get("audio")
+        self._options = OptionsService.get_default()
+        self._audio = AudioService.get_default()
 
         self._options.create_option(
             name=RECORDING_BITRATE_OPTION, default=8000, exists_ok=True
