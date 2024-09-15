@@ -14,7 +14,7 @@ from ignis.exceptions import (
     StylePathAppliedError,
 )
 from ignis.logging import configure_logger
-from ignis.widgets.window import Window
+
 
 class IgnisApp(Gtk.Application, IgnisGObject):
     """
@@ -36,7 +36,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         - **"quit"** (): Emitted when Ignis has finished running.
 
     Properties:
-        - **windows** (list[:class:`~ignis.widgets.Widget.Window`], read-only): List of windows.
+        - **windows** (``list[Gtk.Window]``, read-only): List of windows.
         - **is_ready** (``bool``, read-only): Whether configuration is parsed and app is ready.
         - **autoreload_config** (``bool``, read-write, default: ``True``): Whether to automatically reload the configuration when it changes (only .py files).
         - **autoreload_css** (``bool``, read-write, default: ``True``): Whether to automatically reload the CSS style when it changes (only .css/.scss/.sass files).
@@ -79,7 +79,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         self._css_providers: dict[
             str, Gtk.CssProvider
         ] = {}  # {style_path: Gtk.CssProvider}
-        self._windows: dict[str, Window] = {}
+        self._windows: dict[str, Gtk.Window] = {}
         self._autoreload_config: bool = True
         self._autoreload_css: bool = True
         self._is_ready = False
@@ -106,7 +106,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         return self._is_ready
 
     @GObject.Property
-    def windows(self) -> list[Window]:
+    def windows(self) -> list[Gtk.Window]:
         return list(self._windows.values())
 
     @GObject.Property
@@ -260,7 +260,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         self.emit("ready")
         logger.info("Ready.")
 
-    def get_window(self, window_name: str) -> Window:
+    def get_window(self, window_name: str) -> Gtk.Window:
         """
         Get a window by name.
 
@@ -268,7 +268,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
             window_name (``str``): The window's namespace.
 
         Returns:
-            :class:`~ignis.widgets.Widget.Window`: The window object.
+            ``Gtk.Window``: The window object.
         Raises:
             WindowNotFoundError: If a window with the given namespace does not exist.
         """
@@ -314,14 +314,14 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         window = self.get_window(window_name)
         window.set_visible(not window.get_visible())
 
-    def add_window(self, window_name: str, window: Window) -> None:  # type: ignore
+    def add_window(self, window_name: str, window: Gtk.Window) -> None:  # type: ignore
         """
         Add a window.
         You typically shouldn't use this method, as windows are added to the app automatically.
 
         Args:
             window_name (``str``): The window's namespace.
-            window (:class:`~ignis.widgets.Widget.Window`): The window instance.
+            window (``Gtk.Window``): The window instance.
 
         Raises:
             WindowAddedError: If a window with the given namespace already exists.

@@ -4,6 +4,9 @@ from ignis.base_widget import BaseWidget
 from ignis.utils import Utils
 from gi.repository import Gtk4LayerShell as GtkLayerShell  # type: ignore
 from ignis.exceptions import MonitorNotFoundError, LayerShellNotSupportedError
+from ignis.app import IgnisApp
+
+app = IgnisApp.get_default()
 
 LAYER = {
     "background": GtkLayerShell.Layer.BACKGROUND,
@@ -108,9 +111,6 @@ class Window(Gtk.Window, BaseWidget):
     ):
         if not GtkLayerShell.is_supported():
             raise LayerShellNotSupportedError()
-
-        from ignis.app import IgnisApp
-        app = IgnisApp.get_default()
 
         Gtk.Window.__init__(self, application=app)  # type: ignore
         GtkLayerShell.init_for_window(self)
