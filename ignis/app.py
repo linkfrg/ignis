@@ -97,6 +97,9 @@ class IgnisApp(Gtk.Application, IgnisGObject):
 
     @classmethod
     def get_default(cls: type[IgnisApp]) -> IgnisApp:
+        """
+        Get the default Application object for this process.
+        """
         if cls._instance is None:
             cls._instance = cls()
         return cls._instance
