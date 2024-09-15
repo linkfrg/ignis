@@ -394,12 +394,14 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../gobject.html">GObject</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../app.html">Application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../client.html">Client</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../exceptions.html">Exceptions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dbus.html">D-Bus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dbus_menu.html">D-Bus menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gobject.html">GObject</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../base_widget.html">BaseWidget</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../base_service.html">BaseService</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../widgets/index.html">Widgets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../widgets/Arrow.html">Arrow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../widgets/ArrowButton.html">ArrowButton</a></li>
@@ -530,42 +532,12 @@ document.write(`
   <section id="services">
 <h1>Services<a class="headerlink" href="#services" title="Link to this heading">#</a></h1>
 <p>There is a list of built-in services that provide additional functionality to build various components of your desktop.</p>
-<p>To access a service, use the universal <code class="docutils literal notranslate"><span class="pre">Service</span></code> class:</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="ignis.services.ServiceClass">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ServiceClass</span></span><a class="headerlink" href="#ignis.services.ServiceClass" title="Link to this definition">#</a></dt>
-<dd><p>Universal class to access services.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Do not initialize this class!
-Use the already initialized <code class="docutils literal notranslate"><span class="pre">Service</span></code> instance as shown below.</p>
-</div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.services</span> <span class="kn">import</span> <span class="n">Service</span>
-<span class="n">service_name</span> <span class="o">=</span> <span class="n">Service</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;service_name&quot;</span><span class="p">)</span>
+<p>To access a service, import it and call the <code class="docutils literal notranslate"><span class="pre">.get_default()</span></code> method.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.services.audio</span> <span class="kn">import</span> <span class="n">AudioService</span>
+
+<span class="n">audio</span> <span class="o">=</span> <span class="n">AudioService</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span>
 </pre></div>
 </div>
-<dl class="py method">
-<dt class="sig sig-object py" id="ignis.services.ServiceClass.get">
-<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">service</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../gobject.html#ignis.gobject.IgnisGObject" title="ignis.gobject.IgnisGObject"><span class="pre">IgnisGObject</span></a></span></span><a class="headerlink" href="#ignis.services.ServiceClass.get" title="Link to this definition">#</a></dt>
-<dd><p>Get a service by its name.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>service</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- A service name. It should be in <code class="docutils literal notranslate"><span class="pre">snake_case</span></code>.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The service with given name.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="../gobject.html#ignis.gobject.IgnisGObject" title="ignis.gobject.IgnisGObject">IgnisGObject</a></p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="../exceptions.html#ignis.exceptions.ServiceNotFoundError" title="ignis.exceptions.ServiceNotFoundError"><strong>ServiceNotFoundError</strong></a> -- When service with given ID not found.</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
 <section id="built-in-services">
 <h2>Built-in services<a class="headerlink" href="#built-in-services" title="Link to this heading">#</a></h2>
 <div class="admonition hint">
@@ -637,10 +609,6 @@ Use the already initialized <code class="docutils literal notranslate"><span cla
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.ServiceClass"><code class="docutils literal notranslate"><span class="pre">ServiceClass</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.ServiceClass.get"><code class="docutils literal notranslate"><span class="pre">ServiceClass.get()</span></code></a></li>
-</ul>
-</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-services">Built-in services</a></li>
 </ul>
   </nav></div>

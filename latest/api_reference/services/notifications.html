@@ -394,12 +394,14 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../gobject.html">GObject</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../app.html">Application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../client.html">Client</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../exceptions.html">Exceptions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dbus.html">D-Bus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dbus_menu.html">D-Bus menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gobject.html">GObject</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../base_widget.html">BaseWidget</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../base_service.html">BaseService</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../widgets/index.html">Widgets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../widgets/Arrow.html">Arrow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../widgets/ArrowButton.html">ArrowButton</a></li>
@@ -553,9 +555,9 @@ Allow receiving notifications and perform actions on them.</p>
 </dd>
 </dl>
 <p><strong>Example usage:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.services</span> <span class="kn">import</span> <span class="n">Service</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.services.notifications</span> <span class="kn">import</span> <span class="n">NotificationsService</span>
 
-<span class="n">notifications</span> <span class="o">=</span> <span class="n">Service</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;notifications&quot;</span><span class="p">)</span>
+<span class="n">notifications</span> <span class="o">=</span> <span class="n">NotificationsService</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span>
 
 <span class="n">notifications</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;notified&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">notification</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">notification</span><span class="o">.</span><span class="n">app_name</span><span class="p">,</span> <span class="n">notification</span><span class="o">.</span><span class="n">summary</span><span class="p">))</span>
 </pre></div>

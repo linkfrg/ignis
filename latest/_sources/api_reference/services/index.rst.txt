@@ -2,10 +2,13 @@ Services
 ==========
 There is a list of built-in services that provide additional functionality to build various components of your desktop.
 
-To access a service, use the universal ``Service`` class:
+To access a service, import it and call the ``.get_default()`` method.
 
-.. autoclass:: ignis.services.ServiceClass
-   :members:
+.. code-block:: python
+
+   from ignis.services.audio import AudioService
+
+   audio = AudioService.get_default()
 
 Built-in services
 -----------------

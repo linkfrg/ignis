@@ -459,32 +459,7 @@ document.write(`
                   
   <section id="subclassing-widgets">
 <h1>Subclassing Widgets<a class="headerlink" href="#subclassing-widgets" title="Link to this heading">#</a></h1>
-<p>All widgets inherit from the <a class="reference internal" href="#ignis.base_widget.BaseWidget" title="ignis.base_widget.BaseWidget"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseWidget</span></code></a> class.</p>
-<section id="basewidget">
-<h2>BaseWidget<a class="headerlink" href="#basewidget" title="Link to this heading">#</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="ignis.base_widget.BaseWidget">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">BaseWidget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.base_widget.BaseWidget" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="../api_reference/gobject.html#ignis.gobject.IgnisGObject" title="ignis.gobject.IgnisGObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">IgnisGObject</span></code></a>.</p>
-<p>The base class for all widgets.
-Provides <code class="docutils literal notranslate"><span class="pre">style</span></code> property and allows overriding enums.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="ignis.base_widget.BaseWidget.override_enum">
-<span class="sig-name descname"><span class="pre">override_enum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">property_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enum</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.base_widget.BaseWidget.override_enum" title="Link to this definition">#</a></dt>
-<dd><p>Override an enum.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>property_name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The name of the property to override.</p></li>
-<li><p><strong>enum</strong> (<code class="docutils literal notranslate"><span class="pre">GObject.GEnum</span></code>) -- An enum that accepts the property to be overridden. For example, for <code class="docutils literal notranslate"><span class="pre">valign</span></code> it will be <code class="docutils literal notranslate"><span class="pre">Gtk.Align</span></code>.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-</section>
+<p>All widgets should inherit from the <a class="reference internal" href="../api_reference/base_widget.html#ignis.base_widget.BaseWidget" title="ignis.base_widget.BaseWidget"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseWidget</span></code></a> class.</p>
 <section id="widget-class-template">
 <h2>Widget Class Template<a class="headerlink" href="#widget-class-template" title="Link to this heading">#</a></h2>
 <p>Here is the template for the widget that you want to override.
@@ -589,13 +564,6 @@ Replace <code class="docutils literal notranslate"><span class="pre">WIDGET_NAME
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basewidget">BaseWidget</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.base_widget.BaseWidget"><code class="docutils literal notranslate"><span class="pre">BaseWidget</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.base_widget.BaseWidget.override_enum"><code class="docutils literal notranslate"><span class="pre">BaseWidget.override_enum()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#widget-class-template">Widget Class Template</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#docstrings">Docstrings</a></li>
 </ul>

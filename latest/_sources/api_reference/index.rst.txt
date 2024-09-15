@@ -6,12 +6,14 @@ This reference manual details functions, modules, and objects included in Ignis,
 .. toctree::
    :maxdepth: 1
 
-   gobject
    app
    client
    exceptions
    dbus
    dbus_menu
+   gobject
+   base_widget
+   base_service
    widgets/index
    services/index
    utils/index

@@ -462,14 +462,18 @@ document.write(`
 <section id="using-css-scss-file">
 <h2>Using CSS/SCSS file<a class="headerlink" href="#using-css-scss-file" title="Link to this heading">#</a></h2>
 <p>To get started, add the following to your config:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.app</span> <span class="kn">import</span> <span class="n">app</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.app</span> <span class="kn">import</span> <span class="n">IgnisApp</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">IgnisApp</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span>
 
 <span class="n">app</span><span class="o">.</span><span class="n">apply_css</span><span class="p">(</span><span class="s2">&quot;PATH/TO/CSS_FILE&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>For example, we will use <code class="docutils literal notranslate"><span class="pre">~/.config/ignis/style.scss</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">ignis.app</span> <span class="kn">import</span> <span class="n">app</span>
+<span class="kn">from</span> <span class="nn">ignis.app</span> <span class="kn">import</span> <span class="n">IgnisApp</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">IgnisApp</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span>
 
 <span class="n">app</span><span class="o">.</span><span class="n">apply_css</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/.config/ignis/style.scss&quot;</span><span class="p">))</span>
 </pre></div>

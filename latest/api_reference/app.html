@@ -51,7 +51,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Client" href="client.html" />
-    <link rel="prev" title="GObject" href="gobject.html" />
+    <link rel="prev" title="API reference" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -394,12 +394,14 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="gobject.html">GObject</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="client.html">Client</a></li>
 <li class="toctree-l1"><a class="reference internal" href="exceptions.html">Exceptions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dbus.html">D-Bus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dbus_menu.html">D-Bus menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gobject.html">GObject</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base_widget.html">BaseWidget</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base_service.html">BaseService</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="widgets/index.html">Widgets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="widgets/Arrow.html">Arrow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="widgets/ArrowButton.html">ArrowButton</a></li>
@@ -536,9 +538,11 @@ document.write(`
 <div class="admonition danger">
 <p class="admonition-title">Danger</p>
 <p>Do not initialize this class!
-Instead, import the already initialized instance as shown below.</p>
+Instead, use the already initialized instance as shown below.</p>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.app</span> <span class="kn">import</span> <span class="n">app</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.app</span> <span class="kn">import</span> <span class="n">IgnisApp</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">IgnisApp</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span>
 </pre></div>
 </div>
 <dl class="simple">
@@ -741,12 +745,12 @@ The window will be removed from the application.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="gobject.html"
+       href="index.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">GObject</p>
+        <p class="prev-next-title">API reference</p>
       </div>
     </a>
     <a class="right-next"
