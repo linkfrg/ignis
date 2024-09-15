@@ -303,3 +303,12 @@ class StylePathAppliedError(Exception):
     @property
     def style_path(self) -> str:
         return self._style_path
+
+
+class Gtk4LayerShellNotFoundError(Exception):
+    """
+    Raised when the GTK4 Layer Shell is not found.
+    """
+
+    def __init__(self, *args: object) -> None:
+        super().__init__("GTK4 Layer Shell is not found! To use Ignis, first install it", *args)
