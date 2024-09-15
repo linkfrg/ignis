@@ -1,20 +1,15 @@
 Creating Service
 ====================
 
-All services should inherits from :class:`~ignis.gobject.IgnisGObject` class.
+All services should inherits from :class:`~ignis.base_service.BaseService` class.
 
 Here is simple template for service.
 
 .. code-block:: python
 
-    from ignis.gobject import IgnisGObject
+    from ignis.base_service import BaseService
 
-    class ExampleService(IgnisGObject):
-        __gsignals__ = {
-            "some-signal": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
-            "arg-signal": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, (object,)),
-        }
-
+    class ExampleService(BaseService):
         def __init__(self):
             super().__init__()
             # do other stuff here
@@ -30,10 +25,10 @@ We will use :class:`~ignis.dbus.DBusService` in this template.
 .. code-block:: python
 
     from gi.repository import Gio, GLib
-    from ignis.gobject import IgnisGObject
+    from ignis.base_service import BaseService
     from ignis.dbus import DBusService
 
-    class ExampleService(IgnisGObject):
+    class ExampleService(BaseService):
         def __init__(self):
             super().__init__()
             self.__dbus = DBusService(...)

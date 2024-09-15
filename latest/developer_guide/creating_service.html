@@ -462,16 +462,11 @@ document.write(`
                   
   <section id="creating-service">
 <h1>Creating Service<a class="headerlink" href="#creating-service" title="Link to this heading">#</a></h1>
-<p>All services should inherits from <a class="reference internal" href="../api_reference/gobject.html#ignis.gobject.IgnisGObject" title="ignis.gobject.IgnisGObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">IgnisGObject</span></code></a> class.</p>
+<p>All services should inherits from <a class="reference internal" href="../api_reference/base_service.html#ignis.base_service.BaseService" title="ignis.base_service.BaseService"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseService</span></code></a> class.</p>
 <p>Here is simple template for service.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.gobject</span> <span class="kn">import</span> <span class="n">IgnisGObject</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.base_service</span> <span class="kn">import</span> <span class="n">BaseService</span>
 
-<span class="k">class</span> <span class="nc">ExampleService</span><span class="p">(</span><span class="n">IgnisGObject</span><span class="p">):</span>
-    <span class="n">__gsignals__</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;some-signal&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">GObject</span><span class="o">.</span><span class="n">SignalFlags</span><span class="o">.</span><span class="n">RUN_FIRST</span><span class="p">,</span> <span class="n">GObject</span><span class="o">.</span><span class="n">TYPE_NONE</span><span class="p">,</span> <span class="p">()),</span>
-        <span class="s2">&quot;arg-signal&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">GObject</span><span class="o">.</span><span class="n">SignalFlags</span><span class="o">.</span><span class="n">RUN_FIRST</span><span class="p">,</span> <span class="n">GObject</span><span class="o">.</span><span class="n">TYPE_NONE</span><span class="p">,</span> <span class="p">(</span><span class="nb">object</span><span class="p">,)),</span>
-    <span class="p">}</span>
-
+<span class="k">class</span> <span class="nc">ExampleService</span><span class="p">(</span><span class="n">BaseService</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="c1"># do other stuff here</span>
@@ -483,10 +478,10 @@ document.write(`
 - Use <code class="docutils literal notranslate"><span class="pre">PascalCase</span></code> for D-Bus methods and properties naming.
 - Also make D-Bus methods/properties private (add <code class="docutils literal notranslate"><span class="pre">__</span></code> before name).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gi.repository</span> <span class="kn">import</span> <span class="n">Gio</span><span class="p">,</span> <span class="n">GLib</span>
-<span class="kn">from</span> <span class="nn">ignis.gobject</span> <span class="kn">import</span> <span class="n">IgnisGObject</span>
+<span class="kn">from</span> <span class="nn">ignis.base_service</span> <span class="kn">import</span> <span class="n">BaseService</span>
 <span class="kn">from</span> <span class="nn">ignis.dbus</span> <span class="kn">import</span> <span class="n">DBusService</span>
 
-<span class="k">class</span> <span class="nc">ExampleService</span><span class="p">(</span><span class="n">IgnisGObject</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">ExampleService</span><span class="p">(</span><span class="n">BaseService</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__dbus</span> <span class="o">=</span> <span class="n">DBusService</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
