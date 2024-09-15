@@ -18,6 +18,9 @@ class BaseService(IgnisGObject):
 
     @classmethod
     def get_default(cls: Type[T]) -> T:
+        """
+        Returns the default Service object for this process, creating it if necessary.
+        """
         if cls._instance is None:
             cls._instance = cls()
         return cls._instance
