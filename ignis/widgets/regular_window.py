@@ -1,8 +1,5 @@
-from ignis.app import IgnisApp
 from gi.repository import Gtk, GObject  # type: ignore
 from ignis.base_widget import BaseWidget
-
-app = IgnisApp.get_default()
 
 
 class RegularWindow(Gtk.Window, BaseWidget):
@@ -32,6 +29,9 @@ class RegularWindow(Gtk.Window, BaseWidget):
         BaseWidget.__init__(self, **kwargs)
 
         self._namespace = namespace
+
+        from ignis.app import IgnisApp
+        app = IgnisApp.get_default()
 
         app.add_window(namespace, self)
 

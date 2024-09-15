@@ -1,12 +1,9 @@
 import cairo
-from ignis.app import IgnisApp
 from gi.repository import Gtk, GObject  # type: ignore
 from ignis.base_widget import BaseWidget
 from ignis.utils import Utils
 from gi.repository import Gtk4LayerShell as GtkLayerShell  # type: ignore
 from ignis.exceptions import MonitorNotFoundError, LayerShellNotSupportedError
-
-app = IgnisApp.get_default()
 
 LAYER = {
     "background": GtkLayerShell.Layer.BACKGROUND,
@@ -112,6 +109,9 @@ class Window(Gtk.Window, BaseWidget):
         if not GtkLayerShell.is_supported():
             raise LayerShellNotSupportedError()
 
+        from ignis.app import IgnisApp
+        app = IgnisApp.get_default()
+
         Gtk.Window.__init__(self, application=app)  # type: ignore
         GtkLayerShell.init_for_window(self)
 
@@ -146,7 +146,7 @@ class Window(Gtk.Window, BaseWidget):
     def __close_popup(self, event_controller_key, keyval, keycode, state):
         if self._popup:
             if keyval == 65307:  # 65307 = ESC
-                app.close_window(GtkLayerShell.get_namespace(self))
+                self.visible = False
 
     @GObject.Property
     def anchor(self) -> list:
