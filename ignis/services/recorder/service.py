@@ -203,9 +203,13 @@ class RecorderService(BaseService):
         """
         if not self.__pipeline:
             return
+
         self.__pipeline.send_event(Gst.Event.new_eos())
 
         bus = self.__pipeline.get_bus()
+        if not bus:
+            return
+
         bus.timed_pop_filtered(Gst.CLOCK_TIME_NONE, Gst.MessageType.EOS)
 
         self.__pipeline.set_state(Gst.State.NULL)
