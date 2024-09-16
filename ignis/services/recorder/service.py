@@ -201,16 +201,22 @@ class RecorderService(BaseService):
         """
         Stop recording.
         """
-        if self.__pipeline:
-            self.__pipeline.send_event(Gst.Event.new_eos())
-            self.__pipeline.set_state(Gst.State.NULL)
-            self.__pipeline = None
-            self._pipeline_description = ""
-            self._active = False
-            self._is_paused = False
-            self.notify("active")
-            self.notify("is-paused")
-            self.emit("recording_stopped")
+        if not self.__pipeline:
+            return
+        self.__pipeline.send_event(Gst.Event.new_eos())
+
+        bus = self.__pipeline.get_bus()
+        bus.timed_pop_filtered(Gst.CLOCK_TIME_NONE, Gst.MessageType.EOS)
+
+        self.__pipeline.set_state(Gst.State.NULL)
+
+        self.__pipeline = None
+        self._pipeline_description = ""
+        self._active = False
+        self._is_paused = False
+        self.notify("active")
+        self.notify("is-paused")
+        self.emit("recording_stopped")
 
     def pause_recording(self) -> None:
         """
