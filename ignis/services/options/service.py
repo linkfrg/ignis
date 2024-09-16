@@ -1,36 +1,11 @@
 import sys
 import json
-from ignis.gobject import IgnisGObject, Binding
-from gi.repository import GObject  # type: ignore
+from ignis.gobject import Binding
 from typing import Any, Callable
-from ignis import CACHE_DIR
 from ignis.exceptions import OptionExistsError, OptionNotFoundError
 from ignis.base_service import BaseService
-
-OPTIONS_FILE = f"{CACHE_DIR}/options.json"
-
-
-class Option(IgnisGObject):
-    """
-    :meta private:
-    """
-
-    def __init__(self, name: str, value: Any = None):
-        super().__init__()
-        self._name = name
-        self._value = value
-
-    @GObject.Property
-    def name(self) -> str:
-        return self._name
-
-    @GObject.Property
-    def value(self) -> Any:
-        return self._value
-
-    @value.setter
-    def value(self, value: Any) -> None:
-        self._value = value
+from .option import Option
+from .constants import OPTIONS_FILE
 
 
 class OptionsService(BaseService):

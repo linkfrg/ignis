@@ -1,53 +1,11 @@
 import os
 import shutil
-from ignis.widgets.picture import Picture
 from ignis.utils import Utils
-from gi.repository import GObject, Gtk, Gdk  # type: ignore
-from gi.repository import Gtk4LayerShell as GtkLayerShell  # type: ignore
-from ignis.exceptions import LayerShellNotSupportedError
+from gi.repository import GObject  # type: ignore
 from ignis.services.options import OptionsService
-from ignis import CACHE_DIR
-from ignis.app import IgnisApp
 from ignis.base_service import BaseService
-
-app = IgnisApp.get_default()
-
-CACHE_WALLPAPER_PATH = f"{CACHE_DIR}/wallpaper"
-
-
-class WallpaperLayerWindow(Gtk.Window):
-    def __init__(
-        self, wallpaper_path: str, gdkmonitor: Gdk.Monitor, width: int, height: int
-    ) -> None:
-        if not GtkLayerShell.is_supported():
-            raise LayerShellNotSupportedError()
-
-        Gtk.Window.__init__(self, application=app)
-        GtkLayerShell.init_for_window(self)
-
-        for anchor in ["LEFT", "RIGHT", "TOP", "BOTTOM"]:
-            GtkLayerShell.set_anchor(self, getattr(GtkLayerShell.Edge, anchor), True)
-
-        GtkLayerShell.set_exclusive_zone(self, -1)  # ignore other layers
-
-        GtkLayerShell.set_namespace(
-            self, name_space=f"ignis_wallpaper_service_{gdkmonitor.get_model()}"
-        )
-
-        GtkLayerShell.set_layer(self, GtkLayerShell.Layer.BACKGROUND)
-
-        GtkLayerShell.set_monitor(self, gdkmonitor)
-
-        self.set_child(
-            Picture(
-                image=wallpaper_path,
-                content_fit="cover",
-                width=width,
-                height=height,
-            )
-        )
-
-        self.set_visible(True)
+from .window import WallpaperLayerWindow
+from .constants import CACHE_WALLPAPER_PATH
 
 
 class WallpaperService(BaseService):

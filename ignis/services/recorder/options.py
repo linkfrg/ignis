@@ -1,0 +1,3 @@
+RECORDING_BITRATE_OPTION = "recording_bitrate"
+RECORDING_DEFAULT_FILE_LOCATION_OPTION = "recording_default_file_location"
+RECORDING_DEFAULT_FILENAME_OPTION = "recording_default_filename"

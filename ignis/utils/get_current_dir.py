@@ -1,6 +1,7 @@
 import os
 import inspect
 
+
 def get_current_dir() -> str:
     """
     Returns the directory of the Python file where this function is called.

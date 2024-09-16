@@ -6,10 +6,7 @@ from ignis.utils import Utils
 from typing import Any
 from ignis.exceptions import HyprlandIPCNotFoundError
 from ignis.base_service import BaseService
-
-HYPRLAND_INSTANCE_SIGNATURE = os.getenv("HYPRLAND_INSTANCE_SIGNATURE")
-XDG_RUNTIME_DIR = os.getenv("XDG_RUNTIME_DIR")
-SOCKET_DIR = f"{XDG_RUNTIME_DIR}/hypr/{HYPRLAND_INSTANCE_SIGNATURE}"
+from .constants import HYPR_SOCKET_DIR
 
 
 class HyprlandService(BaseService):
@@ -95,7 +92,7 @@ class HyprlandService(BaseService):
 
     def __init__(self):
         super().__init__()
-        if not os.path.exists(SOCKET_DIR):
+        if not os.path.exists(HYPR_SOCKET_DIR):
             raise HyprlandIPCNotFoundError()
 
         self._workspaces: list[dict[str, Any]] = []
@@ -127,7 +124,7 @@ class HyprlandService(BaseService):
     @Utils.run_in_thread
     def __listen_socket(self) -> None:
         with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as sock:
-            sock.connect(f"{SOCKET_DIR}/.socket2.sock")
+            sock.connect(f"{HYPR_SOCKET_DIR}/.socket2.sock")
             while True:
                 try:
                     data = sock.recv(1024).decode("utf-8")
@@ -181,7 +178,7 @@ class HyprlandService(BaseService):
             Response from Hyprland IPC.
         """
         with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as sock:
-            sock.connect(f"{SOCKET_DIR}/.socket.sock")
+            sock.connect(f"{HYPR_SOCKET_DIR}/.socket.sock")
             sock.send(cmd.encode())
             resp = sock.recv(4096).decode()
             return resp
