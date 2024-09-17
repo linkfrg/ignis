@@ -31,7 +31,14 @@ class MenuItem(GObject.Object):
         return self._uniq_name
 
     def __on_activate(self, *args) -> None:
-        self.__proxy.Event("(isvu)", self._item_id, "clicked", GLib.Variant("i", 0), 0)
+        self.__proxy.Event(
+            "(isvu)",
+            self._item_id,
+            "clicked",
+            GLib.Variant("i", 0),
+            0,
+            result_handler=lambda *args: None,
+        )
 
 
 class DBusMenu(Gtk.PopoverMenu):
@@ -66,26 +73,28 @@ class DBusMenu(Gtk.PopoverMenu):
         self.__update_menu()
 
     def __update_menu(self) -> None:
-        try:
-            layout = self.__proxy.GetLayout(
-                "(iias)",
-                0,
-                -1,
-                [
-                    "type",
-                    "children-display",
-                    "submenu",
-                    "type",
-                    "label",
-                    "visible",
-                    "enabled",
-                    "accessible-desc",
-                ],
-            )
-        except GLib.GError:  # type: ignore
+        self.__proxy.GetLayout(
+            "(iias)",
+            0,
+            -1,
+            [
+                "type",
+                "children-display",
+                "submenu",
+                "type",
+                "label",
+                "visible",
+                "enabled",
+                "accessible-desc",
+            ],
+            result_handler=self.__load_layout,
+        )
+
+    def __load_layout(self, proxy, result, user_data) -> None:
+        if isinstance(result, GLib.GError):
             return
 
-        items = layout[1][2]
+        items = result[1][2]
         menu = self.__parse(items=items)
         self.set_menu_model(menu)
 

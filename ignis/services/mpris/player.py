@@ -232,10 +232,7 @@ class MprisPlayer(IgnisGObject):
 
     @position.setter
     def position(self, value: int) -> None:
-        self.__player_proxy.SetPosition("(ox)", self.track_id, value * 1_000_000)
-
-    def set_position(self, value: int) -> None:
-        self.position = value
+        self.__player_proxy.SetPosition("(ox)", self.track_id, value * 1_000_000, result_handler=lambda *args: None)
 
     @GObject.Property
     def shuffle(self) -> bool:
@@ -257,37 +254,37 @@ class MprisPlayer(IgnisGObject):
         """
         Go to the next track.
         """
-        self.__player_proxy.Next()
+        self.__player_proxy.Next(result_handler=lambda *args: None)
 
     def previous(self) -> None:
         """
         Go to the previous track.
         """
-        self.__player_proxy.Previous()
+        self.__player_proxy.Previous(result_handler=lambda *args: None)
 
     def pause(self) -> None:
         """
         Pause playback.
         """
-        self.__player_proxy.Pause()
+        self.__player_proxy.Pause(result_handler=lambda *args: None)
 
     def play(self) -> None:
         """
         Start playback.
         """
-        self.__player_proxy.Play()
+        self.__player_proxy.Play(result_handler=lambda *args: None)
 
     def play_pause(self) -> None:
         """
         Toggle between playing and pausing.
         """
-        self.__player_proxy.PlayPause()
+        self.__player_proxy.PlayPause(result_handler=lambda *args: None)
 
     def stop(self) -> None:
         """
         Stop playback and remove the MPRIS interface if supported by the player.
         """
-        self.__player_proxy.Stop()
+        self.__player_proxy.Stop(result_handler=lambda *args: None)
 
     def seek(self, offset: int) -> None:
         """
@@ -295,4 +292,4 @@ class MprisPlayer(IgnisGObject):
         Positive values move forward, and negative values move backward.
         The offset is in milliseconds.
         """
-        self.__player_proxy.Seek("(x)", offset * 1_000_100)
+        self.__player_proxy.Seek("(x)", offset * 1_000_100, result_handler=lambda *args: None)
