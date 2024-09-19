@@ -1,10 +1,9 @@
 from __future__ import annotations
 from gi.repository import GObject, Gio  # type: ignore
 from ignis.base_service import BaseService
-from ignis.services.options import OptionsService
 from .application import Application
-from .options import PINNED_APPS_OPTION
-
+from .options import GROUP_NAME, PINNED_APPS_OPTION
+from ignis.services.options import OptionsService
 
 class ApplicationsService(BaseService):
     """
@@ -35,8 +34,9 @@ class ApplicationsService(BaseService):
         self._monitor = Gio.AppInfoMonitor.get()
         self._monitor.connect("changed", lambda x: self.__sync())
 
-        self._options = OptionsService.get_default()
-        self._options.create_option(name=PINNED_APPS_OPTION, default=[], exists_ok=True)
+        options = OptionsService.get_default()
+        self._opt_group = options.create_group(name=GROUP_NAME, exists_ok=True)
+        self._opt_group.create_option(name=PINNED_APPS_OPTION, default=[], exists_ok=True)
 
         self.__sync()
 
@@ -76,7 +76,7 @@ class ApplicationsService(BaseService):
         self._apps[entry.id] = entry
 
     def __read_pinned_apps(self) -> None:
-        for pinned in self._options.get_option(PINNED_APPS_OPTION):
+        for pinned in self._opt_group.get_option(name=PINNED_APPS_OPTION):
             try:
                 app = Gio.DesktopAppInfo.new(desktop_id=pinned)
             except TypeError:
@@ -107,7 +107,7 @@ class ApplicationsService(BaseService):
 
     def __sync_pinned(self) -> None:
         pinned_ids = [p.id for p in self.pinned]
-        self._options.set_option(PINNED_APPS_OPTION, pinned_ids)
+        self._opt_group.set_option(PINNED_APPS_OPTION, pinned_ids)
         self.notify("pinned")
 
     def __pin_entry(self, entry: Application) -> None:

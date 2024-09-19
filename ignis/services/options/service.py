@@ -1,12 +1,11 @@
 import sys
 import json
-from ignis.gobject import Binding
-from typing import Any, Callable
-from ignis.exceptions import OptionExistsError, OptionNotFoundError
+from typing import Any
+from ignis.exceptions import OptionsGroupExistsError, OptionsGroupNotFoundError
+from gi.repository import GObject  # type: ignore
 from ignis.base_service import BaseService
-from .option import Option
 from .constants import OPTIONS_FILE
-
+from .group import OptionsGroup
 
 class OptionsService(BaseService):
     """
@@ -37,10 +36,10 @@ class OptionsService(BaseService):
 
     def __init__(self):
         super().__init__()
-        self.__data: dict[str, Option] = {}
-        self.__load_data()
+        self._groups: dict[str, OptionsGroup] = {}
+        self.__load_groups()
 
-    def __load_data(self) -> None:
+    def __load_groups(self) -> None:
         if "sphinx" in sys.modules:
             return
 
@@ -49,129 +48,58 @@ class OptionsService(BaseService):
                 data = json.load(file)
 
                 for i in data.keys():
-                    self.__data[i] = Option(name=i, value=data[i])
+                    self._groups[i] = self.__init_group(name=i, data=data.get(i, None))
 
         except FileNotFoundError:
             with open(OPTIONS_FILE, "w") as file:
                 json.dump({}, file)
 
     def __sync(self) -> None:
-        json_dict = {}
-
-        for key, option in self.__data.items():
-            json_dict[key] = option.value
-
         with open(OPTIONS_FILE, "w") as file:
-            json.dump(json_dict, file, indent=2)
+            json.dump(self.data, file, indent=2)
 
-    def create_option(self, name: str, default: Any, exists_ok: bool = False) -> None:
-        """
-        Create an option.
+        self.notify("data")
 
-        Args:
-            name (``str``): The name of the option.
-            default (``Any``): The default value for the option.
-            exists_ok (``bool``, optional): If ``True``, do not raise ``OptionExistsError`` if the option already exists. Default: ``False``.
 
-        Raises:
-            OptionExistsError: If the option already exists and ``exists_ok`` is set to ``False``.
-        """
-
-        option = self.__data.get(name, None)
-        if not option:
-            self.__data[name] = Option(name=name, value=default)
+    def create_group(self, name: str, exists_ok: bool = False) -> OptionsGroup:
+        group = self._groups.get(name, None)
+        if not group:
+            new_group = self.__init_group(name=name)
+            self._groups[name] = new_group
             self.__sync()
+            self.notify("groups")
+            return new_group
         else:
-            if not exists_ok:
-                raise OptionExistsError(name)
+            if exists_ok:
+                return group
+            else:
+                raise OptionsGroupExistsError(name)
 
-    def remove_option(self, name: str) -> None:
-        """
-        Remove an option.
+    def get_group(self, name: str) -> OptionsGroup:
+        group = self._groups.get(name, None)
 
-        Args:
-            name (``str``): The name of the option to be removed.
-
-        Raises:
-            OptionNotFoundError: If the option does not exist.
-        """
-        option = self.__data.get(name, None)
-        if option:
-            self._data.pop(name)
+        if group:
+            return group
         else:
-            raise OptionNotFoundError(name)
+            raise OptionsGroupNotFoundError(name)
 
-    def get_option(self, name: str) -> Any:
-        """
-        Retrieve the value of an option by its name.
-
-        Args:
-            name (``str``): The name of the option.
-
-        Returns:
-            The value of the option.
-
-        Raises:
-            OptionNotFoundError: If the option does not exist.
-        """
-        option = self.__data.get(name, None)
-
-        if option:
-            return option.value
-        else:
-            raise OptionNotFoundError(name)
-
-    def set_option(self, name: str, value: Any) -> None:
-        """
-        Set the value of an option by its name.
-
-        Args:
-            name (``str``): The name of the option.
-            value (``Any``): The value to set for the option.
-        Raises:
-            OptionNotFoundError: If the option does not exist.
-        """
-        option = self.__data.get(name, None)
-        if option:
-            option.value = value
-        else:
-            raise OptionNotFoundError(name)
+    def __remove_group(self, group: OptionsGroup) -> None:
+        self._groups.pop(group.name)
         self.__sync()
+        self.notify("groups")
+        self.notify("data")
 
-    def bind_option(self, name: str, transform: Callable | None = None) -> Binding:
-        """
-        Like ``bind()``, but for option.
+    def __init_group(self, name: str, data: dict[str, Any] | None = None) -> OptionsGroup:
+        group = OptionsGroup(name=name, data=data)
+        group.connect("removed", self.__remove_group)
+        group.connect("changed", lambda x: self.__sync())
+        return group
 
-        Args:
-            name (``str``): The name of the option to bind.
-            transform (``Callable``, optional): A transform function.
+    @GObject.Property
+    def groups(self) -> dict[str, OptionsGroup]:
+        return self._groups
 
-        Returns:
-            ``Binding``.
+    @GObject.Property
+    def data(self) -> dict[str, Any]:
+        return {key: group.data for key, group in self._groups.items()}
 
-        Raises:
-            OptionNotFoundError: If the option does not exist.
-        """
-        option = self.__data.get(name, None)
-        if not option:
-            raise OptionNotFoundError(name)
-
-        return Binding(option, "value", transform)
-
-    def connect_option(self, name: str, callback: Callable) -> None:
-        """
-        Associate a callback function with changes to an option value.
-        When the option value changes, the callback function will be invoked with the new value.
-
-        Args:
-            name (``str``): The name of the option.
-            callback (``Callable``): A function to call when the option value changes. The new value of the option will be passed to this function.
-
-        Raises:
-            OptionNotFoundError: If the option does not exist.
-        """
-        option = self.__data.get(name, None)
-        if not option:
-            raise OptionNotFoundError(name)
-
-        option.connect("notify::value", lambda x, y: callback(option.value))

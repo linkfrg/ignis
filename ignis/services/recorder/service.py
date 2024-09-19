@@ -11,6 +11,7 @@ from .util import gst_inspect
 from ._imports import Gst
 from .constants import PIPELINE_TEMPLATE, MAIN_AUDIO_PIPELINE, AUDIO_DEVICE_PIPELINE
 from .options import (
+    GROUP_NAME,
     RECORDING_BITRATE_OPTION,
     RECORDING_DEFAULT_FILE_LOCATION_OPTION,
     RECORDING_DEFAULT_FILENAME_OPTION,
@@ -81,18 +82,19 @@ class RecorderService(BaseService):
 
         self._N_THREADS: str = str(min(max(1, GLib.get_num_processors()), 64))
 
-        self._options = OptionsService.get_default()
+        options = OptionsService.get_default()
         self._audio = AudioService.get_default()
 
-        self._options.create_option(
+        self._opt_group = options.create_group(name=GROUP_NAME, exists_ok=True)
+        self._opt_group.create_option(
             name=RECORDING_BITRATE_OPTION, default=8000, exists_ok=True
         )
-        self._options.create_option(
+        self._opt_group.create_option(
             name=RECORDING_DEFAULT_FILE_LOCATION_OPTION,
             default=GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_VIDEOS),
             exists_ok=True,
         )
-        self._options.create_option(
+        self._opt_group.create_option(
             name=RECORDING_DEFAULT_FILENAME_OPTION,
             default="%Y-%m-%d_%H-%M-%S.mp4",
             exists_ok=True,
@@ -120,27 +122,27 @@ class RecorderService(BaseService):
 
     @GObject.Property
     def bitrate(self) -> int:
-        return self._options.get_option(RECORDING_BITRATE_OPTION)
+        return self._opt_group.get_option(RECORDING_BITRATE_OPTION)
 
     @bitrate.setter
     def bitrate(self, value: int) -> None:
-        self._options.set_option(RECORDING_BITRATE_OPTION, value)
+        self._opt_group.set_option(RECORDING_BITRATE_OPTION, value)
 
     @GObject.Property
     def default_file_location(self) -> str:
-        return self._options.get_option(RECORDING_DEFAULT_FILE_LOCATION_OPTION)
+        return self._opt_group.get_option(RECORDING_DEFAULT_FILE_LOCATION_OPTION)
 
     @default_file_location.setter
     def default_file_location(self, value: str) -> None:
-        self._options.set_option(RECORDING_DEFAULT_FILE_LOCATION_OPTION, value)
+        self._opt_group.set_option(RECORDING_DEFAULT_FILE_LOCATION_OPTION, value)
 
     @GObject.Property
     def default_filename(self) -> str:
-        return self._options.get_option(RECORDING_DEFAULT_FILENAME_OPTION)
+        return self._opt_group.get_option(RECORDING_DEFAULT_FILENAME_OPTION)
 
     @default_filename.setter
     def default_filename(self, value: str) -> None:
-        self._options.set_option(RECORDING_DEFAULT_FILENAME_OPTION, value)
+        self._opt_group.set_option(RECORDING_DEFAULT_FILENAME_OPTION, value)
 
     def start_recording(
         self,

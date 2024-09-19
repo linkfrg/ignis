@@ -118,6 +118,39 @@ class OptionExistsError(Exception):
     def option_name(self) -> str:
         return self._option_name
 
+class OptionsGroupNotFoundError(Exception):
+    """
+    Raised when an options group is not found.
+
+    Properties:
+        - **options_group** (``str``, required, read-only): The name of the options group.
+    """
+
+    def __init__(self, options_group: str, *args) -> None:
+        self._options_group = options_group
+        super().__init__(f'No such options group: "{options_group}"', *args)
+
+    @property
+    def options_group(self) -> str:
+        return self._options_group
+
+
+class OptionsGroupExistsError(Exception):
+    """
+    Raised when an options group exists.
+
+    Properties:
+        - **options_group** (``str``, required, read-only): The name of the options group.
+    """
+
+    def __init__(self, options_group: str, *args) -> None:
+        self._options_group = options_group
+        super().__init__(f'Options groups already exists: "{options_group}"', *args)
+
+    @property
+    def options_group(self) -> str:
+        return self._options_group
+
 
 class GstNotFoundError(Exception):
     """

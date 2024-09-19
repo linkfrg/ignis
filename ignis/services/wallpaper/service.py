@@ -6,7 +6,7 @@ from ignis.services.options import OptionsService
 from ignis.base_service import BaseService
 from .window import WallpaperLayerWindow
 from .constants import CACHE_WALLPAPER_PATH
-
+from .options import GROUP_NAME, WALLPAPER_PATH_OPTION
 
 class WallpaperService(BaseService):
     """
@@ -34,14 +34,16 @@ class WallpaperService(BaseService):
         super().__init__()
         self._windows: list[WallpaperLayerWindow] = []
 
-        self._options = OptionsService.get_default()
-        self._options.create_option(name="wallpaper", default=None, exists_ok=True)
+        options = OptionsService.get_default()
+
+        self._opt_group = options.create_group(name=GROUP_NAME, exists_ok=True)
+        self._opt_group.create_option(name=WALLPAPER_PATH_OPTION, default=None, exists_ok=True)
 
         self.__sync()
 
     @GObject.Property
     def wallpaper(self) -> str:
-        return self._options.get_option("wallpaper")
+        return self._opt_group.get_option(WALLPAPER_PATH_OPTION)
 
     @wallpaper.setter
     def wallpaper(self, value: str) -> None:
@@ -50,7 +52,7 @@ class WallpaperService(BaseService):
         except shutil.SameFileError:
             return
 
-        self._options.set_option("wallpaper", value)
+        self._opt_group.set_option(WALLPAPER_PATH_OPTION, value)
         self.__sync()
 
     def __sync(self) -> None:
