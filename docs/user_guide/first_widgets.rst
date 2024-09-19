@@ -24,7 +24,7 @@ The window is the top-level widget that holds all other widgets.
     )
 
 Copy and paste this code into your config file, 
-and then run Ignis using ``ignis init``.
+and then run Ignis using ``ignis``.
 
 You should see a window that looks like this:
 
