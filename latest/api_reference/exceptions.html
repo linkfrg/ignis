@@ -618,6 +618,30 @@ document.write(`
 </dd></dl>
 
 <dl class="py exception">
+<dt class="sig sig-object py" id="ignis.exceptions.OptionsGroupNotFoundError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">OptionsGroupNotFoundError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">options_group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.exceptions.OptionsGroupNotFoundError" title="Link to this definition">#</a></dt>
+<dd><p>Raised when an options group is not found.</p>
+<dl class="simple">
+<dt>Properties:</dt><dd><ul class="simple">
+<li><p><strong>options_group</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, required, read-only): The name of the options group.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="ignis.exceptions.OptionsGroupExistsError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">OptionsGroupExistsError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">options_group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.exceptions.OptionsGroupExistsError" title="Link to this definition">#</a></dt>
+<dd><p>Raised when an options group exists.</p>
+<dl class="simple">
+<dt>Properties:</dt><dd><ul class="simple">
+<li><p><strong>options_group</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, required, read-only): The name of the options group.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py exception">
 <dt class="sig sig-object py" id="ignis.exceptions.GstNotFoundError">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GstNotFoundError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.exceptions.GstNotFoundError" title="Link to this definition">#</a></dt>
 <dd><p>Raised when GStreamer is not found.</p>
@@ -794,6 +818,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.NetworkManagerNotFoundError"><code class="docutils literal notranslate"><span class="pre">NetworkManagerNotFoundError</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.OptionNotFoundError"><code class="docutils literal notranslate"><span class="pre">OptionNotFoundError</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.OptionExistsError"><code class="docutils literal notranslate"><span class="pre">OptionExistsError</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.OptionsGroupNotFoundError"><code class="docutils literal notranslate"><span class="pre">OptionsGroupNotFoundError</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.OptionsGroupExistsError"><code class="docutils literal notranslate"><span class="pre">OptionsGroupExistsError</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.GstNotFoundError"><code class="docutils literal notranslate"><span class="pre">GstNotFoundError</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.GstPluginNotFoundError"><code class="docutils literal notranslate"><span class="pre">GstPluginNotFoundError</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.SassCompilationError"><code class="docutils literal notranslate"><span class="pre">SassCompilationError</span></code></a></li>
