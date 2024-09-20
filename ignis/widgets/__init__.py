@@ -31,6 +31,7 @@ from .dropdown import DropDown
 from .overlay import Overlay
 from .arrow import Arrow
 from .arrow_button import ArrowButton
+from .revealer_window import RevealerWindow
 
 
 class Widget:
@@ -66,3 +67,5 @@ class Widget:
     Overlay: TypeAlias = Overlay
     Arrow: TypeAlias = Arrow
     ArrowButton: TypeAlias = ArrowButton
+    RevealerWindow: TypeAlias = RevealerWindow
+
