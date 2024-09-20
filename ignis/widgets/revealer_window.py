@@ -43,6 +43,7 @@ class RevealerWindow(Window):
         )
 
     """
+
     def __init__(self, revealer: Revealer, **kwargs) -> None:
         self._revealer = revealer
         super().__init__(**kwargs)

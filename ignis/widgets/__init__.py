@@ -68,4 +68,3 @@ class Widget:
     Arrow: TypeAlias = Arrow
     ArrowButton: TypeAlias = ArrowButton
     RevealerWindow: TypeAlias = RevealerWindow
-
