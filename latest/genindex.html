@@ -500,19 +500,23 @@ document.write(`
         <li><a href="api_reference/client.html#ignis.client.IgnisClient.close_window">(IgnisClient method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api_reference/services/network.html#ignis.services.network.EthernetDevice.connect_to">connect_to() (EthernetDevice method)</a>
 
       <ul>
         <li><a href="api_reference/services/network.html#ignis.services.network.WifiAccessPoint.connect_to">(WifiAccessPoint method)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api_reference/services/network.html#ignis.services.network.WifiAccessPoint.connect_to_graphical">connect_to_graphical() (WifiAccessPoint method)</a>
 </li>
       <li><a href="api_reference/services/recorder.html#ignis.services.recorder.RecorderService.continue_recording">continue_recording() (RecorderService method)</a>
 </li>
       <li><a href="api_reference/dbus_menu.html#ignis.dbus_menu.DBusMenu.copy">copy() (DBusMenu method)</a>
+</li>
+      <li><a href="api_reference/services/options.html#ignis.services.options.OptionsService.create_group">create_group() (OptionsService method)</a>
+</li>
+      <li><a href="api_reference/services/options.html#ignis.services.options.OptionsGroup.create_option">create_option() (OptionsGroup method)</a>
 </li>
       <li><a href="api_reference/utils/crop_pixbuf.html#ignis.utils.Utils.crop_pixbuf">crop_pixbuf() (in module ignis.utils.Utils)</a>
 </li>
@@ -596,6 +600,8 @@ document.write(`
       </ul></li>
       <li><a href="api_reference/utils/get_file_icon_name.html#ignis.utils.Utils.get_file_icon_name">get_file_icon_name() (in module ignis.utils.Utils)</a>
 </li>
+      <li><a href="api_reference/services/options.html#ignis.services.options.OptionsService.get_group">get_group() (OptionsService method)</a>
+</li>
       <li><a href="api_reference/utils/get_ignis_commit.html#ignis.utils.Utils.get_ignis_commit">get_ignis_commit() (in module ignis.utils.Utils)</a>
 </li>
       <li><a href="api_reference/utils/get_ignis_version.html#ignis.utils.Utils.get_ignis_version">get_ignis_version() (in module ignis.utils.Utils)</a>
@@ -607,6 +613,8 @@ document.write(`
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api_reference/services/notifications.html#ignis.services.notifications.NotificationService.get_notification">get_notification() (NotificationService method)</a>
+</li>
+      <li><a href="api_reference/services/options.html#ignis.services.options.OptionsGroup.get_option">get_option() (OptionsGroup method)</a>
 </li>
       <li><a href="api_reference/utils/get_paintable.html#ignis.utils.Utils.get_paintable">get_paintable() (in module ignis.utils.Utils)</a>
 </li>
@@ -756,12 +764,16 @@ document.write(`
         <li><a href="api_reference/client.html#ignis.client.IgnisClient.open_window">(IgnisClient method)</a>
 </li>
       </ul></li>
+      <li><a href="api_reference/services/options.html#ignis.services.options.Option">Option (class in ignis.services.options)</a>
+</li>
       <li><a href="api_reference/exceptions.html#ignis.exceptions.OptionExistsError">OptionExistsError</a>
 </li>
       <li><a href="api_reference/exceptions.html#ignis.exceptions.OptionNotFoundError">OptionNotFoundError</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api_reference/services/options.html#ignis.services.options.OptionsGroup">OptionsGroup (class in ignis.services.options)</a>
+</li>
       <li><a href="api_reference/exceptions.html#ignis.exceptions.OptionsGroupExistsError">OptionsGroupExistsError</a>
 </li>
       <li><a href="api_reference/exceptions.html#ignis.exceptions.OptionsGroupNotFoundError">OptionsGroupNotFoundError</a>
@@ -832,6 +844,12 @@ document.write(`
       </ul></li>
       <li><a href="api_reference/app.html#ignis.app.IgnisApp.reload_css">reload_css() (IgnisApp method)</a>
 </li>
+      <li><a href="api_reference/services/options.html#ignis.services.options.Option.remove">remove() (Option method)</a>
+
+      <ul>
+        <li><a href="api_reference/services/options.html#ignis.services.options.OptionsGroup.remove">(OptionsGroup method)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api_reference/app.html#ignis.app.IgnisApp.remove_css">remove_css() (IgnisApp method)</a>
