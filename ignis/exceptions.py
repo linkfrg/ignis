@@ -118,6 +118,7 @@ class OptionExistsError(Exception):
     def option_name(self) -> str:
         return self._option_name
 
+
 class OptionsGroupNotFoundError(Exception):
     """
     Raised when an options group is not found.

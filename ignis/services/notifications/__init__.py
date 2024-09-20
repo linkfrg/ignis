@@ -7,7 +7,6 @@ from .constants import (
     NOTIFICATIONS_EMPTY_CACHE_FILE,
     NOTIFICATIONS_IMAGE_DATA,
 )
-from .options import DND_OPTION, POPUP_TIMEOUT_OPTION, MAX_POPUPS_COUNT_OPTION
 
 __all__ = [
     "NotificationAction",
@@ -17,7 +16,4 @@ __all__ = [
     "NOTIFICATIONS_CACHE_FILE",
     "NOTIFICATIONS_EMPTY_CACHE_FILE",
     "NOTIFICATIONS_IMAGE_DATA",
-    "DND_OPTION",
-    "POPUP_TIMEOUT_OPTION",
-    "MAX_POPUPS_COUNT_OPTION",
 ]

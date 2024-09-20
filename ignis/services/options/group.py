@@ -1,11 +1,27 @@
 from ignis.gobject import IgnisGObject
 from gi.repository import GObject  # type: ignore
-from ignis.gobject import Binding
 from ignis.exceptions import OptionExistsError, OptionNotFoundError
 from .option import Option
-from typing import Any, Callable
+from typing import Any
+
 
 class OptionsGroup(IgnisGObject):
+    """
+    An options group.
+
+    .. warning::
+        You shouldn't initialize this class manually.
+        Use the :func:`~ignis.esrvices.options.OptionsService.create_group` method instead.
+
+    Signals:
+        - **"changed"** (): Emitted when options in this group is changed.
+        - **"changed"** (): Emitted when this options group is removed.
+
+    Properties:
+        - **name** (``str``, read-only): The name of the group.
+        - **data** (``dict[str, Any]``, read-only): The dictionary containing all options and their values.
+    """
+
     __gsignals__ = {
         "changed": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
         "removed": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
@@ -20,21 +36,31 @@ class OptionsGroup(IgnisGObject):
             self.__load_data(data)
 
     def __load_data(self, data: dict[str, Any]) -> None:
+        if not isinstance(data, dict):
+            return
+
         for key in data.keys():
-            self._data[key] = Option(name=key, value=data.get(key, None))
+            self._data[key] = self.__init_option(name=key, value=data.get(key, None))
 
     @GObject.Property
     def name(self) -> str:
         return self._name
 
-    def create_option(self, name: str, default: Any, exists_ok: bool = False) -> None:
+    @GObject.Property
+    def data(self) -> dict[str, Any]:
+        return {key: option.value for key, option in self._data.items()}
+
+    def create_option(self, name: str, default: Any, exists_ok: bool = False) -> Option:
         """
         Create an option.
 
         Args:
             name (``str``): The name of the option.
             default (``Any``): The default value for the option.
-            exists_ok (``bool``, optional): If ``True``, do not raise ``OptionExistsError`` if the option already exists. Default: ``False``.
+            exists_ok (``bool``, optional): If ``True``, do not raise :class:`~ignis.exceptions.OptionExistsError` if the option already exists. Default: ``False``.
+
+        Returns:
+            :class:`~ignis.services.options.Option`: The newly created option or already existing option.
 
         Raises:
             OptionExistsError: If the option already exists and ``exists_ok`` is set to ``False``.
@@ -42,38 +68,25 @@ class OptionsGroup(IgnisGObject):
 
         option = self._data.get(name, None)
         if not option:
-            self._data[name] = Option(name=name, value=default)
+            new_option = self.__init_option(name=name, value=default)
+            self._data[name] = new_option
             self.__sync()
+            return new_option
         else:
             if not exists_ok:
                 raise OptionExistsError(name)
+            else:
+                return option
 
-    def remove_option(self, name: str) -> None:
+    def get_option(self, name: str) -> Option:
         """
-        Remove an option.
-
-        Args:
-            name (``str``): The name of the option to be removed.
-
-        Raises:
-            OptionNotFoundError: If the option does not exist.
-        """
-        option = self._data.get(name, None)
-        if option:
-            self._data.pop(name)
-            self.__sync()
-        else:
-            raise OptionNotFoundError(name)
-
-    def get_option(self, name: str) -> Any:
-        """
-        Retrieve the value of an option by its name.
+        Get ``Option`` object by its name.
 
         Args:
             name (``str``): The name of the option.
 
         Returns:
-            The value of the option.
+            :class:`~ignis.services.options.Option`: The option instance.
 
         Raises:
             OptionNotFoundError: If the option does not exist.
@@ -81,72 +94,28 @@ class OptionsGroup(IgnisGObject):
         option = self._data.get(name, None)
 
         if option:
-            return option.value
+            return option
         else:
             raise OptionNotFoundError(name)
-
-    def set_option(self, name: str, value: Any) -> None:
-        """
-        Set the value of an option by its name.
-
-        Args:
-            name (``str``): The name of the option.
-            value (``Any``): The value to set for the option.
-        Raises:
-            OptionNotFoundError: If the option does not exist.
-        """
-        option = self._data.get(name, None)
-        if option:
-            option.value = value
-            self.__sync()
-        else:
-            raise OptionNotFoundError(name)
-        self.__sync()
-
-    def bind_option(self, name: str, transform: Callable | None = None) -> Binding:
-        """
-        Like ``bind()``, but for option.
-
-        Args:
-            name (``str``): The name of the option to bind.
-            transform (``Callable``, optional): A transform function.
-
-        Returns:
-            ``Binding``.
-
-        Raises:
-            OptionNotFoundError: If the option does not exist.
-        """
-        option = self._data.get(name, None)
-        if not option:
-            raise OptionNotFoundError(name)
-
-        return Binding(option, "value", transform)
-
-    def connect_option(self, name: str, callback: Callable) -> None:
-        """
-        Associate a callback function with changes to an option value.
-        When the option value changes, the callback function will be invoked with the new value.
-
-        Args:
-            name (``str``): The name of the option.
-            callback (``Callable``): A function to call when the option value changes. The new value of the option will be passed to this function.
-
-        Raises:
-            OptionNotFoundError: If the option does not exist.
-        """
-        option = self._data.get(name, None)
-        if not option:
-            raise OptionNotFoundError(name)
-
-        option.connect("notify::value", lambda x, y: callback(option.value))
 
     def remove(self) -> None:
+        """
+        Remove this options group.
+        """
+
         self.emit("removed")
 
     def __sync(self) -> None:
         self.emit("changed")
 
-    @GObject.Property
-    def data(self) -> dict[str, Any]:
-        return {key: option.value for key, option in self._data.items()}
+    def __remove_option(self, option: Option) -> None:
+        option = self._data.get(option.name, None)
+        if option:
+            self._data.pop(option.name)
+            self.__sync()
+
+    def __init_option(self, name: str, value: Any = None) -> Option:
+        option = Option(name=name, value=value)
+        option.connect("notify::value", lambda x, y: self.__sync())
+        option.connect("removed", lambda x, y: self.__remove_option(option))
+        return option

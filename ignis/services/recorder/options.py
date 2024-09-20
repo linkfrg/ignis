@@ -1,5 +1,0 @@
-GROUP_NAME = "recorder"
-
-RECORDING_BITRATE_OPTION = "bitrate"
-RECORDING_DEFAULT_FILE_LOCATION_OPTION = "default_file_location"
-RECORDING_DEFAULT_FILENAME_OPTION = "default_filename"

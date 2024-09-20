@@ -7,14 +7,19 @@ from ignis.base_service import BaseService
 from .constants import OPTIONS_FILE
 from .group import OptionsGroup
 
+
 class OptionsService(BaseService):
     """
-    Service to manage options.
+    Service to manage options and options groups.
     This service stores options and their values in the ``~/.cache/ignis/options.json`` file.
 
     .. warning::
         You should not manually edit the ``~/.cache/ignis/options.json`` file.
         Use this service instead.
+
+    Properties:
+        - **groups** (list[:class:`~ignis.services.options.OptionsGroup`]): The list of all options groups.
+        - **data** (``dict[str, Any]``): The dictionary containing all options and their values from all groups.
 
 
     **Example usage:**
@@ -25,12 +30,16 @@ class OptionsService(BaseService):
 
         options = OptionsService.get_default()
 
-        SOME_OPTION = "some_option"
+        some_opt_group = options.create_group(name="some_group", exists_ok=True)
 
-        options.create_option(name=SOME_OPTION, default="hi", exists_ok=True)
-        options.set_option(SOME_OPTION, "bye")
+        some_option = some_opt_group.create_option(name="some_option", default="hi", exists_ok=True)
+        some_option.set_value("bye")
 
-        print(options.get_option(SOME_OPTION))
+        print(some_option.value)
+
+        print(some_opt_group.data)
+
+        print(options.data)
 
     """
 
@@ -60,8 +69,28 @@ class OptionsService(BaseService):
 
         self.notify("data")
 
+    @GObject.Property
+    def groups(self) -> list[OptionsGroup]:
+        return list(self._groups.values())
+
+    @GObject.Property
+    def data(self) -> dict[str, Any]:
+        return {key: group.data for key, group in self._groups.items()}
 
     def create_group(self, name: str, exists_ok: bool = False) -> OptionsGroup:
+        """
+        Create options group.
+
+        Args:
+            name (``str``): The name of the options group to create.
+            exists_ok (``bool``, optional): If ``True``, do not raise :class:`~ignis.exceptions.OptionsGroupExistsError` if the group already exists. Default: ``False``.
+
+        Returns:
+            :class:`~ignis.services.options.OptionsGroup`: The newly created options group or already existing one.
+
+        Raises:
+            OptionsGroupExistsError: If the options group already exists and ``exists_ok`` is set to ``False``.
+        """
         group = self._groups.get(name, None)
         if not group:
             new_group = self.__init_group(name=name)
@@ -76,6 +105,18 @@ class OptionsService(BaseService):
                 raise OptionsGroupExistsError(name)
 
     def get_group(self, name: str) -> OptionsGroup:
+        """
+        Get ``OptionsGroup`` object by its name.
+
+        Args:
+            name (``str``): The name of the options group.
+
+        Returns:
+            :class:`~ignis.services.options.OptionsGroup`: The options group instance.
+
+        Raises:
+            OptionsGroupNotFoundError: If the options group does not exist.
+        """
         group = self._groups.get(name, None)
 
         if group:
@@ -89,17 +130,10 @@ class OptionsService(BaseService):
         self.notify("groups")
         self.notify("data")
 
-    def __init_group(self, name: str, data: dict[str, Any] | None = None) -> OptionsGroup:
+    def __init_group(
+        self, name: str, data: dict[str, Any] | None = None
+    ) -> OptionsGroup:
         group = OptionsGroup(name=name, data=data)
         group.connect("removed", self.__remove_group)
         group.connect("changed", lambda x: self.__sync())
         return group
-
-    @GObject.Property
-    def groups(self) -> dict[str, OptionsGroup]:
-        return self._groups
-
-    @GObject.Property
-    def data(self) -> dict[str, Any]:
-        return {key: group.data for key, group in self._groups.items()}
-

@@ -14,7 +14,6 @@ from .constants import (
     NOTIFICATIONS_EMPTY_CACHE_FILE,
     NOTIFICATIONS_IMAGE_DATA,
 )
-from .options import DND_OPTION, POPUP_TIMEOUT_OPTION, MAX_POPUPS_COUNT_OPTION, GROUP_NAME
 
 
 class NotificationService(BaseService):
@@ -89,14 +88,16 @@ class NotificationService(BaseService):
 
         options = OptionsService.get_default()
 
-        self._opt_group = options.create_group(name=GROUP_NAME, exists_ok=True)
+        opt_group = options.create_group(name="notifications", exists_ok=True)
 
-        self._opt_group.create_option(name=DND_OPTION, default=False, exists_ok=True)
-        self._opt_group.create_option(
-            name=POPUP_TIMEOUT_OPTION, default=5000, exists_ok=True
+        self._dnd_opt = opt_group.create_option(
+            name="dnd", default=False, exists_ok=True
         )
-        self._opt_group.create_option(
-            name=MAX_POPUPS_COUNT_OPTION, default=3, exists_ok=True
+        self._popup_timeout_opt = opt_group.create_option(
+            name="timeout", default=5000, exists_ok=True
+        )
+        self._max_popups_count_opt = opt_group.create_option(
+            name="max_popups_count", default=3, exists_ok=True
         )
 
         self.__load_notifications()
@@ -111,27 +112,27 @@ class NotificationService(BaseService):
 
     @GObject.Property
     def dnd(self) -> bool:
-        return self._opt_group.get_option(DND_OPTION)
+        return self._dnd_opt.value
 
     @dnd.setter
     def dnd(self, value: bool) -> None:
-        self._opt_group.set_option(DND_OPTION, value)
+        self._dnd_opt.value = value
 
     @GObject.Property
     def popup_timeout(self) -> int:
-        return self._opt_group.get_option(POPUP_TIMEOUT_OPTION)
+        return self._popup_timeout_opt.value
 
     @popup_timeout.setter
     def popup_timeout(self, value: int) -> None:
-        self._opt_group.set_option(POPUP_TIMEOUT_OPTION, value)
+        self._popup_timeout_opt = value
 
     @GObject.Property
     def max_popups_count(self) -> int:
-        return self._opt_group.get_option(MAX_POPUPS_COUNT_OPTION)
+        return self._max_popups_count_opt.value
 
     @max_popups_count.setter
     def max_popups_count(self, value: int) -> None:
-        self._opt_group.set_option(MAX_POPUPS_COUNT_OPTION, value)
+        self._max_popups_count_opt.value = value
 
     def __GetServerInformation(self, *args) -> GLib.Variant:
         return GLib.Variant(
