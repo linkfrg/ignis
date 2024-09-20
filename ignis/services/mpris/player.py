@@ -2,6 +2,7 @@ import os
 import time
 import shutil
 import requests
+import urllib.parse
 from ignis.dbus import DBusProxy
 from gi.repository import GObject, GLib  # type: ignore
 from ignis.gobject import IgnisGObject
@@ -119,7 +120,7 @@ class MprisPlayer(IgnisGObject):
         return result
 
     def __download_art_url(self, art_url: str) -> str | None:
-        result = ART_URL_CACHE_DIR + "/" + os.path.basename(art_url)
+        result = ART_URL_CACHE_DIR + "/" + self.__get_valid_url_filename(art_url)
         if os.path.exists(result):
             return result
 
@@ -140,6 +141,17 @@ class MprisPlayer(IgnisGObject):
             return None
 
         return result
+
+    def __get_valid_url_filename(self, url: str) -> str:
+        parsed_url = urllib.parse.urlparse(url)
+
+        domain = parsed_url.netloc.replace(".", "_")
+        path = parsed_url.path.replace("/", "_")
+        query = parsed_url.query.replace("&", "_").replace("=", "-")
+
+        filename = f"{domain}{path}_{query}"
+
+        return filename
 
     @Utils.run_in_thread
     def __sync_position(self) -> None:
@@ -232,7 +244,9 @@ class MprisPlayer(IgnisGObject):
 
     @position.setter
     def position(self, value: int) -> None:
-        self.__player_proxy.SetPosition("(ox)", self.track_id, value * 1_000_000, result_handler=lambda *args: None)
+        self.__player_proxy.SetPosition(
+            "(ox)", self.track_id, value * 1_000_000, result_handler=lambda *args: None
+        )
 
     @GObject.Property
     def shuffle(self) -> bool:
@@ -292,4 +306,6 @@ class MprisPlayer(IgnisGObject):
         Positive values move forward, and negative values move backward.
         The offset is in milliseconds.
         """
-        self.__player_proxy.Seek("(x)", offset * 1_000_100, result_handler=lambda *args: None)
+        self.__player_proxy.Seek(
+            "(x)", offset * 1_000_100, result_handler=lambda *args: None
+        )
