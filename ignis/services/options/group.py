@@ -11,7 +11,7 @@ class OptionsGroup(IgnisGObject):
 
     .. warning::
         You shouldn't initialize this class manually.
-        Use the :func:`~ignis.esrvices.options.OptionsService.create_group` method instead.
+        Use the :func:`~ignis.services.options.OptionsService.create_group` method instead.
 
     Signals:
         - **"changed"** (): Emitted when options in this group is changed.
