@@ -6,5 +6,4 @@ __all__ = [
     "ApplicationsService",
     "Application",
     "ApplicationAction",
-    "PINNED_APPS_OPTION",
 ]
