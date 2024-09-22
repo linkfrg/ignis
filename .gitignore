@@ -7,3 +7,9 @@ generated
 build
 .vscode/*
 !.vscode/settings.json
+
+docs/api/utils
+docs/api/widgets
+
+!docs/api/utils/index.rst
+!docs/api/widgets/index.rst
