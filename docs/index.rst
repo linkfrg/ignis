@@ -2,7 +2,7 @@ Ignis
 =========
 
 **Useful links**:
-`Installation <user_guide/installation.html>`__ |
+`Installation <user/installation.html>`__ |
 `Source Repository <https://github.com/linkfrg/ignis>`__ |
 `Issue Tracker <https://github.com/linkfrg/ignis/issues>`__
 
@@ -17,7 +17,7 @@ Ignis is a Python framework for building desktop shells using GTK4.
         :material-regular:`widgets;1.5em` Widgets
         ^^^
 
-        See a list of built-in `Widgets <api_reference/widgets/index.html>`_
+        See a list of built-in `Widgets <api/widgets/index.html>`_
 
     .. grid-item-card::
         :text-align: left
@@ -25,7 +25,7 @@ Ignis is a Python framework for building desktop shells using GTK4.
         :material-regular:`design_services;1.5em` Services
         ^^^
 
-        See a list of built-in `Services <api_reference/services/index.html>`_
+        See a list of built-in `Services <api/services/index.html>`_
 
     .. grid-item-card::
         :text-align: left
@@ -33,7 +33,7 @@ Ignis is a Python framework for building desktop shells using GTK4.
         :material-regular:`settings;1.5em` Utils
         ^^^
 
-        See a list of built-in `Utils <api_reference/utils/index.html>`_
+        See a list of built-in `Utils <api/utils/index.html>`_
 
     .. grid-item-card::
         :text-align: left
@@ -47,7 +47,7 @@ Ignis is a Python framework for building desktop shells using GTK4.
    :maxdepth: 1
    :hidden:
 
-   user_guide/index
-   api_reference/index
-   developer_guide/index
+   user/index
+   api/index
+   dev/index
    examples/index
