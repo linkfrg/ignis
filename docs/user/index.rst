@@ -3,7 +3,7 @@ User guide
 
 This guide is an overview and explains the basics.
 
-Widgets, services, utils and more details can be found in `API reference <../api_reference/index.html>`_.
+Widgets, services, utils and more details can be found in `API reference <../api/index.html>`_.
 
 Get started
 ---------------

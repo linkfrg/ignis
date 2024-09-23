@@ -85,7 +85,7 @@ Here is a list of built-in widgets.
 .. hint::
    If the widget you need is not here, you can use it directly from GTK. 
    Please note that it will not support ``style`` property, bindings, and other Ignis features.
-   Or, you can manually subclass it, see `Subclassing widgets <developer_guide/subclassing_widgets.html>`_ for more info.
+   Or, you can manually subclass it, see `Subclassing widgets <../../dev/subclassing_widgets.html>`_ for more info.
 
 
 .. toctree:: 

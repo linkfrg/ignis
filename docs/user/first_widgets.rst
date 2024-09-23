@@ -181,7 +181,7 @@ The solution is to create functions that return widget instances.
     bar(1)
 
 .. hint::
-    Need more widgets? See them in the `API Reference <../api_reference/widgets/index.html>`_.
+    Need more widgets? See them in the `API Reference <../api/widgets/index.html>`_.
 
 Properties
 -------------
@@ -207,7 +207,7 @@ To set a property, you can use the assignment operator ``=`` or a method that st
 Services
 ------------
 
-Ignis includes built-in `Services <../api_reference/services/index.html>`_, 
+Ignis includes built-in `Services <../api/services/index.html>`_, 
 which allow you to interact with various system components, 
 such as controlling audio, managing networks, handling notifications, and more.
 
