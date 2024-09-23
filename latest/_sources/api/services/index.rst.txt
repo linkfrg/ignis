@@ -16,7 +16,7 @@ Built-in services
 .. hint::
    If the service you need is not here, you can make your own.
    
-   See `Creating Service <../developer_guide/creating_service.html>`_ for more info.
+   See `Creating Service <../../dev/creating_service.html>`_ for more info.
 
 .. toctree:: 
    :glob:
