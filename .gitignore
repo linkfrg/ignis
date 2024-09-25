@@ -7,6 +7,8 @@ generated
 build
 .vscode/*
 !.vscode/settings.json
+ignis/__lib_dir__.py
+ignis/__commit__.py
 
 docs/api/utils
 docs/api/widgets

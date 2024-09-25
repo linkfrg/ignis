@@ -4,11 +4,14 @@ import sys
 from ctypes import CDLL
 from gi.repository import GLib  # type: ignore
 from ignis.exceptions import Gtk4LayerShellNotFoundError
+from ignis._get_lib_dir import get_lib_dir
 
 __version__ = "0.1dev0"
-CACHE_DIR = f"{GLib.get_user_cache_dir()}/ignis"
+__lib_dir__ = None
+CACHE_DIR = None
 
 if "sphinx" not in sys.modules:
+    CACHE_DIR = f"{GLib.get_user_cache_dir()}/ignis"
     os.makedirs(CACHE_DIR, exist_ok=True)
 
     try:
@@ -20,3 +23,12 @@ gi.require_version("Gtk", "4.0")
 gi.require_version("Gdk", "4.0")
 gi.require_version("Gtk4LayerShell", "1.0")
 gi.require_version("GdkPixbuf", "2.0")
+gi.require_version("GIRepository", "2.0")
+
+try:
+    from gi.repository import GIRepository  # type: ignore
+    __lib_dir__ = get_lib_dir()
+    GIRepository.Repository.prepend_library_path(__lib_dir__)
+    GIRepository.Repository.prepend_search_path(__lib_dir__)
+except TypeError:
+    pass
