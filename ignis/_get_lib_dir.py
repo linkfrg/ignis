@@ -1,9 +1,11 @@
 import os
 import sys
 
+
 def get_lib_dir() -> str | None:
     try:
-        from ignis.__lib_dir__ import __lib_dir__ # type: ignore
+        from ignis.__lib_dir__ import __lib_dir__  # type: ignore
+
         return __lib_dir__
     except ImportError:
         pass
@@ -17,4 +19,3 @@ def get_lib_dir() -> str | None:
             return lib_dir
 
     return None
-

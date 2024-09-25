@@ -27,6 +27,7 @@ gi.require_version("GIRepository", "2.0")
 
 try:
     from gi.repository import GIRepository  # type: ignore
+
     __lib_dir__ = get_lib_dir()
     GIRepository.Repository.prepend_library_path(__lib_dir__)  # type: ignore
     GIRepository.Repository.prepend_search_path(__lib_dir__)  # type: ignore
