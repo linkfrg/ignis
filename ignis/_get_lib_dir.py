@@ -16,3 +16,5 @@ def get_lib_dir() -> str | None:
         if os.path.isdir(lib_dir):
             return lib_dir
 
+    return None
+
