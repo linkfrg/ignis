@@ -16,3 +16,4 @@ Get started
    dynamic_content
    styling
    cli
+   expanding_functionality

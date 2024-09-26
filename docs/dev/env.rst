@@ -9,6 +9,13 @@ Clone repository
     git clone https://github.com/linkfrg/ignis.git
     cd ignis
 
+Update submodules
+------------------
+
+.. code-block:: bash
+
+    git submodule update --init --recursive
+
 Create Python Virtual Environment
 ----------------------------------
 
@@ -34,11 +41,18 @@ Activate Virtual Environment
 Install dependencies to Virtual Environment
 -------------------------------------------
 
+Common dependencies:
+
 .. code-block:: bash
 
     pip install --upgrade -r requirements.txt
 
-Additionally, install dependencies required by dotfiles/configuration.
+Development dependencies:
+
+.. code-block:: bash
+
+    pip install --upgrade -r dev.txt
+
 
 Build and Install Ignis to Virtual Environment
 ----------------------------------------------
@@ -58,11 +72,3 @@ Replace ``python3.12`` with actual version of python.
     
     rm -R venv/lib/python3.12/site-packages/ignis
     ln -sf $(pwd)/ignis venv/lib/python3.12/site-packages/ignis
-
-Running Ignis
--------------
-
-.. code-block:: bash
-
-    ignis init
-    

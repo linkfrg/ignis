@@ -17,7 +17,7 @@ Replace ``WIDGET_NAME`` with the actual name of the widget.
 
     class WIDGET_NAME(Gtk.WIDGET_NAME, BaseWidget):
         __gtype_name__ = "IgnisWIDGET_NAME"
-        __gproperties__ = {**BaseWidget.gproperties}  # this inherits properties from BaseWidget
+        __gproperties__ = {**BaseWidget.gproperties}  # this need to inherit properties from BaseWidget
 
         def __init__(self, **kwargs):  # accept keyword arguments
             Gtk.Label.__init__(self)
@@ -34,29 +34,3 @@ Replace ``WIDGET_NAME`` with the actual name of the widget.
         @custom_property.setter
         def custom_property(self, value: bool) -> None:
             self._custom_property = value
-
-Docstrings
-------------
-
-- Use the same patterns as described here: `Documentation <documentation.html>`_.
-- Specify the base widget and link to the PyGObject API Reference.
-- Specify whether properties are ``optional``/``required``.
-- Include a code example.
-
-.. code-block:: python
-
-    """
-    Bases: `Gtk.WIDGET_NAME <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/WIDGET_NAME.html>`_.
-
-    A widget that displays a small amount of text.
-
-    Properties:
-        - **prop1** (``str``, required, read-write): description...
-        - **prop2** (``int``, optional, read-write): description...
-
-    .. code-block:: python
-
-        Widget.WIDGET_NAME(
-            prop1="asd",
-            prop2=12
-        )

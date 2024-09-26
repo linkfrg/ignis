@@ -1,24 +1,24 @@
 Documentation Guidelines
 ========================
 
-Ignis uses the `Sphinx <https://www.sphinx-doc.org/en/master/>`_ documentation generator.
-Additionally, Ignis uses the ``autodoc`` extension to generate documentation from Python docstrings.
+Ignis uses the `Sphinx <https://www.sphinx-doc.org/en/master/>`_ documentation generator
+with the `autodoc <https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html>`_ 
+extension to generate documentation from Python docstrings.
 
 .. hint::
     Sphinx uses the reStructuredText markup language.
     Here are some useful resources to learn more about it:
 
     - `reStructuredText guide by Sphinx <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
-    - `autodoc Sphinx extension <https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html>`_
     - `Example Google Style Python Docstrings <https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html>`_
 
 Docstrings
 -------------
-Use the Google style for Python docstrings, with types included in the docstrings.
-Here are some examples for docstrings.
+Use the Google style for Python docstrings, with types included in them.
+Here are some examples for functions and classes.
 
-For Function
--------------
+Functions
+~~~~~~~~~~~~~~~~
 For functions, use the standard Google docstring style.
 
 .. code-block:: python
@@ -37,8 +37,8 @@ For functions, use the standard Google docstring style.
         SomeException: description...
     """
 
-For Class
-------------
+General Classes
+~~~~~~~~~~~~~~~~
 - If a class has custom signals, define them in the ``Signals`` section.
 
 Signal names should be in double quotes.
@@ -47,6 +47,8 @@ In brackets, indicate the custom arguments that the signal passes to the callbac
 - If a class has custom properties, define them in the ``Properties`` section.
 
 In brackets, indicate the property type and ``read-only`` or ``read-write``.
+
+- If possible, please provide a code example.
 
 .. code-block:: python
 
@@ -64,6 +66,31 @@ In brackets, indicate the property type and ``read-only`` or ``read-write``.
         - **stream** (:class:`~ignis.some_class.SomeClass`, read-only): An instance of :class:`~ignis.some_class.SomeClass`.
         - **application_id** (``bool``, read-write): Whether to do something or not.
     """
+
+Widgets
+~~~~~~~~~~~~~~~~
+
+- Use the same patterns as described above for general classes.
+- Specify the base widget and a link to its page in the `PyGObject API Reference <https://lazka.github.io/pgi-docs>`_.
+- Specify whether properties are ``optional``/``required``.
+
+.. code-block:: python
+
+    """
+    Bases: `Gtk.WIDGET_NAME <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/WIDGET_NAME.html>`_.
+
+    A widget that displays a small amount of text.
+
+    Properties:
+        - **prop1** (``str``, required, read-write): description...
+        - **prop2** (``int``, optional, read-write): description...
+
+    .. code-block:: python
+
+        Widget.WIDGET_NAME(
+            prop1="asd",
+            prop2=12
+        )
 
 Building documentation
 -------------------------

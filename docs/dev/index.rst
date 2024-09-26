@@ -10,6 +10,8 @@ This guide will help you with this.
     Here are some useful resources to learn more about GTK, GObject, and PyGObject:
 
     - `PyGObject Homepage <https://pygobject.gnome.org/>`_
+    - `PyGObject User Guide <https://pygobject.gnome.org/guide/index.html>`_
+    - `GObject Guide <https://pygobject.gnome.org/tutorials/gobject.html>`_
     - `PyGObject API Reference <https://lazka.github.io/pgi-docs/>`_
 
 .. toctree:: 
