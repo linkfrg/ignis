@@ -54,7 +54,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Creating Service" href="creating_service.html" />
-    <link rel="prev" title="Custom GObjects" href="gobject.html" />
+    <link rel="prev" title="GObject" href="gobject.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -398,7 +398,7 @@ document.write(`
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="env.html">Setting up a Development Environment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gobject.html">Custom GObjects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gobject.html">GObject</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Subclassing Widgets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating_service.html">Creating Service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation Guidelines</a></li>
@@ -473,7 +473,7 @@ Replace <code class="docutils literal notranslate"><span class="pre">WIDGET_NAME
 
 <span class="k">class</span> <span class="nc">WIDGET_NAME</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">WIDGET_NAME</span><span class="p">,</span> <span class="n">BaseWidget</span><span class="p">):</span>
     <span class="n">__gtype_name__</span> <span class="o">=</span> <span class="s2">&quot;IgnisWIDGET_NAME&quot;</span>
-    <span class="n">__gproperties__</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">BaseWidget</span><span class="o">.</span><span class="n">gproperties</span><span class="p">}</span>  <span class="c1"># this inherits properties from BaseWidget</span>
+    <span class="n">__gproperties__</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">BaseWidget</span><span class="o">.</span><span class="n">gproperties</span><span class="p">}</span>  <span class="c1"># this need to inherit properties from BaseWidget</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>  <span class="c1"># accept keyword arguments</span>
         <span class="n">Gtk</span><span class="o">.</span><span class="n">Label</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -490,32 +490,6 @@ Replace <code class="docutils literal notranslate"><span class="pre">WIDGET_NAME
     <span class="nd">@custom_property</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">custom_property</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_custom_property</span> <span class="o">=</span> <span class="n">value</span>
-</pre></div>
-</div>
-</section>
-<section id="docstrings">
-<h2>Docstrings<a class="headerlink" href="#docstrings" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Use the same patterns as described here: <a class="reference external" href="documentation.html">Documentation</a>.</p></li>
-<li><p>Specify the base widget and link to the PyGObject API Reference.</p></li>
-<li><p>Specify whether properties are <code class="docutils literal notranslate"><span class="pre">optional</span></code>/<code class="docutils literal notranslate"><span class="pre">required</span></code>.</p></li>
-<li><p>Include a code example.</p></li>
-</ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">Bases: `Gtk.WIDGET_NAME &lt;https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/WIDGET_NAME.html&gt;`_.</span>
-
-<span class="s2">A widget that displays a small amount of text.</span>
-
-<span class="s2">Properties:</span>
-<span class="s2">    - **prop1** (``str``, required, read-write): description...</span>
-<span class="s2">    - **prop2** (``int``, optional, read-write): description...</span>
-
-<span class="s2">.. code-block:: python</span>
-
-<span class="s2">    Widget.WIDGET_NAME(</span>
-<span class="s2">        prop1=&quot;asd&quot;,</span>
-<span class="s2">        prop2=12</span>
-<span class="s2">    )</span>
 </pre></div>
 </div>
 </section>
@@ -537,7 +511,7 @@ Replace <code class="docutils literal notranslate"><span class="pre">WIDGET_NAME
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Custom GObjects</p>
+        <p class="prev-next-title">GObject</p>
       </div>
     </a>
     <a class="right-next"
@@ -568,7 +542,6 @@ Replace <code class="docutils literal notranslate"><span class="pre">WIDGET_NAME
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#widget-class-template">Widget Class Template</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#docstrings">Docstrings</a></li>
 </ul>
   </nav></div>
 

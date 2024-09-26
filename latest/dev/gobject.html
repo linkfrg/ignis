@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Custom GObjects &#8212; Ignis documentation</title>
+    <title>GObject &#8212; Ignis documentation</title>
   
   
   
@@ -398,7 +398,7 @@ document.write(`
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="env.html">Setting up a Development Environment</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Custom GObjects</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">GObject</a></li>
 <li class="toctree-l1"><a class="reference internal" href="subclassing_widgets.html">Subclassing Widgets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating_service.html">Creating Service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation Guidelines</a></li>
@@ -443,7 +443,7 @@ document.write(`
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">Developer Guide</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">Custom GObjects</li>
+    <li class="breadcrumb-item active" aria-current="page">GObject</li>
   </ul>
 </nav>
 </div>
@@ -460,52 +460,11 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="custom-gobjects">
-<h1>Custom GObjects<a class="headerlink" href="#custom-gobjects" title="Link to this heading">#</a></h1>
-<section id="adding-custom-signals">
-<h2>Adding custom signals<a class="headerlink" href="#adding-custom-signals" title="Link to this heading">#</a></h2>
-<p>Use the <code class="docutils literal notranslate"><span class="pre">__gsignals__</span></code> dictionary to create your custom signals.
-To add custom arguments to a signal, add values to the tuple as shown below.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.gobject</span> <span class="kn">import</span> <span class="n">IgnisGObject</span>
-
-<span class="k">class</span> <span class="nc">ExampleGObject</span><span class="p">(</span><span class="n">IgnisGObject</span><span class="p">):</span>
-
-    <span class="n">__gsignals__</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;my-signal&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">GObject</span><span class="o">.</span><span class="n">SignalFlags</span><span class="o">.</span><span class="n">RUN_FIRST</span><span class="p">,</span> <span class="n">GObject</span><span class="o">.</span><span class="n">TYPE_NONE</span><span class="p">,</span> <span class="p">()),</span>
-        <span class="s2">&quot;arg-signal&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">GObject</span><span class="o">.</span><span class="n">SignalFlags</span><span class="o">.</span><span class="n">RUN_FIRST</span><span class="p">,</span> <span class="n">GObject</span><span class="o">.</span><span class="n">TYPE_NONE</span><span class="p">,</span> <span class="p">(</span><span class="nb">object</span><span class="p">,)),</span> <span class="c1"># this one will have an extra custom argument</span>
-    <span class="p">}</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>To call a signal with custom arguments, use the standart <code class="docutils literal notranslate"><span class="pre">.emit()</span></code> method and pass the arguments to it.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">some_gobject</span> <span class="o">=</span> <span class="n">ExampleGObject</span><span class="p">()</span>
-<span class="n">some_gobject</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="s2">&quot;arg-signal&quot;</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="adding-custom-properties">
-<h2>Adding custom properties<a class="headerlink" href="#adding-custom-properties" title="Link to this heading">#</a></h2>
-<p>Use the <code class="docutils literal notranslate"><span class="pre">&#64;GObject.Property</span></code> decorator to add a custom property.
-The syntax is similar to the built-in Python decorator <code class="docutils literal notranslate"><span class="pre">&#64;property</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.gobject</span> <span class="kn">import</span> <span class="n">IgnisGObject</span>
-
-<span class="k">class</span> <span class="nc">ExampleGObject</span><span class="p">(</span><span class="n">IgnisGObject</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_custom_property</span> <span class="o">=</span> <span class="kc">False</span>
-
-    <span class="nd">@GObject</span><span class="o">.</span><span class="n">Property</span>  <span class="c1"># use this decorator to create GObject properties</span>
-    <span class="k">def</span> <span class="nf">custom_property</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>  <span class="c1"># bool here is for example</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_custom_property</span>
-
-    <span class="nd">@custom_property</span><span class="o">.</span><span class="n">setter</span>  <span class="c1"># use this if you want to make the property read-write. Otherwise, the property will be read-only.</span>
-    <span class="k">def</span> <span class="nf">custom_property</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_custom_property</span> <span class="o">=</span> <span class="n">value</span>
-</pre></div>
-</div>
-</section>
+  <section id="gobject">
+<h1>GObject<a class="headerlink" href="#gobject" title="Link to this heading">#</a></h1>
+<p>All GObjects in Ignis should inherit from the <a class="reference internal" href="../api/gobject.html#ignis.gobject.IgnisGObject" title="ignis.gobject.IgnisGObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">IgnisGObject</span></code></a> class,
+which provides additional functionality and thread-safe signal operations.</p>
+<p>All other stuff (properties, signals) follow the standard PyGObject way.</p>
 </section>
 
 
@@ -545,19 +504,6 @@ The syntax is similar to the built-in Python decorator <code class="docutils lit
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
-  </div>
-  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-custom-signals">Adding custom signals</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-custom-properties">Adding custom properties</a></li>
-</ul>
-  </nav></div>
 
   <div class="sidebar-secondary-item">
 

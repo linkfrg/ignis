@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Styling &#8212; Ignis documentation</title>
+    <title>Expanding functionality &#8212; Ignis documentation</title>
   
   
   
@@ -44,7 +44,7 @@
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'user/styling';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user/expanding_functionality';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://linkfrg.github.io/ignis/latest/_static/switcher.json';
@@ -53,8 +53,8 @@
         </script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="CLI" href="cli.html" />
-    <link rel="prev" title="Dynamic content" href="dynamic_content.html" />
+    <link rel="next" title="API reference" href="../api/index.html" />
+    <link rel="prev" title="CLI" href="cli.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -400,9 +400,9 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="first_widgets.html">First widgets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dynamic_content.html">Dynamic content</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Styling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="styling.html">Styling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cli.html">CLI</a></li>
-<li class="toctree-l1"><a class="reference internal" href="expanding_functionality.html">Expanding functionality</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Expanding functionality</a></li>
 </ul>
 </div>
 </nav></div>
@@ -443,7 +443,7 @@ document.write(`
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">User guide</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">Styling</li>
+    <li class="breadcrumb-item active" aria-current="page">Expanding...</li>
   </ul>
 </nav>
 </div>
@@ -460,56 +460,21 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="styling">
-<h1>Styling<a class="headerlink" href="#styling" title="Link to this heading">#</a></h1>
-<p>Ignis supports both CSS and SCSS.</p>
-<section id="using-css-scss-file">
-<h2>Using CSS/SCSS file<a class="headerlink" href="#using-css-scss-file" title="Link to this heading">#</a></h2>
-<p>To get started, add the following to your config:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.app</span> <span class="kn">import</span> <span class="n">IgnisApp</span>
-
-<span class="n">app</span> <span class="o">=</span> <span class="n">IgnisApp</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span>
-
-<span class="n">app</span><span class="o">.</span><span class="n">apply_css</span><span class="p">(</span><span class="s2">&quot;PATH/TO/CSS_FILE&quot;</span><span class="p">)</span>
-</pre></div>
+  <section id="expanding-functionality">
+<h1>Expanding functionality<a class="headerlink" href="#expanding-functionality" title="Link to this heading">#</a></h1>
+<p>Most of the features you need should be available in the <a class="reference external" href="../api/index.html">API Reference</a>.
+owever, if the feature you are looking for is not there, this page may help you.</p>
+<p>Since Ignis uses Python, you can take advantage of its many benefits, features, and modules to expand functionality, including the use of native PyGObject.</p>
+<p>For a more detailed understanding of how Ignis works and to help you add extra features, it is highly recommended to read the following resources:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://pygobject.gnome.org/guide/index.html">PyGObject User Guide</a></p></li>
+<li><p><a class="reference external" href="https://pygobject.gnome.org/tutorials/gobject.html">GObject Guide</a></p></li>
+<li><p><a class="reference external" href="https://lazka.github.io/pgi-docs/">PyGObject API Reference</a></p></li>
+</ul>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>The <a class="reference external" href="../dev/index.html">Developer Guide</a> will also be very helpful.</p>
 </div>
-<p>For example, we will use <code class="docutils literal notranslate"><span class="pre">~/.config/ignis/style.scss</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">ignis.app</span> <span class="kn">import</span> <span class="n">IgnisApp</span>
-
-<span class="n">app</span> <span class="o">=</span> <span class="n">IgnisApp</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span>
-
-<span class="n">app</span><span class="o">.</span><span class="n">apply_css</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/.config/ignis/style.scss&quot;</span><span class="p">))</span>
-</pre></div>
-</div>
-<p>Now, you can add a CSS class to any widget and style it in the CSS file.
-To add CSS classes to a widget, use the <code class="docutils literal notranslate"><span class="pre">css_classes</span></code> property.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span>
-    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span>
-    <span class="n">css_classes</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;my-label&quot;</span><span class="p">]</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<p>In style.scss:</p>
-<div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="nc">my-label</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="kc">red</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</section>
-<section id="using-the-style-property">
-<h2>Using the <code class="docutils literal notranslate"><span class="pre">style</span></code> property<a class="headerlink" href="#using-the-style-property" title="Link to this heading">#</a></h2>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">style</span></code> property does not support SCSS features, only CSS.</p>
-</div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span>
-    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span>
-    <span class="n">style</span><span class="o">=</span><span class="s2">&quot;background-color: black;&quot;</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</section>
 </section>
 
 
@@ -523,20 +488,20 @@ To add CSS classes to a widget, use the <code class="docutils literal notranslat
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="dynamic_content.html"
+       href="cli.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Dynamic content</p>
+        <p class="prev-next-title">CLI</p>
       </div>
     </a>
     <a class="right-next"
-       href="cli.html"
+       href="../api/index.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">CLI</p>
+        <p class="prev-next-title">API reference</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -551,23 +516,10 @@ To add CSS classes to a widget, use the <code class="docutils literal notranslat
 
 
   <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
-  </div>
-  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-css-scss-file">Using CSS/SCSS file</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-style-property">Using the <code class="docutils literal notranslate"><span class="pre">style</span></code> property</a></li>
-</ul>
-  </nav></div>
-
-  <div class="sidebar-secondary-item">
 
   
   <div class="tocsection editthispage">
-    <a href="https://github.com/linkfrg/ignis/edit/main/docs/user/styling.rst">
+    <a href="https://github.com/linkfrg/ignis/edit/main/docs/user/expanding_functionality.rst">
       <i class="fa-solid fa-pencil"></i>
       
       
@@ -582,7 +534,7 @@ To add CSS classes to a widget, use the <code class="docutils literal notranslat
   <div class="sidebar-secondary-item">
 
   <div class="tocsection sourcelink">
-    <a href="../_sources/user/styling.rst.txt">
+    <a href="../_sources/user/expanding_functionality.rst.txt">
       <i class="fa-solid fa-file-lines"></i> Show Source
     </a>
   </div>

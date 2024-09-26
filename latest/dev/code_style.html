@@ -398,7 +398,7 @@ document.write(`
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="env.html">Setting up a Development Environment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gobject.html">Custom GObjects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gobject.html">GObject</a></li>
 <li class="toctree-l1"><a class="reference internal" href="subclassing_widgets.html">Subclassing Widgets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating_service.html">Creating Service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation Guidelines</a></li>
@@ -464,11 +464,16 @@ document.write(`
 <h1>Code Style Guidelines<a class="headerlink" href="#code-style-guidelines" title="Link to this heading">#</a></h1>
 <section id="code-formatting">
 <h2>Code Formatting<a class="headerlink" href="#code-formatting" title="Link to this heading">#</a></h2>
-<p>All code should be formmated using <a class="reference external" href="https://github.com/astral-sh/ruff">Ruff, the Python code formatter</a>.</p>
+<p>All code must be formatted using <a class="reference external" href="https://github.com/astral-sh/ruff">Ruff</a>.</p>
+</section>
+<section id="type-checking">
+<h2>Type checking<a class="headerlink" href="#type-checking" title="Link to this heading">#</a></h2>
+<p>The use of type hints is encouraged,
+and all code must be checked using <a class="reference external" href="https://mypy-lang.org/">mypy</a>.</p>
 </section>
 <section id="definitions-and-naming">
 <h2>Definitions and Naming<a class="headerlink" href="#definitions-and-naming" title="Link to this heading">#</a></h2>
-<p>Use specific naming conventions for different purposes:</p>
+<p>Use the following naming conventions for different purposes:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">snake_case</span></code>: Functions, variables, GObject properties (except D-Bus methods/properties)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">SCREAMING_SNAKE_CASE</span></code>: Constants</p></li>
@@ -525,6 +530,7 @@ document.write(`
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-formatting">Code Formatting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#type-checking">Type checking</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definitions-and-naming">Definitions and Naming</a></li>
 </ul>
   </nav></div>

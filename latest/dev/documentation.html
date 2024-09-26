@@ -398,7 +398,7 @@ document.write(`
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="env.html">Setting up a Development Environment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gobject.html">Custom GObjects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gobject.html">GObject</a></li>
 <li class="toctree-l1"><a class="reference internal" href="subclassing_widgets.html">Subclassing Widgets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="creating_service.html">Creating Service</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Documentation Guidelines</a></li>
@@ -462,25 +462,24 @@ document.write(`
                   
   <section id="documentation-guidelines">
 <h1>Documentation Guidelines<a class="headerlink" href="#documentation-guidelines" title="Link to this heading">#</a></h1>
-<p>Ignis uses the <a class="reference external" href="https://www.sphinx-doc.org/en/master/">Sphinx</a> documentation generator.
-Additionally, Ignis uses the <code class="docutils literal notranslate"><span class="pre">autodoc</span></code> extension to generate documentation from Python docstrings.</p>
+<p>Ignis uses the <a class="reference external" href="https://www.sphinx-doc.org/en/master/">Sphinx</a> documentation generator
+with the <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html">autodoc</a>
+extension to generate documentation from Python docstrings.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>Sphinx uses the reStructuredText markup language.
 Here are some useful resources to learn more about it:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html">reStructuredText guide by Sphinx</a></p></li>
-<li><p><a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html">autodoc Sphinx extension</a></p></li>
 <li><p><a class="reference external" href="https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html">Example Google Style Python Docstrings</a></p></li>
 </ul>
 </div>
 <section id="docstrings">
 <h2>Docstrings<a class="headerlink" href="#docstrings" title="Link to this heading">#</a></h2>
-<p>Use the Google style for Python docstrings, with types included in the docstrings.
-Here are some examples for docstrings.</p>
-</section>
-<section id="for-function">
-<h2>For Function<a class="headerlink" href="#for-function" title="Link to this heading">#</a></h2>
+<p>Use the Google style for Python docstrings, with types included in them.
+Here are some examples for functions and classes.</p>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h3>
 <p>For functions, use the standard Google docstring style.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Description of the function.</span>
@@ -498,8 +497,8 @@ Here are some examples for docstrings.</p>
 </pre></div>
 </div>
 </section>
-<section id="for-class">
-<h2>For Class<a class="headerlink" href="#for-class" title="Link to this heading">#</a></h2>
+<section id="general-classes">
+<h3>General Classes<a class="headerlink" href="#general-classes" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>If a class has custom signals, define them in the <code class="docutils literal notranslate"><span class="pre">Signals</span></code> section.</p></li>
 </ul>
@@ -509,6 +508,9 @@ In brackets, indicate the custom arguments that the signal passes to the callbac
 <li><p>If a class has custom properties, define them in the <code class="docutils literal notranslate"><span class="pre">Properties</span></code> section.</p></li>
 </ul>
 <p>In brackets, indicate the property type and <code class="docutils literal notranslate"><span class="pre">read-only</span></code> or <code class="docutils literal notranslate"><span class="pre">read-write</span></code>.</p>
+<ul class="simple">
+<li><p>If possible, please provide a code example.</p></li>
+</ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">This is an example docstring for a class.</span>
 
@@ -525,6 +527,32 @@ In brackets, indicate the custom arguments that the signal passes to the callbac
 <span class="sd">&quot;&quot;&quot;</span>
 </pre></div>
 </div>
+</section>
+<section id="widgets">
+<h3>Widgets<a class="headerlink" href="#widgets" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Use the same patterns as described above for general classes.</p></li>
+<li><p>Specify the base widget and a link to its page in the <a class="reference external" href="https://lazka.github.io/pgi-docs">PyGObject API Reference</a>.</p></li>
+<li><p>Specify whether properties are <code class="docutils literal notranslate"><span class="pre">optional</span></code>/<code class="docutils literal notranslate"><span class="pre">required</span></code>.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Bases: `Gtk.WIDGET_NAME &lt;https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/WIDGET_NAME.html&gt;`_.</span>
+
+<span class="s2">A widget that displays a small amount of text.</span>
+
+<span class="s2">Properties:</span>
+<span class="s2">    - **prop1** (``str``, required, read-write): description...</span>
+<span class="s2">    - **prop2** (``int``, optional, read-write): description...</span>
+
+<span class="s2">.. code-block:: python</span>
+
+<span class="s2">    Widget.WIDGET_NAME(</span>
+<span class="s2">        prop1=&quot;asd&quot;,</span>
+<span class="s2">        prop2=12</span>
+<span class="s2">    )</span>
+</pre></div>
+</div>
+</section>
 </section>
 <section id="building-documentation">
 <h2>Building documentation<a class="headerlink" href="#building-documentation" title="Link to this heading">#</a></h2>
@@ -587,9 +615,12 @@ make<span class="w"> </span>html
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#docstrings">Docstrings</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-function">For Function</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-class">For Class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#docstrings">Docstrings</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-classes">General Classes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#widgets">Widgets</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-documentation">Building documentation</a></li>
 </ul>
   </nav></div>

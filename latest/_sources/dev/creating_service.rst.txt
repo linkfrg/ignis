@@ -1,7 +1,7 @@
 Creating Service
 ====================
 
-All services should inherits from :class:`~ignis.base_service.BaseService` class.
+All services should inherit from the :class:`~ignis.base_service.BaseService` class.
 
 Here is simple template for service.
 
