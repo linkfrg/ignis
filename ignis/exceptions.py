@@ -376,3 +376,39 @@ class CssParsingError(Exception):
     @property
     def gerror(self) -> GLib.GError:
         return self._gerror
+
+
+class AnotherNotificationDaemonRunningError(Exception):
+    """
+    Raised when another notification daemon is running.
+
+    Properties:
+        - **name** (``str``, required, read-only): The name of the currenly running notification daemon.
+    """
+
+    def __init__(self, name: str, *args: object) -> None:
+        self._name = name
+        super().__init__(
+            f"Another notification daemon is already running: {name}", *args
+        )
+
+    @property
+    def name(self) -> str:
+        return self._name
+
+
+class AnotherSystemTrayRunningError(Exception):
+    """
+    Raised when another system tray is running.
+
+    Properties:
+        - **name** (``str``, required, read-only): The name of the currenly running system tray.
+    """
+
+    def __init__(self, name: str, *args: object) -> None:
+        self._name = name
+        super().__init__(f"Another system tray is already running: {name}", *args)
+
+    @property
+    def name(self) -> str:
+        return self._name

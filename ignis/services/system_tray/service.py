@@ -1,10 +1,10 @@
 from __future__ import annotations
 from ignis.utils import Utils
-from ignis.dbus import DBusService
+from ignis.dbus import DBusService, DBusProxy
 from gi.repository import Gio, GLib, GObject  # type: ignore
-from loguru import logger
 from ignis.base_service import BaseService
 from .item import SystemTrayItem
+from ignis.exceptions import AnotherSystemTrayRunningError
 
 
 class SystemTrayService(BaseService):
@@ -16,6 +16,9 @@ class SystemTrayService(BaseService):
 
     Properties:
         - **items** (list[:class:`~ignis.services.system_tray.SystemTrayItem`], read-only): A list of items.
+
+    Raises:
+        AnotherSystemTrayRunningError: If another system tray is already running.
 
     **Example usage:**
 
@@ -40,9 +43,7 @@ class SystemTrayService(BaseService):
             name="org.kde.StatusNotifierWatcher",
             object_path="/StatusNotifierWatcher",
             info=Utils.load_interface_xml("org.kde.StatusNotifierWatcher"),
-            on_name_lost=lambda x, y: logger.error(
-                "Another system tray is already running. Try to close other status bars/graphical shells."
-            ),
+            on_name_lost=self.__on_name_lost,
         )
 
         self.__dbus.register_dbus_property(
@@ -60,6 +61,16 @@ class SystemTrayService(BaseService):
         self.__dbus.register_dbus_method(
             name="RegisterStatusNotifierItem", method=self.__RegisterStatusNotifierItem
         )
+
+    def __on_name_lost(self, *args) -> None:
+        proxy = DBusProxy(
+            name="org.kde.StatusNotifierWatcher",
+            interface_name="org.kde.StatusNotifierWatcher",
+            object_path="/StatusNotifierWatcher",
+            info=Utils.load_interface_xml("org.kde.StatusNotifierWatcher"),
+        )
+        name = proxy.proxy.get_name_owner()
+        raise AnotherSystemTrayRunningError(name)
 
     @GObject.Property
     def items(self) -> list[SystemTrayItem]:

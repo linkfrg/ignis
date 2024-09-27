@@ -1,6 +1,6 @@
 import os
 import json
-from ignis.dbus import DBusService
+from ignis.dbus import DBusService, DBusProxy
 from gi.repository import GLib, GObject, GdkPixbuf  # type: ignore
 from ignis.utils import Utils
 from loguru import logger
@@ -14,6 +14,7 @@ from .constants import (
     NOTIFICATIONS_EMPTY_CACHE_FILE,
     NOTIFICATIONS_IMAGE_DATA,
 )
+from ignis.exceptions import AnotherNotificationDaemonRunningError
 
 
 class NotificationService(BaseService):
@@ -31,6 +32,9 @@ class NotificationService(BaseService):
         - **dnd** (``bool``, read-write): Do Not Disturb mode. If set to ``True``, the ``"new_popup"`` signal will not be emitted, and all new :class:`~ignis.services.notifications.Notification` instances will have ``popup`` set to ``False``. Default: ``False``.
         - **popup_timeout** (``int``, read-write): Timeout before a popup is automatically dismissed, in milliseconds. Default: ``5000``.
         - **max_popups_count** (``int``, read-write): Maximum number of popups. If the length of the ``popups`` list exceeds ``max_popups_count``, the oldest popup will be dismissed. Default: ``3``.
+
+    Raises:
+        AnotherNotificationDaemonRunningError: If another notification daemon is already running.
 
     **Example usage:**
 
@@ -63,9 +67,7 @@ class NotificationService(BaseService):
             name="org.freedesktop.Notifications",
             object_path="/org/freedesktop/Notifications",
             info=Utils.load_interface_xml("org.freedesktop.Notifications"),
-            on_name_lost=lambda x, y: logger.error(
-                "Another notification daemon is already running. Try removing all other notification daemons (e.g dunst, mako, swaync)."
-            ),
+            on_name_lost=self.__on_name_lost,
         )
 
         self.__dbus.register_dbus_method(
@@ -102,6 +104,21 @@ class NotificationService(BaseService):
 
         self.__load_notifications()
 
+    def __on_name_lost(self, *args) -> None:
+        proxy = DBusProxy(
+            name="org.freedesktop.Notifications",
+            interface_name="org.freedesktop.Notifications",
+            object_path="/org/freedesktop/Notifications",
+            info=Utils.load_interface_xml("org.freedesktop.Notifications"),
+        )
+        try:
+            info = proxy.GetServerInformation()
+            name = info[0]
+        except Exception:  # notification daemon can simply not implement GetServerInformation method, or do it wrongly, so we except all errors
+            name = proxy.proxy.get_name_owner()
+
+        raise AnotherNotificationDaemonRunningError(name)
+
     @GObject.Property
     def notifications(self) -> list[Notification]:
         return list(self._notifications.values())
@@ -137,7 +154,7 @@ class NotificationService(BaseService):
     def __GetServerInformation(self, *args) -> GLib.Variant:
         return GLib.Variant(
             "(ssss)",
-            ("Ignis Notifications service", "linkfrg", "1.0", "1.2"),
+            ("Ignis Notifications Service", "linkfrg", "1.0", "1.2"),
         )
 
     def __GetCapabilities(self, *args) -> GLib.Variant:
