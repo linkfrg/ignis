@@ -12,8 +12,15 @@ from ignis.exceptions import (
     DisplayNotFoundError,
     StylePathNotFoundError,
     StylePathAppliedError,
+    CssParsingError,
 )
 from ignis.logging import configure_logger
+
+
+def raise_css_parsing_error(
+    css_provider: Gtk.CssProvider, section: Gtk.CssSection, gerror: GLib.GError
+) -> None:
+    raise CssParsingError(section, gerror)
 
 
 class IgnisApp(Gtk.Application, IgnisGObject):
@@ -146,6 +153,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         Raises:
             StylePathAppliedError: if the given style path is already to the application.
             DisplayNotFoundError
+            CssParsingError: If an error occured while parsing the CSS/SCSS file. NOTE: If you compile a SASS/SCSS file, it will print the wrong section.
         """
 
         display = Gdk.Display.get_default()
@@ -172,6 +180,8 @@ class IgnisApp(Gtk.Application, IgnisGObject):
             )
 
         provider = Gtk.CssProvider()
+        provider.connect("parsing-error", raise_css_parsing_error)
+
         provider.load_from_string(css_style)
 
         Gtk.StyleContext.add_provider_for_display(

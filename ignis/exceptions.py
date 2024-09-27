@@ -1,3 +1,6 @@
+from gi.repository import Gtk, GLib  # type: ignore
+
+
 class WindowNotFoundError(Exception):
     """
     Raised when a window is not found.
@@ -341,10 +344,35 @@ class StylePathAppliedError(Exception):
 
 class Gtk4LayerShellNotFoundError(Exception):
     """
-    Raised when the GTK4 Layer Shell is not found.
+    Raised when GTK4 Layer Shell is not found.
     """
 
     def __init__(self, *args: object) -> None:
         super().__init__(
             "GTK4 Layer Shell is not found! To use Ignis, first install it", *args
         )
+
+
+class CssParsingError(Exception):
+    """
+    Raised when a CSS parsing error occurs.
+
+    Properties:
+        - **section** (``Gtk.CssSection``, required, read-only): Section the error happened in.
+        - **gerror** (``GLib.GError``, required, read-only): The parsing error.
+    """
+
+    def __init__(
+        self, section: Gtk.CssSection, gerror: GLib.GError, *args: object
+    ) -> None:
+        self._section = section
+        self._gerror = gerror
+        super().__init__(f"{section.to_string()}: {gerror.message}", *args)
+
+    @property
+    def section(self) -> Gtk.CssSection:
+        return self._section
+
+    @property
+    def gerror(self) -> GLib.GError:
+        return self._gerror

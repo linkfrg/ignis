@@ -1,7 +1,14 @@
 from __future__ import annotations
-from gi.repository import Gtk, GObject  # type: ignore
+from gi.repository import Gtk, GObject, GLib  # type: ignore
 from typing import Any, Callable
 from ignis.gobject import IgnisGObject
+from ignis.exceptions import CssParsingError
+
+
+def raise_css_parsing_error(
+    css_provider: Gtk.CssProvider, section: Gtk.CssSection, gerror: GLib.GError
+) -> None:
+    raise CssParsingError(section, gerror)
 
 
 class BaseWidget(Gtk.Widget, IgnisGObject):
@@ -53,6 +60,8 @@ class BaseWidget(Gtk.Widget, IgnisGObject):
             value = "* {" + value + "}"
 
         css_provider = Gtk.CssProvider()
+        css_provider.connect("parsing-error", raise_css_parsing_error)
+
         css_provider.load_from_data(value.encode())
 
         self.get_style_context().add_provider(
