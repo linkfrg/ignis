@@ -17,6 +17,7 @@ if "sphinx" not in sys.modules:
         CDLL("libgtk4-layer-shell.so")
     except OSError:
         from ignis.exceptions import Gtk4LayerShellNotFoundError
+
         raise Gtk4LayerShellNotFoundError() from None
 
 gi.require_version("Gtk", "4.0")
