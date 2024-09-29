@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>API reference &#8212; Ignis documentation</title>
+    <title>Variable &#8212; Ignis documentation</title>
   
   
   
@@ -44,7 +44,7 @@
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'api/index';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/variable';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://linkfrg.github.io/ignis/latest/_static/switcher.json';
@@ -53,8 +53,8 @@
         </script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Application" href="app.html" />
-    <link rel="prev" title="Expanding functionality" href="../user/expanding_functionality.html" />
+    <link rel="next" title="Client" href="client.html" />
+    <link rel="prev" title="GObject" href="gobject.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -176,7 +176,7 @@ document.write(`
 
 
 <li class="nav-item current active">
-  <a class="nav-link nav-internal" href="#">
+  <a class="nav-link nav-internal" href="index.html">
     API reference
   </a>
 </li>
@@ -330,7 +330,7 @@ document.write(`
 
 
 <li class="nav-item current active">
-  <a class="nav-link nav-internal" href="#">
+  <a class="nav-link nav-internal" href="index.html">
     API reference
   </a>
 </li>
@@ -396,10 +396,10 @@ document.write(`
 <nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="app.html">Application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gobject.html">GObject</a></li>
-<li class="toctree-l1"><a class="reference internal" href="variable.html">Variable</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Variable</a></li>
 <li class="toctree-l1"><a class="reference internal" href="client.html">Client</a></li>
 <li class="toctree-l1"><a class="reference internal" href="exceptions.html">Exceptions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dbus.html">D-Bus</a></li>
@@ -516,7 +516,10 @@ document.write(`
         <i class="fa-solid fa-home"></i>
       </a>
     </li>
-    <li class="breadcrumb-item active" aria-current="page">API reference</li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">API reference</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Variable</li>
   </ul>
 </nav>
 </div>
@@ -533,25 +536,30 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="api-reference">
-<h1>API reference<a class="headerlink" href="#api-reference" title="Link to this heading">#</a></h1>
-<p>This reference manual details functions, modules, and objects included in Ignis, describing what they are and what they do.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="app.html">Application</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gobject.html">GObject</a></li>
-<li class="toctree-l1"><a class="reference internal" href="variable.html">Variable</a></li>
-<li class="toctree-l1"><a class="reference internal" href="client.html">Client</a></li>
-<li class="toctree-l1"><a class="reference internal" href="exceptions.html">Exceptions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dbus.html">D-Bus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dbus_menu.html">D-Bus menu</a></li>
-<li class="toctree-l1"><a class="reference internal" href="base_widget.html">BaseWidget</a></li>
-<li class="toctree-l1"><a class="reference internal" href="base_service.html">BaseService</a></li>
-<li class="toctree-l1"><a class="reference internal" href="widgets/index.html">Widgets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="services/index.html">Services</a></li>
-<li class="toctree-l1"><a class="reference internal" href="utils/index.html">Utils</a></li>
+  <section id="variable">
+<h1>Variable<a class="headerlink" href="#variable" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="ignis.variable.Variable">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.variable.Variable" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="gobject.html#ignis.gobject.IgnisGObject" title="ignis.gobject.IgnisGObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">IgnisGObject</span></code></a></p>
+<p>Simple class that holds a value.</p>
+<dl class="simple">
+<dt>Properties</dt><dd><ul class="simple">
+<li><p><strong>value</strong> (<code class="docutils literal notranslate"><span class="pre">Any</span></code>, read-write, optional): A value.</p></li>
 </ul>
+</dd>
+</dl>
+<p>Example usage:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.variable</span> <span class="kn">import</span> <span class="n">Variable</span>
+
+<span class="n">var</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">var</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;notify::value&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Value changed!: &quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">value</span><span class="p">))</span>
+
+<span class="n">var</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">20</span>
+</pre></div>
 </div>
+</dd></dl>
+
 </section>
 
 
@@ -565,20 +573,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../user/expanding_functionality.html"
+       href="gobject.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Expanding functionality</p>
+        <p class="prev-next-title">GObject</p>
       </div>
     </a>
     <a class="right-next"
-       href="app.html"
+       href="client.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Application</p>
+        <p class="prev-next-title">Client</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -593,10 +601,22 @@ document.write(`
 
 
   <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.variable.Variable"><code class="docutils literal notranslate"><span class="pre">Variable</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
 
   
   <div class="tocsection editthispage">
-    <a href="https://github.com/linkfrg/ignis/edit/main/docs/api/index.rst">
+    <a href="https://github.com/linkfrg/ignis/edit/main/docs/api/variable.rst">
       <i class="fa-solid fa-pencil"></i>
       
       
@@ -611,7 +631,7 @@ document.write(`
   <div class="sidebar-secondary-item">
 
   <div class="tocsection sourcelink">
-    <a href="../_sources/api/index.rst.txt">
+    <a href="../_sources/api/variable.rst.txt">
       <i class="fa-solid fa-file-lines"></i> Show Source
     </a>
   </div>
