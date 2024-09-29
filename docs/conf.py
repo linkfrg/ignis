@@ -34,7 +34,7 @@ html_css_files = ["css/custom.css"]
 html_title = "Ignis documentation"
 
 smartquotes = False
-add_module_names = False
+
 
 json_url = f"{DOCS_URL}/_static/switcher.json"
 
@@ -144,9 +144,11 @@ def generate_utils(klass) -> None:
 
     _generate(klass, "utils", check)
 
+
 with mock(autodoc_mock_imports):
     from ignis.widgets import Widget
     from ignis.utils import Utils
+
     clean("widgets")
     clean("utils")
     generate_widgets(Widget)
