@@ -7,11 +7,12 @@ This reference manual details functions, modules, and objects included in Ignis,
    :maxdepth: 1
 
    app
+   gobject
+   variable
    client
    exceptions
    dbus
    dbus_menu
-   gobject
    base_widget
    base_service
    widgets/index
