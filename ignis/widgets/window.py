@@ -211,6 +211,9 @@ class Window(Gtk.Window, BaseWidget):
 
     @monitor.setter
     def monitor(self, value: int) -> None:
+        if value is None:
+            return
+
         gdkmonitor = Utils.get_monitor(value)
         if gdkmonitor is None:
             raise MonitorNotFoundError(value)

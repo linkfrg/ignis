@@ -77,6 +77,9 @@ class Scale(Gtk.Scale, BaseWidget):
 
     @value.setter
     def value(self, value: float) -> None:
+        if value is None:
+            return
+
         if not self._dragging:
             self.adjustment.set_value(value)
 

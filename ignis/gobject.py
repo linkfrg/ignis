@@ -93,9 +93,7 @@ class IgnisGObject(GObject.Object):
         """
         :meta private:
         """
-        if value is None:
-            return
-        elif isinstance(value, Binding):
+        if isinstance(value, Binding):
             self.bind_property2(
                 source_property=property_name,
                 target=value.target,
