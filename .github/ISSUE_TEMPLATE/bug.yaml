@@ -1,0 +1,95 @@
+name: Bug Report
+description: Something is not working right
+labels: ["bug"]
+body:
+  - type: checkboxes
+    attributes:
+      label: Already reported ? *
+      description: Before opening a new bug report, please take a moment to search through the current open and closed issues to check if it already exists.
+      options:
+      - label: I have searched the existing open and closed issues.
+        required: true
+
+  - type: checkboxes
+    attributes:
+      label: Related to dotfiles ? *
+      description: Before opening a new bug report, please take a moment to make sure that the problem is not related to dotfiles specifically.
+      options:
+      - label: I'm sure the problem is related specifically to Ignis.
+        required: true
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: Regression?
+      description: |
+        Regression means that something used to work but no longer does.
+      multiple: false
+      options:
+        - "Yes"
+        - "No"
+    validations:
+      required: true
+
+  - type: textarea
+    id: ver
+    attributes:
+      label: Version
+      description: |
+        Paste the output of `ignis --version` here.
+
+      value: "
+        ```
+
+        <Paste the output of the command here>
+
+        ```"
+    validations:
+      required: true
+
+  - type: textarea
+    id: distro
+    attributes:
+      label: Distro
+      description: |
+        Indicate your distro name.
+      value: "<Indicate your distro name here>"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: install_method
+    attributes:
+      label: Installation method
+      description: How did you install Ignis?
+      multiple: false
+      options:
+        - "Distro package"
+        - "Build from source (via meson)"
+        - "Setted up a development envieronment"
+    validations:
+      required: true
+
+  - type: textarea
+    id: desc
+    attributes:
+      label: Description
+      description: "What went wrong?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: How to reproduce
+      description: "How can someone else reproduce the issue?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs, images, videos, config files, CSS/SCSS files (if necessary)
+      description: |
+        Anything that can help. Please always ATTACH and not paste them.
+        The log file is stored in ``~/.ignis/ignis.log``
