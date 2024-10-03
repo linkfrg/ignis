@@ -21,8 +21,7 @@ class OrderedGroup(click.Group):
 def get_version_message() -> str:
     return f"""Ignis {Utils.get_ignis_version()}
 Branch: {Utils.get_ignis_branch()}
-Commit: {Utils.get_ignis_commit()} ({Utils.get_ignis_commit_msg()})
-"""
+Commit: {Utils.get_ignis_commit()} ({Utils.get_ignis_commit_msg()})"""
 
 def get_systeminfo() -> str:
     current_desktop = os.getenv("XDG_CURRENT_DESKTOP")
@@ -33,8 +32,7 @@ def get_systeminfo() -> str:
 Current desktop: {current_desktop}
 
 os-release:
-{os_release}
-"""
+{os_release}"""
 
 def print_version(ctx, param, value):
     if value:
