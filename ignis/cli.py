@@ -18,10 +18,27 @@ class OrderedGroup(click.Group):
         return self.commands
 
 
+def get_version_message() -> str:
+    return f"""Ignis {Utils.get_ignis_version()}
+Branch: {Utils.get_ignis_branch()}
+Commit: {Utils.get_ignis_commit()} ({Utils.get_ignis_commit_msg()})
+"""
+
+def get_systeminfo() -> str:
+    current_desktop = os.getenv("XDG_CURRENT_DESKTOP")
+    with open("/etc/os-release") as file:
+        os_release = file.read().strip()
+
+    return f"""{get_version_message()}
+Current desktop: {current_desktop}
+
+os-release:
+{os_release}
+"""
+
 def print_version(ctx, param, value):
     if value:
-        ctx.exit(print(f"Ignis {Utils.get_ignis_version()} {Utils.get_ignis_commit()}"))
-
+        ctx.exit(print(get_version_message()))
 
 def call_client_func(name: str, *args) -> Any:
     client = IgnisClient()
@@ -74,7 +91,7 @@ def init(config: str, debug: bool) -> None:
 
 @cli.command(name="open", help="Open window")
 @click.argument("window")
-def open(window: str) -> None:
+def open_window(window: str) -> None:
     call_client_func("open_window", window)
 
 
@@ -121,3 +138,7 @@ def reload() -> None:
 @cli.command(name="quit", help="Quit Ignis")
 def quit() -> None:
     call_client_func("quit")
+
+@cli.command(name="systeminfo", help="Print system information")
+def systeminfo() -> None:
+    print(get_systeminfo())
