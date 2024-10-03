@@ -3,7 +3,7 @@ import subprocess
 from ignis import __version__
 
 
-def _run_git_cmd(args: str) -> str:
+def _run_git_cmd(args: str) -> str | None:
     try:
         repo_dir = os.path.abspath(os.path.join(__file__, "../.."))
         commit_hash = subprocess.run(
