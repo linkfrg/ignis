@@ -23,6 +23,7 @@ def get_version_message() -> str:
 Branch: {Utils.get_ignis_branch()}
 Commit: {Utils.get_ignis_commit()} ({Utils.get_ignis_commit_msg()})"""
 
+
 def get_systeminfo() -> str:
     current_desktop = os.getenv("XDG_CURRENT_DESKTOP")
     with open("/etc/os-release") as file:
@@ -34,9 +35,11 @@ Current desktop: {current_desktop}
 os-release:
 {os_release}"""
 
+
 def print_version(ctx, param, value):
     if value:
         ctx.exit(print(get_version_message()))
+
 
 def call_client_func(name: str, *args) -> Any:
     client = IgnisClient()
@@ -136,6 +139,7 @@ def reload() -> None:
 @cli.command(name="quit", help="Quit Ignis")
 def quit() -> None:
     call_client_func("quit")
+
 
 @cli.command(name="systeminfo", help="Print system information")
 def systeminfo() -> None:
