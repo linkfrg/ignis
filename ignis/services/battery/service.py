@@ -7,6 +7,8 @@ from .constants import DeviceState
 
 class BatteryService(BaseService):
     def __init__(self) -> None:
+        super().__init__()
+
         self._available: bool = False
         self._percent: int = -1
         self._charging: bool = False
@@ -23,7 +25,7 @@ class BatteryService(BaseService):
             interface_name="org.freedesktop.UPower.Device",
             info=Utils.load_interface_xml("org.freedesktop.UPower.Device"),
         )
-        self._proxy.connect("g-properties-changed", self.__sync)
+        self._proxy.proxy.connect("g-properties-changed", self.__sync)
 
     @GObject.Property
     def available(self) -> bool:
