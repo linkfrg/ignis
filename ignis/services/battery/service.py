@@ -26,6 +26,7 @@ class BatteryService(BaseService):
             info=Utils.load_interface_xml("org.freedesktop.UPower.Device"),
         )
         self._proxy.proxy.connect("g-properties-changed", self.__sync)
+        self.__sync()
 
     @GObject.Property
     def available(self) -> bool:
