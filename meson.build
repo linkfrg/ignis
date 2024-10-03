@@ -48,6 +48,8 @@ install_subdir(
 config = configuration_data()
 config.set('LIB_DIR', libdir)
 config.set('COMMIT', run_command('git', 'rev-parse', 'HEAD').stdout().strip())
+config.set('BRANCH', run_command('git', 'branch', '--show-current').stdout().strip())
+config.set('COMMIT_MSG', run_command('git', 'log', '-1', '--pretty=%B').stdout().strip())
 
 install_data(
     files('bin/ignis'),

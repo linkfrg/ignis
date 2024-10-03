@@ -1,1 +1,3 @@
 __commit__ = "@COMMIT@"
+__branch__ = "@BRANCH@"
+__commit_msg__ = "@COMMIT_MSG@"
