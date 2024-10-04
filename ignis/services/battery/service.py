@@ -66,8 +66,9 @@ class BatteryService(BaseService):
         return self._energy_rate
 
     def __sync(self, *args) -> None:
-        if not self._proxy.IsPresent:
-            self._available = False
+        self._available = self._proxy.IsPresent
+
+        if not self._available:
             self.notify("available")
             return
 
