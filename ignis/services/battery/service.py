@@ -24,6 +24,7 @@ class BatteryService(BaseService):
             object_path="/org/freedesktop/UPower/devices/DisplayDevice",
             interface_name="org.freedesktop.UPower.Device",
             info=Utils.load_interface_xml("org.freedesktop.UPower.Device"),
+            bus_type="system",
         )
         self._proxy.proxy.connect("g-properties-changed", self.__sync)
         self.__sync()

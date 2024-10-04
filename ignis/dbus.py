@@ -4,6 +4,9 @@ from typing import Any, Callable
 from ignis.utils import Utils
 from ignis.gobject import IgnisGObject
 from ignis.exceptions import DBusMethodNotFoundError, DBusPropertyNotFoundError
+from typing import Literal
+
+BUS_TYPE = {"session": Gio.BusType.SESSION, "system": Gio.BusType.SYSTEM}
 
 
 class DBusService(IgnisGObject):
@@ -219,6 +222,7 @@ class DBusProxy(IgnisGObject):
         - **object_path** (``str``, required, read-only): An object path.
         - **interface_name** (``str``, required, read-only): A D-Bus interface name.
         - **info** (`Gio.DBusInterfaceInfo <https://lazka.github.io/pgi-docs/Gio-2.0/classes/DBusInterfaceInfo.html>`_, required, read-only): A ``Gio.DBusInterfaceInfo`` instance. You can get it from XML using :class:`~ignis.utils.Utils.load_interface_xml`.
+        - **bus_type** (``Literal["session", "system"]``): The bus type. Default: ``"session"``.
         - **proxy** (`Gio.DBusProxy <https://lazka.github.io/pgi-docs/index.html#Gio-2.0/classes/DBusProxy.html>`_, not argument, read-only): The ``Gio.DBusProxy`` instance.
         - **methods** (``list[str]``, not argument, read-only): A list of methods exposed by D-Bus service.
         - **properties** (``list[str]``, not argument, read-only): A list of properties exposed by D-Bus service.
@@ -251,18 +255,20 @@ class DBusProxy(IgnisGObject):
         object_path: str,
         interface_name: str,
         info: Gio.DBusInterfaceInfo,
+        bus_type: Literal["session", "system"] = "session",
     ):
         super().__init__()
         self._name = name
         self._object_path = object_path
         self._interface_name = interface_name
         self._info = info
+        self._bus_type = bus_type
 
         self._methods: list[str] = []
         self._properties: list[str] = []
 
         self._proxy = Gio.DBusProxy.new_for_bus_sync(
-            Gio.BusType.SESSION,
+            BUS_TYPE[bus_type],
             Gio.DBusProxyFlags.NONE,
             info,
             name,
@@ -294,6 +300,10 @@ class DBusProxy(IgnisGObject):
         return self._info
 
     @GObject.Property
+    def bus_type(self) -> Literal["session", "system"]:
+        return self._bus_type
+
+    @GObject.Property
     def connection(self) -> Gio.DBusConnection:
         return self._proxy.get_connection()
 
@@ -316,6 +326,7 @@ class DBusProxy(IgnisGObject):
             object_path="/org/freedesktop/DBus",
             interface_name="org.freedesktop.DBus",
             info=Utils.load_interface_xml("org.freedesktop.DBus"),
+            bus_type=self._bus_type,
         )
         return dbus.NameHasOwner("(s)", self.name)
 
@@ -392,7 +403,7 @@ class DBusProxy(IgnisGObject):
             on_name_vanished (``Callable``, optional): A function to call when ``name`` vanished.
         """
         self._watcher = Gio.bus_watch_name(
-            Gio.BusType.SESSION,
+            BUS_TYPE[self._bus_type],
             self.name,
             Gio.BusNameWatcherFlags.NONE,
             on_name_appeared,
