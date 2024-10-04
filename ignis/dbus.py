@@ -336,16 +336,16 @@ class DBusProxy(IgnisGObject):
         return dbus.NameHasOwner("(s)", self.name)
 
     def __getattr__(self, name: str) -> Any:
-        if name in self.methods:
+        if name in self._methods:
             return getattr(self._proxy, name)
-        elif name in self.properties:
+        elif name in self._properties:
             return self.get_dbus_property(name)
         else:
             return super().__getattribute__(name)
 
     def __setattr__(self, name: str, value: Any) -> None:
-        if name in self.properties:
-            self.set_property(name, value)
+        if name in self.__dict__.get('_properties', {}):  # avoid recursion
+            self.set_dbus_property(name, value)
         else:
             return super().__setattr__(name, value)
 
