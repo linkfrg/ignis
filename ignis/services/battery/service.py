@@ -1,5 +1,5 @@
 from ignis.base_service import BaseService
-from gi.repository import GObject  # type: ignore
+from gi.repository import GObject, GLib  # type: ignore
 from ignis.dbus import DBusProxy
 from ignis.utils import Utils
 from .constants import DeviceState
@@ -18,6 +18,10 @@ class BatteryService(BaseService):
         self._energy: int = 0
         self._energy_full: float = 0.0
         self._energy_rate: float = 0.0
+        self._charge_threshold: bool = False
+        self._charge_threshold_supported: bool = False
+        self._charge_start_threshold: int = 0
+        self._charge_end_threshold: int = 0
 
         self._proxy = DBusProxy(
             name="org.freedesktop.UPower",
@@ -65,6 +69,36 @@ class BatteryService(BaseService):
     def energy_rate(self) -> float:
         return self._energy_rate
 
+    @GObject.Property
+    def charge_threshold(self) -> bool:
+        return self._charge_threshold
+
+    @charge_threshold.setter
+    def charge_threshold(self, value: bool) -> None:
+        self._proxy.EnableChargeThreshold("(b)", (value,))
+
+    @GObject.Property
+    def charge_threshold_supported(self) -> bool:
+        return self._charge_threshold_supported
+
+    @GObject.Property
+    def charge_start_threshold(self) -> int:
+        return self._charge_start_threshold
+
+    @charge_start_threshold.setter
+    def charge_start_threshold(self, value: int) -> None:
+        if self.charge_threshold_supported:
+            self._proxy.ChargeStartThreshold = GLib.Variant("(u)", (value,))
+
+    @GObject.Property
+    def charge_end_threshold(self) -> int:
+        return self._charge_end_threshold
+
+    @charge_end_threshold.setter
+    def charge_end_threshold(self, value: int) -> None:
+        if self.charge_threshold_supported:
+            self._proxy.ChargeEndThreshold = GLib.Variant("(u)", (value,))
+
     def __sync(self, *args) -> None:
         self._available = self._proxy.IsPresent
 
@@ -94,5 +128,10 @@ class BatteryService(BaseService):
         self._energy = self._proxy.Energy
         self._energy_full = self._proxy.EnergyFull
         self._energy_rate = self._proxy.EnergyRate
+
+        self._charge_threshold = self._proxy.ChargeThresholdEnabled
+        self._charge_threshold_supported = self._proxy.ChargeThresholdSupported
+        self._charge_start_threshold = self._proxy.ChargeStartThreshold
+        self._charge_end_threshold = self._proxy.ChargeEndThreshold
 
         self.notify_all()
