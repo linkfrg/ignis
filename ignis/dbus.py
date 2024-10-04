@@ -239,14 +239,19 @@ class DBusProxy(IgnisGObject):
         proxy = DBusProxy(...)
         proxy.MyMethod("(is)", 42, "hello")
 
-    To get a D-Bus property, also use the standart pythonic way.
+    To get and set a D-Bus property, also use the standart pythonic way.
 
     .. code-block:: python
 
         from ignis.dbus import DBusProxy
+        from gi.repostitory import GLib
+
         proxy = DBusProxy(...)
         value = proxy.MyValue
         print(value)
+
+        proxy.MyValue = GLib.Variant("(s)", ("Hello world!",))
+
     """
 
     def __init__(
@@ -334,9 +339,15 @@ class DBusProxy(IgnisGObject):
         if name in self.methods:
             return getattr(self._proxy, name)
         elif name in self.properties:
-            return self.__get_dbus_property(name)
+            return self.get_dbus_property(name)
         else:
             return super().__getattribute__(name)
+
+    def __setattr__(self, name: str, value: Any) -> None:
+        if name in self.properties:
+            self.set_property(name, value)
+        else:
+            return super().__setattr__(name, value)
 
     def signal_subscribe(
         self,
@@ -371,7 +382,16 @@ class DBusProxy(IgnisGObject):
         """
         self.connection.signal_unsubscribe(id)
 
-    def __get_dbus_property(self, property_name: str) -> Any:
+    def get_dbus_property(self, property_name: str) -> Any:
+        """
+        Get the value of the D-Bus property by its name.
+
+        Args:
+            property_name (``str``): The name of the property.
+
+        Returns:
+            ``Any``: The value of the property.
+        """
         try:
             return self.connection.call_sync(
                 self.name,
@@ -389,6 +409,29 @@ class DBusProxy(IgnisGObject):
             )[0]
         except GLib.GError:  # type: ignore
             return None
+
+    def set_dbus_property(self, property_name: str, value: GLib.Variant) -> None:
+        """
+        Set the new value of the D-Bus property.
+
+        Args:
+            property_name (``str``): The name of the property.
+            value (``GLib.Variant``): The new value.
+        """
+        self.connection.call_sync(
+            self.name,
+            self.object_path,
+            "org.freedesktop.DBus.Properties",
+            "Set",
+            GLib.Variant(
+                "(ssv)",
+                (self.interface_name, property_name, value),
+            ),
+            None,
+            Gio.DBusCallFlags.NONE,
+            -1,
+            None,
+        )
 
     def watch_name(
         self,
