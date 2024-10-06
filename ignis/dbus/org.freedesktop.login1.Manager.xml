@@ -1,0 +1,11 @@
+<node>
+    <interface name="org.freedesktop.login1.Manager">
+        <method name="GetSession">
+            <arg type="s" name="session_id" direction="in"/>
+            <arg type="o" name="object_path" direction="out"/>
+        </method>
+        <method name="ListSessions">
+            <arg type="a(susso)" name="sessions" direction="out"/>
+        </method>
+    </interface>
+</node>
