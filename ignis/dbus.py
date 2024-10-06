@@ -251,18 +251,21 @@ class DBusProxy(IgnisGObject):
         object_path: str,
         interface_name: str,
         info: Gio.DBusInterfaceInfo,
+        type: Gio.BusType = Gio.BusType.SESSION
+
     ):
         super().__init__()
         self._name = name
         self._object_path = object_path
         self._interface_name = interface_name
         self._info = info
+        self._type = type
 
         self._methods: list[str] = []
         self._properties: list[str] = []
 
         self._proxy = Gio.DBusProxy.new_for_bus_sync(
-            Gio.BusType.SESSION,
+            type,
             Gio.DBusProxyFlags.NONE,
             info,
             name,

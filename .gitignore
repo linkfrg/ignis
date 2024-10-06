@@ -15,3 +15,5 @@ docs/api/widgets
 
 !docs/api/utils/index.rst
 !docs/api/widgets/index.rst
+
+.idea/*
