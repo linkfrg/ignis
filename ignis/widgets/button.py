@@ -18,7 +18,7 @@ class Button(Gtk.Button, BaseWidget):
     .. code-block:: python
 
         Widget.Button(
-            child=Widget.Label('button'),
+            child=Widget.Label(label="button"),
             on_click=lambda self: print(self),
             on_right_click=lambda self: print(self),
             on_middle_click=lambda self: print(self),

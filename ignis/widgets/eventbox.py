@@ -22,7 +22,7 @@ class EventBox(Box):
     .. code-block:: python
 
         Widget.EventBox(
-            child=[Widget.Label(label='this is eventbox'), Widget.Label("It can contain multiple child as Widget.Box")],
+            child=[Widget.Label(label='this is eventbox'), Widget.Label(label="It can contain multiple child as Widget.Box")],
             vertical=True,
             homogeneous=False,
             spacing=52,
