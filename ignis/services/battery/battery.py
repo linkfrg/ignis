@@ -67,14 +67,14 @@ class Battery(IgnisGObject):
 
     @GObject.Property
     def device(self) -> UPowerGlib.Device:
-        return UPowerGlib.Device
+        return self._device
 
     @GObject.Property
     def available(self) -> bool:
         return self._device.props.is_present
 
     @GObject.Property
-    def percent(self) -> int:
+    def percent(self) -> float:
         return self._device.props.percentage
 
     @GObject.Property
@@ -135,7 +135,7 @@ class Battery(IgnisGObject):
 
     @GObject.Property
     def technology(self) -> str:
-        return UPowerGlib.Device.technology_to_string(self._device.props.technology)
+        return UPowerGlib.Device.technology_to_string(self._device.props.technology)  # type: ignore
 
     @GObject.Property
     def temperature(self) -> float:
