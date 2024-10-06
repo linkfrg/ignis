@@ -22,15 +22,16 @@ class BacklightService(BaseService):
         # Setting initial values
         backlights = listdir("/sys/class/backlight")
         for backlight in list(backlights):
-            try:
-                with open("/sys/class/backlight/" + backlight + "/brightness", "r") as brightness_file:
-                    self._brightness = int(brightness_file.read().strip())
-                with open("/sys/class/backlight/" + backlight + "/max_brightness", 'r') as max_brightness_file:
-                    self._max_brightness = int(max_brightness_file.read().strip())
-                self.__backlight = backlight
-                break
-            except:
-                continue
+            if "backlight" in backlight:
+                try:
+                    with open("/sys/class/backlight/" + backlight + "/brightness", "r") as brightness_file:
+                        self._brightness = int(brightness_file.read().strip())
+                    with open("/sys/class/backlight/" + backlight + "/max_brightness", 'r') as max_brightness_file:
+                        self._max_brightness = int(max_brightness_file.read().strip())
+                    self.__backlight = backlight
+                    break
+                except:
+                    continue
         else:
             self._enabled = False
             logger.warning("Backlight not found. Brightness support disabled.")
@@ -53,8 +54,9 @@ class BacklightService(BaseService):
 
     @brightness.setter
     def brightness(self, brightness_val: int) -> None:
-        self._brightness = brightness_val
-        self.__set_brightness(brightness_val)
+        if self._enabled:
+            self._brightness = brightness_val
+            self.__set_brightness(brightness_val)
 
 
     def _get_session_path(self):
@@ -71,7 +73,7 @@ class BacklightService(BaseService):
             sessionid.check_returncode()
             sessionid = sessionid.stdout
         except CalledProcessError:
-            logger.error("Failed to get session id")
+            logger.error("Failed to get session id.")
             return
 
         sessionpath = self.__session_proxy.GetSession('(s)', sessionid.strip() + '\x00').strip()
@@ -80,5 +82,3 @@ class BacklightService(BaseService):
     def __set_brightness(self, brightness_val: int) -> None:
         if self._enabled:
             self.__dbus.SetBrightness("(ssu)", "backlight" + "\x00", self.__backlight.strip() + "\x00", brightness_val)
-            logger.info(f"set brightness to: {brightness_val}")
-
