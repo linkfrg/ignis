@@ -1,9 +1,14 @@
 name: Build Stable Documentation
 
 on:
+
   push:
     branches:
       - stable
+    paths:
+      - "ignis/**"
+      - "docs/**"
+    workflow_dispatch:
 
 jobs:
   build:
