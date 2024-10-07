@@ -93,7 +93,7 @@ class Battery(IgnisGObject):
     def time_remaining(self) -> int:
         return (
             self._device.props.time_to_full
-            if self._charging
+            if self.charging
             else self._device.props.time_to_empty
         )
 
