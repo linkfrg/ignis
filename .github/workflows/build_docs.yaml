@@ -39,3 +39,14 @@ jobs:
         allow_empty_commit: true
         force_orphan: false
         keep_files: true
+
+    - name: Deploy to "stable" directory if TAG matches ref_name
+      if: ${{ inputs.TAG == github.ref_name }}
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: docs/_build/html
+        destination_dir: stable
+        allow_empty_commit: true
+        force_orphan: false
+        keep_files: true
