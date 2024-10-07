@@ -1,8 +1,10 @@
 on: 
-  push: 
+  push:
+    paths:
+      - "ignis/**"
   pull_request:
-  paths:
-    - "ignis/**"
+    paths:
+      - "ignis/**"
 
 name: Static Analysis
 jobs:
