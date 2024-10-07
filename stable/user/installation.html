@@ -38,7 +38,7 @@
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../_static/documentation_options.js?v=0335fd14"></script>
+    <script src="../_static/documentation_options.js?v=ea3bebfc"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -48,7 +48,7 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://linkfrg.github.io/ignis/latest/_static/switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'v0.2';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'stable';
         DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
         </script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -468,6 +468,17 @@ document.write(`
 </pre></div>
 </div>
 </section>
+<section id="nixos">
+<h2>NixOS<a class="headerlink" href="#nixos" title="Link to this heading">#</a></h2>
+<p>Add Ignis to your flake's inputs:</p>
+<div class="highlight-nix notranslate"><div class="highlight"><pre><span></span>ignis<span class="o">.</span><span class="ss">url</span> <span class="o">=</span> <span class="s2">&quot;github:linkfrg/ignis&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Then add the following to <code class="docutils literal notranslate"><span class="pre">environment.systemPackages</span></code> or <code class="docutils literal notranslate"><span class="pre">home.packages</span></code>:</p>
+<div class="highlight-nix notranslate"><div class="highlight"><pre><span></span>inputs<span class="o">.</span>ignis<span class="o">.</span>packages<span class="o">.</span><span class="si">${</span>system<span class="si">}</span><span class="o">.</span>ignis
+</pre></div>
+</div>
+</section>
 <section id="building-from-source">
 <h2>Building from source<a class="headerlink" href="#building-from-source" title="Link to this heading">#</a></h2>
 <p><strong>Dependencies:</strong></p>
@@ -545,6 +556,7 @@ meson<span class="w"> </span>install<span class="w"> </span>-C<span class="w"> <
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arch-linux">Arch linux</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nixos">NixOS</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-from-source">Building from source</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running">Running</a></li>
 </ul>
