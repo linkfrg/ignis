@@ -14,9 +14,9 @@ class BacklightService(BaseService):
     def __init__(self):
         super().__init__()
 
-        self._brightness: int | None = None
-        self._max_brightness: int | None = None
-        self._enabled = True
+        self._brightness: int = -1
+        self._max_brightness: int = -1
+        self._active = True
 
         # Setting initial values
         backlights = listdir("/sys/class/backlight")
@@ -45,13 +45,13 @@ class BacklightService(BaseService):
                 except FileNotFoundError:
                     continue
         else:
-            self._enabled = False
+            self._active = False
             logger.warning("Backlight not found. Brightness support disabled.")
 
         sessionpath = self._get_session_path()
         if sessionpath == "":
             self.__dbus = None
-            self._enabled = False
+            self._active = False
         else:
             self.__dbus = DBusProxy(
                 name="org.freedesktop.login1",
@@ -71,13 +71,13 @@ class BacklightService(BaseService):
 
     @brightness.setter
     def brightness(self, brightness_val: int) -> None:
-        if self._enabled:
+        if self._active:
             self._brightness = brightness_val
             self.__set_brightness(brightness_val)
 
     @GObject.Property
-    def enabled(self) -> bool:
-        return self._enabled
+    def active(self) -> bool:
+        return self._active
 
     def _get_session_path(self) -> str:
         self.__session_proxy = DBusProxy(
@@ -102,7 +102,7 @@ class BacklightService(BaseService):
         return sessionpath
 
     def __set_brightness(self, brightness_val: int) -> None:
-        if self._enabled and self.__dbus is not None:
+        if self._active and self.__dbus is not None:
             self.__dbus.SetBrightness(
                 "(ssu)",
                 "backlight" + "\x00",
