@@ -30,7 +30,6 @@ pkgs.stdenv.mkDerivation {
     pkgs.python312Packages.pygobject3
     pkgs.python312Packages.pycairo
     pkgs.python312Packages.click
-    pkgs.python312Packages.gst-python
     pkgs.python312Packages.charset-normalizer
   ];
 
@@ -56,11 +55,7 @@ pkgs.stdenv.mkDerivation {
     wrapProgram $out/bin/ignis \
       --set PATH "${pkgs.gst_all_1.gstreamer}/bin:${pkgs.dart-sass}/bin:$PATH" \
       --set PYTHONPATH "${concatStringsSep ":" (map (pkg: "${pkg}/lib/python3.12/site-packages") [
-        pkgs.python312Packages.materialyoucolor
-        pkgs.python312Packages.pillow
         pkgs.python312Packages.markupsafe
-        pkgs.python312Packages.jinja2
-        pkgs.python312Packages.gst-python
         pkgs.python312Packages.pygobject3
         pkgs.python312Packages.pycairo
         pkgs.python312Packages.loguru
