@@ -14,3 +14,4 @@ jobs:
     uses: ./.github/workflows/build_docs.yaml
     with:
       TAG: "latest"
+      DEST_DIR: "latest"
