@@ -12,6 +12,16 @@ on:
 
 jobs:
   build:
-    uses: ./.github/workflows/build_docs.yaml
-    with:
-      TAG: ${{ github.event.release.tag_name }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get latest tag
+        run: echo "TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
+
+      - name: Build Documentation
+        uses: ./.github/workflows/build_docs.yaml
+        with:
+          TAG: ${{ env.TAG }}
