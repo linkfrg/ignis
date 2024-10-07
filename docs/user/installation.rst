@@ -12,10 +12,14 @@ NixOS
 ------
 
 To install ignis, you need to add it to your flake's inputs:
+
+.. code-block:: nix
     
     ignis.url = "github:linkfrg/ignis";
 
 Then add the following to environment.systemPackages (or home.packages):
+
+.. code-block:: nix
   
     inputs.ignis.packages.${system}.ignis
 
