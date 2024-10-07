@@ -470,11 +470,11 @@ document.write(`
 </section>
 <section id="nixos">
 <h2>NixOS<a class="headerlink" href="#nixos" title="Link to this heading">#</a></h2>
-<p>To install ignis, you need to add it to your flake's inputs:</p>
+<p>Add Ignis to your flake's inputs:</p>
 <div class="highlight-nix notranslate"><div class="highlight"><pre><span></span>ignis<span class="o">.</span><span class="ss">url</span> <span class="o">=</span> <span class="s2">&quot;github:linkfrg/ignis&quot;</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>Then add the following to environment.systemPackages (or home.packages):</p>
+<p>Then add the following to <code class="docutils literal notranslate"><span class="pre">environment.systemPackages</span></code> or <code class="docutils literal notranslate"><span class="pre">home.packages</span></code>:</p>
 <div class="highlight-nix notranslate"><div class="highlight"><pre><span></span>inputs<span class="o">.</span>ignis<span class="o">.</span>packages<span class="o">.</span><span class="si">${</span>system<span class="si">}</span><span class="o">.</span>ignis
 </pre></div>
 </div>
