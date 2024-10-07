@@ -1,6 +1,6 @@
 from subprocess import CalledProcessError
 
-from gi.repository import GObject  # type: ignore
+from gi.repository import GObject, Gio  # type: ignore
 from loguru import logger
 
 from ignis.base_service import BaseService
@@ -8,7 +8,6 @@ from os import listdir
 
 from ignis.dbus import DBusProxy
 from ignis.utils import load_interface_xml, exec_sh, Utils
-from gi.repository import Gio
 
 
 class BacklightService(BaseService):
@@ -33,6 +32,15 @@ class BacklightService(BaseService):
                     ) as max_brightness_file:
                         self._max_brightness = int(max_brightness_file.read().strip())
                     self.__backlight = backlight
+
+                    Utils.FileMonitor(
+                        path="/sys/class/backlight/" + backlight + "/brightness",
+                        recursive=False,
+                        callback=lambda path, event_type: self.__update_brightness()
+                        if event_type == "changed"
+                        else None,
+                    )
+
                     break
                 except FileNotFoundError:
                     continue
@@ -67,6 +75,10 @@ class BacklightService(BaseService):
             self._brightness = brightness_val
             self.__set_brightness(brightness_val)
 
+    @GObject.Property
+    def enabled(self) -> bool:
+        return self._enabled
+
     def _get_session_path(self) -> str:
         self.__session_proxy = DBusProxy(
             name="org.freedesktop.login1",
@@ -76,10 +88,10 @@ class BacklightService(BaseService):
             type=Gio.BusType.SYSTEM,
         )
 
-        sessionid = exec_sh("echo $XDG_SESSION_ID")
+        sessionidcmd = exec_sh("echo $XDG_SESSION_ID")
         try:
-            sessionid.check_returncode()
-            sessionid = str(sessionid.stdout)
+            sessionidcmd.check_returncode()
+            sessionid = str(sessionidcmd.stdout)
         except CalledProcessError:
             logger.error("Failed to get session id.")
             return ""
@@ -97,3 +109,8 @@ class BacklightService(BaseService):
                 self.__backlight.strip() + "\x00",
                 brightness_val,
             )
+
+    def __update_brightness(self) -> None:
+        with open("/sys/class/backlight/" + self.__backlight + "/brightness") as file:
+            self._brightness = int(file.read().strip())
+            self.notify("brightness")
