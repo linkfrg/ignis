@@ -7,3 +7,4 @@ generated
 .vscode
 build
 subprojects
+docs
