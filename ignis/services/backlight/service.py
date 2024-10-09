@@ -58,7 +58,7 @@ class BacklightService(BaseService):
                 object_path=self._get_session_path(),
                 info=Utils.load_interface_xml("org.freedesktop.login1.Session"),
                 interface_name="org.freedesktop.login1.Session",
-                type=Gio.BusType.SYSTEM,
+                bus_type="system"
             )
 
     @GObject.Property(type=int)
@@ -85,7 +85,7 @@ class BacklightService(BaseService):
             object_path="/org/freedesktop/login1",
             info=load_interface_xml("org.freedesktop.login1.Manager"),
             interface_name="org.freedesktop.login1.Manager",
-            type=Gio.BusType.SYSTEM,
+            bus_type="system"
         )
 
         sessionidcmd = exec_sh("echo $XDG_SESSION_ID")
