@@ -1,13 +1,13 @@
-from subprocess import CalledProcessError
+import os
+from typing import Literal
 
 from gi.repository import GObject  # type: ignore
-from loguru import logger
 
 from ignis.base_service import BaseService
 from os import listdir
 
 from ignis.dbus import DBusProxy
-from ignis.utils import load_interface_xml, exec_sh, Utils
+from ignis.utils import load_interface_xml, Utils
 
 
 class BacklightService(BaseService):
@@ -16,27 +16,21 @@ class BacklightService(BaseService):
 
         self._brightness: int = -1
         self._max_brightness: int = -1
-        self._active = True
+        self._available = True
 
         # Setting initial values
         backlights = listdir("/sys/class/backlight")
         for backlight in list(backlights):
             if "backlight" in backlight:
                 try:
-                    with open(
-                        "/sys/class/backlight/" + backlight + "/brightness"
-                    ) as brightness_file:
-                        self._brightness = int(brightness_file.read().strip())
-                    with open(
-                        "/sys/class/backlight/" + backlight + "/max_brightness"
-                    ) as max_brightness_file:
-                        self._max_brightness = int(max_brightness_file.read().strip())
-                    self.__backlight = backlight
+                    self._backlight = backlight
+                    self.__update_from_file(file="brightness", notify=False)
+                    self.__update_from_file(file="max_brightness", notify=False)
 
                     Utils.FileMonitor(
                         path="/sys/class/backlight/" + backlight + "/brightness",
                         recursive=False,
-                        callback=lambda path, event_type: self.__update_brightness()
+                        callback=lambda path, event_type: self.__update_from_file(file="brightness", notify=True)
                         if event_type == "changed"
                         else None,
                     )
@@ -45,20 +39,19 @@ class BacklightService(BaseService):
                 except FileNotFoundError:
                     continue
         else:
-            self._active = False
-            logger.warning("Backlight not found. Brightness support disabled.")
+            self._available = False
 
         sessionpath = self._get_session_path()
         if sessionpath == "":
             self.__dbus = None
-            self._active = False
+            self._available = False
         else:
             self.__dbus = DBusProxy(
                 name="org.freedesktop.login1",
-                object_path=self._get_session_path(),
+                object_path=sessionpath,
                 info=Utils.load_interface_xml("org.freedesktop.login1.Session"),
                 interface_name="org.freedesktop.login1.Session",
-                bus_type="system"
+                bus_type="system",
             )
 
     @GObject.Property(type=int)
@@ -71,13 +64,13 @@ class BacklightService(BaseService):
 
     @brightness.setter
     def brightness(self, brightness_val: int) -> None:
-        if self._active:
+        if self._available:
             self._brightness = brightness_val
             self.__set_brightness(brightness_val)
 
     @GObject.Property
-    def active(self) -> bool:
-        return self._active
+    def available(self) -> bool:
+        return self._available
 
     def _get_session_path(self) -> str:
         self.__session_proxy = DBusProxy(
@@ -85,33 +78,31 @@ class BacklightService(BaseService):
             object_path="/org/freedesktop/login1",
             info=load_interface_xml("org.freedesktop.login1.Manager"),
             interface_name="org.freedesktop.login1.Manager",
-            bus_type="system"
+            bus_type="system",
         )
 
-        sessionidcmd = exec_sh("echo $XDG_SESSION_ID")
-        try:
-            sessionidcmd.check_returncode()
-            sessionid = str(sessionidcmd.stdout)
-        except CalledProcessError:
-            logger.error("Failed to get session id. Brightness support disabled")
-            self._active = False
+        sessionid = os.getenv("XDG_SESSION_ID", default="")
+        if sessionid == "":
             return ""
 
-        sessionpath = self.__session_proxy.GetSession(
-            "(s)", sessionid.strip() + "\x00"
-        ).strip()
+        sessionpath = self.__session_proxy.GetSession("(s)", sessionid.strip() + "\x00").strip()
         return sessionpath
 
     def __set_brightness(self, brightness_val: int) -> None:
-        if self._active and self.__dbus is not None:
+        if self._available and self.__dbus is not None:
             self.__dbus.SetBrightness(
                 "(ssu)",
                 "backlight" + "\x00",
-                self.__backlight.strip() + "\x00",
+                self._backlight.strip() + "\x00",
                 brightness_val,
             )
 
-    def __update_brightness(self) -> None:
-        with open("/sys/class/backlight/" + self.__backlight + "/brightness") as file:
-            self._brightness = int(file.read().strip())
-            self.notify("brightness")
+    def __update_from_file(self, file: Literal["brightness", "max_brightness"], notify: bool) -> None:
+        if self._available:
+            with open(f"/sys/class/backlight/{self._backlight}/{str(file)}") as backlight_file:
+                if file == "brightness":
+                    self._brightness = int(backlight_file.read().strip())
+                elif file == "max_brightness":
+                    self._max_brightness = int(backlight_file.read().strip())
+            if notify:
+                self.notify("brightness")
