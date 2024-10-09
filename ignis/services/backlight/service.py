@@ -93,7 +93,8 @@ class BacklightService(BaseService):
             sessionidcmd.check_returncode()
             sessionid = str(sessionidcmd.stdout)
         except CalledProcessError:
-            logger.error("Failed to get session id.")
+            logger.error("Failed to get session id. Brightness support disabled")
+            self._active = False
             return ""
 
         sessionpath = self.__session_proxy.GetSession(
