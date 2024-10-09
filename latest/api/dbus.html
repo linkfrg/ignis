@@ -655,18 +655,25 @@ this class also provides convenient pythonic property access.</p>
 </dl>
 <p>To call a D-Bus method, use the standart pythonic way.
 The first argument always needs to be the DBus signature tuple of the method call.
-Subsequent arguments must match the provided D-Bus signature.
-If the D-Bus method does not accept any arguments, do not pass arguments.</p>
+Next arguments must match the provided D-Bus signature.
+If the D-Bus method does not accept any arguments, do not pass them.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.dbus</span> <span class="kn">import</span> <span class="n">DBusProxy</span>
 <span class="n">proxy</span> <span class="o">=</span> <span class="n">DBusProxy</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="n">proxy</span><span class="o">.</span><span class="n">MyMethod</span><span class="p">(</span><span class="s2">&quot;(is)&quot;</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="s2">&quot;hello&quot;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">proxy</span><span class="o">.</span><span class="n">MyMethod</span><span class="p">(</span><span class="s2">&quot;(is)&quot;</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="s2">&quot;hello&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>To get a D-Bus property, also use the standart pythonic way.</p>
+<p>To get a D-Bus property:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.dbus</span> <span class="kn">import</span> <span class="n">DBusProxy</span>
 <span class="n">proxy</span> <span class="o">=</span> <span class="n">DBusProxy</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="n">value</span> <span class="o">=</span> <span class="n">proxy</span><span class="o">.</span><span class="n">MyValue</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">proxy</span><span class="o">.</span><span class="n">MyValue</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To set a D-Bus property:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.dbus</span> <span class="kn">import</span> <span class="n">DBusProxy</span>
+<span class="n">proxy</span> <span class="o">=</span> <span class="n">DBusProxy</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="c1"># pass GLib.Variant as new property value</span>
+<span class="n">proxy</span><span class="o">.</span><span class="n">MyValue</span> <span class="o">=</span> <span class="n">GLib</span><span class="o">.</span><span class="n">Variant</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="s2">&quot;Hello world!&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="py method">
