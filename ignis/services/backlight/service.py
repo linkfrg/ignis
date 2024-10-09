@@ -1,6 +1,6 @@
 from subprocess import CalledProcessError
 
-from gi.repository import GObject, Gio  # type: ignore
+from gi.repository import GObject  # type: ignore
 from loguru import logger
 
 from ignis.base_service import BaseService
