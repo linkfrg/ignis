@@ -230,23 +230,32 @@ class DBusProxy(IgnisGObject):
 
     To call a D-Bus method, use the standart pythonic way.
     The first argument always needs to be the DBus signature tuple of the method call.
-    Subsequent arguments must match the provided D-Bus signature.
-    If the D-Bus method does not accept any arguments, do not pass arguments.
+    Next arguments must match the provided D-Bus signature.
+    If the D-Bus method does not accept any arguments, do not pass them.
 
     .. code-block:: python
 
         from ignis.dbus import DBusProxy
         proxy = DBusProxy(...)
-        proxy.MyMethod("(is)", 42, "hello")
+        result = proxy.MyMethod("(is)", 42, "hello")
+        print(result)
 
-    To get a D-Bus property, also use the standart pythonic way.
+    To get a D-Bus property:
 
     .. code-block:: python
 
         from ignis.dbus import DBusProxy
         proxy = DBusProxy(...)
-        value = proxy.MyValue
-        print(value)
+        print(proxy.MyValue)
+
+    To set a D-Bus property:
+
+    .. code-block:: python
+
+        from ignis.dbus import DBusProxy
+        proxy = DBusProxy(...)
+        # pass GLib.Variant as new property value
+        proxy.MyValue = GLib.Variant("s", "Hello world!")
     """
 
     def __init__(
@@ -334,6 +343,12 @@ class DBusProxy(IgnisGObject):
         else:
             return super().__getattribute__(name)
 
+    def __setattr__(self, name: str, value: Any) -> None:
+        if name in self.__dict__.get("_properties", {}):  # avoid recursion
+            self.__set_dbus_property(name, value)
+        else:
+            return super().__setattr__(name, value)
+
     def signal_subscribe(
         self,
         signal_name: str,
@@ -385,6 +400,22 @@ class DBusProxy(IgnisGObject):
             )[0]
         except GLib.GError:  # type: ignore
             return None
+
+    def __set_dbus_property(self, property_name: str, value: GLib.Variant) -> None:
+        self.connection.call_sync(
+            self.name,
+            self.object_path,
+            "org.freedesktop.DBus.Properties",
+            "Set",
+            GLib.Variant(
+                "(ssv)",
+                (self.interface_name, property_name, value),
+            ),
+            None,
+            Gio.DBusCallFlags.NONE,
+            -1,
+            None,
+        )
 
     def watch_name(
         self,
