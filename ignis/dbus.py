@@ -222,7 +222,7 @@ class DBusProxy(IgnisGObject):
         - **object_path** (``str``, required, read-only): An object path.
         - **interface_name** (``str``, required, read-only): A D-Bus interface name.
         - **info** (`Gio.DBusInterfaceInfo <https://lazka.github.io/pgi-docs/Gio-2.0/classes/DBusInterfaceInfo.html>`_, required, read-only): A ``Gio.DBusInterfaceInfo`` instance. You can get it from XML using :class:`~ignis.utils.Utils.load_interface_xml`.
-        - **bus_type** (``Literal["session", "system"]``): The bus type. Default: ``"session"``.
+        - **bus_type** (``Literal["session", "system"]``): The type of the bus. Default: ``"session"``.
         - **proxy** (`Gio.DBusProxy <https://lazka.github.io/pgi-docs/index.html#Gio-2.0/classes/DBusProxy.html>`_, not argument, read-only): The ``Gio.DBusProxy`` instance.
         - **methods** (``list[str]``, not argument, read-only): A list of methods exposed by D-Bus service.
         - **properties** (``list[str]``, not argument, read-only): A list of properties exposed by D-Bus service.
@@ -230,28 +230,32 @@ class DBusProxy(IgnisGObject):
 
     To call a D-Bus method, use the standart pythonic way.
     The first argument always needs to be the DBus signature tuple of the method call.
-    Subsequent arguments must match the provided D-Bus signature.
-    If the D-Bus method does not accept any arguments, do not pass arguments.
+    Next arguments must match the provided D-Bus signature.
+    If the D-Bus method does not accept any arguments, do not pass them.
 
     .. code-block:: python
 
         from ignis.dbus import DBusProxy
         proxy = DBusProxy(...)
-        proxy.MyMethod("(is)", 42, "hello")
+        result = proxy.MyMethod("(is)", 42, "hello")
+        print(result)
 
-    To get and set a D-Bus property, also use the standart pythonic way.
+    To get a D-Bus property:
 
     .. code-block:: python
 
         from ignis.dbus import DBusProxy
-        from gi.repostitory import GLib
-
         proxy = DBusProxy(...)
-        value = proxy.MyValue
-        print(value)
+        print(proxy.MyValue)
 
-        proxy.MyValue = GLib.Variant("(s)", ("Hello world!",))
+    To set a D-Bus property:
 
+    .. code-block:: python
+
+        from ignis.dbus import DBusProxy
+        proxy = DBusProxy(...)
+        # pass GLib.Variant as new property value
+        proxy.MyValue = GLib.Variant("s", "Hello world!")
     """
 
     def __init__(
@@ -305,10 +309,6 @@ class DBusProxy(IgnisGObject):
         return self._info
 
     @GObject.Property
-    def bus_type(self) -> Literal["session", "system"]:
-        return self._bus_type
-
-    @GObject.Property
     def connection(self) -> Gio.DBusConnection:
         return self._proxy.get_connection()
 
@@ -336,16 +336,16 @@ class DBusProxy(IgnisGObject):
         return dbus.NameHasOwner("(s)", self.name)
 
     def __getattr__(self, name: str) -> Any:
-        if name in self._methods:
+        if name in self.methods:
             return getattr(self._proxy, name)
-        elif name in self._properties:
-            return self.get_dbus_property(name)
+        elif name in self.properties:
+            return self.__get_dbus_property(name)
         else:
             return super().__getattribute__(name)
 
     def __setattr__(self, name: str, value: Any) -> None:
         if name in self.__dict__.get("_properties", {}):  # avoid recursion
-            self.set_dbus_property(name, value)
+            self.__set_dbus_property(name, value)
         else:
             return super().__setattr__(name, value)
 
@@ -382,16 +382,7 @@ class DBusProxy(IgnisGObject):
         """
         self.connection.signal_unsubscribe(id)
 
-    def get_dbus_property(self, property_name: str) -> Any:
-        """
-        Get the value of the D-Bus property by its name.
-
-        Args:
-            property_name (``str``): The name of the property.
-
-        Returns:
-            ``Any``: The value of the property.
-        """
+    def __get_dbus_property(self, property_name: str) -> Any:
         try:
             return self.connection.call_sync(
                 self.name,
@@ -410,14 +401,7 @@ class DBusProxy(IgnisGObject):
         except GLib.GError:  # type: ignore
             return None
 
-    def set_dbus_property(self, property_name: str, value: GLib.Variant) -> None:
-        """
-        Set the new value of the D-Bus property.
-
-        Args:
-            property_name (``str``): The name of the property.
-            value (``GLib.Variant``): The new value.
-        """
+    def __set_dbus_property(self, property_name: str, value: GLib.Variant) -> None:
         self.connection.call_sync(
             self.name,
             self.object_path,
