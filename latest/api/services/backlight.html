@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>CenterBox &#8212; Ignis documentation</title>
+    <title>Backlight &#8212; Ignis documentation</title>
   
   
   
@@ -44,7 +44,7 @@
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'api/widgets/CenterBox';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/services/backlight';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://linkfrg.github.io/ignis/latest/_static/switcher.json';
@@ -53,8 +53,8 @@
         </script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="CheckButton" href="CheckButton.html" />
-    <link rel="prev" title="Calendar" href="Calendar.html" />
+    <link rel="next" title="Fetch" href="fetch.html" />
+    <link rel="prev" title="Audio" href="audio.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -406,55 +406,55 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="../dbus_menu.html">D-Bus menu</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../base_widget.html">BaseWidget</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../base_service.html">BaseService</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Widgets</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="Arrow.html">Arrow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ArrowButton.html">ArrowButton</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Box.html">Box</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Button.html">Button</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Calendar.html">Calendar</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">CenterBox</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CheckButton.html">CheckButton</a></li>
-<li class="toctree-l2"><a class="reference internal" href="DropDown.html">DropDown</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Entry.html">Entry</a></li>
-<li class="toctree-l2"><a class="reference internal" href="EventBox.html">EventBox</a></li>
-<li class="toctree-l2"><a class="reference internal" href="FileChooserButton.html">FileChooserButton</a></li>
-<li class="toctree-l2"><a class="reference internal" href="FileDialog.html">FileDialog</a></li>
-<li class="toctree-l2"><a class="reference internal" href="FileFilter.html">FileFilter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Grid.html">Grid</a></li>
-<li class="toctree-l2"><a class="reference internal" href="HeaderBar.html">HeaderBar</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Icon.html">Icon</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Label.html">Label</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ListBox.html">ListBox</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ListBoxRow.html">ListBoxRow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="MenuItem.html">MenuItem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Overlay.html">Overlay</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Picture.html">Picture</a></li>
-<li class="toctree-l2"><a class="reference internal" href="PopoverMenu.html">PopoverMenu</a></li>
-<li class="toctree-l2"><a class="reference internal" href="RegularWindow.html">RegularWindow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Revealer.html">Revealer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="RevealerWindow.html">RevealerWindow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Scale.html">Scale</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Scroll.html">Scroll</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Separator.html">Separator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="SpinButton.html">SpinButton</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Switch.html">Switch</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ToggleButton.html">ToggleButton</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Window.html">Window</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../widgets/index.html">Widgets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Arrow.html">Arrow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/ArrowButton.html">ArrowButton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Box.html">Box</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Button.html">Button</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Calendar.html">Calendar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/CenterBox.html">CenterBox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/CheckButton.html">CheckButton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/DropDown.html">DropDown</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Entry.html">Entry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/EventBox.html">EventBox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/FileChooserButton.html">FileChooserButton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/FileDialog.html">FileDialog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/FileFilter.html">FileFilter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Grid.html">Grid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/HeaderBar.html">HeaderBar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Icon.html">Icon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Label.html">Label</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/ListBox.html">ListBox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/ListBoxRow.html">ListBoxRow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/MenuItem.html">MenuItem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Overlay.html">Overlay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Picture.html">Picture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/PopoverMenu.html">PopoverMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/RegularWindow.html">RegularWindow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Revealer.html">Revealer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/RevealerWindow.html">RevealerWindow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Scale.html">Scale</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Scroll.html">Scroll</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Separator.html">Separator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/SpinButton.html">SpinButton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Switch.html">Switch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/ToggleButton.html">ToggleButton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Window.html">Window</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../services/index.html">Services</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../services/applications.html">Applications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../services/audio.html">Audio</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../services/backlight.html">Backlight</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../services/fetch.html">Fetch</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../services/hyprland.html">Hyprland</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../services/mpris.html">MPRIS (media)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../services/network.html">Network</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../services/notifications.html">Notifications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../services/options.html">Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../services/recorder.html">Recorder</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../services/system_tray.html">System Tray</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../services/wallpaper.html">Wallpaper</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Services</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="applications.html">Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="audio.html">Audio</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Backlight</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fetch.html">Fetch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hyprland.html">Hyprland</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mpris.html">MPRIS (media)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="network.html">Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notifications.html">Notifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="options.html">Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recorder.html">Recorder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system_tray.html">System Tray</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wallpaper.html">Wallpaper</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../utils/index.html">Utils</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -523,9 +523,9 @@ document.write(`
     <li class="breadcrumb-item"><a href="../index.html" class="nav-link">API reference</a></li>
     
     
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Widgets</a></li>
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Services</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">CenterBox</li>
+    <li class="breadcrumb-item active" aria-current="page">Backlight</li>
   </ul>
 </nav>
 </div>
@@ -542,25 +542,33 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="centerbox">
-<h1>CenterBox<a class="headerlink" href="#centerbox" title="Link to this heading">#</a></h1>
+  <section id="backlight">
+<h1>Backlight<a class="headerlink" href="#backlight" title="Link to this heading">#</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.CenterBox">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.widgets.Widget.</span></span><span class="sig-name descname"><span class="pre">CenterBox</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.widgets.Widget.CenterBox" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/CenterBox.html">Gtk.CenterBox</a>.</p>
-<p>A box widget that contains three widgets, which are placed at the start, center, and end of the container.</p>
+<dt class="sig sig-object py" id="ignis.services.backlight.BacklightService">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.backlight.</span></span><span class="sig-name descname"><span class="pre">BacklightService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.backlight.BacklightService" title="Link to this definition">#</a></dt>
+<dd><p>A backlight service.
+Allows controlling device screen brightness.</p>
 <dl class="simple">
 <dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>vertical</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, optional, read-write): Whether the box arranges children vertically.</p></li>
+<li><p><strong>brightness</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, read-write): Current brightness of your device backlight. <code class="docutils literal notranslate"><span class="pre">-1</span></code> if not applicable.</p></li>
+<li><p><strong>max_brightness</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, read-only): Maximum brightness allowed by your device backlight. <code class="docutils literal notranslate"><span class="pre">-1</span></code> if not applicable.</p></li>
+<li><p><strong>available</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-only): <code class="docutils literal notranslate"><span class="pre">True</span></code> if your device has a controllable backlight, <code class="docutils literal notranslate"><span class="pre">False</span></code> if otherwise.</p></li>
 </ul>
 </dd>
 </dl>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Widget</span><span class="o">.</span><span class="n">CenterBox</span><span class="p">(</span>
-    <span class="n">vertical</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">start_widget</span><span class="o">=</span><span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;start&#39;</span><span class="p">),</span>
-    <span class="n">center_widget</span><span class="o">=</span><span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">),</span>
-    <span class="n">end_widget</span><span class="o">=</span><span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;end&#39;</span><span class="p">),</span>
-<span class="p">)</span>
+<p><strong>Example Usage:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.service.backlight</span> <span class="kn">import</span> <span class="n">BacklightService</span>
+
+<span class="n">backlight</span> <span class="o">=</span> <span class="n">BacklightService</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span>
+
+<span class="c1"># Getter methods</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">backlight</span><span class="o">.</span><span class="n">get_brightness</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">backlight</span><span class="o">.</span><span class="n">get_max_brightness</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">backlight</span><span class="o">.</span><span class="n">get_available</span><span class="p">())</span>
+
+<span class="c1"># Setter method</span>
+<span class="n">backlight</span><span class="o">.</span><span class="n">set_brightness</span><span class="p">(</span><span class="n">backlight</span><span class="o">.</span><span class="n">get_max_brightness</span><span class="p">())</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -578,20 +586,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="Calendar.html"
+       href="audio.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Calendar</p>
+        <p class="prev-next-title">Audio</p>
       </div>
     </a>
     <a class="right-next"
-       href="CheckButton.html"
+       href="fetch.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">CheckButton</p>
+        <p class="prev-next-title">Fetch</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -613,7 +621,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.CenterBox"><code class="docutils literal notranslate"><span class="pre">CenterBox</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.backlight.BacklightService"><code class="docutils literal notranslate"><span class="pre">BacklightService</span></code></a></li>
 </ul>
   </nav></div>
 
@@ -621,7 +629,7 @@ document.write(`
 
   
   <div class="tocsection editthispage">
-    <a href="https://github.com/linkfrg/ignis/edit/main/docs/api/widgets/CenterBox.rst">
+    <a href="https://github.com/linkfrg/ignis/edit/main/docs/api/services/backlight.rst">
       <i class="fa-solid fa-pencil"></i>
       
       
@@ -636,7 +644,7 @@ document.write(`
   <div class="sidebar-secondary-item">
 
   <div class="tocsection sourcelink">
-    <a href="../../_sources/api/widgets/CenterBox.rst.txt">
+    <a href="../../_sources/api/services/backlight.rst.txt">
       <i class="fa-solid fa-file-lines"></i> Show Source
     </a>
   </div>
