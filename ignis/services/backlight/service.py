@@ -12,17 +12,18 @@ from ignis.utils import load_interface_xml, Utils
 
 class BacklightService(BaseService):
     """
-    A backlight service
-    Allows controlling device screen brightness
+    A backlight service.
+    Allows controlling device screen brightness.
 
     Properties:
-    - **brightness** (``int``, read-write): Stores the current brightness value for your device backlight. ''-1'' if not applicable, ie your device does not have a screen backlight(for eg: PC)
-    - **max_brightness** (``int``, read-only): Stores the maximum possible brightness value allowed by your device backlight. ''-1'' if not applicable
-    - **available** (``bool``, read-only): ``True`` if your device has a controllable backlight, ``False`` if otherwise
+        - **brightness** (``int``, read-write): Current brightness of your device backlight. ``-1`` if not applicable.
+        - **max_brightness** (``int``, read-only): Maximum brightness allowed by your device backlight. ``-1`` if not applicable.
+        - **available** (``bool``, read-only): ``True`` if your device has a controllable backlight, ``False`` if otherwise.
 
     **Example Usage:**
 
     .. code-block:: python
+
         from ignis.service.backlight import BacklightService
 
         backlight = BacklightService.get_default()
@@ -49,15 +50,14 @@ class BacklightService(BaseService):
             if "backlight" in backlight:
                 try:
                     self._backlight = backlight
-                    self.__update_from_file(file="brightness", notify=False)
-                    self.__update_from_file(file="max_brightness", notify=False)
+                    self._brightness = self.__update_from_file(file="brightness", notify=False)
+                    self._max_brightness = self.__update_from_file(file="max_brightness", notify=False)
 
                     Utils.FileMonitor(
                         path="/sys/class/backlight/" + backlight + "/brightness",
                         recursive=False,
-                        callback=lambda path, event_type: self.__update_from_file(file="brightness", notify=True)
-                        if event_type == "changed"
-                        else None,
+                        # updating self._brightness and calling the signal notify::brightness
+                        callback=lambda path, event_type: setattr(self, "_brightness", self.__update_from_file(file="brightness", notify=True)) if event_type == "changed" else None,
                     )
 
                     break
@@ -122,12 +122,11 @@ class BacklightService(BaseService):
                 brightness_val,
             )
 
-    def __update_from_file(self, file: Literal["brightness", "max_brightness"], notify: bool) -> None:
+    def __update_from_file(self, file: Literal["brightness", "max_brightness"], notify: bool) -> int:
         if self._available:
-            with open(f"/sys/class/backlight/{self._backlight}/{str(file)}") as backlight_file:
-                if file == "brightness":
-                    self._brightness = int(backlight_file.read().strip())
-                elif file == "max_brightness":
-                    self._max_brightness = int(backlight_file.read().strip())
             if notify:
                 self.notify("brightness")
+            with open(f"/sys/class/backlight/{self._backlight}/{file}") as backlight_file:
+                return int(backlight_file.read().strip())
+        else:
+            return -1
