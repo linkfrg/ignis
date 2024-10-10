@@ -11,6 +11,31 @@ from ignis.utils import load_interface_xml, Utils
 
 
 class BacklightService(BaseService):
+    """
+    A backlight service
+    Allows controlling device screen brightness
+
+    Properties:
+    - **brightness** (``int``, read-write): Stores the current brightness value for your device backlight. ''-1'' if not applicable, ie your device does not have a screen backlight(for eg: PC)
+    - **max_brightness** (``int``, read-only): Stores the maximum possible brightness value allowed by your device backlight. ''-1'' if not applicable
+    - **available** (``bool``, read-only): ``True`` if your device has a controllable backlight, ``False`` if otherwise
+
+    **Example Usage:**
+
+    .. code-block:: python
+        from ignis.service.backlight import BacklightService
+
+        backlight = BacklightService.get_default()
+
+        # Getter methods
+        print(backlight.get_brightness())
+        print(backlight.get_max_brightness())
+        print(backlight.get_available())
+
+        # Setter method
+        backlight.set_brightness(backlight.get_max_brightness())
+    """
+
     def __init__(self):
         super().__init__()
 
