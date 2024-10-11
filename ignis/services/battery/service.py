@@ -7,6 +7,7 @@ from .battery import Battery
 class BatteryService(BaseService):
     """
     A battery service.
+    Requires ``UPower``.
 
     Signals:
         - **device-added** (:class:`~ignis.services.battery.Battery`): Emitted when a battery has been added.
