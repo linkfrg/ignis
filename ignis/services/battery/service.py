@@ -54,7 +54,8 @@ class BatteryService(BaseService):
 
         self.emit("device-added", battery)
 
-    def __remove_device(self, x, device: UPowerGlib.Device) -> None:
-        if device.get_object_path() in self._devices:
-            battery = self._devices.pop(device.get_object_path())
-            battery.emit("removed")
+    def __remove_device(self, x, object_path: str) -> None:
+        if object_path not in self._devices:
+            return
+        battery = self._devices.pop(object_path)
+        battery.emit("removed")
