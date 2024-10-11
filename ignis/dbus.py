@@ -309,6 +309,10 @@ class DBusProxy(IgnisGObject):
         return self._info
 
     @GObject.Property
+    def bus_type(self) -> Literal["session", "system"]:
+        return self._bus_type
+
+    @GObject.Property
     def connection(self) -> Gio.DBusConnection:
         return self._proxy.get_connection()
 
