@@ -8,10 +8,17 @@ class BatteryService(BaseService):
     """
     A battery service.
 
+    Signals:
+        - **device-added** (:class:`~ignis.services.battery.Battery`): Emitted when a battery has been added.
+
     Properties:
         - **devices** (list[:class:`~ignis.services.battery.Battery`]): List of all batteries.
         - **display_device** (:class:`~ignis.services.battery.Battery`): The currently active battery intended for display.
     """
+
+    __gsignals__ = {
+        "device-added": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, (Battery,)),
+    }
 
     def __init__(self) -> None:
         super().__init__()
@@ -40,8 +47,13 @@ class BatteryService(BaseService):
         ):  # don't add non-battery devices
             return
 
-        self._devices[device.get_object_path()] = Battery(device=device)
+        battery = Battery(device=device)
+
+        self._devices[device.get_object_path()] = battery
+
+        self.emit("device-added", battery)
 
     def __remove_device(self, x, device: UPowerGlib.Device) -> None:
         if device.get_object_path() in self._devices:
-            self._devices.pop(device.get_object_path())
+            battery = self._devices.pop(device.get_object_path())
+            battery.emit("removed")

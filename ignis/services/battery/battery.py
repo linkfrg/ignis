@@ -9,6 +9,9 @@ class Battery(IgnisGObject):
     """
     A battery object.
 
+    Signals:
+        - **removed** (:class:`~ignis.services.battery.Battery`): Emitted when the battery has been removed.
+
     Properties:
         - **device** (``UPowerGlib.Device``, read-only): The instance of ``UPowerGlib.Device``.
         - **native_path** (``str``, read-only): The native path of the device.
@@ -31,6 +34,10 @@ class Battery(IgnisGObject):
         - **temperature** (``float``, read-only): The temperature of the device in degrees Celsius.
         - **voltage** (``float``, read-only): The current voltage of the device.
     """
+
+    __gsignals__ = {
+        "removed": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
+    }
 
     def __init__(self, device: UPowerGlib.Device):
         super().__init__()
