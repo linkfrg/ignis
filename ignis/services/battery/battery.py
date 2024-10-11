@@ -6,6 +6,32 @@ from ignis.utils import Utils
 
 
 class Battery(IgnisGObject):
+    """
+    A battery object.
+
+    Properties:
+        - **device** (``UPowerGlib.Device``, read-only): The instance of ``UPowerGlib.Device``.
+        - **native_path** (``str``, read-only): The native path of the device.
+        - **available** (``bool`` read-only): Whether the battery is available.
+        - **percent** (``float`` read-only): Current percentage.
+        - **charging** (``bool`` read-only): Whether the battery is currently charging.
+        - **charged** (``bool`` read-only): Whether the battery is charged.
+        - **icon_name** (``str`` read-only): The current icon name.
+        - **time_remaining** (``int`` read-only): Time in seconds until fully charged (when charging) or until fully drains (when discharging).
+        - **energy** (``float`` read-only): The energy left in the device. Measured in mWh.
+        - **energy_full** (``float``, read-only): The amount of energy when the device is fully charged. Measured in mWh.
+        - **energy_full_design** (``float``, read-only): The amount of energy when the device was brand new. Measured in mWh.
+        - **energy_rate** (``float``, read-only): The rate of discharge or charge. Measured in mW.
+        - **charge_cycles** (``int``, read-only): The number of charge cycles for the battery, or -1 if unknown or non-applicable.
+        - **vendor** (``str``, read-only): The vendor of the device.
+        - **model** (``str``, read-only): The model of the device.
+        - **serial** (``str``, read-only): The serial number of the device.
+        - **power_supply** (``bool``, read-only): Whether the device is powering the system.
+        - **technology** (``str``, read-only): The battery technology e.g. ``"lithium-ion"``.
+        - **temperature** (``float``, read-only): The temperature of the device in degrees Celsius.
+        - **voltage** (``float``, read-only): The current voltage of the device.
+    """
+
     def __init__(self, device: UPowerGlib.Device):
         super().__init__()
 
@@ -70,6 +96,10 @@ class Battery(IgnisGObject):
         return self._device
 
     @GObject.Property
+    def native_path(self) -> str:
+        return self._device.props.native_path
+
+    @GObject.Property
     def available(self) -> bool:
         return self._device.props.is_present
 
@@ -106,6 +136,10 @@ class Battery(IgnisGObject):
         return self._device.props.energy_full
 
     @GObject.Property
+    def energy_full_design(self) -> float:
+        return self._device.props.energy_full_design
+
+    @GObject.Property
     def energy_rate(self) -> float:
         return self._device.props.energy_rate
 
@@ -114,24 +148,20 @@ class Battery(IgnisGObject):
         return self._device.props.charge_cycles
 
     @GObject.Property
-    def energy_full_design(self) -> float:
-        return self._device.props.energy_full_design
+    def vendor(self) -> str:
+        return self._device.props.vendor
 
     @GObject.Property
     def model(self) -> str:
         return self._device.props.model
 
     @GObject.Property
-    def native_path(self) -> str:
-        return self._device.props.native_path
+    def serial(self) -> str:
+        return self._device.props.serial
 
     @GObject.Property
     def power_supply(self) -> bool:
         return self._device.props.power_supply
-
-    @GObject.Property
-    def serial(self) -> str:
-        return self._device.props.serial
 
     @GObject.Property
     def technology(self) -> str:
@@ -140,10 +170,6 @@ class Battery(IgnisGObject):
     @GObject.Property
     def temperature(self) -> float:
         return self._device.props.temperature
-
-    @GObject.Property
-    def vendor(self) -> str:
-        return self._device.props.vendor
 
     @GObject.Property
     def voltage(self) -> float:

@@ -5,6 +5,14 @@ from .battery import Battery
 
 
 class BatteryService(BaseService):
+    """
+    A battery service.
+
+    Properties:
+        - **devices** (list[:class:`~ignis.services.battery.Battery`]): List of all batteries.
+        - **display_device** (:class:`~ignis.services.battery.Battery`): The currently active battery intended for display.
+    """
+
     def __init__(self) -> None:
         super().__init__()
 
