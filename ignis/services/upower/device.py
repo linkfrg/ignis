@@ -5,32 +5,33 @@ from ignis.dbus import DBusProxy
 from ignis.utils import Utils
 
 
-class Battery(IgnisGObject):
+class UPowerDevice(IgnisGObject):
     """
-    A battery object.
+    The general class for power devices, including batteries.
 
     Signals:
-        - **removed** (:class:`~ignis.services.battery.Battery`): Emitted when the battery has been removed.
+        - **removed** (): Emitted when the device has been removed.
 
     Properties:
         - **device** (``UPowerGlib.Device``, read-only): The instance of ``UPowerGlib.Device``.
         - **native_path** (``str``, read-only): The native path of the device.
-        - **available** (``bool`` read-only): Whether the battery is available.
-        - **percent** (``float`` read-only): Current percentage.
-        - **charging** (``bool`` read-only): Whether the battery is currently charging.
-        - **charged** (``bool`` read-only): Whether the battery is charged.
+        - **kind** (``str``, read-only): The device kind, e.g. ``"battery"``.
+        - **available** (``bool`` read-only): Whether the device is available.
+        - **percent** (``float`` read-only): The current percentage of the device.
+        - **charging** (``bool`` read-only): Whether the device is currently charging.
+        - **charged** (``bool`` read-only): Whether the device is charged.
         - **icon_name** (``str`` read-only): The current icon name.
         - **time_remaining** (``int`` read-only): Time in seconds until fully charged (when charging) or until fully drains (when discharging).
         - **energy** (``float`` read-only): The energy left in the device. Measured in mWh.
         - **energy_full** (``float``, read-only): The amount of energy when the device is fully charged. Measured in mWh.
         - **energy_full_design** (``float``, read-only): The amount of energy when the device was brand new. Measured in mWh.
         - **energy_rate** (``float``, read-only): The rate of discharge or charge. Measured in mW.
-        - **charge_cycles** (``int``, read-only): The number of charge cycles for the battery, or -1 if unknown or non-applicable.
+        - **charge_cycles** (``int``, read-only): The number of charge cycles for the device, or -1 if unknown or non-applicable.
         - **vendor** (``str``, read-only): The vendor of the device.
         - **model** (``str``, read-only): The model of the device.
         - **serial** (``str``, read-only): The serial number of the device.
         - **power_supply** (``bool``, read-only): Whether the device is powering the system.
-        - **technology** (``str``, read-only): The battery technology e.g. ``"lithium-ion"``.
+        - **technology** (``str``, read-only): The device technology e.g. ``"lithium-ion"``.
         - **temperature** (``float``, read-only): The temperature of the device in degrees Celsius.
         - **voltage** (``float``, read-only): The current voltage of the device.
     """
@@ -105,6 +106,10 @@ class Battery(IgnisGObject):
     @GObject.Property
     def native_path(self) -> str:
         return self._device.props.native_path
+
+    @GObject.Property
+    def kind(self) -> str:
+        return UPowerGlib.Device.kind_to_string(self._device.props.kind)  # type: ignore
 
     @GObject.Property
     def available(self) -> bool:
