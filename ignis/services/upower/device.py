@@ -1,8 +1,6 @@
 from ignis.gobject import IgnisGObject
 from ._imports import UPowerGlib
-from gi.repository import GObject, GLib  # type: ignore
-from ignis.dbus import DBusProxy
-from ignis.utils import Utils
+from gi.repository import GObject  # type: ignore
 
 
 class UPowerDevice(IgnisGObject):
@@ -50,14 +48,6 @@ class UPowerDevice(IgnisGObject):
         self._charge_start_threshold: int = 0
         self._charge_end_threshold: int = 0
 
-        self._proxy = DBusProxy(
-            name="org.freedesktop.UPower",
-            object_path=device.get_object_path(),
-            interface_name="org.freedesktop.UPower.Device",
-            info=Utils.load_interface_xml("org.freedesktop.UPower.Device"),
-            bus_type="system",
-        )
-
         for prop_name in [
             "icon-name",
             "energy",
@@ -78,26 +68,10 @@ class UPowerDevice(IgnisGObject):
         self.__conn_dev_notif("state", "time-remaining")
         self.__conn_dev_notif("time-to-empty", "time-remaining")
 
-        self._proxy.proxy.connect("g-properties-changed", self.__notif_dbus)
-
     def __conn_dev_notif(self, dev_prop: str, *self_props: str) -> None:
         self._device.connect(
             f"notify::{dev_prop}", lambda x, y: (self.notify(i) for i in self_props)
         )
-
-    def __notif_dbus(
-        self, proxy, properties: GLib.Variant, invalidated_properties
-    ) -> None:
-        prop_dict = properties.unpack()
-
-        if "ChargeThresholdEnabled" in prop_dict:
-            self.notify("charge-threshold")
-        elif "ChargeThresholdSupported" in prop_dict:
-            self.notify("charge-threshold-supported")
-        elif "ChargeStartThreshold" in prop_dict:
-            self.notify("charge-start-threshold")
-        elif "ChargeEndThreshold" in prop_dict:
-            self.notify("charge-end-threshold")
 
     @GObject.Property
     def device(self) -> UPowerGlib.Device:
@@ -186,31 +160,3 @@ class UPowerDevice(IgnisGObject):
     @GObject.Property
     def voltage(self) -> float:
         return self._device.props.voltage
-
-    @GObject.Property
-    def charge_threshold(self) -> bool:
-        return self._proxy.ChargeThresholdEnabled
-
-    @charge_threshold.setter
-    def charge_threshold(self, value: bool) -> None:
-        self._proxy.EnableChargeThreshold("(b)", (value,))
-
-    @GObject.Property
-    def charge_threshold_supported(self) -> bool:
-        return self._proxy.ChargeThresholdSupported
-
-    @GObject.Property
-    def charge_start_threshold(self) -> int:
-        return self._proxy.ChargeStartThreshold
-
-    @charge_start_threshold.setter
-    def charge_start_threshold(self, value: int) -> None:
-        self._proxy.ChargeStartThreshold = GLib.Variant("(u)", (value,))
-
-    @GObject.Property
-    def charge_end_threshold(self) -> int:
-        return self._proxy.ChargeEndThreshold
-
-    @charge_end_threshold.setter
-    def charge_end_threshold(self, value: int) -> None:
-        self._proxy.ChargeEndThreshold = GLib.Variant("(u)", (value,))
