@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Separator &#8212; Ignis documentation</title>
+    <title>UPower &#8212; Ignis documentation</title>
   
   
   
@@ -44,7 +44,7 @@
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'api/widgets/Separator';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/services/upower';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://linkfrg.github.io/ignis/latest/_static/switcher.json';
@@ -53,8 +53,8 @@
         </script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="SpinButton" href="SpinButton.html" />
-    <link rel="prev" title="Scroll" href="Scroll.html" />
+    <link rel="next" title="Wallpaper" href="wallpaper.html" />
+    <link rel="prev" title="System Tray" href="system_tray.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -406,56 +406,56 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="../dbus_menu.html">D-Bus menu</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../base_widget.html">BaseWidget</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../base_service.html">BaseService</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Widgets</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="Arrow.html">Arrow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ArrowButton.html">ArrowButton</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Box.html">Box</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Button.html">Button</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Calendar.html">Calendar</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CenterBox.html">CenterBox</a></li>
-<li class="toctree-l2"><a class="reference internal" href="CheckButton.html">CheckButton</a></li>
-<li class="toctree-l2"><a class="reference internal" href="DropDown.html">DropDown</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Entry.html">Entry</a></li>
-<li class="toctree-l2"><a class="reference internal" href="EventBox.html">EventBox</a></li>
-<li class="toctree-l2"><a class="reference internal" href="FileChooserButton.html">FileChooserButton</a></li>
-<li class="toctree-l2"><a class="reference internal" href="FileDialog.html">FileDialog</a></li>
-<li class="toctree-l2"><a class="reference internal" href="FileFilter.html">FileFilter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Grid.html">Grid</a></li>
-<li class="toctree-l2"><a class="reference internal" href="HeaderBar.html">HeaderBar</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Icon.html">Icon</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Label.html">Label</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ListBox.html">ListBox</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ListBoxRow.html">ListBoxRow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="MenuItem.html">MenuItem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Overlay.html">Overlay</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Picture.html">Picture</a></li>
-<li class="toctree-l2"><a class="reference internal" href="PopoverMenu.html">PopoverMenu</a></li>
-<li class="toctree-l2"><a class="reference internal" href="RegularWindow.html">RegularWindow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Revealer.html">Revealer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="RevealerWindow.html">RevealerWindow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Scale.html">Scale</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Scroll.html">Scroll</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Separator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="SpinButton.html">SpinButton</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Switch.html">Switch</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ToggleButton.html">ToggleButton</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Window.html">Window</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../widgets/index.html">Widgets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Arrow.html">Arrow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/ArrowButton.html">ArrowButton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Box.html">Box</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Button.html">Button</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Calendar.html">Calendar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/CenterBox.html">CenterBox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/CheckButton.html">CheckButton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/DropDown.html">DropDown</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Entry.html">Entry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/EventBox.html">EventBox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/FileChooserButton.html">FileChooserButton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/FileDialog.html">FileDialog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/FileFilter.html">FileFilter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Grid.html">Grid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/HeaderBar.html">HeaderBar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Icon.html">Icon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Label.html">Label</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/ListBox.html">ListBox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/ListBoxRow.html">ListBoxRow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/MenuItem.html">MenuItem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Overlay.html">Overlay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Picture.html">Picture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/PopoverMenu.html">PopoverMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/RegularWindow.html">RegularWindow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Revealer.html">Revealer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/RevealerWindow.html">RevealerWindow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Scale.html">Scale</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Scroll.html">Scroll</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Separator.html">Separator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/SpinButton.html">SpinButton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Switch.html">Switch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/ToggleButton.html">ToggleButton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Window.html">Window</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../services/index.html">Services</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../services/applications.html">Applications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../services/audio.html">Audio</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../services/backlight.html">Backlight</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../services/fetch.html">Fetch</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../services/hyprland.html">Hyprland</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../services/mpris.html">MPRIS (media)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../services/network.html">Network</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../services/notifications.html">Notifications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../services/options.html">Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../services/recorder.html">Recorder</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../services/system_tray.html">System Tray</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../services/upower.html">UPower</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../services/wallpaper.html">Wallpaper</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Services</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="applications.html">Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backlight.html">Backlight</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fetch.html">Fetch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hyprland.html">Hyprland</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mpris.html">MPRIS (media)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="network.html">Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notifications.html">Notifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="options.html">Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recorder.html">Recorder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system_tray.html">System Tray</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">UPower</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wallpaper.html">Wallpaper</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../utils/index.html">Utils</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -524,9 +524,9 @@ document.write(`
     <li class="breadcrumb-item"><a href="../index.html" class="nav-link">API reference</a></li>
     
     
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Widgets</a></li>
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Services</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">Separator</li>
+    <li class="breadcrumb-item active" aria-current="page">UPower</li>
   </ul>
 </nav>
 </div>
@@ -543,24 +543,62 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="separator">
-<h1>Separator<a class="headerlink" href="#separator" title="Link to this heading">#</a></h1>
+  <section id="upower">
+<h1>UPower<a class="headerlink" href="#upower" title="Link to this heading">#</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.Separator">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.widgets.Widget.</span></span><span class="sig-name descname"><span class="pre">Separator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.widgets.Widget.Separator" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Separator.html">Gtk.Separator</a>.</p>
-<p>A separator widget.</p>
+<dt class="sig sig-object py" id="ignis.services.upower.UPowerService">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.upower.</span></span><span class="sig-name descname"><span class="pre">UPowerService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.upower.UPowerService" title="Link to this definition">#</a></dt>
+<dd><p>An UPower service.
+Requires <code class="docutils literal notranslate"><span class="pre">UPower</span></code>.</p>
 <dl class="simple">
+<dt>Signals:</dt><dd><ul class="simple">
+<li><p><strong>device-added</strong> (<a class="reference internal" href="#ignis.services.upower.UPowerDevice" title="ignis.services.upower.UPowerDevice"><code class="xref py py-class docutils literal notranslate"><span class="pre">UPowerDevice</span></code></a>): Emitted when a power device has been added.</p></li>
+<li><p><strong>battery-added</strong> (<a class="reference internal" href="#ignis.services.upower.UPowerDevice" title="ignis.services.upower.UPowerDevice"><code class="xref py py-class docutils literal notranslate"><span class="pre">UPowerDevice</span></code></a>): Emitted when a battery has been added.</p></li>
+</ul>
+</dd>
 <dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>vertical</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, optional, read-write): Whether the separator is vertical.</p></li>
+<li><p><strong>devices</strong> (list[<a class="reference internal" href="#ignis.services.upower.UPowerDevice" title="ignis.services.upower.UPowerDevice"><code class="xref py py-class docutils literal notranslate"><span class="pre">UPowerDevice</span></code></a>]): List of all power devices.</p></li>
+<li><p><strong>batteries</strong> (list[<a class="reference internal" href="#ignis.services.upower.UPowerDevice" title="ignis.services.upower.UPowerDevice"><code class="xref py py-class docutils literal notranslate"><span class="pre">UPowerDevice</span></code></a>]): List of batteries.</p></li>
+<li><p><strong>display_device</strong> (<a class="reference internal" href="#ignis.services.upower.UPowerDevice" title="ignis.services.upower.UPowerDevice"><code class="xref py py-class docutils literal notranslate"><span class="pre">UPowerDevice</span></code></a>): The currently active device intended for display.</p></li>
 </ul>
 </dd>
 </dl>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Widget</span><span class="o">.</span><span class="n">Separator</span><span class="p">(</span>
-    <span class="n">vertical</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
-</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ignis.services.upower.UPowerDevice">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.upower.</span></span><span class="sig-name descname"><span class="pre">UPowerDevice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.upower.UPowerDevice" title="Link to this definition">#</a></dt>
+<dd><p>The general class for power devices, including batteries.</p>
+<dl class="simple">
+<dt>Signals:</dt><dd><ul class="simple">
+<li><p><strong>removed</strong> (): Emitted when the device has been removed.</p></li>
+</ul>
+</dd>
+<dt>Properties:</dt><dd><ul class="simple">
+<li><p><strong>device</strong> (<code class="docutils literal notranslate"><span class="pre">UPowerGlib.Device</span></code>, read-only): The instance of <code class="docutils literal notranslate"><span class="pre">UPowerGlib.Device</span></code>.</p></li>
+<li><p><strong>native_path</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The native path of the device.</p></li>
+<li><p><strong>kind</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The device kind, e.g. <code class="docutils literal notranslate"><span class="pre">&quot;battery&quot;</span></code>.</p></li>
+<li><p><strong>available</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code> read-only): Whether the device is available.</p></li>
+<li><p><strong>percent</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code> read-only): The current percentage of the device.</p></li>
+<li><p><strong>charging</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code> read-only): Whether the device is currently charging.</p></li>
+<li><p><strong>charged</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code> read-only): Whether the device is charged.</p></li>
+<li><p><strong>icon_name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code> read-only): The current icon name.</p></li>
+<li><p><strong>time_remaining</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code> read-only): Time in seconds until fully charged (when charging) or until fully drains (when discharging).</p></li>
+<li><p><strong>energy</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code> read-only): The energy left in the device. Measured in mWh.</p></li>
+<li><p><strong>energy_full</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>, read-only): The amount of energy when the device is fully charged. Measured in mWh.</p></li>
+<li><p><strong>energy_full_design</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>, read-only): The amount of energy when the device was brand new. Measured in mWh.</p></li>
+<li><p><strong>energy_rate</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>, read-only): The rate of discharge or charge. Measured in mW.</p></li>
+<li><p><strong>charge_cycles</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, read-only): The number of charge cycles for the device, or -1 if unknown or non-applicable.</p></li>
+<li><p><strong>vendor</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The vendor of the device.</p></li>
+<li><p><strong>model</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The model of the device.</p></li>
+<li><p><strong>serial</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The serial number of the device.</p></li>
+<li><p><strong>power_supply</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-only): Whether the device is powering the system.</p></li>
+<li><p><strong>technology</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The device technology e.g. <code class="docutils literal notranslate"><span class="pre">&quot;lithium-ion&quot;</span></code>.</p></li>
+<li><p><strong>temperature</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>, read-only): The temperature of the device in degrees Celsius.</p></li>
+<li><p><strong>voltage</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>, read-only): The current voltage of the device.</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -576,20 +614,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="Scroll.html"
+       href="system_tray.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Scroll</p>
+        <p class="prev-next-title">System Tray</p>
       </div>
     </a>
     <a class="right-next"
-       href="SpinButton.html"
+       href="wallpaper.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">SpinButton</p>
+        <p class="prev-next-title">Wallpaper</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -611,7 +649,8 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.Separator"><code class="docutils literal notranslate"><span class="pre">Separator</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.upower.UPowerService"><code class="docutils literal notranslate"><span class="pre">UPowerService</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.upower.UPowerDevice"><code class="docutils literal notranslate"><span class="pre">UPowerDevice</span></code></a></li>
 </ul>
   </nav></div>
 
@@ -619,7 +658,7 @@ document.write(`
 
   
   <div class="tocsection editthispage">
-    <a href="https://github.com/linkfrg/ignis/edit/main/docs/api/widgets/Separator.rst">
+    <a href="https://github.com/linkfrg/ignis/edit/main/docs/api/services/upower.rst">
       <i class="fa-solid fa-pencil"></i>
       
       
@@ -634,7 +673,7 @@ document.write(`
   <div class="sidebar-secondary-item">
 
   <div class="tocsection sourcelink">
-    <a href="../../_sources/api/widgets/Separator.rst.txt">
+    <a href="../../_sources/api/services/upower.rst.txt">
       <i class="fa-solid fa-file-lines"></i> Show Source
     </a>
   </div>
