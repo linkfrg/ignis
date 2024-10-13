@@ -7,6 +7,7 @@ from typing import Any
 from ignis.exceptions import HyprlandIPCNotFoundError
 from ignis.base_service import BaseService
 from .constants import HYPR_SOCKET_DIR
+from .util import listen_socket, get_socket_resp
 
 
 class HyprlandService(BaseService):
@@ -100,7 +101,8 @@ class HyprlandService(BaseService):
         self._kb_layout: str = ""
         self._active_window: dict[str, Any] = {}
 
-        self.__listen_socket()
+        self.__listen_events()
+
         self.__sync_kb_layout()
         self.__sync_workspaces()
         self.__sync_active_window()
@@ -122,30 +124,24 @@ class HyprlandService(BaseService):
         return self._active_window
 
     @Utils.run_in_thread
-    def __listen_socket(self) -> None:
+    def __listen_events(self) -> None:
         with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as sock:
             sock.connect(f"{HYPR_SOCKET_DIR}/.socket2.sock")
-            while True:
-                try:
-                    data = sock.recv(1024).decode("utf-8")
-                    self.__on_data_received(data)
-                except (UnicodeDecodeError, json.decoder.JSONDecodeError):
-                    pass
+            for event in listen_socket(sock):
+                self.__on_event_received(event)
 
-    def __on_data_received(self, data: str) -> None:
-        data_list = data.split("\n")
-        for d in data_list:
-            if (
-                d.startswith("workspace>>")
-                or d.startswith("destroyworkspace>>")
-                or d.startswith("focusedmon>>")
-            ):
-                self.__sync_workspaces()
-            elif d.startswith("activelayout>>"):
-                self.__sync_kb_layout()
+    def __on_event_received(self, event: str) -> None:
+        if (
+            event.startswith("workspace>>")
+            or event.startswith("destroyworkspace>>")
+            or event.startswith("focusedmon>>")
+        ):
+            self.__sync_workspaces()
+        elif event.startswith("activelayout>>"):
+            self.__sync_kb_layout()
 
-            elif d.startswith("activewindow>>"):
-                self.__sync_active_window()
+        elif event.startswith("activewindow>>"):
+            self.__sync_active_window()
 
     def __sync_workspaces(self) -> None:
         self._workspaces = sorted(
@@ -180,7 +176,7 @@ class HyprlandService(BaseService):
         with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as sock:
             sock.connect(f"{HYPR_SOCKET_DIR}/.socket.sock")
             sock.send(cmd.encode())
-            resp = sock.recv(4096).decode()
+            resp = get_socket_resp(sock)
             return resp
 
     def switch_kb_layout(self) -> None:
