@@ -43,7 +43,7 @@ Here's an example using the :class:`~ignis.services.mpris.MprisService`:
 
 .. code-block:: python
 
-    from ignis.service.mpris import MprisService
+    from ignis.services.mpris import MprisService
 
     mpris = MprisService.get_default()
 
