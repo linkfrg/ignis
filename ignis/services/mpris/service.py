@@ -22,7 +22,7 @@ class MprisService(BaseService):
 
     .. code-block:: python
 
-        from ignis.service import MprisService
+        from ignis.services.mpris import MprisService
 
         mpris = MprisService.get_default()
 

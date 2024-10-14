@@ -34,7 +34,7 @@ class AudioService(BaseService):
 
     .. code-block:: python
 
-        from ignis.service.audio import AudioService
+        from ignis.services.audio import AudioService
 
         audio = AudioService.get_default()
 

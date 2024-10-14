@@ -41,7 +41,7 @@ class FetchService(BaseService):
 
     .. code-block:: python
 
-        from ignis.service import FetchService
+        from ignis.services.fetch import FetchService
 
         fetch = FetchService.get_default()
 

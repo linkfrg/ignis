@@ -81,7 +81,7 @@ class HyprlandService(BaseService):
 
     .. code-block:: python
 
-        from ignis.service import HyprlandService
+        from ignis.services.hyprland import HyprlandService
 
         hyprland = HyprlandService.get_default()
 

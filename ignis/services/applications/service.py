@@ -18,7 +18,7 @@ class ApplicationsService(BaseService):
 
     .. code-block:: python
 
-        from ignis.service.applications import ApplicationsService
+        from ignis.services.applications import ApplicationsService
 
         applications = ApplicationsService.get_default()
         for i in applications.apps:
