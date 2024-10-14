@@ -9,6 +9,9 @@ body:
         ---
 
   - type: textarea
-    id: text
+    id: desc
+    attributes:
+      label: Description
+      description: "Describe"
     validations:
       required: true
