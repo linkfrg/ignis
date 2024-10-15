@@ -57,19 +57,6 @@ body:
     validations:
       required: true
 
-  - type: dropdown
-    id: install_method
-    attributes:
-      label: Installation method
-      description: How did you install Ignis?
-      multiple: false
-      options:
-        - "Distro package"
-        - "Build from source (via meson)"
-        - "Setted up a development envieronment"
-    validations:
-      required: true
-
   - type: textarea
     id: desc
     attributes:
@@ -89,7 +76,7 @@ body:
   - type: textarea
     id: logs
     attributes:
-      label: Logs, images, videos, config files, CSS/SCSS files (if necessary)
+      label: Logs, images, videos, config files, CSS/SCSS files
       description: |
         Anything that can help. Please always ATTACH and not paste them.
         The log file is stored in ``~/.ignis/ignis.log``
