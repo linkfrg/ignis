@@ -92,7 +92,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         self._is_ready = False
 
     def __watch_config(self, path: str, event_type: str) -> None:
-        if event_type == "changed":  # "changed" event is called multiple times
+        if event_type != "changes_done_hint":
             return
 
         if not os.path.isdir(path) and "__pycache__" not in path:
