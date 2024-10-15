@@ -18,7 +18,7 @@ class Icon(Gtk.Image, BaseWidget):
 
     .. code-block:: python
 
-        Widget.Image(
+        Widget.Icon(
             image='audio-volume-high',
             pixel_size=12
         )
