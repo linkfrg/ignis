@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>exec_sh_async &#8212; Ignis documentation</title>
+    <title>send_socket &#8212; Ignis documentation</title>
   
   
   
@@ -44,7 +44,7 @@
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'api/utils/exec_sh_async';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/utils/send_socket';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://linkfrg.github.io/ignis/latest/_static/switcher.json';
@@ -53,8 +53,8 @@
         </script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="get_current_dir" href="get_current_dir.html" />
-    <link rel="prev" title="exec_sh" href="exec_sh.html" />
+    <link rel="next" title="thread" href="thread.html" />
+    <link rel="prev" title="scale_pixbuf" href="scale_pixbuf.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -466,7 +466,7 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="crop_pixbuf.html">crop_pixbuf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="download_image.html">download_image</a></li>
 <li class="toctree-l2"><a class="reference internal" href="exec_sh.html">exec_sh</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">exec_sh_async</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exec_sh_async.html">exec_sh_async</a></li>
 <li class="toctree-l2"><a class="reference internal" href="get_current_dir.html">get_current_dir</a></li>
 <li class="toctree-l2"><a class="reference internal" href="get_file_icon_name.html">get_file_icon_name</a></li>
 <li class="toctree-l2"><a class="reference internal" href="get_ignis_branch.html">get_ignis_branch</a></li>
@@ -481,7 +481,7 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="run_in_thread.html">run_in_thread</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sass_compile.html">sass_compile</a></li>
 <li class="toctree-l2"><a class="reference internal" href="scale_pixbuf.html">scale_pixbuf</a></li>
-<li class="toctree-l2"><a class="reference internal" href="send_socket.html">send_socket</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">send_socket</a></li>
 <li class="toctree-l2"><a class="reference internal" href="thread.html">thread</a></li>
 </ul>
 </details></li>
@@ -528,7 +528,7 @@ document.write(`
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">Utils</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">exec_sh_async</li>
+    <li class="breadcrumb-item active" aria-current="page">send_socket</li>
   </ul>
 </nav>
 </div>
@@ -545,21 +545,24 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="exec-sh-async">
-<h1>exec_sh_async<a class="headerlink" href="#exec-sh-async" title="Link to this heading">#</a></h1>
+  <section id="send-socket">
+<h1>send_socket<a class="headerlink" href="#send-socket" title="Link to this heading">#</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="ignis.utils.Utils.exec_sh_async">
-<span class="sig-prename descclassname"><span class="pre">ignis.utils.Utils.</span></span><span class="sig-name descname"><span class="pre">exec_sh_async</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">on_finished</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">gi.repository.Gio.Subprocess</span></span></span><a class="headerlink" href="#ignis.utils.Utils.exec_sh_async" title="Link to this definition">#</a></dt>
-<dd><p>Execute a shell (bash) command asynchronously.</p>
+<dt class="sig sig-object py" id="ignis.utils.Utils.send_socket">
+<span class="sig-prename descclassname"><span class="pre">ignis.utils.Utils.</span></span><span class="sig-name descname"><span class="pre">send_socket</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sock</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">socket</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ignis.utils.Utils.send_socket" title="Link to this definition">#</a></dt>
+<dd><p>Send a message to the socket.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>command</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The command to execute.</p></li>
-<li><p><strong>on_finished</strong> (<code class="docutils literal notranslate"><span class="pre">Callable</span></code>, optional) -- A function to call when the process is finished. An instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncCompletedProcess</span></code> will be passed to this function.</p></li>
+<li><p><strong>sock</strong> (<code class="docutils literal notranslate"><span class="pre">socket.socket</span></code>) -- An instance of a socket.</p></li>
+<li><p><strong>message</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The message to send.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">Gio.Subprocess</span></code></p>
+<dd class="field-even"><p>The response from the socket.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -577,20 +580,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="exec_sh.html"
+       href="scale_pixbuf.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">exec_sh</p>
+        <p class="prev-next-title">scale_pixbuf</p>
       </div>
     </a>
     <a class="right-next"
-       href="get_current_dir.html"
+       href="thread.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">get_current_dir</p>
+        <p class="prev-next-title">thread</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -612,7 +615,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.exec_sh_async"><code class="docutils literal notranslate"><span class="pre">exec_sh_async()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.send_socket"><code class="docutils literal notranslate"><span class="pre">send_socket()</span></code></a></li>
 </ul>
   </nav></div>
 
@@ -620,7 +623,7 @@ document.write(`
 
   
   <div class="tocsection editthispage">
-    <a href="https://github.com/linkfrg/ignis/edit/main/docs/api/utils/exec_sh_async.rst">
+    <a href="https://github.com/linkfrg/ignis/edit/main/docs/api/utils/send_socket.rst">
       <i class="fa-solid fa-pencil"></i>
       
       
@@ -635,7 +638,7 @@ document.write(`
   <div class="sidebar-secondary-item">
 
   <div class="tocsection sourcelink">
-    <a href="../../_sources/api/utils/exec_sh_async.rst.txt">
+    <a href="../../_sources/api/utils/send_socket.rst.txt">
       <i class="fa-solid fa-file-lines"></i> Show Source
     </a>
   </div>
