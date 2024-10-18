@@ -20,6 +20,7 @@ from .get_file_icon_name import get_file_icon_name
 from .thread_task import ThreadTask
 from .download_image import download_image
 from .get_current_dir import get_current_dir
+from .socket import send_socket, listen_socket
 
 
 class Utils:
@@ -45,3 +46,5 @@ class Utils:
     get_current_dir = get_current_dir
     get_ignis_branch = get_ignis_branch
     get_ignis_commit_msg = get_ignis_commit_msg
+    send_socket = send_socket
+    listen_socket = listen_socket

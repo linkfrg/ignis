@@ -7,7 +7,6 @@ from typing import Any
 from ignis.exceptions import HyprlandIPCNotFoundError
 from ignis.base_service import BaseService
 from .constants import HYPR_SOCKET_DIR
-from .util import listen_socket, get_socket_resp
 
 
 class HyprlandService(BaseService):
@@ -127,7 +126,7 @@ class HyprlandService(BaseService):
     def __listen_events(self) -> None:
         with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as sock:
             sock.connect(f"{HYPR_SOCKET_DIR}/.socket2.sock")
-            for event in listen_socket(sock):
+            for event in Utils.listen_socket(sock):
                 self.__on_event_received(event)
 
     def __on_event_received(self, event: str) -> None:
@@ -175,9 +174,7 @@ class HyprlandService(BaseService):
         """
         with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as sock:
             sock.connect(f"{HYPR_SOCKET_DIR}/.socket.sock")
-            sock.send(cmd.encode())
-            resp = get_socket_resp(sock)
-            return resp
+            return Utils.send_socket(sock, cmd)
 
     def switch_kb_layout(self) -> None:
         """
