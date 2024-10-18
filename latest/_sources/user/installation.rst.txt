@@ -8,8 +8,8 @@ Arch linux
 
     paru -S ignis
 
-NixOS
-------
+Nix
+---
 
 Add Ignis to your flake's inputs:
 
