@@ -28,14 +28,16 @@ Building from source
 
 **Dependencies:**
 
-- git 
-- ninja 
-- meson 
+- ninja
+- meson
 - gtk4 
 - gtk4-layer-shell
+- glib-mkenums (glib2-devel)
 - pygobject
 - pycairo
 - python-click
+- python-loguru
+- python-requests
 - libpulse (if using PipeWire, install ``pipewire-pulse``)
 
 .. code-block:: bash
