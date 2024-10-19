@@ -119,7 +119,7 @@ def clock() -> Widget.Label:
     return Widget.Label(
         css_classes=["clock"],
         label=Utils.Poll(
-            1, lambda self: datetime.datetime.now().strftime("%H:%M")
+            1_000, lambda self: datetime.datetime.now().strftime("%H:%M")
         ).bind("output"),
     )
 
