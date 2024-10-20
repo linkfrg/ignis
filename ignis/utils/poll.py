@@ -24,7 +24,7 @@ class Poll(IgnisGObject):
         from ignis.utils import Utils
 
         # print "Hello" every second
-        Utils.Poll(timeout=1, callback=lambda self: print("Hello"))
+        Utils.Poll(timeout=1_000, callback=lambda self: print("Hello"))
     """
 
     __gsignals__ = {
