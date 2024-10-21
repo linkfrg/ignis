@@ -15,7 +15,7 @@
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
     in
     {
-      overlays.default = import ./overlay.nix;
+      overlays.default = import ./nix/overlay.nix;
 
       packages = forAllSystems (system:
         let
