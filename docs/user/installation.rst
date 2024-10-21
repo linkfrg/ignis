@@ -15,7 +15,7 @@ Add Ignis to your flake's inputs:
 
 .. code-block:: nix
     
-    ignis.url = "github:linkfrg/ignis";
+    ignis.url = "git+https://github.com/linkfrg/ignis?submodules=1";
 
 Then add the following to ``environment.systemPackages`` or ``home.packages``:
 
