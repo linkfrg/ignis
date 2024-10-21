@@ -414,13 +414,13 @@ class AnotherSystemTrayRunningError(Exception):
         return self._name
 
 
-class UPowerNotFoundError(Exception):
+class UPowerNotRunningError(Exception):
     """
-    Raised when UPower is not found.
+    Raised when UPower is not running.
     """
 
     def __init__(self, *args: object) -> None:
         super().__init__(
-            "UPower is not found! To use the battery service, install UPower and UPowerGLib",
+            "UPower is not running! To use the UPower Service, install UPower and run it",
             *args,
         )

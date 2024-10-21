@@ -1,0 +1,26 @@
+<node name="/">
+    <interface name="org.freedesktop.UPower">
+        <method name="EnumerateDevices">
+            <annotation name="org.freedesktop.DBus.GLib.Async" value="" />
+            <arg name="devices" direction="out" type="ao" />
+        </method>
+        <method name="GetDisplayDevice">
+            <annotation name="org.freedesktop.DBus.GLib.Async" value="" />
+            <arg name="device" direction="out" type="o" />
+        </method>
+        <method name="GetCriticalAction">
+            <annotation name="org.freedesktop.DBus.GLib.Async" value="" />
+            <arg name="action" direction="out" type="s" />
+        </method>
+        <signal name="DeviceAdded">
+            <arg name="device" type="o" />
+        </signal>
+        <signal name="DeviceRemoved">
+            <arg name="device" type="o" />
+        </signal>
+        <property name="DaemonVersion" type="s" access="read" />
+        <property name="OnBattery" type="b" access="read" />
+        <property name="LidIsClosed" type="b" access="read" />
+        <property name="LidIsPresent" type="b" access="read" />
+    </interface>
+</node>
