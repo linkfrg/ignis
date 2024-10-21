@@ -1,18 +1,12 @@
 { pkgs, ... }:
 let
-inherit (pkgs.lib) concatStringsSep;
+  inherit (pkgs.lib) concatStringsSep;
 in
 pkgs.stdenv.mkDerivation {
   pname = "ignis";
   version = "0.2";
 
-  src = pkgs.fetchFromGitHub {
-    owner = "linkfrg";
-    repo = "ignis";
-    rev = "78846c57832c70fd971dbcd28ac5d8e70cd09840";
-    sha256 = "sha256-V70DT1Czyj/rbBAQIqfRVlQOyeuLjk1F6P8XOagDxNw=";
-    fetchSubmodules = true;
-  };
+  src = ./..;
 
   nativeBuildInputs = [
     pkgs.pkg-config
