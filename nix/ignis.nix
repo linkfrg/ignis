@@ -84,6 +84,6 @@ pkgs.stdenv.mkDerivation {
     changelog = "https://github.com/linkfrg/ignis/releases/tag/v${version}";
     license = licenses.gpl3;
     maintainers = with maintainers; [ frdiener somokill ];
-    main_program = "ignis";
+    mainProgram = "ignis";
   };
 }
