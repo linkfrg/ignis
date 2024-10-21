@@ -1,6 +1,7 @@
+import os
 import re
 import subprocess
-from gi.repository import GObject, Gio  # type: ignore
+from gi.repository import GObject, Gio, GLib  # type: ignore
 from ignis.gobject import IgnisGObject
 from .action import ApplicationAction
 
@@ -118,10 +119,20 @@ class Application(IgnisGObject):
         Launch the application.
         """
         exec_string = re.sub(r"%\S*", "", self.exec_string)
+        custom_env = os.environ.copy()
+
+        # Disable Python virtual environment
+        custom_env.pop("VIRTUAL_ENV", None)
+        custom_env.pop("PYTHONHOME", None)
+        custom_env.pop("PYTHONPATH", None)
+        custom_env["PATH"] = os.defpath
+
         subprocess.Popen(
             exec_string,
             shell=True,
             start_new_session=True,
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
+            cwd=GLib.get_home_dir(),
+            env=custom_env
         )
