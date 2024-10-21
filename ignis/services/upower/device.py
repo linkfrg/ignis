@@ -64,6 +64,7 @@ class UPowerDevice(IgnisGObject):
         self.__watch_property("PowerSupply", "power-supply")
         self.__watch_property("Voltage", "voltage")
         self.__watch_property("Temperature", "temperature")
+        self.__watch_property("IconName", "icon-name")
 
         self.__watch_property("IsPresent", "available")
         self.__watch_property("State", "charging", "charged", "time-remaining")
