@@ -13,9 +13,11 @@
       ];
 
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+
+      version = import ./nix/version.nix { inherit self; };
     in
     {
-      overlays.default = import ./nix/overlay.nix;
+      overlays.default = import ./nix/overlay.nix { inherit version; };
 
       packages = forAllSystems (system:
         let

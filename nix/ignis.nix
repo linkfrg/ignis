@@ -1,10 +1,11 @@
-{ pkgs, ... }:
+{ pkgs, version ? "git", ... }:
 let
   inherit (pkgs.lib) concatStringsSep;
 in
 pkgs.stdenv.mkDerivation {
+  inherit version;
+
   pname = "ignis";
-  version = "0.2";
 
   src = ./..;
 
