@@ -577,7 +577,8 @@ Requires <code class="docutils literal notranslate"><span class="pre">UPower</sp
 </ul>
 </dd>
 <dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>device</strong> (<code class="docutils literal notranslate"><span class="pre">UPowerGlib.Device</span></code>, read-only): The instance of <code class="docutils literal notranslate"><span class="pre">UPowerGlib.Device</span></code>.</p></li>
+<li><p><strong>object_path</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The D-Bus object path of the device.</p></li>
+<li><p><strong>proxy</strong> (<a class="reference internal" href="../dbus.html#ignis.dbus.DBusProxy" title="ignis.dbus.DBusProxy"><code class="xref py py-class docutils literal notranslate"><span class="pre">DBusProxy</span></code></a>, read-only): The instance of <a class="reference internal" href="../dbus.html#ignis.dbus.DBusProxy" title="ignis.dbus.DBusProxy"><code class="xref py py-class docutils literal notranslate"><span class="pre">DBusProxy</span></code></a> for this device.</p></li>
 <li><p><strong>native_path</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The native path of the device.</p></li>
 <li><p><strong>kind</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The device kind, e.g. <code class="docutils literal notranslate"><span class="pre">&quot;battery&quot;</span></code>.</p></li>
 <li><p><strong>available</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code> read-only): Whether the device is available.</p></li>
