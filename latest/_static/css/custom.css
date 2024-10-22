@@ -1,11 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
-* {
-    font-family: "JetBrains Mono";
-}
-
-h1 {
-    font-family: "JetBrains Mono";
+html {
+    --pst-font-family-base: "JetBrains Mono", var(--pst-font-family-base-system);
+    --pst-font-family-heading: "JetBrains Mono", var(--pst-font-family-base-system);
+    --pst-font-family-monospace: "JetBrains Mono", var(--pst-font-family-monospace-system);
 }
 
 a {
