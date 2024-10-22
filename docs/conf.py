@@ -68,6 +68,8 @@ html_theme_options = {
         "json_url": json_url,
         "version_match": version_match,
     },
+    "pygments_light_style": "tango",
+    "pygments_dark_style": "monokai"
 }
 
 
