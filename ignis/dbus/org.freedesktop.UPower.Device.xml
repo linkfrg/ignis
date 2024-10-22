@@ -1,0 +1,56 @@
+<node name="/">
+    <interface name="org.freedesktop.UPower.Device">
+        <method name="Refresh">
+            <annotation name="org.freedesktop.DBus.GLib.Async" value="" />
+        </method>
+        <method name="GetHistory">
+            <annotation name="org.freedesktop.DBus.GLib.Async" value="" />
+            <arg name="type" direction="in" type="s" />
+            <arg name="timespan" direction="in" type="u" />
+            <arg name="resolution" direction="in" type="u" />
+            <arg name="data" direction="out" type="a(udu)" />
+        </method>
+        <method name="GetStatistics">
+            <annotation name="org.freedesktop.DBus.GLib.Async" value="" />
+            <arg name="type" direction="in" type="s" />
+            <arg name="data" direction="out" type="a(dd)" />
+        </method>
+        <method name="EnableChargeThreshold">
+            <arg name="chargeThreshold" direction="in" type="b" />
+        </method>
+        <property name="NativePath" type="s" access="read" />
+        <property name="Vendor" type="s" access="read" />
+        <property name="Model" type="s" access="read" />
+        <property name="Serial" type="s" access="read" />
+        <property name="UpdateTime" type="t" access="read" />
+        <property name="Type" type="u" access="read" />
+        <property name="PowerSupply" type="b" access="read" />
+        <property name="HasHistory" type="b" access="read" />
+        <property name="HasStatistics" type="b" access="read" />
+        <property name="Online" type="b" access="read" />
+        <property name="Energy" type="d" access="read" />
+        <property name="EnergyEmpty" type="d" access="read" />
+        <property name="EnergyFull" type="d" access="read" />
+        <property name="EnergyFullDesign" type="d" access="read" />
+        <property name="EnergyRate" type="d" access="read" />
+        <property name="Voltage" type="d" access="read" />
+        <property name="ChargeCycles" type="i" access="read" />
+        <property name="Luminosity" type="d" access="read" />
+        <property name="TimeToEmpty" type="x" access="read" />
+        <property name="TimeToFull" type="x" access="read" />
+        <property name="Percentage" type="d" access="read" />
+        <property name="Temperature" type="d" access="read" />
+        <property name="IsPresent" type="b" access="read" />
+        <property name="State" type="u" access="read" />
+        <property name="IsRechargeable" type="b" access="read" />
+        <property name="Capacity" type="d" access="read" />
+        <property name="Technology" type="u" access="read" />
+        <property name="WarningLevel" type="u" access="read" />
+        <property name="BatteryLevel" type="u" access="read" />
+        <property name="IconName" type="s" access="read" />
+        <property name="ChargeStartThreshold" type="u" access="read" />
+        <property name="ChargeEndThreshold" type="u" access="read" />
+        <property name="ChargeThresholdEnabled" type="b" access="read" />
+        <property name="ChargeThresholdSupported" type="b" access="read" />
+    </interface>
+</node>
