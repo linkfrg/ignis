@@ -546,6 +546,24 @@ document.write(`
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.widgets.Widget.</span></span><span class="sig-name descname"><span class="pre">Window</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.widgets.Widget.Window" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Window.html">Gtk.Window</a>.</p>
 <p>The top-level widget that contains everything.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Applying CSS styles directly to <code class="docutils literal notranslate"><span class="pre">Widget.Window</span></code> can cause various graphical glitches/bugs.
+It's highly recommended to set some container (for example, <code class="docutils literal notranslate"><span class="pre">Widget.Box</span></code>) or widget as a child and apply styles to it.
+For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.widgets</span> <span class="kn">import</span> <span class="n">Widget</span>
+
+<span class="n">Widget</span><span class="o">.</span><span class="n">Window</span><span class="p">(</span>
+    <span class="n">namespace</span><span class="o">=</span><span class="s2">&quot;some-window&quot;</span><span class="p">,</span>
+    <span class="c1"># css_classes=[&#39;test-window&#39;],  # don&#39;t do this!</span>
+    <span class="n">child</span><span class="o">=</span><span class="n">Widget</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span>
+        <span class="n">css_classes</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;test-window&#39;</span><span class="p">],</span>  <span class="c1"># use this instead</span>
+        <span class="n">child</span><span class="o">=</span><span class="p">[</span><span class="o">...</span><span class="p">]</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
 <dl class="simple">
 <dt>Properties:</dt><dd><ul class="simple">
 <li><p><strong>namespace</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, required, read-only): The name of the window, used to access it from the CLI and <code class="xref py py-class docutils literal notranslate"><span class="pre">ignisApp</span></code>. It must be unique. It is also the name of the layer.</p></li>
