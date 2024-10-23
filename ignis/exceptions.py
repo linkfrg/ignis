@@ -424,3 +424,14 @@ class UPowerNotRunningError(Exception):
             "UPower is not running! To use the UPower Service, install UPower and run it",
             *args,
         )
+
+class GnomeBluetoothNotFoundError(Exception):
+    """
+    Raised when GnomeBluetooth is not running.
+    """
+
+    def __init__(self, *args: object) -> None:
+        super().__init__(
+            "GnomeBluetooth is not found! To use the Bluetooth Service, install GnomeBluetooth",
+            *args,
+        )
