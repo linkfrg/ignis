@@ -43,6 +43,24 @@ class Window(Gtk.Window, BaseWidget):
 
     The top-level widget that contains everything.
 
+    .. warning::
+        Applying CSS styles directly to ``Widget.Window`` can cause various graphical glitches/bugs.
+        It's highly recommended to set some container (for example, ``Widget.Box``) or widget as a child and apply styles to it.
+        For example:
+
+        .. code-block:: python
+
+            from ignis.widgets import Widget
+
+            Widget.Window(
+                namespace="some-window",
+                # css_classes=['test-window'],  # don't do this!
+                child=Widget.Box(
+                    css_classes=['test-window'],  # use this instead
+                    child=[...]
+                )
+            )
+
     Properties:
         - **namespace** (``str``, required, read-only): The name of the window, used to access it from the CLI and :class:`~ignis.app.ignisApp`. It must be unique. It is also the name of the layer.
         - **monitor** (``int | None``, optional, read-write): The monitor number on which to display the window. Raises :class:`~ignis.exceptions.MonitorNotFoundError` if the monitor with the given ID is not found.
