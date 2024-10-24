@@ -427,11 +427,11 @@ class UPowerNotRunningError(Exception):
 
 class GnomeBluetoothNotFoundError(Exception):
     """
-    Raised when GnomeBluetooth is not running.
+    Raised when GnomeBluetooth-3.0 is not found.
     """
 
     def __init__(self, *args: object) -> None:
         super().__init__(
-            "GnomeBluetooth is not found! To use the Bluetooth Service, install GnomeBluetooth",
+            "GnomeBluetooth-3.0 is not found! To use the Bluetooth Service, install GnomeBluetooth-3.0",
             *args,
         )
