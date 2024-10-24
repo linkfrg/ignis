@@ -6,6 +6,7 @@ from .util import get_devices
 from .wifi_connect_dialog import WifiConnectDialog
 from .wifi_device import WifiDevice
 from .wifi import Wifi
+from .vpn import VpnConnection
 from .constants import WIFI_ICON_TEMPLATE, STATE
 
 __all__ = [
@@ -19,5 +20,6 @@ __all__ = [
     "WifiConnectDialog",
     "WifiDevice",
     "Wifi",
+    "VpnConnection"
     "WIFI_ICON_TEMPLATE",
 ]
