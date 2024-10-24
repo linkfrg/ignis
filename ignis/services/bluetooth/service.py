@@ -7,7 +7,7 @@ from .constants import ADAPTER_STATE
 
 class BluetoothService(BaseService):
     __gsignals__ = {
-        "device-added": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
+        "device-added": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, (BluetoothDevice,)),
     }
 
     def __init__(self) -> None:
