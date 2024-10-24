@@ -425,6 +425,7 @@ class UPowerNotRunningError(Exception):
             *args,
         )
 
+
 class GnomeBluetoothNotFoundError(Exception):
     """
     Raised when GnomeBluetooth-3.0 is not found.
