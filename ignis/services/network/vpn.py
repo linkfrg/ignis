@@ -10,7 +10,7 @@ class VpnConnection(IgnisGObject):
 
     Properties:
         - **is_connected** (``bool``, read-only): Whether the device is connected to the network.
-        - **id** (``str | None``, read-only): The name of the connection or ``None`` if unknown.
+        - **get_id** (``str | None``, read-only): The id (name) of the vpn connection or ``None`` if unknown.
     """
 
     def __init__(self, connection: NM.RemoteConnection, client: NM.Client):
@@ -28,12 +28,11 @@ class VpnConnection(IgnisGObject):
 
     @GObject.Property
     def is_connected(self) -> bool:
-        # TODO: Reduce times when this is called
         return self._is_connected
 
     @GObject.Property
     def get_id(self) -> str | None:
-        return self._connection.get_id() or None
+        return self._connection.get_id()
 
     def toggle_connection(self) -> None:
         if self.is_connected:
@@ -43,7 +42,7 @@ class VpnConnection(IgnisGObject):
 
     def connect_to(self) -> None:
         """
-        Connect this VPN.
+        Connect to this VPN.
         """
 
         def finish(x, res) -> None:
@@ -59,7 +58,7 @@ class VpnConnection(IgnisGObject):
 
     def disconnect_from(self) -> None:
         """
-        Disconnect form this VPN.
+        Disconnect from this VPN.
         """
         def finish(x, res) -> None:
             self._client.deactivate_connection_finish(res)
@@ -85,8 +84,9 @@ class Vpn(IgnisGObject):
 
     Properties:
         - **connections** (:class:`~ignis.services.network.VpnConnection`, read-only): A list of VPN connections.
-        - **is_connected** (``bool``, read-only): Whether at least one Ethernet device is connected to the network.
-        - **icon_name** (``str``, read-only): The general icon name for all devices, depends on ``is_connected`` property.
+        - **is_connected** (``bool``, read-only): Whether at least one VPN connection is active.
+        - **active_vpn_id** (``str``, read-only): The id (name) of the first active vpn connection.
+        - **icon_name** (``str``, read-only): The general icon name for all vpn connections, depends on ``is_connected`` property.
     """
 
     def __init__(self, client: NM.Client):
