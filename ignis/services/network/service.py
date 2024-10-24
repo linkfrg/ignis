@@ -14,6 +14,7 @@ class NetworkService(BaseService):
     Properties:
         - **wifi** (:class:`~ignis.services.network.Wifi`, read-only): The Wi-Fi object.
         - **ethernet** (:class:`~ignis.services.network.Ethernet`, read-only): The Ethernet device object.
+        - **vpn** (:class:`~ignis.services.network.Vpn`, read-only): The Vpn object.
     """
 
     def __init__(self):

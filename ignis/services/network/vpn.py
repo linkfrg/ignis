@@ -10,7 +10,7 @@ class VpnConnection(IgnisGObject):
 
     Properties:
         - **is_connected** (``bool``, read-only): Whether the device is connected to the network.
-        - **get_id** (``str | None``, read-only): The id (name) of the vpn connection or ``None`` if unknown.
+        - **connection_id** (``str | None``, read-only): The id (name) of the vpn connection or ``None`` if unknown.
     """
 
     def __init__(self, connection: NM.RemoteConnection, client: NM.Client):
@@ -31,10 +31,13 @@ class VpnConnection(IgnisGObject):
         return self._is_connected
 
     @GObject.Property
-    def get_id(self) -> str | None:
+    def connection_id(self) -> str | None:
         return self._connection.get_id()
 
     def toggle_connection(self) -> None:
+        """
+        Toggle this VPN depending on it's `is_connected` property
+        """
         if self.is_connected:
             self.disconnect_from()
         else:
@@ -113,7 +116,7 @@ class Vpn(IgnisGObject):
         if not self.is_connected:
             return None
         else:
-            return self._active_vpn_connections[0].get_id
+            return self._active_vpn_connections[0].connection_id
 
     @GObject.Property
     def is_connected(self) -> bool:
