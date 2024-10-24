@@ -4,6 +4,29 @@ from ._imports import GnomeBluetooth
 
 
 class BluetoothDevice(IgnisGObject):
+    """
+    A Bluetooth device.
+
+    Signals:
+        - **removed** (): Emitted when the device has been removed.
+
+    Properties:
+        - **gdevice** (``GnomeBluetooth.Device``, read-only): The instance of ``GnomeBluetooth.Device`` for this device.
+        - **address** (``str``, read-only): The Bluetooth device address of the device.
+        - **alias** (``str``, read-only): The name alias for the device.
+        - **battery_level** (``int``, read-only): The current battery level of the device (if available).
+        - **battery_percentage** (``float``, read-only): The current battery percentage of the device (if available).
+        - **connectable** (``bool``, read-only): Whether it is possible to connect to the device.
+        - **connected** (``bool``, read-only): Whether the device is currently connected.
+        - **icon_name** (``str``, read-only): The current icon name of the device.
+        - **name** (``str``, read-only): The complete device name. It is better to use the ``alias`` property when displaying the device name.
+        - **paired** (``bool``, read-only): Whether the device is paired.
+        - **trusted** (``bool``, read-only): Whether the remote is seen as trusted.
+        - **device_type** (``str``, read-only): The type of the device, e.g., ``"mouse"``, ``"speakers"``.
+
+    For more device types, see `GnomeBluetooth.Type <https://lazka.github.io/pgi-docs/index.html#GnomeBluetooth-3.0/flags.html#GnomeBluetooth.Type>`_.
+    """
+
     __gsignals__ = {
         "removed": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
     }

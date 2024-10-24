@@ -6,8 +6,32 @@ from .constants import ADAPTER_STATE
 
 
 class BluetoothService(BaseService):
+    """
+    A Bluetooth service.
+    Requires ``gnome-bluetooth-3.0``.
+
+    Signals:
+        - **"device-added"** (:class:`~ignis.services.bluetooth.BluetoothDevice`): Emitted when a Bluetooth device has been added.
+
+    Properties:
+        - **devices** (list[:class:`~ignis.services.bluetooth.BluetoothDevice`], read-only): List of all Bluetooth devices.
+        - **powered** (``bool``, read-write): Whether the default Bluetooth adapter is powered.
+        - **state** (``str``, read-only): The current state of the default Bluetooth adapter.
+
+    Adapter state:
+        - **"absent"**
+        - **"on"**
+        - **"turning-on"**
+        - **"turning-off"**
+        - **"off"**
+    """
+
     __gsignals__ = {
-        "device-added": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, (BluetoothDevice,)),
+        "device-added": (
+            GObject.SignalFlags.RUN_FIRST,
+            GObject.TYPE_NONE,
+            (BluetoothDevice,),
+        ),
     }
 
     def __init__(self) -> None:
