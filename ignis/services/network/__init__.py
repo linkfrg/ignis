@@ -20,7 +20,7 @@ __all__ = [
     "WifiConnectDialog",
     "WifiDevice",
     "Wifi",
-    "Vpn"
-    "VpnConnection"
+    "VpnConnection",
+    "Vpn",
     "WIFI_ICON_TEMPLATE",
 ]
