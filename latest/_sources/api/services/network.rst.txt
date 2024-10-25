@@ -10,6 +10,9 @@ Network
 .. autoclass:: ignis.services.network.Ethernet
     :members:
 
+.. autoclass:: ignis.services.network.Vpn
+    :members:
+
 .. autoclass:: ignis.services.network.WifiDevice
     :members:
 
@@ -17,6 +20,9 @@ Network
     :members:
 
 .. autoclass:: ignis.services.network.WifiAccessPoint
+    :members:
+
+.. autoclass:: ignis.services.network.VpnConnection
     :members:
 
 .. autoclass:: ignis.services.network.ActiveAccessPoint
