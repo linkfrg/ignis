@@ -116,7 +116,7 @@ class Vpn(IgnisGObject):
         if not self.is_connected:
             return None
         else:
-            return self._active_vpn_connections[0].connection_id
+            return self._active_vpn_connections[0].name
 
     @GObject.Property
     def is_connected(self) -> bool:
