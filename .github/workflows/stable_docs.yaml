@@ -4,7 +4,7 @@ on:
 
   push:
     branches:
-      - stable
+      - stable-docs
     paths:
       - "ignis/**"
       - "docs/**"
