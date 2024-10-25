@@ -1,7 +1,7 @@
 from __future__ import annotations
 from gi.repository import GObject, GLib  # type: ignore
 from ignis.gobject import IgnisGObject
-from ignis.services.network._imports import NM
+from ._imports import NM
 
 
 class VpnConnection(IgnisGObject):
@@ -88,7 +88,7 @@ class Vpn(IgnisGObject):
     Properties:
         - **connections** (:class:`~ignis.services.network.VpnConnection`, read-only): A list of VPN connections.
         - **is_connected** (``bool``, read-only): Whether at least one VPN connection is active.
-        - **active_vpn_id** (``str``, read-only): The id (name) of the first active vpn connection.
+        - **active_vpn_id** (``str | None``, read-only): The id (name) of the first active vpn connection.
         - **icon_name** (``str``, read-only): The general icon name for all vpn connections, depends on ``is_connected`` property.
     """
 
