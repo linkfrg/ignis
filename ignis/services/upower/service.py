@@ -88,6 +88,8 @@ class UPowerService(BaseService):
             self._batteries[object_path] = device
             self.emit("battery-added", device)
 
+        self.notify("devices")
+
     def __remove_device(self, object_path: str) -> None:
         if object_path not in self._devices:
             return
@@ -97,3 +99,4 @@ class UPowerService(BaseService):
 
         device = self._devices.pop(object_path)
         device.emit("removed")
+        self.notify("devices")
