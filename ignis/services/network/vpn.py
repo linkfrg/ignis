@@ -18,12 +18,12 @@ class VpnConnection(IgnisGObject):
         self._connection = connection
         self._client = client
 
-        active_uuids = [conn.get_uuid()
-                        for conn in self._client.get_active_connections()]
+        active_uuids = [
+            conn.get_uuid() for conn in self._client.get_active_connections()
+        ]
         self._is_connected: bool = connection.get_uuid() in active_uuids
 
-        self._client.connect(
-            "notify::active-connections", self.__update_is_connected)
+        self._client.connect("notify::active-connections", self.__update_is_connected)
         self.__update_is_connected()
 
     @GObject.Property
@@ -63,8 +63,10 @@ class VpnConnection(IgnisGObject):
         """
         Disconnect from this VPN.
         """
+
         def finish(x, res) -> None:
             self._client.deactivate_connection_finish(res)
+
         for conn in self._client.get_active_connections():
             if conn.get_uuid() == self._connection.get_uuid():
                 self._client.deactivate_connection_async(
@@ -74,8 +76,9 @@ class VpnConnection(IgnisGObject):
                 )
 
     def __update_is_connected(self, *args) -> None:
-        active_uuids = [conn.get_uuid()
-                        for conn in self._client.get_active_connections()]
+        active_uuids = [
+            conn.get_uuid() for conn in self._client.get_active_connections()
+        ]
         self._is_connected = self._connection.get_uuid() in active_uuids
 
         self.notify("is-connected")
@@ -131,12 +134,15 @@ class Vpn(IgnisGObject):
 
     def __sync(self) -> None:
         def filter_conn(df):
-            return [VpnConnection(conn, self._client) for conn in df() if conn.get_connection_type() == 'vpn']
+            return [
+                VpnConnection(conn, self._client)
+                for conn in df()
+                if conn.get_connection_type() == "vpn"
+            ]
 
         self._connections = filter_conn(self._client.get_connections)
 
-        self._active_vpn_connections = filter_conn(
-            self._client.get_active_connections)
+        self._active_vpn_connections = filter_conn(self._client.get_active_connections)
 
         for connection in self._active_vpn_connections:
             self.__add_connection(connection)  # type: ignore

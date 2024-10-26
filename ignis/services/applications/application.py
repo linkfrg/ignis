@@ -134,5 +134,5 @@ class Application(IgnisGObject):
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
             cwd=GLib.get_home_dir(),
-            env=custom_env
+            env=custom_env,
         )
