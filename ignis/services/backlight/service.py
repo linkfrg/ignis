@@ -55,8 +55,13 @@ class BacklightService(BaseService):
         for device_name in os.listdir(SYS_BACKLIGHT):
             self._devices.append(BacklightDevice(device_name))
 
-        self.notify("devices")
-        self.notify("available")
+        if len(self._devices) > 0:
+            self._devices[0].connect(
+                "notify::brightness",
+                lambda x, y: self.notify("brightness"),
+            )
+
+        self.notify_all()
 
     @GObject.Property
     def available(self) -> bool:

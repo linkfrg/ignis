@@ -75,5 +75,5 @@ class BacklightDevice(IgnisGObject):
             "backlight",
             self._device_name,
             value,
-            result_handler=lambda *args: None
+            result_handler=lambda *args: None,
         )
