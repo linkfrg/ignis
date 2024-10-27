@@ -71,6 +71,10 @@ class Window(Gtk.Window, BaseWidget):
         - **popup** (``bool``, optional, read-write): Whether the window should close on ESC. Works only if ``kb_mode`` is set to ``"exclusive"`` or ``"on_demand"``.
         - **input_width** (``int``, optional, read-write): The width at which the window can receive keyboard and mouse input. Must be > 0.
         - **input_height** (``int``, optional, read-write): The width at which the window can receive keyboard and mouse input. Must be > 0.
+        - **margin_bottom** (``int``, optional, read-write): The bottom margin. Default: ``0``.
+        - **margin_left** (``int``, optional, read-write): The left margin. Default: ``0``.
+        - **margin_right** (``int``, optional, read-write): The right margin. Default: ``0``.
+        - **margin_top** (``int``, optional, read-write): The top margin. Default: ``0``.
 
     **Anchors:**
         - **"bottom"**
@@ -125,6 +129,10 @@ class Window(Gtk.Window, BaseWidget):
         layer: str = "top",
         kb_mode: str = "none",
         popup: bool = False,
+        margin_bottom: int = 0,
+        margin_left: int = 0,
+        margin_right: int = 0,
+        margin_top: int = 0,
         **kwargs,
     ):
         if not GtkLayerShell.is_supported():
@@ -142,6 +150,10 @@ class Window(Gtk.Window, BaseWidget):
         self._monitor = None
         self._input_width = 0
         self._input_height = 0
+        self._margin_bottom = 0
+        self._margin_left = 0
+        self._margin_right = 0
+        self._margin_top = 0
 
         self.anchor = anchor
         self.exclusivity = exclusivity
@@ -152,6 +164,10 @@ class Window(Gtk.Window, BaseWidget):
         self.popup = popup
         self.default_width = 2
         self.default_height = 2
+        self.margin_bottom = margin_bottom
+        self.margin_left = margin_left
+        self.margin_right = margin_right
+        self.margin_top = margin_top
 
         app.add_window(namespace, self)
 
@@ -261,6 +277,42 @@ class Window(Gtk.Window, BaseWidget):
     def input_height(self, value: int) -> None:
         self._input_height = value
         self.__change_input_region()
+
+    @GObject.Property
+    def margin_bottom(self) -> int:
+        return self._margin_bottom
+
+    @margin_bottom.setter
+    def margin_bottom(self, value: int) -> None:
+        self._margin_bottom = value
+        GtkLayerShell.set_margin(self, GtkLayerShell.Edge.BOTTOM, value)
+
+    @GObject.Property
+    def margin_left(self) -> int:
+        return self._margin_left
+
+    @margin_left.setter
+    def margin_left(self, value: int) -> None:
+        self._margin_left = value
+        GtkLayerShell.set_margin(self, GtkLayerShell.Edge.LEFT, value)
+
+    @GObject.Property
+    def margin_right(self) -> int:
+        return self._margin_right
+
+    @margin_right.setter
+    def margin_right(self, value: int) -> None:
+        self._margin_right = value
+        GtkLayerShell.set_margin(self, GtkLayerShell.Edge.RIGHT, value)
+
+    @GObject.Property
+    def margin_top(self) -> int:
+        return self._margin_top
+
+    @margin_top.setter
+    def margin_top(self, value: int) -> None:
+        self._margin_top = value
+        GtkLayerShell.set_margin(self, GtkLayerShell.Edge.TOP, value)
 
     def __change_input_region(self) -> None:
         if self.input_width < 0:
