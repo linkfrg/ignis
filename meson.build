@@ -27,7 +27,7 @@ dependency('gio-2.0')
 dependency('gtk4')
 dependency('gtk4-layer-shell-0')
 
-# gvc
+#gvc
 subproject('gvc',
     default_options: [
         'package_name=' + meson.project_name(),
@@ -38,7 +38,6 @@ subproject('gvc',
         'alsa=false'
     ]
 )
-
 # Do installation
 install_subdir(
     'ignis',
