@@ -5,10 +5,6 @@ from ignis.gobject import IgnisGObject
 class ApplicationAction(IgnisGObject):
     """
     Application action.
-
-    Properties:
-        - **action** (``str``, read-only): ID of the action.
-        - **name** (``str``, read-only): Human-readable name of the action.
     """
 
     def __init__(self, app: Gio.DesktopAppInfo, action: str):
@@ -20,10 +16,20 @@ class ApplicationAction(IgnisGObject):
 
     @GObject.Property
     def action(self) -> str:
+        """
+        - **read-only**
+
+        ID of the action.
+        """
         return self._action
 
     @GObject.Property
     def name(self) -> str:
+        """
+        - **read-only**
+
+        Human-readable name of the action.
+        """
         return self._name
 
     def launch(self) -> None:

@@ -10,11 +10,6 @@ from .util import get_session_path
 class BacklightDevice(IgnisGObject):
     """
     A backlight device.
-
-    Properties:
-        - **device_name** (``str``, read-write): The name of the directory in ``/sys/class/backlight``.
-        - **brightness** (``int``, read-only): Current brightness of the device.
-        - **max_brightness** (``int``, read-only): Maximum brightness allowed by the device.
     """
 
     def __init__(self, device_name: str):
@@ -58,14 +53,25 @@ class BacklightDevice(IgnisGObject):
 
     @GObject.Property
     def device_name(self) -> str:
+        """
+        The name of the directory in ``/sys/class/backlight``.
+        """
         return self._device_name
 
     @GObject.Property
     def max_brightness(self) -> int:
+        """
+        Maximum brightness allowed by the device.
+        """
         return self._max_brightness
 
     @GObject.Property
     def brightness(self) -> int:
+        """
+        - **read-write**
+
+        The current brightness of the device.
+        """
         return self._brightness
 
     @brightness.setter

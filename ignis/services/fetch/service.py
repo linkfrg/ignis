@@ -6,36 +6,7 @@ from ignis.base_service import BaseService
 
 class FetchService(BaseService):
     """
-    System info service.
-
-    Properties:
-        - **os_name** (``str``, read-only): OS name.
-        - **os_id** (``str``, read-only): OS ID.
-        - **os_build_id** (``str``, read-only): OS build ID.
-        - **os_ansi_color** (``str``, read-only): OS ANSI color.
-        - **os_home_url** (``str``, read-only): OS homepage URL.
-        - **os_documentation_url** (``str``, read-only): OS documentation URL.
-        - **os_support_url** (``str``, read-only): OS support URL.
-        - **os_bug_report_url** (``str``, read-only): OS bug report URL.
-        - **os_privacy_policy_url** (``str``, read-only): OS privacy policy URL.
-        - **os_logo** (``str``, read-only): OS logo icon name.
-        - **os_logo_dark** (``str``, read-only): OS dark logo icon name.
-        - **os_logo_text** (``str``, read-only): OS logo with text icon name.
-        - **os_logo_text_dark** (``str``, read-only): OS dark logo with text icon name.
-        - **session_type** (``str``, read-only): Current session type (wayland/x11).
-        - **current_desktop** (``str``, read-only): Current desktop environment.
-        - **hostname** (``str``, read-only): Hostname.
-        - **kernel** (``str``, read-only): Kernel version.
-        - **uptime** (``Tuple[int, int, int, int]``, read-only): Current uptime, (days, hours, minutes, seconds). You can use ``Utils.Poll`` to get the current uptime every minute or second.
-        - **cpu** (``str``, read-only): CPU model.
-        - **mem_info** (``Dict[str, int]``, read-only): Dictionary with all information about RAM.
-        - **mem_total** (``int``, read-only): Total amount of RAM.
-        - **mem_available** (``int``, read-only): Available amount of RAM.
-        - **board_vendor** (``str``, read-only): Vendor of the motherboard.
-        - **board_name** (``str``, read-only): Motherboard name.
-        - **bios_version** (``str``, read-only): BIOS/UEFI version.
-        - **gtk_theme** (``str | None``, read-only): Current GTK theme.
-        - **icon_theme** (``str | None``, read-only): Current icon theme.
+    A service for fetching system information.
 
     **Example usage**:
 
@@ -66,76 +37,132 @@ class FetchService(BaseService):
 
     @GObject.Property
     def os_name(self) -> str:
+        """
+        The OS name.
+        """
         return self._os_info.get("NAME", "Unknown")
 
     @GObject.Property
     def os_id(self) -> str:
+        """
+        The OS ID.
+        """
         return self._os_info.get("ID", "Unknown")
 
     @GObject.Property
     def os_build_id(self) -> str:
+        """
+        The OS build ID.
+        """
         return self._os_info.get("BUILD_ID", "Unknown")
 
     @GObject.Property
     def os_ansi_color(self) -> str:
+        """
+        The OS ANSI color.
+        """
         return self._os_info.get("ANSI_COLOR", "Unknown")
 
     @GObject.Property
     def os_home_url(self) -> str:
+        """
+        The OS homepage URL.
+        """
         return self._os_info.get("HOME_URL", "Unknown")
 
     @GObject.Property
     def os_documentation_url(self) -> str:
+        """
+        The OS documentation URL.
+        """
         return self._os_info.get("DOCUMENTATION_URL", "Unknown")
 
     @GObject.Property
     def os_support_url(self) -> str:
+        """
+        The OS support URL.
+        """
         return self._os_info.get("SUPPORT_URL", "Unknown")
 
     @GObject.Property
     def os_bug_report_url(self) -> str:
+        """
+        The OS bug report URL.
+        """
         return self._os_info.get("BUG_REPORT_URL", "Unknown")
 
     @GObject.Property
     def os_privacy_policy_url(self) -> str:
+        """
+        The OS privacy policy URL.
+        """
         return self._os_info.get("PRIVACY_POLICY_URL", "Unknown")
 
     @GObject.Property
     def os_logo(self) -> str:
+        """
+        The OS logo icon name.
+        """
         return self._os_info.get("LOGO", "Unknown")
 
     @GObject.Property
     def os_logo_dark(self) -> str:
+        """
+        The OS dark logo icon name.
+        """
         return f"{self.os_logo}-dark"
 
     @GObject.Property
     def os_logo_text(self) -> str:
+        """
+        The OS logo with text icon name.
+        """
         return f"{self.os_logo}-text"
 
     @GObject.Property
     def os_logo_text_dark(self) -> str:
+        """
+        The OS dark logo with text icon name.
+        """
         return f"{self.os_logo}-text-dark"
 
     @GObject.Property
     def session_type(self) -> str | None:
+        """
+        The current session type (wayland/x11).
+        """
         return os.environ.get("XDG_SESSION_TYPE")
 
     @GObject.Property
     def current_desktop(self) -> str | None:
+        """
+        The current desktop environment.
+        """
         return os.environ.get("XDG_CURRENT_DESKTOP")
 
     @GObject.Property
     def hostname(self) -> str:
+        """
+        The hostname of this machine.
+        """
         with open("/etc/hostname") as file:
             data = file.read()
         return data
 
     @GObject.Property
     def kernel(self) -> str:
+        """
+        Kernel version.
+        """
         return os.uname().release
 
     @GObject.Property
     def uptime(self) -> tuple[int, int, int, int]:
+        """
+        Current uptime, (days, hours, minutes, seconds).
+
+        You can use :class:`~ignis.utils.Utils.Poll` to get the current uptime every minute or second.
+        """
         with open("/proc/uptime") as f:
             uptime_seconds = float(f.readline().split()[0])
 
@@ -147,6 +174,9 @@ class FetchService(BaseService):
 
     @GObject.Property
     def cpu(self) -> str:
+        """
+        CPU model.
+        """
         cpu_name = "Unknown"
         with open("/proc/cpuinfo") as f:
             for line in f:
@@ -157,6 +187,9 @@ class FetchService(BaseService):
 
     @GObject.Property
     def mem_info(self) -> dict[str, int]:
+        """
+        Dictionary with all information about RAM.
+        """
         mem_info = {}
         with open("/proc/meminfo") as file:
             for line in file:
@@ -168,18 +201,30 @@ class FetchService(BaseService):
 
     @GObject.Property
     def mem_total(self) -> int:
+        """
+        Total amount of RAM.
+        """
         return self.mem_info.get("MemTotal", None)
 
     @GObject.Property
     def mem_available(self) -> int:
+        """
+        Available amount of RAM.
+        """
         return self.mem_info.get("MemAvailable", None)
 
     @GObject.Property
     def mem_used(self) -> int:
+        """
+        Vendor of the motherboard.
+        """
         return self.mem_total - self.mem_available
 
     @GObject.Property
     def board_vendor(self) -> str:
+        """
+        Motherboard name.
+        """
         with open("/sys/devices/virtual/dmi/id/board_vendor") as file:
             data = file.read()
 
@@ -187,6 +232,9 @@ class FetchService(BaseService):
 
     @GObject.Property
     def board_name(self) -> str:
+        """
+        BIOS/UEFI version.
+        """
         with open("/sys/devices/virtual/dmi/id/board_name") as file:
             data = file.read()
 
@@ -201,6 +249,9 @@ class FetchService(BaseService):
 
     @GObject.Property
     def gtk_theme(self) -> str | None:
+        """
+        Current GTK theme.
+        """
         settings = Gtk.Settings.get_default()
         if not settings:
             return None
@@ -209,6 +260,9 @@ class FetchService(BaseService):
 
     @GObject.Property
     def icon_theme(self) -> str | None:
+        """
+        Current icon theme.
+        """
         display = Gdk.Display.get_default()
         if not display:
             raise DisplayNotFoundError()

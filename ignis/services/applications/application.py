@@ -11,21 +11,8 @@ class Application(IgnisGObject):
     An application object.
 
     Signals:
-        - **"pinned"**: Emitted when the application has been pinned.
-        - **"unpinned"**: Emitted when the application has been unpinned.
-
-    Properties:
-        - **app** (`Gio.DesktopAppInfo <https://lazka.github.io/pgi-docs/index.html#Gio-2.0/classes/DesktopAppInfo.html>`_, read-only): An instance of ``Gio.DesktopAppInfo``. You typically shouldn't use this property.
-        - **id** (``str | None``, read-only): The ID of the application.
-        - **name** (``str``, read-only): The name of the application.
-        - **description** (``str | None``, read-only): The description of the application.
-        - **icon** (``str``, read-only): The icon of the application. If the app has no icon, "image-missing" will be returned.
-        - **keywords** (``list[str]``, read-only): Keywords of the application. Ususally, these are words that describe the application.
-        - **desktop_file** (``str | None``, read-only): The full path to the ``.desktop`` file of the application.
-        - **executable** (``str | None``, read-only): The executable of the application.
-        - **exec_string** (``str``, read-only): The string that contains the executable with command line arguments, used to launch the application.
-        - **actions** (list[:class:`~ignis.services.applications.Application`], read-only): A list of actions.
-        - **is_pinned** (``bool``, read-write): Whether the application is pinned.
+        - **pinned**: Emitted when the application has been pinned.
+        - **unpinned**: Emitted when the application has been unpinned.
     """
 
     __gsignals__ = {
@@ -45,22 +32,37 @@ class Application(IgnisGObject):
 
     @GObject.Property
     def app(self) -> Gio.DesktopAppInfo:
+        """
+        An instance of `Gio.DesktopAppInfo <https://lazka.github.io/pgi-docs/index.html#Gio-2.0/classes/DesktopAppInfo.html>`_.
+        """
         return self._app
 
     @GObject.Property
     def id(self) -> str | None:
+        """
+        The ID of the application.
+        """
         return self._app.get_id()
 
     @GObject.Property
     def name(self) -> str:
+        """
+        The name of the application.
+        """
         return self._app.get_display_name()
 
     @GObject.Property
     def description(self) -> str | None:
+        """
+        The description of the application.
+        """
         return self._app.get_description()
 
     @GObject.Property
     def icon(self) -> str:
+        """
+        The icon of the application. If the app has no icon, "image-missing" will be returned.
+        """
         icon = self._app.get_string("Icon")
         if not icon:
             return "image-missing"
@@ -69,26 +71,46 @@ class Application(IgnisGObject):
 
     @GObject.Property
     def keywords(self) -> list[str]:
+        """
+        Keywords of the application. Ususally, these are words that describe the application.
+        """
         return self._app.get_keywords()
 
     @GObject.Property
     def desktop_file(self) -> str | None:
+        """
+        The full path to the ``.desktop`` file of the application.
+        """
         return self._app.get_filename()
 
     @GObject.Property
     def executable(self) -> str:
+        """
+        The executable of the application.
+        """
         return self._app.get_executable()
 
     @GObject.Property
     def exec_string(self) -> str | None:
+        """
+        The string that contains the executable with command line arguments, used to launch the application.
+        """
         return self._app.get_string("Exec")
 
     @GObject.Property
     def actions(self) -> list[ApplicationAction]:
+        """
+        A list of actions.
+        """
         return self._actions
 
     @GObject.Property
     def is_pinned(self) -> bool:
+        """
+        - **read-write**
+
+        Whether the application is pinned.
+        """
         return self._is_pinned
 
     @is_pinned.setter

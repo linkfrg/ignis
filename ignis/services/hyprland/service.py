@@ -13,12 +13,6 @@ class HyprlandService(BaseService):
     """
     Hyprland IPC client.
 
-    Properties:
-        - **workspaces** (``list[dict[str, Any]]``, read-only): A list of workspaces.
-        - **active_workspace** (``Dict[str, Any]``, read-only): The currently active workspace.
-        - **kb_layout** (``str``, read-only): The currenly active keyboard layout.
-        - **active_window** (``Dict[str, Any]``, read-only): The currenly focused window.
-
     Raises:
         HyprlandIPCNotFoundError: If Hyprland IPC is not found.
 
@@ -108,18 +102,30 @@ class HyprlandService(BaseService):
 
     @GObject.Property
     def workspaces(self) -> list[dict[str, Any]]:
+        """
+        A list of workspaces.
+        """
         return self._workspaces
 
     @GObject.Property
     def active_workspace(self) -> dict[str, Any]:
+        """
+        The currently active workspace.
+        """
         return self._active_workspace
 
     @GObject.Property
     def kb_layout(self) -> str:
+        """
+        The currenly active keyboard layout.
+        """
         return self._kb_layout
 
     @GObject.Property
     def active_window(self) -> dict[str, Any]:
+        """
+        The currenly focused window.
+        """
         return self._active_window
 
     @Utils.run_in_thread

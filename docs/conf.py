@@ -1,10 +1,11 @@
 import os
 import sys
+import shutil
 import inspect
 from typing import Callable
 from sphinx.ext.autodoc.mock import mock
 
-sys.path.insert(0, os.path.abspath(".."))
+sys.path.insert(0, os.path.abspath("tmp"))
 
 project = "Ignis"
 copyright = "2024, linkfrg"
@@ -69,7 +70,7 @@ html_theme_options = {
         "version_match": version_match,
     },
     "pygments_light_style": "tango",
-    "pygments_dark_style": "monokai"
+    "pygments_dark_style": "monokai",
 }
 
 
@@ -79,6 +80,33 @@ html_context = {
     "github_version": "main",
     "doc_path": "docs/",
 }
+
+
+def copy_and_replace_gobject_property(source_dir: str, target_dir: str):
+    """
+    This trash function copys source_dir to target_dir
+    and replaces @GObject.Property with @property.
+    For what? To indicate Sphinx that GObject.Property functions is actually properties.
+    """
+    if os.path.exists(target_dir):
+        shutil.rmtree(target_dir)
+
+    shutil.copytree(source_dir, target_dir)
+
+    for dirpath, _, filenames in os.walk(target_dir):
+        for filename in filenames:
+            if filename.endswith(".py"):
+                file_path = os.path.join(dirpath, filename)
+                with open(file_path) as file:
+                    content = file.read()
+
+                new_content = content.replace("@GObject.Property", "@property")
+
+                with open(file_path, "w", encoding="utf-8") as file:
+                    file.write(new_content)
+
+
+copy_and_replace_gobject_property("../ignis", "tmp/ignis")
 
 API_REFERENCE_DIR = "api"
 

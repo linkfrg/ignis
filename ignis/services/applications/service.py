@@ -10,10 +10,6 @@ class ApplicationsService(BaseService):
     Provides a list of applications installed on the system.
     It also allows "pinning" of apps and retrieving a list of pinned applications.
 
-    Properties:
-        - **apps** (list[:class:`~ignis.services.applications.Application`], read-only): A list of all installed applications.
-        - **pinned** (list[:class:`~ignis.services.applications.Application`], read-only): A list of all pinned applications.
-
     **Example usage**:
 
     .. code-block:: python
@@ -44,10 +40,16 @@ class ApplicationsService(BaseService):
 
     @GObject.Property
     def apps(self) -> list[Application]:
+        """
+        A list of all installed applications.
+        """
         return sorted(self._apps.values(), key=lambda x: x.name)
 
     @GObject.Property
     def pinned(self) -> list[Application]:
+        """
+        A list of all pinned applications.
+        """
         return list(self._pinned.values())
 
     def __connect_entry(self, entry: Application) -> None:

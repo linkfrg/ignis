@@ -17,3 +17,4 @@ docs/api/widgets
 !docs/api/widgets/index.rst
 
 .idea/*
+docs/tmp

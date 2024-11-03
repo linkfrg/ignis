@@ -7,16 +7,10 @@ from .player import MprisPlayer
 
 class MprisService(BaseService):
     """
-    Service for getting and controlling media players using the MPRIS interface (e.g., Spotify, Firefox/Chromium with playing media).
-
-    **Dependencies:**
-        - **python-requests**
+    A service for controlling media players using the MPRIS interface.
 
     Signals:
-        - **"player_added"** (:class:`~ignis.services.applications.Application`): Emitted when a :class:`~ignis.services.applications.Application` has been added.
-
-    Properties:
-        - **players** (list[:class:`~ignis.services.applications.Application`], read-only): A list of currently active players.
+        - **player_added** (:class:`~ignis.services.applications.Application`): Emitted when a :class:`~ignis.services.applications.Application` has been added.
 
     **Example usage:**
 
@@ -82,4 +76,7 @@ class MprisService(BaseService):
 
     @GObject.Property
     def players(self) -> list[MprisPlayer]:
+        """
+        A list of currently active players.
+        """
         return list(self._players.values())
