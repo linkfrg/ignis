@@ -149,5 +149,8 @@ class DBusMenu(Gtk.PopoverMenu):
         return DBusMenu(self.__proxy.name, self.__proxy.object_path)
 
     def popup(self) -> None:
-        self.__proxy.AboutToShow("(i)", self._menu_id)
+        try:
+            self.__proxy.AboutToShow("(i)", self._menu_id)
+        except GLib.GError:  # type: ignore
+            pass
         return super().popup()
