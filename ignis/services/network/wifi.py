@@ -8,13 +8,7 @@ from .util import get_devices
 
 class Wifi(IgnisGObject):
     """
-    Class for controlling Wi-Fi devices.
-
-    Properties:
-        - **devices** (:class:`~ignis.services.network.WifiDevice`, read-only): A list of Wi-Fi devices.
-        - **is_connected** (``bool``, read-only): Whether at least one Wi-Fi device is connected to the network.
-        - **icon_name** (``str``, read-only): The icon name of the first device in the list.
-        - **enabled** (``bool``, read-only): Whether Wi-Fi is enabled.
+    The class for controlling Wi-Fi devices.
     """
 
     def __init__(self, client: NM.Client):
@@ -33,10 +27,16 @@ class Wifi(IgnisGObject):
 
     @GObject.Property
     def devices(self) -> list[WifiDevice]:
+        """
+        A list of Wi-Fi devices.
+        """
         return self._devices
 
     @GObject.Property
     def is_connected(self) -> bool:
+        """
+        Whether at least one Wi-Fi device is connected to the network.
+        """
         for i in self._devices:
             if i.is_connected:
                 return True
@@ -44,6 +44,9 @@ class Wifi(IgnisGObject):
 
     @GObject.Property
     def icon_name(self) -> str:
+        """
+        The icon name of the first device in the list.
+        """
         result = None
         for i in self._devices:
             if i.ap.icon_name != "network-wireless-offline-symbolic":
@@ -56,6 +59,11 @@ class Wifi(IgnisGObject):
 
     @GObject.Property
     def enabled(self) -> bool:
+        """
+        - **read-write**
+
+        Whether Wi-Fi is enabled.
+        """
         return self._client.wireless_get_enabled()
 
     @enabled.setter

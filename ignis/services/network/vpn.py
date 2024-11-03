@@ -6,11 +6,7 @@ from ._imports import NM
 
 class VpnConnection(IgnisGObject):
     """
-    VPN connection.
-
-    Properties:
-        - **is_connected** (``bool``, read-only): Whether the device is connected to the network.
-        - **name** (``str | None``, read-only): The id (name) of the vpn connection or ``None`` if unknown.
+    A VPN connection.
     """
 
     def __init__(self, connection: NM.RemoteConnection, client: NM.Client):
@@ -28,10 +24,16 @@ class VpnConnection(IgnisGObject):
 
     @GObject.Property
     def is_connected(self) -> bool:
+        """
+        Whether the device is connected to the network.
+        """
         return self._is_connected
 
     @GObject.Property
     def name(self) -> str | None:
+        """
+        The id (name) of the vpn connection or ``None`` if unknown.
+        """
         return self._connection.get_id()
 
     def toggle_connection(self) -> None:

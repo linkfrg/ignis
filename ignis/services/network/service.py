@@ -10,11 +10,6 @@ from .vpn import Vpn
 class NetworkService(BaseService):
     """
     A Network service. Uses ``NetworkManager``.
-
-    Properties:
-        - **wifi** (:class:`~ignis.services.network.Wifi`, read-only): The Wi-Fi object.
-        - **ethernet** (:class:`~ignis.services.network.Ethernet`, read-only): The Ethernet device object.
-        - **vpn** (:class:`~ignis.services.network.Vpn`, read-only): The Vpn object.
     """
 
     def __init__(self):
@@ -26,12 +21,21 @@ class NetworkService(BaseService):
 
     @GObject.Property
     def wifi(self) -> Wifi:
+        """
+        The Wi-Fi object.
+        """
         return self._wifi
 
     @GObject.Property
     def ethernet(self) -> Ethernet:
+        """
+        The Ethernet object.
+        """
         return self._ethernet
 
     @GObject.Property
     def vpn(self) -> Vpn:
+        """
+        The Vpn object.
+        """
         return self._vpn
