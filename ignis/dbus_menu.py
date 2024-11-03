@@ -70,6 +70,8 @@ class DBusMenu(Gtk.PopoverMenu):
             "ItemsPropertiesUpdated", lambda *args: self.__update_menu()
         )
 
+        self._menu_id: int = 0
+
         self.__update_menu()
 
     def __update_menu(self) -> None:
@@ -93,6 +95,8 @@ class DBusMenu(Gtk.PopoverMenu):
     def __load_layout(self, proxy, result, user_data) -> None:
         if isinstance(result, GLib.GError):
             return
+
+        self._menu_id = result[1][0]
 
         items = result[1][2]
         menu = self.__parse(items=items)
@@ -143,3 +147,7 @@ class DBusMenu(Gtk.PopoverMenu):
             :class:`~ignis.dbus_menu.DBusMenu`: A copy of this instance.
         """
         return DBusMenu(self.__proxy.name, self.__proxy.object_path)
+
+    def popup(self) -> None:
+        self.__proxy.AboutToShow("(i)", self._menu_id)
+        return super().popup()
