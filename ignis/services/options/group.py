@@ -14,12 +14,8 @@ class OptionsGroup(IgnisGObject):
         Use the :func:`~ignis.services.options.OptionsService.create_group` method instead.
 
     Signals:
-        - **"changed"** (): Emitted when options in this group is changed.
-        - **"changed"** (): Emitted when this options group is removed.
-
-    Properties:
-        - **name** (``str``, read-only): The name of the group.
-        - **data** (``dict[str, Any]``, read-only): The dictionary containing all options and their values.
+        - **changed** (): Emitted when options in this group is changed.
+        - **removed** (): Emitted when this options group is removed.
     """
 
     __gsignals__ = {
@@ -44,10 +40,16 @@ class OptionsGroup(IgnisGObject):
 
     @GObject.Property
     def name(self) -> str:
+        """
+        The name of the group.
+        """
         return self._name
 
     @GObject.Property
     def data(self) -> dict[str, Any]:
+        """
+        The dictionary containing all options and their values.
+        """
         return {key: option.value for key, option in self._data.items()}
 
     def create_option(self, name: str, default: Any, exists_ok: bool = False) -> Option:

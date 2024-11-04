@@ -29,15 +29,8 @@ class RecorderService(BaseService):
         - **pipewire-pulse**: for audio recording.
 
     Signals:
-        - **"recording_started"** (): Emitted when recording starts.
-        - **"recording_stopped"** (): Emitted when recording stops.
-
-    Properties:
-        - **active** (``bool``, read-write): Whether recording is currently active.
-        - **is_paused** (``bool``, read-write): Whether recording is currently paused.
-        - **bitrate** (``int``, read-write, default: 8000): The bitrate of the recording.
-        - **default_file_location** (``str``, read-write, default: ``"$HOME/Videos"``): Default location for saving recordings.
-        - **default_filename** (``str``, read-write, default: ``"%Y-%m-%d_%H-%M-%S.mp4"``): Default filename for recordings. Supports time formating.
+        - **recording_started** (): Emitted when recording starts.
+        - **recording_stopped** (): Emitted when recording stops.
 
     Raises:
         GstNotFoundError: If GStreamer is not found.
@@ -108,14 +101,27 @@ class RecorderService(BaseService):
 
     @GObject.Property
     def active(self) -> bool:
+        """
+        Whether recording is currently active.
+        """
         return self._active
 
     @GObject.Property
     def is_paused(self) -> bool:
+        """
+        Whether recording is currently paused.
+        """
         return self._is_paused
 
     @GObject.Property
     def bitrate(self) -> int:
+        """
+        - **read-write**
+
+        The bitrate of the recording.
+
+        Default: ``8000``
+        """
         return self._bitrate_opt.value
 
     @bitrate.setter
@@ -124,6 +130,13 @@ class RecorderService(BaseService):
 
     @GObject.Property
     def default_file_location(self) -> str:
+        """
+        - **read-write**
+
+        The default location for saving recordings.
+
+        Default: ``"$HOME/Videos"``.
+        """
         return self._default_file_location_opt.value
 
     @default_file_location.setter
@@ -132,6 +145,13 @@ class RecorderService(BaseService):
 
     @GObject.Property
     def default_filename(self) -> str:
+        """
+        - **read-write**
+
+        The default filename for recordings. Supports time formating.
+
+        Default: ``"%Y-%m-%d_%H-%M-%S.mp4"``
+        """
         return self._default_filename_opt.value
 
     @default_filename.setter

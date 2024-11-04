@@ -6,10 +6,6 @@ from ignis.gobject import IgnisGObject
 class NotificationAction(IgnisGObject):
     """
     A simple object that contains data about a notification action.
-
-    Properties:
-        - **id** (``str``, read-only): The ID of the action.
-        - **label** (``int``, read-only): The label of the notification. This one should be displayed to user.
     """
 
     def __init__(self, dbus: DBusService, notification, id: str, label: str):
@@ -21,10 +17,16 @@ class NotificationAction(IgnisGObject):
 
     @GObject.Property
     def id(self) -> str:
+        """
+        The ID of the action.
+        """
         return self._id
 
     @GObject.Property
     def label(self) -> str:
+        """
+        The label of the notification. This one should be displayed to user.
+        """
         return self._label
 
     def invoke(self) -> None:

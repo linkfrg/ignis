@@ -8,31 +8,10 @@ from ignis.dbus_menu import DBusMenu
 
 class SystemTrayItem(IgnisGObject):
     """
-    System tray item.
-
-    .. warning::
-        If you want to add ``menu`` to several containers (e.g., make two status bars with a system tray),
-        you must call the ``copy()`` method to obtain a copy of the menu.
-        This is necessary because you can't add a single widget to multiple containers.
-
-        .. code-block:: python
-
-            menu = item.menu.copy()
+    A system tray item.
 
     Signals:
-        - **"removed"** (): Emitted when the item is removed.
-
-    Properties:
-        - **id** (``str``, read-only): The ID of the item.
-        - **category** (``str``, read-only): The category of the item.
-        - **title** (``str``, read-only): The title of the item.
-        - **status** (``str``, read-only): The status of the item.
-        - **window_id** (``int``, read-only): The window ID.
-        - **icon** (``str | GdkPixbuf.Pixbuf | None``, read-only): The icon name or a ``GdkPixbuf.Pixbuf``.
-        - **item_is_menu** (``bool``, read-only): Whether the item has a menu.
-        - **menu** (``DBusMenu | None``, read-only): A :class:`~ignis.dbus_menu.DBusMenu` or ``None``. Add it to a container, and call the ``popup()`` method on it to display the menu.
-        - **tooltip** (``str``, read-only): Tooltip, the text should be displayed when you hover cursor over the icon.
-
+        - **removed** (): Emitted when the item is removed.
     """
 
     __gsignals__ = {
@@ -125,38 +104,77 @@ class SystemTrayItem(IgnisGObject):
 
     @GObject.Property
     def id(self) -> str:
+        """
+        The ID of the item.
+        """
         return self.__dbus.Id
 
     @GObject.Property
     def category(self) -> str:
+        """
+        The category of the item.
+        """
         return self.__dbus.Category
 
     @GObject.Property
     def title(self) -> str:
+        """
+        The title of the item.
+        """
         return self.__dbus.Title
 
     @GObject.Property
     def status(self) -> str:
+        """
+        The status of the item.
+        """
         return self.__dbus.Status
 
     @GObject.Property
     def window_id(self) -> int:
+        """
+        The window ID.
+        """
         return self.__dbus.WindowId
 
     @GObject.Property
     def icon(self) -> str | GdkPixbuf.Pixbuf | None:
+        """
+        The icon name or a ``GdkPixbuf.Pixbuf``.
+        """
         return self._icon
 
     @GObject.Property
     def item_is_menu(self) -> bool:
+        """
+        Whether the item has a menu.
+        """
         return self.__dbus.ItemIsMenu
 
     @GObject.Property
     def menu(self) -> DBusMenu | None:
+        """
+        A :class:`~ignis.dbus_menu.DBusMenu` or ``None``.
+
+        .. hint::
+            To display the menu, add it to a container, and call the ``.popup()`` method on it.
+
+        .. warning::
+            If you want to add ``menu`` to several containers (e.g., make two status bars with a system tray),
+            you must call the ``copy()`` method to obtain a copy of the menu.
+            This is necessary because you can't add a single widget to multiple containers.
+
+            .. code-block:: python
+
+                menu = item.menu.copy()
+        """
         return self._menu
 
     @GObject.Property
     def tooltip(self) -> str:
+        """
+        A tooltip, the text should be displayed when you hover cursor over the icon.
+        """
         tooltip = self.__dbus.ToolTip
         return self.title if not tooltip else tooltip[2]
 

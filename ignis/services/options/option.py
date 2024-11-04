@@ -8,11 +8,7 @@ class Option(IgnisGObject):
     An option object.
 
     Signals:
-        - **"removed"** (): Emitted when the option is removed.
-
-    Properties:
-        - **name** (``str``, read-only): The name of the option.
-        - **value** (``Any``, read-write): The current value of the option.
+        - **removed** (): Emitted when the option is removed.
     """
 
     __gsignals__ = {
@@ -26,10 +22,18 @@ class Option(IgnisGObject):
 
     @GObject.Property
     def name(self) -> str:
+        """
+        The name of the option.
+        """
         return self._name
 
     @GObject.Property
     def value(self) -> Any:
+        """
+        - **read-write**
+
+        The current value of the option.
+        """
         return self._value
 
     @value.setter

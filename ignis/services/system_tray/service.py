@@ -12,10 +12,7 @@ class SystemTrayService(BaseService):
     A system tray, where application icons are placed.
 
     Signals:
-        - **"added"** (:class:`~ignis.services.system_tray.SystemTrayItem`): Emitted when a new item is added.
-
-    Properties:
-        - **items** (list[:class:`~ignis.services.system_tray.SystemTrayItem`], read-only): A list of items.
+        - **added** (:class:`~ignis.services.system_tray.SystemTrayItem`): Emitted when a new item is added.
 
     Raises:
         AnotherSystemTrayRunningError: If another system tray is already running.
@@ -74,6 +71,9 @@ class SystemTrayService(BaseService):
 
     @GObject.Property
     def items(self) -> list[SystemTrayItem]:
+        """
+        A list of system tray items.
+        """
         return list(self._items.values())
 
     def __ProtocolVersion(self) -> GLib.Variant:

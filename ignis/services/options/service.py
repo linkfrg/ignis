@@ -17,11 +17,6 @@ class OptionsService(BaseService):
         You should not manually edit the ``~/.cache/ignis/options.json`` file.
         Use this service instead.
 
-    Properties:
-        - **groups** (list[:class:`~ignis.services.options.OptionsGroup`]): The list of all options groups.
-        - **data** (``dict[str, Any]``): The dictionary containing all options and their values from all groups.
-
-
     **Example usage:**
 
     .. code-block:: python
@@ -71,10 +66,16 @@ class OptionsService(BaseService):
 
     @GObject.Property
     def groups(self) -> list[OptionsGroup]:
+        """
+        A list of all options groups.
+        """
         return list(self._groups.values())
 
     @GObject.Property
     def data(self) -> dict[str, Any]:
+        """
+        The dictionary containing all options and their values from all groups.
+        """
         return {key: group.data for key, group in self._groups.items()}
 
     def create_group(self, name: str, exists_ok: bool = False) -> OptionsGroup:

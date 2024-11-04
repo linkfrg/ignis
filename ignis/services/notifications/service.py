@@ -23,15 +23,8 @@ class NotificationService(BaseService):
     Allow receiving notifications and perform actions on them.
 
     Signals:
-        - **"notified"** (:class:`~ignis.services.notifications.Notification`): Emitted when a new notification appears.
-        - **"new_popup"** (:class:`~ignis.services.notifications.Notification`): Emitted when a new popup notification appears. Only emitted if ``dnd`` is set to ``False``.
-
-    Properties:
-        - **notifications** (list[:class:`~ignis.services.notifications.Notification`], read-only): A list of all notifications.
-        - **popups** (list[:class:`~ignis.services.notifications.Notification`], read-only): A list of currently active popup notifications, sorted from newest to oldest.
-        - **dnd** (``bool``, read-write): Do Not Disturb mode. If set to ``True``, the ``"new_popup"`` signal will not be emitted, and all new :class:`~ignis.services.notifications.Notification` instances will have ``popup`` set to ``False``. Default: ``False``.
-        - **popup_timeout** (``int``, read-write): Timeout before a popup is automatically dismissed, in milliseconds. Default: ``5000``.
-        - **max_popups_count** (``int``, read-write): Maximum number of popups. If the length of the ``popups`` list exceeds ``max_popups_count``, the oldest popup will be dismissed. Default: ``3``.
+        - **notified** (:class:`~ignis.services.notifications.Notification`): Emitted when a new notification appears.
+        - **new_popup** (:class:`~ignis.services.notifications.Notification`): Emitted when a new popup notification appears. Only emitted if ``dnd`` is set to ``False``.
 
     Raises:
         AnotherNotificationDaemonRunningError: If another notification daemon is already running.
@@ -121,14 +114,29 @@ class NotificationService(BaseService):
 
     @GObject.Property
     def notifications(self) -> list[Notification]:
+        """
+        A list of all notifications.
+        """
         return list(self._notifications.values())
 
     @GObject.Property
     def popups(self) -> list[Notification]:
+        """
+        A list of currently active popup notifications.
+        """
         return list(self._popups.values())
 
     @GObject.Property
     def dnd(self) -> bool:
+        """
+        - **read-write**
+
+        Do Not Disturb mode.
+        If set to ``True``, the ``"new_popup"`` signal will not be emitted,
+        and all new :class:`~ignis.services.notifications.Notification` instances will have ``popup`` set to ``False``.
+
+        Default: ``False``.
+        """
         return self._dnd_opt.value
 
     @dnd.setter
@@ -137,6 +145,13 @@ class NotificationService(BaseService):
 
     @GObject.Property
     def popup_timeout(self) -> int:
+        """
+        - **read-write**
+
+        The timeout before a popup is automatically dismissed, in milliseconds.
+
+        Default: ``5000``.
+        """
         return self._popup_timeout_opt.value
 
     @popup_timeout.setter
@@ -145,6 +160,14 @@ class NotificationService(BaseService):
 
     @GObject.Property
     def max_popups_count(self) -> int:
+        """
+        - **read-write**
+
+        The Maximum number of popups.
+        If the length of the ``popups`` list exceeds ``max_popups_count``, the oldest popup will be dismissed.
+
+        Default: ``3``.
+        """
         return self._max_popups_count_opt.value
 
     @max_popups_count.setter
