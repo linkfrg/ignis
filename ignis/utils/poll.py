@@ -5,17 +5,9 @@ from typing import Any, Callable
 
 class Poll(IgnisGObject):
     """
-    Call a callback every n milliseconds specefied by the timeout.
-
-    Properties:
-        - **timeout** (``int``, required, read-write): The timeout interval in milliseconds.
-        - **callback** (``Callable``, required, read-write): The function to call when the timeout is reached. The ``self`` will passed as an argument.
-        - **output** (``str``, not argument, read-only): The output of the callback.
+    Calls a callback every n milliseconds specified by the timeout.
 
     You can pass arguments to the constructor, and they will be passed to the callback.
-
-    .. hint::
-        You can use bind() on ``output``.
 
     **Example usage:**
 
@@ -44,10 +36,24 @@ class Poll(IgnisGObject):
 
     @GObject.Property
     def output(self) -> Any:
+        """
+        - **not argument**
+
+        The output of the callback.
+
+        .. hint::
+            You can use bind() on ``output``.
+        """
         return self._output
 
     @GObject.Property
     def timeout(self) -> int:
+        """
+        - **read-write**
+        - **required**
+
+        The timeout interval in milliseconds.
+        """
         return self._timeout
 
     @timeout.setter
@@ -56,6 +62,12 @@ class Poll(IgnisGObject):
 
     @GObject.Property
     def callback(self) -> Callable:
+        """
+        - **read-write**
+        - **required**
+
+        The function to call when the timeout is reached. The ``self`` will passed as an argument.
+        """
         return self._callback
 
     @callback.setter

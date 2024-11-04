@@ -167,7 +167,7 @@ def generate_widgets(klass) -> None:
 
 def generate_utils(klass) -> None:
     def check(name: str) -> str:
-        if inspect.isclass(name):
+        if inspect.isclass(getattr(klass, name)):
             return format_utils_class_template(name)
         else:
             return format_utils_function_template(name)
