@@ -9,10 +9,6 @@ class ListBoxRow(Gtk.ListBoxRow, BaseWidget):
 
     A row for :class:`~ignis.widgets.listbox.ListBox`.
 
-    Properties:
-        - **on_activate** (``Callable``, optional, read-write): Function to call when the user selects the row.
-        - **selected** (``bool``, optional, read-write): Whether the row is selected by default.
-
     .. code-block:: python
 
         Widget.ListBoxRow(
@@ -33,6 +29,11 @@ class ListBoxRow(Gtk.ListBoxRow, BaseWidget):
 
     @GObject.Property
     def on_activate(self) -> Callable:
+        """
+        - optional, read-write
+
+        The function to call when the user selects the row.
+        """
         return self._on_activate
 
     @on_activate.setter
@@ -41,6 +42,11 @@ class ListBoxRow(Gtk.ListBoxRow, BaseWidget):
 
     @GObject.Property
     def selected(self) -> bool:
+        """
+        - optional, read-write
+
+        Whether the row is selected by default.
+        """
         return self._selected
 
     @selected.setter

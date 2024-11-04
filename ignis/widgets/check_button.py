@@ -43,6 +43,11 @@ class CheckButton(Gtk.CheckButton, BaseWidget):
 
     @GObject.Property
     def on_toggled(self) -> Callable:
+        """
+        - optional, read-write
+
+        The function to call when button is toggled (checked/unchecked).
+        """
         return self._on_toggled
 
     @on_toggled.setter

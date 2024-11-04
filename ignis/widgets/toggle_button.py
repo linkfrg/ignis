@@ -9,9 +9,6 @@ class ToggleButton(Gtk.ToggleButton, BaseWidget):
 
     A toggle button widget.
 
-    Properties:
-        - **on_toggled** (``Callable``, optional, read-write): Function to call when the button is toggled by the user.
-
     .. code-block:: python
 
         Widget.ToggleButton(
@@ -34,6 +31,11 @@ class ToggleButton(Gtk.ToggleButton, BaseWidget):
 
     @GObject.Property
     def on_toggled(self) -> Callable | None:
+        """
+        - optional, read-write
+
+        The function to call when the button is toggled by the user.
+        """
         return self._on_toggled
 
     @on_toggled.setter

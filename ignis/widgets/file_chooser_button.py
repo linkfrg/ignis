@@ -14,10 +14,6 @@ class FileChooserButton(Gtk.Button, BaseWidget):
 
     A button that allows the user to select a file.
 
-    Properties:
-        - **dialog** (:class:`~ignis.widgets.Widget.FileDialog`, required, read-only): An instance of :class:`~ignis.widgets.Widget.FileDialog`.
-        - **label** (:class:`~ignis.widgets.Widget.Label`, required, read-only): An instance of :class:`~ignis.widgets.Widget.Label`.
-
     .. code-block :: python
 
         Widget.FileChooserButton(
@@ -71,10 +67,20 @@ class FileChooserButton(Gtk.Button, BaseWidget):
 
     @GObject.Property
     def dialog(self) -> FileDialog:
+        """
+        - required, read-only
+
+        An instance of :class:`~ignis.widgets.Widget.FileDialog`.
+        """
         return self._dialog
 
     @GObject.Property
     def label(self) -> Label:
+        """
+        - required, read-only
+
+        An instance of :class:`~ignis.widgets.Widget.Label`.
+        """
         return self._label
 
     def __sync(self, path: str) -> None:

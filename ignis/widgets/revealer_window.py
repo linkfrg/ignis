@@ -10,9 +10,6 @@ class RevealerWindow(Window):
     Bases: :class:`~ignis.widgets.Widget.Window`.
     A window with animation.
 
-    Properties:
-        - **revealer** (:class:`~ignis.widgets.Widget.Revealer`, required, read-write): An instance of ``Revealer``.
-
     .. warning::
         Do not set ``Widget.Revealer`` as a direct child,
         as this can lead to various graphical bugs.
@@ -72,6 +69,11 @@ class RevealerWindow(Window):
 
     @GObject.Property
     def revealer(self) -> Revealer:
+        """
+        - required, read-write
+
+        An instance of :class:`~ignis.widgets.Widget.Revealer`.
+        """
         return self._revealer
 
     @revealer.setter

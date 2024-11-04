@@ -11,11 +11,8 @@ class Picture(Gtk.Picture, BaseWidget):
 
     A widget that displays an image at its native aspect ratio.
 
-    Properties:
-        - **image** (``str | GdkPixbuf.Pixbuf | None``, optional, read-write): Icon name, path to an image or ``GdkPixbuf.Pixbuf``.
-        - **width** (``int``, optional, read-write): Width of the image.
-        - **height** (``int``, optional, read-write): Height of the image.
-        - **content_fit** (``str``, optional, read-write): Controls how a content should be made to fit inside an allocation. Default: ``"contain"``.
+    Overrided properties:
+        - **content_fit** : Controls how a content should be made to fit inside an allocation. Default: ``"contain"``.
 
     **Content fit:**
         - **"fill"**: Make the content fill the entire allocation, without taking its aspect ratio in consideration.
@@ -56,6 +53,11 @@ class Picture(Gtk.Picture, BaseWidget):
 
     @GObject.Property
     def image(self) -> str | GdkPixbuf.Pixbuf | None:
+        """
+        - optional, read-write
+
+        The icon name, path to an image or ``GdkPixbuf.Pixbuf``.
+        """
         return self._image
 
     @image.setter
@@ -65,6 +67,11 @@ class Picture(Gtk.Picture, BaseWidget):
 
     @GObject.Property
     def width(self) -> int:
+        """
+        - optional, read-write
+
+        Width of the image.
+        """
         return self._width
 
     @width.setter
@@ -75,6 +82,11 @@ class Picture(Gtk.Picture, BaseWidget):
 
     @GObject.Property
     def height(self) -> int:
+        """
+        - optional, read-write
+
+        Height of the image.
+        """
         return self._height
 
     @height.setter

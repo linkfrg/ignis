@@ -17,10 +17,6 @@ class Box(Gtk.Box, BaseWidget):
                 child=[Widget.Label(label=str(i)) for i in range(10)]
             )
 
-    Properties:
-        - **child** (``list[Gtk.Widget]``, optional, read-write): A list of child widgets.
-        - **vertical** (``bool``, optional, read-write): Whether the box arranges children vertically.
-
     .. code-block:: python
 
         Widget.Box(
@@ -41,6 +37,11 @@ class Box(Gtk.Box, BaseWidget):
 
     @GObject.Property
     def child(self) -> list[Gtk.Widget]:
+        """
+        - optional, read-write
+
+        A list of child widgets.
+        """
         return self._child
 
     @child.setter
@@ -67,6 +68,13 @@ class Box(Gtk.Box, BaseWidget):
 
     @GObject.Property
     def vertical(self) -> bool:
+        """
+        - optional, read-write
+
+        Whether the box arranges children vertically.
+
+        Default: ``False``.
+        """
         return self.get_orientation() == Gtk.Orientation.VERTICAL
 
     @vertical.setter

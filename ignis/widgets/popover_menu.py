@@ -11,9 +11,6 @@ class PopoverMenu(Gtk.PopoverMenu, BaseWidget):
     It must be added as a child to a container.
     To display it, call the ``popup()`` method.
 
-    Properties:
-        - **items** (list[:class:`~ignis.widgets.Widget.MenuItem`], optional, read-write): A list of :class:`~ignis.widgets.Widget.MenuItem`.
-
     .. code-block:: python
 
         Widget.PopoverMenu(
@@ -70,6 +67,11 @@ class PopoverMenu(Gtk.PopoverMenu, BaseWidget):
 
     @GObject.Property
     def items(self) -> list[MenuItem]:
+        """
+        - optional, read-write
+
+        A list of :class:`~ignis.widgets.Widget.MenuItem`.
+        """
         return self._items
 
     @items.setter

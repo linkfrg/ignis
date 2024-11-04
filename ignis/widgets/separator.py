@@ -8,9 +8,6 @@ class Separator(Gtk.Separator, BaseWidget):
 
     A separator widget.
 
-    Properties:
-        - **vertical** (``bool``, optional, read-write): Whether the separator is vertical.
-
     .. code-block:: python
 
         Widget.Separator(
@@ -27,6 +24,11 @@ class Separator(Gtk.Separator, BaseWidget):
 
     @GObject.Property
     def vertical(self) -> bool:
+        """
+        - optional, read-write
+
+        Whether the separator is vertical.
+        """
         return self.get_orientation() == Gtk.Orientation.VERTICAL
 
     @vertical.setter

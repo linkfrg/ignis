@@ -10,11 +10,6 @@ class Button(Gtk.Button, BaseWidget):
 
     A button.
 
-    Properties:
-        - **on_click** (``Callable``, optional, read-write): The function to call on left click.
-        - **on_right_click** (``Callable``, optional, read-write): The function to call on right click.
-        - **on_middle_click** (``Callable``, optional, read-write): The function to call on middle click.
-
     .. code-block:: python
 
         Widget.Button(
@@ -53,6 +48,11 @@ class Button(Gtk.Button, BaseWidget):
 
     @GObject.Property
     def on_click(self) -> Callable:
+        """
+        - optional, read-write
+
+        The function to call on left click.
+        """
         return self._on_click
 
     @on_click.setter
@@ -61,6 +61,11 @@ class Button(Gtk.Button, BaseWidget):
 
     @GObject.Property
     def on_right_click(self) -> Callable:
+        """
+        - optional, read-write
+
+        The function to call on right click.
+        """
         return self._on_right_click
 
     @on_right_click.setter
@@ -73,6 +78,11 @@ class Button(Gtk.Button, BaseWidget):
 
     @GObject.Property
     def on_middle_click(self) -> Callable:
+        """
+        - optional, read-write
+
+        The function to call on middle click.
+        """
         return self._on_middle_click
 
     @on_middle_click.setter

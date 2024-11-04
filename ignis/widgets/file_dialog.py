@@ -17,17 +17,7 @@ class FileDialog(Gtk.FileDialog, IgnisGObject):
     A window that allows the user to select a file.
 
     Signals:
-        - **"file-set"** (``Gio.File``): Emitted when a file or folder is selected.
-
-    Properties:
-        - **file** (``Gio.File | None``, not argument, read-only): The selected ``Gio.File``.
-        - **on_file_set** (``Callable``, optional, read-write): A function to call when user selects a file.
-        - **filters** (list[:class:`~ignis.widgets.Widget.FileFilter`], optional, read-write): A list of file filters.
-        - **initial_path** (``str``, optional, read-write): The path to the folder or file that will be selected by default.
-        - **select_folder** (``bool``, optional, read-write): Whether the dialog should allow selecting folders instead of files.
-
-    .. hint::
-        Use the ``get_path`` method on the ``Gio.File`` to get the path.
+        - **file-set** (``Gio.File``): Emitted when a file or folder is selected.
 
     .. code-block :: python
 
@@ -91,27 +81,36 @@ class FileDialog(Gtk.FileDialog, IgnisGObject):
 
     @GObject.Property
     def file(self) -> Gio.File | None:
+        """
+        - not argument, read-only
+
+        The selected ``Gio.File``.
+
+        .. hint::
+            Use the ``get_path`` method on the ``Gio.File`` to get the path.
+        """
         return self._file
 
     @GObject.Property
     def on_file_set(self) -> Callable:
+        """
+        - optional, read-write
+
+        A function to call when user selects a file.
+        """
         return self._on_file_set
 
     @on_file_set.setter
     def on_file_set(self, value: Callable) -> None:
         self._on_file_set = value
 
-    def add_filter(self, filter: FileFilter) -> None:
-        self._list_store.append(filter)
-
-        super().set_filters(self._list_store)
-        if filter.default:
-            self.set_default_filter(filter)
-
-        self._filters.append(filter)
-
     @GObject.Property
     def filters(self) -> list[FileFilter]:
+        """
+        - optional, read-write
+
+        A list of file filters.
+        """
         return self._filters
 
     @filters.setter
@@ -123,6 +122,11 @@ class FileDialog(Gtk.FileDialog, IgnisGObject):
 
     @GObject.Property
     def initial_path(self) -> str:
+        """
+        - optional, read-write
+
+        The path to the folder or file that will be selected by default.
+        """
         return self._initial_path
 
     @initial_path.setter
@@ -136,8 +140,28 @@ class FileDialog(Gtk.FileDialog, IgnisGObject):
 
     @GObject.Property
     def select_folder(self) -> bool:
+        """
+        - optional, read-write
+
+        Whether the dialog should allow selecting folders instead of files.
+        """
         return self._select_folder
 
     @select_folder.setter
     def select_folder(self, value: bool) -> None:
         self._select_folder = value
+
+    def add_filter(self, filter: FileFilter) -> None:
+        """
+        Add a filter.
+
+        Args:
+            filter (:class:`~ignis.widgets.FileFilter`): The instance of filter to add.
+        """
+        self._list_store.append(filter)
+
+        super().set_filters(self._list_store)
+        if filter.default:
+            self.set_default_filter(filter)
+
+        self._filters.append(filter)

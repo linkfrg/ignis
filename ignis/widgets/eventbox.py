@@ -10,15 +10,6 @@ class EventBox(Box):
 
     The same :class:`~ignis.widgets.box.Box`, but it can receive events.
 
-    Properties:
-        - **on_click** (``Callable``, optional, read-write): The function to call on left click.
-        - **on_right_click** (``Callable``, optional, read-write): The function to call on right click.
-        - **on_middle_click** (``Callable``, optional, read-write): The function to call on middle click.
-        - **on_hover** (``Callable``, optional, read-write): The function to call on hover.
-        - **on_hover_lost** (``Callable``, optional, read-write): The function to call on hover lost.
-        - **on_scroll_up** (``Callable``, optional, read-write): The function to call on scroll up.
-        - **on_scroll_down** (``Callable``, optional, read-write): The function to call on scroll down.
-
     .. code-block:: python
 
         Widget.EventBox(
@@ -108,6 +99,11 @@ class EventBox(Box):
 
     @GObject.Property
     def on_click(self) -> Callable:
+        """
+        - optional, read-write
+
+        The function to call on left click.
+        """
         return self._on_click
 
     @on_click.setter
@@ -119,6 +115,11 @@ class EventBox(Box):
 
     @GObject.Property
     def on_right_click(self) -> Callable:
+        """
+        - optional, read-write
+
+        The function to call on right click.
+        """
         return self._on_right_click
 
     @on_right_click.setter
@@ -132,6 +133,11 @@ class EventBox(Box):
 
     @GObject.Property
     def on_middle_click(self) -> Callable:
+        """
+        - optional, read-write
+
+        The function to call on middle click.
+        """
         return self._on_middle_click
 
     @on_middle_click.setter
@@ -145,6 +151,11 @@ class EventBox(Box):
 
     @GObject.Property
     def on_hover(self) -> Callable:
+        """
+        - optional, read-write
+
+        The function to call on hover.
+        """
         return self._on_hover
 
     @on_hover.setter
@@ -154,6 +165,11 @@ class EventBox(Box):
 
     @GObject.Property
     def on_hover_lost(self) -> Callable:
+        """
+        - optional, read-write
+
+        The function to call on hover lost.
+        """
         return self._on_hover_lost
 
     @on_hover_lost.setter
@@ -163,6 +179,11 @@ class EventBox(Box):
 
     @GObject.Property
     def on_scroll_up(self) -> Callable:
+        """
+        - optional, read-write
+
+        The function to call on scroll up.
+        """
         return self._on_scroll_up
 
     @on_scroll_up.setter
@@ -172,6 +193,11 @@ class EventBox(Box):
 
     @GObject.Property
     def on_scroll_down(self) -> Callable:
+        """
+        - optional, read-write
+
+        The function to call on scroll down.
+        """
         return self._on_scroll_down
 
     @on_scroll_down.setter

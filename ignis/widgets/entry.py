@@ -9,10 +9,6 @@ class Entry(Gtk.Entry, BaseWidget):  # type: ignore
 
     An input field. To make it work, set the ``kb_mode`` property of the window to ``"on_demand"`` or ``"exclusive"``.
 
-    Properies:
-        - **on_accept** (``Callable``, optional, read-write): The function that will be called when the user hits the Enter key.
-        - **on_change** (``Callable``, optional, read-write): The function that will be called when the text in the widget is changed (e.g., when the user types something into the entry).
-
     .. code-block:: python
 
         Widget.Entry(
@@ -40,6 +36,11 @@ class Entry(Gtk.Entry, BaseWidget):  # type: ignore
 
     @GObject.Property
     def on_accept(self) -> Callable:
+        """
+        - optional, read-write
+
+        The function that will be called when the user hits the Enter key.
+        """
         return self._on_accept
 
     @on_accept.setter
@@ -48,6 +49,11 @@ class Entry(Gtk.Entry, BaseWidget):  # type: ignore
 
     @GObject.Property
     def on_change(self) -> Callable:
+        """
+        - optional, read-write
+
+        The function that will be called when the text in the widget is changed (e.g., when the user types something into the entry).
+        """
         return self._on_change
 
     @on_change.setter
