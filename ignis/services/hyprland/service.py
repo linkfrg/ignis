@@ -168,12 +168,12 @@ class HyprlandService(BaseService):
 
     def send_command(self, cmd: str) -> str:
         """
-        Send command to Hyprland IPC.
-        Supported the same commands as in hyprctl.
-        If you want to get response as JSON use this syntax: ``j/COMMAND``.
+        Send a command to the Hyprland IPC.
+        Supports the same commands as ``hyprctl``.
+        If you want to receive the response in JSON format, use this syntax: ``j/COMMAND``.
 
         Args:
-            cmd (``str``): A command.
+            cmd (``str``): The command to send.
 
         Returns:
             Response from Hyprland IPC.
@@ -184,7 +184,7 @@ class HyprlandService(BaseService):
 
     def switch_kb_layout(self) -> None:
         """
-        Just switch to next keyboard layout.
+        Switch to the next keyboard layout.
         """
         for kb in json.loads(self.send_command("j/devices"))["keyboards"]:
             if kb["main"]:
@@ -192,9 +192,9 @@ class HyprlandService(BaseService):
 
     def switch_to_workspace(self, workspace_id: int) -> None:
         """
-        Switch to workspace by ID.
+        Switch to a workspace by its ID.
 
         Args:
-            workspace_id (``int``): ID of workspace to be switched to
+            workspace_id (``int``): The ID of the workspace to switch to.
         """
         self.send_command(f"dispatch workspace {workspace_id}")
