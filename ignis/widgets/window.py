@@ -215,7 +215,6 @@ class Window(Gtk.Window, BaseWidget):
         else:
             GtkLayerShell.set_exclusive_zone(self, EXCLUSIVITY[value])
 
-
     @GObject.Property
     def layer(self) -> str:
         """
