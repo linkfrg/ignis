@@ -11,7 +11,7 @@ class SystemTrayItem(IgnisGObject):
     A system tray item.
 
     Signals:
-        - **removed** (): Emitted when the item is removed.
+        - removed (): Emitted when the item is removed.
     """
 
     __gsignals__ = {
@@ -105,6 +105,8 @@ class SystemTrayItem(IgnisGObject):
     @GObject.Property
     def id(self) -> str:
         """
+        - read-only
+
         The ID of the item.
         """
         return self.__dbus.Id
@@ -112,6 +114,8 @@ class SystemTrayItem(IgnisGObject):
     @GObject.Property
     def category(self) -> str:
         """
+        - read-only
+
         The category of the item.
         """
         return self.__dbus.Category
@@ -119,6 +123,8 @@ class SystemTrayItem(IgnisGObject):
     @GObject.Property
     def title(self) -> str:
         """
+        - read-only
+
         The title of the item.
         """
         return self.__dbus.Title
@@ -126,6 +132,8 @@ class SystemTrayItem(IgnisGObject):
     @GObject.Property
     def status(self) -> str:
         """
+        - read-only
+
         The status of the item.
         """
         return self.__dbus.Status
@@ -133,6 +141,8 @@ class SystemTrayItem(IgnisGObject):
     @GObject.Property
     def window_id(self) -> int:
         """
+        - read-only
+
         The window ID.
         """
         return self.__dbus.WindowId
@@ -140,6 +150,8 @@ class SystemTrayItem(IgnisGObject):
     @GObject.Property
     def icon(self) -> str | GdkPixbuf.Pixbuf | None:
         """
+        - read-only
+
         The icon name or a ``GdkPixbuf.Pixbuf``.
         """
         return self._icon
@@ -147,6 +159,8 @@ class SystemTrayItem(IgnisGObject):
     @GObject.Property
     def item_is_menu(self) -> bool:
         """
+        - read-only
+
         Whether the item has a menu.
         """
         return self.__dbus.ItemIsMenu
@@ -154,6 +168,8 @@ class SystemTrayItem(IgnisGObject):
     @GObject.Property
     def menu(self) -> DBusMenu | None:
         """
+        - read-only
+
         A :class:`~ignis.dbus_menu.DBusMenu` or ``None``.
 
         .. hint::
@@ -173,6 +189,8 @@ class SystemTrayItem(IgnisGObject):
     @GObject.Property
     def tooltip(self) -> str:
         """
+        - read-only
+
         A tooltip, the text should be displayed when you hover cursor over the icon.
         """
         tooltip = self.__dbus.ToolTip

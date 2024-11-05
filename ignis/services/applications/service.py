@@ -10,7 +10,7 @@ class ApplicationsService(BaseService):
     Provides a list of applications installed on the system.
     It also allows "pinning" of apps and retrieving a list of pinned applications.
 
-    **Example usage**:
+    Example usage:
 
     .. code-block:: python
 
@@ -41,6 +41,8 @@ class ApplicationsService(BaseService):
     @GObject.Property
     def apps(self) -> list[Application]:
         """
+        - read-only
+
         A list of all installed applications.
         """
         return sorted(self._apps.values(), key=lambda x: x.name)
@@ -48,6 +50,8 @@ class ApplicationsService(BaseService):
     @GObject.Property
     def pinned(self) -> list[Application]:
         """
+        - read-only
+
         A list of all pinned applications.
         """
         return list(self._pinned.values())

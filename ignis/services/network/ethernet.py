@@ -23,6 +23,8 @@ class Ethernet(IgnisGObject):
     @GObject.Property
     def devices(self) -> list[EthernetDevice]:
         """
+        - read-only
+
         A list of Ethernet devices.
         """
         return self._devices
@@ -30,6 +32,8 @@ class Ethernet(IgnisGObject):
     @GObject.Property
     def is_connected(self) -> bool:
         """
+        - read-only
+
         Whether at least one Ethernet device is connected to the network.
         """
         for i in self.devices:
@@ -40,6 +44,8 @@ class Ethernet(IgnisGObject):
     @GObject.Property
     def icon_name(self) -> str:
         """
+        - read-only
+
         The general icon name for all devices, depends on ``is_connected`` property.
         """
         if self.is_connected:

@@ -10,9 +10,9 @@ class MprisService(BaseService):
     A service for controlling media players using the MPRIS interface.
 
     Signals:
-        - **player_added** (:class:`~ignis.services.applications.Application`): Emitted when a :class:`~ignis.services.applications.Application` has been added.
+        - player_added (:class:`~ignis.services.applications.Application`): Emitted when a :class:`~ignis.services.applications.Application` has been added.
 
-    **Example usage:**
+    Example usage:
 
     .. code-block:: python
 
@@ -77,6 +77,8 @@ class MprisService(BaseService):
     @GObject.Property
     def players(self) -> list[MprisPlayer]:
         """
+        - read-only
+
         A list of currently active players.
         """
         return list(self._players.values())

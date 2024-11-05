@@ -16,7 +16,7 @@ class MprisPlayer(IgnisGObject):
     A media player object.
 
     Signals:
-        - **closed** (): Emitted when a player has been closed or removed.
+        - closed (): Emitted when a player has been closed or removed.
     """
 
     __gsignals__ = {
@@ -141,6 +141,8 @@ class MprisPlayer(IgnisGObject):
     @GObject.Property
     def can_control(self) -> bool:
         """
+        - read-only
+
         Whether the player can be controlled.
         """
         return self.__player_proxy.CanControl
@@ -148,6 +150,8 @@ class MprisPlayer(IgnisGObject):
     @GObject.Property
     def can_go_next(self) -> bool:
         """
+        - read-only
+
         Whether the player can go to the next track.
         """
         return self.__player_proxy.CanGoNext
@@ -155,6 +159,8 @@ class MprisPlayer(IgnisGObject):
     @GObject.Property
     def can_go_previous(self) -> bool:
         """
+        - read-only
+
         Whether the player can go to the previous track.
         """
         return self.__player_proxy.CanGoPrevious
@@ -162,6 +168,8 @@ class MprisPlayer(IgnisGObject):
     @GObject.Property
     def can_pause(self) -> bool:
         """
+        - read-only
+
         Whether the player can pause.
         """
         return self.__player_proxy.CanPause
@@ -169,6 +177,8 @@ class MprisPlayer(IgnisGObject):
     @GObject.Property
     def can_play(self) -> bool:
         """
+        - read-only
+
         Whether the player can play.
         """
         return self.__player_proxy.CanPlay
@@ -176,6 +186,8 @@ class MprisPlayer(IgnisGObject):
     @GObject.Property
     def can_seek(self) -> bool:
         """
+        - read-only
+
         Whether the player can seek (change position on track in seconds).
         """
         return self.__player_proxy.CanSeek
@@ -183,6 +195,8 @@ class MprisPlayer(IgnisGObject):
     @GObject.Property
     def loop_status(self) -> str:
         """
+        - read-only
+
         The current loop status.
         """
         return self.__player_proxy.LoopStatus
@@ -190,6 +204,8 @@ class MprisPlayer(IgnisGObject):
     @GObject.Property
     def metadata(self) -> dict:
         """
+        - read-only
+
         A dictionary containing metadata.
         """
         metadata = getattr(self.__player_proxy, "Metadata", None)
@@ -201,6 +217,8 @@ class MprisPlayer(IgnisGObject):
     @GObject.Property
     def track_id(self) -> str:
         """
+        - read-only
+
         The ID of the current track.
         """
         return self.metadata.get("mpris:trackid", None)
@@ -208,9 +226,10 @@ class MprisPlayer(IgnisGObject):
     @GObject.Property
     def length(self) -> int:
         """
-        The length of the current track.
+        - read-only
 
-        Returns -1 if not supported by player.
+        The length of the current track,
+        ``-1`` if not supported by the player.
         """
         length = self.metadata.get("mpris:length", None)
         if length:
@@ -221,6 +240,8 @@ class MprisPlayer(IgnisGObject):
     @GObject.Property
     def art_url(self) -> str | None:
         """
+        - read-only
+
         The path to the cached art image of the track.
         """
         return self._art_url
@@ -228,6 +249,8 @@ class MprisPlayer(IgnisGObject):
     @GObject.Property
     def album(self) -> str | None:
         """
+        - read-only
+
         The current album name.
         """
         return self.metadata.get("xesam:album", None)
@@ -235,6 +258,8 @@ class MprisPlayer(IgnisGObject):
     @GObject.Property
     def artist(self) -> str | None:
         """
+        - read-only
+
         The current artist name.
         """
         artist = self.metadata.get("xesam:artist", None)
@@ -246,6 +271,8 @@ class MprisPlayer(IgnisGObject):
     @GObject.Property
     def title(self) -> str | None:
         """
+        - read-only
+
         The current title of the track.
         """
         return self.metadata.get("xesam:title", None)
@@ -253,6 +280,8 @@ class MprisPlayer(IgnisGObject):
     @GObject.Property
     def url(self) -> str | None:
         """
+        - read-only
+
         The URL address of the track.
         """
         return self.metadata.get("xesam:url", None)
@@ -260,20 +289,23 @@ class MprisPlayer(IgnisGObject):
     @GObject.Property
     def playback_status(self) -> str:
         """
+        - read-only
+
         The current playback status. Can be "Playing" or "Paused".
         """
         return self.__player_proxy.PlaybackStatus
 
     @GObject.Property
     def position(self) -> int:
+        """
+        - read-write
+
+        The current position in the track in seconds.
+        """
         return self._position
 
     @position.setter
     def position(self, value: int) -> None:
-        """
-        - **read-write**
-        The current position in the track in seconds.
-        """
         self.__player_proxy.SetPosition(
             "(ox)", self.track_id, value * 1_000_000, result_handler=lambda *args: None
         )
@@ -281,6 +313,8 @@ class MprisPlayer(IgnisGObject):
     @GObject.Property
     def shuffle(self) -> bool:
         """
+        - read-only
+
         The shuffle status.
         """
         return self.__player_proxy.Shuffle
@@ -288,6 +322,8 @@ class MprisPlayer(IgnisGObject):
     @GObject.Property
     def volume(self) -> float:
         """
+        - read-only
+
         The volume of the player.
         """
         return self.__player_proxy.Volume
@@ -295,6 +331,8 @@ class MprisPlayer(IgnisGObject):
     @GObject.Property
     def identity(self) -> str:
         """
+        - read-only
+
         The name of the player (e.g. "Spotify", "firefox").
         """
         return self.__mpris_proxy.Identity
@@ -302,6 +340,8 @@ class MprisPlayer(IgnisGObject):
     @GObject.Property
     def desktop_entry(self) -> str:
         """
+        - read-only
+
         The .desktop file of the player.
         """
         return self.__mpris_proxy.DesktopEntry

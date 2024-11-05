@@ -34,9 +34,9 @@ class FileMonitor(IgnisGObject):
     Monitor changes of the file or directory.
 
     Signals:
-        - **changed** (``str``, ``str``): Emitted when the file or directory changed. Passes the path and the event type as arguments.
+        - changed (``str``, ``str``): Emitted when the file or directory changed. Passes the path and the event type as arguments.
 
-    **Example usage:**
+    Example usage:
 
     .. code-block::
 
@@ -103,8 +103,7 @@ class FileMonitor(IgnisGObject):
     @GObject.Property
     def path(self) -> str:
         """
-        - **required**
-        - **read-only**
+        - required, read-only
 
         The path to the file or directory to be monitored.
         """
@@ -113,17 +112,17 @@ class FileMonitor(IgnisGObject):
     @GObject.Property
     def flags(self) -> str | None:
         """
-        - **read-only**
+        - optional, read-only
 
         What the monitor will watch for.
 
         Possible values:
 
-        - **none**
-        - **watch_mounts**
-        - **send_moved**
-        - **watch_hard_links**
-        - **watch_moves**
+        - none
+        - watch_mounts
+        - send_moved
+        - watch_hard_links
+        - watch_moves
 
         See `Gio.FileMonitorFlags <https://lazka.github.io/pgi-docs/Gio-2.0/flags.html#Gio.FileMonitorFlags>`_ for more info.
 
@@ -134,7 +133,7 @@ class FileMonitor(IgnisGObject):
     @GObject.Property
     def callback(self) -> Callable | None:
         """
-        - **read-write**
+        - optional, read-write
 
         A function to call when the file or directory changes.
         It should take two arguments:
@@ -145,17 +144,17 @@ class FileMonitor(IgnisGObject):
 
         Event types:
 
-        - **changed**
-        - **changes_done_hint**
-        - **moved_out**
-        - **deleted**
-        - **created**
-        - **attribute_changed**
-        - **pre_unmount**
-        - **unmounted**
-        - **moved**
-        - **renamed**
-        - **moved_in**
+        - changed
+        - changes_done_hint
+        - moved_out
+        - deleted
+        - created
+        - attribute_changed
+        - pre_unmount
+        - unmounted
+        - moved
+        - renamed
+        - moved_in
 
         See `Gio.FileMonitorEvent <https://lazka.github.io/pgi-docs/index.html#Gio-2.0/enums.html#Gio.FileMonitorEvent>`_ for more info.
 
@@ -169,7 +168,7 @@ class FileMonitor(IgnisGObject):
     @GObject.Property
     def recursive(self) -> bool:
         """
-        - **read-only**
+        - optional, read-only
 
         Whether monitoring is recursive (monitor all subdirectories and files).
 

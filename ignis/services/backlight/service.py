@@ -11,7 +11,7 @@ class BacklightService(BaseService):
     A backlight service.
     Allows controlling device screen brightness.
 
-    **Example Usage:**
+    Example Usage:
 
     .. code-block:: python
 
@@ -60,6 +60,8 @@ class BacklightService(BaseService):
     @GObject.Property
     def available(self) -> bool:
         """
+        - read-only
+
         Whether there are controllable backlight devices.
         """
         return len(self._devices) > 0
@@ -67,6 +69,8 @@ class BacklightService(BaseService):
     @GObject.Property
     def devices(self) -> list[BacklightDevice]:
         """
+        - read-only
+
         A list of all backlight devices.
         """
         return self._devices
@@ -74,9 +78,9 @@ class BacklightService(BaseService):
     @GObject.Property
     def brightness(self) -> int:
         """
-        - **read-write**
+        - read-write
 
-        Current brightness of the first backlight device in the list, ``-1`` if there are no backlight devices.
+        The current brightness of the first backlight device in the list, ``-1`` if there are no backlight devices.
         Setting this property will set provided brightness on ALL backlight devices.
         """
         if len(self._devices) > 0:
@@ -92,7 +96,9 @@ class BacklightService(BaseService):
     @GObject.Property
     def max_brightness(self) -> int:
         """
-        Maximum brightness allowed by the first backlight device in the list, ``-1`` if there are no backlight devices.
+        - read-only
+
+        The maximum brightness allowed by the first backlight device in the list, ``-1`` if there are no backlight devices.
         """
         if len(self._devices) > 0:
             return self._devices[0].max_brightness

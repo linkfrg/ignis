@@ -35,6 +35,8 @@ class WifiDevice(IgnisGObject):
     @GObject.Property
     def access_points(self) -> list[WifiAccessPoint]:
         """
+        - read-only
+
         A list of access points (Wi-FI networks).
         """
         return self._access_points
@@ -42,6 +44,8 @@ class WifiDevice(IgnisGObject):
     @GObject.Property
     def ap(self) -> WifiAccessPoint:
         """
+        - read-only
+
         The currently active access point.
         """
         return self._ap
@@ -49,6 +53,8 @@ class WifiDevice(IgnisGObject):
     @GObject.Property
     def state(self) -> str | None:
         """
+        - read-only
+
         The current state of the device or ``None`` if unknown.
         """
         return STATE.get(self._device.get_state(), None)
@@ -56,6 +62,8 @@ class WifiDevice(IgnisGObject):
     @GObject.Property
     def is_connected(self) -> bool:
         """
+        - read-only
+
         Whether the device is connected to a Wi-Fi network.
         """
         return (

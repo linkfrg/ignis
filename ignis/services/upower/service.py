@@ -12,8 +12,8 @@ class UPowerService(BaseService):
     Requires ``UPower``.
 
     Signals:
-        - **device-added** (:class:`~ignis.services.upower.UPowerDevice`): Emitted when a power device has been added.
-        - **battery-added** (:class:`~ignis.services.upower.UPowerDevice`): Emitted when a battery has been added.
+        - device-added (:class:`~ignis.services.upower.UPowerDevice`): Emitted when a power device has been added.
+        - battery-added (:class:`~ignis.services.upower.UPowerDevice`): Emitted when a battery has been added.
 
     Raises:
         UPowerNotRunningError: If UPower D-Bus service is not running.
@@ -68,6 +68,8 @@ class UPowerService(BaseService):
     @GObject.Property
     def devices(self) -> list[UPowerDevice]:
         """
+        - read-only
+
         A list of all power devices.
         """
         return list(self._devices.values())
@@ -75,6 +77,8 @@ class UPowerService(BaseService):
     @GObject.Property
     def batteries(self) -> list[UPowerDevice]:
         """
+        - read-only
+
         A list of batteries.
         """
         return list(self._batteries.values())
@@ -82,6 +86,8 @@ class UPowerService(BaseService):
     @GObject.Property
     def display_device(self) -> UPowerDevice:
         """
+        - read-only
+
         The currently active device intended for display.
         """
         return self._display_device

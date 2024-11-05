@@ -23,13 +23,13 @@ class NotificationService(BaseService):
     Allow receiving notifications and perform actions on them.
 
     Signals:
-        - **notified** (:class:`~ignis.services.notifications.Notification`): Emitted when a new notification appears.
-        - **new_popup** (:class:`~ignis.services.notifications.Notification`): Emitted when a new popup notification appears. Only emitted if ``dnd`` is set to ``False``.
+        - notified (:class:`~ignis.services.notifications.Notification`): Emitted when a new notification appears.
+        - new_popup (:class:`~ignis.services.notifications.Notification`): Emitted when a new popup notification appears. Only emitted if ``dnd`` is set to ``False``.
 
     Raises:
         AnotherNotificationDaemonRunningError: If another notification daemon is already running.
 
-    **Example usage:**
+    Example usage:
 
     .. code-block:: python
 
@@ -115,6 +115,8 @@ class NotificationService(BaseService):
     @GObject.Property
     def notifications(self) -> list[Notification]:
         """
+        - read-only
+
         A list of all notifications.
         """
         return list(self._notifications.values())
@@ -122,6 +124,8 @@ class NotificationService(BaseService):
     @GObject.Property
     def popups(self) -> list[Notification]:
         """
+        - read-only
+
         A list of currently active popup notifications.
         """
         return list(self._popups.values())
@@ -129,10 +133,10 @@ class NotificationService(BaseService):
     @GObject.Property
     def dnd(self) -> bool:
         """
-        - **read-write**
+        - read-write
 
         Do Not Disturb mode.
-        If set to ``True``, the ``"new_popup"`` signal will not be emitted,
+        If set to ``True``, the ``new_popup`` signal will not be emitted,
         and all new :class:`~ignis.services.notifications.Notification` instances will have ``popup`` set to ``False``.
 
         Default: ``False``.
@@ -146,7 +150,7 @@ class NotificationService(BaseService):
     @GObject.Property
     def popup_timeout(self) -> int:
         """
-        - **read-write**
+        - read-write
 
         The timeout before a popup is automatically dismissed, in milliseconds.
 
@@ -161,7 +165,7 @@ class NotificationService(BaseService):
     @GObject.Property
     def max_popups_count(self) -> int:
         """
-        - **read-write**
+        - read-write
 
         The Maximum number of popups.
         If the length of the ``popups`` list exceeds ``max_popups_count``, the oldest popup will be dismissed.

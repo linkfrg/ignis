@@ -10,7 +10,7 @@ class Scale(Gtk.Scale, BaseWidget):
     A slider widget.
 
     Overrided properties:
-        - value_pos : Position where the current value is displayed. Works only if ``draw_value`` is set to ``True``. Default: ``top``.
+        - value_pos: Position where the current value is displayed. Works only if ``draw_value`` is set to ``True``. Default: ``top``.
 
     Value position:
         - left

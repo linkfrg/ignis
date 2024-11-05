@@ -20,23 +20,23 @@ class RecorderService(BaseService):
     Uses XDG Desktop portal and PipeWire.
     Allow record screen with microphone audio and internal system audio.
 
-    **Dependencies**:
-        - **GStreamer**
-        - **PipeWire**
-        - **gst-plugin-pipewire**
-        - **gst-plugins-good**
-        - **gst-plugins-ugly**
-        - **pipewire-pulse**: for audio recording.
+    Dependencies:
+        - GStreamer
+        - PipeWire
+        - gst-plugin-pipewire
+        - gst-plugins-good
+        - gst-plugins-ugly
+        - pipewire-pulse: for audio recording.
 
     Signals:
-        - **recording_started** (): Emitted when recording starts.
-        - **recording_stopped** (): Emitted when recording stops.
+        - recording_started (): Emitted when recording starts.
+        - recording_stopped (): Emitted when recording stops.
 
     Raises:
         GstNotFoundError: If GStreamer is not found.
         GstPluginNotFoundError: If GStreamer plugin is not found.
 
-    **Example usage:**
+    Example usage:
 
     .. code-block:: python
 
@@ -102,6 +102,8 @@ class RecorderService(BaseService):
     @GObject.Property
     def active(self) -> bool:
         """
+        - read-only
+
         Whether recording is currently active.
         """
         return self._active
@@ -109,6 +111,8 @@ class RecorderService(BaseService):
     @GObject.Property
     def is_paused(self) -> bool:
         """
+        - read-only
+
         Whether recording is currently paused.
         """
         return self._is_paused
@@ -116,7 +120,7 @@ class RecorderService(BaseService):
     @GObject.Property
     def bitrate(self) -> int:
         """
-        - **read-write**
+        - read-write
 
         The bitrate of the recording.
 
@@ -131,11 +135,11 @@ class RecorderService(BaseService):
     @GObject.Property
     def default_file_location(self) -> str:
         """
-        - **read-write**
+        - read-write
 
         The default location for saving recordings.
 
-        Default: ``"$HOME/Videos"``.
+        Default: ``$HOME/Videos``.
         """
         return self._default_file_location_opt.value
 
@@ -146,11 +150,11 @@ class RecorderService(BaseService):
     @GObject.Property
     def default_filename(self) -> str:
         """
-        - **read-write**
+        - read-write
 
         The default filename for recordings. Supports time formating.
 
-        Default: ``"%Y-%m-%d_%H-%M-%S.mp4"``
+        Default: ``%Y-%m-%d_%H-%M-%S.mp4``
         """
         return self._default_filename_opt.value
 

@@ -53,6 +53,8 @@ class WifiAccessPoint(IgnisGObject):
     @GObject.Property
     def point(self) -> NM.AccessPoint:
         """
+        - read-only
+
         An instance of ``NM.AccessPoint``.
         """
         return self._point
@@ -60,6 +62,8 @@ class WifiAccessPoint(IgnisGObject):
     @GObject.Property
     def bandwidth(self) -> int:
         """
+        - read-only
+
         The channel bandwidth announced by the access point, in MHz.
         """
         return self._point.props.bandwidth
@@ -67,6 +71,8 @@ class WifiAccessPoint(IgnisGObject):
     @GObject.Property
     def bssid(self) -> str:
         """
+        - read-only
+
         The BSSID of the access point.
         """
         return self._point.props.bssid
@@ -74,6 +80,8 @@ class WifiAccessPoint(IgnisGObject):
     @GObject.Property
     def frequency(self) -> int:
         """
+        - read-only
+
         The frequency of the access point, in MHz.
         """
         return self._point.props.frequency
@@ -81,6 +89,8 @@ class WifiAccessPoint(IgnisGObject):
     @GObject.Property
     def last_seen(self) -> int:
         """
+        - read-only
+
         The timestamp for the last time the access point was found in scan results.
         """
         return self._point.props.last_seen
@@ -88,6 +98,8 @@ class WifiAccessPoint(IgnisGObject):
     @GObject.Property
     def max_bitrate(self) -> int:
         """
+        - read-only
+
         The maximum bit rate of the access point, in kbit/s.
         """
         return self._point.props.max_bitrate
@@ -95,6 +107,8 @@ class WifiAccessPoint(IgnisGObject):
     @GObject.Property
     def ssid(self) -> str | None:
         """
+        - read-only
+
         The SSID of the access point, or ``None`` if it is not known.
         """
         return self._ssid
@@ -102,6 +116,8 @@ class WifiAccessPoint(IgnisGObject):
     @GObject.Property
     def strength(self) -> int:
         """
+        - read-only
+
         The current signal strength of the access point, from 0 to 100.
         """
         return self._point.props.strength
@@ -109,6 +125,8 @@ class WifiAccessPoint(IgnisGObject):
     @GObject.Property
     def icon_name(self) -> str:
         """
+        - read-only
+
         The current icon name for the access point. Depends on signal strength and current connection status.
         """
         ac = self._client.get_activating_connection()
@@ -132,6 +150,8 @@ class WifiAccessPoint(IgnisGObject):
     @GObject.Property
     def requires_password(self) -> bool:
         """
+        - read-only
+
         Whether the access point requires a password to connect.
         """
         NM_80211ApFlags = getattr(NM, "80211ApFlags")
@@ -141,6 +161,8 @@ class WifiAccessPoint(IgnisGObject):
     @GObject.Property
     def is_connected(self) -> bool:
         """
+        - read-only
+
         Whether the device is currently connected to this access point.
         """
         if not self._device:

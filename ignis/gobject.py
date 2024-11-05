@@ -5,12 +5,6 @@ from typing import Any, Callable
 class Binding(GObject.Object):
     """
     An object that describe binding.
-
-    Properties:
-        - **target** (``GObject.Object``, required, read-only): Target GObject.
-        - **target_property** (``str``, required, read-only): Property on target GObject.
-        - **transform** (``Callable``, optional, read-only): The function that accepts a new property value and returns the processed value.
-
     """
 
     def __init__(
@@ -26,14 +20,29 @@ class Binding(GObject.Object):
 
     @GObject.Property
     def target(self) -> GObject.Object:
+        """
+        - required, read-only
+
+        The target GObject.
+        """
         return self._target
 
     @GObject.Property
     def target_property(self) -> str:
+        """
+        - required, read-only
+
+        The property on the target GObject.
+        """
         return self._target_property
 
     @GObject.Property
     def transform(self) -> Callable | None:
+        """
+        - required, read-only
+
+        The function that accepts a new property value and returns the processed value.
+        """
         return self._transform
 
 

@@ -201,9 +201,9 @@ class Window(Gtk.Window, BaseWidget):
         Default: ``normal``.
 
         Exclusivity:
-            - ignore : Completely ignore other surfaces. This allows you to overlap other surfaces.
-            - normal : The window will have no extra space and do not overlap other surfaces.
-            - exclusive : The compositor will reserve extra space for this window.
+            - ignore: Completely ignore other surfaces. This allows you to overlap other surfaces.
+            - normal: The window will have no extra space and do not overlap other surfaces.
+            - exclusive: The compositor will reserve extra space for this window.
         """
         return self._exclusivity
 
@@ -248,9 +248,9 @@ class Window(Gtk.Window, BaseWidget):
         Default: ``none``.
 
         Keyboard mode:
-            - none : This window should not receive keyboard events.
-            - exclusive : This window should have exclusive focus if it is on the top or overlay layer.
-            - on_demand : The user should be able to focus and unfocus this window.
+            - none: This window should not receive keyboard events.
+            - exclusive: This window should have exclusive focus if it is on the top or overlay layer.
+            - on_demand: The user should be able to focus and unfocus this window.
         """
         return self._kb_mode
 
@@ -266,7 +266,7 @@ class Window(Gtk.Window, BaseWidget):
 
         Whether the window should close on ESC.
 
-        Works only if ``kb_mode`` is set to ``"exclusive"`` or ``"on_demand"``.
+        Works only if ``kb_mode`` is set to ``exclusive`` or ``on_demand``.
         """
         return self._popup
 

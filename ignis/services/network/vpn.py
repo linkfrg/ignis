@@ -25,6 +25,8 @@ class VpnConnection(IgnisGObject):
     @GObject.Property
     def is_connected(self) -> bool:
         """
+        - read-only
+
         Whether the device is connected to the network.
         """
         return self._is_connected
@@ -32,6 +34,8 @@ class VpnConnection(IgnisGObject):
     @GObject.Property
     def name(self) -> str | None:
         """
+        - read-only
+
         The id (name) of the vpn connection or ``None`` if unknown.
         """
         return self._connection.get_id()
@@ -88,13 +92,7 @@ class VpnConnection(IgnisGObject):
 
 class Vpn(IgnisGObject):
     """
-    Class for controlling VPN connections.
-
-    Properties:
-        - **connections** (:class:`~ignis.services.network.VpnConnection`, read-only): A list of VPN connections.
-        - **is_connected** (``bool``, read-only): Whether at least one VPN connection is active.
-        - **active_vpn_id** (``str | None``, read-only): The id (name) of the first active vpn connection.
-        - **icon_name** (``str``, read-only): The general icon name for all vpn connections, depends on ``is_connected`` property.
+    The class for controlling VPN connections.
     """
 
     def __init__(self, client: NM.Client):
@@ -114,10 +112,20 @@ class Vpn(IgnisGObject):
 
     @GObject.Property
     def connections(self) -> list[VpnConnection]:
+        """
+        - read-only
+
+        A list of VPN connections.
+        """
         return self._connections
 
     @GObject.Property
     def active_vpn_id(self) -> str | None:
+        """
+        - read-only
+
+        The id (name) of the first active vpn connection.
+        """
         if not self.is_connected:
             return None
         else:
@@ -125,10 +133,20 @@ class Vpn(IgnisGObject):
 
     @GObject.Property
     def is_connected(self) -> bool:
+        """
+        - read-only
+
+        Whether at least one VPN connection is active.
+        """
         return len(self._active_vpn_connections) != 0
 
     @GObject.Property
     def icon_name(self) -> str:
+        """
+        - read-only
+
+        The general icon name for all vpn connections, depends on ``is_connected`` property.
+        """
         if self.is_connected:
             return "network-vpn-symbolic"
         else:

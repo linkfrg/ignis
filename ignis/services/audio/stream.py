@@ -12,7 +12,7 @@ class Stream(IgnisGObject):
     A general class for speakers, microphones, applications, and recorders.
 
     Signals:
-        - **removed** (): Emitted when the stream has been removed.
+        - removed (): Emitted when the stream has been removed.
 
     Raises:
         GvcNotFoundError: If Gvc is not found.
@@ -62,6 +62,8 @@ class Stream(IgnisGObject):
     @GObject.Property
     def stream(self) -> Gvc.MixerStream | None:
         """
+        - read-only
+
         An instance of ``Gvc.MixerStream``.
         """
         return self._stream
@@ -69,7 +71,9 @@ class Stream(IgnisGObject):
     @GObject.Property
     def application_id(self) -> str | None:
         """
-        Application ID or ``None``.
+        - read-only
+
+        The application ID or ``None``.
         """
         if not self._stream:
             return None
@@ -79,6 +83,8 @@ class Stream(IgnisGObject):
     @GObject.Property
     def icon_name(self) -> str | None:
         """
+        - read-only
+
         The current icon name, depending on ``volume`` and ``is_muted`` properties.
         Works only for speakers and microphones.
         """
@@ -101,6 +107,8 @@ class Stream(IgnisGObject):
     @GObject.Property
     def id(self) -> int | None:
         """
+        - read-only
+
         The ID of the stream.
         """
         if not self._stream:
@@ -111,6 +119,8 @@ class Stream(IgnisGObject):
     @GObject.Property
     def name(self) -> str | None:
         """
+        - read-only
+
         The name of the stream.
         """
         if not self._stream:
@@ -121,6 +131,8 @@ class Stream(IgnisGObject):
     @GObject.Property
     def description(self) -> str | None:
         """
+        - read-only
+
         The description of the stream.
         """
         if not self._stream:
@@ -131,6 +143,8 @@ class Stream(IgnisGObject):
     @GObject.Property
     def is_muted(self) -> bool | None:
         """
+        - read-only
+
         Whether the stream is muted.
         """
         if not self._stream:
@@ -146,6 +160,8 @@ class Stream(IgnisGObject):
     @GObject.Property
     def volume(self) -> float | None:
         """
+        - read-only
+
         The current volume of the stream.
         """
         if not self._stream:
@@ -164,6 +180,8 @@ class Stream(IgnisGObject):
     @GObject.Property
     def is_default(self) -> bool:
         """
+        - read-only
+
         Whether the stream is default.
         Works only for speakers and microphones.
         """

@@ -22,6 +22,8 @@ class NetworkService(BaseService):
     @GObject.Property
     def wifi(self) -> Wifi:
         """
+        - read-only
+
         The Wi-Fi object.
         """
         return self._wifi
@@ -29,6 +31,8 @@ class NetworkService(BaseService):
     @GObject.Property
     def ethernet(self) -> Ethernet:
         """
+        - read-only
+
         The Ethernet object.
         """
         return self._ethernet
@@ -36,6 +40,8 @@ class NetworkService(BaseService):
     @GObject.Property
     def vpn(self) -> Vpn:
         """
+        - read-only
+
         The Vpn object.
         """
         return self._vpn

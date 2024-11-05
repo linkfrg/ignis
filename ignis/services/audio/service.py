@@ -15,19 +15,18 @@ class AudioService(BaseService):
         To use it with PipeWire, install ``pipewire-pulse``.
 
     Signals:
-        - **speaker-added** (:class:`~ignis.services.audio.Stream`): Emitted when a speaker is added.
-        - **microphone-added** (:class:`~ignis.services.audio.Stream`): Emitted when a microphone is added.
-        - **app-added** (:class:`~ignis.services.audio.Stream`): Emitted when an app is added.
-        - **recorder-added** (:class:`~ignis.services.audio.Stream`): Emitted when a recorder is added.
+        - speaker-added (:class:`~ignis.services.audio.Stream`): Emitted when a speaker is added.
+        - microphone-added (:class:`~ignis.services.audio.Stream`): Emitted when a microphone is added.
+        - app-added (:class:`~ignis.services.audio.Stream`): Emitted when an app is added.
+        - recorder-added (:class:`~ignis.services.audio.Stream`): Emitted when a recorder is added.
 
-    **Example usage:**
+    Example usage:
 
     .. code-block:: python
 
         from ignis.services.audio import AudioService
 
         audio = AudioService.get_default()
-
         audio.connect("speaker-added", lambda x, speaker: print(speaker.description))
     """
 
@@ -74,6 +73,8 @@ class AudioService(BaseService):
     @GObject.Property
     def control(self) -> Gvc.MixerControl:
         """
+        - read-only
+
         An instance of ``Gvc.MixerControl``.
         """
         return self._control
@@ -81,7 +82,7 @@ class AudioService(BaseService):
     @GObject.Property
     def speaker(self) -> Stream:
         """
-        - **read-write**
+        - read-write
 
         The default speaker.
         """
@@ -94,7 +95,7 @@ class AudioService(BaseService):
     @GObject.Property
     def microphone(self) -> Stream:
         """
-        - **read-write**
+        - read-write
 
         The default microphone.
         """
@@ -107,6 +108,8 @@ class AudioService(BaseService):
     @GObject.Property
     def streams(self) -> list[Stream]:
         """
+        - read-only
+
         A list of all streams.
         """
         return list(self._streams.values())
@@ -114,6 +117,8 @@ class AudioService(BaseService):
     @GObject.Property
     def speakers(self) -> list[Stream]:
         """
+        - read-only
+
         A list of speakers.
         """
         return list(self._speakers.values())
@@ -121,6 +126,8 @@ class AudioService(BaseService):
     @GObject.Property
     def microphones(self) -> list[Stream]:
         """
+        - read-only
+
         A list of microphones.
         """
         return list(self._microphones.values())
@@ -128,6 +135,8 @@ class AudioService(BaseService):
     @GObject.Property
     def apps(self) -> list[Stream]:
         """
+        - read-only
+
         A list of applications currently playing sound.
         """
         return list(self._apps.values())
@@ -135,6 +144,8 @@ class AudioService(BaseService):
     @GObject.Property
     def recorders(self) -> list[Stream]:
         """
+        - read-only
+
         A list of audio recorders.
         """
         return list(self._recorders.values())

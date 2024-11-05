@@ -32,21 +32,16 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         Do not initialize this class!
         Instead, use the already initialized instance as shown below.
 
-    .. code-block:: python
+        .. code-block:: python
 
-        from ignis.app import IgnisApp
+            from ignis.app import IgnisApp
 
-        app = IgnisApp.get_default()
+            app = IgnisApp.get_default()
 
     Signals:
-        - **"ready"** (): Emitted when the configuration has been parsed.
-        - **"quit"** (): Emitted when Ignis has finished running.
+        - ready (): Emitted when the configuration has been parsed.
+        - quit (): Emitted when Ignis has finished running.
 
-    Properties:
-        - **windows** (``list[Gtk.Window]``, read-only): List of windows.
-        - **is_ready** (``bool``, read-only): Whether configuration is parsed and app is ready.
-        - **autoreload_config** (``bool``, read-write, default: ``True``): Whether to automatically reload the configuration when it changes (only .py files).
-        - **autoreload_css** (``bool``, read-write, default: ``True``): Whether to automatically reload the CSS style when it changes (only .css/.scss/.sass files).
     """
 
     __gsignals__ = {
@@ -113,14 +108,31 @@ class IgnisApp(Gtk.Application, IgnisGObject):
 
     @GObject.Property
     def is_ready(self) -> bool:
+        """
+        - read-only
+
+        Whether configuration is parsed and app is ready.
+        """
         return self._is_ready
 
     @GObject.Property
     def windows(self) -> list[Gtk.Window]:
+        """
+        - read-only
+
+        A list of windows added to this application.
+        """
         return list(self._windows.values())
 
     @GObject.Property
     def autoreload_config(self) -> bool:
+        """
+        - read-write
+
+        Whether to automatically reload the configuration when it changes (only .py files).
+
+        Default: ``True``.
+        """
         return self._autoreload_config
 
     @autoreload_config.setter
@@ -129,6 +141,13 @@ class IgnisApp(Gtk.Application, IgnisGObject):
 
     @GObject.Property
     def autoreload_css(self) -> bool:
+        """
+        - read-write
+
+        Whether to automatically reload the CSS style when it changes (only .css/.scss/.sass files).
+
+        Default: ``True``.
+        """
         return self._autoreload_css
 
     @autoreload_css.setter

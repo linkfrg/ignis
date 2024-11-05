@@ -17,7 +17,7 @@ class FileDialog(Gtk.FileDialog, IgnisGObject):
     A window that allows the user to select a file.
 
     Signals:
-        - **file-set** (``Gio.File``): Emitted when a file or folder is selected.
+        - file-set (``Gio.File``): Emitted when a file or folder is selected.
 
     .. code-block :: python
 

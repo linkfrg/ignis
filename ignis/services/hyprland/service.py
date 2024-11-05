@@ -70,7 +70,7 @@ class HyprlandService(BaseService):
             "focusHistoryID": 0,
         }
 
-    **Example usage:**
+    Example usage:
 
     .. code-block:: python
 
@@ -103,6 +103,8 @@ class HyprlandService(BaseService):
     @GObject.Property
     def workspaces(self) -> list[dict[str, Any]]:
         """
+        - read-only
+
         A list of workspaces.
         """
         return self._workspaces
@@ -110,6 +112,8 @@ class HyprlandService(BaseService):
     @GObject.Property
     def active_workspace(self) -> dict[str, Any]:
         """
+        - read-only
+
         The currently active workspace.
         """
         return self._active_workspace
@@ -117,6 +121,8 @@ class HyprlandService(BaseService):
     @GObject.Property
     def kb_layout(self) -> str:
         """
+        - read-only
+
         The currenly active keyboard layout.
         """
         return self._kb_layout
@@ -124,6 +130,8 @@ class HyprlandService(BaseService):
     @GObject.Property
     def active_window(self) -> dict[str, Any]:
         """
+        - read-only
+
         The currenly focused window.
         """
         return self._active_window

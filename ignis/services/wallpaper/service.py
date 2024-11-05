@@ -13,7 +13,7 @@ class WallpaperService(BaseService):
     A simple service to set the wallpaper.
     Supports multiple monitors.
 
-    **Example usage:**
+    Example usage:
 
     .. code-block:: python
 
@@ -43,7 +43,7 @@ class WallpaperService(BaseService):
     @GObject.Property
     def wallpaper(self) -> str:
         """
-        - **read-write**
+        - read-write
 
         The path to the image.
         """

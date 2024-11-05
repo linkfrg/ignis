@@ -7,7 +7,7 @@ class Entry(Gtk.Entry, BaseWidget):  # type: ignore
     """
     Bases: `Gtk.Entry <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Entry.html>`_.
 
-    An input field. To make it work, set the ``kb_mode`` property of the window to ``"on_demand"`` or ``"exclusive"``.
+    An input field. To make it work, set the ``kb_mode`` property of the window to ``on_demand`` or ``exclusive``.
 
     .. code-block:: python
 

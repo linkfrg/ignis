@@ -48,14 +48,13 @@ class DBusMenu(Gtk.PopoverMenu):
     Like DbusmenuGtk3, but for GTK4.
 
     The bus must provide the ``com.canonical.dbusmenu`` D-Bus interface.
-
-    Parameters:
-        name (``str``): A bus name (well-known or unique).
-        object_path(``str``): An object path to the menu.
     """
 
     def __init__(self, name: str, object_path: str):
         super().__init__()
+        self._name = name
+        self._object_path = object_path
+
         self.__proxy = DBusProxy(
             name=name,
             object_path=object_path,
@@ -71,6 +70,24 @@ class DBusMenu(Gtk.PopoverMenu):
         )
 
         self.__update_menu()
+
+    @GObject.Property
+    def name(self) -> str:
+        """
+        - required, read-only
+
+        A bus name (well-known or unique).
+        """
+        return self._name
+
+    @GObject.Property
+    def object_path(self) -> str:
+        """
+        - required, read-only
+
+        An object path to the menu.
+        """
+        return self._object_path
 
     def __update_menu(self) -> None:
         self.__proxy.GetLayout(

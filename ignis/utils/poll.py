@@ -9,7 +9,7 @@ class Poll(IgnisGObject):
 
     You can pass arguments to the constructor, and they will be passed to the callback.
 
-    **Example usage:**
+    Example usage:
 
     .. code-block:: python
 
@@ -35,22 +35,9 @@ class Poll(IgnisGObject):
         self.__main()
 
     @GObject.Property
-    def output(self) -> Any:
-        """
-        - **not argument**
-
-        The output of the callback.
-
-        .. hint::
-            You can use bind() on ``output``.
-        """
-        return self._output
-
-    @GObject.Property
     def timeout(self) -> int:
         """
-        - **read-write**
-        - **required**
+        - required, read-write
 
         The timeout interval in milliseconds.
         """
@@ -63,8 +50,7 @@ class Poll(IgnisGObject):
     @GObject.Property
     def callback(self) -> Callable:
         """
-        - **read-write**
-        - **required**
+        - required, read-write
 
         The function to call when the timeout is reached. The ``self`` will passed as an argument.
         """
@@ -73,6 +59,18 @@ class Poll(IgnisGObject):
     @callback.setter
     def callback(self, value: Callable) -> None:
         self._callback = value
+
+    @GObject.Property
+    def output(self) -> Any:
+        """
+        - not argument, read-only
+
+        The output of the callback.
+
+        .. hint::
+            You can use bind() on ``output``.
+        """
+        return self._output
 
     def __main(self) -> None:
         self._output = self._callback(self, *self._args)
