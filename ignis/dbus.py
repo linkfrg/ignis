@@ -197,7 +197,7 @@ class DBusService(IgnisGObject):
             name (``str``): The name of the method to register.
             method (``Callable``): A function to call when the method is invoked (from D-Bus).
 
-         DBus methods:
+        DBus methods:
             - Must accept `Gio.DBusMethodInvocation <https://lazka.github.io/pgi-docs/index.html#Gio-2.0/classes/DBusMethodInvocation.html>`_ as the first argument.
             - Must accept all other arguments typical for this method (specified by interface info).
             - Must return `GLib.Variant <https://lazka.github.io/pgi-docs/index.html#GLib-2.0/classes/Variant.html>`_ or ``None``, as specified by interface info.
