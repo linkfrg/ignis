@@ -13,8 +13,8 @@ class ThreadTask(IgnisGObject):
         - finished (``Any``): Emitted when the function has finished. Passes the output from the function as an argument.
 
     Parameters:
-        target (``Callable``): The function to execute in another thread.
-        callback (``Callable``): The function to call when ``target`` has finished.
+        target: The function to execute in another thread.
+        callback: The function to call when ``target`` has finished.
 
     """
 

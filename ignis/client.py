@@ -101,7 +101,7 @@ class IgnisClient:
         Run a Python code inside the Ignis process.
 
         Args:
-            code (``str``): The Python code to execute.
+            code: The Python code to execute.
         """
         self.__call_dbus_method("RunPython", "(s)", code)
 
@@ -110,7 +110,7 @@ class IgnisClient:
         Run a Python file inside Ignis daemon.
 
         Args:
-            path (``str``): The path to the Python file to execute.
+            path: The path to the Python file to execute.
         """
         self.__call_dbus_method("RunFile", "(s)", path)
 

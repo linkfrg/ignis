@@ -194,8 +194,8 @@ class DBusService(IgnisGObject):
         Register a D-Bus method for this service.
 
         Args:
-            name (``str``): The name of the method to register.
-            method (``Callable``): A function to call when the method is invoked (from D-Bus).
+            name: The name of the method to register.
+            method: A function to call when the method is invoked (from D-Bus).
 
         DBus methods:
             - Must accept `Gio.DBusMethodInvocation <https://lazka.github.io/pgi-docs/index.html#Gio-2.0/classes/DBusMethodInvocation.html>`_ as the first argument.
@@ -209,8 +209,8 @@ class DBusService(IgnisGObject):
         Register D-Bus property for this service.
 
         Args:
-            name (``str``): The name of the property to register.
-            method (``Callable``): A function to call when the property is accessed (from DBus).
+            name: The name of the property to register.
+            method: A function to call when the property is accessed (from DBus).
 
         DBus properties:
             - Must return `GLib.Variant <https://lazka.github.io/pgi-docs/index.html#GLib-2.0/classes/Variant.html>`_, as specified by interface info.
@@ -224,8 +224,8 @@ class DBusService(IgnisGObject):
         Emit a D-Bus signal on this service.
 
         Args:
-            signal_name (``str``): The name of the signal to emit.
-            parameters (`GLib.Variant <https://lazka.github.io/pgi-docs/index.html#GLib-2.0/classes/Variant.html>`_, optional): The ``GLib.Variant`` containing paramaters to pass with the signal.
+            signal_name: The name of the signal to emit.
+            parameters: The `GLib.Variant <https://lazka.github.io/pgi-docs/index.html#GLib-2.0/classes/Variant.html>`_ containing paramaters to pass with the signal.
         """
 
         self._connection.emit_signal(
@@ -437,8 +437,8 @@ class DBusProxy(IgnisGObject):
         Subscribe to D-Bus signal.
 
         Args:
-            signal_name (``str``): The signal name to subscribe.
-            callback (``Callable``, optional): A function to call when signal is emitted.
+            signal_name: The signal name to subscribe.
+            callback: A function to call when signal is emitted.
         Returns:
             ``int``: a subscription ID that can be used with :func:`~ignis.dbus.DBusProxy.signal_unsubscribe`
         """
@@ -457,7 +457,7 @@ class DBusProxy(IgnisGObject):
         Unsubscribe from D-Bus signal.
 
         Args:
-            id (``int``): The ID of the subscription.
+            id: The ID of the subscription.
         """
         self.connection.signal_unsubscribe(id)
 
@@ -505,8 +505,8 @@ class DBusProxy(IgnisGObject):
         Watch ``name``.
 
         Args:
-            on_name_appeared (``Callable``, optional): A function to call when ``name`` appeared.
-            on_name_vanished (``Callable``, optional): A function to call when ``name`` vanished.
+            on_name_appeared: A function to call when ``name`` appeared.
+            on_name_vanished: A function to call when ``name`` vanished.
         """
         self._watcher = Gio.bus_watch_name(
             BUS_TYPE[self._bus_type],

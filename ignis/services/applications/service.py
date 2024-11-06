@@ -101,7 +101,7 @@ class ApplicationsService(BaseService):
         Filter applications by query.
 
         Args:
-            query (str): the string to be searched for
+            query: The string to be searched for.
 
         Returns:
             list[Application]: A list of applications filtered by provided query.

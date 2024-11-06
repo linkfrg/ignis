@@ -181,7 +181,7 @@ class HyprlandService(BaseService):
         If you want to receive the response in JSON format, use this syntax: ``j/COMMAND``.
 
         Args:
-            cmd (``str``): The command to send.
+            cmd: The command to send.
 
         Returns:
             Response from Hyprland IPC.
@@ -203,6 +203,6 @@ class HyprlandService(BaseService):
         Switch to a workspace by its ID.
 
         Args:
-            workspace_id (``int``): The ID of the workspace to switch to.
+            workspace_id: The ID of the workspace to switch to.
         """
         self.send_command(f"dispatch workspace {workspace_id}")

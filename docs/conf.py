@@ -18,6 +18,7 @@ extensions = [
     "sphinx.ext.napoleon",
     "sphinx_design",
     "sphinx_copybutton",
+    "sphinx_autodoc_typehints",
 ]
 
 templates_path = ["_templates"]
@@ -35,6 +36,9 @@ html_css_files = ["css/custom.css"]
 html_title = "Ignis documentation"
 
 smartquotes = False
+napoleon_use_param = True
+typehints_use_signature = True
+typehints_use_signature_return = True
 
 
 json_url = f"{DOCS_URL}/_static/switcher.json"

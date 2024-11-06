@@ -7,7 +7,7 @@ def get_n_monitors() -> int:
     Get the number of monitors.
 
     Returns:
-        ``int``: The number of monitors.
+        The number of monitors.
     """
     display = Gdk.Display.get_default()
     if not display:

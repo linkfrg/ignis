@@ -104,12 +104,12 @@ class BaseWidget(Gtk.Widget, IgnisGObject):
         else:
             super().__getattribute__(name)
 
-    def override_enum(self, property_name: str, enum: Any) -> None:
+    def override_enum(self, property_name: str, enum: GObject.GEnum) -> None:  # type: ignore
         """
         Override an enum.
 
         Args:
-            property_name (``str``): The name of the property to override.
-            enum (``GObject.GEnum``): An enum that accepts the property to be overridden. For example, for ``valign`` it will be ``Gtk.Align``.
+            property_name: The name of the property to override.
+            enum: An enum that accepts the property to be overridden. For example, for ``valign`` it will be ``Gtk.Align``.
         """
         self._overrided_enums[property_name] = enum

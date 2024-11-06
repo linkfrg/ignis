@@ -179,7 +179,7 @@ class WifiAccessPoint(IgnisGObject):
         Connect to this access point.
 
         Args
-            password (``str``, optional): Password to use. This has an effect only if the access point requires a password.
+            password: Password to use. This has an effect only if the access point requires a password.
         """
         connection = NM.RemoteConnection()
 

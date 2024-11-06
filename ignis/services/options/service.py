@@ -87,8 +87,8 @@ class OptionsService(BaseService):
         Create options group.
 
         Args:
-            name (``str``): The name of the options group to create.
-            exists_ok (``bool``, optional): If ``True``, do not raise :class:`~ignis.exceptions.OptionsGroupExistsError` if the group already exists. Default: ``False``.
+            name: The name of the options group to create.
+            exists_ok: If ``True``, do not raise :class:`~ignis.exceptions.OptionsGroupExistsError` if the group already exists. Default: ``False``.
 
         Returns:
             :class:`~ignis.services.options.OptionsGroup`: The newly created options group or already existing one.
@@ -114,7 +114,7 @@ class OptionsService(BaseService):
         Get ``OptionsGroup`` object by its name.
 
         Args:
-            name (``str``): The name of the options group.
+            name: The name of the options group.
 
         Returns:
             :class:`~ignis.services.options.OptionsGroup`: The options group instance.

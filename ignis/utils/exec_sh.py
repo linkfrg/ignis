@@ -8,10 +8,10 @@ def exec_sh(command: str) -> subprocess.CompletedProcess:
     Execute a shell (bash) command.
 
     Args:
-        command (``str``): The command to execute.
+        command: The command to execute.
 
     Returns:
-        ``subprocess.CompletedProcess``: The result of the command execution. You can use the ``stdout`` property to get the command's output.
+        The result of the command execution. You can use the ``stdout`` property to get the command's output.
     """
     return subprocess.run(command, shell=True, text=True, capture_output=True)
 
@@ -64,11 +64,11 @@ def exec_sh_async(command: str, on_finished: Callable | None = None) -> Gio.Subp
     Execute a shell (bash) command asynchronously.
 
     Args:
-        command (``str``): The command to execute.
-        on_finished (``Callable``, optional): A function to call when the process is finished. An instance of :class:`~ignis.utils.exec_sh.AsyncCompletedProcess` will be passed to this function.
+        command: The command to execute.
+        on_finished: A function to call when the process is finished. An instance of :class:`~ignis.utils.exec_sh.AsyncCompletedProcess` will be passed to this function.
 
     Returns:
-        ``Gio.Subprocess``
+        The instance of ``Gio.Subprocess``.
     """
 
     def wait_check_callback(process: Gio.Subprocess, result: Gio.AsyncResult) -> None:

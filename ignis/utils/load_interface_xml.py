@@ -12,13 +12,15 @@ def load_interface_xml(
     If you want to load interface info from the path or XML string, you need to provide ``path`` and ``xml`` as keyword arguments respectively.
 
     Args:
-        interface_name (``str | None``, optional): The name of the interface. The interface must be stored in the ``ignis/dbus/`` directory in the Ignis sources.
-        path (``str | None``, optional): The full path to the interface XML.
-        xml (``str | None``, optional): The XML string.
+        interface_name: The name of the interface. The interface must be stored in the ``ignis/dbus/`` directory in the Ignis sources.
+        path: The full path to the interface XML.
+        xml: The XML string.
+
     Raises:
         TypeError: If neither of the arguments is provided.
+
     Returns:
-        ``Gio.DBusInterfaceInfo``: The interface information.
+        The interface information.
     """
     xml_string: str
 

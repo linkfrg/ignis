@@ -61,9 +61,9 @@ class OptionsGroup(IgnisGObject):
         Create an option.
 
         Args:
-            name (``str``): The name of the option.
-            default (``Any``): The default value for the option.
-            exists_ok (``bool``, optional): If ``True``, do not raise :class:`~ignis.exceptions.OptionExistsError` if the option already exists. Default: ``False``.
+            name: The name of the option.
+            default: The default value for the option.
+            exists_ok: If ``True``, do not raise :class:`~ignis.exceptions.OptionExistsError` if the option already exists. Default: ``False``.
 
         Returns:
             :class:`~ignis.services.options.Option`: The newly created option or already existing option.
@@ -89,7 +89,7 @@ class OptionsGroup(IgnisGObject):
         Get ``Option`` object by its name.
 
         Args:
-            name (``str``): The name of the option.
+            name: The name of the option.
 
         Returns:
             :class:`~ignis.services.options.Option`: The option instance.

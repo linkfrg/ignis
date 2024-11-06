@@ -156,7 +156,7 @@ class FileDialog(Gtk.FileDialog, IgnisGObject):
         Add a filter.
 
         Args:
-            filter (:class:`~ignis.widgets.FileFilter`): The instance of filter to add.
+            filter: The instance of filter to add.
         """
         self._list_store.append(filter)
 

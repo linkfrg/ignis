@@ -173,10 +173,10 @@ class RecorderService(BaseService):
         Start recording.
 
         Args:
-            path (``str``, optional): Recording path. It will override ``default_file_location`` and ``default_filename`` properties.
-            record_microphone (``bool``, optional): Whether record audio from microphone.
-            record_internal_audio (``bool``, optional): Whether record internal audio.
-            audio_devices (``list[str]``, optional): A list of audio devices names from which audio should be recorded.
+            path: Recording path. It will override ``default_file_location`` and ``default_filename`` properties.
+            record_microphone: Whether record audio from microphone.
+            record_internal_audio: Whether record internal audio.
+            audio_devices: A list of audio devices names from which audio should be recorded.
         """
 
         if path is None:

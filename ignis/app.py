@@ -167,7 +167,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         Requires ``dart-sass`` for SASS/SCSS compilation.
 
         Args:
-            style_path (``str``): Path to the .css/.scss/.sass file.
+            style_path: Path to the .css/.scss/.sass file.
 
         Raises:
             StylePathAppliedError: if the given style path is already to the application.
@@ -218,7 +218,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         Remove the applied CSS/SCSS/SASS style by its path.
 
         Args:
-            style_path (``str``): Path to the applied .css/.scss/.sass file.
+            style_path: Path to the applied .css/.scss/.sass file.
 
         Raises:
             StylePathNotFoundError: if the given style path is not applied to the application.
@@ -297,10 +297,11 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         Get a window by name.
 
         Args:
-            window_name (``str``): The window's namespace.
+            window_name: The window's namespace.
 
         Returns:
             ``Gtk.Window``: The window object.
+
         Raises:
             WindowNotFoundError: If a window with the given namespace does not exist.
         """
@@ -315,7 +316,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         Open (show) a window by its name.
 
         Args:
-            window_name (``str``): The window's namespace.
+            window_name: The window's namespace.
         Raises:
             WindowNotFoundError: If a window with the given namespace does not exist.
         """
@@ -327,7 +328,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         Close (hide) a window by its name.
 
         Args:
-            window_name (``str``): The window's namespace.
+            window_name: The window's namespace.
         Raises:
             WindowNotFoundError: If a window with the given namespace does not exist.
         """
@@ -339,7 +340,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         Toggle (change visibility to opposite state) a window by its name.
 
         Args:
-            window_name (``str``): The window's namespace.
+            window_name: The window's namespace.
         Raises:
             WindowNotFoundError: If a window with the given namespace does not exist.
         """
@@ -352,8 +353,8 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         You typically shouldn't use this method, as windows are added to the app automatically.
 
         Args:
-            window_name (``str``): The window's namespace.
-            window (``Gtk.Window``): The window instance.
+            window_name: The window's namespace.
+            window: The window instance.
 
         Raises:
             WindowAddedError: If a window with the given namespace already exists.
@@ -370,7 +371,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         The window will be removed from the application.
 
         Args:
-            window_name (``str``): The window's namespace.
+            window_name: The window's namespace.
 
         Raises:
             WindowNotFoundError: If a window with the given namespace does not exist.

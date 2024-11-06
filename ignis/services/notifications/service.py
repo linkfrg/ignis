@@ -199,7 +199,7 @@ class NotificationService(BaseService):
         Get :class:`~ignis.services.notifications.Notification` by ID.
 
         Args:
-            id (``int``): ID of notification.
+            id: The ID of the notification to get.
 
         Returns:
             :class:`~ignis.services.notifications.Notification` or ``None``

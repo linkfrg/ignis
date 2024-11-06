@@ -23,7 +23,7 @@ def get_ignis_version() -> str:
     Get the current Ignis version.
 
     Returns:
-        ``str``: The Ignis version.
+        The Ignis version.
     """
     return __version__
 
@@ -33,7 +33,7 @@ def get_ignis_commit() -> str:
     Get the current Ignis commit hash.
 
     Returns:
-        ``str``: The Ignis commit hash.
+        The Ignis commit hash.
     """
 
     try:
@@ -49,7 +49,7 @@ def get_ignis_branch() -> str:
     Get the name of the current Ignis git branch.
 
     Returns:
-        ``str``: The name of the Ignis git branch.
+        The name of the Ignis git branch.
     """
     try:
         from ignis.__commit__ import __branch__  # type: ignore
@@ -64,7 +64,7 @@ def get_ignis_commit_msg() -> str:
     Get the message of the latest Ignis commit.
 
     Returns:
-        ``str``: The message of the latest Ignis commit.
+        The message of the latest Ignis commit.
     """
     try:
         from ignis.__commit__ import __commit_msg__  # type: ignore

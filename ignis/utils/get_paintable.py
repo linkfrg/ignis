@@ -10,12 +10,12 @@ def get_paintable(
     Get a ``Gdk.Paintable`` by icon name.
 
     Args:
-        widget (``Gtk.Widget``): The parent widget.
-        icon_name (``str``): The name of the icon to look up.
-        size (``int``): The size of the icon.
+        widget: The parent widget.
+        icon_name: The name of the icon to look up.
+        size: The size of the icon.
 
     Returns:
-        ``Gdk.Paintable | None``: The paintable object for the icon or ``None`` if no such icon exists.
+        The paintable object for the icon or ``None`` if no such icon exists.
     """
     display = Gdk.Display.get_default()
     if not display:
