@@ -11,9 +11,6 @@ class SystemTrayService(BaseService):
     """
     A system tray, where application icons are placed.
 
-    Signals:
-        - added (:class:`~ignis.services.system_tray.SystemTrayItem`): Emitted when a new item is added.
-
     Raises:
         AnotherSystemTrayRunningError: If another system tray is already running.
 
@@ -27,10 +24,6 @@ class SystemTrayService(BaseService):
 
         system_tray.connect("added", lambda x, item: print(item.title))
     """
-
-    __gsignals__ = {
-        "added": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, (GObject.Object,)),
-    }
 
     def __init__(self):
         super().__init__()
@@ -68,6 +61,17 @@ class SystemTrayService(BaseService):
         )
         name = proxy.proxy.get_name_owner()
         raise AnotherSystemTrayRunningError(name)
+
+    @GObject.Signal(arg_types=(SystemTrayItem,))
+    def added(self, *args):
+        """
+        - Signal
+
+        Emitted when a new item is added.
+
+        Args:
+            item (:class:`~ignis.services.system_tray.SystemTrayItem`): The instance of the system tray item.
+        """
 
     @GObject.Property
     def items(self) -> list[SystemTrayItem]:

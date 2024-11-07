@@ -14,15 +14,7 @@ from .constants import ART_URL_CACHE_DIR
 class MprisPlayer(IgnisGObject):
     """
     A media player object.
-
-    Signals:
-        - closed (): Emitted when a player has been closed or removed.
     """
-
-    __gsignals__ = {
-        "ready": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
-        "closed": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
-    }
 
     def __init__(self, name: str):
         super().__init__()
@@ -137,6 +129,17 @@ class MprisPlayer(IgnisGObject):
                 self._position = position // 1_000_000
                 self.notify("position")
             time.sleep(1)
+
+    @GObject.Signal
+    def ready(self): ...  # user shouldn't connect to this signal
+
+    @GObject.Signal
+    def closed(self):
+        """
+        - Signal
+
+        Emitted when a player has been closed or removed.
+        """
 
     @GObject.Property
     def can_control(self) -> bool:

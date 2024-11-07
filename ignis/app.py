@@ -37,17 +37,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
             from ignis.app import IgnisApp
 
             app = IgnisApp.get_default()
-
-    Signals:
-        - ready (): Emitted when the configuration has been parsed.
-        - quit (): Emitted when Ignis has finished running.
-
     """
-
-    __gsignals__ = {
-        "ready": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
-        "quit": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
-    }
 
     _instance: IgnisApp | None = None  # type: ignore
 
@@ -105,6 +95,17 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         if cls._instance is None:
             cls._instance = cls()
         return cls._instance
+
+    @GObject.Signal
+    def ready(self):
+        """
+        - Signal
+
+        Emitted when the configuration has been parsed.
+
+        .. hint::
+            To handle shutdown of the application use the ``shutdown`` signal.
+        """
 
     @GObject.Property
     def is_ready(self) -> bool:
@@ -392,7 +393,6 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         Quit Ignis.
         """
         super().quit()
-        self.emit("quit")
         logger.info("Quitting.")
 
     def inspector(self) -> None:

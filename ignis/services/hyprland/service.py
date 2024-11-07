@@ -17,7 +17,7 @@ class HyprlandService(BaseService):
         HyprlandIPCNotFoundError: If Hyprland IPC is not found.
 
     .. note::
-        The contents of "dictionary" (``Dict``) properties are not described here.
+        The contents of ``dict`` properties are not described here.
         To find out their contents just print them into the terminal.
 
         >>> print(hyprland.workspaces)

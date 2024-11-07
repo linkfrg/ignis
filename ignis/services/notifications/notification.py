@@ -7,17 +7,9 @@ from .action import NotificationAction
 
 class Notification(IgnisGObject):
     """
-    A notification object. Contain data about the notification and allows performing actions.
-
-    Signals:
-        - closed (): Emitted when notification has been closed.
-        - dismissed (): Emitted when notification has been dismissed.
+    A notification object.
+    Contains data about the notification and allows performing actions.
     """
-
-    __gsignals__ = {
-        "closed": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
-        "dismissed": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
-    }
 
     def __init__(
         self,
@@ -56,6 +48,22 @@ class Notification(IgnisGObject):
         ]
 
         Utils.Timeout(timeout, self.dismiss)
+
+    @GObject.Signal
+    def closed(self):
+        """
+        - Signal
+
+        Emitted when notification has been closed.
+        """
+
+    @GObject.Signal
+    def dismissed(self):
+        """
+        - Signal
+
+        Emitted when notification has been dismissed.
+        """
 
     @GObject.Property
     def id(self) -> int:

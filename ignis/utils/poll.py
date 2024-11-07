@@ -19,10 +19,6 @@ class Poll(IgnisGObject):
         Utils.Poll(timeout=1_000, callback=lambda self: print("Hello"))
     """
 
-    __gsignals__ = {
-        "changed": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
-    }
-
     def __init__(self, timeout: int, callback: Callable, *args):
         super().__init__()
         self._id: int | None = None
@@ -33,6 +29,14 @@ class Poll(IgnisGObject):
         self._args = args
 
         self.__main()
+
+    @GObject.Signal
+    def changed(self):
+        """
+        - Signal
+
+        Emitted at each iteration.
+        """
 
     @GObject.Property
     def timeout(self) -> int:

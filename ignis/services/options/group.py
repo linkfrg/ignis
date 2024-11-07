@@ -12,16 +12,7 @@ class OptionsGroup(IgnisGObject):
     .. warning::
         You shouldn't initialize this class manually.
         Use the :func:`~ignis.services.options.OptionsService.create_group` method instead.
-
-    Signals:
-        - changed (): Emitted when options in this group is changed.
-        - removed (): Emitted when this options group is removed.
     """
-
-    __gsignals__ = {
-        "changed": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
-        "removed": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
-    }
 
     def __init__(self, name: str, data: dict[str, Any] | None = None):
         super().__init__()
@@ -37,6 +28,22 @@ class OptionsGroup(IgnisGObject):
 
         for key in data.keys():
             self._data[key] = self.__init_option(name=key, value=data.get(key, None))
+
+    @GObject.Signal
+    def changed(self):
+        """
+        - Signal
+
+        Emitted when options in this group is changed.
+        """
+
+    @GObject.Signal
+    def removed(self):
+        """
+        - Signal
+
+        Emitted when this options group is removed.
+        """
 
     @GObject.Property
     def name(self) -> str:

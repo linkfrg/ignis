@@ -9,19 +9,7 @@ from ignis.dbus_menu import DBusMenu
 class SystemTrayItem(IgnisGObject):
     """
     A system tray item.
-
-    Signals:
-        - removed (): Emitted when the item is removed.
     """
-
-    __gsignals__ = {
-        "ready": (
-            GObject.SignalFlags.RUN_FIRST,
-            GObject.TYPE_NONE,
-            (),
-        ),  # user shouldn't connect to this signal
-        "removed": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
-    }
 
     def __init__(self, name: str, object_path: str):
         super().__init__()
@@ -101,6 +89,17 @@ class SystemTrayItem(IgnisGObject):
             self._icon = "image-missing"
 
         self.notify("icon")
+
+    @GObject.Signal
+    def ready(self): ...  # user shouldn't connect to this signal
+
+    @GObject.Signal
+    def removed(self):
+        """
+        - Signal
+
+        Emitted when the item is removed.
+        """
 
     @GObject.Property
     def id(self) -> str:

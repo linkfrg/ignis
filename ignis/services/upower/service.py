@@ -11,26 +11,9 @@ class UPowerService(BaseService):
     An UPower service.
     Requires ``UPower``.
 
-    Signals:
-        - device-added (:class:`~ignis.services.upower.UPowerDevice`): Emitted when a power device has been added.
-        - battery-added (:class:`~ignis.services.upower.UPowerDevice`): Emitted when a battery has been added.
-
     Raises:
         UPowerNotRunningError: If UPower D-Bus service is not running.
     """
-
-    __gsignals__ = {
-        "device-added": (
-            GObject.SignalFlags.RUN_FIRST,
-            GObject.TYPE_NONE,
-            (UPowerDevice,),
-        ),
-        "battery-added": (
-            GObject.SignalFlags.RUN_FIRST,
-            GObject.TYPE_NONE,
-            (UPowerDevice,),
-        ),
-    }
 
     def __init__(self) -> None:
         super().__init__()
@@ -64,6 +47,28 @@ class UPowerService(BaseService):
 
     def __get_device_object_path(self, args) -> str:
         return args[-1].unpack()[0]  # -1 element is the device object path (Variant)
+
+    @GObject.Signal(arg_types=(UPowerDevice,))
+    def device_added(self, *args):
+        """
+        - Signal
+
+        Emitted when a power device has been added.
+
+        Args:
+            device (:class:`~ignis.services.upower.UPowerDevice`): The instance of the UPower device.
+        """
+
+    @GObject.Signal(arg_types=(UPowerDevice,))
+    def battery_added(self, *args):
+        """
+        - Signal
+
+        Emitted when a battery has been added.
+
+        Args:
+            battery (:class:`~ignis.services.upower.UPowerDevice`): The instance of the battery.
+        """
 
     @GObject.Property
     def devices(self) -> list[UPowerDevice]:

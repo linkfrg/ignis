@@ -11,16 +11,9 @@ class Stream(IgnisGObject):
     An audio stream.
     A general class for speakers, microphones, applications, and recorders.
 
-    Signals:
-        - removed (): Emitted when the stream has been removed.
-
     Raises:
         GvcNotFoundError: If Gvc is not found.
     """
-
-    __gsignals__ = {
-        "removed": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
-    }
 
     def __init__(self, control: Gvc.MixerControl, stream: Gvc.MixerStream | None):
         super().__init__()
@@ -58,6 +51,14 @@ class Stream(IgnisGObject):
         self._connection_ids.append(id_)
 
         self.notify_all()
+
+    @GObject.Signal
+    def removed(self):
+        """
+        - Signal
+
+        Emitted when the stream has been removed.
+        """
 
     @GObject.Property
     def stream(self) -> Gvc.MixerStream | None:

@@ -9,16 +9,7 @@ from .action import ApplicationAction
 class Application(IgnisGObject):
     """
     An application object.
-
-    Signals:
-        - pinned (): Emitted when the application has been pinned.
-        - unpinned (): Emitted when the application has been unpinned.
     """
-
-    __gsignals__ = {
-        "pinned": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
-        "unpinned": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
-    }
 
     def __init__(self, app: Gio.DesktopAppInfo, is_pinned: bool):
         super().__init__()
@@ -29,6 +20,22 @@ class Application(IgnisGObject):
 
         for action in app.list_actions():
             self._actions.append(ApplicationAction(app=app, action=action))
+
+    @GObject.Signal
+    def pinned(self):
+        """
+        - Signal
+
+        Emitted when the application has been pinned.
+        """
+
+    @GObject.Signal
+    def unpinned(self):
+        """
+        - Signal
+
+        Emitted when the application has been unpinned.
+        """
 
     @GObject.Property
     def app(self) -> Gio.DesktopAppInfo:

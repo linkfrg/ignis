@@ -14,12 +14,6 @@ class AudioService(BaseService):
         This service uses the PulseAudio backend.
         To use it with PipeWire, install ``pipewire-pulse``.
 
-    Signals:
-        - speaker-added (:class:`~ignis.services.audio.Stream`): Emitted when a speaker is added.
-        - microphone-added (:class:`~ignis.services.audio.Stream`): Emitted when a microphone is added.
-        - app-added (:class:`~ignis.services.audio.Stream`): Emitted when an app is added.
-        - recorder-added (:class:`~ignis.services.audio.Stream`): Emitted when a recorder is added.
-
     Example usage:
 
     .. code-block:: python
@@ -29,17 +23,6 @@ class AudioService(BaseService):
         audio = AudioService.get_default()
         audio.connect("speaker-added", lambda x, speaker: print(speaker.description))
     """
-
-    __gsignals__ = {
-        "speaker-added": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, (Stream,)),
-        "microphone-added": (
-            GObject.SignalFlags.RUN_FIRST,
-            GObject.TYPE_NONE,
-            (Stream,),
-        ),
-        "app-added": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, (Stream,)),
-        "recorder-added": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, (Stream,)),
-    }
 
     def __init__(self):
         super().__init__()
@@ -69,6 +52,50 @@ class AudioService(BaseService):
         getattr(self, _type)._sync()
         for stream in getattr(self, f"{_type}s"):
             stream.notify("is_default")
+
+    @GObject.Signal(arg_types=(Stream,))
+    def speaker_added(self, *args):
+        """
+        - Signal
+
+        Emitted when a speaker is added.
+
+        Args:
+            stream (:class:`~ignis.services.audio.Stream`): The instance of the stream.
+        """
+
+    @GObject.Signal(arg_types=(Stream,))
+    def microphone_added(self, *args):
+        """
+        - Signal
+
+        Emitted when a microphone is added.
+
+        Args:
+            stream (:class:`~ignis.services.audio.Stream`): The instance of the stream.
+        """
+
+    @GObject.Signal(arg_types=(Stream,))
+    def app_added(self, *args):
+        """
+        - Signal
+
+        Emitted when an app is added.
+
+        Args:
+            stream (:class:`~ignis.services.audio.Stream`): The instance of the stream.
+        """
+
+    @GObject.Signal(arg_types=(Stream,))
+    def recorder_added(self, *args):
+        """
+        - Signal
+
+        Emitted when a recorder is added.
+
+        Args:
+            stream (:class:`~ignis.services.audio.Stream`): The instance of the stream.
+        """
 
     @GObject.Property
     def control(self) -> Gvc.MixerControl:

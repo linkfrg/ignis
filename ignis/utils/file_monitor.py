@@ -33,9 +33,6 @@ class FileMonitor(IgnisGObject):
     """
     Monitor changes of the file or directory.
 
-    Signals:
-        - changed (``str``, ``str``): Emitted when the file or directory changed. Passes the path and the event type as arguments.
-
     Example usage:
 
     .. code-block::
@@ -46,10 +43,6 @@ class FileMonitor(IgnisGObject):
             callback=lambda path, event_type: print(path, event_type),
         )
     """
-
-    __gsignals__ = {
-        "changed": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, (str, str)),
-    }
 
     def __init__(
         self,
@@ -80,6 +73,19 @@ class FileMonitor(IgnisGObject):
         file_monitors.append(
             self
         )  # to prevent the garbage collector from collecting "self"
+
+    @GObject.Signal(arg_types=(str, str))
+    def changed(self, *args):
+        """
+        - Signal
+
+        Emitted when the file or directory changed.
+
+        Args:
+            path (``str``): The path to the changed file or directory.
+            event_type (``str``): The event type. A list of all event types described in :attr:`callback`.
+        """
+        pass
 
     def __on_change(self, file_monitor, file, other_file, event_type) -> None:
         path = file.get_path()

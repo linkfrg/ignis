@@ -6,19 +6,20 @@ from typing import Any
 class Option(IgnisGObject):
     """
     An option object.
-
-    Signals:
-        - removed (): Emitted when the option is removed.
     """
-
-    __gsignals__ = {
-        "removed": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
-    }
 
     def __init__(self, name: str, value: Any = None):
         super().__init__()
         self._name = name
         self._value = value
+
+    @GObject.Signal
+    def removed(self):
+        """
+        - Signal
+
+        Emitted when the option is removed.
+        """
 
     @GObject.Property
     def name(self) -> str:

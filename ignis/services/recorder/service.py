@@ -28,10 +28,6 @@ class RecorderService(BaseService):
         - gst-plugins-ugly
         - pipewire-pulse: for audio recording.
 
-    Signals:
-        - recording_started (): Emitted when recording starts.
-        - recording_stopped (): Emitted when recording stops.
-
     Raises:
         GstNotFoundError: If GStreamer is not found.
         GstPluginNotFoundError: If GStreamer plugin is not found.
@@ -50,11 +46,6 @@ class RecorderService(BaseService):
         # record for 30 seconds and then stop
         Utils.Timeout(ms=30 * 1000, target=recorder.stop_recording)
     """
-
-    __gsignals__ = {
-        "recording_started": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
-        "recording_stopped": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
-    }
 
     def __init__(self):
         super().__init__()
@@ -87,7 +78,7 @@ class RecorderService(BaseService):
             exists_ok=True,
         )
 
-        app.connect("quit", lambda x: self.stop_recording())
+        app.connect("shutdown", lambda x: self.stop_recording())
 
     def __check_deps(self) -> None:
         if not gst_inspect("pipewiresrc"):
@@ -98,6 +89,22 @@ class RecorderService(BaseService):
 
         if not gst_inspect("mp4mux"):
             raise GstPluginNotFoundError("MP4 muxer", "gst-plugins-good")
+
+    @GObject.Signal
+    def recording_started(self):
+        """
+        - Signal
+
+        Emitted when recording starts.
+        """
+
+    @GObject.Signal
+    def recording_stopped(self):
+        """
+        - Signal
+
+        Emitted when recording stops.
+        """
 
     @GObject.Property
     def active(self) -> bool:

@@ -8,14 +8,7 @@ from .constants import DEVICE_KIND, DeviceState
 class UPowerDevice(IgnisGObject):
     """
     The general class for power devices, including batteries.
-
-    Signals:
-        - removed (): Emitted when the device has been removed.
     """
-
-    __gsignals__ = {
-        "removed": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
-    }
 
     def __init__(self, object_path: str):
         super().__init__()
@@ -57,6 +50,14 @@ class UPowerDevice(IgnisGObject):
             if dbus_property in self.__watching_props:
                 for i in self.__watching_props[dbus_property]:
                     self.notify(i)
+
+    @GObject.Signal
+    def removed(self):
+        """
+        - Signal
+
+        Emitted when the device has been removed.
+        """
 
     @GObject.Property
     def object_path(self) -> str:

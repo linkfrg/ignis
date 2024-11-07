@@ -16,9 +16,6 @@ class FileDialog(Gtk.FileDialog, IgnisGObject):
 
     A window that allows the user to select a file.
 
-    Signals:
-        - file-set (``Gio.File``): Emitted when a file or folder is selected.
-
     .. code-block :: python
 
         Widget.FileDialog(
@@ -36,9 +33,6 @@ class FileDialog(Gtk.FileDialog, IgnisGObject):
     """
 
     __gtype_name__ = "IgnisFileDialog"
-    __gsignals__ = {
-        "file-set": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, (Gio.File,)),
-    }
 
     def __init__(self, **kwargs):
         Gtk.FileDialog.__init__(self)
@@ -78,6 +72,17 @@ class FileDialog(Gtk.FileDialog, IgnisGObject):
             self._file = file
             self.emit("file-set", file)
             self.notify("file")
+
+    @GObject.Signal(arg_types=(Gio.File,))
+    def file_set(self, *args):
+        """
+        - Signal
+
+        Emitted when a file or directory is selected.
+
+        Args:
+            file (``Gio.File``): The instance of ``Gio.File`` for this file or directory.
+        """
 
     @GObject.Property
     def file(self) -> Gio.File | None:

@@ -22,10 +22,6 @@ class NotificationService(BaseService):
     A notification daemon.
     Allow receiving notifications and perform actions on them.
 
-    Signals:
-        - notified (:class:`~ignis.services.notifications.Notification`): Emitted when a new notification appears.
-        - new_popup (:class:`~ignis.services.notifications.Notification`): Emitted when a new popup notification appears. Only emitted if ``dnd`` is set to ``False``.
-
     Raises:
         AnotherNotificationDaemonRunningError: If another notification daemon is already running.
 
@@ -39,19 +35,6 @@ class NotificationService(BaseService):
 
         notifications.connect("notified", lambda x, notification: print(notification.app_name, notification.summary))
     """
-
-    __gsignals__ = {
-        "notified": (
-            GObject.SignalFlags.RUN_FIRST,
-            GObject.TYPE_NONE,
-            (GObject.Object,),
-        ),
-        "new_popup": (
-            GObject.SignalFlags.RUN_FIRST,
-            GObject.TYPE_NONE,
-            (GObject.Object,),
-        ),
-    }
 
     def __init__(self):
         super().__init__()
@@ -111,6 +94,29 @@ class NotificationService(BaseService):
             name = proxy.proxy.get_name_owner()
 
         raise AnotherNotificationDaemonRunningError(name)
+
+    @GObject.Signal(arg_types=(Notification,))
+    def notified(self, *args):
+        """
+        - Signal
+
+        Emitted when a new notification appears.
+
+        Args:
+            notification (:class:`~ignis.services.notifications.Notification`): The instance of the notification.
+        """
+
+    @GObject.Signal(arg_types=(Notification,))
+    def new_popup(self, *args):
+        """
+        - Signal
+
+        Emitted when a new popup notification appears.
+        Only emitted if ``dnd`` is set to ``False``.
+
+        Args:
+            notification (:class:`~ignis.services.notifications.Notification`): The instance of the notification.
+        """
 
     @GObject.Property
     def notifications(self) -> list[Notification]:
