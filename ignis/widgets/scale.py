@@ -18,6 +18,7 @@ class Scale(Gtk.Scale, BaseWidget):
         - **on_change** (``Callable``, optional, read-write): Function to call when the value changes.
         - **draw_value** (``int``, optional, read-write): Whether the current value is displayed.
         - **value_pos** (``str``, optional, read-write): Position where the current value is displayed. Works only if ``draw_value`` is set to ``True``. Default: ``"top"``.
+        - **invert** (``bool``, optional, read-write): When set to True the scale slides from bottom to top when vertical or right to left when horizontal.
 
     **Value position:**
         - **"left"**
@@ -35,7 +36,8 @@ class Scale(Gtk.Scale, BaseWidget):
             value=20,
             on_change=lambda x: print(x.value),
             draw_value=True,
-            value_pos='top'
+            value_pos='top',
+            invert=True
         )
     """
 
@@ -51,7 +53,8 @@ class Scale(Gtk.Scale, BaseWidget):
         self._on_change: Callable | None = None
         self.override_enum("value_pos", Gtk.PositionType)
         BaseWidget.__init__(self, **kwargs)
-
+        
+        # self.invert: bool = False
         self.connect("value-changed", lambda x: self.__invoke_on_change())
 
         legacy_controller = (
@@ -115,6 +118,7 @@ class Scale(Gtk.Scale, BaseWidget):
     def step(self, value: float) -> None:
         self.adjustment.props.step_increment = value
 
+
     @GObject.Property
     def vertical(self) -> bool:
         return self.get_orientation() == Gtk.Orientation.VERTICAL
@@ -125,6 +129,14 @@ class Scale(Gtk.Scale, BaseWidget):
             self.set_property("orientation", Gtk.Orientation.VERTICAL)
         else:
             self.set_property("orientation", Gtk.Orientation.HORIZONTAL)
+
+    @GObject.Property
+    def invert(self) -> bool:
+        return Gtk.Range.get_inverted()
+
+    @invert.setter
+    def invert(self, value:bool) -> None:
+        return Gtk.Range.set_inverted(self, value)
 
     def __invoke_on_change(self):
         if self._dragging and self.on_change:
