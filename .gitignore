@@ -10,11 +10,5 @@ build
 ignis/__lib_dir__.py
 ignis/__commit__.py
 
-docs/api/utils
-docs/api/widgets
-
-!docs/api/utils/index.rst
-!docs/api/widgets/index.rst
-
 .idea/*
 docs/tmp

@@ -18,7 +18,7 @@ def exec_sh(command: str) -> subprocess.CompletedProcess:
 
 class AsyncCompletedProcess:
     """
-    Completed process object for :func:`~ignis.utils.exec_sh.exec_sh_async`.
+    Completed process object for :func:`~ignis.utils.Utils.exec_sh_async`.
     """
 
     def __init__(self, process: Gio.Subprocess) -> None:
