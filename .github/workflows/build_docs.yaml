@@ -9,6 +9,12 @@ on:
       DEST_DIR:
         required: true
         type: string
+  pull_request:
+    paths:
+      - "ignis/**"
+      - "docs/**"
+    branches:
+      - '*'
 
 jobs:
   build:
@@ -34,6 +40,7 @@ jobs:
         make html
 
     - name: Deploy to GitHub Pages
+      if: ${{ github.event_name != 'pull_request' }}
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
