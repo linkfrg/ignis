@@ -37,6 +37,7 @@ napoleon_use_param = True
 typehints_use_signature = True
 typehints_use_signature_return = True
 typehints_defaults = "comma"
+always_use_bars_union = True
 
 json_url = f"{DOCS_URL}/_static/switcher.json"
 
