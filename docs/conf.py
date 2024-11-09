@@ -20,7 +20,7 @@ extensions = [
 
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
-
+suppress_warnings = ["config.cache"]
 
 autodoc_mock_imports = ["gi", "loguru", "setuptools", "click", "cairo", "requests"]
 autodoc_member_order = "bysource"
@@ -36,7 +36,7 @@ smartquotes = False
 napoleon_use_param = True
 typehints_use_signature = True
 typehints_use_signature_return = True
-
+typehints_defaults = "comma"
 
 json_url = f"{DOCS_URL}/_static/switcher.json"
 
