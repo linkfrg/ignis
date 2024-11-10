@@ -440,7 +440,7 @@ class DBusProxy(IgnisGObject):
             signal_name: The signal name to subscribe.
             callback: A function to call when signal is emitted.
         Returns:
-            ``int``: a subscription ID that can be used with :func:`~ignis.dbus.DBusProxy.signal_unsubscribe`
+            A subscription ID that can be used with :func:`~ignis.dbus.DBusProxy.signal_unsubscribe`
         """
         return self.connection.signal_subscribe(
             self.name,

@@ -301,7 +301,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
             window_name: The window's namespace.
 
         Returns:
-            ``Gtk.Window``: The window object.
+            The window object.
 
         Raises:
             WindowNotFoundError: If a window with the given namespace does not exist.
