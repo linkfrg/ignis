@@ -141,7 +141,7 @@ class NotificationService(BaseService):
 
     @popup_timeout.setter
     def popup_timeout(self, value: int) -> None:
-        self._popup_timeout_opt = value
+        self._popup_timeout_opt.value = value
 
     @GObject.Property
     def max_popups_count(self) -> int:
