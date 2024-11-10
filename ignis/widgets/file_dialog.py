@@ -1,7 +1,6 @@
-from __future__ import annotations
 import os
 from gi.repository import Gtk, GObject, Gio, GLib  # type: ignore
-from typing import Callable
+from typing import Callable, Union
 from ignis.widgets.file_filter import FileFilter
 from ignis.gobject import IgnisGObject
 
@@ -36,7 +35,7 @@ class FileDialog(Gtk.FileDialog, IgnisGObject):
 
     def __init__(self, **kwargs):
         Gtk.FileDialog.__init__(self)
-        self._file: Gio.File | None = None
+        self._file: Union[Gio.File, None] = None
         self._list_store = Gio.ListStore.new(Gtk.FileFilter)
 
         self._filters: list[FileFilter] = []
@@ -85,7 +84,7 @@ class FileDialog(Gtk.FileDialog, IgnisGObject):
         """
 
     @GObject.Property
-    def file(self) -> Gio.File | None:
+    def file(self) -> Union[Gio.File, None]:
         """
         - not argument, read-only
 

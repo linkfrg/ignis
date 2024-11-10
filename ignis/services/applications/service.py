@@ -1,4 +1,3 @@
-from __future__ import annotations
 from gi.repository import GObject, Gio  # type: ignore
 from ignis.base_service import BaseService
 from .application import Application

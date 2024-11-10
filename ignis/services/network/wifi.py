@@ -1,4 +1,3 @@
-from __future__ import annotations
 from gi.repository import GObject, GLib  # type: ignore
 from ignis.gobject import IgnisGObject
 from ._imports import NM

@@ -1,6 +1,5 @@
-from __future__ import annotations
 from gi.repository import Gtk, GObject, GLib  # type: ignore
-from typing import Any, Callable
+from typing import Any, Callable, Union
 from ignis.gobject import IgnisGObject
 from ignis.exceptions import CssParsingError
 
@@ -33,7 +32,7 @@ class BaseWidget(Gtk.Widget, IgnisGObject):
         Gtk.Widget.__init__(self)
 
         self._style: str | None = None
-        self._css_provider: Gtk.CssProvider | None = None
+        self._css_provider: Union[Gtk.CssProvider, None] = None
 
         self.vexpand = vexpand
         self.hexpand = hexpand

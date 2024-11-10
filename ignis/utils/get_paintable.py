@@ -1,11 +1,11 @@
-from __future__ import annotations
 from gi.repository import Gtk, Gdk, Gio  # type: ignore
 from ignis.exceptions import DisplayNotFoundError
+from typing import Union
 
 
 def get_paintable(
     widget: Gtk.Widget, icon_name: str, size: int
-) -> Gtk.IconPaintable | None:
+) -> Union[Gtk.IconPaintable, None]:
     """
     Get a ``Gdk.Paintable`` by icon name.
 

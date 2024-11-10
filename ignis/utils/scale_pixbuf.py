@@ -1,10 +1,10 @@
-from __future__ import annotations
+from typing import Union
 from gi.repository import GdkPixbuf  # type: ignore
 
 
 def scale_pixbuf(
     pixbuf: GdkPixbuf.Pixbuf, width: int, height: int
-) -> GdkPixbuf.Pixbuf | None:
+) -> Union[GdkPixbuf.Pixbuf, None]:
     """
     Scale a ``GdkPixbuf.Pixbuf`` to the given width and height.
 

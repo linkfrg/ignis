@@ -1,4 +1,3 @@
-from __future__ import annotations
 from gi.repository import Gtk, Gio, GObject, GLib  # type: ignore
 from ignis.dbus import DBusProxy
 from ignis.app import IgnisApp
@@ -152,7 +151,7 @@ class DBusMenu(Gtk.PopoverMenu):
     def __copy__(self):
         return self.copy()
 
-    def copy(self) -> DBusMenu:
+    def copy(self) -> "DBusMenu":
         """
         Create a copy of this instance.
 

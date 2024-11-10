@@ -1,8 +1,8 @@
-from __future__ import annotations
 import os
 from ignis.base_widget import BaseWidget
 from gi.repository import Gtk, GObject, GdkPixbuf, Gdk  # type: ignore
 from ignis.utils import Utils
+from typing import Union
 
 
 class Icon(Gtk.Image, BaseWidget):
@@ -31,7 +31,7 @@ class Icon(Gtk.Image, BaseWidget):
         BaseWidget.__init__(self, **kwargs)
 
     @GObject.Property
-    def image(self) -> str | GdkPixbuf.Pixbuf:
+    def image(self) -> Union[str, GdkPixbuf.Pixbuf]:
         """
         - optional, read-write
 
@@ -40,7 +40,7 @@ class Icon(Gtk.Image, BaseWidget):
         return self._image
 
     @image.setter
-    def image(self, value: str | GdkPixbuf.Pixbuf) -> None:
+    def image(self, value: Union[str, GdkPixbuf.Pixbuf]) -> None:
         self._image = value
 
         pixbuf = None

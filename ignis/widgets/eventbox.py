@@ -1,7 +1,6 @@
-from __future__ import annotations
 from gi.repository import Gtk, GObject  # type: ignore
 from ignis.widgets.box import Box
-from typing import Callable
+from typing import Callable, Union
 
 
 class EventBox(Box):
@@ -38,12 +37,12 @@ class EventBox(Box):
         self._on_scroll_up: Callable | None = None
         self._on_scroll_down: Callable | None = None
 
-        self.__click_controller: Gtk.GestureClick | None = None
-        self.__right_click_controller: Gtk.GestureClick | None = None
-        self.__middle_click_controller: Gtk.GestureClick | None = None
+        self.__click_controller: Union[Gtk.GestureClick, None] = None
+        self.__right_click_controller: Union[Gtk.GestureClick, None] = None
+        self.__middle_click_controller: Union[Gtk.GestureClick, None] = None
 
-        self.__scroll_controller: Gtk.EventControllerScroll | None = None
-        self.__motion_controller: Gtk.EventControllerMotion | None = None
+        self.__scroll_controller: Union[Gtk.EventControllerScroll, None] = None
+        self.__motion_controller: Union[Gtk.EventControllerMotion, None] = None
 
         super().__init__(**kwargs)
 

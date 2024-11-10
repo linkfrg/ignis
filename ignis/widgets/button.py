@@ -1,7 +1,6 @@
-from __future__ import annotations
 from gi.repository import Gtk, GObject  # type: ignore
 from ignis.base_widget import BaseWidget
-from typing import Callable
+from typing import Callable, Union
 
 
 class Button(Gtk.Button, BaseWidget):
@@ -29,8 +28,8 @@ class Button(Gtk.Button, BaseWidget):
         self._on_right_click: Callable | None = None
         self._on_middle_click: Callable | None = None
 
-        self.__right_click_controller: Gtk.GestureClick | None = None
-        self.__middle_click_controller: Gtk.GestureClick | None = None
+        self.__right_click_controller: Union[Gtk.GestureClick, None] = None
+        self.__middle_click_controller: Union[Gtk.GestureClick, None] = None
 
         BaseWidget.__init__(self, **kwargs)
         self.connect("clicked", lambda x: self.on_click(x) if self.on_click else None)
