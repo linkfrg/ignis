@@ -11,12 +11,22 @@ REPO_URL = "https://github.com/linkfrg/ignis"
 DOCS_URL = "https://linkfrg.github.io/ignis/latest"
 
 extensions = [
+    "sphinx.ext.intersphinx",
     "sphinx.ext.autodoc",
     "sphinx.ext.napoleon",
     "sphinx_design",
     "sphinx_copybutton",
     "sphinx_autodoc_typehints",
 ]
+
+intersphinx_mapping = {
+    "python": ("https://docs.python.org/3", None),
+    "gtk": ("https://lazka.github.io/pgi-docs/Gtk-4.0", None),
+    "gio": ("https://lazka.github.io/pgi-docs/Gio-2.0", None),
+    "glib": ("https://lazka.github.io/pgi-docs/GLib-2.0", None),
+    "gdkpixbuf": ("https://lazka.github.io/pgi-docs/GdkPixbuf-2.0", None),
+    "NM": ("https://lazka.github.io/pgi-docs/NM-1.0", None),
+}
 
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
@@ -109,5 +119,3 @@ def copy_and_replace_gobject_property(source_dir: str, target_dir: str):
 
 
 copy_and_replace_gobject_property("../ignis", "tmp/ignis")
-
-API_REFERENCE_DIR = "api"
