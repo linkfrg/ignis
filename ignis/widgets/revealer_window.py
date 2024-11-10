@@ -7,7 +7,8 @@ from typing import Any
 
 class RevealerWindow(Window):
     """
-    Bases: :class:`~ignis.widgets.Widget.Window`.
+    Bases: :class:`~ignis.widgets.Widget.Window`
+
     A window with animation.
 
     .. warning::

@@ -112,13 +112,13 @@ Widgets
 ~~~~~~~~~~~~~~~~
 
 - Use the same patterns as described above for general classes.
-- Specify the base widget and a link to its page in the `PyGObject API Reference <https://lazka.github.io/pgi-docs>`_.
+- Specify the base widget using the ``:class:`` directive.
 
 .. code-block:: python
 
     class SomeWidget:
         """
-        Bases: `Gtk.WIDGET_NAME <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/WIDGET_NAME.html>`_.
+        Bases: :class:`Gtk.WIDGET_NAME`
 
         The description of the widget.
 

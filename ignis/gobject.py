@@ -48,7 +48,7 @@ class Binding(GObject.Object):
 
 class IgnisGObject(GObject.Object):
     """
-    Bases: `GObject.Object <https://lazka.github.io/pgi-docs/index.html#GObject-2.0/classes/Object.html>`_.
+    Bases: :class:`GObject.Object`
 
     A base class for all services and widgets (and some utils).
     Mainly, it is the same GObject.Object, but with some improvements.

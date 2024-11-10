@@ -5,7 +5,7 @@ from typing import Callable
 
 class SpinButton(Gtk.SpinButton, BaseWidget):  # type: ignore
     """
-    Bases: `Gtk.SpinButton <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/SpinButton.html>`_.
+    Bases: :class:`Gtk.SpinButton`
 
     A widget that allows the user to increment or decrement the displayed value within a specified range.
 

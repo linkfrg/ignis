@@ -7,7 +7,7 @@ from typing import Union
 
 class Icon(Gtk.Image, BaseWidget):
     """
-    Bases: `Gtk.Image <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Image.html>`_.
+    Bases: :class:`Gtk.Image`
 
     A widget that displays images or icons in a 1:1 ratio.
 

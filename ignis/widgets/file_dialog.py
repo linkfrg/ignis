@@ -7,7 +7,7 @@ from ignis.gobject import IgnisGObject
 
 class FileDialog(Gtk.FileDialog, IgnisGObject):
     """
-    Bases: `Gtk.FileDialog <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/FileDialog.html>`_.
+    Bases: :class:`Gtk.FileDialog`
 
     .. danger::
         This is not a regular widget.

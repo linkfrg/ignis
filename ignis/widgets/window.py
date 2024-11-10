@@ -39,7 +39,7 @@ EXCLUSIVITY = {
 
 class Window(Gtk.Window, BaseWidget):
     """
-    Bases: `Gtk.Window <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Window.html>`_.
+    Bases: :class:`Gtk.Window`
 
     The top-level widget that contains everything.
 

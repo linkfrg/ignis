@@ -42,7 +42,7 @@ class Application(IgnisGObject):
         """
         - read-only
 
-        An instance of `Gio.DesktopAppInfo <https://lazka.github.io/pgi-docs/index.html#Gio-2.0/classes/DesktopAppInfo.html>`_.
+        An instance of :class:`Gio.DesktopAppInfo`.
         """
         return self._app
 

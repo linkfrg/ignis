@@ -5,7 +5,7 @@ from ignis.widgets.listboxrow import ListBoxRow
 
 class ListBox(Gtk.ListBox, BaseWidget):
     """
-    Bases: `Gtk.ListBox <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/ListBox.html>`_.
+    Bases: :class:`Gtk.ListBox`
 
     A vertical list that allows selecting rows. Well suited, for example, for a navigation bar.
 

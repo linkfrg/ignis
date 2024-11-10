@@ -4,7 +4,7 @@ from ignis.base_widget import BaseWidget
 
 class Grid(Gtk.Grid, BaseWidget):
     """
-    Bases: `Gtk.Grid <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Grid.html>`_.
+    Bases: :class:`Gtk.Grid`
 
     A container that arranges its child widgets in rows and columns.
 

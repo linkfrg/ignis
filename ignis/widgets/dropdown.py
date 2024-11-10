@@ -5,7 +5,7 @@ from typing import Callable
 
 class DropDown(Gtk.DropDown, BaseWidget):
     """
-    Bases: `Gtk.DropDown <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/DropDown.html>`_.
+    Bases: :class:`Gtk.DropDown`
 
     A widget that allows the user to choose an item from a list of options.
 

@@ -5,7 +5,7 @@ from typing import Callable
 
 class Scale(Gtk.Scale, BaseWidget):
     """
-    Bases: `Gtk.Scale <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Scale.html>`_.
+    Bases: :class:`Gtk.Scale`
 
     A slider widget.
 

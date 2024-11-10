@@ -80,7 +80,7 @@ class DBusService(IgnisGObject):
         """
         - required, read-only
 
-        An instance of `Gio.DBusInterfaceInfo <https://lazka.github.io/pgi-docs/Gio-2.0/classes/DBusInterfaceInfo.html>`_.
+        An instance of :class:`Gio.DBusInterfaceInfo`
 
         You can get it from XML using :func:`~ignis.utils.Utils.load_interface_xml`.
         """
@@ -117,7 +117,7 @@ class DBusService(IgnisGObject):
         """
         - not argument, read-only
 
-        The instance of `Gio.DBusConnection <https://lazka.github.io/pgi-docs/Gio-2.0/classes/DBusConnection.html>`_ for this service.
+        The instance of :class:`Gio.DBusConnection` for this service.
         """
         return self._connection
 
@@ -197,9 +197,9 @@ class DBusService(IgnisGObject):
             method: A function to call when the method is invoked (from D-Bus).
 
         DBus methods:
-            - Must accept `Gio.DBusMethodInvocation <https://lazka.github.io/pgi-docs/index.html#Gio-2.0/classes/DBusMethodInvocation.html>`_ as the first argument.
+            - Must accept :class:`Gio.DBusMethodInvocation` as the first argument.
             - Must accept all other arguments typical for this method (specified by interface info).
-            - Must return `GLib.Variant <https://lazka.github.io/pgi-docs/index.html#GLib-2.0/classes/Variant.html>`_ or ``None``, as specified by interface info.
+            - Must return :class:`GLib.Variant` or ``None``, as specified by interface info.
         """
         self._methods[name] = method
 
@@ -212,7 +212,7 @@ class DBusService(IgnisGObject):
             method: A function to call when the property is accessed (from DBus).
 
         DBus properties:
-            - Must return `GLib.Variant <https://lazka.github.io/pgi-docs/index.html#GLib-2.0/classes/Variant.html>`_, as specified by interface info.
+            - Must return :class:`GLib.Variant`, as specified by interface info.
         """
         self._properties[name] = method
 
@@ -224,7 +224,7 @@ class DBusService(IgnisGObject):
 
         Args:
             signal_name: The name of the signal to emit.
-            parameters: The `GLib.Variant <https://lazka.github.io/pgi-docs/index.html#GLib-2.0/classes/Variant.html>`_ containing paramaters to pass with the signal.
+            parameters: The :class:`GLib.Variant` containing paramaters to pass with the signal.
         """
 
         self._connection.emit_signal(
@@ -245,7 +245,7 @@ class DBusService(IgnisGObject):
 class DBusProxy(IgnisGObject):
     """
     A class to interact with D-Bus services (create a D-Bus proxy).
-    Unlike `Gio.DBusProxy <https://lazka.github.io/pgi-docs/index.html#Gio-2.0/classes/DBusProxy.html>`_,
+    Unlike :class:`Gio.DBusProxy>`,
     this class also provides convenient pythonic property access.
 
     To call a D-Bus method, use the standart pythonic way.
@@ -344,7 +344,7 @@ class DBusProxy(IgnisGObject):
         """
         - required, read-only
 
-        A `Gio.DBusInterfaceInfo <https://lazka.github.io/pgi-docs/Gio-2.0/classes/DBusInterfaceInfo.html>`_ instance.
+        A :class:`Gio.DBusInterfaceInfo` instance.
 
         You can get it from XML using :class:`~ignis.utils.Utils.load_interface_xml`.
         """
@@ -366,7 +366,7 @@ class DBusProxy(IgnisGObject):
         """
         - not argument, read-only
 
-        The `Gio.DBusProxy <https://lazka.github.io/pgi-docs/index.html#Gio-2.0/classes/DBusProxy.html>`_ instance.
+        The :class:`Gio.DBusProxy` instance.
         """
         return self._proxy
 
@@ -375,7 +375,7 @@ class DBusProxy(IgnisGObject):
         """
         - not argument, read-only
 
-        The instance of `Gio.DBusConnection <https://lazka.github.io/pgi-docs/Gio-2.0/classes/DBusConnection.html>`_ for this proxy.
+        The instance of :class:`Gio.DBusConnection` for this proxy.
         """
         return self._proxy.get_connection()
 

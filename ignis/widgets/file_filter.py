@@ -4,7 +4,7 @@ from ignis.gobject import IgnisGObject
 
 class FileFilter(Gtk.FileFilter, IgnisGObject):
     """
-    Bases: `Gtk.FileFilter <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/FileFilter.html>`_.
+    Bases: :class:`Gtk.FileFilter`
 
     .. note::
         This is not a regular widget.

@@ -5,7 +5,7 @@ from typing import Callable
 
 class ToggleButton(Gtk.ToggleButton, BaseWidget):
     """
-    Bases: `Gtk.ToggleButton <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/ToggleButton.html>`_.
+    Bases: :class:`Gtk.ToggleButton`
 
     A toggle button widget.
 

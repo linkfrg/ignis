@@ -5,7 +5,7 @@ from typing import Callable
 
 class CheckButton(Gtk.CheckButton, BaseWidget):
     """
-    Bases: `Gtk.CheckButton <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/CheckButton.html>`_.
+    Bases: :class:`Gtk.CheckButton`
 
     A check button. If ``group`` is set, the check button behaves as a radio button.
 

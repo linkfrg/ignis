@@ -7,7 +7,7 @@ from typing import Union
 
 class Picture(Gtk.Picture, BaseWidget):
     """
-    Bases: `Gtk.Picture <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Picture.html>`_.
+    Bases: :class:`Gtk.Picture`
 
     A widget that displays an image at its native aspect ratio.
 
@@ -20,7 +20,7 @@ class Picture(Gtk.Picture, BaseWidget):
         - cover: Cover the entire allocation, while taking the content aspect ratio in consideration.
         - scale_down: The content is scaled down to fit the allocation, if needed, otherwise its original size is used.
 
-        For more info, see `Gtk.ContentFit <https://lazka.github.io/pgi-docs/Gtk-4.0/enums.html#Gtk.ContentFit>`_
+        For more info, see :class:`Gtk.ContentFit`.
 
     .. code-block:: python
 

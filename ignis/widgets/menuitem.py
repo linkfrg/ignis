@@ -8,7 +8,7 @@ app = IgnisApp.get_default()
 
 class MenuItem(IgnisGObject):
     """
-    Bases: :class:``ignis.gobject.IgnisGObject``.
+    Bases: :class:`~ignis.gobject.IgnisGObject`
 
     .. danger::
         This is not a regular widget.

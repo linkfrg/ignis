@@ -4,7 +4,7 @@ from ignis.base_widget import BaseWidget
 
 class Overlay(Gtk.Overlay, BaseWidget):
     """
-    Bases: `Gtk.Overlay <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Overlay.html>`_.
+    Bases: :class:`Gtk.Overlay`
 
     A container that places its children on top of each other.
     The ``child`` property is the main child, on which other widgets defined in ``overlays`` will be placed on top.

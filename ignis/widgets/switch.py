@@ -5,7 +5,7 @@ from typing import Any, Callable
 
 class Switch(Gtk.Switch, BaseWidget):
     """
-    Bases: `Gtk.Switch <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Switch.html>`_.
+    Bases: :class:`Gtk.Switch`
 
     A switch widget.
 

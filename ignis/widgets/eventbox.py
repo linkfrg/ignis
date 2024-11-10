@@ -5,7 +5,7 @@ from typing import Callable, Union
 
 class EventBox(Box):
     """
-    Bases: :class:`~ignis.widgets.box.Box`.
+    Bases: :class:`~ignis.widgets.box.Box`
 
     The same :class:`~ignis.widgets.box.Box`, but it can receive events.
 

@@ -4,7 +4,7 @@ from ignis.base_widget import BaseWidget
 
 class Separator(Gtk.Separator, BaseWidget):
     """
-    Bases: `Gtk.Separator <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Separator.html>`_.
+    Bases: :class:`Gtk.Separator`
 
     A separator widget.
 

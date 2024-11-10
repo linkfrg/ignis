@@ -4,7 +4,7 @@ from ignis.base_widget import BaseWidget
 
 class Label(Gtk.Label, BaseWidget):
     """
-    Bases: `Gtk.Label <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Label.html>`_.
+    Bases: :class:`Gtk.Label`
 
     A widget that displays a small amount of text.
 

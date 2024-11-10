@@ -5,7 +5,7 @@ from ignis.widgets.arrow import Arrow
 
 class ArrowButton(Button):
     """
-    Bases: :class:`~ignis.widgets.button.Button`.
+    Bases: :class:`~ignis.widgets.button.Button`
 
     A simple button with an arrow. On click, it will toggle (rotate) the arrow.
 

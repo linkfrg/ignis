@@ -4,7 +4,7 @@ from ignis.base_widget import BaseWidget
 
 class HeaderBar(Gtk.HeaderBar, BaseWidget):
     """
-    Bases: `Gtk.HeaderBar <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/HeaderBar.html>`_.
+    Bases: :class:`Gtk.HeaderBar`
 
     A custom title bar with decorations like a close button and title.
 

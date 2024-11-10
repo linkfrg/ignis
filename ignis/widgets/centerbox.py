@@ -4,7 +4,7 @@ from ignis.base_widget import BaseWidget
 
 class CenterBox(Gtk.CenterBox, BaseWidget):
     """
-    Bases: `Gtk.CenterBox <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/CenterBox.html>`_.
+    Bases: :class:`Gtk.CenterBox`
 
     A box widget that contains three widgets, which are placed at the start, center, and end of the container.
 

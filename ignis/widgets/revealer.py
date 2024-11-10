@@ -4,7 +4,7 @@ from ignis.base_widget import BaseWidget
 
 class Revealer(Gtk.Revealer, BaseWidget):
     """
-    Bases: `Gtk.Revealer <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Revealer.html>`_.
+    Bases: :class:`Gtk.Revealer`
 
     A container that animates the transition of its child from invisible to visible.
 

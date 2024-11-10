@@ -5,7 +5,7 @@ from typing import Callable
 
 class ListBoxRow(Gtk.ListBoxRow, BaseWidget):
     """
-    Bases: `Gtk.ListBoxRow <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/ListBoxRow.html>`_.
+    Bases: :class:`Gtk.ListBoxRow`
 
     A row for :class:`~ignis.widgets.listbox.ListBox`.
 

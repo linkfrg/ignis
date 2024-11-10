@@ -4,7 +4,7 @@ from ignis.base_widget import BaseWidget
 
 class Box(Gtk.Box, BaseWidget):
     """
-    Bases: `Gtk.Box <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Box.html>`_.
+    Bases: :class:`Gtk.Box`.
 
     The main layout widget.
 

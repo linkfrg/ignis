@@ -130,7 +130,7 @@ class FileMonitor(IgnisGObject):
         - watch_hard_links
         - watch_moves
 
-        See `Gio.FileMonitorFlags <https://lazka.github.io/pgi-docs/Gio-2.0/flags.html#Gio.FileMonitorFlags>`_ for more info.
+        See :class:`Gio.FileMonitorFlags` for more info.
 
         Default: ``None``.
         """
@@ -162,7 +162,7 @@ class FileMonitor(IgnisGObject):
         - renamed
         - moved_in
 
-        See `Gio.FileMonitorEvent <https://lazka.github.io/pgi-docs/index.html#Gio-2.0/enums.html#Gio.FileMonitorEvent>`_ for more info.
+        See :class:`Gio.FileMonitorEvent` for more info.
 
         """
         return self._callback

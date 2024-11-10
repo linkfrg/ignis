@@ -10,7 +10,7 @@ from ignis.utils import Utils
 
 class FileChooserButton(Gtk.Button, BaseWidget):
     """
-    Bases: `Gtk.Button <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Button.html>`_.
+    Bases: :class:`Gtk.Button`
 
     A button that allows the user to select a file.
 

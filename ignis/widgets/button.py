@@ -5,7 +5,7 @@ from typing import Callable, Union
 
 class Button(Gtk.Button, BaseWidget):
     """
-    Bases: `Gtk.Button <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Button.html>`_.
+    Bases: :class:`Gtk.Button`
 
     A button.
 

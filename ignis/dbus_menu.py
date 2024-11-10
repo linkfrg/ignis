@@ -42,7 +42,7 @@ class MenuItem(GObject.Object):
 
 class DBusMenu(Gtk.PopoverMenu):
     """
-    Bases: `Gtk.PopoverMenu <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/PopoverMenu.html>`_.
+    Bases: :class:`Gtk.PopoverMenu`
 
     Like DbusmenuGtk3, but for GTK4.
 

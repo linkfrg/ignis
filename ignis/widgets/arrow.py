@@ -12,7 +12,7 @@ DIRECTION = {
 
 class Arrow(Icon):
     """
-    Bases: :class:`~ignis.widgets.icon.Icon`.
+    Bases: :class:`~ignis.widgets.icon.Icon`
 
     An arrow icon that can rotate (with animation!).
     Useful for dropdown lists.
