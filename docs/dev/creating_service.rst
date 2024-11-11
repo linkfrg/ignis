@@ -1,10 +1,10 @@
-Creating Service
+Creating a Service
 ====================
 
-Standart Service Structure
+Standard Service Structure
 ---------------------------
 
-There is standart service directory structure.
+There is the standard service directory structure.
 
 .. code-block:: bash
 
