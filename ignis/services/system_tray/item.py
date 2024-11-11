@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Union, Literal
 from ignis.utils import Utils
 from ignis.dbus import DBusProxy
 from gi.repository import GLib, GObject, GdkPixbuf  # type: ignore
@@ -214,4 +214,51 @@ class SystemTrayItem(IgnisGObject):
             pixmap[0],
             pixmap[1],
             pixmap[0] * 4,
+        )
+
+    def activate(self, x: int = 0, y: int = 0) -> None:
+        """
+        Activate the application.
+        Usually this causes an application window to appear.
+
+        Args:
+            x: x coordinate.
+            y: y coordinate.
+        """
+        self.__dbus.Activate("(ii)", x, y, result_handler=lambda *args: None)
+
+    def secondary_activate(self, x: int = 0, y: int = 0) -> None:
+        """
+        Activate a secondary and less important action compared to :func:`activate`.
+
+        Args:
+            x: x coordinate.
+            y: y coordinate.
+        """
+        self.__dbus.SecondaryActivate("(ii)", x, y, result_handler=lambda *args: None)
+
+    def context_menu(self, x: int = 0, y: int = 0) -> None:
+        """
+        Ask the item to show a context menu.
+
+        Args:
+            x: x coordinate.
+            y: y coordinate.
+        """
+        self.__dbus.ContextMenu("(ii)", x, y, result_handler=lambda *args: None)
+
+    def scroll(
+        self,
+        delta: int = 0,
+        orientation: Literal["horizontal", "vertical"] = "horizontal",
+    ) -> None:
+        """
+        Ask for a scroll action.
+
+        Args:
+            delta: The amount of scroll.
+            orientation: The type of the orientation: horizontal or vertical.
+        """
+        self.__dbus.Scroll(
+            "(is)", delta, orientation, result_handler=lambda *args: None
         )
