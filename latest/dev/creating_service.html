@@ -429,6 +429,48 @@
                   
   <section id="creating-service">
 <h1>Creating Service<a class="headerlink" href="#creating-service" title="Link to this heading">#</a></h1>
+<section id="standart-service-structure">
+<h2>Standart Service Structure<a class="headerlink" href="#standart-service-structure" title="Link to this heading">#</a></h2>
+<p>There is standart service directory structure.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>SERVICE_NAME/
+├──<span class="w"> </span>_imports.py
+├──<span class="w"> </span>service.py
+├──<span class="w"> </span>constants.py
+├──<span class="w"> </span>util.py
+├──<span class="w"> </span>related_class.py
+└──<span class="w"> </span>related_class2.py
+</pre></div>
+</div>
+</section>
+<section id="imports-py">
+<h2><code class="docutils literal notranslate"><span class="pre">_imports.py</span></code><a class="headerlink" href="#imports-py" title="Link to this heading">#</a></h2>
+<p>If the service requires additional imports from <code class="docutils literal notranslate"><span class="pre">gi.repository</span></code>,
+which, in turn, requires installing dependencies by an user, define them here.</p>
+<p>It should look like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gi</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">ignis.exceptions</span> <span class="kn">import</span> <span class="n">GvcNotFoundError</span>
+
+<span class="c1"># Gvc is here just for example.</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">if</span> <span class="s2">&quot;sphinx&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>  <span class="c1"># prevent possible errors while building docs</span>
+        <span class="n">gi</span><span class="o">.</span><span class="n">require_version</span><span class="p">(</span><span class="s2">&quot;Gvc&quot;</span><span class="p">,</span> <span class="s2">&quot;1.0&quot;</span><span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">gi.repository</span> <span class="kn">import</span> <span class="n">Gvc</span>  <span class="c1"># type: ignore</span>
+<span class="k">except</span> <span class="p">(</span><span class="ne">ImportError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="n">GvcNotFoundError</span><span class="p">()</span> <span class="kn">from</span> <span class="kc">None</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Gvc&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>And then, import them ONLY from this file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">._imports</span> <span class="kn">import</span> <span class="n">Gvc</span>
+<span class="c1"># ... rest of code</span>
+</pre></div>
+</div>
+</section>
+<section id="service-py">
+<h2><code class="docutils literal notranslate"><span class="pre">service.py</span></code><a class="headerlink" href="#service-py" title="Link to this heading">#</a></h2>
+<p>Place the service class itself in this file.</p>
 <p>All services should inherit from the <a class="reference internal" href="../api/base_service.html#ignis.base_service.BaseService" title="ignis.base_service.BaseService"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseService</span></code></a> class.</p>
 <p>Here is simple template for service.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.base_service</span> <span class="kn">import</span> <span class="n">BaseService</span>
@@ -439,11 +481,41 @@
         <span class="c1"># do other stuff here</span>
 </pre></div>
 </div>
+</section>
+<section id="constants-py">
+<h2><code class="docutils literal notranslate"><span class="pre">constants.py</span></code><a class="headerlink" href="#constants-py" title="Link to this heading">#</a></h2>
+<p>Define here constants for the service (if they are).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">SOME_CONSTANT</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">ANOTHER_CONSTANT</span> <span class="o">=</span> <span class="s2">&quot;30&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="util-py">
+<h2><code class="docutils literal notranslate"><span class="pre">util.py</span></code><a class="headerlink" href="#util-py" title="Link to this heading">#</a></h2>
+<p>If the service have additional non-class functions/utilities, define them here.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">useful_func</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="c1"># ... do something</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</pre></div>
+</div>
+</section>
+<section id="related-class-py-and-others">
+<h2><code class="docutils literal notranslate"><span class="pre">related_class.py</span></code> and others<a class="headerlink" href="#related-class-py-and-others" title="Link to this heading">#</a></h2>
+<p>If the service manages other objects, define them in the appropriate files.</p>
+<p>For example, <code class="docutils literal notranslate"><span class="pre">AudioService</span></code> manages <code class="docutils literal notranslate"><span class="pre">Stream</span></code> class, so we create separate file for it:</p>
+<p><code class="docutils literal notranslate"><span class="pre">stream.py</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Stream</span><span class="p">(</span><span class="o">...</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+</section>
 <section id="creating-d-bus-service">
 <h2>Creating D-Bus Service<a class="headerlink" href="#creating-d-bus-service" title="Link to this heading">#</a></h2>
-<p>We will use <a class="reference internal" href="../api/dbus.html#ignis.dbus.DBusService" title="ignis.dbus.DBusService"><code class="xref py py-class docutils literal notranslate"><span class="pre">DBusService</span></code></a> in this template.
-- Use <code class="docutils literal notranslate"><span class="pre">PascalCase</span></code> for D-Bus methods and properties naming.
-- Also make D-Bus methods/properties private (add <code class="docutils literal notranslate"><span class="pre">__</span></code> before name).</p>
+<p>We will use <a class="reference internal" href="../api/dbus.html#ignis.dbus.DBusService" title="ignis.dbus.DBusService"><code class="xref py py-class docutils literal notranslate"><span class="pre">DBusService</span></code></a> in this template.</p>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">PascalCase</span></code> for D-Bus methods and properties naming.</p></li>
+<li><p>Also make D-Bus methods/properties private (add <code class="docutils literal notranslate"><span class="pre">__</span></code> before name).</p></li>
+</ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gi.repository</span> <span class="kn">import</span> <span class="n">Gio</span><span class="p">,</span> <span class="n">GLib</span>
 <span class="kn">from</span> <span class="nn">ignis.base_service</span> <span class="kn">import</span> <span class="n">BaseService</span>
 <span class="kn">from</span> <span class="nn">ignis.dbus</span> <span class="kn">import</span> <span class="n">DBusService</span>
@@ -513,6 +585,12 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#standart-service-structure">Standart Service Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imports-py"><code class="docutils literal notranslate"><span class="pre">_imports.py</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#service-py"><code class="docutils literal notranslate"><span class="pre">service.py</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constants-py"><code class="docutils literal notranslate"><span class="pre">constants.py</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#util-py"><code class="docutils literal notranslate"><span class="pre">util.py</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#related-class-py-and-others"><code class="docutils literal notranslate"><span class="pre">related_class.py</span></code> and others</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-d-bus-service">Creating D-Bus Service</a></li>
 </ul>
   </nav></div>
