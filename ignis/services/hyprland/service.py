@@ -13,17 +13,11 @@ class HyprlandService(BaseService):
     """
     Hyprland IPC client.
 
-    Properties:
-        - **workspaces** (``list[dict[str, Any]]``, read-only): A list of workspaces.
-        - **active_workspace** (``Dict[str, Any]``, read-only): The currently active workspace.
-        - **kb_layout** (``str``, read-only): The currenly active keyboard layout.
-        - **active_window** (``Dict[str, Any]``, read-only): The currenly focused window.
-
     Raises:
         HyprlandIPCNotFoundError: If Hyprland IPC is not found.
 
     .. note::
-        The contents of "dictionary" (``Dict``) properties are not described here.
+        The contents of ``dict`` properties are not described here.
         To find out their contents just print them into the terminal.
 
         >>> print(hyprland.workspaces)
@@ -76,7 +70,7 @@ class HyprlandService(BaseService):
             "focusHistoryID": 0,
         }
 
-    **Example usage:**
+    Example usage:
 
     .. code-block:: python
 
@@ -108,18 +102,38 @@ class HyprlandService(BaseService):
 
     @GObject.Property
     def workspaces(self) -> list[dict[str, Any]]:
+        """
+        - read-only
+
+        A list of workspaces.
+        """
         return self._workspaces
 
     @GObject.Property
     def active_workspace(self) -> dict[str, Any]:
+        """
+        - read-only
+
+        The currently active workspace.
+        """
         return self._active_workspace
 
     @GObject.Property
     def kb_layout(self) -> str:
+        """
+        - read-only
+
+        The currenly active keyboard layout.
+        """
         return self._kb_layout
 
     @GObject.Property
     def active_window(self) -> dict[str, Any]:
+        """
+        - read-only
+
+        The currenly focused window.
+        """
         return self._active_window
 
     @Utils.run_in_thread
@@ -162,12 +176,12 @@ class HyprlandService(BaseService):
 
     def send_command(self, cmd: str) -> str:
         """
-        Send command to Hyprland IPC.
-        Supported the same commands as in hyprctl.
-        If you want to get response as JSON use this syntax: ``j/COMMAND``.
+        Send a command to the Hyprland IPC.
+        Supports the same commands as ``hyprctl``.
+        If you want to receive the response in JSON format, use this syntax: ``j/COMMAND``.
 
         Args:
-            cmd (``str``): A command.
+            cmd: The command to send.
 
         Returns:
             Response from Hyprland IPC.
@@ -178,7 +192,7 @@ class HyprlandService(BaseService):
 
     def switch_kb_layout(self) -> None:
         """
-        Just switch to next keyboard layout.
+        Switch to the next keyboard layout.
         """
         for kb in json.loads(self.send_command("j/devices"))["keyboards"]:
             if kb["main"]:
@@ -186,9 +200,9 @@ class HyprlandService(BaseService):
 
     def switch_to_workspace(self, workspace_id: int) -> None:
         """
-        Switch to workspace by ID.
+        Switch to a workspace by its ID.
 
         Args:
-            workspace_id (``int``): ID of workspace to be switched to
+            workspace_id: The ID of the workspace to switch to.
         """
         self.send_command(f"dispatch workspace {workspace_id}")

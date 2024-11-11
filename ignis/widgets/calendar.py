@@ -4,7 +4,7 @@ from ignis.base_widget import BaseWidget
 
 class Calendar(Gtk.Calendar, BaseWidget):
     """
-    Bases: `Gtk.Calendar <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Calendar.html>`_.
+    Bases: :class:`Gtk.Calendar`
 
     A calendar.
 

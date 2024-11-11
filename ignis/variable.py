@@ -9,9 +9,6 @@ class Variable(IgnisGObject):
 
     Simple class that holds a value.
 
-    Properties
-        - **value** (``Any``, read-write, optional): A value.
-
     Example usage:
 
     .. code-block:: python
@@ -30,6 +27,11 @@ class Variable(IgnisGObject):
 
     @GObject.Property
     def value(self) -> Any:
+        """
+        - optional, read-write
+
+        A value.
+        """
         return self._value
 
     @value.setter

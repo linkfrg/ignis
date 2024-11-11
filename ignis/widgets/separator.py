@@ -4,12 +4,9 @@ from ignis.base_widget import BaseWidget
 
 class Separator(Gtk.Separator, BaseWidget):
     """
-    Bases: `Gtk.Separator <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Separator.html>`_.
+    Bases: :class:`Gtk.Separator`
 
     A separator widget.
-
-    Properties:
-        - **vertical** (``bool``, optional, read-write): Whether the separator is vertical.
 
     .. code-block:: python
 
@@ -27,6 +24,11 @@ class Separator(Gtk.Separator, BaseWidget):
 
     @GObject.Property
     def vertical(self) -> bool:
+        """
+        - optional, read-write
+
+        Whether the separator is vertical.
+        """
         return self.get_orientation() == Gtk.Orientation.VERTICAL
 
     @vertical.setter

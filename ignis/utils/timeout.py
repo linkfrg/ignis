@@ -5,13 +5,9 @@ from typing import Callable
 
 class Timeout(IgnisGObject):
     """
-    Call a function after a specified interval of time.
+    Calls a function after a specified time interval.
 
-    Properties:
-        - **ms** (``int``, required, read-only): Time in milliseconds.
-        - **target** (``Callable``, required, read-only): Function to call.
-
-    **Example usage:**
+    Example usage:
 
     .. code-block:: python
 
@@ -29,10 +25,20 @@ class Timeout(IgnisGObject):
 
     @GObject.Property
     def ms(self) -> int:
+        """
+        - required, read-only
+
+        Time in milliseconds.
+        """
         return self._ms
 
     @GObject.Property
     def target(self) -> Callable:
+        """
+        - required, read-only
+
+        The function to call.
+        """
         return self._target
 
     def cancel(self) -> None:

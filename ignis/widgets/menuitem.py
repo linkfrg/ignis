@@ -1,15 +1,14 @@
-from __future__ import annotations
 from gi.repository import GObject, Gio, Gtk  # type: ignore
 from ignis.gobject import IgnisGObject
 from ignis.app import IgnisApp
-from typing import Callable
+from typing import Callable, Union
 
 app = IgnisApp.get_default()
 
 
 class MenuItem(IgnisGObject):
     """
-    Bases: :class:``ignis.gobject.IgnisGObject``.
+    Bases: :class:`~ignis.gobject.IgnisGObject`
 
     .. danger::
         This is not a regular widget.
@@ -17,12 +16,6 @@ class MenuItem(IgnisGObject):
 
     A class that represent a menu item.
     Intended for use in :class:`~ignis.widgets.Widget.PopoverMenu`.
-
-    Properties:
-        - **label** (``str``, required, read-only): The label of item.
-        - **enabled** (``bool``, optional, read-only): Whether the item is enabled. If ``False``, the item cannot be selected.
-        - **on_activate** (``Callable``, optional, read-write): Function to call when the user clicks on the item.
-        - **submenu** (:class:`~ignis.widgets.Widget.PopoverMenu`, optional, read-only): The :class:`~ignis.widgets.Widget.PopoverMenu` that will appear when activated.
 
     .. code-block :: python
 
@@ -41,7 +34,7 @@ class MenuItem(IgnisGObject):
         label: str,
         enabled: bool = True,
         on_activate: Callable | None = None,
-        submenu: Gtk.PopoverMenu | None = None,
+        submenu: Union[Gtk.PopoverMenu, None] = None,
     ):
         super().__init__()
         self._label = label
@@ -58,18 +51,38 @@ class MenuItem(IgnisGObject):
 
     @GObject.Property
     def label(self) -> str:
+        """
+        - required, read-only
+
+        The label of item.
+        """
         return self._label
 
     @GObject.Property
     def uniq_name(self) -> str:
+        """
+        - not argument, read-only
+
+        The unique name of the ``Gio.Action``.
+        """
         return self._uniq_name
 
     @GObject.Property
     def enabled(self) -> bool:
+        """
+        - optional, read-write
+
+        Whether the item is enabled. If ``False``, the item cannot be selected.
+        """
         return self._enabled
 
     @GObject.Property
     def on_activate(self) -> Callable:
+        """
+        - optional, read-write
+
+        The function to call when the user clicks on the item.
+        """
         return self._on_activate
 
     @on_activate.setter
@@ -80,5 +93,10 @@ class MenuItem(IgnisGObject):
         self.on_activate(self)
 
     @GObject.Property
-    def submenu(self) -> Gtk.PopoverMenu | None:
+    def submenu(self) -> Union[Gtk.PopoverMenu, None]:
+        """
+        - optional, read-only
+
+        The :class:`~ignis.widgets.Widget.PopoverMenu` that will appear when activated.
+        """
         return self._submenu

@@ -1,23 +1,13 @@
-from __future__ import annotations
 from gi.repository import Gtk, GObject  # type: ignore
 from ignis.widgets.box import Box
-from typing import Callable
+from typing import Callable, Union
 
 
 class EventBox(Box):
     """
-    Bases: :class:`~ignis.widgets.box.Box`.
+    Bases: :class:`~ignis.widgets.box.Box`
 
     The same :class:`~ignis.widgets.box.Box`, but it can receive events.
-
-    Properties:
-        - **on_click** (``Callable``, optional, read-write): The function to call on left click.
-        - **on_right_click** (``Callable``, optional, read-write): The function to call on right click.
-        - **on_middle_click** (``Callable``, optional, read-write): The function to call on middle click.
-        - **on_hover** (``Callable``, optional, read-write): The function to call on hover.
-        - **on_hover_lost** (``Callable``, optional, read-write): The function to call on hover lost.
-        - **on_scroll_up** (``Callable``, optional, read-write): The function to call on scroll up.
-        - **on_scroll_down** (``Callable``, optional, read-write): The function to call on scroll down.
 
     .. code-block:: python
 
@@ -47,12 +37,12 @@ class EventBox(Box):
         self._on_scroll_up: Callable | None = None
         self._on_scroll_down: Callable | None = None
 
-        self.__click_controller: Gtk.GestureClick | None = None
-        self.__right_click_controller: Gtk.GestureClick | None = None
-        self.__middle_click_controller: Gtk.GestureClick | None = None
+        self.__click_controller: Union[Gtk.GestureClick, None] = None
+        self.__right_click_controller: Union[Gtk.GestureClick, None] = None
+        self.__middle_click_controller: Union[Gtk.GestureClick, None] = None
 
-        self.__scroll_controller: Gtk.EventControllerScroll | None = None
-        self.__motion_controller: Gtk.EventControllerMotion | None = None
+        self.__scroll_controller: Union[Gtk.EventControllerScroll, None] = None
+        self.__motion_controller: Union[Gtk.EventControllerMotion, None] = None
 
         super().__init__(**kwargs)
 
@@ -108,6 +98,11 @@ class EventBox(Box):
 
     @GObject.Property
     def on_click(self) -> Callable:
+        """
+        - optional, read-write
+
+        The function to call on left click.
+        """
         return self._on_click
 
     @on_click.setter
@@ -119,6 +114,11 @@ class EventBox(Box):
 
     @GObject.Property
     def on_right_click(self) -> Callable:
+        """
+        - optional, read-write
+
+        The function to call on right click.
+        """
         return self._on_right_click
 
     @on_right_click.setter
@@ -132,6 +132,11 @@ class EventBox(Box):
 
     @GObject.Property
     def on_middle_click(self) -> Callable:
+        """
+        - optional, read-write
+
+        The function to call on middle click.
+        """
         return self._on_middle_click
 
     @on_middle_click.setter
@@ -145,6 +150,11 @@ class EventBox(Box):
 
     @GObject.Property
     def on_hover(self) -> Callable:
+        """
+        - optional, read-write
+
+        The function to call on hover.
+        """
         return self._on_hover
 
     @on_hover.setter
@@ -154,6 +164,11 @@ class EventBox(Box):
 
     @GObject.Property
     def on_hover_lost(self) -> Callable:
+        """
+        - optional, read-write
+
+        The function to call on hover lost.
+        """
         return self._on_hover_lost
 
     @on_hover_lost.setter
@@ -163,6 +178,11 @@ class EventBox(Box):
 
     @GObject.Property
     def on_scroll_up(self) -> Callable:
+        """
+        - optional, read-write
+
+        The function to call on scroll up.
+        """
         return self._on_scroll_up
 
     @on_scroll_up.setter
@@ -172,6 +192,11 @@ class EventBox(Box):
 
     @GObject.Property
     def on_scroll_down(self) -> Callable:
+        """
+        - optional, read-write
+
+        The function to call on scroll down.
+        """
         return self._on_scroll_down
 
     @on_scroll_down.setter

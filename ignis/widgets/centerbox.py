@@ -4,12 +4,9 @@ from ignis.base_widget import BaseWidget
 
 class CenterBox(Gtk.CenterBox, BaseWidget):
     """
-    Bases: `Gtk.CenterBox <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/CenterBox.html>`_.
+    Bases: :class:`Gtk.CenterBox`
 
     A box widget that contains three widgets, which are placed at the start, center, and end of the container.
-
-    Properties:
-        - **vertical** (``bool``, optional, read-write): Whether the box arranges children vertically.
 
     .. code-block:: python
 
@@ -30,6 +27,13 @@ class CenterBox(Gtk.CenterBox, BaseWidget):
 
     @GObject.Property
     def vertical(self) -> bool:
+        """
+        - optional, read-write
+
+        Whether the box arranges children vertically.
+
+        Default: ``False``.
+        """
         return self.get_orientation() == Gtk.Orientation.VERTICAL
 
     @vertical.setter

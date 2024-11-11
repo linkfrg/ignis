@@ -5,12 +5,9 @@ from typing import Callable
 
 class ToggleButton(Gtk.ToggleButton, BaseWidget):
     """
-    Bases: `Gtk.ToggleButton <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/ToggleButton.html>`_.
+    Bases: :class:`Gtk.ToggleButton`
 
     A toggle button widget.
-
-    Properties:
-        - **on_toggled** (``Callable``, optional, read-write): Function to call when the button is toggled by the user.
 
     .. code-block:: python
 
@@ -34,6 +31,11 @@ class ToggleButton(Gtk.ToggleButton, BaseWidget):
 
     @GObject.Property
     def on_toggled(self) -> Callable | None:
+        """
+        - optional, read-write
+
+        The function to call when the button is toggled by the user.
+        """
         return self._on_toggled
 
     @on_toggled.setter

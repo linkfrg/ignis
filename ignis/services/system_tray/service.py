@@ -1,4 +1,3 @@
-from __future__ import annotations
 from ignis.utils import Utils
 from ignis.dbus import DBusService, DBusProxy
 from gi.repository import Gio, GLib, GObject  # type: ignore
@@ -11,16 +10,10 @@ class SystemTrayService(BaseService):
     """
     A system tray, where application icons are placed.
 
-    Signals:
-        - **"added"** (:class:`~ignis.services.system_tray.SystemTrayItem`): Emitted when a new item is added.
-
-    Properties:
-        - **items** (list[:class:`~ignis.services.system_tray.SystemTrayItem`], read-only): A list of items.
-
     Raises:
         AnotherSystemTrayRunningError: If another system tray is already running.
 
-    **Example usage:**
+    Example usage:
 
     .. code-block:: python
 
@@ -30,10 +23,6 @@ class SystemTrayService(BaseService):
 
         system_tray.connect("added", lambda x, item: print(item.title))
     """
-
-    __gsignals__ = {
-        "added": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, (GObject.Object,)),
-    }
 
     def __init__(self):
         super().__init__()
@@ -72,8 +61,24 @@ class SystemTrayService(BaseService):
         name = proxy.proxy.get_name_owner()
         raise AnotherSystemTrayRunningError(name)
 
+    @GObject.Signal(arg_types=(SystemTrayItem,))
+    def added(self, *args):
+        """
+        - Signal
+
+        Emitted when a new item is added.
+
+        Args:
+            item (:class:`~ignis.services.system_tray.SystemTrayItem`): The instance of the system tray item.
+        """
+
     @GObject.Property
     def items(self) -> list[SystemTrayItem]:
+        """
+        - read-only
+
+        A list of system tray items.
+        """
         return list(self._items.values())
 
     def __ProtocolVersion(self) -> GLib.Variant:

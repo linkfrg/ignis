@@ -12,7 +12,7 @@ DIRECTION = {
 
 class Arrow(Icon):
     """
-    Bases: :class:`~ignis.widgets.icon.Icon`.
+    Bases: :class:`~ignis.widgets.icon.Icon`
 
     An arrow icon that can rotate (with animation!).
     Useful for dropdown lists.
@@ -20,19 +20,6 @@ class Arrow(Icon):
     .. hint::
         If you are looking for a button with an arrow that rotates on click,
         see :class:`~ignis.widgets.Widget.ArrowButton`.
-
-    Properties:
-        - **rotated** (``bool``, optional, read-write): Whether the arrow is rotated. Default: ``False``.
-        - **degree** (``int``, optional, read-write): Target rotation degree. Must be > 0. Default: ``90``.
-        - **time** (``int``, optional, read-write): Rotation time in milliseconds. Default: ``135``.
-        - **direction** (``str``, optional, read-write): Direction of the arrow. Do not use this property if using custom icon name. Default: ``"right"``.
-        - **counterclockwise** (``bool``, optional, read-write): Whether to rotate counterclockwise. Default: ``False``.
-
-    **Direction:**
-        - **"right"**
-        - **"left"**
-        - **"up"**
-        - **"down"**
 
     .. hint::
         You can set your custom icon name or image using the ``image`` property.
@@ -87,6 +74,13 @@ class Arrow(Icon):
 
     @GObject.Property
     def rotated(self) -> bool:
+        """
+        - optional, read-write
+
+        Whether the arrow is rotated.
+
+        Default: ``False``.
+        """
         return self._rotated
 
     @rotated.setter
@@ -108,6 +102,14 @@ class Arrow(Icon):
 
     @GObject.Property
     def degree(self) -> int:
+        """
+        - optional, read-write
+
+        The target rotation degree.
+        Must be > 0.
+
+        Default: ``90``.
+        """
         return self._degree
 
     @degree.setter
@@ -117,6 +119,13 @@ class Arrow(Icon):
 
     @GObject.Property
     def time(self) -> int:
+        """
+        - optional, read-write
+
+        Rotation time in milliseconds.
+
+        Default: ``135``.
+        """
         return self._time
 
     @time.setter
@@ -126,6 +135,20 @@ class Arrow(Icon):
 
     @GObject.Property
     def direction(self) -> str:
+        """
+        - optional, read-write
+
+        The direction of the arrow.
+        Do not use this property if using custom icon name.
+
+        Default: ``right``.
+
+        Direction:
+            - right
+            - left
+            - up
+            - down
+        """
         return self._direction
 
     @direction.setter
@@ -135,6 +158,13 @@ class Arrow(Icon):
 
     @GObject.Property
     def counterclockwise(self) -> bool:
+        """
+        - optional, read-write
+
+        Whether to rotate counterclockwise.
+
+        Default: ``False``.
+        """
         return self._counterclockwise
 
     @counterclockwise.setter

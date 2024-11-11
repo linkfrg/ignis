@@ -5,19 +5,11 @@ from typing import Any, Callable
 
 class Poll(IgnisGObject):
     """
-    Call a callback every n milliseconds specefied by the timeout.
-
-    Properties:
-        - **timeout** (``int``, required, read-write): The timeout interval in milliseconds.
-        - **callback** (``Callable``, required, read-write): The function to call when the timeout is reached. The ``self`` will passed as an argument.
-        - **output** (``str``, not argument, read-only): The output of the callback.
+    Calls a callback every n milliseconds specified by the timeout.
 
     You can pass arguments to the constructor, and they will be passed to the callback.
 
-    .. hint::
-        You can use bind() on ``output``.
-
-    **Example usage:**
+    Example usage:
 
     .. code-block:: python
 
@@ -26,10 +18,6 @@ class Poll(IgnisGObject):
         # print "Hello" every second
         Utils.Poll(timeout=1_000, callback=lambda self: print("Hello"))
     """
-
-    __gsignals__ = {
-        "changed": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
-    }
 
     def __init__(self, timeout: int, callback: Callable, *args):
         super().__init__()
@@ -42,12 +30,21 @@ class Poll(IgnisGObject):
 
         self.__main()
 
-    @GObject.Property
-    def output(self) -> Any:
-        return self._output
+    @GObject.Signal
+    def changed(self):
+        """
+        - Signal
+
+        Emitted at each iteration.
+        """
 
     @GObject.Property
     def timeout(self) -> int:
+        """
+        - required, read-write
+
+        The timeout interval in milliseconds.
+        """
         return self._timeout
 
     @timeout.setter
@@ -56,11 +53,28 @@ class Poll(IgnisGObject):
 
     @GObject.Property
     def callback(self) -> Callable:
+        """
+        - required, read-write
+
+        The function to call when the timeout is reached. The ``self`` will passed as an argument.
+        """
         return self._callback
 
     @callback.setter
     def callback(self, value: Callable) -> None:
         self._callback = value
+
+    @GObject.Property
+    def output(self) -> Any:
+        """
+        - not argument, read-only
+
+        The output of the callback.
+
+        .. hint::
+            You can use bind() on ``output``.
+        """
+        return self._output
 
     def __main(self) -> None:
         self._output = self._callback(self, *self._args)

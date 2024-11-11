@@ -4,24 +4,24 @@ from ignis.base_widget import BaseWidget
 
 class Revealer(Gtk.Revealer, BaseWidget):
     """
-    Bases: `Gtk.Revealer <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Revealer.html>`_.
+    Bases: :class:`Gtk.Revealer`
 
     A container that animates the transition of its child from invisible to visible.
 
-    Properties:
-        - **transition_type** (``str``, optional, read-write): The type of transition. Default: ``"slide_down"``.
+    Overrided properties:
+        - transition_type: The type of transition. Default: ``slide_down``.
 
-    **Transition type:**
-        - **"none"** : No transition.
-        - **"crossfade"** : Fade in.
-        - **"slide_right"** : Slide in from the left.
-        - **"slide_left"** : Slide in from the right.
-        - **"slide_up"** : Slide in from the bottom.
-        - **"slide_down"** : Slide in from the top.
-        - **"swing_right"** : Floop in from the left
-        - **"swing_left"** : Floop in from the right
-        - **"swing_up"** : Floop in from the bottom
-        - **"swing_down"** : Floop in from the top
+    Transition type:
+        - none: No transition.
+        - crossfade: Fade in.
+        - slide_right: Slide in from the left.
+        - slide_left: Slide in from the right.
+        - slide_up: Slide in from the bottom.
+        - slide_down: Slide in from the top.
+        - swing_right: Floop in from the left
+        - swing_left: Floop in from the right
+        - swing_up: Floop in from the bottom
+        - swing_down: Floop in from the top
 
     .. code-block:: python
 

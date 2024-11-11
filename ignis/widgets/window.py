@@ -39,7 +39,7 @@ EXCLUSIVITY = {
 
 class Window(Gtk.Window, BaseWidget):
     """
-    Bases: `Gtk.Window <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Window.html>`_.
+    Bases: :class:`Gtk.Window`
 
     The top-level widget that contains everything.
 
@@ -61,46 +61,8 @@ class Window(Gtk.Window, BaseWidget):
                 )
             )
 
-    Properties:
-        - **namespace** (``str``, required, read-only): The name of the window, used to access it from the CLI and :class:`~ignis.app.ignisApp`. It must be unique. It is also the name of the layer.
-        - **monitor** (``int | None``, optional, read-write): The monitor number on which to display the window. Raises :class:`~ignis.exceptions.MonitorNotFoundError` if the monitor with the given ID is not found.
-        - **anchor** (``list[str] | None``, optional, read-write): A list of anchors. If the list is empty, the window will be centered on the screen. ``None`` will unset all anchors. Default: ``None``.
-        - **exclusivity** (``str``, optional, read-write): Defines how the compositor should avoid occluding a window area with other surfaces/layers. Default: ``"normal"``.
-        - **layer** (``str``, optional, read-write): The layer of the surface. Default: ``"top"``.
-        - **kb_mode** (``str``, optional, read-write): Whether the window should receive keyboard events from the compositor. Default: ``"none"``.
-        - **popup** (``bool``, optional, read-write): Whether the window should close on ESC. Works only if ``kb_mode`` is set to ``"exclusive"`` or ``"on_demand"``.
-        - **input_width** (``int``, optional, read-write): The width at which the window can receive keyboard and mouse input. Must be > 0.
-        - **input_height** (``int``, optional, read-write): The width at which the window can receive keyboard and mouse input. Must be > 0.
-        - **margin_bottom** (``int``, optional, read-write): The bottom margin. Default: ``0``.
-        - **margin_left** (``int``, optional, read-write): The left margin. Default: ``0``.
-        - **margin_right** (``int``, optional, read-write): The right margin. Default: ``0``.
-        - **margin_top** (``int``, optional, read-write): The top margin. Default: ``0``.
-
-    **Anchors:**
-        - **"bottom"**
-        - **"left"**
-        - **"right"**
-        - **"top"**
-
-    **Exclusivity:**
-        - **"ignore"** : Completely ignore other surfaces. This allows you to overlap other surfaces.
-        - **"normal"** : The window will have no extra space and do not overlap other surfaces.
-        - **"exclusive"** : The compositor will reserve extra space for this window.
-
-    **Layer:**
-        - **"background"**
-        - **"bottom"**
-        - **"top"**
-        - **"overlay"**
-
-    **Keyboard mode:**
-        - **"none"** : This window should not receive keyboard events.
-        - **"exclusive"** : This window should have exclusive focus if it is on the top or overlay layer.
-        - **"on_demand"** : The user should be able to focus and unfocus this window.
-
     Raises:
         LayerShellNotSupportedError: If the compositor does not support the Layer Shell protocol.
-        MonitorNotFoundError: If an invalid ID is passed to the ``monitor`` property.
 
     .. code-block:: python
 
@@ -183,7 +145,39 @@ class Window(Gtk.Window, BaseWidget):
                 self.visible = False
 
     @GObject.Property
+    def namespace(self) -> str:
+        """
+        - required, read-only
+
+        The name of the window, used to access it from the CLI and :class:`~ignis.app.IgnisApp`.
+
+        It must be unique.
+        It is also the name of the layer.
+        """
+        return self._namespace
+
+    @namespace.setter
+    def namespace(self, value: str) -> None:
+        self._namespace = value
+        GtkLayerShell.set_namespace(self, name_space=value)
+
+    @GObject.Property
     def anchor(self) -> list[str] | None:
+        """
+        - optional, read-write
+
+        A list of anchors.
+        If the list is empty, the window will be centered on the screen.
+        ``None`` will unset all anchors.
+
+        Default: ``None``.
+
+        Anchors:
+            - bottom
+            - left
+            - right
+            - top
+        """
         return self._anchor
 
     @anchor.setter
@@ -199,6 +193,18 @@ class Window(Gtk.Window, BaseWidget):
 
     @GObject.Property
     def exclusivity(self) -> str:
+        """
+        - optional, read-write
+
+        Defines how the compositor should avoid occluding a window area with other surfaces/layers.
+
+        Default: ``normal``.
+
+        Exclusivity:
+            - ignore: Completely ignore other surfaces. This allows you to overlap other surfaces.
+            - normal: The window will have no extra space and do not overlap other surfaces.
+            - exclusive: The compositor will reserve extra space for this window.
+        """
         return self._exclusivity
 
     @exclusivity.setter
@@ -210,16 +216,20 @@ class Window(Gtk.Window, BaseWidget):
             GtkLayerShell.set_exclusive_zone(self, EXCLUSIVITY[value])
 
     @GObject.Property
-    def namespace(self) -> str:
-        return self._namespace
-
-    @namespace.setter
-    def namespace(self, value: str) -> None:
-        self._namespace = value
-        GtkLayerShell.set_namespace(self, name_space=value)
-
-    @GObject.Property
     def layer(self) -> str:
+        """
+        - optional, read-write
+
+        The layer of the surface.
+
+        Default: ``top``.
+
+        Layer:
+            - background
+            - bottom
+            - top
+            - overlay
+        """
         return self._layer
 
     @layer.setter
@@ -229,6 +239,18 @@ class Window(Gtk.Window, BaseWidget):
 
     @GObject.Property
     def kb_mode(self) -> str:
+        """
+        - optional, read-write
+
+        Whether the window should receive keyboard events from the compositor.
+
+        Default: ``none``.
+
+        Keyboard mode:
+            - none: This window should not receive keyboard events.
+            - exclusive: This window should have exclusive focus if it is on the top or overlay layer.
+            - on_demand: The user should be able to focus and unfocus this window.
+        """
         return self._kb_mode
 
     @kb_mode.setter
@@ -238,6 +260,13 @@ class Window(Gtk.Window, BaseWidget):
 
     @GObject.Property
     def popup(self) -> bool:
+        """
+        - optional, read-write
+
+        Whether the window should close on ESC.
+
+        Works only if ``kb_mode`` is set to ``exclusive`` or ``on_demand``.
+        """
         return self._popup
 
     @popup.setter
@@ -250,6 +279,14 @@ class Window(Gtk.Window, BaseWidget):
 
     @monitor.setter
     def monitor(self, value: int) -> None:
+        """
+        - optional, read-write
+
+        The monitor number on which to display the window.
+
+        Raises:
+            :class:`~ignis.exceptions.MonitorNotFoundError` if the monitor with the given ID is not found.
+        """
         if value is None:
             return
 
@@ -262,6 +299,11 @@ class Window(Gtk.Window, BaseWidget):
 
     @GObject.Property
     def input_width(self) -> int:
+        """
+        - optional, read-write
+
+        The width at which the window can receive keyboard and mouse input. Must be > 0.
+        """
         return self._input_width
 
     @input_width.setter
@@ -271,6 +313,11 @@ class Window(Gtk.Window, BaseWidget):
 
     @GObject.Property
     def input_height(self) -> int:
+        """
+        - optional, read-write
+
+        The height at which the window can receive keyboard and mouse input. Must be > 0.
+        """
         return self._input_height
 
     @input_height.setter
@@ -280,6 +327,13 @@ class Window(Gtk.Window, BaseWidget):
 
     @GObject.Property
     def margin_bottom(self) -> int:
+        """
+        - optional, read-write
+
+        The bottom margin.
+
+        Default: ``0``.
+        """
         return self._margin_bottom
 
     @margin_bottom.setter
@@ -289,6 +343,13 @@ class Window(Gtk.Window, BaseWidget):
 
     @GObject.Property
     def margin_left(self) -> int:
+        """
+        - optional, read-write
+
+        The left margin.
+
+        Default: ``0``.
+        """
         return self._margin_left
 
     @margin_left.setter
@@ -298,6 +359,13 @@ class Window(Gtk.Window, BaseWidget):
 
     @GObject.Property
     def margin_right(self) -> int:
+        """
+        - optional, read-write
+
+        The right margin.
+
+        Default: ``0``.
+        """
         return self._margin_right
 
     @margin_right.setter
@@ -307,6 +375,13 @@ class Window(Gtk.Window, BaseWidget):
 
     @GObject.Property
     def margin_top(self) -> int:
+        """
+        - optional, read-write
+
+        The top margin.
+
+        Default: ``0``.
+        """
         return self._margin_top
 
     @margin_top.setter

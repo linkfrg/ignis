@@ -5,11 +5,11 @@ from typing import Callable
 
 class CheckButton(Gtk.CheckButton, BaseWidget):
     """
-    Bases: `Gtk.CheckButton <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/CheckButton.html>`_.
+    Bases: :class:`Gtk.CheckButton`
 
     A check button. If ``group`` is set, the check button behaves as a radio button.
 
-    **Simple checkbutton:**
+    Simple checkbutton:
 
     .. code-block:: python
 
@@ -18,7 +18,7 @@ class CheckButton(Gtk.CheckButton, BaseWidget):
             active=True,
         )
 
-    **Radio button:**
+    Radio button:
 
     .. code-block:: python
 
@@ -43,6 +43,11 @@ class CheckButton(Gtk.CheckButton, BaseWidget):
 
     @GObject.Property
     def on_toggled(self) -> Callable:
+        """
+        - optional, read-write
+
+        The function to call when button is toggled (checked/unchecked).
+        """
         return self._on_toggled
 
     @on_toggled.setter

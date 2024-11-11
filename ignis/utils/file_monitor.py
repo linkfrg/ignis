@@ -33,40 +33,7 @@ class FileMonitor(IgnisGObject):
     """
     Monitor changes of the file or directory.
 
-    Signals:
-        - **"changed"** (``str``, ``str``): Emitted when the file or directory changed. Passes path and event type as arguments.
-
-    Properties:
-        - **path** (``str``, required, read-only): The path to the file or directory to be monitored.
-        - **recursive** (``bool``, optional, read-only): Whether monitoring is recursive (monitor all subdirectories and files). Default: ``False``.
-        - **flags** (``str | None``, optional, read-only): What the monitor will watch for. Default: ``None``.
-        - **callback** (``Callable | None``, optional, read-write): A function to call when the file or directory changes. Default: ``None``.
-
-    **Flags:**
-        - **"none"**
-        - **"watch_mounts"**
-        - **"send_moved"**
-        - **"watch_hard_links"**
-        - **"watch_moves"**
-
-        See `Gio.FileMonitorFlags <https://lazka.github.io/pgi-docs/Gio-2.0/flags.html#Gio.FileMonitorFlags>`_ for more info.
-
-    **Event types:**
-        - **"changed"**
-        - **"changes_done_hint"**
-        - **"moved_out"**
-        - **"deleted"**
-        - **"created"**
-        - **"attribute_changed"**
-        - **"pre_unmount"**
-        - **"unmounted"**
-        - **"moved"**
-        - **"renamed"**
-        - **"moved_in"**
-
-        See `Gio.FileMonitorEvent <https://lazka.github.io/pgi-docs/index.html#Gio-2.0/enums.html#Gio.FileMonitorEvent>`_ for more info.
-
-    **Example usage:**
+    Example usage:
 
     .. code-block::
 
@@ -76,10 +43,6 @@ class FileMonitor(IgnisGObject):
             callback=lambda path, event_type: print(path, event_type),
         )
     """
-
-    __gsignals__ = {
-        "changed": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, (str, str)),
-    }
 
     def __init__(
         self,
@@ -111,6 +74,19 @@ class FileMonitor(IgnisGObject):
             self
         )  # to prevent the garbage collector from collecting "self"
 
+    @GObject.Signal(arg_types=(str, str))
+    def changed(self, *args):
+        """
+        - Signal
+
+        Emitted when the file or directory changed.
+
+        Args:
+            path (``str``): The path to the changed file or directory.
+            event_type (``str``): The event type. A list of all event types described in :attr:`callback`.
+        """
+        pass
+
     def __on_change(self, file_monitor, file, other_file, event_type) -> None:
         path = file.get_path()
         if self._callback:
@@ -132,23 +108,79 @@ class FileMonitor(IgnisGObject):
 
     @GObject.Property
     def path(self) -> str:
+        """
+        - required, read-only
+
+        The path to the file or directory to be monitored.
+        """
         return self._path
 
     @GObject.Property
     def flags(self) -> str | None:
+        """
+        - optional, read-only
+
+        What the monitor will watch for.
+
+        Possible values:
+
+        - none
+        - watch_mounts
+        - send_moved
+        - watch_hard_links
+        - watch_moves
+
+        See :class:`Gio.FileMonitorFlags` for more info.
+
+        Default: ``None``.
+        """
         return self._flags
 
     @GObject.Property
     def callback(self) -> Callable | None:
-        return self._callback
+        """
+        - optional, read-write
 
-    @GObject.Property
-    def recursive(self) -> bool:
-        return self._recursive
+        A function to call when the file or directory changes.
+        It should take two arguments:
+        1. The path to the changed file or directory
+        2. The event type.
+
+        Default: ``None``.
+
+        Event types:
+
+        - changed
+        - changes_done_hint
+        - moved_out
+        - deleted
+        - created
+        - attribute_changed
+        - pre_unmount
+        - unmounted
+        - moved
+        - renamed
+        - moved_in
+
+        See :class:`Gio.FileMonitorEvent` for more info.
+
+        """
+        return self._callback
 
     @callback.setter
     def callback(self, value: Callable) -> None:
         self._callback = value
+
+    @GObject.Property
+    def recursive(self) -> bool:
+        """
+        - optional, read-only
+
+        Whether monitoring is recursive (monitor all subdirectories and files).
+
+        Default: ``False``.
+        """
+        return self._recursive
 
     def cancel(self) -> None:
         """

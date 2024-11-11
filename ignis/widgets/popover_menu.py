@@ -5,14 +5,11 @@ from ignis.widgets.menuitem import MenuItem
 
 class PopoverMenu(Gtk.PopoverMenu, BaseWidget):
     """
-    Bases: `Gtk.PopoverMenu <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/PopoverMenu.html>`_.
+    Bases: :class:`Gtk.PopoverMenu`
 
     A dropdown menu consisting of a list of :class:`~ignis.widgets.Widget.MenuItem`.
     It must be added as a child to a container.
     To display it, call the ``popup()`` method.
-
-    Properties:
-        - **items** (list[:class:`~ignis.widgets.Widget.MenuItem`], optional, read-write): A list of :class:`~ignis.widgets.Widget.MenuItem`.
 
     .. code-block:: python
 
@@ -70,6 +67,11 @@ class PopoverMenu(Gtk.PopoverMenu, BaseWidget):
 
     @GObject.Property
     def items(self) -> list[MenuItem]:
+        """
+        - optional, read-write
+
+        A list of :class:`~ignis.widgets.Widget.MenuItem`.
+        """
         return self._items
 
     @items.setter

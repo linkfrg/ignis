@@ -38,8 +38,8 @@ def sass_compile(path: str | None = None, string: str | None = None) -> str:
     Requires `Dart Sass <https://sass-lang.com/dart-sass/>`_.
 
     Args:
-        path (``str``, optional): The path to the SASS/SCSS file.
-        string (``str``, optional): A string with SASS/SCSS style.
+        path: The path to the SASS/SCSS file.
+        string: A string with SASS/SCSS style.
 
     Raises:
         TypeError: If neither of the arguments is provided.

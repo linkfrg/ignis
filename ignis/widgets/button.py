@@ -1,19 +1,13 @@
-from __future__ import annotations
 from gi.repository import Gtk, GObject  # type: ignore
 from ignis.base_widget import BaseWidget
-from typing import Callable
+from typing import Callable, Union
 
 
 class Button(Gtk.Button, BaseWidget):
     """
-    Bases: `Gtk.Button <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Button.html>`_.
+    Bases: :class:`Gtk.Button`
 
     A button.
-
-    Properties:
-        - **on_click** (``Callable``, optional, read-write): The function to call on left click.
-        - **on_right_click** (``Callable``, optional, read-write): The function to call on right click.
-        - **on_middle_click** (``Callable``, optional, read-write): The function to call on middle click.
 
     .. code-block:: python
 
@@ -34,8 +28,8 @@ class Button(Gtk.Button, BaseWidget):
         self._on_right_click: Callable | None = None
         self._on_middle_click: Callable | None = None
 
-        self.__right_click_controller: Gtk.GestureClick | None = None
-        self.__middle_click_controller: Gtk.GestureClick | None = None
+        self.__right_click_controller: Union[Gtk.GestureClick, None] = None
+        self.__middle_click_controller: Union[Gtk.GestureClick, None] = None
 
         BaseWidget.__init__(self, **kwargs)
         self.connect("clicked", lambda x: self.on_click(x) if self.on_click else None)
@@ -53,6 +47,11 @@ class Button(Gtk.Button, BaseWidget):
 
     @GObject.Property
     def on_click(self) -> Callable:
+        """
+        - optional, read-write
+
+        The function to call on left click.
+        """
         return self._on_click
 
     @on_click.setter
@@ -61,6 +60,11 @@ class Button(Gtk.Button, BaseWidget):
 
     @GObject.Property
     def on_right_click(self) -> Callable:
+        """
+        - optional, read-write
+
+        The function to call on right click.
+        """
         return self._on_right_click
 
     @on_right_click.setter
@@ -73,6 +77,11 @@ class Button(Gtk.Button, BaseWidget):
 
     @GObject.Property
     def on_middle_click(self) -> Callable:
+        """
+        - optional, read-write
+
+        The function to call on middle click.
+        """
         return self._on_middle_click
 
     @on_middle_click.setter

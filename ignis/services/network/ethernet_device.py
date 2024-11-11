@@ -6,15 +6,7 @@ from .constants import STATE
 
 class EthernetDevice(IgnisGObject):
     """
-    Ethernet device.
-
-    Properties:
-        - **carrier** (``bool``, read-only): Whether the device has a carrier.
-        - **perm_hw_address** (``str``, read-only): The permanent hardware (MAC) address of the device.
-        - **speed** (``int``, read-only): The speed of the device.
-        - **state** (``str | None``, read-only): Current state of the device or ``None`` if unknown.
-        - **is_connected** (``bool``, read-only): Whether the device is connected to the network.
-        - **name** (``str | None``, read-only): The name of the connection or ``None`` if unknown.
+    An Ethernet device.
     """
 
     def __init__(self, device: NM.DeviceEthernet, client: NM.Client):
@@ -37,26 +29,56 @@ class EthernetDevice(IgnisGObject):
 
     @GObject.Property
     def carrier(self) -> bool:
+        """
+        - read-only
+
+        Whether the device has a carrier.
+        """
         return self._device.props.carrier
 
     @GObject.Property
     def perm_hw_address(self) -> str:
+        """
+        - read-only
+
+        The permanent hardware (MAC) address of the device.
+        """
         return self._device.props.perm_hw_address
 
     @GObject.Property
     def speed(self) -> int:
+        """
+        - read-only
+
+        The speed of the device.
+        """
         return self._device.props.speed
 
     @GObject.Property
     def state(self) -> str | None:
+        """
+        - read-only
+
+        The current state of the device or ``None`` if unknown.
+        """
         return STATE.get(self._device.get_state(), None)
 
     @GObject.Property
     def is_connected(self) -> bool:
+        """
+        - read-only
+
+        Whether the device is connected to the network.
+        """
         return self._is_connected
 
     @GObject.Property
     def name(self) -> str | None:
+        """
+        - read-only
+
+        The name of the connection or ``None`` if unknown.
+        """
         return self._name
 
     def connect_to(self) -> None:

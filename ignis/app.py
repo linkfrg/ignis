@@ -32,27 +32,12 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         Do not initialize this class!
         Instead, use the already initialized instance as shown below.
 
-    .. code-block:: python
+        .. code-block:: python
 
-        from ignis.app import IgnisApp
+            from ignis.app import IgnisApp
 
-        app = IgnisApp.get_default()
-
-    Signals:
-        - **"ready"** (): Emitted when the configuration has been parsed.
-        - **"quit"** (): Emitted when Ignis has finished running.
-
-    Properties:
-        - **windows** (``list[Gtk.Window]``, read-only): List of windows.
-        - **is_ready** (``bool``, read-only): Whether configuration is parsed and app is ready.
-        - **autoreload_config** (``bool``, read-write, default: ``True``): Whether to automatically reload the configuration when it changes (only .py files).
-        - **autoreload_css** (``bool``, read-write, default: ``True``): Whether to automatically reload the CSS style when it changes (only .css/.scss/.sass files).
+            app = IgnisApp.get_default()
     """
-
-    __gsignals__ = {
-        "ready": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
-        "quit": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
-    }
 
     _instance: IgnisApp | None = None  # type: ignore
 
@@ -111,16 +96,44 @@ class IgnisApp(Gtk.Application, IgnisGObject):
             cls._instance = cls()
         return cls._instance
 
+    @GObject.Signal
+    def ready(self):
+        """
+        - Signal
+
+        Emitted when the configuration has been parsed.
+
+        .. hint::
+            To handle shutdown of the application use the ``shutdown`` signal.
+        """
+
     @GObject.Property
     def is_ready(self) -> bool:
+        """
+        - read-only
+
+        Whether configuration is parsed and app is ready.
+        """
         return self._is_ready
 
     @GObject.Property
     def windows(self) -> list[Gtk.Window]:
+        """
+        - read-only
+
+        A list of windows added to this application.
+        """
         return list(self._windows.values())
 
     @GObject.Property
     def autoreload_config(self) -> bool:
+        """
+        - read-write
+
+        Whether to automatically reload the configuration when it changes (only .py files).
+
+        Default: ``True``.
+        """
         return self._autoreload_config
 
     @autoreload_config.setter
@@ -129,6 +142,13 @@ class IgnisApp(Gtk.Application, IgnisGObject):
 
     @GObject.Property
     def autoreload_css(self) -> bool:
+        """
+        - read-write
+
+        Whether to automatically reload the CSS style when it changes (only .css/.scss/.sass files).
+
+        Default: ``True``.
+        """
         return self._autoreload_css
 
     @autoreload_css.setter
@@ -148,7 +168,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         Requires ``dart-sass`` for SASS/SCSS compilation.
 
         Args:
-            style_path (``str``): Path to the .css/.scss/.sass file.
+            style_path: Path to the .css/.scss/.sass file.
 
         Raises:
             StylePathAppliedError: if the given style path is already to the application.
@@ -199,7 +219,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         Remove the applied CSS/SCSS/SASS style by its path.
 
         Args:
-            style_path (``str``): Path to the applied .css/.scss/.sass file.
+            style_path: Path to the applied .css/.scss/.sass file.
 
         Raises:
             StylePathNotFoundError: if the given style path is not applied to the application.
@@ -278,10 +298,11 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         Get a window by name.
 
         Args:
-            window_name (``str``): The window's namespace.
+            window_name: The window's namespace.
 
         Returns:
-            ``Gtk.Window``: The window object.
+            The window object.
+
         Raises:
             WindowNotFoundError: If a window with the given namespace does not exist.
         """
@@ -296,7 +317,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         Open (show) a window by its name.
 
         Args:
-            window_name (``str``): The window's namespace.
+            window_name: The window's namespace.
         Raises:
             WindowNotFoundError: If a window with the given namespace does not exist.
         """
@@ -308,7 +329,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         Close (hide) a window by its name.
 
         Args:
-            window_name (``str``): The window's namespace.
+            window_name: The window's namespace.
         Raises:
             WindowNotFoundError: If a window with the given namespace does not exist.
         """
@@ -320,7 +341,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         Toggle (change visibility to opposite state) a window by its name.
 
         Args:
-            window_name (``str``): The window's namespace.
+            window_name: The window's namespace.
         Raises:
             WindowNotFoundError: If a window with the given namespace does not exist.
         """
@@ -333,8 +354,8 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         You typically shouldn't use this method, as windows are added to the app automatically.
 
         Args:
-            window_name (``str``): The window's namespace.
-            window (``Gtk.Window``): The window instance.
+            window_name: The window's namespace.
+            window: The window instance.
 
         Raises:
             WindowAddedError: If a window with the given namespace already exists.
@@ -351,7 +372,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         The window will be removed from the application.
 
         Args:
-            window_name (``str``): The window's namespace.
+            window_name: The window's namespace.
 
         Raises:
             WindowNotFoundError: If a window with the given namespace does not exist.
@@ -372,7 +393,6 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         Quit Ignis.
         """
         super().quit()
-        self.emit("quit")
         logger.info("Quitting.")
 
     def inspector(self) -> None:

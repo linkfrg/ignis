@@ -1,20 +1,17 @@
-from __future__ import annotations
 import os
 from ignis.base_widget import BaseWidget
 from gi.repository import Gtk, GObject, GdkPixbuf, Gdk  # type: ignore
 from ignis.utils import Utils
+from typing import Union
 
 
 class Icon(Gtk.Image, BaseWidget):
     """
-    Bases: `Gtk.Image <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Image.html>`_.
+    Bases: :class:`Gtk.Image`
 
     A widget that displays images or icons in a 1:1 ratio.
 
     If you want to display an image at its native aspect ratio, see :class:`~ignis.widgets.picture.Picture`.
-
-    Properties:
-        - **image** (``str | GdkPixbuf.Pixbuf``, optional, read-write): The icon name, path to the file, or a ``GdkPixbuf.Pixbuf``.
 
     .. code-block:: python
 
@@ -34,11 +31,16 @@ class Icon(Gtk.Image, BaseWidget):
         BaseWidget.__init__(self, **kwargs)
 
     @GObject.Property
-    def image(self) -> str | GdkPixbuf.Pixbuf:
+    def image(self) -> Union[str, GdkPixbuf.Pixbuf]:
+        """
+        - optional, read-write
+
+        The icon name, path to the file, or a ``GdkPixbuf.Pixbuf``.
+        """
         return self._image
 
     @image.setter
-    def image(self, value: str | GdkPixbuf.Pixbuf) -> None:
+    def image(self, value: Union[str, GdkPixbuf.Pixbuf]) -> None:
         self._image = value
 
         pixbuf = None

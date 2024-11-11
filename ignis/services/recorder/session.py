@@ -1,4 +1,3 @@
-from __future__ import annotations
 from gi.repository import GLib  # type: ignore
 from ignis.dbus import DBusProxy
 from ignis.utils import Utils

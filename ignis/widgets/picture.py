@@ -1,29 +1,26 @@
-from __future__ import annotations
 import os
 from ignis.base_widget import BaseWidget
 from gi.repository import Gtk, GObject, GdkPixbuf, Gdk  # type: ignore
 from ignis.utils import Utils
+from typing import Union
 
 
 class Picture(Gtk.Picture, BaseWidget):
     """
-    Bases: `Gtk.Picture <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Picture.html>`_.
+    Bases: :class:`Gtk.Picture`
 
     A widget that displays an image at its native aspect ratio.
 
-    Properties:
-        - **image** (``str | GdkPixbuf.Pixbuf | None``, optional, read-write): Icon name, path to an image or ``GdkPixbuf.Pixbuf``.
-        - **width** (``int``, optional, read-write): Width of the image.
-        - **height** (``int``, optional, read-write): Height of the image.
-        - **content_fit** (``str``, optional, read-write): Controls how a content should be made to fit inside an allocation. Default: ``"contain"``.
+    Overrided properties:
+        - content_fit: Controls how a content should be made to fit inside an allocation. Default: ``contain``.
 
-    **Content fit:**
-        - **"fill"**: Make the content fill the entire allocation, without taking its aspect ratio in consideration.
-        - **"contain"**: Scale the content to fit the allocation, while taking its aspect ratio in consideration..
-        - **"cover"**: Cover the entire allocation, while taking the content aspect ratio in consideration.
-        - **"scale_down"**: The content is scaled down to fit the allocation, if needed, otherwise its original size is used.
+    Content fit:
+        - fill: Make the content fill the entire allocation, without taking its aspect ratio in consideration.
+        - contain: Scale the content to fit the allocation, while taking its aspect ratio in consideration..
+        - cover: Cover the entire allocation, while taking the content aspect ratio in consideration.
+        - scale_down: The content is scaled down to fit the allocation, if needed, otherwise its original size is used.
 
-        For more info, see `Gtk.ContentFit <https://lazka.github.io/pgi-docs/Gtk-4.0/enums.html#Gtk.ContentFit>`_
+        For more info, see :class:`Gtk.ContentFit`.
 
     .. code-block:: python
 
@@ -44,7 +41,7 @@ class Picture(Gtk.Picture, BaseWidget):
         self.override_enum("content_fit", Gtk.ContentFit)
 
         # avoid custom setters to avoid running the __draw function multiple times during initialization
-        self._image: str | GdkPixbuf.Pixbuf | None = None
+        self._image: Union[str, GdkPixbuf.Pixbuf, None] = None
         self._width = width
         self._height = height
         self.width_request = width
@@ -55,16 +52,26 @@ class Picture(Gtk.Picture, BaseWidget):
         BaseWidget.__init__(self, **kwargs)
 
     @GObject.Property
-    def image(self) -> str | GdkPixbuf.Pixbuf | None:
+    def image(self) -> Union[str, GdkPixbuf.Pixbuf, None]:
+        """
+        - optional, read-write
+
+        The icon name, path to an image or ``GdkPixbuf.Pixbuf``.
+        """
         return self._image
 
     @image.setter
-    def image(self, value: str | GdkPixbuf.Pixbuf) -> None:
+    def image(self, value: Union[str, GdkPixbuf.Pixbuf]) -> None:
         self._image = value
         self.__draw(value)
 
     @GObject.Property
     def width(self) -> int:
+        """
+        - optional, read-write
+
+        Width of the image.
+        """
         return self._width
 
     @width.setter
@@ -75,6 +82,11 @@ class Picture(Gtk.Picture, BaseWidget):
 
     @GObject.Property
     def height(self) -> int:
+        """
+        - optional, read-write
+
+        Height of the image.
+        """
         return self._height
 
     @height.setter
@@ -83,7 +95,7 @@ class Picture(Gtk.Picture, BaseWidget):
         self.height_request = value
         self.__draw(self.image)
 
-    def __draw(self, image: str | GdkPixbuf.Pixbuf):
+    def __draw(self, image: Union[str, GdkPixbuf.Pixbuf]):
         if isinstance(image, GdkPixbuf.Pixbuf):
             self.__set_from_pixbuf(image)
         elif isinstance(image, str):
@@ -148,7 +160,7 @@ class Picture(Gtk.Picture, BaseWidget):
 
     def __scale_pixbuf(
         self, pixbuf: GdkPixbuf.Pixbuf, width: int, height: int
-    ) -> GdkPixbuf.Pixbuf | None:
+    ) -> Union[GdkPixbuf.Pixbuf, None]:
         if width <= 0:
             return pixbuf
 
