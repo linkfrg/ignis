@@ -551,189 +551,474 @@ document.write(`
 <dt class="sig sig-object py" id="ignis.services.network.NetworkService">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.network.</span></span><span class="sig-name descname"><span class="pre">NetworkService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.network.NetworkService" title="Link to this definition">#</a></dt>
 <dd><p>A Network service. Uses <code class="docutils literal notranslate"><span class="pre">NetworkManager</span></code>.</p>
-<dl class="simple">
-<dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>wifi</strong> (<a class="reference internal" href="#ignis.services.network.Wifi" title="ignis.services.network.Wifi"><code class="xref py py-class docutils literal notranslate"><span class="pre">Wifi</span></code></a>, read-only): The Wi-Fi object.</p></li>
-<li><p><strong>ethernet</strong> (<a class="reference internal" href="#ignis.services.network.Ethernet" title="ignis.services.network.Ethernet"><code class="xref py py-class docutils literal notranslate"><span class="pre">Ethernet</span></code></a>, read-only): The Ethernet device object.</p></li>
-<li><p><strong>vpn</strong> (<a class="reference internal" href="#ignis.services.network.Vpn" title="ignis.services.network.Vpn"><code class="xref py py-class docutils literal notranslate"><span class="pre">Vpn</span></code></a>, read-only): The Vpn object.</p></li>
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.NetworkService.wifi">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">wifi</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#ignis.services.network.Wifi" title="ignis.services.network.wifi.Wifi"><span class="pre">Wifi</span></a></em><a class="headerlink" href="#ignis.services.network.NetworkService.wifi" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
 </ul>
-</dd>
-</dl>
+<p>The Wi-Fi object.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.NetworkService.ethernet">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ethernet</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#ignis.services.network.Ethernet" title="ignis.services.network.ethernet.Ethernet"><span class="pre">Ethernet</span></a></em><a class="headerlink" href="#ignis.services.network.NetworkService.ethernet" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The Ethernet object.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.NetworkService.vpn">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vpn</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#ignis.services.network.Vpn" title="ignis.services.network.vpn.Vpn"><span class="pre">Vpn</span></a></em><a class="headerlink" href="#ignis.services.network.NetworkService.vpn" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The Vpn object.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ignis.services.network.Wifi">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.network.</span></span><span class="sig-name descname"><span class="pre">Wifi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.network.Wifi" title="Link to this definition">#</a></dt>
-<dd><p>Class for controlling Wi-Fi devices.</p>
-<dl class="simple">
-<dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>devices</strong> (<a class="reference internal" href="#ignis.services.network.WifiDevice" title="ignis.services.network.WifiDevice"><code class="xref py py-class docutils literal notranslate"><span class="pre">WifiDevice</span></code></a>, read-only): A list of Wi-Fi devices.</p></li>
-<li><p><strong>is_connected</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-only): Whether at least one Wi-Fi device is connected to the network.</p></li>
-<li><p><strong>icon_name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The icon name of the first device in the list.</p></li>
-<li><p><strong>enabled</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-only): Whether Wi-Fi is enabled.</p></li>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.network.</span></span><span class="sig-name descname"><span class="pre">Wifi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.NM.Client</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.network.Wifi" title="Link to this definition">#</a></dt>
+<dd><p>The class for controlling Wi-Fi devices.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.Wifi.devices">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">devices</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ignis.services.network.WifiDevice" title="ignis.services.network.wifi_device.WifiDevice"><span class="pre">WifiDevice</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.network.Wifi.devices" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
 </ul>
-</dd>
-</dl>
+<p>A list of Wi-Fi devices.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.Wifi.is_connected">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_connected</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.network.Wifi.is_connected" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>Whether at least one Wi-Fi device is connected to the network.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.Wifi.icon_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">icon_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.network.Wifi.icon_name" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The icon name of the first device in the list.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.Wifi.enabled">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enabled</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.network.Wifi.enabled" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-write</p></li>
+</ul>
+<p>Whether Wi-Fi is enabled.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ignis.services.network.Ethernet">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.network.</span></span><span class="sig-name descname"><span class="pre">Ethernet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.network.Ethernet" title="Link to this definition">#</a></dt>
-<dd><p>Class for controlling Ethernet devices.</p>
-<dl class="simple">
-<dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>devices</strong> (<a class="reference internal" href="#ignis.services.network.EthernetDevice" title="ignis.services.network.EthernetDevice"><code class="xref py py-class docutils literal notranslate"><span class="pre">EthernetDevice</span></code></a>, read-only): A list of Ethernet devices.</p></li>
-<li><p><strong>is_connected</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-only): Whether at least one Ethernet device is connected to the network.</p></li>
-<li><p><strong>icon_name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The general icon name for all devices, depends on <code class="docutils literal notranslate"><span class="pre">is_connected</span></code> property.</p></li>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.network.</span></span><span class="sig-name descname"><span class="pre">Ethernet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.NM.Client</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.network.Ethernet" title="Link to this definition">#</a></dt>
+<dd><p>The class for controlling Ethernet devices.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.Ethernet.devices">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">devices</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ignis.services.network.EthernetDevice" title="ignis.services.network.ethernet_device.EthernetDevice"><span class="pre">EthernetDevice</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.network.Ethernet.devices" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
 </ul>
-</dd>
-</dl>
+<p>A list of Ethernet devices.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.Ethernet.is_connected">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_connected</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.network.Ethernet.is_connected" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>Whether at least one Ethernet device is connected to the network.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.Ethernet.icon_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">icon_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.network.Ethernet.icon_name" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The general icon name for all devices, depends on <code class="docutils literal notranslate"><span class="pre">is_connected</span></code> property.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ignis.services.network.Vpn">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.network.</span></span><span class="sig-name descname"><span class="pre">Vpn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.network.Vpn" title="Link to this definition">#</a></dt>
-<dd><p>Class for controlling VPN connections.</p>
-<dl class="simple">
-<dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>connections</strong> (<a class="reference internal" href="#ignis.services.network.VpnConnection" title="ignis.services.network.VpnConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">VpnConnection</span></code></a>, read-only): A list of VPN connections.</p></li>
-<li><p><strong>is_connected</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-only): Whether at least one VPN connection is active.</p></li>
-<li><p><strong>active_vpn_id</strong> (<code class="docutils literal notranslate"><span class="pre">str</span> <span class="pre">|</span> <span class="pre">None</span></code>, read-only): The id (name) of the first active vpn connection.</p></li>
-<li><p><strong>icon_name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The general icon name for all vpn connections, depends on <code class="docutils literal notranslate"><span class="pre">is_connected</span></code> property.</p></li>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.network.</span></span><span class="sig-name descname"><span class="pre">Vpn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.NM.Client</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.network.Vpn" title="Link to this definition">#</a></dt>
+<dd><p>The class for controlling VPN connections.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.Vpn.connections">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">connections</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ignis.services.network.VpnConnection" title="ignis.services.network.vpn.VpnConnection"><span class="pre">VpnConnection</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.network.Vpn.connections" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
 </ul>
-</dd>
-</dl>
+<p>A list of VPN connections.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.Vpn.active_vpn_id">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">active_vpn_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.network.Vpn.active_vpn_id" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The id (name) of the first active vpn connection.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.Vpn.is_connected">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_connected</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.network.Vpn.is_connected" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>Whether at least one VPN connection is active.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.Vpn.icon_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">icon_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.network.Vpn.icon_name" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The general icon name for all vpn connections, depends on <code class="docutils literal notranslate"><span class="pre">is_connected</span></code> property.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ignis.services.network.WifiDevice">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.network.</span></span><span class="sig-name descname"><span class="pre">WifiDevice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.network.WifiDevice" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.network.</span></span><span class="sig-name descname"><span class="pre">WifiDevice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.NM.DeviceWifi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.NM.Client</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.network.WifiDevice" title="Link to this definition">#</a></dt>
 <dd><p>A Wifi device.</p>
-<dl class="simple">
-<dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>access_points</strong> (list[<a class="reference internal" href="#ignis.services.network.WifiAccessPoint" title="ignis.services.network.WifiAccessPoint"><code class="xref py py-class docutils literal notranslate"><span class="pre">WifiAccessPoint</span></code></a>], read-only): A list of access points (Wi-FI networks).</p></li>
-<li><p><strong>ap</strong> (<a class="reference internal" href="#ignis.services.network.WifiAccessPoint" title="ignis.services.network.WifiAccessPoint"><code class="xref py py-class docutils literal notranslate"><span class="pre">WifiAccessPoint</span></code></a>, read-only): The currently active access point.</p></li>
-<li><p><strong>state</strong> (<code class="docutils literal notranslate"><span class="pre">str</span> <span class="pre">|</span> <span class="pre">None</span></code>, read-only): The current state of the device or <code class="docutils literal notranslate"><span class="pre">None</span></code> if unknown.</p></li>
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.WifiDevice.access_points">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">access_points</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ignis.services.network.WifiAccessPoint" title="ignis.services.network.access_point.WifiAccessPoint"><span class="pre">WifiAccessPoint</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.network.WifiDevice.access_points" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
 </ul>
-</dd>
-</dl>
+<p>A list of access points (Wi-FI networks).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.WifiDevice.ap">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ap</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#ignis.services.network.WifiAccessPoint" title="ignis.services.network.access_point.WifiAccessPoint"><span class="pre">WifiAccessPoint</span></a></em><a class="headerlink" href="#ignis.services.network.WifiDevice.ap" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The currently active access point.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.WifiDevice.state">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">state</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.network.WifiDevice.state" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The current state of the device or <code class="docutils literal notranslate"><span class="pre">None</span></code> if unknown.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.WifiDevice.is_connected">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_connected</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.network.WifiDevice.is_connected" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>Whether the device is connected to a Wi-Fi network.</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.network.WifiDevice.scan">
-<span class="sig-name descname"><span class="pre">scan</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.network.WifiDevice.scan" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">scan</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.network.WifiDevice.scan" title="Link to this definition">#</a></dt>
 <dd><p>Scan for Wi-Fi networks.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ignis.services.network.EthernetDevice">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.network.</span></span><span class="sig-name descname"><span class="pre">EthernetDevice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.network.EthernetDevice" title="Link to this definition">#</a></dt>
-<dd><p>Ethernet device.</p>
-<dl class="simple">
-<dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>carrier</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-only): Whether the device has a carrier.</p></li>
-<li><p><strong>perm_hw_address</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The permanent hardware (MAC) address of the device.</p></li>
-<li><p><strong>speed</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, read-only): The speed of the device.</p></li>
-<li><p><strong>state</strong> (<code class="docutils literal notranslate"><span class="pre">str</span> <span class="pre">|</span> <span class="pre">None</span></code>, read-only): Current state of the device or <code class="docutils literal notranslate"><span class="pre">None</span></code> if unknown.</p></li>
-<li><p><strong>is_connected</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-only): Whether the device is connected to the network.</p></li>
-<li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span> <span class="pre">|</span> <span class="pre">None</span></code>, read-only): The name of the connection or <code class="docutils literal notranslate"><span class="pre">None</span></code> if unknown.</p></li>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.network.</span></span><span class="sig-name descname"><span class="pre">EthernetDevice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.NM.DeviceEthernet</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.NM.Client</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.network.EthernetDevice" title="Link to this definition">#</a></dt>
+<dd><p>An Ethernet device.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.EthernetDevice.carrier">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">carrier</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.network.EthernetDevice.carrier" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
 </ul>
-</dd>
-</dl>
+<p>Whether the device has a carrier.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.EthernetDevice.perm_hw_address">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">perm_hw_address</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.network.EthernetDevice.perm_hw_address" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The permanent hardware (MAC) address of the device.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.EthernetDevice.speed">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">speed</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.services.network.EthernetDevice.speed" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The speed of the device.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.EthernetDevice.state">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">state</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.network.EthernetDevice.state" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The current state of the device or <code class="docutils literal notranslate"><span class="pre">None</span></code> if unknown.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.EthernetDevice.is_connected">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_connected</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.network.EthernetDevice.is_connected" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>Whether the device is connected to the network.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.EthernetDevice.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.network.EthernetDevice.name" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The name of the connection or <code class="docutils literal notranslate"><span class="pre">None</span></code> if unknown.</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.network.EthernetDevice.connect_to">
-<span class="sig-name descname"><span class="pre">connect_to</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.network.EthernetDevice.connect_to" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">connect_to</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.network.EthernetDevice.connect_to" title="Link to this definition">#</a></dt>
 <dd><p>Connect this Ethernet device to the network.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.network.EthernetDevice.disconnect_from">
-<span class="sig-name descname"><span class="pre">disconnect_from</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.network.EthernetDevice.disconnect_from" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">disconnect_from</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.network.EthernetDevice.disconnect_from" title="Link to this definition">#</a></dt>
 <dd><p>Disconnect this Ethernet device from the network.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ignis.services.network.WifiAccessPoint">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.network.</span></span><span class="sig-name descname"><span class="pre">WifiAccessPoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.network.WifiAccessPoint" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.network.</span></span><span class="sig-name descname"><span class="pre">WifiAccessPoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">point</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.NM.AccessPoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.NM.Client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.NM.DeviceWifi</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.network.WifiAccessPoint" title="Link to this definition">#</a></dt>
 <dd><p>A Wi-Fi access point (Wi-Fi network).</p>
-<dl class="simple">
-<dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>point</strong> (<code class="docutils literal notranslate"><span class="pre">NM.AccessPoint</span></code>, read-only): An instance of <code class="docutils literal notranslate"><span class="pre">NM.AccessPoint</span></code>. You typically shouldn't use this property.</p></li>
-<li><p><strong>bandwidth</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, read-only): The channel bandwidth announced by the access point, in MHz.</p></li>
-<li><p><strong>bssid</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The BSSID of the access point.</p></li>
-<li><p><strong>frequency</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, read-only): The frequency of the access point, in MHz.</p></li>
-<li><p><strong>last_seen</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, read-only): The timestamp for the last time the access point was found in scan results.</p></li>
-<li><p><strong>max_bitrate</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, read-only): The maximum bit rate of the access point, in kbit/s.</p></li>
-<li><p><strong>ssid</strong> (<code class="docutils literal notranslate"><span class="pre">str</span> <span class="pre">|</span> <span class="pre">None</span></code>, read-only): The SSID of the access point, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if it is not known.</p></li>
-<li><p><strong>strength</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, read-only): The current signal strength of the access point, from 0 to 100.</p></li>
-<li><p><strong>icon_name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The current icon name for the access point. Depends on signal strength and current connection status.</p></li>
-<li><p><strong>requires_password</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-only): Whether the access point requires a password to connect.</p></li>
-<li><p><strong>is_connected</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-only): Whether the device is currently connected to this access point.</p></li>
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.WifiAccessPoint.point">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">point</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">gi.repository.NM.AccessPoint</span></em><a class="headerlink" href="#ignis.services.network.WifiAccessPoint.point" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
 </ul>
-</dd>
-</dl>
-<dl class="field-list simple">
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="../exceptions.html#ignis.exceptions.NetworkManagerNotFoundError" title="ignis.exceptions.NetworkManagerNotFoundError"><strong>NetworkManagerNotFoundError</strong></a> -- If Network Manager is not found.</p>
-</dd>
-</dl>
+<p>An instance of <code class="docutils literal notranslate"><span class="pre">NM.AccessPoint</span></code>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.WifiAccessPoint.bandwidth">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bandwidth</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.services.network.WifiAccessPoint.bandwidth" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The channel bandwidth announced by the access point, in MHz.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.WifiAccessPoint.bssid">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bssid</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.network.WifiAccessPoint.bssid" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The BSSID of the access point.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.WifiAccessPoint.frequency">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">frequency</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.services.network.WifiAccessPoint.frequency" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The frequency of the access point, in MHz.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.WifiAccessPoint.last_seen">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">last_seen</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.services.network.WifiAccessPoint.last_seen" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The timestamp for the last time the access point was found in scan results.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.WifiAccessPoint.max_bitrate">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">max_bitrate</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.services.network.WifiAccessPoint.max_bitrate" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The maximum bit rate of the access point, in kbit/s.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.WifiAccessPoint.ssid">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ssid</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.network.WifiAccessPoint.ssid" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The SSID of the access point, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if it is not known.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.WifiAccessPoint.strength">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">strength</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.services.network.WifiAccessPoint.strength" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The current signal strength of the access point, from 0 to 100.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.WifiAccessPoint.icon_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">icon_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.network.WifiAccessPoint.icon_name" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The current icon name for the access point. Depends on signal strength and current connection status.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.WifiAccessPoint.requires_password">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">requires_password</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.network.WifiAccessPoint.requires_password" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>Whether the access point requires a password to connect.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.WifiAccessPoint.is_connected">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_connected</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.network.WifiAccessPoint.is_connected" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>Whether the device is currently connected to this access point.</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.network.WifiAccessPoint.connect_to">
-<span class="sig-name descname"><span class="pre">connect_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.network.WifiAccessPoint.connect_to" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">connect_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.network.WifiAccessPoint.connect_to" title="Link to this definition">#</a></dt>
 <dd><p>Connect to this access point.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
 <dl class="simple">
-<dt>Args</dt><dd><p>password (<code class="docutils literal notranslate"><span class="pre">str</span></code>, optional): Password to use. This has an effect only if the access point requires a password.</p>
+<dt>Args</dt><dd><p>password: Password to use. This has an effect only if the access point requires a password.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.network.WifiAccessPoint.connect_to_graphical">
-<span class="sig-name descname"><span class="pre">connect_to_graphical</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.network.WifiAccessPoint.connect_to_graphical" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">connect_to_graphical</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.network.WifiAccessPoint.connect_to_graphical" title="Link to this definition">#</a></dt>
 <dd><p>Display a graphical dialog to connect to the access point.
 The dialog will be shown only if the access point requires a password.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ignis.services.network.VpnConnection">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.network.</span></span><span class="sig-name descname"><span class="pre">VpnConnection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.network.VpnConnection" title="Link to this definition">#</a></dt>
-<dd><p>VPN connection.</p>
-<dl class="simple">
-<dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>is_connected</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-only): Whether the device is connected to the network.</p></li>
-<li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span> <span class="pre">|</span> <span class="pre">None</span></code>, read-only): The id (name) of the vpn connection or <code class="docutils literal notranslate"><span class="pre">None</span></code> if unknown.</p></li>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.network.</span></span><span class="sig-name descname"><span class="pre">VpnConnection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.NM.RemoteConnection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.NM.Client</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.network.VpnConnection" title="Link to this definition">#</a></dt>
+<dd><p>A VPN connection.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.VpnConnection.is_connected">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_connected</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.network.VpnConnection.is_connected" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
 </ul>
-</dd>
-</dl>
+<p>Whether the device is connected to the network.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.VpnConnection.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.network.VpnConnection.name" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The id (name) of the vpn connection or <code class="docutils literal notranslate"><span class="pre">None</span></code> if unknown.</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.network.VpnConnection.toggle_connection">
-<span class="sig-name descname"><span class="pre">toggle_connection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.network.VpnConnection.toggle_connection" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">toggle_connection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.network.VpnConnection.toggle_connection" title="Link to this definition">#</a></dt>
 <dd><p>Toggle this VPN depending on it's <cite>is_connected</cite> property</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.network.VpnConnection.connect_to">
-<span class="sig-name descname"><span class="pre">connect_to</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.network.VpnConnection.connect_to" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">connect_to</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.network.VpnConnection.connect_to" title="Link to this definition">#</a></dt>
 <dd><p>Connect to this VPN.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.network.VpnConnection.disconnect_from">
-<span class="sig-name descname"><span class="pre">disconnect_from</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.network.VpnConnection.disconnect_from" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">disconnect_from</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.network.VpnConnection.disconnect_from" title="Link to this definition">#</a></dt>
 <dd><p>Disconnect from this VPN.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="ignis.services.network.ActiveAccessPoint">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.network.</span></span><span class="sig-name descname"><span class="pre">ActiveAccessPoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.network.ActiveAccessPoint" title="Link to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
 </dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -784,31 +1069,75 @@ The dialog will be shown only if the access point requires a password.</p>
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.NetworkService"><code class="docutils literal notranslate"><span class="pre">NetworkService</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.Wifi"><code class="docutils literal notranslate"><span class="pre">Wifi</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.Ethernet"><code class="docutils literal notranslate"><span class="pre">Ethernet</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.Vpn"><code class="docutils literal notranslate"><span class="pre">Vpn</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.NetworkService"><code class="docutils literal notranslate"><span class="pre">NetworkService</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.NetworkService.wifi"><code class="docutils literal notranslate"><span class="pre">NetworkService.wifi</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.NetworkService.ethernet"><code class="docutils literal notranslate"><span class="pre">NetworkService.ethernet</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.NetworkService.vpn"><code class="docutils literal notranslate"><span class="pre">NetworkService.vpn</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.Wifi"><code class="docutils literal notranslate"><span class="pre">Wifi</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.Wifi.devices"><code class="docutils literal notranslate"><span class="pre">Wifi.devices</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.Wifi.is_connected"><code class="docutils literal notranslate"><span class="pre">Wifi.is_connected</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.Wifi.icon_name"><code class="docutils literal notranslate"><span class="pre">Wifi.icon_name</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.Wifi.enabled"><code class="docutils literal notranslate"><span class="pre">Wifi.enabled</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.Ethernet"><code class="docutils literal notranslate"><span class="pre">Ethernet</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.Ethernet.devices"><code class="docutils literal notranslate"><span class="pre">Ethernet.devices</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.Ethernet.is_connected"><code class="docutils literal notranslate"><span class="pre">Ethernet.is_connected</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.Ethernet.icon_name"><code class="docutils literal notranslate"><span class="pre">Ethernet.icon_name</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.Vpn"><code class="docutils literal notranslate"><span class="pre">Vpn</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.Vpn.connections"><code class="docutils literal notranslate"><span class="pre">Vpn.connections</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.Vpn.active_vpn_id"><code class="docutils literal notranslate"><span class="pre">Vpn.active_vpn_id</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.Vpn.is_connected"><code class="docutils literal notranslate"><span class="pre">Vpn.is_connected</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.Vpn.icon_name"><code class="docutils literal notranslate"><span class="pre">Vpn.icon_name</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiDevice"><code class="docutils literal notranslate"><span class="pre">WifiDevice</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiDevice.access_points"><code class="docutils literal notranslate"><span class="pre">WifiDevice.access_points</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiDevice.ap"><code class="docutils literal notranslate"><span class="pre">WifiDevice.ap</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiDevice.state"><code class="docutils literal notranslate"><span class="pre">WifiDevice.state</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiDevice.is_connected"><code class="docutils literal notranslate"><span class="pre">WifiDevice.is_connected</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiDevice.scan"><code class="docutils literal notranslate"><span class="pre">WifiDevice.scan()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.EthernetDevice"><code class="docutils literal notranslate"><span class="pre">EthernetDevice</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.EthernetDevice.carrier"><code class="docutils literal notranslate"><span class="pre">EthernetDevice.carrier</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.EthernetDevice.perm_hw_address"><code class="docutils literal notranslate"><span class="pre">EthernetDevice.perm_hw_address</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.EthernetDevice.speed"><code class="docutils literal notranslate"><span class="pre">EthernetDevice.speed</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.EthernetDevice.state"><code class="docutils literal notranslate"><span class="pre">EthernetDevice.state</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.EthernetDevice.is_connected"><code class="docutils literal notranslate"><span class="pre">EthernetDevice.is_connected</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.EthernetDevice.name"><code class="docutils literal notranslate"><span class="pre">EthernetDevice.name</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.EthernetDevice.connect_to"><code class="docutils literal notranslate"><span class="pre">EthernetDevice.connect_to()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.EthernetDevice.disconnect_from"><code class="docutils literal notranslate"><span class="pre">EthernetDevice.disconnect_from()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiAccessPoint"><code class="docutils literal notranslate"><span class="pre">WifiAccessPoint</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiAccessPoint.point"><code class="docutils literal notranslate"><span class="pre">WifiAccessPoint.point</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiAccessPoint.bandwidth"><code class="docutils literal notranslate"><span class="pre">WifiAccessPoint.bandwidth</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiAccessPoint.bssid"><code class="docutils literal notranslate"><span class="pre">WifiAccessPoint.bssid</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiAccessPoint.frequency"><code class="docutils literal notranslate"><span class="pre">WifiAccessPoint.frequency</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiAccessPoint.last_seen"><code class="docutils literal notranslate"><span class="pre">WifiAccessPoint.last_seen</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiAccessPoint.max_bitrate"><code class="docutils literal notranslate"><span class="pre">WifiAccessPoint.max_bitrate</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiAccessPoint.ssid"><code class="docutils literal notranslate"><span class="pre">WifiAccessPoint.ssid</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiAccessPoint.strength"><code class="docutils literal notranslate"><span class="pre">WifiAccessPoint.strength</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiAccessPoint.icon_name"><code class="docutils literal notranslate"><span class="pre">WifiAccessPoint.icon_name</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiAccessPoint.requires_password"><code class="docutils literal notranslate"><span class="pre">WifiAccessPoint.requires_password</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiAccessPoint.is_connected"><code class="docutils literal notranslate"><span class="pre">WifiAccessPoint.is_connected</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiAccessPoint.connect_to"><code class="docutils literal notranslate"><span class="pre">WifiAccessPoint.connect_to()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiAccessPoint.connect_to_graphical"><code class="docutils literal notranslate"><span class="pre">WifiAccessPoint.connect_to_graphical()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.VpnConnection"><code class="docutils literal notranslate"><span class="pre">VpnConnection</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.VpnConnection.is_connected"><code class="docutils literal notranslate"><span class="pre">VpnConnection.is_connected</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.VpnConnection.name"><code class="docutils literal notranslate"><span class="pre">VpnConnection.name</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.VpnConnection.toggle_connection"><code class="docutils literal notranslate"><span class="pre">VpnConnection.toggle_connection()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.VpnConnection.connect_to"><code class="docutils literal notranslate"><span class="pre">VpnConnection.connect_to()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.VpnConnection.disconnect_from"><code class="docutils literal notranslate"><span class="pre">VpnConnection.disconnect_from()</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.ActiveAccessPoint"><code class="docutils literal notranslate"><span class="pre">ActiveAccessPoint</span></code></a></li>
 </ul>
   </nav></div>
 

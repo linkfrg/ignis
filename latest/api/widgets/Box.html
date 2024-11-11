@@ -550,7 +550,7 @@ document.write(`
 <dl class="py class">
 <dt class="sig sig-object py" id="ignis.widgets.Widget.Box">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.widgets.Widget.</span></span><span class="sig-name descname"><span class="pre">Box</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.widgets.Widget.Box" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Box.html">Gtk.Box</a>.</p>
+<dd><p>Bases: <a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-4.0/classes/Box.html#Gtk.Box" title="(in Gtk 4.0 v4.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gtk.Box</span></code></a>.</p>
 <p>The main layout widget.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
@@ -561,13 +561,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<dl class="simple">
-<dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>child</strong> (<code class="docutils literal notranslate"><span class="pre">list[Gtk.Widget]</span></code>, optional, read-write): A list of child widgets.</p></li>
-<li><p><strong>vertical</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, optional, read-write): Whether the box arranges children vertically.</p></li>
-</ul>
-</dd>
-</dl>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Widget</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span>
     <span class="n">child</span><span class="o">=</span><span class="p">[</span><span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;heh&#39;</span><span class="p">),</span> <span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;heh2&#39;</span><span class="p">)],</span>
     <span class="n">vertical</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -576,6 +569,25 @@ document.write(`
 <span class="p">)</span>
 </pre></div>
 </div>
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.widgets.Widget.Box.child">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">child</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><span class="pre">gi.repository.Gtk.Widget</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.widgets.Widget.Box.child" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>optional, read-write</p></li>
+</ul>
+<p>A list of child widgets.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.widgets.Widget.Box.vertical">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vertical</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.Box.vertical" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>optional, read-write</p></li>
+</ul>
+<p>Whether the box arranges children vertically.</p>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -626,7 +638,11 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.Box"><code class="docutils literal notranslate"><span class="pre">Box</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.Box"><code class="docutils literal notranslate"><span class="pre">Box</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.Box.child"><code class="docutils literal notranslate"><span class="pre">Box.child</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.Box.vertical"><code class="docutils literal notranslate"><span class="pre">Box.vertical</span></code></a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

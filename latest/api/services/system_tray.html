@@ -551,22 +551,12 @@ document.write(`
 <dt class="sig sig-object py" id="ignis.services.system_tray.SystemTrayService">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.system_tray.</span></span><span class="sig-name descname"><span class="pre">SystemTrayService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.system_tray.SystemTrayService" title="Link to this definition">#</a></dt>
 <dd><p>A system tray, where application icons are placed.</p>
-<dl class="simple">
-<dt>Signals:</dt><dd><ul class="simple">
-<li><p><strong>&quot;added&quot;</strong> (<a class="reference internal" href="#ignis.services.system_tray.SystemTrayItem" title="ignis.services.system_tray.SystemTrayItem"><code class="xref py py-class docutils literal notranslate"><span class="pre">SystemTrayItem</span></code></a>): Emitted when a new item is added.</p></li>
-</ul>
-</dd>
-<dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>items</strong> (list[<a class="reference internal" href="#ignis.services.system_tray.SystemTrayItem" title="ignis.services.system_tray.SystemTrayItem"><code class="xref py py-class docutils literal notranslate"><span class="pre">SystemTrayItem</span></code></a>], read-only): A list of items.</p></li>
-</ul>
-</dd>
-</dl>
 <dl class="field-list simple">
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="../exceptions.html#ignis.exceptions.AnotherSystemTrayRunningError" title="ignis.exceptions.AnotherSystemTrayRunningError"><strong>AnotherSystemTrayRunningError</strong></a> -- If another system tray is already running.</p>
 </dd>
 </dl>
-<p><strong>Example usage:</strong></p>
+<p>Example usage:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.services.system_tray</span> <span class="kn">import</span> <span class="n">SystemTrayService</span>
 
 <span class="n">system_tray</span> <span class="o">=</span> <span class="n">SystemTrayService</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span>
@@ -574,12 +564,118 @@ document.write(`
 <span class="n">system_tray</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;added&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">title</span><span class="p">))</span>
 </pre></div>
 </div>
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.system_tray.SystemTrayService.added">
+<span class="sig-name descname"><span class="pre">added</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.system_tray.SystemTrayService.added" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>Signal</p></li>
+</ul>
+<p>Emitted when a new item is added.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>item</strong> (<a class="reference internal" href="#ignis.services.system_tray.SystemTrayItem" title="ignis.services.system_tray.SystemTrayItem"><code class="xref py py-class docutils literal notranslate"><span class="pre">SystemTrayItem</span></code></a>) -- The instance of the system tray item.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.system_tray.SystemTrayService.items">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">items</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ignis.services.system_tray.SystemTrayItem" title="ignis.services.system_tray.item.SystemTrayItem"><span class="pre">SystemTrayItem</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.system_tray.SystemTrayService.items" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>A list of system tray items.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ignis.services.system_tray.SystemTrayItem">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.system_tray.</span></span><span class="sig-name descname"><span class="pre">SystemTrayItem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.system_tray.SystemTrayItem" title="Link to this definition">#</a></dt>
-<dd><p>System tray item.</p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.system_tray.</span></span><span class="sig-name descname"><span class="pre">SystemTrayItem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.system_tray.SystemTrayItem" title="Link to this definition">#</a></dt>
+<dd><p>A system tray item.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.system_tray.SystemTrayItem.removed">
+<span class="sig-name descname"><span class="pre">removed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.system_tray.SystemTrayItem.removed" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>Signal</p></li>
+</ul>
+<p>Emitted when the item is removed.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.system_tray.SystemTrayItem.id">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.system_tray.SystemTrayItem.id" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The ID of the item.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.system_tray.SystemTrayItem.category">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">category</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.system_tray.SystemTrayItem.category" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The category of the item.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.system_tray.SystemTrayItem.title">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.system_tray.SystemTrayItem.title" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The title of the item.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.system_tray.SystemTrayItem.status">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">status</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.system_tray.SystemTrayItem.status" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The status of the item.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.system_tray.SystemTrayItem.window_id">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">window_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.services.system_tray.SystemTrayItem.window_id" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The window ID.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.system_tray.SystemTrayItem.icon">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">icon</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">gi.repository.GdkPixbuf.Pixbuf</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.system_tray.SystemTrayItem.icon" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The icon name or a <code class="docutils literal notranslate"><span class="pre">GdkPixbuf.Pixbuf</span></code>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.system_tray.SystemTrayItem.item_is_menu">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">item_is_menu</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.system_tray.SystemTrayItem.item_is_menu" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>Whether the item has a menu.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.system_tray.SystemTrayItem.menu">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">menu</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../dbus_menu.html#ignis.dbus_menu.DBusMenu" title="ignis.dbus_menu.DBusMenu"><span class="pre">DBusMenu</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.system_tray.SystemTrayItem.menu" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>A <a class="reference internal" href="../dbus_menu.html#ignis.dbus_menu.DBusMenu" title="ignis.dbus_menu.DBusMenu"><code class="xref py py-class docutils literal notranslate"><span class="pre">DBusMenu</span></code></a> or <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>To display the menu, add it to a container, and call the <code class="docutils literal notranslate"><span class="pre">.popup()</span></code> method on it.</p>
+</div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>If you want to add <code class="docutils literal notranslate"><span class="pre">menu</span></code> to several containers (e.g., make two status bars with a system tray),
@@ -589,24 +685,17 @@ This is necessary because you can't add a single widget to multiple containers.<
 </pre></div>
 </div>
 </div>
-<dl class="simple">
-<dt>Signals:</dt><dd><ul class="simple">
-<li><p><strong>&quot;removed&quot;</strong> (): Emitted when the item is removed.</p></li>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.system_tray.SystemTrayItem.tooltip">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tooltip</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.system_tray.SystemTrayItem.tooltip" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
 </ul>
-</dd>
-<dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>id</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The ID of the item.</p></li>
-<li><p><strong>category</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The category of the item.</p></li>
-<li><p><strong>title</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The title of the item.</p></li>
-<li><p><strong>status</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The status of the item.</p></li>
-<li><p><strong>window_id</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, read-only): The window ID.</p></li>
-<li><p><strong>icon</strong> (<code class="docutils literal notranslate"><span class="pre">str</span> <span class="pre">|</span> <span class="pre">GdkPixbuf.Pixbuf</span> <span class="pre">|</span> <span class="pre">None</span></code>, read-only): The icon name or a <code class="docutils literal notranslate"><span class="pre">GdkPixbuf.Pixbuf</span></code>.</p></li>
-<li><p><strong>item_is_menu</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-only): Whether the item has a menu.</p></li>
-<li><p><strong>menu</strong> (<code class="docutils literal notranslate"><span class="pre">DBusMenu</span> <span class="pre">|</span> <span class="pre">None</span></code>, read-only): A <a class="reference internal" href="../dbus_menu.html#ignis.dbus_menu.DBusMenu" title="ignis.dbus_menu.DBusMenu"><code class="xref py py-class docutils literal notranslate"><span class="pre">DBusMenu</span></code></a> or <code class="docutils literal notranslate"><span class="pre">None</span></code>. Add it to a container, and call the <code class="docutils literal notranslate"><span class="pre">popup()</span></code> method on it to display the menu.</p></li>
-<li><p><strong>tooltip</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): Tooltip, the text should be displayed when you hover cursor over the icon.</p></li>
-</ul>
-</dd>
-</dl>
+<p>A tooltip, the text should be displayed when you hover cursor over the icon.</p>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -657,8 +746,24 @@ This is necessary because you can't add a single widget to multiple containers.<
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayService"><code class="docutils literal notranslate"><span class="pre">SystemTrayService</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayItem"><code class="docutils literal notranslate"><span class="pre">SystemTrayItem</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayService"><code class="docutils literal notranslate"><span class="pre">SystemTrayService</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayService.added"><code class="docutils literal notranslate"><span class="pre">SystemTrayService.added()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayService.items"><code class="docutils literal notranslate"><span class="pre">SystemTrayService.items</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayItem"><code class="docutils literal notranslate"><span class="pre">SystemTrayItem</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayItem.removed"><code class="docutils literal notranslate"><span class="pre">SystemTrayItem.removed()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayItem.id"><code class="docutils literal notranslate"><span class="pre">SystemTrayItem.id</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayItem.category"><code class="docutils literal notranslate"><span class="pre">SystemTrayItem.category</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayItem.title"><code class="docutils literal notranslate"><span class="pre">SystemTrayItem.title</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayItem.status"><code class="docutils literal notranslate"><span class="pre">SystemTrayItem.status</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayItem.window_id"><code class="docutils literal notranslate"><span class="pre">SystemTrayItem.window_id</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayItem.icon"><code class="docutils literal notranslate"><span class="pre">SystemTrayItem.icon</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayItem.item_is_menu"><code class="docutils literal notranslate"><span class="pre">SystemTrayItem.item_is_menu</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayItem.menu"><code class="docutils literal notranslate"><span class="pre">SystemTrayItem.menu</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayItem.tooltip"><code class="docutils literal notranslate"><span class="pre">SystemTrayItem.tooltip</span></code></a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

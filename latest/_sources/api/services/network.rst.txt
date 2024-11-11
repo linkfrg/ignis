@@ -24,6 +24,3 @@ Network
 
 .. autoclass:: ignis.services.network.VpnConnection
     :members:
-
-.. autoclass:: ignis.services.network.ActiveAccessPoint
-    :members:

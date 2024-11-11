@@ -547,48 +547,11 @@ document.write(`
                   
   <section id="filemonitor">
 <h1>FileMonitor<a class="headerlink" href="#filemonitor" title="Link to this heading">#</a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="ignis.utils.Utils.FileMonitor">
-<span class="sig-prename descclassname"><span class="pre">ignis.utils.Utils.</span></span><span class="sig-name descname"><span class="pre">FileMonitor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.utils.Utils.FileMonitor" title="Link to this definition">#</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="ignis.utils.FileMonitor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.utils.</span></span><span class="sig-name descname"><span class="pre">FileMonitor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.utils.FileMonitor" title="Link to this definition">#</a></dt>
 <dd><p>Monitor changes of the file or directory.</p>
-<dl>
-<dt>Signals:</dt><dd><ul class="simple">
-<li><p><strong>&quot;changed&quot;</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, <code class="docutils literal notranslate"><span class="pre">str</span></code>): Emitted when the file or directory changed. Passes path and event type as arguments.</p></li>
-</ul>
-</dd>
-<dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>path</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, required, read-only): The path to the file or directory to be monitored.</p></li>
-<li><p><strong>recursive</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, optional, read-only): Whether monitoring is recursive (monitor all subdirectories and files). Default: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
-<li><p><strong>flags</strong> (<code class="docutils literal notranslate"><span class="pre">str</span> <span class="pre">|</span> <span class="pre">None</span></code>, optional, read-only): What the monitor will watch for. Default: <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
-<li><p><strong>callback</strong> (<code class="docutils literal notranslate"><span class="pre">Callable</span> <span class="pre">|</span> <span class="pre">None</span></code>, optional, read-write): A function to call when the file or directory changes. Default: <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
-</ul>
-</dd>
-<dt><strong>Flags:</strong></dt><dd><ul class="simple">
-<li><p><strong>&quot;none&quot;</strong></p></li>
-<li><p><strong>&quot;watch_mounts&quot;</strong></p></li>
-<li><p><strong>&quot;send_moved&quot;</strong></p></li>
-<li><p><strong>&quot;watch_hard_links&quot;</strong></p></li>
-<li><p><strong>&quot;watch_moves&quot;</strong></p></li>
-</ul>
-<p>See <a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/flags.html#Gio.FileMonitorFlags">Gio.FileMonitorFlags</a> for more info.</p>
-</dd>
-<dt><strong>Event types:</strong></dt><dd><ul class="simple">
-<li><p><strong>&quot;changed&quot;</strong></p></li>
-<li><p><strong>&quot;changes_done_hint&quot;</strong></p></li>
-<li><p><strong>&quot;moved_out&quot;</strong></p></li>
-<li><p><strong>&quot;deleted&quot;</strong></p></li>
-<li><p><strong>&quot;created&quot;</strong></p></li>
-<li><p><strong>&quot;attribute_changed&quot;</strong></p></li>
-<li><p><strong>&quot;pre_unmount&quot;</strong></p></li>
-<li><p><strong>&quot;unmounted&quot;</strong></p></li>
-<li><p><strong>&quot;moved&quot;</strong></p></li>
-<li><p><strong>&quot;renamed&quot;</strong></p></li>
-<li><p><strong>&quot;moved_in&quot;</strong></p></li>
-</ul>
-<p>See <a class="reference external" href="https://lazka.github.io/pgi-docs/index.html#Gio-2.0/enums.html#Gio.FileMonitorEvent">Gio.FileMonitorEvent</a> for more info.</p>
-</dd>
-</dl>
-<p><strong>Example usage:</strong></p>
+<p>Example usage:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Utils</span><span class="o">.</span><span class="n">FileMonitor</span><span class="p">(</span>
     <span class="n">path</span><span class="o">=</span><span class="s2">&quot;path/to/something&quot;</span><span class="p">,</span>
     <span class="n">recursive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -596,6 +559,100 @@ document.write(`
 <span class="p">)</span>
 </pre></div>
 </div>
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.utils.FileMonitor.changed">
+<span class="sig-name descname"><span class="pre">changed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.utils.FileMonitor.changed" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>Signal</p></li>
+</ul>
+<p>Emitted when the file or directory changed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The path to the changed file or directory.</p></li>
+<li><p><strong>event_type</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The event type. A list of all event types described in <a class="reference internal" href="#ignis.utils.FileMonitor.callback" title="ignis.utils.FileMonitor.callback"><code class="xref py py-attr docutils literal notranslate"><span class="pre">callback</span></code></a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.utils.FileMonitor.path">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.utils.FileMonitor.path" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>required, read-only</p></li>
+</ul>
+<p>The path to the file or directory to be monitored.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.utils.FileMonitor.flags">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">flags</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.utils.FileMonitor.flags" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>optional, read-only</p></li>
+</ul>
+<p>What the monitor will watch for.</p>
+<p>Possible values:</p>
+<ul class="simple">
+<li><p>none</p></li>
+<li><p>watch_mounts</p></li>
+<li><p>send_moved</p></li>
+<li><p>watch_hard_links</p></li>
+<li><p>watch_moves</p></li>
+</ul>
+<p>See <a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/flags.html#Gio.FileMonitorFlags" title="(in Gio 2.0 v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gio.FileMonitorFlags</span></code></a> for more info.</p>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.utils.FileMonitor.callback">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">callback</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.utils.FileMonitor.callback" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>optional, read-write</p></li>
+</ul>
+<p>A function to call when the file or directory changes.
+It should take two arguments:
+1. The path to the changed file or directory
+2. The event type.</p>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p>Event types:</p>
+<ul class="simple">
+<li><p>changed</p></li>
+<li><p>changes_done_hint</p></li>
+<li><p>moved_out</p></li>
+<li><p>deleted</p></li>
+<li><p>created</p></li>
+<li><p>attribute_changed</p></li>
+<li><p>pre_unmount</p></li>
+<li><p>unmounted</p></li>
+<li><p>moved</p></li>
+<li><p>renamed</p></li>
+<li><p>moved_in</p></li>
+</ul>
+<p>See <a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/enums.html#Gio.FileMonitorEvent" title="(in Gio 2.0 v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gio.FileMonitorEvent</span></code></a> for more info.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.utils.FileMonitor.recursive">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">recursive</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.utils.FileMonitor.recursive" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>optional, read-only</p></li>
+</ul>
+<p>Whether monitoring is recursive (monitor all subdirectories and files).</p>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.utils.FileMonitor.cancel">
+<span class="sig-name descname"><span class="pre">cancel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.utils.FileMonitor.cancel" title="Link to this definition">#</a></dt>
+<dd><p>Cancel the monitoring process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -646,7 +703,15 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.FileMonitor"><code class="docutils literal notranslate"><span class="pre">FileMonitor()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.FileMonitor"><code class="docutils literal notranslate"><span class="pre">FileMonitor</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.FileMonitor.changed"><code class="docutils literal notranslate"><span class="pre">FileMonitor.changed()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.FileMonitor.path"><code class="docutils literal notranslate"><span class="pre">FileMonitor.path</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.FileMonitor.flags"><code class="docutils literal notranslate"><span class="pre">FileMonitor.flags</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.FileMonitor.callback"><code class="docutils literal notranslate"><span class="pre">FileMonitor.callback</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.FileMonitor.recursive"><code class="docutils literal notranslate"><span class="pre">FileMonitor.recursive</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.FileMonitor.cancel"><code class="docutils literal notranslate"><span class="pre">FileMonitor.cancel()</span></code></a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

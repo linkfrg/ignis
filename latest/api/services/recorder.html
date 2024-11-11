@@ -554,26 +554,13 @@ document.write(`
 Uses XDG Desktop portal and PipeWire.
 Allow record screen with microphone audio and internal system audio.</p>
 <dl class="simple">
-<dt><strong>Dependencies</strong>:</dt><dd><ul class="simple">
-<li><p><strong>GStreamer</strong></p></li>
-<li><p><strong>PipeWire</strong></p></li>
-<li><p><strong>gst-plugin-pipewire</strong></p></li>
-<li><p><strong>gst-plugins-good</strong></p></li>
-<li><p><strong>gst-plugins-ugly</strong></p></li>
-<li><p><strong>pipewire-pulse</strong>: for audio recording.</p></li>
-</ul>
-</dd>
-<dt>Signals:</dt><dd><ul class="simple">
-<li><p><strong>&quot;recording_started&quot;</strong> (): Emitted when recording starts.</p></li>
-<li><p><strong>&quot;recording_stopped&quot;</strong> (): Emitted when recording stops.</p></li>
-</ul>
-</dd>
-<dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>active</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-write): Whether recording is currently active.</p></li>
-<li><p><strong>is_paused</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-write): Whether recording is currently paused.</p></li>
-<li><p><strong>bitrate</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, read-write, default: 8000): The bitrate of the recording.</p></li>
-<li><p><strong>default_file_location</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-write, default: <code class="docutils literal notranslate"><span class="pre">&quot;$HOME/Videos&quot;</span></code>): Default location for saving recordings.</p></li>
-<li><p><strong>default_filename</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-write, default: <code class="docutils literal notranslate"><span class="pre">&quot;%Y-%m-%d_%H-%M-%S.mp4&quot;</span></code>): Default filename for recordings. Supports time formating.</p></li>
+<dt>Dependencies:</dt><dd><ul class="simple">
+<li><p>GStreamer</p></li>
+<li><p>PipeWire</p></li>
+<li><p>gst-plugin-pipewire</p></li>
+<li><p>gst-plugins-good</p></li>
+<li><p>gst-plugins-ugly</p></li>
+<li><p>pipewire-pulse: for audio recording.</p></li>
 </ul>
 </dd>
 </dl>
@@ -585,7 +572,7 @@ Allow record screen with microphone audio and internal system audio.</p>
 </ul>
 </dd>
 </dl>
-<p><strong>Example usage:</strong></p>
+<p>Example usage:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.services.recorder</span> <span class="kn">import</span> <span class="n">RecorderService</span>
 <span class="kn">from</span> <span class="nn">ignis.utils</span> <span class="kn">import</span> <span class="n">Utils</span>
 
@@ -598,37 +585,121 @@ Allow record screen with microphone audio and internal system audio.</p>
 </pre></div>
 </div>
 <dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.recorder.RecorderService.recording_started">
+<span class="sig-name descname"><span class="pre">recording_started</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.recorder.RecorderService.recording_started" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>Signal</p></li>
+</ul>
+<p>Emitted when recording starts.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.recorder.RecorderService.recording_stopped">
+<span class="sig-name descname"><span class="pre">recording_stopped</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.recorder.RecorderService.recording_stopped" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>Signal</p></li>
+</ul>
+<p>Emitted when recording stops.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.recorder.RecorderService.active">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">active</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.recorder.RecorderService.active" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>Whether recording is currently active.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.recorder.RecorderService.is_paused">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_paused</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.recorder.RecorderService.is_paused" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>Whether recording is currently paused.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.recorder.RecorderService.bitrate">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bitrate</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.services.recorder.RecorderService.bitrate" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-write</p></li>
+</ul>
+<p>The bitrate of the recording.</p>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">8000</span></code></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.recorder.RecorderService.default_file_location">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">default_file_location</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.recorder.RecorderService.default_file_location" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-write</p></li>
+</ul>
+<p>The default location for saving recordings.</p>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">$HOME/Videos</span></code>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.recorder.RecorderService.default_filename">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">default_filename</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.recorder.RecorderService.default_filename" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-write</p></li>
+</ul>
+<p>The default filename for recordings. Supports time formating.</p>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">%Y-%m-%d_%H-%M-%S.mp4</span></code></p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.recorder.RecorderService.start_recording">
-<span class="sig-name descname"><span class="pre">start_recording</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">record_microphone</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">record_internal_audio</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">audio_devices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.recorder.RecorderService.start_recording" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">start_recording</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">record_microphone</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">record_internal_audio</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">audio_devices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.recorder.RecorderService.start_recording" title="Link to this definition">#</a></dt>
 <dd><p>Start recording.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>path</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, optional) -- Recording path. It will override <code class="docutils literal notranslate"><span class="pre">default_file_location</span></code> and <code class="docutils literal notranslate"><span class="pre">default_filename</span></code> properties.</p></li>
-<li><p><strong>record_microphone</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, optional) -- Whether record audio from microphone.</p></li>
-<li><p><strong>record_internal_audio</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, optional) -- Whether record internal audio.</p></li>
-<li><p><strong>audio_devices</strong> (<code class="docutils literal notranslate"><span class="pre">list[str]</span></code>, optional) -- A list of audio devices names from which audio should be recorded.</p></li>
+<li><p><strong>path</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">None</span></code>) -- Recording path. It will override <code class="docutils literal notranslate"><span class="pre">default_file_location</span></code> and <code class="docutils literal notranslate"><span class="pre">default_filename</span></code> properties.</p></li>
+<li><p><strong>record_microphone</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">False</span></code>) -- Whether record audio from microphone.</p></li>
+<li><p><strong>record_internal_audio</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">False</span></code>) -- Whether record internal audio.</p></li>
+<li><p><strong>audio_devices</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>] | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">None</span></code>) -- A list of audio devices names from which audio should be recorded.</p></li>
 </ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.recorder.RecorderService.stop_recording">
-<span class="sig-name descname"><span class="pre">stop_recording</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.recorder.RecorderService.stop_recording" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">stop_recording</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.recorder.RecorderService.stop_recording" title="Link to this definition">#</a></dt>
 <dd><p>Stop recording.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.recorder.RecorderService.pause_recording">
-<span class="sig-name descname"><span class="pre">pause_recording</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.recorder.RecorderService.pause_recording" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">pause_recording</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.recorder.RecorderService.pause_recording" title="Link to this definition">#</a></dt>
 <dd><p>Pause recording. This has an effect only if the recording is active and not already paused.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.recorder.RecorderService.continue_recording">
-<span class="sig-name descname"><span class="pre">continue_recording</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.recorder.RecorderService.continue_recording" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">continue_recording</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.recorder.RecorderService.continue_recording" title="Link to this definition">#</a></dt>
 <dd><p>Continue recording. This has an effect only if the recording is active and paused.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -682,6 +753,13 @@ Allow record screen with microphone audio and internal system audio.</p>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService"><code class="docutils literal notranslate"><span class="pre">RecorderService</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.recording_started"><code class="docutils literal notranslate"><span class="pre">RecorderService.recording_started()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.recording_stopped"><code class="docutils literal notranslate"><span class="pre">RecorderService.recording_stopped()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.active"><code class="docutils literal notranslate"><span class="pre">RecorderService.active</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.is_paused"><code class="docutils literal notranslate"><span class="pre">RecorderService.is_paused</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.bitrate"><code class="docutils literal notranslate"><span class="pre">RecorderService.bitrate</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.default_file_location"><code class="docutils literal notranslate"><span class="pre">RecorderService.default_file_location</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.default_filename"><code class="docutils literal notranslate"><span class="pre">RecorderService.default_filename</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.start_recording"><code class="docutils literal notranslate"><span class="pre">RecorderService.start_recording()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.stop_recording"><code class="docutils literal notranslate"><span class="pre">RecorderService.stop_recording()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.pause_recording"><code class="docutils literal notranslate"><span class="pre">RecorderService.pause_recording()</span></code></a></li>

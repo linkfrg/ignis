@@ -550,33 +550,33 @@ document.write(`
 <dl class="py class">
 <dt class="sig sig-object py" id="ignis.widgets.Widget.Label">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.widgets.Widget.</span></span><span class="sig-name descname"><span class="pre">Label</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.widgets.Widget.Label" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Label.html">Gtk.Label</a>.</p>
+<dd><p>Bases: <a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-4.0/classes/Label.html#Gtk.Label" title="(in Gtk 4.0 v4.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gtk.Label</span></code></a></p>
 <p>A widget that displays a small amount of text.</p>
 <dl class="simple">
-<dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>justify</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, optional, read-write): The alignment of the lines in the text of the label relative to each other. This does NOT affect the alignment of the label within its allocation.</p></li>
-<li><p><strong>ellipsize</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, optional, read-write): The preferred place to ellipsize the string. Default: <code class="docutils literal notranslate"><span class="pre">&quot;none&quot;</span></code>.</p></li>
-<li><p><strong>wrap_mode</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, optional, read-write): If <code class="docutils literal notranslate"><span class="pre">wrap</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, controls how linewrapping is done. Default: <code class="docutils literal notranslate"><span class="pre">&quot;word&quot;</span></code>.</p></li>
+<dt>Overrided properties:</dt><dd><ul class="simple">
+<li><p>justify: The alignment of the lines in the text of the label relative to each other. This does NOT affect the alignment of the label within its allocation.</p></li>
+<li><p>ellipsize: The preferred place to ellipsize the string. Default: <code class="docutils literal notranslate"><span class="pre">none</span></code>.</p></li>
+<li><p>wrap_mode: If <code class="docutils literal notranslate"><span class="pre">wrap</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, controls how linewrapping is done. Default: <code class="docutils literal notranslate"><span class="pre">word</span></code>.</p></li>
 </ul>
 </dd>
-<dt><strong>Justify:</strong></dt><dd><ul class="simple">
-<li><p><strong>&quot;left&quot;</strong> : The text is placed at the left edge of the label.</p></li>
-<li><p><strong>&quot;right&quot;</strong> : The text is placed at the right edge of the label.</p></li>
-<li><p><strong>&quot;center&quot;</strong> : The text is placed in the center of the label.</p></li>
-<li><p><strong>&quot;fill&quot;</strong> : The text is placed is distributed across the label.</p></li>
+<dt>Justify:</dt><dd><ul class="simple">
+<li><p>left: The text is placed at the left edge of the label.</p></li>
+<li><p>right: The text is placed at the right edge of the label.</p></li>
+<li><p>center: The text is placed in the center of the label.</p></li>
+<li><p>fill: The text is placed is distributed across the label.</p></li>
 </ul>
 </dd>
-<dt><strong>Ellipsize:</strong></dt><dd><ul class="simple">
-<li><p><strong>&quot;none&quot;</strong> : No ellipsization.</p></li>
-<li><p><strong>&quot;start&quot;</strong> : Omit characters at the start of the text.</p></li>
-<li><p><strong>&quot;middle&quot;</strong> : Omit characters in the middle of the text.</p></li>
-<li><p><strong>&quot;end&quot;</strong> : Omit characters at the end of the text.</p></li>
+<dt>Ellipsize:</dt><dd><ul class="simple">
+<li><p>none: No ellipsization.</p></li>
+<li><p>start: Omit characters at the start of the text.</p></li>
+<li><p>middle: Omit characters in the middle of the text.</p></li>
+<li><p>end: Omit characters at the end of the text.</p></li>
 </ul>
 </dd>
-<dt><strong>Wrap mode:</strong></dt><dd><ul class="simple">
-<li><p><strong>&quot;word&quot;</strong> : Wrap lines at word boundaries.</p></li>
-<li><p><strong>&quot;char&quot;</strong> : Wrap lines at character boundaries.</p></li>
-<li><p><strong>&quot;word_char&quot;</strong> : Wrap lines at word boundaries, but fall back to character boundaries if there is not enough space for a full word.</p></li>
+<dt>Wrap mode:</dt><dd><ul class="simple">
+<li><p>word: Wrap lines at word boundaries.</p></li>
+<li><p>char: Wrap lines at character boundaries.</p></li>
+<li><p>word_char: Wrap lines at word boundaries, but fall back to character boundaries if there is not enough space for a full word.</p></li>
 </ul>
 </dd>
 </dl>

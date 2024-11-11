@@ -1,4 +1,5 @@
 Timeout
 -------
 
-.. autofunction:: ignis.utils.Utils.Timeout
+.. autoclass:: ignis.utils.Timeout
+    :members:

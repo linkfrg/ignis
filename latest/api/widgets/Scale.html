@@ -550,25 +550,18 @@ document.write(`
 <dl class="py class">
 <dt class="sig sig-object py" id="ignis.widgets.Widget.Scale">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.widgets.Widget.</span></span><span class="sig-name descname"><span class="pre">Scale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.widgets.Widget.Scale" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Scale.html">Gtk.Scale</a>.</p>
+<dd><p>Bases: <a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-4.0/classes/Scale.html#Gtk.Scale" title="(in Gtk 4.0 v4.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gtk.Scale</span></code></a></p>
 <p>A slider widget.</p>
 <dl class="simple">
-<dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>vertical</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, optional, read-write): Whether the scale is vertical.</p></li>
-<li><p><strong>min</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>, optional, read-write): Minimum value.</p></li>
-<li><p><strong>max</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>, optional, read-write): Maximum value.</p></li>
-<li><p><strong>step</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>, optional, read-write): Step increment.</p></li>
-<li><p><strong>value</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code>, optional, read-write): Current value.</p></li>
-<li><p><strong>on_change</strong> (<code class="docutils literal notranslate"><span class="pre">Callable</span></code>, optional, read-write): Function to call when the value changes.</p></li>
-<li><p><strong>draw_value</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, optional, read-write): Whether the current value is displayed.</p></li>
-<li><p><strong>value_pos</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, optional, read-write): Position where the current value is displayed. Works only if <code class="docutils literal notranslate"><span class="pre">draw_value</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>. Default: <code class="docutils literal notranslate"><span class="pre">&quot;top&quot;</span></code>.</p></li>
+<dt>Overrided properties:</dt><dd><ul class="simple">
+<li><p>value_pos: Position where the current value is displayed. Works only if <code class="docutils literal notranslate"><span class="pre">draw_value</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>. Default: <code class="docutils literal notranslate"><span class="pre">top</span></code>.</p></li>
 </ul>
 </dd>
-<dt><strong>Value position:</strong></dt><dd><ul class="simple">
-<li><p><strong>&quot;left&quot;</strong></p></li>
-<li><p><strong>&quot;right&quot;</strong></p></li>
-<li><p><strong>&quot;top&quot;</strong></p></li>
-<li><p><strong>&quot;bottom&quot;</strong></p></li>
+<dt>Value position:</dt><dd><ul class="simple">
+<li><p>left</p></li>
+<li><p>right</p></li>
+<li><p>top</p></li>
+<li><p>bottom</p></li>
 </ul>
 </dd>
 </dl>
@@ -584,6 +577,60 @@ document.write(`
 <span class="p">)</span>
 </pre></div>
 </div>
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.widgets.Widget.Scale.value">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">value</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.Scale.value" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>optional, read-write</p></li>
+</ul>
+<p>The current value.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.widgets.Widget.Scale.min">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">min</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.Scale.min" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>optional, read-write</p></li>
+</ul>
+<p>Minimum value.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.widgets.Widget.Scale.max">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">max</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.Scale.max" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>optional, read-write</p></li>
+</ul>
+<p>Maximum value.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.widgets.Widget.Scale.on_change">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">on_change</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.Scale.on_change" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>optional, read-write</p></li>
+</ul>
+<p>The function to call when the value changes.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.widgets.Widget.Scale.step">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">step</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.Scale.step" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>optional, read-write</p></li>
+</ul>
+<p>Step increment.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.widgets.Widget.Scale.vertical">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vertical</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.Scale.vertical" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>optional, read-write</p></li>
+</ul>
+<p>Whether the scale is vertical.</p>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -634,7 +681,15 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.Scale"><code class="docutils literal notranslate"><span class="pre">Scale</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.Scale"><code class="docutils literal notranslate"><span class="pre">Scale</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.Scale.value"><code class="docutils literal notranslate"><span class="pre">Scale.value</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.Scale.min"><code class="docutils literal notranslate"><span class="pre">Scale.min</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.Scale.max"><code class="docutils literal notranslate"><span class="pre">Scale.max</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.Scale.on_change"><code class="docutils literal notranslate"><span class="pre">Scale.on_change</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.Scale.step"><code class="docutils literal notranslate"><span class="pre">Scale.step</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.Scale.vertical"><code class="docutils literal notranslate"><span class="pre">Scale.vertical</span></code></a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

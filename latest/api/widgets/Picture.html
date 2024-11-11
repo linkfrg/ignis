@@ -549,24 +549,21 @@ document.write(`
 <h1>Picture<a class="headerlink" href="#picture" title="Link to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="ignis.widgets.Widget.Picture">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.widgets.Widget.</span></span><span class="sig-name descname"><span class="pre">Picture</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.widgets.Widget.Picture" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Picture.html">Gtk.Picture</a>.</p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.widgets.Widget.</span></span><span class="sig-name descname"><span class="pre">Picture</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">content_fit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'contain'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.widgets.Widget.Picture" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-4.0/classes/Picture.html#Gtk.Picture" title="(in Gtk 4.0 v4.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gtk.Picture</span></code></a></p>
 <p>A widget that displays an image at its native aspect ratio.</p>
 <dl>
-<dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>image</strong> (<code class="docutils literal notranslate"><span class="pre">str</span> <span class="pre">|</span> <span class="pre">GdkPixbuf.Pixbuf</span> <span class="pre">|</span> <span class="pre">None</span></code>, optional, read-write): Icon name, path to an image or <code class="docutils literal notranslate"><span class="pre">GdkPixbuf.Pixbuf</span></code>.</p></li>
-<li><p><strong>width</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, optional, read-write): Width of the image.</p></li>
-<li><p><strong>height</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, optional, read-write): Height of the image.</p></li>
-<li><p><strong>content_fit</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, optional, read-write): Controls how a content should be made to fit inside an allocation. Default: <code class="docutils literal notranslate"><span class="pre">&quot;contain&quot;</span></code>.</p></li>
+<dt>Overrided properties:</dt><dd><ul class="simple">
+<li><p>content_fit: Controls how a content should be made to fit inside an allocation. Default: <code class="docutils literal notranslate"><span class="pre">contain</span></code>.</p></li>
 </ul>
 </dd>
-<dt><strong>Content fit:</strong></dt><dd><ul class="simple">
-<li><p><strong>&quot;fill&quot;</strong>: Make the content fill the entire allocation, without taking its aspect ratio in consideration.</p></li>
-<li><p><strong>&quot;contain&quot;</strong>: Scale the content to fit the allocation, while taking its aspect ratio in consideration..</p></li>
-<li><p><strong>&quot;cover&quot;</strong>: Cover the entire allocation, while taking the content aspect ratio in consideration.</p></li>
-<li><p><strong>&quot;scale_down&quot;</strong>: The content is scaled down to fit the allocation, if needed, otherwise its original size is used.</p></li>
+<dt>Content fit:</dt><dd><ul class="simple">
+<li><p>fill: Make the content fill the entire allocation, without taking its aspect ratio in consideration.</p></li>
+<li><p>contain: Scale the content to fit the allocation, while taking its aspect ratio in consideration..</p></li>
+<li><p>cover: Cover the entire allocation, while taking the content aspect ratio in consideration.</p></li>
+<li><p>scale_down: The content is scaled down to fit the allocation, if needed, otherwise its original size is used.</p></li>
 </ul>
-<p>For more info, see <a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-4.0/enums.html#Gtk.ContentFit">Gtk.ContentFit</a></p>
+<p>For more info, see <a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-4.0/enums.html#Gtk.ContentFit" title="(in Gtk 4.0 v4.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gtk.ContentFit</span></code></a>.</p>
 </dd>
 </dl>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Widget</span><span class="o">.</span><span class="n">Picture</span><span class="p">(</span>
@@ -576,6 +573,33 @@ document.write(`
 <span class="p">)</span>
 </pre></div>
 </div>
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.widgets.Widget.Picture.image">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">image</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">gi.repository.GdkPixbuf.Pixbuf</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.Picture.image" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>optional, read-write</p></li>
+</ul>
+<p>The icon name, path to an image or <code class="docutils literal notranslate"><span class="pre">GdkPixbuf.Pixbuf</span></code>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.widgets.Widget.Picture.width">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">width</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.Picture.width" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>optional, read-write</p></li>
+</ul>
+<p>Width of the image.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.widgets.Widget.Picture.height">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">height</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.Picture.height" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>optional, read-write</p></li>
+</ul>
+<p>Height of the image.</p>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -626,7 +650,12 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.Picture"><code class="docutils literal notranslate"><span class="pre">Picture</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.Picture"><code class="docutils literal notranslate"><span class="pre">Picture</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.Picture.image"><code class="docutils literal notranslate"><span class="pre">Picture.image</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.Picture.width"><code class="docutils literal notranslate"><span class="pre">Picture.width</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.Picture.height"><code class="docutils literal notranslate"><span class="pre">Picture.height</span></code></a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

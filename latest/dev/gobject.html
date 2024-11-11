@@ -464,7 +464,8 @@ document.write(`
 <h1>GObject<a class="headerlink" href="#gobject" title="Link to this heading">#</a></h1>
 <p>All GObjects in Ignis should inherit from the <a class="reference internal" href="../api/gobject.html#ignis.gobject.IgnisGObject" title="ignis.gobject.IgnisGObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">IgnisGObject</span></code></a> class,
 which provides additional functionality and thread-safe signal operations.</p>
-<p>All other stuff (properties, signals) follow the standard PyGObject way.</p>
+<p>All other stuff (properties, signals) follow the standard PyGObject way.
+Use <code class="docutils literal notranslate"><span class="pre">&#64;GObject.Property</span></code> and <code class="docutils literal notranslate"><span class="pre">&#64;GObject.Signal</span></code>  decorators to define properties and signals respectively.</p>
 </section>
 
 

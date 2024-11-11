@@ -547,30 +547,69 @@ document.write(`
                   
   <section id="poll">
 <h1>Poll<a class="headerlink" href="#poll" title="Link to this heading">#</a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="ignis.utils.Utils.Poll">
-<span class="sig-prename descclassname"><span class="pre">ignis.utils.Utils.</span></span><span class="sig-name descname"><span class="pre">Poll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.utils.Utils.Poll" title="Link to this definition">#</a></dt>
-<dd><p>Call a callback every n milliseconds specefied by the timeout.</p>
-<dl class="simple">
-<dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>timeout</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, required, read-write): The timeout interval in milliseconds.</p></li>
-<li><p><strong>callback</strong> (<code class="docutils literal notranslate"><span class="pre">Callable</span></code>, required, read-write): The function to call when the timeout is reached. The <code class="docutils literal notranslate"><span class="pre">self</span></code> will passed as an argument.</p></li>
-<li><p><strong>output</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, not argument, read-only): The output of the callback.</p></li>
-</ul>
-</dd>
-</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="ignis.utils.Poll">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.utils.</span></span><span class="sig-name descname"><span class="pre">Poll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.utils.Poll" title="Link to this definition">#</a></dt>
+<dd><p>Calls a callback every n milliseconds specified by the timeout.</p>
 <p>You can pass arguments to the constructor, and they will be passed to the callback.</p>
-<div class="admonition hint">
-<p class="admonition-title">Hint</p>
-<p>You can use bind() on <code class="docutils literal notranslate"><span class="pre">output</span></code>.</p>
-</div>
-<p><strong>Example usage:</strong></p>
+<p>Example usage:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.utils</span> <span class="kn">import</span> <span class="n">Utils</span>
 
 <span class="c1"># print &quot;Hello&quot; every second</span>
 <span class="n">Utils</span><span class="o">.</span><span class="n">Poll</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">1_000</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="k">lambda</span> <span class="bp">self</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.utils.Poll.changed">
+<span class="sig-name descname"><span class="pre">changed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ignis.utils.Poll.changed" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>Signal</p></li>
+</ul>
+<p>Emitted at each iteration.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.utils.Poll.timeout">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">timeout</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.utils.Poll.timeout" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>required, read-write</p></li>
+</ul>
+<p>The timeout interval in milliseconds.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.utils.Poll.callback">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">callback</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></em><a class="headerlink" href="#ignis.utils.Poll.callback" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>required, read-write</p></li>
+</ul>
+<p>The function to call when the timeout is reached. The <code class="docutils literal notranslate"><span class="pre">self</span></code> will passed as an argument.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.utils.Poll.output">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">output</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a></em><a class="headerlink" href="#ignis.utils.Poll.output" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>not argument, read-only</p></li>
+</ul>
+<p>The output of the callback.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>You can use bind() on <code class="docutils literal notranslate"><span class="pre">output</span></code>.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.utils.Poll.cancel">
+<span class="sig-name descname"><span class="pre">cancel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.utils.Poll.cancel" title="Link to this definition">#</a></dt>
+<dd><p>Cancel polling.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -621,7 +660,14 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.Poll"><code class="docutils literal notranslate"><span class="pre">Poll()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Poll"><code class="docutils literal notranslate"><span class="pre">Poll</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Poll.changed"><code class="docutils literal notranslate"><span class="pre">Poll.changed()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Poll.timeout"><code class="docutils literal notranslate"><span class="pre">Poll.timeout</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Poll.callback"><code class="docutils literal notranslate"><span class="pre">Poll.callback</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Poll.output"><code class="docutils literal notranslate"><span class="pre">Poll.output</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Poll.cancel"><code class="docutils literal notranslate"><span class="pre">Poll.cancel()</span></code></a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

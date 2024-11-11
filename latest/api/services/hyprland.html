@@ -551,15 +551,6 @@ document.write(`
 <dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.hyprland.</span></span><span class="sig-name descname"><span class="pre">HyprlandService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.hyprland.HyprlandService" title="Link to this definition">#</a></dt>
 <dd><p>Hyprland IPC client.</p>
-<dl class="simple">
-<dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>workspaces</strong> (<code class="docutils literal notranslate"><span class="pre">list[dict[str,</span> <span class="pre">Any]]</span></code>, read-only): A list of workspaces.</p></li>
-<li><p><strong>active_workspace</strong> (<code class="docutils literal notranslate"><span class="pre">Dict[str,</span> <span class="pre">Any]</span></code>, read-only): The currently active workspace.</p></li>
-<li><p><strong>kb_layout</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The currenly active keyboard layout.</p></li>
-<li><p><strong>active_window</strong> (<code class="docutils literal notranslate"><span class="pre">Dict[str,</span> <span class="pre">Any]</span></code>, read-only): The currenly focused window.</p></li>
-</ul>
-</dd>
-</dl>
 <dl class="field-list simple">
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="../exceptions.html#ignis.exceptions.HyprlandIPCNotFoundError" title="ignis.exceptions.HyprlandIPCNotFoundError"><strong>HyprlandIPCNotFoundError</strong></a> -- If Hyprland IPC is not found.</p>
@@ -567,7 +558,7 @@ document.write(`
 </dl>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The contents of &quot;dictionary&quot; (<code class="docutils literal notranslate"><span class="pre">Dict</span></code>) properties are not described here.
+<p>The contents of <code class="docutils literal notranslate"><span class="pre">dict</span></code> properties are not described here.
 To find out their contents just print them into the terminal.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">hyprland</span><span class="o">.</span><span class="n">workspaces</span><span class="p">)</span>
 <span class="go">[</span>
@@ -622,7 +613,7 @@ To find out their contents just print them into the terminal.</p>
 </pre></div>
 </div>
 </div>
-<p><strong>Example usage:</strong></p>
+<p>Example usage:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.services.hyprland</span> <span class="kn">import</span> <span class="n">HyprlandService</span>
 
 <span class="n">hyprland</span> <span class="o">=</span> <span class="n">HyprlandService</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span>
@@ -633,35 +624,82 @@ To find out their contents just print them into the terminal.</p>
 <span class="n">hyprland</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;notify::kb-layout&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">hyprland</span><span class="o">.</span><span class="n">kb_layout</span><span class="p">))</span>
 </pre></div>
 </div>
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService.workspaces">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">workspaces</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.workspaces" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>A list of workspaces.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService.active_workspace">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">active_workspace</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.active_workspace" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The currently active workspace.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService.kb_layout">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">kb_layout</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.kb_layout" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The currenly active keyboard layout.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService.active_window">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">active_window</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.active_window" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The currenly focused window.</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService.send_command">
-<span class="sig-name descname"><span class="pre">send_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.send_command" title="Link to this definition">#</a></dt>
-<dd><p>Send command to Hyprland IPC.
-Supported the same commands as in hyprctl.
-If you want to get response as JSON use this syntax: <code class="docutils literal notranslate"><span class="pre">j/COMMAND</span></code>.</p>
+<span class="sig-name descname"><span class="pre">send_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.send_command" title="Link to this definition">#</a></dt>
+<dd><p>Send a command to the Hyprland IPC.
+Supports the same commands as <code class="docutils literal notranslate"><span class="pre">hyprctl</span></code>.
+If you want to receive the response in JSON format, use this syntax: <code class="docutils literal notranslate"><span class="pre">j/COMMAND</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>cmd</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- A command.</p>
+<dd class="field-odd"><p><strong>cmd</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The command to send.</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Response from Hyprland IPC.</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Response from Hyprland IPC.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService.switch_kb_layout">
-<span class="sig-name descname"><span class="pre">switch_kb_layout</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.switch_kb_layout" title="Link to this definition">#</a></dt>
-<dd><p>Just switch to next keyboard layout.</p>
+<span class="sig-name descname"><span class="pre">switch_kb_layout</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.switch_kb_layout" title="Link to this definition">#</a></dt>
+<dd><p>Switch to the next keyboard layout.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService.switch_to_workspace">
-<span class="sig-name descname"><span class="pre">switch_to_workspace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">workspace_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.switch_to_workspace" title="Link to this definition">#</a></dt>
-<dd><p>Switch to workspace by ID.</p>
+<span class="sig-name descname"><span class="pre">switch_to_workspace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">workspace_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.switch_to_workspace" title="Link to this definition">#</a></dt>
+<dd><p>Switch to a workspace by its ID.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>workspace_id</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>) -- ID of workspace to be switched to</p>
+<dd class="field-odd"><p><strong>workspace_id</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) -- The ID of the workspace to switch to.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
 </dd>
 </dl>
 </dd></dl>
@@ -717,6 +755,10 @@ If you want to get response as JSON use this syntax: <code class="docutils liter
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService"><code class="docutils literal notranslate"><span class="pre">HyprlandService</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.workspaces"><code class="docutils literal notranslate"><span class="pre">HyprlandService.workspaces</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.active_workspace"><code class="docutils literal notranslate"><span class="pre">HyprlandService.active_workspace</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.kb_layout"><code class="docutils literal notranslate"><span class="pre">HyprlandService.kb_layout</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.active_window"><code class="docutils literal notranslate"><span class="pre">HyprlandService.active_window</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.send_command"><code class="docutils literal notranslate"><span class="pre">HyprlandService.send_command()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.switch_kb_layout"><code class="docutils literal notranslate"><span class="pre">HyprlandService.switch_kb_layout()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.switch_to_workspace"><code class="docutils literal notranslate"><span class="pre">HyprlandService.switch_to_workspace()</span></code></a></li>

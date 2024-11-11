@@ -549,15 +549,9 @@ document.write(`
 <h1>RegularWindow<a class="headerlink" href="#regularwindow" title="Link to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="ignis.widgets.Widget.RegularWindow">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.widgets.Widget.</span></span><span class="sig-name descname"><span class="pre">RegularWindow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.widgets.Widget.RegularWindow" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Window.html">Gtk.Window</a>.</p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.widgets.Widget.</span></span><span class="sig-name descname"><span class="pre">RegularWindow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">namespace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.widgets.Widget.RegularWindow" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-4.0/classes/Window.html#Gtk.Window" title="(in Gtk 4.0 v4.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gtk.Window</span></code></a></p>
 <p>A standart application window.</p>
-<dl class="simple">
-<dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>namespace</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, required, read-only): The name of the window, used for accessing it from the CLI and <code class="xref py py-class docutils literal notranslate"><span class="pre">ignisApp</span></code>. It must be unique.</p></li>
-</ul>
-</dd>
-</dl>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Widget</span><span class="o">.</span><span class="n">RegularWindow</span><span class="p">(</span>
     <span class="n">child</span><span class="o">=</span><span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;this is regular window&quot;</span><span class="p">),</span>
     <span class="n">title</span><span class="o">=</span><span class="s2">&quot;This is title&quot;</span><span class="p">,</span>
@@ -566,6 +560,16 @@ document.write(`
 <span class="p">)</span>
 </pre></div>
 </div>
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.widgets.Widget.RegularWindow.namespace">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">namespace</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.RegularWindow.namespace" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>required, read-only</p></li>
+</ul>
+<p>The name of the window, used for accessing it from the CLI and <a class="reference internal" href="../app.html#ignis.app.IgnisApp" title="ignis.app.IgnisApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">IgnisApp</span></code></a>.
+It must be unique.</p>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -616,7 +620,10 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.RegularWindow"><code class="docutils literal notranslate"><span class="pre">RegularWindow</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.RegularWindow"><code class="docutils literal notranslate"><span class="pre">RegularWindow</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.RegularWindow.namespace"><code class="docutils literal notranslate"><span class="pre">RegularWindow.namespace</span></code></a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

@@ -20,77 +20,116 @@ Here are some examples for functions and classes.
 Functions
 ~~~~~~~~~~~~~~~~
 For functions, use the standard Google docstring style.
+Type hints will be added automatically.
 
 .. code-block:: python
 
-    """
-    Description of the function.
+    def some_func(arg1: int, arg2: str) -> str:
+        """
+        Description of the function.
 
-    Args:
-        arg1 (``str``): description...
-        arg2 (``bool``, optional): description...
+        Args:
+            arg1: Description...
+            arg2: Description 2...
 
-    Returns:
-        ``str``: description...
-    
-    Raises:
-        SomeException: description...
-    """
+        Returns:
+            The description of the return value...
+        
+        Raises:
+            SomeException: If this condition is true...
+        """
+        pass
 
 General Classes
 ~~~~~~~~~~~~~~~~
-- If a class has custom signals, define them in the ``Signals`` section.
 
-Signal names should be in double quotes.
-In brackets, indicate the custom arguments that the signal passes to the callback.
+- Signals:
 
-- If a class has custom properties, define them in the ``Properties`` section.
+    If a class has custom signals, add docstrings to the functions decorated with ``@GObject.Signal`` respectively.
 
-In brackets, indicate the property type and ``read-only`` or ``read-write``.
+    At the top of the docstring indicate that it's signal: ``- Signal``.
+
+    Also, if the signal have custom arguments, define them in the ``Args`` section.
+
+- Properties:
+
+    If a class has custom properties, add docstrings to the functions decorated with ``@GObject.Object`` or ``@property`` respectively.
+
+    At the top of the docstring indicate ``read-only`` / ``read-write``, ``optional`` / ``required`` / ``not argument``.
+
+    .. note::
+        You shouldn't specify ``optional`` / ``required`` / ``not argument``
+        in properties of Services and classes related to them, since the user shouldn't initialize them manually.
 
 - If possible, please provide a code example.
 
 .. code-block:: python
 
-    """
-    This is an example docstring for a class.
+    class SomeClass:
+        """
+        This is an example docstring for a class.
+        Further info goes here...
+        """
 
-    .. warning::
-        This is a warning.
+    @GObject.Signal
+    def some_signal(self):
+        """
+        - Signal
 
-    Signals:
-        - **"some-signal"** (): Emitted when the application is deleted.
-        - **"arg-signal"** (``int``): Emitted when the xD. Passes an ``int`` as an argument.
+        Emitted when the something happens.
+        """
 
-    Properties:
-        - **stream** (:class:`~ignis.some_class.SomeClass`, read-only): An instance of :class:`~ignis.some_class.SomeClass`.
-        - **application_id** (``bool``, read-write): Whether to do something or not.
-    """
+    @GObject.Signal(arg_types=(int,))
+    def arg_signal(self):
+        """
+        - Signal
+
+        Emitted when the something another happens.
+
+        Args:
+            some_arg (``int``): Description of the argument...
+        """
+
+    @GObject.Property
+    def some_prop(self) -> int:
+        """
+        - optional, read-only
+        """
+        ...
+
+    @GObject.Property
+    def rw_prop(self) -> str:
+        """
+        - optional, read-write
+        """
+        ...
+
+    @rw_prop.setter
+    def rw_prop(self, value: str) -> None:
+        ...
 
 Widgets
 ~~~~~~~~~~~~~~~~
 
 - Use the same patterns as described above for general classes.
-- Specify the base widget and a link to its page in the `PyGObject API Reference <https://lazka.github.io/pgi-docs>`_.
-- Specify whether properties are ``optional``/``required``.
+- Specify the base widget using the ``:class:`` directive.
 
 .. code-block:: python
 
-    """
-    Bases: `Gtk.WIDGET_NAME <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/WIDGET_NAME.html>`_.
+    class SomeWidget:
+        """
+        Bases: :class:`Gtk.WIDGET_NAME`
 
-    A widget that displays a small amount of text.
+        The description of the widget.
 
-    Properties:
-        - **prop1** (``str``, required, read-write): description...
-        - **prop2** (``int``, optional, read-write): description...
+        .. code-block:: python
 
-    .. code-block:: python
-
-        Widget.WIDGET_NAME(
-            prop1="asd",
-            prop2=12
-        )
+            Widget.WIDGET_NAME(
+                prop1="asd",
+                prop2=12
+            )
+        """
+        ... # rest of stuff goes here
 
 Building documentation
 -------------------------

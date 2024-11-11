@@ -557,14 +557,7 @@ This service stores options and their values in the <code class="docutils litera
 <p>You should not manually edit the <code class="docutils literal notranslate"><span class="pre">~/.cache/ignis/options.json</span></code> file.
 Use this service instead.</p>
 </div>
-<dl class="simple">
-<dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>groups</strong> (list[<a class="reference internal" href="#ignis.services.options.OptionsGroup" title="ignis.services.options.OptionsGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">OptionsGroup</span></code></a>]): The list of all options groups.</p></li>
-<li><p><strong>data</strong> (<code class="docutils literal notranslate"><span class="pre">dict[str,</span> <span class="pre">Any]</span></code>): The dictionary containing all options and their values from all groups.</p></li>
-</ul>
-</dd>
-</dl>
-<p><strong>Example usage:</strong></p>
+<p>Example usage:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.services.options</span> <span class="kn">import</span> <span class="n">OptionsService</span>
 
 <span class="n">options</span> <span class="o">=</span> <span class="n">OptionsService</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span>
@@ -581,15 +574,33 @@ Use this service instead.</p>
 <span class="nb">print</span><span class="p">(</span><span class="n">options</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
 </div>
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.options.OptionsService.groups">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">groups</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ignis.services.options.OptionsGroup" title="ignis.services.options.group.OptionsGroup"><span class="pre">OptionsGroup</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.options.OptionsService.groups" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>A list of all options groups.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.options.OptionsService.data">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.options.OptionsService.data" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The dictionary containing all options and their values from all groups.</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.options.OptionsService.create_group">
-<span class="sig-name descname"><span class="pre">create_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exists_ok</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#ignis.services.options.OptionsGroup" title="ignis.services.options.group.OptionsGroup"><span class="pre">OptionsGroup</span></a></span></span><a class="headerlink" href="#ignis.services.options.OptionsService.create_group" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">create_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">exists_ok</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#ignis.services.options.OptionsGroup" title="ignis.services.options.group.OptionsGroup"><span class="pre">OptionsGroup</span></a></span></span><a class="headerlink" href="#ignis.services.options.OptionsService.create_group" title="Link to this definition">#</a></dt>
 <dd><p>Create options group.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The name of the options group to create.</p></li>
-<li><p><strong>exists_ok</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, optional) -- If <code class="docutils literal notranslate"><span class="pre">True</span></code>, do not raise <a class="reference internal" href="../exceptions.html#ignis.exceptions.OptionsGroupExistsError" title="ignis.exceptions.OptionsGroupExistsError"><code class="xref py py-class docutils literal notranslate"><span class="pre">OptionsGroupExistsError</span></code></a> if the group already exists. Default: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+<li><p><strong>name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The name of the options group to create.</p></li>
+<li><p><strong>exists_ok</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">False</span></code>) -- If <code class="docutils literal notranslate"><span class="pre">True</span></code>, do not raise <a class="reference internal" href="../exceptions.html#ignis.exceptions.OptionsGroupExistsError" title="ignis.exceptions.OptionsGroupExistsError"><code class="xref py py-class docutils literal notranslate"><span class="pre">OptionsGroupExistsError</span></code></a> if the group already exists. Default: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -606,11 +617,11 @@ Use this service instead.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.options.OptionsService.get_group">
-<span class="sig-name descname"><span class="pre">get_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#ignis.services.options.OptionsGroup" title="ignis.services.options.group.OptionsGroup"><span class="pre">OptionsGroup</span></a></span></span><a class="headerlink" href="#ignis.services.options.OptionsService.get_group" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">get_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#ignis.services.options.OptionsGroup" title="ignis.services.options.group.OptionsGroup"><span class="pre">OptionsGroup</span></a></span></span><a class="headerlink" href="#ignis.services.options.OptionsService.get_group" title="Link to this definition">#</a></dt>
 <dd><p>Get <code class="docutils literal notranslate"><span class="pre">OptionsGroup</span></code> object by its name.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The name of the options group.</p>
+<dd class="field-odd"><p><strong>name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The name of the options group.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The options group instance.</p>
@@ -628,35 +639,59 @@ Use this service instead.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ignis.services.options.OptionsGroup">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.options.</span></span><span class="sig-name descname"><span class="pre">OptionsGroup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.options.OptionsGroup" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.options.</span></span><span class="sig-name descname"><span class="pre">OptionsGroup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.options.OptionsGroup" title="Link to this definition">#</a></dt>
 <dd><p>An options group.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>You shouldn't initialize this class manually.
 Use the <a class="reference internal" href="#ignis.services.options.OptionsService.create_group" title="ignis.services.options.OptionsService.create_group"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_group()</span></code></a> method instead.</p>
 </div>
-<dl class="simple">
-<dt>Signals:</dt><dd><ul class="simple">
-<li><p><strong>&quot;changed&quot;</strong> (): Emitted when options in this group is changed.</p></li>
-<li><p><strong>&quot;changed&quot;</strong> (): Emitted when this options group is removed.</p></li>
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.options.OptionsGroup.changed">
+<span class="sig-name descname"><span class="pre">changed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.options.OptionsGroup.changed" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>Signal</p></li>
 </ul>
-</dd>
-<dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The name of the group.</p></li>
-<li><p><strong>data</strong> (<code class="docutils literal notranslate"><span class="pre">dict[str,</span> <span class="pre">Any]</span></code>, read-only): The dictionary containing all options and their values.</p></li>
+<p>Emitted when options in this group is changed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.options.OptionsGroup.removed">
+<span class="sig-name descname"><span class="pre">removed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.options.OptionsGroup.removed" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>Signal</p></li>
 </ul>
-</dd>
-</dl>
+<p>Emitted when this options group is removed.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.options.OptionsGroup.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.options.OptionsGroup.name" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The name of the group.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.options.OptionsGroup.data">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.options.OptionsGroup.data" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The dictionary containing all options and their values.</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.options.OptionsGroup.create_option">
-<span class="sig-name descname"><span class="pre">create_option</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exists_ok</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#ignis.services.options.Option" title="ignis.services.options.option.Option"><span class="pre">Option</span></a></span></span><a class="headerlink" href="#ignis.services.options.OptionsGroup.create_option" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">create_option</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">exists_ok</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#ignis.services.options.Option" title="ignis.services.options.option.Option"><span class="pre">Option</span></a></span></span><a class="headerlink" href="#ignis.services.options.OptionsGroup.create_option" title="Link to this definition">#</a></dt>
 <dd><p>Create an option.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The name of the option.</p></li>
-<li><p><strong>default</strong> (<code class="docutils literal notranslate"><span class="pre">Any</span></code>) -- The default value for the option.</p></li>
-<li><p><strong>exists_ok</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, optional) -- If <code class="docutils literal notranslate"><span class="pre">True</span></code>, do not raise <a class="reference internal" href="../exceptions.html#ignis.exceptions.OptionExistsError" title="ignis.exceptions.OptionExistsError"><code class="xref py py-class docutils literal notranslate"><span class="pre">OptionExistsError</span></code></a> if the option already exists. Default: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+<li><p><strong>name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The name of the option.</p></li>
+<li><p><strong>default</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></span>) -- The default value for the option.</p></li>
+<li><p><strong>exists_ok</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">False</span></code>) -- If <code class="docutils literal notranslate"><span class="pre">True</span></code>, do not raise <a class="reference internal" href="../exceptions.html#ignis.exceptions.OptionExistsError" title="ignis.exceptions.OptionExistsError"><code class="xref py py-class docutils literal notranslate"><span class="pre">OptionExistsError</span></code></a> if the option already exists. Default: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -673,11 +708,11 @@ Use the <a class="reference internal" href="#ignis.services.options.OptionsServi
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.options.OptionsGroup.get_option">
-<span class="sig-name descname"><span class="pre">get_option</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#ignis.services.options.Option" title="ignis.services.options.option.Option"><span class="pre">Option</span></a></span></span><a class="headerlink" href="#ignis.services.options.OptionsGroup.get_option" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">get_option</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#ignis.services.options.Option" title="ignis.services.options.option.Option"><span class="pre">Option</span></a></span></span><a class="headerlink" href="#ignis.services.options.OptionsGroup.get_option" title="Link to this definition">#</a></dt>
 <dd><p>Get <code class="docutils literal notranslate"><span class="pre">Option</span></code> object by its name.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The name of the option.</p>
+<dd class="field-odd"><p><strong>name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The name of the option.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The option instance.</p>
@@ -693,31 +728,57 @@ Use the <a class="reference internal" href="#ignis.services.options.OptionsServi
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.options.OptionsGroup.remove">
-<span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.options.OptionsGroup.remove" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.options.OptionsGroup.remove" title="Link to this definition">#</a></dt>
 <dd><p>Remove this options group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ignis.services.options.Option">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.options.</span></span><span class="sig-name descname"><span class="pre">Option</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.options.Option" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.options.</span></span><span class="sig-name descname"><span class="pre">Option</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.options.Option" title="Link to this definition">#</a></dt>
 <dd><p>An option object.</p>
-<dl class="simple">
-<dt>Signals:</dt><dd><ul class="simple">
-<li><p><strong>&quot;removed&quot;</strong> (): Emitted when the option is removed.</p></li>
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.options.Option.removed">
+<span class="sig-name descname"><span class="pre">removed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.options.Option.removed" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>Signal</p></li>
 </ul>
-</dd>
-<dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>name</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The name of the option.</p></li>
-<li><p><strong>value</strong> (<code class="docutils literal notranslate"><span class="pre">Any</span></code>, read-write): The current value of the option.</p></li>
+<p>Emitted when the option is removed.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.options.Option.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.options.Option.name" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
 </ul>
-</dd>
-</dl>
+<p>The name of the option.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.options.Option.value">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">value</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a></em><a class="headerlink" href="#ignis.services.options.Option.value" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-write</p></li>
+</ul>
+<p>The current value of the option.</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.options.Option.remove">
-<span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ignis.services.options.Option.remove" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.options.Option.remove" title="Link to this definition">#</a></dt>
 <dd><p>Remove this option.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -771,17 +832,26 @@ Use the <a class="reference internal" href="#ignis.services.options.OptionsServi
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.OptionsService"><code class="docutils literal notranslate"><span class="pre">OptionsService</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.OptionsService.groups"><code class="docutils literal notranslate"><span class="pre">OptionsService.groups</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.OptionsService.data"><code class="docutils literal notranslate"><span class="pre">OptionsService.data</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.OptionsService.create_group"><code class="docutils literal notranslate"><span class="pre">OptionsService.create_group()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.OptionsService.get_group"><code class="docutils literal notranslate"><span class="pre">OptionsService.get_group()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.OptionsGroup"><code class="docutils literal notranslate"><span class="pre">OptionsGroup</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.OptionsGroup.changed"><code class="docutils literal notranslate"><span class="pre">OptionsGroup.changed()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.OptionsGroup.removed"><code class="docutils literal notranslate"><span class="pre">OptionsGroup.removed()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.OptionsGroup.name"><code class="docutils literal notranslate"><span class="pre">OptionsGroup.name</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.OptionsGroup.data"><code class="docutils literal notranslate"><span class="pre">OptionsGroup.data</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.OptionsGroup.create_option"><code class="docutils literal notranslate"><span class="pre">OptionsGroup.create_option()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.OptionsGroup.get_option"><code class="docutils literal notranslate"><span class="pre">OptionsGroup.get_option()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.OptionsGroup.remove"><code class="docutils literal notranslate"><span class="pre">OptionsGroup.remove()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.Option"><code class="docutils literal notranslate"><span class="pre">Option</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.Option.removed"><code class="docutils literal notranslate"><span class="pre">Option.removed()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.Option.name"><code class="docutils literal notranslate"><span class="pre">Option.name</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.Option.value"><code class="docutils literal notranslate"><span class="pre">Option.value</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.options.Option.remove"><code class="docutils literal notranslate"><span class="pre">Option.remove()</span></code></a></li>
 </ul>
 </li>
