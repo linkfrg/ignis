@@ -1,6 +1,10 @@
 Developer Guide
 ==================
 
+.. warning::
+    If you plan to open a Pull Request to the Ignis repository, 
+    please follow the `latest <https://linkfrg.github.io/ignis/latest/dev/index.html>`_ version of the developer documentation.
+
 Ignis is a modular and extensible framework that allows you to easily make modifications to the source code.
 
 This guide will help you with this.
