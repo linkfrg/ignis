@@ -32,4 +32,10 @@ and all other compositors that implement the Layer Shell protocol.
 * [My own configuration](https://github.com/linkfrg/dotfiles/)
 ![My own configuration](https://github.com/linkfrg/dotfiles/blob/main/assets/1.png?raw=true)
 
-Heavily inspired by [AGS](https://github.com/aylur/ags)
+
+## Contributing
+Check out the [Developer Guide](https://linkfrg.github.io/ignis/latest/dev/index.html)
+
+## Special Thanks
+
+[AGS](https://github.com/aylur/ags) - For inspiration
