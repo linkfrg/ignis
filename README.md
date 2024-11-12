@@ -6,7 +6,7 @@
 [![Linting: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
 <div align="center">
-__Ignis is a modern widget system for building desktop shells using GTK4.__
+<strong>Ignis is a modern widget system for building desktop shells using GTK4.</strong>
 </div>
 
 ## Features
