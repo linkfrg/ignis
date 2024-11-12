@@ -12,6 +12,16 @@ Type checking
 The use of type hints is encouraged, 
 and all code must be checked using `mypy <https://mypy-lang.org/>`_.
 
+Commit messages
+----------------
+
+Commit messages should follow the `Conventional Commits <https://www.conventionalcommits.org/en/v1.0.0/#summary>`_.
+
+Versioning
+----------------
+
+Ignis follows `Semantic Versioning <https://semver.org/>`_.
+
 Definitions and Naming
 -----------------------
 
