@@ -433,6 +433,7 @@
 <h2>Standard Service Structure<a class="headerlink" href="#standard-service-structure" title="Link to this heading">#</a></h2>
 <p>There is the standard service directory structure.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>SERVICE_NAME/
+├──<span class="w"> </span>__init__.py
 ├──<span class="w"> </span>_imports.py
 ├──<span class="w"> </span>service.py
 ├──<span class="w"> </span>constants.py
@@ -506,6 +507,23 @@ which, in turn, requires installing dependencies by an user, define them here.</
 <p><code class="docutils literal notranslate"><span class="pre">stream.py</span></code></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Stream</span><span class="p">(</span><span class="o">...</span><span class="p">):</span>
     <span class="o">...</span>
+</pre></div>
+</div>
+</section>
+<section id="init-py">
+<h2><code class="docutils literal notranslate"><span class="pre">__init__.py</span></code><a class="headerlink" href="#init-py" title="Link to this heading">#</a></h2>
+<p>Don't forget to add the service class, related classes and constants to the <code class="docutils literal notranslate"><span class="pre">__all__</span></code> list here.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">.service</span> <span class="kn">import</span> <span class="n">ExampleService</span>
+<span class="kn">from</span> <span class="nn">.related_class</span> <span class="kn">import</span> <span class="n">RelatedClass1</span>
+<span class="kn">from</span> <span class="nn">.related_class2</span> <span class="kn">import</span> <span class="n">RelatedClass2</span>
+<span class="kn">from</span> <span class="nn">.constants</span> <span class="kn">import</span> <span class="n">SOME_CONSTANT</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;ExampleService&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RelatedClass1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RelatedClass2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SOME_CONSTANT&quot;</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </section>
@@ -591,6 +609,7 @@ which, in turn, requires installing dependencies by an user, define them here.</
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constants-py"><code class="docutils literal notranslate"><span class="pre">constants.py</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#util-py"><code class="docutils literal notranslate"><span class="pre">util.py</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#related-class-py-and-others"><code class="docutils literal notranslate"><span class="pre">related_class.py</span></code> and others</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#init-py"><code class="docutils literal notranslate"><span class="pre">__init__.py</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-d-bus-service">Creating D-Bus Service</a></li>
 </ul>
   </nav></div>

@@ -9,6 +9,7 @@ There is the standard service directory structure.
 .. code-block:: bash
 
     SERVICE_NAME/
+    ├── __init__.py
     ├── _imports.py
     ├── service.py
     ├── constants.py
@@ -101,6 +102,25 @@ For example, ``AudioService`` manages ``Stream`` class, so we create separate fi
 
     class Stream(...):
         ...
+
+``__init__.py``
+----------------
+
+Don't forget to add the service class, related classes and constants to the ``__all__`` list here.
+
+.. code-block:: python
+
+    from .service import ExampleService
+    from .related_class import RelatedClass1
+    from .related_class2 import RelatedClass2
+    from .constants import SOME_CONSTANT
+
+    __all__ = [
+        "ExampleService",
+        "RelatedClass1",
+        "RelatedClass2",
+        "SOME_CONSTANT"
+    ]
 
 Creating D-Bus Service
 --------------------------
