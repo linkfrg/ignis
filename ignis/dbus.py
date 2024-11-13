@@ -172,7 +172,7 @@ class DBusService(IgnisGObject):
         # so we unpack in another thread, and call DBus method when unpacking is finished
         Utils.ThreadTask(
             target=params.unpack, callback=lambda result: callback(func, result)
-        )
+        ).run()
 
     def __handle_get_property(
         self,

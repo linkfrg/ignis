@@ -12,7 +12,6 @@ class ThreadTask(IgnisGObject):
     Parameters:
         target: The function to execute in another thread.
         callback: The function to call when ``target`` has finished.
-
     """
 
     def __init__(self, target: Callable, callback: Callable):
@@ -21,7 +20,6 @@ class ThreadTask(IgnisGObject):
         self._callback = callback
 
         self.connect("finished", lambda x, result: callback(result))
-        self.__run()
 
     @run_in_thread
     def __run(self) -> None:
@@ -36,3 +34,9 @@ class ThreadTask(IgnisGObject):
         Args:
             output (``Any``): The output from the function.
         """
+
+    def run(self) -> None:
+        """
+        Run this task.
+        """
+        self.__run()
