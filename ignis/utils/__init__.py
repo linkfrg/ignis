@@ -1,3 +1,4 @@
+from typing import TypeAlias
 from .exec_sh import exec_sh, exec_sh_async
 from .load_interface_xml import load_interface_xml
 from .poll import Poll
@@ -27,11 +28,11 @@ class Utils:
     exec_sh = exec_sh
     exec_sh_async = exec_sh_async
     load_interface_xml = load_interface_xml
-    Poll = Poll
+    Poll: TypeAlias = Poll
     get_monitor = get_monitor
     get_n_monitors = get_n_monitors
-    Timeout = Timeout
-    FileMonitor = FileMonitor
+    Timeout: TypeAlias = Timeout
+    FileMonitor: TypeAlias = FileMonitor
     thread = thread
     run_in_thread = run_in_thread
     sass_compile = sass_compile
@@ -40,7 +41,7 @@ class Utils:
     crop_pixbuf = crop_pixbuf
     get_paintable = get_paintable
     get_file_icon_name = get_file_icon_name
-    ThreadTask = ThreadTask
+    ThreadTask: TypeAlias = ThreadTask
     get_ignis_commit = get_ignis_commit
     download_image = download_image
     get_current_dir = get_current_dir
