@@ -2,6 +2,7 @@ on:
   push:
     paths:
       - "ignis/**"
+      - ".github/workflows/static.yaml"
   pull_request:
     paths:
       - "ignis/**"
