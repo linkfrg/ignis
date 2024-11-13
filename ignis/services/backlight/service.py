@@ -36,7 +36,7 @@ class BacklightService(BaseService):
         # FIXME: not working
         Utils.FileMonitor(
             path=SYS_BACKLIGHT,
-            callback=lambda path, event_type: self.__sync_devices()
+            callback=lambda x, path, event_type: self.__sync_devices()
             if event_type == "deleted" or event_type == "created"
             else None,
         )

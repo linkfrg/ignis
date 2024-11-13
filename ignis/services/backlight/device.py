@@ -30,7 +30,7 @@ class BacklightDevice(IgnisGObject):
 
         Utils.FileMonitor(
             path=self._PATH_TO_BRIGHTNESS,
-            callback=lambda path, event_type: self.__sync_brightness()
+            callback=lambda x, path, event_type: self.__sync_brightness()
             if event_type != "changed"  # "changed" event is called multiple times
             else None,
         )

@@ -74,6 +74,10 @@ class FileMonitor(IgnisGObject):
             self
         )  # to prevent the garbage collector from collecting "self"
 
+        self.connect(
+            "changed", lambda *args: self._callback(*args) if self._callback else None
+        )
+
     @GObject.Signal(arg_types=(str, str))
     def changed(self, *args):
         """
@@ -89,9 +93,6 @@ class FileMonitor(IgnisGObject):
 
     def __on_change(self, file_monitor, file, other_file, event_type) -> None:
         path = file.get_path()
-        if self._callback:
-            self._callback(path, EVENT[event_type])
-
         self.emit("changed", path, EVENT[event_type])
 
         if self.recursive and os.path.isdir(path):

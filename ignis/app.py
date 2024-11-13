@@ -76,7 +76,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         self._autoreload_css: bool = True
         self._is_ready = False
 
-    def __watch_config(self, path: str, event_type: str) -> None:
+    def __watch_config(self, file_monitor: Utils.FileMonitor, path: str, event_type: str) -> None:
         if event_type != "changes_done_hint":
             return
 
