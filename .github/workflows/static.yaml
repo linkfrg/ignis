@@ -52,5 +52,4 @@ jobs:
           ruff check ignis/
 
       - name: Check format
-        continue-on-error: true
         run: ruff format ignis/ --check
