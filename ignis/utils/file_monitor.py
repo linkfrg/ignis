@@ -61,6 +61,7 @@ class FileMonitor(IgnisGObject):
         self._flags = flags
         self._callback = callback
         self._recursive = recursive
+        self._prevent_gc = prevent_gc
 
         self._sub_monitors: list[Gio.FileMonitor] = []
         self._sub_paths: list[str] = []
@@ -193,7 +194,7 @@ class FileMonitor(IgnisGObject):
 
         Default: ``True``.
         """
-        return self._recursive
+        return self._prevent_gc
 
     def cancel(self) -> None:
         """
