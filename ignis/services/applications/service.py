@@ -95,23 +95,6 @@ class ApplicationsService(BaseService):
             self.__connect_entry(entry)
             self._pinned[entry.id] = entry
 
-    def search(self, query: str) -> list[Application]:
-        """
-        Filter applications by query.
-
-        Args:
-            query: The string to be searched for.
-
-        Returns:
-            list[Application]: A list of applications filtered by provided query.
-        """
-        return [
-            entry
-            for result in Gio.DesktopAppInfo.search(query)
-            for entry in self.apps
-            if entry.id in result
-        ]
-
     def __sync_pinned(self) -> None:
         pinned_ids = [p.id for p in self.pinned]
         self._pinned_apps_opt.value = pinned_ids
