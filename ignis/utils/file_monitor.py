@@ -50,6 +50,7 @@ class FileMonitor(IgnisGObject):
         recursive: bool = False,
         flags: str | None = None,
         callback: Callable | None = None,
+        prevent_gc: bool = True,
     ):
         super().__init__()
         self._file = Gio.File.new_for_path(path)
@@ -70,9 +71,8 @@ class FileMonitor(IgnisGObject):
                     subdir_path = os.path.join(root, d)
                     self.__add_submonitor(subdir_path)
 
-        file_monitors.append(
-            self
-        )  # to prevent the garbage collector from collecting "self"
+        if prevent_gc:
+            file_monitors.append(self)
 
         self.connect(
             "changed", lambda *args: self._callback(*args) if self._callback else None
@@ -181,6 +181,17 @@ class FileMonitor(IgnisGObject):
         Whether monitoring is recursive (monitor all subdirectories and files).
 
         Default: ``False``.
+        """
+        return self._recursive
+
+    @GObject.Property
+    def prevent_gc(self) -> bool:
+        """
+        - optional, read-only
+
+        Whether to prevent the garbage collector from collecting this file monitor.
+
+        Default: ``True``.
         """
         return self._recursive
 
