@@ -91,7 +91,8 @@ class FileMonitor(IgnisGObject):
         path = file.get_path()
         if self._callback:
             self._callback(path, EVENT[event_type])
-            self.emit("changed", path, EVENT[event_type])
+
+        self.emit("changed", path, EVENT[event_type])
 
         if self.recursive and os.path.isdir(path):
             self.__add_submonitor(path)
