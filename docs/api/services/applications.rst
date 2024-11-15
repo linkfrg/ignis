@@ -9,6 +9,3 @@ Applications
 
 .. autoclass:: ignis.services.applications.ApplicationAction
     :members:
-
-.. automodule:: ignis.services.applications.util
-    :members:
