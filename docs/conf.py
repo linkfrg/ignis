@@ -2,7 +2,26 @@ import os
 import sys
 import shutil
 
-sys.path.insert(0, os.path.abspath("tmp"))
+
+TMP_DIR = "./tmp"
+SOURCE_DIR = "../ignis"
+TARGET_DIR = TMP_DIR + "/ignis"
+
+
+def copy_dir(source_dir: str, target_dir: str) -> None:
+    if os.path.exists(target_dir):
+        shutil.rmtree(target_dir)
+
+    shutil.copytree(source_dir, target_dir)
+
+
+copy_dir(SOURCE_DIR, TARGET_DIR)
+
+sys.path.insert(0, os.path.abspath(TMP_DIR))
+import ignis  # noqa: E402
+
+
+# ============================== PROJECT INFO ===============================
 
 project = "Ignis"
 copyright = "2024, linkfrg"
@@ -33,31 +52,40 @@ templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 suppress_warnings = ["config.cache"]
 
+# ============================ AUTODOC/TYPEHINTS ============================
+
 autodoc_mock_imports = ["gi", "loguru", "setuptools", "click", "cairo", "requests"]
 autodoc_member_order = "bysource"
 
-html_theme = "pydata_sphinx_theme"
-html_static_path = ["_static"]
-
-html_css_files = ["css/custom.css"]
-
-html_title = "Ignis documentation"
-
 smartquotes = False
 napoleon_use_param = True
+
 typehints_use_signature = True
 typehints_use_signature_return = True
 typehints_defaults = "comma"
 always_use_bars_union = True
 
+# =============================== VERSIONING ================================
+
 json_url = f"{DOCS_URL}/_static/switcher.json"
 
-version_match = os.getenv("DOCS_VERSION")
+DOC_TAG = os.getenv("DOC_TAG")
 
-if not version_match or version_match == "latest":
+if DOC_TAG == "latest" or DOC_TAG is None:
     version_match = "dev"
+elif DOC_TAG == "stable":
+    version_match = ignis.__version__.replace(".dev0", "")
+else:
+    version_match = DOC_TAG
 
 release = version_match
+
+# ============================== HTML OPTIONS ===============================
+
+html_title = "Ignis documentation"
+html_theme = "pydata_sphinx_theme"
+html_static_path = ["_static"]
+html_css_files = ["css/custom.css"]
 
 html_theme_options = {
     "use_edit_page_button": True,
@@ -86,7 +114,6 @@ html_theme_options = {
     "pygments_dark_style": "monokai",
 }
 
-
 html_context = {
     "github_user": "linkfrg",
     "github_repo": "ignis",
@@ -94,18 +121,14 @@ html_context = {
     "doc_path": "docs/",
 }
 
+# ============================== CUSTOM STUFF ===============================
 
-def copy_and_replace_gobject_property(source_dir: str, target_dir: str):
+
+def replace_gobject_property(target_dir: str) -> None:
     """
-    This trash function copys source_dir to target_dir
-    and replaces @GObject.Property with @property.
-    For what? To indicate Sphinx that GObject.Property functions is actually properties.
+    This function replaces @GObject.Property with @property.
+    For what? To indicate to Sphinx that GObject.Property functions are actually properties.
     """
-    if os.path.exists(target_dir):
-        shutil.rmtree(target_dir)
-
-    shutil.copytree(source_dir, target_dir)
-
     for dirpath, _, filenames in os.walk(target_dir):
         for filename in filenames:
             if filename.endswith(".py"):
@@ -119,4 +142,4 @@ def copy_and_replace_gobject_property(source_dir: str, target_dir: str):
                     file.write(new_content)
 
 
-copy_and_replace_gobject_property("../ignis", "tmp/ignis")
+replace_gobject_property(TARGET_DIR)

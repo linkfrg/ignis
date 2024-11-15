@@ -15,5 +15,4 @@ jobs:
   build:
     uses: ./.github/workflows/build_docs.yaml
     with:
-      TAG: "v0.2"
-      DEST_DIR: "stable"
+      DOC_TAG: "stable"
