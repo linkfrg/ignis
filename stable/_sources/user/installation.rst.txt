@@ -9,7 +9,7 @@ Arch linux
     paru -S ignis
 
 Nix
-----
+---
 
 Add Ignis to your flake's inputs:
 

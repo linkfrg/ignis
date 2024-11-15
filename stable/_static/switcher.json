@@ -2,5 +2,11 @@
     {
       "version": "dev",
       "url": "https://linkfrg.github.io/ignis/latest/"
+    },
+    {
+      "name": "v0.2 (stable)",
+      "version": "v0.2",
+      "url": "https://linkfrg.github.io/ignis/stable/",
+      "preferred": true
     }
 ]

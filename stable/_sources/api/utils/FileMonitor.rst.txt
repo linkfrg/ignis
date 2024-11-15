@@ -1,4 +1,5 @@
 FileMonitor
 -----------
 
-.. autofunction:: ignis.utils.Utils.FileMonitor
+.. autoclass:: ignis.utils.FileMonitor
+    :members:

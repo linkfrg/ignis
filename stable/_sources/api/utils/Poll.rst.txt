@@ -1,4 +1,5 @@
 Poll
 ----
 
-.. autofunction:: ignis.utils.Utils.Poll
+.. autoclass:: ignis.utils.Poll
+    :members:

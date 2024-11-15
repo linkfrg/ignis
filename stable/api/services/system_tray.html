@@ -16,29 +16,32 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=5dc8be31" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=fe5c0044" />
   
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
-    <script src="../../_static/documentation_options.js?v=0335fd14"></script>
+    <script src="../../_static/documentation_options.js?v=a74d790d"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -46,17 +49,18 @@
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/services/system_tray';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://linkfrg.github.io/ignis/latest/_static/switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'v0.2';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'v0.3';
         DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
         </script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Wallpaper" href="wallpaper.html" />
+    <link rel="next" title="UPower" href="upower.html" />
     <link rel="prev" title="Recorder" href="recorder.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -72,19 +76,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../../search.html"
       method="get">
@@ -92,7 +85,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search the docs ..."
          aria-label="Search the docs ..."
          autocomplete="off"
@@ -100,8 +92,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -141,28 +133,24 @@
     <div class="me-auto navbar-header-items__center">
       
         <div class="navbar-item">
-<script>
-document.write(`
-  <div class="version-switcher__container dropdown">
-    <button id="pst-version-switcher-button-2"
-      type="button"
-      class="version-switcher__button btn btn-sm dropdown-toggle"
-      data-bs-toggle="dropdown"
-      aria-haspopup="listbox"
-      aria-controls="pst-version-switcher-list-2"
-      aria-label="Version switcher list"
-    >
-      Choose version  <!-- this text may get changed later by javascript -->
-      <span class="caret"></span>
-    </button>
-    <div id="pst-version-switcher-list-2"
-      class="version-switcher__menu dropdown-menu list-group-flush py-0"
-      role="listbox" aria-labelledby="pst-version-switcher-button-2">
-      <!-- dropdown will be populated by javascript on page load -->
-    </div>
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
   </div>
-`);
-</script></div>
+</div></div>
       
         <div class="navbar-item">
 <nav>
@@ -206,29 +194,21 @@ document.write(`
         <div class="navbar-item navbar-persistent--container">
           
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
         </div>
       
       
         <div class="navbar-item">
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script></div>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
       
         <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
@@ -253,15 +233,11 @@ document.write(`
   
     <div class="navbar-persistent--mobile">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
     </div>
   
 
@@ -280,7 +256,8 @@ document.write(`
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -292,28 +269,24 @@ document.write(`
           
           
             <div class="navbar-item">
-<script>
-document.write(`
-  <div class="version-switcher__container dropdown">
-    <button id="pst-version-switcher-button-3"
-      type="button"
-      class="version-switcher__button btn btn-sm dropdown-toggle"
-      data-bs-toggle="dropdown"
-      aria-haspopup="listbox"
-      aria-controls="pst-version-switcher-list-3"
-      aria-label="Version switcher list"
-    >
-      Choose version  <!-- this text may get changed later by javascript -->
-      <span class="caret"></span>
-    </button>
-    <div id="pst-version-switcher-list-3"
-      class="version-switcher__menu dropdown-menu list-group-flush py-0"
-      role="listbox" aria-labelledby="pst-version-switcher-button-3">
-      <!-- dropdown will be populated by javascript on page load -->
-    </div>
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
   </div>
-`);
-</script></div>
+</div></div>
           
         
           
@@ -361,15 +334,11 @@ document.write(`
         
           <div class="navbar-item">
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script></div>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
         
           <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
@@ -445,6 +414,7 @@ document.write(`
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Services</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="applications.html">Applications</a></li>
 <li class="toctree-l2"><a class="reference internal" href="audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backlight.html">Backlight</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fetch.html">Fetch</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hyprland.html">Hyprland</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mpris.html">MPRIS (media)</a></li>
@@ -453,6 +423,7 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="options.html">Options</a></li>
 <li class="toctree-l2"><a class="reference internal" href="recorder.html">Recorder</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">System Tray</a></li>
+<li class="toctree-l2"><a class="reference internal" href="upower.html">UPower</a></li>
 <li class="toctree-l2"><a class="reference internal" href="wallpaper.html">Wallpaper</a></li>
 </ul>
 </details></li>
@@ -467,15 +438,19 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="../utils/exec_sh_async.html">exec_sh_async</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../utils/get_current_dir.html">get_current_dir</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../utils/get_file_icon_name.html">get_file_icon_name</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/get_ignis_branch.html">get_ignis_branch</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../utils/get_ignis_commit.html">get_ignis_commit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/get_ignis_commit_msg.html">get_ignis_commit_msg</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../utils/get_ignis_version.html">get_ignis_version</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../utils/get_monitor.html">get_monitor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../utils/get_n_monitors.html">get_n_monitors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../utils/get_paintable.html">get_paintable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/listen_socket.html">listen_socket</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../utils/load_interface_xml.html">load_interface_xml</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../utils/run_in_thread.html">run_in_thread</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../utils/sass_compile.html">sass_compile</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../utils/scale_pixbuf.html">scale_pixbuf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/send_socket.html">send_socket</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../utils/thread.html">thread</a></li>
 </ul>
 </details></li>
@@ -506,8 +481,6 @@ document.write(`
       
         <div class="header-article-item">
 
-
-
 <nav aria-label="Breadcrumb" class="d-print-none">
   <ul class="bd-breadcrumbs">
     
@@ -522,7 +495,7 @@ document.write(`
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">Services</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">System Tray</li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">System Tray</span></li>
   </ul>
 </nav>
 </div>
@@ -545,22 +518,12 @@ document.write(`
 <dt class="sig sig-object py" id="ignis.services.system_tray.SystemTrayService">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.system_tray.</span></span><span class="sig-name descname"><span class="pre">SystemTrayService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.system_tray.SystemTrayService" title="Link to this definition">#</a></dt>
 <dd><p>A system tray, where application icons are placed.</p>
-<dl class="simple">
-<dt>Signals:</dt><dd><ul class="simple">
-<li><p><strong>&quot;added&quot;</strong> (<a class="reference internal" href="#ignis.services.system_tray.SystemTrayItem" title="ignis.services.system_tray.SystemTrayItem"><code class="xref py py-class docutils literal notranslate"><span class="pre">SystemTrayItem</span></code></a>): Emitted when a new item is added.</p></li>
-</ul>
-</dd>
-<dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>items</strong> (list[<a class="reference internal" href="#ignis.services.system_tray.SystemTrayItem" title="ignis.services.system_tray.SystemTrayItem"><code class="xref py py-class docutils literal notranslate"><span class="pre">SystemTrayItem</span></code></a>], read-only): A list of items.</p></li>
-</ul>
-</dd>
-</dl>
 <dl class="field-list simple">
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="../exceptions.html#ignis.exceptions.AnotherSystemTrayRunningError" title="ignis.exceptions.AnotherSystemTrayRunningError"><strong>AnotherSystemTrayRunningError</strong></a> -- If another system tray is already running.</p>
 </dd>
 </dl>
-<p><strong>Example usage:</strong></p>
+<p>Example usage:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.services.system_tray</span> <span class="kn">import</span> <span class="n">SystemTrayService</span>
 
 <span class="n">system_tray</span> <span class="o">=</span> <span class="n">SystemTrayService</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span>
@@ -568,12 +531,118 @@ document.write(`
 <span class="n">system_tray</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;added&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">title</span><span class="p">))</span>
 </pre></div>
 </div>
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.system_tray.SystemTrayService.added">
+<span class="sig-name descname"><span class="pre">added</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.system_tray.SystemTrayService.added" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>Signal</p></li>
+</ul>
+<p>Emitted when a new item is added.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>item</strong> (<a class="reference internal" href="#ignis.services.system_tray.SystemTrayItem" title="ignis.services.system_tray.SystemTrayItem"><code class="xref py py-class docutils literal notranslate"><span class="pre">SystemTrayItem</span></code></a>) -- The instance of the system tray item.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.system_tray.SystemTrayService.items">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">items</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ignis.services.system_tray.SystemTrayItem" title="ignis.services.system_tray.item.SystemTrayItem"><span class="pre">SystemTrayItem</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.system_tray.SystemTrayService.items" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>A list of system tray items.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ignis.services.system_tray.SystemTrayItem">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.system_tray.</span></span><span class="sig-name descname"><span class="pre">SystemTrayItem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.system_tray.SystemTrayItem" title="Link to this definition">#</a></dt>
-<dd><p>System tray item.</p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.system_tray.</span></span><span class="sig-name descname"><span class="pre">SystemTrayItem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.system_tray.SystemTrayItem" title="Link to this definition">#</a></dt>
+<dd><p>A system tray item.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.system_tray.SystemTrayItem.removed">
+<span class="sig-name descname"><span class="pre">removed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.system_tray.SystemTrayItem.removed" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>Signal</p></li>
+</ul>
+<p>Emitted when the item is removed.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.system_tray.SystemTrayItem.id">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.system_tray.SystemTrayItem.id" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The ID of the item.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.system_tray.SystemTrayItem.category">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">category</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.system_tray.SystemTrayItem.category" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The category of the item.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.system_tray.SystemTrayItem.title">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.system_tray.SystemTrayItem.title" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The title of the item.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.system_tray.SystemTrayItem.status">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">status</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.system_tray.SystemTrayItem.status" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The status of the item.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.system_tray.SystemTrayItem.window_id">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">window_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.services.system_tray.SystemTrayItem.window_id" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The window ID.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.system_tray.SystemTrayItem.icon">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">icon</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">gi.repository.GdkPixbuf.Pixbuf</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.system_tray.SystemTrayItem.icon" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The icon name or a <code class="docutils literal notranslate"><span class="pre">GdkPixbuf.Pixbuf</span></code>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.system_tray.SystemTrayItem.item_is_menu">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">item_is_menu</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.system_tray.SystemTrayItem.item_is_menu" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>Whether the item has a menu.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.system_tray.SystemTrayItem.menu">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">menu</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../dbus_menu.html#ignis.dbus_menu.DBusMenu" title="ignis.dbus_menu.DBusMenu"><span class="pre">DBusMenu</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.system_tray.SystemTrayItem.menu" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>A <a class="reference internal" href="../dbus_menu.html#ignis.dbus_menu.DBusMenu" title="ignis.dbus_menu.DBusMenu"><code class="xref py py-class docutils literal notranslate"><span class="pre">DBusMenu</span></code></a> or <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>To display the menu, add it to a container, and call the <code class="docutils literal notranslate"><span class="pre">.popup()</span></code> method on it.</p>
+</div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>If you want to add <code class="docutils literal notranslate"><span class="pre">menu</span></code> to several containers (e.g., make two status bars with a system tray),
@@ -583,24 +652,86 @@ This is necessary because you can't add a single widget to multiple containers.<
 </pre></div>
 </div>
 </div>
-<dl class="simple">
-<dt>Signals:</dt><dd><ul class="simple">
-<li><p><strong>&quot;removed&quot;</strong> (): Emitted when the item is removed.</p></li>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.system_tray.SystemTrayItem.tooltip">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tooltip</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.system_tray.SystemTrayItem.tooltip" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>A tooltip, the text should be displayed when you hover cursor over the icon.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.system_tray.SystemTrayItem.activate">
+<span class="sig-name descname"><span class="pre">activate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.system_tray.SystemTrayItem.activate" title="Link to this definition">#</a></dt>
+<dd><p>Activate the application.
+Usually this causes an application window to appear.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">0</span></code>) -- x coordinate.</p></li>
+<li><p><strong>y</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">0</span></code>) -- y coordinate.</p></li>
 </ul>
 </dd>
-<dt>Properties:</dt><dd><ul class="simple">
-<li><p><strong>id</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The ID of the item.</p></li>
-<li><p><strong>category</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The category of the item.</p></li>
-<li><p><strong>title</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The title of the item.</p></li>
-<li><p><strong>status</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): The status of the item.</p></li>
-<li><p><strong>window_id</strong> (<code class="docutils literal notranslate"><span class="pre">int</span></code>, read-only): The window ID.</p></li>
-<li><p><strong>icon</strong> (<code class="docutils literal notranslate"><span class="pre">str</span> <span class="pre">|</span> <span class="pre">GdkPixbuf.Pixbuf</span> <span class="pre">|</span> <span class="pre">None</span></code>, read-only): The icon name or a <code class="docutils literal notranslate"><span class="pre">GdkPixbuf.Pixbuf</span></code>.</p></li>
-<li><p><strong>item_is_menu</strong> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>, read-only): Whether the item has a menu.</p></li>
-<li><p><strong>menu</strong> (<code class="docutils literal notranslate"><span class="pre">DBusMenu</span> <span class="pre">|</span> <span class="pre">None</span></code>, read-only): A <a class="reference internal" href="../dbus_menu.html#ignis.dbus_menu.DBusMenu" title="ignis.dbus_menu.DBusMenu"><code class="xref py py-class docutils literal notranslate"><span class="pre">DBusMenu</span></code></a> or <code class="docutils literal notranslate"><span class="pre">None</span></code>. Add it to a container, and call the <code class="docutils literal notranslate"><span class="pre">popup()</span></code> method on it to display the menu.</p></li>
-<li><p><strong>tooltip</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>, read-only): Tooltip, the text should be displayed when you hover cursor over the icon.</p></li>
-</ul>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.system_tray.SystemTrayItem.secondary_activate">
+<span class="sig-name descname"><span class="pre">secondary_activate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.system_tray.SystemTrayItem.secondary_activate" title="Link to this definition">#</a></dt>
+<dd><p>Activate a secondary and less important action compared to <a class="reference internal" href="#ignis.services.system_tray.SystemTrayItem.activate" title="ignis.services.system_tray.SystemTrayItem.activate"><code class="xref py py-func docutils literal notranslate"><span class="pre">activate()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">0</span></code>) -- x coordinate.</p></li>
+<li><p><strong>y</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">0</span></code>) -- y coordinate.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.system_tray.SystemTrayItem.context_menu">
+<span class="sig-name descname"><span class="pre">context_menu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.system_tray.SystemTrayItem.context_menu" title="Link to this definition">#</a></dt>
+<dd><p>Ask the item to show a context menu.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">0</span></code>) -- x coordinate.</p></li>
+<li><p><strong>y</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">0</span></code>) -- y coordinate.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.system_tray.SystemTrayItem.scroll">
+<span class="sig-name descname"><span class="pre">scroll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orientation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.13)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'horizontal'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'vertical'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'horizontal'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.system_tray.SystemTrayItem.scroll" title="Link to this definition">#</a></dt>
+<dd><p>Ask for a scroll action.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>delta</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">0</span></code>) -- The amount of scroll.</p></li>
+<li><p><strong>orientation</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code></a>[<code class="docutils literal notranslate"><span class="pre">'horizontal'</span></code>, <code class="docutils literal notranslate"><span class="pre">'vertical'</span></code>]</span>, default: <code class="docutils literal notranslate"><span class="pre">'horizontal'</span></code>) -- The type of the orientation: horizontal or vertical.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -625,11 +756,11 @@ This is necessary because you can't add a single widget to multiple containers.<
       </div>
     </a>
     <a class="right-next"
-       href="wallpaper.html"
+       href="upower.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Wallpaper</p>
+        <p class="prev-next-title">UPower</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -640,7 +771,8 @@ This is necessary because you can't add a single widget to multiple containers.<
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -651,8 +783,28 @@ This is necessary because you can't add a single widget to multiple containers.<
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayService"><code class="docutils literal notranslate"><span class="pre">SystemTrayService</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayItem"><code class="docutils literal notranslate"><span class="pre">SystemTrayItem</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayService"><code class="docutils literal notranslate"><span class="pre">SystemTrayService</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayService.added"><code class="docutils literal notranslate"><span class="pre">SystemTrayService.added()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayService.items"><code class="docutils literal notranslate"><span class="pre">SystemTrayService.items</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayItem"><code class="docutils literal notranslate"><span class="pre">SystemTrayItem</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayItem.removed"><code class="docutils literal notranslate"><span class="pre">SystemTrayItem.removed()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayItem.id"><code class="docutils literal notranslate"><span class="pre">SystemTrayItem.id</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayItem.category"><code class="docutils literal notranslate"><span class="pre">SystemTrayItem.category</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayItem.title"><code class="docutils literal notranslate"><span class="pre">SystemTrayItem.title</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayItem.status"><code class="docutils literal notranslate"><span class="pre">SystemTrayItem.status</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayItem.window_id"><code class="docutils literal notranslate"><span class="pre">SystemTrayItem.window_id</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayItem.icon"><code class="docutils literal notranslate"><span class="pre">SystemTrayItem.icon</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayItem.item_is_menu"><code class="docutils literal notranslate"><span class="pre">SystemTrayItem.item_is_menu</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayItem.menu"><code class="docutils literal notranslate"><span class="pre">SystemTrayItem.menu</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayItem.tooltip"><code class="docutils literal notranslate"><span class="pre">SystemTrayItem.tooltip</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayItem.activate"><code class="docutils literal notranslate"><span class="pre">SystemTrayItem.activate()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayItem.secondary_activate"><code class="docutils literal notranslate"><span class="pre">SystemTrayItem.secondary_activate()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayItem.context_menu"><code class="docutils literal notranslate"><span class="pre">SystemTrayItem.context_menu()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.system_tray.SystemTrayItem.scroll"><code class="docutils literal notranslate"><span class="pre">SystemTrayItem.scroll()</span></code></a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
@@ -694,8 +846,8 @@ This is necessary because you can't add a single widget to multiple containers.<
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -728,7 +880,7 @@ This is necessary because you can't add a single widget to multiple containers.<
       
         <div class="footer-item">
 <p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
 </p></div>
       
     </div>

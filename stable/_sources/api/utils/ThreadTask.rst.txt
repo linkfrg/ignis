@@ -1,4 +1,5 @@
 ThreadTask
 ----------
 
-.. autofunction:: ignis.utils.Utils.ThreadTask
+.. autoclass:: ignis.utils.ThreadTask
+    :members:
