@@ -110,7 +110,7 @@ class ApplicationsService(BaseService):
 
     @classmethod
     def search(
-        cls: "ApplicationsService",
+        cls,
         apps: list[Application],
         query: str,
     ) -> list[Application]:
