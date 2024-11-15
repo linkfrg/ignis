@@ -77,7 +77,7 @@ with mock(autodoc_mock_imports):
     if DOC_TAG == "latest" or DOC_TAG is None:
         version_match = "dev"
     elif DOC_TAG == "stable":
-        version_match = ignis.__version__.replace(".dev0", "")
+        version_match = "v" + ignis.__version__.replace(".dev0", "")
     else:
         version_match = DOC_TAG
 
