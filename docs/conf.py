@@ -1,25 +1,7 @@
 import os
 import sys
 import shutil
-
-
-TMP_DIR = "./tmp"
-SOURCE_DIR = "../ignis"
-TARGET_DIR = TMP_DIR + "/ignis"
-
-
-def copy_dir(source_dir: str, target_dir: str) -> None:
-    if os.path.exists(target_dir):
-        shutil.rmtree(target_dir)
-
-    shutil.copytree(source_dir, target_dir)
-
-
-copy_dir(SOURCE_DIR, TARGET_DIR)
-
-sys.path.insert(0, os.path.abspath(TMP_DIR))
-import ignis  # noqa: E402
-
+from sphinx.ext.autodoc.mock import mock
 
 # ============================== PROJECT INFO ===============================
 
@@ -65,20 +47,41 @@ typehints_use_signature_return = True
 typehints_defaults = "comma"
 always_use_bars_union = True
 
+# =============================== PATH STUFF ================================
+
+TMP_DIR = "./tmp"
+SOURCE_DIR = "../ignis"
+TARGET_DIR = TMP_DIR + "/ignis"
+
+
+def copy_dir(source_dir: str, target_dir: str) -> None:
+    if os.path.exists(target_dir):
+        shutil.rmtree(target_dir)
+
+    shutil.copytree(source_dir, target_dir)
+
+
+copy_dir(SOURCE_DIR, TARGET_DIR)
+
+sys.path.insert(0, os.path.abspath(TMP_DIR))
+
 # =============================== VERSIONING ================================
 
-json_url = f"{DOCS_URL}/_static/switcher.json"
+with mock(autodoc_mock_imports):
+    import ignis
 
-DOC_TAG = os.getenv("DOC_TAG")
+    json_url = f"{DOCS_URL}/_static/switcher.json"
 
-if DOC_TAG == "latest" or DOC_TAG is None:
-    version_match = "dev"
-elif DOC_TAG == "stable":
-    version_match = ignis.__version__.replace(".dev0", "")
-else:
-    version_match = DOC_TAG
+    DOC_TAG = os.getenv("DOC_TAG")
 
-release = version_match
+    if DOC_TAG == "latest" or DOC_TAG is None:
+        version_match = "dev"
+    elif DOC_TAG == "stable":
+        version_match = ignis.__version__.replace(".dev0", "")
+    else:
+        version_match = DOC_TAG
+
+    release = version_match
 
 # ============================== HTML OPTIONS ===============================
 
