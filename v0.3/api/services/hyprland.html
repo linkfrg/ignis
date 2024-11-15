@@ -1,0 +1,819 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Hyprland &#8212; Ignis documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=fe5c0044" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../../_static/documentation_options.js?v=a74d790d"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/services/hyprland';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://linkfrg.github.io/ignis/latest/_static/switcher.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'v0.3';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="MPRIS (media)" href="mpris.html" />
+    <link rel="prev" title="Fetch" href="fetch.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Ignis</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../user/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../dev/index.html">
+    Developer Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/linkfrg/ignis" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+          
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../user/index.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../dev/index.html">
+    Developer Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../examples/index.html">
+    Examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/linkfrg/ignis" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../app.html">Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gobject.html">GObject</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../variable.html">Variable</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../client.html">Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exceptions.html">Exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dbus.html">D-Bus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dbus_menu.html">D-Bus menu</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../base_widget.html">BaseWidget</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../base_service.html">BaseService</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../widgets/index.html">Widgets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Arrow.html">Arrow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/ArrowButton.html">ArrowButton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Box.html">Box</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Button.html">Button</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Calendar.html">Calendar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/CenterBox.html">CenterBox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/CheckButton.html">CheckButton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/DropDown.html">DropDown</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Entry.html">Entry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/EventBox.html">EventBox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/FileChooserButton.html">FileChooserButton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/FileDialog.html">FileDialog</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/FileFilter.html">FileFilter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Grid.html">Grid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/HeaderBar.html">HeaderBar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Icon.html">Icon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Label.html">Label</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/ListBox.html">ListBox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/ListBoxRow.html">ListBoxRow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/MenuItem.html">MenuItem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Overlay.html">Overlay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Picture.html">Picture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/PopoverMenu.html">PopoverMenu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/RegularWindow.html">RegularWindow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Revealer.html">Revealer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/RevealerWindow.html">RevealerWindow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Scale.html">Scale</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Scroll.html">Scroll</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Separator.html">Separator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/SpinButton.html">SpinButton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Switch.html">Switch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/ToggleButton.html">ToggleButton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Window.html">Window</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Services</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="applications.html">Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backlight.html">Backlight</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fetch.html">Fetch</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Hyprland</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mpris.html">MPRIS (media)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="network.html">Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notifications.html">Notifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="options.html">Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recorder.html">Recorder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system_tray.html">System Tray</a></li>
+<li class="toctree-l2"><a class="reference internal" href="upower.html">UPower</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wallpaper.html">Wallpaper</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../utils/index.html">Utils</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../utils/FileMonitor.html">FileMonitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/Poll.html">Poll</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/ThreadTask.html">ThreadTask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/Timeout.html">Timeout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/crop_pixbuf.html">crop_pixbuf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/download_image.html">download_image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/exec_sh.html">exec_sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/exec_sh_async.html">exec_sh_async</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/get_current_dir.html">get_current_dir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/get_file_icon_name.html">get_file_icon_name</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/get_ignis_branch.html">get_ignis_branch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/get_ignis_commit.html">get_ignis_commit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/get_ignis_commit_msg.html">get_ignis_commit_msg</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/get_ignis_version.html">get_ignis_version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/get_monitor.html">get_monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/get_n_monitors.html">get_n_monitors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/get_paintable.html">get_paintable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/listen_socket.html">listen_socket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/load_interface_xml.html">load_interface_xml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/run_in_thread.html">run_in_thread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/sass_compile.html">sass_compile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/scale_pixbuf.html">scale_pixbuf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/send_socket.html">send_socket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/thread.html">thread</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">API reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Services</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Hyprland</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="hyprland">
+<h1>Hyprland<a class="headerlink" href="#hyprland" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.hyprland.</span></span><span class="sig-name descname"><span class="pre">HyprlandService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.hyprland.HyprlandService" title="Link to this definition">#</a></dt>
+<dd><p>Hyprland IPC client.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../exceptions.html#ignis.exceptions.HyprlandIPCNotFoundError" title="ignis.exceptions.HyprlandIPCNotFoundError"><strong>HyprlandIPCNotFoundError</strong></a> -- If Hyprland IPC is not found.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The contents of <code class="docutils literal notranslate"><span class="pre">dict</span></code> properties are not described here.
+To find out their contents just print them into the terminal.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">hyprland</span><span class="o">.</span><span class="n">workspaces</span><span class="p">)</span>
+<span class="go">[</span>
+<span class="go">    {</span>
+<span class="go">        &quot;id&quot;: 1,</span>
+<span class="go">        &quot;name&quot;: &quot;1&quot;,</span>
+<span class="go">        &quot;monitor&quot;: &quot;DP-1&quot;,</span>
+<span class="go">        &quot;monitorID&quot;: 1,</span>
+<span class="go">        &quot;windows&quot;: 1,</span>
+<span class="go">        &quot;hasfullscreen&quot;: False,</span>
+<span class="go">        &quot;lastwindow&quot;: &quot;0x561dc35d2e80&quot;,</span>
+<span class="go">        &quot;lastwindowtitle&quot;: &quot;hyprland.py - ignis - Visual Studio Code&quot;,</span>
+<span class="go">    },</span>
+<span class="go">    {</span>
+<span class="go">        &quot;id&quot;: 10,</span>
+<span class="go">        &quot;name&quot;: &quot;10&quot;,</span>
+<span class="go">        &quot;monitor&quot;: &quot;HDMI-A-1&quot;,</span>
+<span class="go">        &quot;monitorID&quot;: 0,</span>
+<span class="go">        &quot;windows&quot;: 1,</span>
+<span class="go">        &quot;hasfullscreen&quot;: False,</span>
+<span class="go">        &quot;lastwindow&quot;: &quot;0x561dc3845f30&quot;,</span>
+<span class="go">        &quot;lastwindowtitle&quot;: &quot;Type hints cheat sheet - mypy 1.11.2 documentation — Mozilla Firefox&quot;,</span>
+<span class="go">    },</span>
+<span class="go">]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">hyprland</span><span class="o">.</span><span class="n">active_window</span><span class="p">)</span>
+<span class="go">{</span>
+<span class="go">    &quot;address&quot;: &quot;0x561dc35d2e80&quot;,</span>
+<span class="go">    &quot;mapped&quot;: True,</span>
+<span class="go">    &quot;hidden&quot;: False,</span>
+<span class="go">    &quot;at&quot;: [1942, 22],</span>
+<span class="go">    &quot;size&quot;: [1876, 1036],</span>
+<span class="go">    &quot;workspace&quot;: {&quot;id&quot;: 1, &quot;name&quot;: &quot;1&quot;},</span>
+<span class="go">    &quot;floating&quot;: False,</span>
+<span class="go">    &quot;pseudo&quot;: False,</span>
+<span class="go">    &quot;monitor&quot;: 1,</span>
+<span class="go">    &quot;class&quot;: &quot;code-url-handler&quot;,</span>
+<span class="go">    &quot;title&quot;: &quot;hyprland.py - ignis - Visual Studio Code&quot;,</span>
+<span class="go">    &quot;initialClass&quot;: &quot;code-url-handler&quot;,</span>
+<span class="go">    &quot;initialTitle&quot;: &quot;Visual Studio Code&quot;,</span>
+<span class="go">    &quot;pid&quot;: 1674,</span>
+<span class="go">    &quot;xwayland&quot;: False,</span>
+<span class="go">    &quot;pinned&quot;: False,</span>
+<span class="go">    &quot;fullscreen&quot;: 0,</span>
+<span class="go">    &quot;fullscreenClient&quot;: 0,</span>
+<span class="go">    &quot;grouped&quot;: [],</span>
+<span class="go">    &quot;tags&quot;: [],</span>
+<span class="go">    &quot;swallowing&quot;: &quot;0x0&quot;,</span>
+<span class="go">    &quot;focusHistoryID&quot;: 0,</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
+<p>Example usage:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.services.hyprland</span> <span class="kn">import</span> <span class="n">HyprlandService</span>
+
+<span class="n">hyprland</span> <span class="o">=</span> <span class="n">HyprlandService</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">hyprland</span><span class="o">.</span><span class="n">workspaces</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hyprland</span><span class="o">.</span><span class="n">kb_layout</span><span class="p">)</span>
+
+<span class="n">hyprland</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;notify::kb-layout&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">hyprland</span><span class="o">.</span><span class="n">kb_layout</span><span class="p">))</span>
+</pre></div>
+</div>
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService.workspaces">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">workspaces</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.workspaces" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>A list of workspaces.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService.active_workspace">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">active_workspace</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.active_workspace" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The currently active workspace.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService.kb_layout">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">kb_layout</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.kb_layout" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The currenly active keyboard layout.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService.active_window">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">active_window</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.active_window" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The currenly focused window.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService.send_command">
+<span class="sig-name descname"><span class="pre">send_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.send_command" title="Link to this definition">#</a></dt>
+<dd><p>Send a command to the Hyprland IPC.
+Supports the same commands as <code class="docutils literal notranslate"><span class="pre">hyprctl</span></code>.
+If you want to receive the response in JSON format, use this syntax: <code class="docutils literal notranslate"><span class="pre">j/COMMAND</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmd</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The command to send.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Response from Hyprland IPC.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService.switch_kb_layout">
+<span class="sig-name descname"><span class="pre">switch_kb_layout</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.switch_kb_layout" title="Link to this definition">#</a></dt>
+<dd><p>Switch to the next keyboard layout.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService.switch_to_workspace">
+<span class="sig-name descname"><span class="pre">switch_to_workspace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">workspace_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.switch_to_workspace" title="Link to this definition">#</a></dt>
+<dd><p>Switch to a workspace by its ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>workspace_id</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) -- The ID of the workspace to switch to.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="fetch.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Fetch</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="mpris.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">MPRIS (media)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService"><code class="docutils literal notranslate"><span class="pre">HyprlandService</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.workspaces"><code class="docutils literal notranslate"><span class="pre">HyprlandService.workspaces</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.active_workspace"><code class="docutils literal notranslate"><span class="pre">HyprlandService.active_workspace</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.kb_layout"><code class="docutils literal notranslate"><span class="pre">HyprlandService.kb_layout</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.active_window"><code class="docutils literal notranslate"><span class="pre">HyprlandService.active_window</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.send_command"><code class="docutils literal notranslate"><span class="pre">HyprlandService.send_command()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.switch_kb_layout"><code class="docutils literal notranslate"><span class="pre">HyprlandService.switch_kb_layout()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.switch_to_workspace"><code class="docutils literal notranslate"><span class="pre">HyprlandService.switch_to_workspace()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/linkfrg/ignis/edit/main/docs/api/services/hyprland.rst">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/api/services/hyprland.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, linkfrg.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
