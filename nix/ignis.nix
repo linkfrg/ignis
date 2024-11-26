@@ -26,11 +26,12 @@ pkgs.stdenv.mkDerivation {
     pkgs.python312Packages.pycairo
     pkgs.python312Packages.click
     pkgs.python312Packages.charset-normalizer
-  ];
-
-  runtimeInputs = [
     pkgs.gst_all_1.gstreamer
     pkgs.gst_all_1.gst-plugins-base
+    pkgs.gst_all_1.gst-plugins-good
+    pkgs.gst_all_1.gst-plugins-bad
+    pkgs.gst_all_1.gst-plugins-ugly
+    pkgs.pipewire
     pkgs.dart-sass
   ];
 
@@ -65,16 +66,15 @@ pkgs.stdenv.mkDerivation {
         pkgs.glib
         pkgs.gobject-introspection
         pkgs.networkmanager
-        pkgs.gobject-introspection-unwrapped
         pkgs.gst_all_1.gstreamer
-        pkgs.gst_all_1.gst-plugins-base
-        pkgs.gst_all_1.gst-plugins-ugly
       ])}:$GI_TYPELIB_PATH" \
       --set LD_LIBRARY_PATH "$out/lib:${pkgs.gtk4-layer-shell}/lib:${pkgs.glib}/lib:$LD_LIBRARY_PATH" \
       --set GST_PLUGIN_PATH "${concatStringsSep ":" (map (pkg: "${pkg}/lib/gstreamer-1.0") [
         pkgs.gst_all_1.gst-plugins-base
         pkgs.gst_all_1.gst-plugins-good
+        pkgs.gst_all_1.gst-plugins-bad
         pkgs.gst_all_1.gst-plugins-ugly
+        pkgs.pipewire
       ])}:$GST_PLUGIN_PATH"
   '';
 
