@@ -9,21 +9,6 @@ class BluetoothService(BaseService):
     """
     A Bluetooth service.
     Requires ``gnome-bluetooth-3.0``.
-
-    Signals:
-        - **"device-added"** (:class:`~ignis.services.bluetooth.BluetoothDevice`): Emitted when a Bluetooth device has been added.
-
-    Properties:
-        - **devices** (list[:class:`~ignis.services.bluetooth.BluetoothDevice`], read-only): List of all Bluetooth devices.
-        - **powered** (``bool``, read-write): Whether the default Bluetooth adapter is powered.
-        - **state** (``str``, read-only): The current state of the default Bluetooth adapter.
-
-    Adapter state:
-        - **"absent"**
-        - **"on"**
-        - **"turning-on"**
-        - **"turning-off"**
-        - **"off"**
     """
 
     __gsignals__ = {
@@ -46,12 +31,33 @@ class BluetoothService(BaseService):
         for gdevice in self._client.get_devices():
             self.__add_device(None, gdevice)  # type: ignore
 
+    @GObject.Signal(arg_types=(BluetoothDevice,))
+    def device_added(self, *args):
+        """
+        - Signal
+
+        Emitted when a Bluetooth device has been added.
+
+        Args:
+            device (:class:`~ignis.services.bluetooth.BluetoothDevice`): The instance of the Bluetooth device.
+        """
+
     @GObject.Property
     def devices(self) -> list[BluetoothDevice]:
+        """
+        - read-only
+
+        A list of all Bluetooth devices.
+        """
         return list(self._devices.values())
 
     @GObject.Property
     def powered(self) -> bool:
+        """
+        - read-write
+
+        Whether the default Bluetooth adapter is powered.
+        """
         return self._client.props.default_adapter_powered
 
     @powered.setter
@@ -60,6 +66,18 @@ class BluetoothService(BaseService):
 
     @GObject.Property
     def state(self) -> str:
+        """
+        - read-only
+
+        The current state of the default Bluetooth adapter.
+
+        Adapter state:
+            - absent
+            - on
+            - turning-on
+            - turning-off
+            - off
+        """
         return ADAPTER_STATE.get(self._client.props.default_adapter_state, "absent")
 
     def __add_device(self, x, gdevice: GnomeBluetooth.Device) -> None:
