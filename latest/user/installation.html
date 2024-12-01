@@ -431,13 +431,34 @@
   <section id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h1>
 <section id="arch-linux">
-<h2>Arch linux<a class="headerlink" href="#arch-linux" title="Link to this heading">#</a></h2>
+<h2>Arch Linux<a class="headerlink" href="#arch-linux" title="Link to this heading">#</a></h2>
+<p>maintainer: &#64;linkfrg</p>
+<p>Install the package from AUR.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>paru<span class="w"> </span>-S<span class="w"> </span>ignis
+</pre></div>
+</div>
+<p>For the latest (git) version of Ignis install <code class="docutils literal notranslate"><span class="pre">ignis-git</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>paru<span class="w"> </span>-S<span class="w"> </span>ignis-git
 </pre></div>
 </div>
 </section>
 <section id="nix">
 <h2>Nix<a class="headerlink" href="#nix" title="Link to this heading">#</a></h2>
+<p>maintainer: missing specific maintainers, the package is mostly maintained by free contributors (bugs are expected)</p>
+<dl class="simple">
+<dt>Contributors:</dt><dd><ul class="simple">
+<li><p>&#64;frdiener</p></li>
+<li><p>&#64;somokill</p></li>
+<li><p>&#64;ratson</p></li>
+<li><p>&#64;0x006E</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This will install the latest (git) version of Ignis.
+Please refer to the <a class="reference external" href="https://linkfrg.github.io/ignis/latest/index.html">latest documentation</a>.</p>
+</div>
 <p>Add Ignis to your flake's inputs:</p>
 <div class="highlight-nix notranslate"><div class="highlight"><pre><span></span>ignis<span class="o">.</span><span class="ss">url</span> <span class="o">=</span> <span class="s2">&quot;github:linkfrg/ignis&quot;</span><span class="p">;</span>
 </pre></div>
@@ -526,7 +547,7 @@ meson<span class="w"> </span>install<span class="w"> </span>-C<span class="w"> <
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arch-linux">Arch linux</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arch-linux">Arch Linux</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nix">Nix</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-from-source">Building from source</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running">Running</a></li>
