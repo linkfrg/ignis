@@ -1,5 +1,5 @@
 from ignis.gobject import IgnisGObject
-from typing import TypeVar, Type
+from typing import TypeVar
 
 T = TypeVar("T", bound="BaseService")
 
@@ -17,7 +17,7 @@ class BaseService(IgnisGObject):
         super().__init__()
 
     @classmethod
-    def get_default(cls: Type[T]) -> T:
+    def get_default(cls: type[T]) -> T:
         """
         Returns the default Service object for this process, creating it if necessary.
         """
