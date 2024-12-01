@@ -17,10 +17,7 @@ class IgnisClient:
         Do not use this class inside the main Ignis process (e.g., in the config file).
         It's unnecessary; use :class:`~ignis.app.IgnisApp` instead.
 
-    Properties:
-        - **has_owner** (``bool``, read-only): Whether D-Bus name has the owner (Whether Ignis is running).
-
-    **Example usage:**
+    Example usage:
 
     .. code-block:: python
 
@@ -42,6 +39,11 @@ class IgnisClient:
 
     @property
     def has_owner(self) -> bool:
+        """
+        - read-only
+
+        Whether D-Bus name has the owner (Whether Ignis is running).
+        """
         return self.__dbus.has_owner
 
     def __call_dbus_method(self, method_name: str, *args) -> Any:
@@ -99,7 +101,7 @@ class IgnisClient:
         Run a Python code inside the Ignis process.
 
         Args:
-            code (``str``): The Python code to execute.
+            code: The Python code to execute.
         """
         self.__call_dbus_method("RunPython", "(s)", code)
 
@@ -108,7 +110,7 @@ class IgnisClient:
         Run a Python file inside Ignis daemon.
 
         Args:
-            path (``str``): The path to the Python file to execute.
+            path: The path to the Python file to execute.
         """
         self.__call_dbus_method("RunFile", "(s)", path)
 

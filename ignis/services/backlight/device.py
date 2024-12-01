@@ -10,11 +10,6 @@ from .util import get_session_path
 class BacklightDevice(IgnisGObject):
     """
     A backlight device.
-
-    Properties:
-        - **device_name** (``str``, read-write): The name of the directory in ``/sys/class/backlight``.
-        - **brightness** (``int``, read-only): Current brightness of the device.
-        - **max_brightness** (``int``, read-only): Maximum brightness allowed by the device.
     """
 
     def __init__(self, device_name: str):
@@ -35,7 +30,7 @@ class BacklightDevice(IgnisGObject):
 
         Utils.FileMonitor(
             path=self._PATH_TO_BRIGHTNESS,
-            callback=lambda path, event_type: self.__sync_brightness()
+            callback=lambda x, path, event_type: self.__sync_brightness()
             if event_type != "changed"  # "changed" event is called multiple times
             else None,
         )
@@ -58,14 +53,29 @@ class BacklightDevice(IgnisGObject):
 
     @GObject.Property
     def device_name(self) -> str:
+        """
+        - read-only
+
+        The name of the directory in ``/sys/class/backlight``.
+        """
         return self._device_name
 
     @GObject.Property
     def max_brightness(self) -> int:
+        """
+        - read-only
+
+        The maximum brightness allowed by the device.
+        """
         return self._max_brightness
 
     @GObject.Property
     def brightness(self) -> int:
+        """
+        - read-write
+
+        The current brightness of the device.
+        """
         return self._brightness
 
     @brightness.setter
@@ -75,4 +85,5 @@ class BacklightDevice(IgnisGObject):
             "backlight",
             self._device_name,
             value,
+            result_handler=lambda *args: None,
         )

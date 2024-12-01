@@ -1,21 +1,21 @@
-from __future__ import annotations
 from gi.repository import Gtk, Gdk, Gio  # type: ignore
 from ignis.exceptions import DisplayNotFoundError
+from typing import Union
 
 
 def get_paintable(
     widget: Gtk.Widget, icon_name: str, size: int
-) -> Gtk.IconPaintable | None:
+) -> Union[Gtk.IconPaintable, None]:
     """
     Get a ``Gdk.Paintable`` by icon name.
 
     Args:
-        widget (``Gtk.Widget``): The parent widget.
-        icon_name (``str``): The name of the icon to look up.
-        size (``int``): The size of the icon.
+        widget: The parent widget.
+        icon_name: The name of the icon to look up.
+        size: The size of the icon.
 
     Returns:
-        ``Gdk.Paintable | None``: The paintable object for the icon or ``None`` if no such icon exists.
+        The paintable object for the icon or ``None`` if no such icon exists.
     """
     display = Gdk.Display.get_default()
     if not display:

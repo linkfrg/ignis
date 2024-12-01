@@ -7,11 +7,11 @@ on:
     paths:
       - "ignis/**"
       - "docs/**"
+      - ".github/workflows/latest_docs.yaml"
   workflow_dispatch:
 
 jobs:
   build:
     uses: ./.github/workflows/build_docs.yaml
     with:
-      TAG: "latest"
-      DEST_DIR: "latest"
+      DOC_TAG: "latest"

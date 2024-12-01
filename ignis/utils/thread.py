@@ -8,9 +8,10 @@ def thread(target: Callable, *args, **kwargs) -> threading.Thread:
     The provided args and kwargs will be passed to the function.
 
     Args:
-        target (``Callable``): The function to run.
+        target: The function to run.
+
     Returns:
-        `threading.Thread``: The thread in which the function is running.
+        The thread in which the function is running.
     """
     th = threading.Thread(target=target, args=args, kwargs=kwargs, daemon=True)
     th.start()

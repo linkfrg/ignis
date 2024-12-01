@@ -5,12 +5,9 @@ from typing import Any, Callable
 
 class Switch(Gtk.Switch, BaseWidget):
     """
-    Bases: `Gtk.Switch <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Switch.html>`_.
+    Bases: :class:`Gtk.Switch`
 
     A switch widget.
-
-    Properties:
-        - **on_change** (``Callable``, optional, read-write): Function to call when the position of the switch changes (e.g., when the user toggles the switch).
 
     .. code-block:: python
 
@@ -33,6 +30,11 @@ class Switch(Gtk.Switch, BaseWidget):
 
     @GObject.Property
     def on_change(self) -> Callable | None:
+        """
+        - optional, read-write
+
+        The function to call when the position of the switch changes (e.g., when the user toggles the switch).
+        """
         return self._on_change
 
     @on_change.setter

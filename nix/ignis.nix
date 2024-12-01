@@ -1,18 +1,21 @@
-{ pkgs, ... }:
+{ fetchFromGitLab, pkgs, version ? "git", ... }:
 let
-inherit (pkgs.lib) concatStringsSep;
+  inherit (pkgs.lib) concatStringsSep;
+
+  gvc = fetchFromGitLab {
+    domain = "gitlab.gnome.org";
+    owner = "GNOME";
+    repo = "libgnome-volume-control";
+    rev = "5f9768a2eac29c1ed56f1fbb449a77a3523683b6";
+    hash = "sha256-gdgTnxzH8BeYQAsvv++Yq/8wHi7ISk2LTBfU8hk12NM=";
+  };
 in
 pkgs.stdenv.mkDerivation {
-  pname = "ignis";
-  version = "0.2";
+  inherit version;
 
-  src = pkgs.fetchFromGitHub {
-    owner = "linkfrg";
-    repo = "ignis";
-    rev = "78846c57832c70fd971dbcd28ac5d8e70cd09840";
-    sha256 = "sha256-V70DT1Czyj/rbBAQIqfRVlQOyeuLjk1F6P8XOagDxNw=";
-    fetchSubmodules = true;
-  };
+  pname = "ignis";
+
+  src = ./..;
 
   nativeBuildInputs = [
     pkgs.pkg-config
@@ -31,15 +34,18 @@ pkgs.stdenv.mkDerivation {
     pkgs.python312Packages.pycairo
     pkgs.python312Packages.click
     pkgs.python312Packages.charset-normalizer
-  ];
-
-  runtimeInputs = [
     pkgs.gst_all_1.gstreamer
     pkgs.gst_all_1.gst-plugins-base
+    pkgs.gst_all_1.gst-plugins-good
+    pkgs.gst_all_1.gst-plugins-bad
+    pkgs.gst_all_1.gst-plugins-ugly
+    pkgs.pipewire
     pkgs.dart-sass
   ];
 
   patchPhase = ''
+    mkdir -p ./subprojects/gvc
+    cp -r ${gvc}/* ./subprojects/gvc
     substituteInPlace ignis/utils/sass.py \
       --replace-fail '/bin/sass' '${pkgs.dart-sass}/bin/sass'
   '';
@@ -70,16 +76,15 @@ pkgs.stdenv.mkDerivation {
         pkgs.glib
         pkgs.gobject-introspection
         pkgs.networkmanager
-        pkgs.gobject-introspection-unwrapped
         pkgs.gst_all_1.gstreamer
-        pkgs.gst_all_1.gst-plugins-base
-        pkgs.gst_all_1.gst-plugins-ugly
       ])}:$GI_TYPELIB_PATH" \
       --set LD_LIBRARY_PATH "$out/lib:${pkgs.gtk4-layer-shell}/lib:${pkgs.glib}/lib:$LD_LIBRARY_PATH" \
       --set GST_PLUGIN_PATH "${concatStringsSep ":" (map (pkg: "${pkg}/lib/gstreamer-1.0") [
         pkgs.gst_all_1.gst-plugins-base
         pkgs.gst_all_1.gst-plugins-good
+        pkgs.gst_all_1.gst-plugins-bad
         pkgs.gst_all_1.gst-plugins-ugly
+        pkgs.pipewire
       ])}:$GST_PLUGIN_PATH"
   '';
 
@@ -89,6 +94,6 @@ pkgs.stdenv.mkDerivation {
     changelog = "https://github.com/linkfrg/ignis/releases/tag/v${version}";
     license = licenses.gpl3;
     maintainers = with maintainers; [ frdiener somokill ];
-    main_program = "ignis";
+    mainProgram = "ignis";
   };
 }

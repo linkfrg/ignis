@@ -7,12 +7,7 @@ from .util import get_devices
 
 class Ethernet(IgnisGObject):
     """
-    Class for controlling Ethernet devices.
-
-    Properties:
-        - **devices** (:class:`~ignis.services.network.EthernetDevice`, read-only): A list of Ethernet devices.
-        - **is_connected** (``bool``, read-only): Whether at least one Ethernet device is connected to the network.
-        - **icon_name** (``str``, read-only): The general icon name for all devices, depends on ``is_connected`` property.
+    The class for controlling Ethernet devices.
     """
 
     def __init__(self, client: NM.Client):
@@ -27,10 +22,20 @@ class Ethernet(IgnisGObject):
 
     @GObject.Property
     def devices(self) -> list[EthernetDevice]:
+        """
+        - read-only
+
+        A list of Ethernet devices.
+        """
         return self._devices
 
     @GObject.Property
     def is_connected(self) -> bool:
+        """
+        - read-only
+
+        Whether at least one Ethernet device is connected to the network.
+        """
         for i in self.devices:
             if i.is_connected:
                 return True
@@ -38,6 +43,11 @@ class Ethernet(IgnisGObject):
 
     @GObject.Property
     def icon_name(self) -> str:
+        """
+        - read-only
+
+        The general icon name for all devices, depends on ``is_connected`` property.
+        """
         if self.is_connected:
             return "network-wired-symbolic"
         else:

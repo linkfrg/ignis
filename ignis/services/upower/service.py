@@ -11,28 +11,9 @@ class UPowerService(BaseService):
     An UPower service.
     Requires ``UPower``.
 
-    Signals:
-        - **device-added** (:class:`~ignis.services.upower.UPowerDevice`): Emitted when a power device has been added.
-        - **battery-added** (:class:`~ignis.services.upower.UPowerDevice`): Emitted when a battery has been added.
-
-    Properties:
-        - **devices** (list[:class:`~ignis.services.upower.UPowerDevice`]): List of all power devices.
-        - **batteries** (list[:class:`~ignis.services.upower.UPowerDevice`]): List of batteries.
-        - **display_device** (:class:`~ignis.services.upower.UPowerDevice`): The currently active device intended for display.
+    Raises:
+        UPowerNotRunningError: If UPower D-Bus service is not running.
     """
-
-    __gsignals__ = {
-        "device-added": (
-            GObject.SignalFlags.RUN_FIRST,
-            GObject.TYPE_NONE,
-            (UPowerDevice,),
-        ),
-        "battery-added": (
-            GObject.SignalFlags.RUN_FIRST,
-            GObject.TYPE_NONE,
-            (UPowerDevice,),
-        ),
-    }
 
     def __init__(self) -> None:
         super().__init__()
@@ -67,16 +48,53 @@ class UPowerService(BaseService):
     def __get_device_object_path(self, args) -> str:
         return args[-1].unpack()[0]  # -1 element is the device object path (Variant)
 
+    @GObject.Signal(arg_types=(UPowerDevice,))
+    def device_added(self, *args):
+        """
+        - Signal
+
+        Emitted when a power device has been added.
+
+        Args:
+            device (:class:`~ignis.services.upower.UPowerDevice`): The instance of the UPower device.
+        """
+
+    @GObject.Signal(arg_types=(UPowerDevice,))
+    def battery_added(self, *args):
+        """
+        - Signal
+
+        Emitted when a battery has been added.
+
+        Args:
+            battery (:class:`~ignis.services.upower.UPowerDevice`): The instance of the battery.
+        """
+
     @GObject.Property
     def devices(self) -> list[UPowerDevice]:
+        """
+        - read-only
+
+        A list of all power devices.
+        """
         return list(self._devices.values())
 
     @GObject.Property
     def batteries(self) -> list[UPowerDevice]:
+        """
+        - read-only
+
+        A list of batteries.
+        """
         return list(self._batteries.values())
 
     @GObject.Property
     def display_device(self) -> UPowerDevice:
+        """
+        - read-only
+
+        The currently active device intended for display.
+        """
         return self._display_device
 
     def __add_device(self, object_path: str) -> None:
@@ -88,6 +106,8 @@ class UPowerService(BaseService):
             self._batteries[object_path] = device
             self.emit("battery-added", device)
 
+        self.notify("devices")
+
     def __remove_device(self, object_path: str) -> None:
         if object_path not in self._devices:
             return
@@ -97,3 +117,4 @@ class UPowerService(BaseService):
 
         device = self._devices.pop(object_path)
         device.emit("removed")
+        self.notify("devices")

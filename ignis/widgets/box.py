@@ -4,7 +4,7 @@ from ignis.base_widget import BaseWidget
 
 class Box(Gtk.Box, BaseWidget):
     """
-    Bases: `Gtk.Box <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Box.html>`_.
+    Bases: :class:`Gtk.Box`.
 
     The main layout widget.
 
@@ -16,10 +16,6 @@ class Box(Gtk.Box, BaseWidget):
             Widget.Box(
                 child=[Widget.Label(label=str(i)) for i in range(10)]
             )
-
-    Properties:
-        - **child** (``list[Gtk.Widget]``, optional, read-write): A list of child widgets.
-        - **vertical** (``bool``, optional, read-write): Whether the box arranges children vertically.
 
     .. code-block:: python
 
@@ -41,6 +37,11 @@ class Box(Gtk.Box, BaseWidget):
 
     @GObject.Property
     def child(self) -> list[Gtk.Widget]:
+        """
+        - optional, read-write
+
+        A list of child widgets.
+        """
         return self._child
 
     @child.setter
@@ -67,6 +68,13 @@ class Box(Gtk.Box, BaseWidget):
 
     @GObject.Property
     def vertical(self) -> bool:
+        """
+        - optional, read-write
+
+        Whether the box arranges children vertically.
+
+        Default: ``False``.
+        """
         return self.get_orientation() == Gtk.Orientation.VERTICAL
 
     @vertical.setter

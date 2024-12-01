@@ -6,12 +6,12 @@ def crop_pixbuf(pixbuf: GdkPixbuf.Pixbuf, width: int, height: int) -> GdkPixbuf.
     Crop the ``GdkPixbuf.Pixbuf`` to the given width and height.
 
     Args:
-        pixbuf (``GdkPixbuf.Pixbuf``): The source pixbuf.
-        width (``int``): The width to crop to.
-        height (``int``): The height to crop to.
+        pixbuf: The source pixbuf.
+        width: The width to crop to.
+        height: The height to crop to.
 
     Returns:
-        ``GdkPixbuf.Pixbuf``: The cropped pixbuf.
+        The cropped pixbuf.
     """
     img_width = pixbuf.get_width()
     img_height = pixbuf.get_height()

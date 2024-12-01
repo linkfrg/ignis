@@ -1,4 +1,4 @@
-from __future__ import annotations
+from typing import Union, Literal
 from ignis.utils import Utils
 from ignis.dbus import DBusProxy
 from gi.repository import GLib, GObject, GdkPixbuf  # type: ignore
@@ -8,47 +8,14 @@ from ignis.dbus_menu import DBusMenu
 
 class SystemTrayItem(IgnisGObject):
     """
-    System tray item.
-
-    .. warning::
-        If you want to add ``menu`` to several containers (e.g., make two status bars with a system tray),
-        you must call the ``copy()`` method to obtain a copy of the menu.
-        This is necessary because you can't add a single widget to multiple containers.
-
-        .. code-block:: python
-
-            menu = item.menu.copy()
-
-    Signals:
-        - **"removed"** (): Emitted when the item is removed.
-
-    Properties:
-        - **id** (``str``, read-only): The ID of the item.
-        - **category** (``str``, read-only): The category of the item.
-        - **title** (``str``, read-only): The title of the item.
-        - **status** (``str``, read-only): The status of the item.
-        - **window_id** (``int``, read-only): The window ID.
-        - **icon** (``str | GdkPixbuf.Pixbuf | None``, read-only): The icon name or a ``GdkPixbuf.Pixbuf``.
-        - **item_is_menu** (``bool``, read-only): Whether the item has a menu.
-        - **menu** (``DBusMenu | None``, read-only): A :class:`~ignis.dbus_menu.DBusMenu` or ``None``. Add it to a container, and call the ``popup()`` method on it to display the menu.
-        - **tooltip** (``str``, read-only): Tooltip, the text should be displayed when you hover cursor over the icon.
-
+    A system tray item.
     """
-
-    __gsignals__ = {
-        "ready": (
-            GObject.SignalFlags.RUN_FIRST,
-            GObject.TYPE_NONE,
-            (),
-        ),  # user shouldn't connect to this signal
-        "removed": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
-    }
 
     def __init__(self, name: str, object_path: str):
         super().__init__()
 
         self._title: str | None = None
-        self._icon: str | GdkPixbuf.Pixbuf | None = None
+        self._icon: Union[str, GdkPixbuf.Pixbuf, None] = None
         self._tooltip: str | None = None
         self._status: str | None = None
         self._menu: DBusMenu | None = None
@@ -123,40 +90,108 @@ class SystemTrayItem(IgnisGObject):
 
         self.notify("icon")
 
+    @GObject.Signal
+    def ready(self): ...  # user shouldn't connect to this signal
+
+    @GObject.Signal
+    def removed(self):
+        """
+        - Signal
+
+        Emitted when the item is removed.
+        """
+
     @GObject.Property
     def id(self) -> str:
+        """
+        - read-only
+
+        The ID of the item.
+        """
         return self.__dbus.Id
 
     @GObject.Property
     def category(self) -> str:
+        """
+        - read-only
+
+        The category of the item.
+        """
         return self.__dbus.Category
 
     @GObject.Property
     def title(self) -> str:
+        """
+        - read-only
+
+        The title of the item.
+        """
         return self.__dbus.Title
 
     @GObject.Property
     def status(self) -> str:
+        """
+        - read-only
+
+        The status of the item.
+        """
         return self.__dbus.Status
 
     @GObject.Property
     def window_id(self) -> int:
+        """
+        - read-only
+
+        The window ID.
+        """
         return self.__dbus.WindowId
 
     @GObject.Property
-    def icon(self) -> str | GdkPixbuf.Pixbuf | None:
+    def icon(self) -> Union[str, GdkPixbuf.Pixbuf, None]:
+        """
+        - read-only
+
+        The icon name or a ``GdkPixbuf.Pixbuf``.
+        """
         return self._icon
 
     @GObject.Property
     def item_is_menu(self) -> bool:
+        """
+        - read-only
+
+        Whether the item has a menu.
+        """
         return self.__dbus.ItemIsMenu
 
     @GObject.Property
     def menu(self) -> DBusMenu | None:
+        """
+        - read-only
+
+        A :class:`~ignis.dbus_menu.DBusMenu` or ``None``.
+
+        .. hint::
+            To display the menu, add it to a container, and call the ``.popup()`` method on it.
+
+        .. warning::
+            If you want to add ``menu`` to several containers (e.g., make two status bars with a system tray),
+            you must call the ``copy()`` method to obtain a copy of the menu.
+            This is necessary because you can't add a single widget to multiple containers.
+
+            .. code-block:: python
+
+                menu = item.menu.copy()
+        """
         return self._menu
 
     @GObject.Property
     def tooltip(self) -> str:
+        """
+        - read-only
+
+        A tooltip, the text should be displayed when you hover cursor over the icon.
+        """
         tooltip = self.__dbus.ToolTip
         return self.title if not tooltip else tooltip[2]
 
@@ -179,4 +214,51 @@ class SystemTrayItem(IgnisGObject):
             pixmap[0],
             pixmap[1],
             pixmap[0] * 4,
+        )
+
+    def activate(self, x: int = 0, y: int = 0) -> None:
+        """
+        Activate the application.
+        Usually this causes an application window to appear.
+
+        Args:
+            x: x coordinate.
+            y: y coordinate.
+        """
+        self.__dbus.Activate("(ii)", x, y, result_handler=lambda *args: None)
+
+    def secondary_activate(self, x: int = 0, y: int = 0) -> None:
+        """
+        Activate a secondary and less important action compared to :func:`activate`.
+
+        Args:
+            x: x coordinate.
+            y: y coordinate.
+        """
+        self.__dbus.SecondaryActivate("(ii)", x, y, result_handler=lambda *args: None)
+
+    def context_menu(self, x: int = 0, y: int = 0) -> None:
+        """
+        Ask the item to show a context menu.
+
+        Args:
+            x: x coordinate.
+            y: y coordinate.
+        """
+        self.__dbus.ContextMenu("(ii)", x, y, result_handler=lambda *args: None)
+
+    def scroll(
+        self,
+        delta: int = 0,
+        orientation: Literal["horizontal", "vertical"] = "horizontal",
+    ) -> None:
+        """
+        Ask for a scroll action.
+
+        Args:
+            delta: The amount of scroll.
+            orientation: The type of the orientation: horizontal or vertical.
+        """
+        self.__dbus.Scroll(
+            "(is)", delta, orientation, result_handler=lambda *args: None
         )

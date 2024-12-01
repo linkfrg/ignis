@@ -4,31 +4,31 @@ from ignis.base_widget import BaseWidget
 
 class Label(Gtk.Label, BaseWidget):
     """
-    Bases: `Gtk.Label <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Label.html>`_.
+    Bases: :class:`Gtk.Label`
 
     A widget that displays a small amount of text.
 
-    Properties:
-        - **justify** (``str``, optional, read-write): The alignment of the lines in the text of the label relative to each other. This does NOT affect the alignment of the label within its allocation.
-        - **ellipsize** (``str``, optional, read-write): The preferred place to ellipsize the string. Default: ``"none"``.
-        - **wrap_mode** (``str``, optional, read-write): If ``wrap`` is set to ``True``, controls how linewrapping is done. Default: ``"word"``.
+    Overrided properties:
+        - justify: The alignment of the lines in the text of the label relative to each other. This does NOT affect the alignment of the label within its allocation.
+        - ellipsize: The preferred place to ellipsize the string. Default: ``none``.
+        - wrap_mode: If ``wrap`` is set to ``True``, controls how linewrapping is done. Default: ``word``.
 
-    **Justify:**
-        - **"left"** : The text is placed at the left edge of the label.
-        - **"right"** : The text is placed at the right edge of the label.
-        - **"center"** : The text is placed in the center of the label.
-        - **"fill"** : The text is placed is distributed across the label.
+    Justify:
+        - left: The text is placed at the left edge of the label.
+        - right: The text is placed at the right edge of the label.
+        - center: The text is placed in the center of the label.
+        - fill: The text is placed is distributed across the label.
 
-    **Ellipsize:**
-        - **"none"** : No ellipsization.
-        - **"start"** : Omit characters at the start of the text.
-        - **"middle"** : Omit characters in the middle of the text.
-        - **"end"** : Omit characters at the end of the text.
+    Ellipsize:
+        - none: No ellipsization.
+        - start: Omit characters at the start of the text.
+        - middle: Omit characters in the middle of the text.
+        - end: Omit characters at the end of the text.
 
-    **Wrap mode:**
-        - **"word"** : Wrap lines at word boundaries.
-        - **"char"** : Wrap lines at character boundaries.
-        - **"word_char"** : Wrap lines at word boundaries, but fall back to character boundaries if there is not enough space for a full word.
+    Wrap mode:
+        - word: Wrap lines at word boundaries.
+        - char: Wrap lines at character boundaries.
+        - word_char: Wrap lines at word boundaries, but fall back to character boundaries if there is not enough space for a full word.
 
     .. code-block:: python
 

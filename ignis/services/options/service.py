@@ -17,12 +17,7 @@ class OptionsService(BaseService):
         You should not manually edit the ``~/.cache/ignis/options.json`` file.
         Use this service instead.
 
-    Properties:
-        - **groups** (list[:class:`~ignis.services.options.OptionsGroup`]): The list of all options groups.
-        - **data** (``dict[str, Any]``): The dictionary containing all options and their values from all groups.
-
-
-    **Example usage:**
+    Example usage:
 
     .. code-block:: python
 
@@ -71,10 +66,20 @@ class OptionsService(BaseService):
 
     @GObject.Property
     def groups(self) -> list[OptionsGroup]:
+        """
+        - read-only
+
+        A list of all options groups.
+        """
         return list(self._groups.values())
 
     @GObject.Property
     def data(self) -> dict[str, Any]:
+        """
+        - read-only
+
+        The dictionary containing all options and their values from all groups.
+        """
         return {key: group.data for key, group in self._groups.items()}
 
     def create_group(self, name: str, exists_ok: bool = False) -> OptionsGroup:
@@ -82,8 +87,8 @@ class OptionsService(BaseService):
         Create options group.
 
         Args:
-            name (``str``): The name of the options group to create.
-            exists_ok (``bool``, optional): If ``True``, do not raise :class:`~ignis.exceptions.OptionsGroupExistsError` if the group already exists. Default: ``False``.
+            name: The name of the options group to create.
+            exists_ok: If ``True``, do not raise :class:`~ignis.exceptions.OptionsGroupExistsError` if the group already exists. Default: ``False``.
 
         Returns:
             :class:`~ignis.services.options.OptionsGroup`: The newly created options group or already existing one.
@@ -109,7 +114,7 @@ class OptionsService(BaseService):
         Get ``OptionsGroup`` object by its name.
 
         Args:
-            name (``str``): The name of the options group.
+            name: The name of the options group.
 
         Returns:
             :class:`~ignis.services.options.OptionsGroup`: The options group instance.

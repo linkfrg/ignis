@@ -1,3 +1,4 @@
-pydata-sphinx-theme==0.15.4
-sphinx_design==0.6.1
-sphinx_copybutton==0.5.2
+pydata-sphinx-theme>=0.15.4
+sphinx_design>=0.6.1
+sphinx_copybutton>=0.5.2
+sphinx-autodoc-typehints>=2.5.0

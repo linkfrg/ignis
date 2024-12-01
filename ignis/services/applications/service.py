@@ -1,4 +1,3 @@
-from __future__ import annotations
 from gi.repository import GObject, Gio  # type: ignore
 from ignis.base_service import BaseService
 from .application import Application
@@ -10,11 +9,7 @@ class ApplicationsService(BaseService):
     Provides a list of applications installed on the system.
     It also allows "pinning" of apps and retrieving a list of pinned applications.
 
-    Properties:
-        - **apps** (list[:class:`~ignis.services.applications.Application`], read-only): A list of all installed applications.
-        - **pinned** (list[:class:`~ignis.services.applications.Application`], read-only): A list of all pinned applications.
-
-    **Example usage**:
+    Example usage:
 
     .. code-block:: python
 
@@ -44,10 +39,20 @@ class ApplicationsService(BaseService):
 
     @GObject.Property
     def apps(self) -> list[Application]:
+        """
+        - read-only
+
+        A list of all installed applications.
+        """
         return sorted(self._apps.values(), key=lambda x: x.name)
 
     @GObject.Property
     def pinned(self) -> list[Application]:
+        """
+        - read-only
+
+        A list of all pinned applications.
+        """
         return list(self._pinned.values())
 
     def __connect_entry(self, entry: Application) -> None:
@@ -90,23 +95,6 @@ class ApplicationsService(BaseService):
             self.__connect_entry(entry)
             self._pinned[entry.id] = entry
 
-    def search(self, query: str) -> list[Application]:
-        """
-        Filter applications by query.
-
-        Args:
-            query (str): the string to be searched for
-
-        Returns:
-            list[Application]: A list of applications filtered by provided query.
-        """
-        return [
-            entry
-            for result in Gio.DesktopAppInfo.search(query)
-            for entry in self.apps
-            if entry.id in result
-        ]
-
     def __sync_pinned(self) -> None:
         pinned_ids = [p.id for p in self.pinned]
         self._pinned_apps_opt.value = pinned_ids
@@ -119,3 +107,26 @@ class ApplicationsService(BaseService):
     def __unpin_entry(self, entry: Application) -> None:
         self._pinned.pop(entry.id)
         self.__sync_pinned()
+
+    @classmethod
+    def search(
+        cls,
+        apps: list[Application],
+        query: str,
+    ) -> list[Application]:
+        """
+        Search applications by a query.
+
+        Args:
+            apps: A list of applications where to search, e.g., :attr:`~ignis.services.applications.ApplicationsService.apps`.
+            query: The string to be searched for.
+
+        Returns:
+            list[Application]: A list of applications filtered by the provided query.
+        """
+        return [
+            entry
+            for result in Gio.DesktopAppInfo.search(query)
+            for entry in apps
+            if entry.id in result
+        ]

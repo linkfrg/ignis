@@ -17,3 +17,4 @@ Get started
    styling
    cli
    expanding_functionality
+   faq

@@ -1,4 +1,3 @@
-from __future__ import annotations
 import datetime
 from gi.repository import GObject, GLib  # type: ignore
 from ignis.app import IgnisApp
@@ -6,6 +5,7 @@ from ignis.services.options import OptionsService
 from ignis.services.audio import AudioService
 from ignis.exceptions import GstPluginNotFoundError
 from ignis.base_service import BaseService
+from typing import Union
 from .session import SessionManager
 from .util import gst_inspect
 from ._imports import Gst
@@ -20,30 +20,19 @@ class RecorderService(BaseService):
     Uses XDG Desktop portal and PipeWire.
     Allow record screen with microphone audio and internal system audio.
 
-    **Dependencies**:
-        - **GStreamer**
-        - **PipeWire**
-        - **gst-plugin-pipewire**
-        - **gst-plugins-good**
-        - **gst-plugins-ugly**
-        - **pipewire-pulse**: for audio recording.
-
-    Signals:
-        - **"recording_started"** (): Emitted when recording starts.
-        - **"recording_stopped"** (): Emitted when recording stops.
-
-    Properties:
-        - **active** (``bool``, read-write): Whether recording is currently active.
-        - **is_paused** (``bool``, read-write): Whether recording is currently paused.
-        - **bitrate** (``int``, read-write, default: 8000): The bitrate of the recording.
-        - **default_file_location** (``str``, read-write, default: ``"$HOME/Videos"``): Default location for saving recordings.
-        - **default_filename** (``str``, read-write, default: ``"%Y-%m-%d_%H-%M-%S.mp4"``): Default filename for recordings. Supports time formating.
+    Dependencies:
+        - GStreamer
+        - PipeWire
+        - gst-plugin-pipewire
+        - gst-plugins-good
+        - gst-plugins-ugly
+        - pipewire-pulse: for audio recording.
 
     Raises:
         GstNotFoundError: If GStreamer is not found.
         GstPluginNotFoundError: If GStreamer plugin is not found.
 
-    **Example usage:**
+    Example usage:
 
     .. code-block:: python
 
@@ -58,11 +47,6 @@ class RecorderService(BaseService):
         Utils.Timeout(ms=30 * 1000, target=recorder.stop_recording)
     """
 
-    __gsignals__ = {
-        "recording_started": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
-        "recording_stopped": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
-    }
-
     def __init__(self):
         super().__init__()
         self.__check_deps()
@@ -72,7 +56,7 @@ class RecorderService(BaseService):
 
         self._active: bool = False
         self._is_paused: bool = False
-        self.__pipeline: Gst.Element | None = None
+        self.__pipeline: Union[Gst.Element, None] = None
 
         self._N_THREADS: str = str(min(max(1, GLib.get_num_processors()), 64))
 
@@ -94,7 +78,7 @@ class RecorderService(BaseService):
             exists_ok=True,
         )
 
-        app.connect("quit", lambda x: self.stop_recording())
+        app.connect("shutdown", lambda x: self.stop_recording())
 
     def __check_deps(self) -> None:
         if not gst_inspect("pipewiresrc"):
@@ -106,16 +90,49 @@ class RecorderService(BaseService):
         if not gst_inspect("mp4mux"):
             raise GstPluginNotFoundError("MP4 muxer", "gst-plugins-good")
 
+    @GObject.Signal
+    def recording_started(self):
+        """
+        - Signal
+
+        Emitted when recording starts.
+        """
+
+    @GObject.Signal
+    def recording_stopped(self):
+        """
+        - Signal
+
+        Emitted when recording stops.
+        """
+
     @GObject.Property
     def active(self) -> bool:
+        """
+        - read-only
+
+        Whether recording is currently active.
+        """
         return self._active
 
     @GObject.Property
     def is_paused(self) -> bool:
+        """
+        - read-only
+
+        Whether recording is currently paused.
+        """
         return self._is_paused
 
     @GObject.Property
     def bitrate(self) -> int:
+        """
+        - read-write
+
+        The bitrate of the recording.
+
+        Default: ``8000``
+        """
         return self._bitrate_opt.value
 
     @bitrate.setter
@@ -124,6 +141,13 @@ class RecorderService(BaseService):
 
     @GObject.Property
     def default_file_location(self) -> str:
+        """
+        - read-write
+
+        The default location for saving recordings.
+
+        Default: ``$HOME/Videos``.
+        """
         return self._default_file_location_opt.value
 
     @default_file_location.setter
@@ -132,6 +156,13 @@ class RecorderService(BaseService):
 
     @GObject.Property
     def default_filename(self) -> str:
+        """
+        - read-write
+
+        The default filename for recordings. Supports time formating.
+
+        Default: ``%Y-%m-%d_%H-%M-%S.mp4``
+        """
         return self._default_filename_opt.value
 
     @default_filename.setter
@@ -149,10 +180,10 @@ class RecorderService(BaseService):
         Start recording.
 
         Args:
-            path (``str``, optional): Recording path. It will override ``default_file_location`` and ``default_filename`` properties.
-            record_microphone (``bool``, optional): Whether record audio from microphone.
-            record_internal_audio (``bool``, optional): Whether record internal audio.
-            audio_devices (``list[str]``, optional): A list of audio devices names from which audio should be recorded.
+            path: Recording path. It will override ``default_file_location`` and ``default_filename`` properties.
+            record_microphone: Whether record audio from microphone.
+            record_internal_audio: Whether record internal audio.
+            audio_devices: A list of audio devices names from which audio should be recorded.
         """
 
         if path is None:

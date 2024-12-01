@@ -5,16 +5,9 @@ from typing import Callable
 
 class SpinButton(Gtk.SpinButton, BaseWidget):  # type: ignore
     """
-    Bases: `Gtk.SpinButton <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/SpinButton.html>`_.
+    Bases: :class:`Gtk.SpinButton`
 
     A widget that allows the user to increment or decrement the displayed value within a specified range.
-
-    Properties:
-        - **min** (``float``, optional, read-write): Minimum value.
-        - **max** (``float``, optional, read-write): Maximum value.
-        - **step** (``float``, optional, read-write): Step increment.
-        - **value** (``float``, optional, read-write): Current value.
-        - **on_change** (``Callable``, optional, read-write): Function to call when the value changes.
 
     .. code-block:: python
 
@@ -44,6 +37,11 @@ class SpinButton(Gtk.SpinButton, BaseWidget):  # type: ignore
 
     @GObject.Property
     def value(self) -> float:
+        """
+        - optional, read-write
+
+        The current value.
+        """
         return super().get_value()
 
     @value.setter
@@ -52,6 +50,11 @@ class SpinButton(Gtk.SpinButton, BaseWidget):  # type: ignore
 
     @GObject.Property
     def min(self) -> float:
+        """
+        - optional, read-write
+
+        Minimum value.
+        """
         return self.adjustment.props.lower
 
     @min.setter
@@ -60,6 +63,11 @@ class SpinButton(Gtk.SpinButton, BaseWidget):  # type: ignore
 
     @GObject.Property
     def max(self) -> float:
+        """
+        - optional, read-write
+
+        Maximum value.
+        """
         return self.adjustment.props.upper
 
     @max.setter
@@ -68,6 +76,11 @@ class SpinButton(Gtk.SpinButton, BaseWidget):  # type: ignore
 
     @GObject.Property
     def step(self) -> float:
+        """
+        - optional, read-write
+
+        Step increment.
+        """
         return self.adjustment.props.step_increment
 
     @step.setter
@@ -76,6 +89,11 @@ class SpinButton(Gtk.SpinButton, BaseWidget):  # type: ignore
 
     @GObject.Property
     def on_change(self) -> Callable | None:
+        """
+        - optional, read-write
+
+        The function to call when the value changes.
+        """
         return self._on_change
 
     @on_change.setter

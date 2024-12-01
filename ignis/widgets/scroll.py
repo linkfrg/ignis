@@ -4,7 +4,7 @@ from ignis.base_widget import BaseWidget
 
 class Scroll(Gtk.ScrolledWindow, BaseWidget):
     """
-    Bases: `Gtk.ScrolledWindow <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/ScrolledWindow.html>`_.
+    Bases: :class:`Gtk.ScrolledWindow`
 
     A container that accepts a single child widget and makes it scrollable.
 

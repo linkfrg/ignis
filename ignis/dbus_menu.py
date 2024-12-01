@@ -1,4 +1,3 @@
-from __future__ import annotations
 from gi.repository import Gtk, Gio, GObject, GLib  # type: ignore
 from ignis.dbus import DBusProxy
 from ignis.app import IgnisApp
@@ -43,19 +42,18 @@ class MenuItem(GObject.Object):
 
 class DBusMenu(Gtk.PopoverMenu):
     """
-    Bases: `Gtk.PopoverMenu <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/PopoverMenu.html>`_.
+    Bases: :class:`Gtk.PopoverMenu`
 
     Like DbusmenuGtk3, but for GTK4.
 
     The bus must provide the ``com.canonical.dbusmenu`` D-Bus interface.
-
-    Parameters:
-        name (``str``): A bus name (well-known or unique).
-        object_path(``str``): An object path to the menu.
     """
 
     def __init__(self, name: str, object_path: str):
         super().__init__()
+        self._name = name
+        self._object_path = object_path
+
         self.__proxy = DBusProxy(
             name=name,
             object_path=object_path,
@@ -70,7 +68,27 @@ class DBusMenu(Gtk.PopoverMenu):
             "ItemsPropertiesUpdated", lambda *args: self.__update_menu()
         )
 
+        self._menu_id: int = 0
+
         self.__update_menu()
+
+    @GObject.Property
+    def name(self) -> str:
+        """
+        - required, read-only
+
+        A bus name (well-known or unique).
+        """
+        return self._name
+
+    @GObject.Property
+    def object_path(self) -> str:
+        """
+        - required, read-only
+
+        An object path to the menu.
+        """
+        return self._object_path
 
     def __update_menu(self) -> None:
         self.__proxy.GetLayout(
@@ -93,6 +111,8 @@ class DBusMenu(Gtk.PopoverMenu):
     def __load_layout(self, proxy, result, user_data) -> None:
         if isinstance(result, GLib.GError):
             return
+
+        self._menu_id = result[1][0]
 
         items = result[1][2]
         menu = self.__parse(items=items)
@@ -135,7 +155,7 @@ class DBusMenu(Gtk.PopoverMenu):
     def __copy__(self):
         return self.copy()
 
-    def copy(self) -> DBusMenu:
+    def copy(self) -> "DBusMenu":
         """
         Create a copy of this instance.
 
@@ -143,3 +163,10 @@ class DBusMenu(Gtk.PopoverMenu):
             :class:`~ignis.dbus_menu.DBusMenu`: A copy of this instance.
         """
         return DBusMenu(self.__proxy.name, self.__proxy.object_path)
+
+    def popup(self) -> None:
+        try:
+            self.__proxy.AboutToShow("(i)", self._menu_id)
+        except GLib.GError:  # type: ignore
+            pass
+        return super().popup()

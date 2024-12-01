@@ -7,10 +7,11 @@ def send_socket(sock: socket.socket, message: str) -> str:
     Send a message to the socket.
 
     Args:
-        sock (``socket.socket``): An instance of a socket.
-        message (``str``): The message to send.
+        sock: An instance of a socket.
+        message: The message to send.
+
     Returns:
-        ``str``: The response from the socket.
+        The response from the socket.
     """
     sock.send(message.encode())
     resp = sock.recv(8192)
@@ -30,9 +31,10 @@ def listen_socket(sock: socket.socket) -> Generator[str, None, None]:
     This function is a generator.
 
     Args:
-        sock (``socket.socket``): An instance of a socket.
+        sock: An instance of a socket.
+
     Returns:
-        ``Generator[str, None, None]``: A generator that yields responses from the socket.
+        A generator that yields responses from the socket.
 
     Example usage:
 

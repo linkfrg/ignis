@@ -1,10 +1,9 @@
 import os
 import sys
-import inspect
-from typing import Callable
+import shutil
 from sphinx.ext.autodoc.mock import mock
 
-sys.path.insert(0, os.path.abspath(".."))
+# ============================== PROJECT INFO ===============================
 
 project = "Ignis"
 copyright = "2024, linkfrg"
@@ -13,37 +12,83 @@ REPO_URL = "https://github.com/linkfrg/ignis"
 DOCS_URL = "https://linkfrg.github.io/ignis/latest"
 
 extensions = [
+    "sphinx.ext.intersphinx",
     "sphinx.ext.autodoc",
     "sphinx.ext.napoleon",
     "sphinx_design",
     "sphinx_copybutton",
+    "sphinx_autodoc_typehints",
 ]
+
+intersphinx_mapping = {
+    "python": ("https://docs.python.org/3", None),
+    "gtk": ("https://lazka.github.io/pgi-docs/Gtk-4.0", None),
+    "gio": ("https://lazka.github.io/pgi-docs/Gio-2.0", None),
+    "glib": ("https://lazka.github.io/pgi-docs/GLib-2.0", None),
+    "gdkpixbuf": ("https://lazka.github.io/pgi-docs/GdkPixbuf-2.0", None),
+    "nm": ("https://lazka.github.io/pgi-docs/NM-1.0", None),
+    "gobject": ("https://lazka.github.io/pgi-docs/GObject-2.0", None),
+}
 
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
+suppress_warnings = ["config.cache"]
 
+# ============================ AUTODOC/TYPEHINTS ============================
 
 autodoc_mock_imports = ["gi", "loguru", "setuptools", "click", "cairo", "requests"]
 autodoc_member_order = "bysource"
 
-html_theme = "pydata_sphinx_theme"
-html_static_path = ["_static"]
+smartquotes = False
+napoleon_use_param = True
 
-html_css_files = ["css/custom.css"]
+typehints_use_signature = True
+typehints_use_signature_return = True
+typehints_defaults = "comma"
+always_use_bars_union = True
+
+# =============================== PATH STUFF ================================
+
+TMP_DIR = "./tmp"
+SOURCE_DIR = "../ignis"
+TARGET_DIR = TMP_DIR + "/ignis"
+
+
+def copy_dir(source_dir: str, target_dir: str) -> None:
+    if os.path.exists(target_dir):
+        shutil.rmtree(target_dir)
+
+    shutil.copytree(source_dir, target_dir)
+
+
+copy_dir(SOURCE_DIR, TARGET_DIR)
+
+sys.path.insert(0, os.path.abspath(TMP_DIR))
+
+# =============================== VERSIONING ================================
+
+with mock(autodoc_mock_imports):
+    import ignis
+
+    json_url = f"{DOCS_URL}/_static/switcher.json"
+
+    DOC_TAG = os.getenv("DOC_TAG")
+
+    if DOC_TAG == "latest" or DOC_TAG is None:
+        version_match = "dev"
+    elif DOC_TAG == "stable":
+        version_match = "v" + ignis.__version__.replace(".dev0", "")
+    else:
+        version_match = DOC_TAG
+
+    release = version_match
+
+# ============================== HTML OPTIONS ===============================
 
 html_title = "Ignis documentation"
-
-smartquotes = False
-
-
-json_url = f"{DOCS_URL}/_static/switcher.json"
-
-version_match = os.getenv("DOCS_VERSION")
-
-if not version_match or version_match == "latest":
-    version_match = "dev"
-
-release = version_match
+html_theme = "pydata_sphinx_theme"
+html_static_path = ["_static"]
+html_css_files = ["css/custom.css"]
 
 html_theme_options = {
     "use_edit_page_button": True,
@@ -69,9 +114,8 @@ html_theme_options = {
         "version_match": version_match,
     },
     "pygments_light_style": "tango",
-    "pygments_dark_style": "monokai"
+    "pygments_dark_style": "monokai",
 }
-
 
 html_context = {
     "github_user": "linkfrg",
@@ -80,78 +124,25 @@ html_context = {
     "doc_path": "docs/",
 }
 
-API_REFERENCE_DIR = "api"
+# ============================== CUSTOM STUFF ===============================
 
 
-def format_widget_template(name: str) -> None:
-    return f"""{name}
-{'-'*len(name)}
+def replace_gobject_property(target_dir: str) -> None:
+    """
+    This function replaces @GObject.Property with @property.
+    For what? To indicate to Sphinx that GObject.Property functions are actually properties.
+    """
+    for dirpath, _, filenames in os.walk(target_dir):
+        for filename in filenames:
+            if filename.endswith(".py"):
+                file_path = os.path.join(dirpath, filename)
+                with open(file_path) as file:
+                    content = file.read()
 
-.. autoclass:: ignis.widgets.Widget.{name}
-    :members:
-"""
+                new_content = content.replace("@GObject.Property", "@property")
 
-
-def format_utils_function_template(name: str) -> None:
-    return f"""{name}
-{'-'*len(name)}
-
-.. autofunction:: ignis.utils.Utils.{name}
-"""
-
-
-def format_utils_class_template(name: str) -> None:
-    return f"""{name}
-{'-'*len(name)}
-
-.. autoclass:: ignis.utils.{name}
-    :members:
-"""
+                with open(file_path, "w", encoding="utf-8") as file:
+                    file.write(new_content)
 
 
-def clean(dir_name: str) -> None:
-    files_to_keep = ["index.rst"]
-    for filename in os.listdir(f"{API_REFERENCE_DIR}/{dir_name}"):
-        file_path = os.path.join(dir_name, filename)
-        if os.path.isfile(file_path) and filename not in files_to_keep:
-            os.remove(file_path)
-
-
-def _generate(klass: object, dir_name: str, transform: Callable) -> None:
-    for name in klass.__dict__:
-        if name.startswith("__"):
-            continue
-
-        override_path = f"{API_REFERENCE_DIR}/{dir_name}/overrides/{name}"
-        if os.path.exists(override_path):
-            with open(override_path) as file:
-                data = file.read()
-        else:
-            data = transform(name)
-
-        with open(f"{API_REFERENCE_DIR}/{dir_name}/{name}.rst", "w") as file:
-            file.write(data)
-
-
-def generate_widgets(klass) -> None:
-    _generate(klass, "widgets", format_widget_template)
-
-
-def generate_utils(klass) -> None:
-    def check(name: str) -> str:
-        if inspect.isclass(name):
-            return format_utils_class_template(name)
-        else:
-            return format_utils_function_template(name)
-
-    _generate(klass, "utils", check)
-
-
-with mock(autodoc_mock_imports):
-    from ignis.widgets import Widget
-    from ignis.utils import Utils
-
-    clean("widgets")
-    clean("utils")
-    generate_widgets(Widget)
-    generate_utils(Utils)
+replace_gobject_property(TARGET_DIR)

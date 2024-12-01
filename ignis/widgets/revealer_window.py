@@ -7,11 +7,9 @@ from typing import Any
 
 class RevealerWindow(Window):
     """
-    Bases: :class:`~ignis.widgets.Widget.Window`.
-    A window with animation.
+    Bases: :class:`~ignis.widgets.Widget.Window`
 
-    Properties:
-        - **revealer** (:class:`~ignis.widgets.Widget.Revealer`, required, read-write): An instance of ``Revealer``.
+    A window with animation.
 
     .. warning::
         Do not set ``Widget.Revealer`` as a direct child,
@@ -72,6 +70,11 @@ class RevealerWindow(Window):
 
     @GObject.Property
     def revealer(self) -> Revealer:
+        """
+        - required, read-write
+
+        An instance of :class:`~ignis.widgets.Widget.Revealer`.
+        """
         return self._revealer
 
     @revealer.setter

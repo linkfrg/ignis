@@ -5,12 +5,6 @@ from typing import Any, Callable
 class Binding(GObject.Object):
     """
     An object that describe binding.
-
-    Properties:
-        - **target** (``GObject.Object``, required, read-only): Target GObject.
-        - **target_property** (``str``, required, read-only): Property on target GObject.
-        - **transform** (``Callable``, optional, read-only): The function that accepts a new property value and returns the processed value.
-
     """
 
     def __init__(
@@ -26,20 +20,35 @@ class Binding(GObject.Object):
 
     @GObject.Property
     def target(self) -> GObject.Object:
+        """
+        - required, read-only
+
+        The target GObject.
+        """
         return self._target
 
     @GObject.Property
     def target_property(self) -> str:
+        """
+        - required, read-only
+
+        The property on the target GObject.
+        """
         return self._target_property
 
     @GObject.Property
     def transform(self) -> Callable | None:
+        """
+        - required, read-only
+
+        The function that accepts a new property value and returns the processed value.
+        """
         return self._transform
 
 
 class IgnisGObject(GObject.Object):
     """
-    Bases: `GObject.Object <https://lazka.github.io/pgi-docs/index.html#GObject-2.0/classes/Object.html>`_.
+    Bases: :class:`GObject.Object`
 
     A base class for all services and widgets (and some utils).
     Mainly, it is the same GObject.Object, but with some improvements.
@@ -73,7 +82,7 @@ class IgnisGObject(GObject.Object):
         Notify all properties.
 
         Args:
-            without (list[str] | str | None, optional): Property or list of properties that will not be notified.
+            without: A property or a list of properties that will not be notified.
         """
         for i in self.list_properties():
             if without:
@@ -114,10 +123,10 @@ class IgnisGObject(GObject.Object):
         Bind ``source_property`` on ``self`` with ``target_property`` on ``target``.
 
         Args:
-            source_property (``str``): The property on ``self`` to bind.
-            target (``GObject.Object``): the target ``GObject.Object``.
-            target_property (``str``): the property on ``target`` to bind.
-            transform (``Callable``, optional): The function that accepts a new property value and returns the processed value.
+            source_property: The property on ``self`` to bind.
+            target: the target ``GObject.Object``.
+            target_property: the property on ``target`` to bind.
+            transform: The function that accepts a new property value and returns the processed value.
         """
 
         def callback(*args):
@@ -134,8 +143,8 @@ class IgnisGObject(GObject.Object):
         Creates ``Binding`` from property name on ``self``.
 
         Args:
-            property_name(``str``): Property name of ``self``.
-            transform (``Callable | None``): The function that accepts a new property value and returns the processed value.
+            property_name: Property name of ``self``.
+            transform: The function that accepts a new property value and returns the processed value.
         Returns:
             :class:`~ignis.gobject.Binding`
         """

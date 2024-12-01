@@ -5,14 +5,9 @@ from typing import Callable
 
 class DropDown(Gtk.DropDown, BaseWidget):
     """
-    Bases: `Gtk.DropDown <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/DropDown.html>`_.
+    Bases: :class:`Gtk.DropDown`
 
     A widget that allows the user to choose an item from a list of options.
-
-    Properties:
-        - **items** (``list[str]``, optional, read-write): A list of strings that can be selected in the popover.
-        - **on_selected** (``Callable``, optional, read-write): Function to call when the user selects an item from the list.
-        - **selected** (``str``, not argument, read-only): The selected string. It is a shortcut for ``self.selected_item.props.string``.
 
     .. code-block:: python
 
@@ -35,6 +30,11 @@ class DropDown(Gtk.DropDown, BaseWidget):
 
     @GObject.Property
     def items(self) -> list[str]:
+        """
+        - optional, read-write
+
+        A list of strings that can be selected in the popover.
+        """
         return self._items
 
     @items.setter
@@ -48,6 +48,11 @@ class DropDown(Gtk.DropDown, BaseWidget):
 
     @GObject.Property
     def on_selected(self) -> Callable | None:
+        """
+        - optional, read-write
+
+        The function to call when the user selects an item from the list.
+        """
         return self._on_selected
 
     @on_selected.setter
@@ -60,4 +65,9 @@ class DropDown(Gtk.DropDown, BaseWidget):
 
     @GObject.Property
     def selected(self) -> str:
+        """
+        - not argument, read-only
+
+        The selected string. It is a shortcut for ``self.selected_item.props.string``.
+        """
         return self.selected_item.props.string

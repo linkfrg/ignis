@@ -1,21 +1,26 @@
 # Ignis
 
 [![docs](https://github.com/linkfrg/ignis/actions/workflows/latest_docs.yaml/badge.svg)](https://github.com/linkfrg/ignis/actions/workflows/latest_docs.yaml)
+[![Checked with mypy](https://www.mypy-lang.org/static/mypy_badge.svg)](https://mypy-lang.org/)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Linting: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
-__Ignis is a Python framework for building desktop shells using GTK4.__
+<div align="center">
+<strong>Ignis is a modern widget system for building desktop shells using GTK4.</strong>
+</div>
 
 ## Features
-- Configured in Python
+- Configurable in Python
 - Uses GTK4
-- Provides built-in services to interact with various parts of your system
-- Working with widgets is easier than in pure PyGObject
+- Batteries Included
+- Simplified work with widgets
 
 > [!NOTE]
-> Ignis is still a work in progress.
-> API is a subject to change.
+> Ignis is mostly stable, but still a work in progress.
+> The API is a subject to change.
 
 ## Getting started
-See [Documentation](https://linkfrg.github.io/ignis)
+See the [Documentation](https://linkfrg.github.io/ignis)
 
 ## Supported Desktops
 - wlroots-based Wayland compositors (e.g., __Sway__) 
@@ -23,7 +28,7 @@ See [Documentation](https://linkfrg.github.io/ignis)
 - Smithay based compositors (e.g., __COSMIC__)
 - __KDE Plasma__ on wayland
 
-and all other compositors that implement the Layer Shell protocol.
+...and all other compositors that implement the Layer Shell protocol.
 
 ## Examples
 * A simple bar, see [examples](./examples/bar)
@@ -32,4 +37,9 @@ and all other compositors that implement the Layer Shell protocol.
 * [My own configuration](https://github.com/linkfrg/dotfiles/)
 ![My own configuration](https://github.com/linkfrg/dotfiles/blob/main/assets/1.png?raw=true)
 
-Heavily inspired by [AGS](https://github.com/aylur/ags)
+## Contributing
+Check out the [Developer Guide](https://linkfrg.github.io/ignis/latest/dev/index.html)
+
+## Special Thanks
+
+[AGS](https://github.com/aylur/ags) - for inspiration

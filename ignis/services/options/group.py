@@ -12,20 +12,7 @@ class OptionsGroup(IgnisGObject):
     .. warning::
         You shouldn't initialize this class manually.
         Use the :func:`~ignis.services.options.OptionsService.create_group` method instead.
-
-    Signals:
-        - **"changed"** (): Emitted when options in this group is changed.
-        - **"changed"** (): Emitted when this options group is removed.
-
-    Properties:
-        - **name** (``str``, read-only): The name of the group.
-        - **data** (``dict[str, Any]``, read-only): The dictionary containing all options and their values.
     """
-
-    __gsignals__ = {
-        "changed": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
-        "removed": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
-    }
 
     def __init__(self, name: str, data: dict[str, Any] | None = None):
         super().__init__()
@@ -42,12 +29,38 @@ class OptionsGroup(IgnisGObject):
         for key in data.keys():
             self._data[key] = self.__init_option(name=key, value=data.get(key, None))
 
+    @GObject.Signal
+    def changed(self):
+        """
+        - Signal
+
+        Emitted when options in this group is changed.
+        """
+
+    @GObject.Signal
+    def removed(self):
+        """
+        - Signal
+
+        Emitted when this options group is removed.
+        """
+
     @GObject.Property
     def name(self) -> str:
+        """
+        - read-only
+
+        The name of the group.
+        """
         return self._name
 
     @GObject.Property
     def data(self) -> dict[str, Any]:
+        """
+        - read-only
+
+        The dictionary containing all options and their values.
+        """
         return {key: option.value for key, option in self._data.items()}
 
     def create_option(self, name: str, default: Any, exists_ok: bool = False) -> Option:
@@ -55,9 +68,9 @@ class OptionsGroup(IgnisGObject):
         Create an option.
 
         Args:
-            name (``str``): The name of the option.
-            default (``Any``): The default value for the option.
-            exists_ok (``bool``, optional): If ``True``, do not raise :class:`~ignis.exceptions.OptionExistsError` if the option already exists. Default: ``False``.
+            name: The name of the option.
+            default: The default value for the option.
+            exists_ok: If ``True``, do not raise :class:`~ignis.exceptions.OptionExistsError` if the option already exists. Default: ``False``.
 
         Returns:
             :class:`~ignis.services.options.Option`: The newly created option or already existing option.
@@ -83,7 +96,7 @@ class OptionsGroup(IgnisGObject):
         Get ``Option`` object by its name.
 
         Args:
-            name (``str``): The name of the option.
+            name: The name of the option.
 
         Returns:
             :class:`~ignis.services.options.Option`: The option instance.

@@ -1,4 +1,3 @@
-from __future__ import annotations
 from gi.repository import GObject  # type: ignore
 from ignis.base_service import BaseService
 from ._imports import Gvc
@@ -8,49 +7,21 @@ from .stream import Stream, DefaultStream
 class AudioService(BaseService):
     """
     An audio service.
-    Allow controlling audio devices.
+    Allows controlling audio devices.
 
     .. warning::
         This service uses the PulseAudio backend.
         To use it with PipeWire, install ``pipewire-pulse``.
 
-    Signals:
-        - **"speaker-added"** (:class:`~ignis.services.audio.Stream`): Emitted when a speaker is added.
-        - **"microphone-added"** (:class:`~ignis.services.audio.Stream`): Emitted when a microphone is added.
-        - **"app-added"** (:class:`~ignis.services.audio.Stream`): Emitted when an app is added.
-        - **"recorder-added"** (:class:`~ignis.services.audio.Stream`): Emitted when a recorder is added.
-
-    Properties:
-        - **control** (``Gvc.MixerControl``, read-only): A instance of ``Gvc.MixerControl``. You typically shouldn't use this property.
-        - **speaker** (:class:`~ignis.services.audio.Stream`, read-write): The default speaker.
-        - **microphone** (:class:`~ignis.services.audio.Stream`, read-write): The default microphone.
-        - **streams** (list[:class:`~ignis.services.audio.Stream`], read-only): A list of all streams.
-        - **speakers** (list[:class:`~ignis.services.audio.Stream`], read-only): A list of speakers.
-        - **microphones** (list[:class:`~ignis.services.audio.Stream`], read-only): A list of microphones.
-        - **apps** (list[:class:`~ignis.services.audio.Stream`], read-only): A list of applications currently playing sound.
-        - **recorders** (list[:class:`~ignis.services.audio.Stream`], read-only): A list of audio recorders.
-
-    **Example usage:**
+    Example usage:
 
     .. code-block:: python
 
         from ignis.services.audio import AudioService
 
         audio = AudioService.get_default()
-
         audio.connect("speaker-added", lambda x, speaker: print(speaker.description))
     """
-
-    __gsignals__ = {
-        "speaker-added": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, (Stream,)),
-        "microphone-added": (
-            GObject.SignalFlags.RUN_FIRST,
-            GObject.TYPE_NONE,
-            (Stream,),
-        ),
-        "app-added": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, (Stream,)),
-        "recorder-added": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, (Stream,)),
-    }
 
     def __init__(self):
         super().__init__()
@@ -81,12 +52,66 @@ class AudioService(BaseService):
         for stream in getattr(self, f"{_type}s"):
             stream.notify("is_default")
 
+    @GObject.Signal(arg_types=(Stream,))
+    def speaker_added(self, *args):
+        """
+        - Signal
+
+        Emitted when a speaker is added.
+
+        Args:
+            stream (:class:`~ignis.services.audio.Stream`): The instance of the stream.
+        """
+
+    @GObject.Signal(arg_types=(Stream,))
+    def microphone_added(self, *args):
+        """
+        - Signal
+
+        Emitted when a microphone is added.
+
+        Args:
+            stream (:class:`~ignis.services.audio.Stream`): The instance of the stream.
+        """
+
+    @GObject.Signal(arg_types=(Stream,))
+    def app_added(self, *args):
+        """
+        - Signal
+
+        Emitted when an app is added.
+
+        Args:
+            stream (:class:`~ignis.services.audio.Stream`): The instance of the stream.
+        """
+
+    @GObject.Signal(arg_types=(Stream,))
+    def recorder_added(self, *args):
+        """
+        - Signal
+
+        Emitted when a recorder is added.
+
+        Args:
+            stream (:class:`~ignis.services.audio.Stream`): The instance of the stream.
+        """
+
     @GObject.Property
     def control(self) -> Gvc.MixerControl:
+        """
+        - read-only
+
+        An instance of ``Gvc.MixerControl``.
+        """
         return self._control
 
     @GObject.Property
     def speaker(self) -> Stream:
+        """
+        - read-write
+
+        The default speaker.
+        """
         return self._speaker
 
     @speaker.setter
@@ -95,6 +120,11 @@ class AudioService(BaseService):
 
     @GObject.Property
     def microphone(self) -> Stream:
+        """
+        - read-write
+
+        The default microphone.
+        """
         return self._microphone
 
     @microphone.setter
@@ -103,22 +133,47 @@ class AudioService(BaseService):
 
     @GObject.Property
     def streams(self) -> list[Stream]:
+        """
+        - read-only
+
+        A list of all streams.
+        """
         return list(self._streams.values())
 
     @GObject.Property
     def speakers(self) -> list[Stream]:
+        """
+        - read-only
+
+        A list of speakers.
+        """
         return list(self._speakers.values())
 
     @GObject.Property
     def microphones(self) -> list[Stream]:
+        """
+        - read-only
+
+        A list of microphones.
+        """
         return list(self._microphones.values())
 
     @GObject.Property
     def apps(self) -> list[Stream]:
+        """
+        - read-only
+
+        A list of applications currently playing sound.
+        """
         return list(self._apps.values())
 
     @GObject.Property
     def recorders(self) -> list[Stream]:
+        """
+        - read-only
+
+        A list of audio recorders.
+        """
         return list(self._recorders.values())
 
     def __add_stream(self, control: Gvc.MixerControl, id: int):

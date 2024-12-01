@@ -5,25 +5,18 @@ from typing import Callable
 
 class Scale(Gtk.Scale, BaseWidget):
     """
-    Bases: `Gtk.Scale <https://lazka.github.io/pgi-docs/#Gtk-4.0/classes/Scale.html>`_.
+    Bases: :class:`Gtk.Scale`
 
     A slider widget.
 
-    Properties:
-        - **vertical** (``bool``, optional, read-write): Whether the scale is vertical.
-        - **min** (``float``, optional, read-write): Minimum value.
-        - **max** (``float``, optional, read-write): Maximum value.
-        - **step** (``float``, optional, read-write): Step increment.
-        - **value** (``float``, optional, read-write): Current value.
-        - **on_change** (``Callable``, optional, read-write): Function to call when the value changes.
-        - **draw_value** (``int``, optional, read-write): Whether the current value is displayed.
-        - **value_pos** (``str``, optional, read-write): Position where the current value is displayed. Works only if ``draw_value`` is set to ``True``. Default: ``"top"``.
+    Overrided properties:
+        - value_pos: Position where the current value is displayed. Works only if ``draw_value`` is set to ``True``. Default: ``top``.
 
-    **Value position:**
-        - **"left"**
-        - **"right"**
-        - **"top"**
-        - **"bottom"**
+    Value position:
+        - left
+        - right
+        - top
+        - bottom
 
     .. code-block:: python
 
@@ -73,6 +66,11 @@ class Scale(Gtk.Scale, BaseWidget):
 
     @GObject.Property
     def value(self) -> float:
+        """
+        - optional, read-write
+
+        The current value.
+        """
         return super().get_value()
 
     @value.setter
@@ -85,6 +83,11 @@ class Scale(Gtk.Scale, BaseWidget):
 
     @GObject.Property
     def min(self) -> float:
+        """
+        - optional, read-write
+
+        Minimum value.
+        """
         return self.adjustment.props.lower
 
     @min.setter
@@ -93,6 +96,11 @@ class Scale(Gtk.Scale, BaseWidget):
 
     @GObject.Property
     def max(self) -> float:
+        """
+        - optional, read-write
+
+        Maximum value.
+        """
         return self.adjustment.props.upper
 
     @max.setter
@@ -101,6 +109,11 @@ class Scale(Gtk.Scale, BaseWidget):
 
     @GObject.Property
     def on_change(self) -> Callable:
+        """
+        - optional, read-write
+
+        The function to call when the value changes.
+        """
         return self._on_change
 
     @on_change.setter
@@ -109,6 +122,11 @@ class Scale(Gtk.Scale, BaseWidget):
 
     @GObject.Property
     def step(self) -> float:
+        """
+        - optional, read-write
+
+        Step increment.
+        """
         return self.adjustment.props.step_increment
 
     @step.setter
@@ -117,6 +135,11 @@ class Scale(Gtk.Scale, BaseWidget):
 
     @GObject.Property
     def vertical(self) -> bool:
+        """
+        - optional, read-write
+
+        Whether the scale is vertical.
+        """
         return self.get_orientation() == Gtk.Orientation.VERTICAL
 
     @vertical.setter

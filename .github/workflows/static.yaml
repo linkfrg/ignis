@@ -2,6 +2,7 @@ on:
   push:
     paths:
       - "ignis/**"
+      - ".github/workflows/static.yaml"
   pull_request:
     paths:
       - "ignis/**"
@@ -52,5 +53,4 @@ jobs:
           ruff check ignis/
 
       - name: Check format
-        continue-on-error: true
         run: ruff format ignis/ --check

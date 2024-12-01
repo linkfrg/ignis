@@ -4,15 +4,15 @@ on:
 
   push:
     branches:
-      - stable
+      - stable-docs
     paths:
       - "ignis/**"
       - "docs/**"
+      - ".github/workflows/stable_docs.yaml"
   workflow_dispatch:
 
 jobs:
   build:
     uses: ./.github/workflows/build_docs.yaml
     with:
-      TAG: "v0.2"
-      DEST_DIR: "stable"
+      DOC_TAG: "stable"

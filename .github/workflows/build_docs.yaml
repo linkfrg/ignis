@@ -3,12 +3,15 @@ name: Build documentation
 on:
   workflow_call:
     inputs:
-      TAG:
+      DOC_TAG:
         required: true
         type: string
-      DEST_DIR:
-        required: true
-        type: string
+  pull_request:
+    paths:
+      - "ignis/**"
+      - "docs/**"
+    branches:
+      - '*'
 
 jobs:
   build:
@@ -29,16 +32,17 @@ jobs:
 
     - name: Build documentation
       run: |
-        export DOCS_VERSION=${{ inputs.TAG }}
+        export DOC_TAG=${{ inputs.DOC_TAG }}
         cd docs
         make html
 
     - name: Deploy to GitHub Pages
+      if: ${{ github.event_name != 'pull_request' }}
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: docs/_build/html
-        destination_dir: ${{ inputs.DEST_DIR }}
+        destination_dir: ${{ inputs.DOC_TAG }}
         allow_empty_commit: true
         force_orphan: false
         keep_files: true

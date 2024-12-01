@@ -9,7 +9,7 @@ def set_process_name(name):
 
 def main():
     set_process_name("ignis")
-    cli()
+    cli(prog_name="ignis")
 
 
 if __name__ == "__main__":

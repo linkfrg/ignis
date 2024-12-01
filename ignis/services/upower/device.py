@@ -8,38 +8,7 @@ from .constants import DEVICE_KIND, DeviceState
 class UPowerDevice(IgnisGObject):
     """
     The general class for power devices, including batteries.
-
-    Signals:
-        - **removed** (): Emitted when the device has been removed.
-
-    Properties:
-        - **object_path** (``str``, read-only): The D-Bus object path of the device.
-        - **proxy** (:class:`~ignis.dbus.DBusProxy`, read-only): The instance of :class:`~ignis.dbus.DBusProxy` for this device.
-        - **native_path** (``str``, read-only): The native path of the device.
-        - **kind** (``str``, read-only): The device kind, e.g. ``"battery"``.
-        - **available** (``bool`` read-only): Whether the device is available.
-        - **percent** (``float`` read-only): The current percentage of the device.
-        - **charging** (``bool`` read-only): Whether the device is currently charging.
-        - **charged** (``bool`` read-only): Whether the device is charged.
-        - **icon_name** (``str`` read-only): The current icon name.
-        - **time_remaining** (``int`` read-only): Time in seconds until fully charged (when charging) or until fully drains (when discharging).
-        - **energy** (``float`` read-only): The energy left in the device. Measured in mWh.
-        - **energy_full** (``float``, read-only): The amount of energy when the device is fully charged. Measured in mWh.
-        - **energy_full_design** (``float``, read-only): The amount of energy when the device was brand new. Measured in mWh.
-        - **energy_rate** (``float``, read-only): The rate of discharge or charge. Measured in mW.
-        - **charge_cycles** (``int``, read-only): The number of charge cycles for the device, or -1 if unknown or non-applicable.
-        - **vendor** (``str``, read-only): The vendor of the device.
-        - **model** (``str``, read-only): The model of the device.
-        - **serial** (``str``, read-only): The serial number of the device.
-        - **power_supply** (``bool``, read-only): Whether the device is powering the system.
-        - **technology** (``str``, read-only): The device technology e.g. ``"lithium-ion"``.
-        - **temperature** (``float``, read-only): The temperature of the device in degrees Celsius.
-        - **voltage** (``float``, read-only): The current voltage of the device.
     """
-
-    __gsignals__ = {
-        "removed": (GObject.SignalFlags.RUN_FIRST, GObject.TYPE_NONE, ()),
-    }
 
     def __init__(self, object_path: str):
         super().__init__()
@@ -82,90 +51,208 @@ class UPowerDevice(IgnisGObject):
                 for i in self.__watching_props[dbus_property]:
                     self.notify(i)
 
+    @GObject.Signal
+    def removed(self):
+        """
+        - Signal
+
+        Emitted when the device has been removed.
+        """
+
     @GObject.Property
     def object_path(self) -> str:
+        """
+        - read-only
+
+        The D-Bus object path of the device.
+        """
         return self._object_path
 
     @GObject.Property
     def proxy(self) -> DBusProxy:
+        """
+        - read-only
+
+        The instance of :class:`~ignis.dbus.DBusProxy` for this device.
+        """
         return self._proxy
 
     @GObject.Property
     def native_path(self) -> str:
+        """
+        - read-only
+
+        The native path of the device.
+        """
         return self._proxy.NativePath
 
     @GObject.Property
     def kind(self) -> str:
+        """
+        - read-only
+
+        The device kind, e.g. ``battery``.
+        """
         return DEVICE_KIND.get(self._proxy.Type, "unknown")
 
     @GObject.Property
     def available(self) -> bool:
+        """
+        - read-only
+
+        Whether the device is available.
+        """
         return self._proxy.IsPresent
 
     @GObject.Property
     def percent(self) -> float:
+        """
+        - read-only
+
+        The current percentage of the device.
+        """
         return self._proxy.Percentage
 
     @GObject.Property
     def charging(self) -> bool:
+        """
+        - read-only
+
+        Whether the device is currently charging.
+        """
         return self._proxy.State == DeviceState.CHARGING
 
     @GObject.Property
     def charged(self) -> bool:
+        """
+        - read-only
+
+        Whether the device is charged.
+        """
         return self._proxy.State == DeviceState.FULLY_CHARGED
 
     @GObject.Property
     def icon_name(self) -> str:
+        """
+        - read-only
+
+        The current icon name.
+        """
         return self._proxy.IconName
 
     @GObject.Property
     def time_remaining(self) -> int:
+        """
+        - read-only
+
+        The time in seconds until fully charged (when charging) or until fully drains (when discharging).
+        """
         return self._proxy.TimeToFull if self.charging else self._proxy.TimeToEmpty
 
     @GObject.Property
     def energy(self) -> float:
+        """
+        - read-only
+
+        The energy left in the device. Measured in mWh.
+        """
         return self._proxy.Energy
 
     @GObject.Property
     def energy_full(self) -> float:
+        """
+        - read-only
+
+        The amount of energy when the device is fully charged. Measured in mWh.
+        """
         return self._proxy.EnergyFull
 
     @GObject.Property
     def energy_full_design(self) -> float:
+        """
+        - read-only
+
+        The amount of energy when the device was brand new. Measured in mWh.
+        """
         return self._proxy.EnergyDesign
 
     @GObject.Property
     def energy_rate(self) -> float:
+        """
+        - read-only
+
+        The rate of discharge or charge. Measured in mW.
+        """
         return self._proxy.EnergyRate
 
     @GObject.Property
     def charge_cycles(self) -> int:
+        """
+        - read-only
+
+        The number of charge cycles for the device, or -1 if unknown or non-applicable.
+        """
         return self._proxy.ChargeCycles
 
     @GObject.Property
     def vendor(self) -> str:
+        """
+        - read-only
+
+        The vendor of the device.
+        """
         return self._proxy.Vendor
 
     @GObject.Property
     def model(self) -> str:
+        """
+        - read-only
+
+        The model of the device.
+        """
         return self._proxy.Model
 
     @GObject.Property
     def serial(self) -> str:
+        """
+        - read-only
+
+        The serial number of the device.
+        """
         return self._proxy.Serial
 
     @GObject.Property
     def power_supply(self) -> bool:
+        """
+        - read-only
+
+        Whether the device is powering the system.
+        """
         return self._proxy.PowerSupply
 
     @GObject.Property
     def technology(self) -> str:
+        """
+        - read-only
+
+        The device technology e.g. ``lithium-ion``.
+        """
         return DEVICE_KIND.get(self._proxy.Technology, "unknown")
 
     @GObject.Property
     def temperature(self) -> float:
+        """
+        - read-only
+
+        The temperature of the device in degrees Celsius.
+        """
         return self._proxy.Temperature
 
     @GObject.Property
     def voltage(self) -> float:
+        """
+        - read-only
+
+        The current voltage of the device.
+        """
         return self._proxy.Voltage
