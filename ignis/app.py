@@ -1,6 +1,7 @@
 from __future__ import annotations
 import os
 import sys
+import shutil
 from ignis.dbus import DBusService
 from ignis.utils import Utils
 from loguru import logger
@@ -15,6 +16,21 @@ from ignis.exceptions import (
     CssParsingError,
 )
 from ignis.logging import configure_logger
+from typing import Literal
+
+
+CUSTOM_ICONS_RESOURCE = """
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="{}">
+    {}
+  </gresource>
+</gresources>
+"""
+
+RESOURCE_FILE = "<file>{}</file>"
+
+RESOURCE_PATH_ICONS = "data/icons/{}/{}"
 
 
 def raise_css_parsing_error(
@@ -71,6 +87,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         self._css_providers: dict[
             str, Gtk.CssProvider
         ] = {}  # {style_path: Gtk.CssProvider}
+        self._custom_icons: dict[str, Gio.Resource] = {}  # {dir: Gio.Resource}
         self._windows: dict[str, Gtk.Window] = {}
         self._autoreload_config: bool = True
         self._autoreload_css: bool = True
@@ -265,6 +282,58 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         for i in style_paths:
             self.apply_css(i)
 
+    def apply_custom_icons(
+        self,
+        source: str,
+        resolution: Literal[
+            "symbloic",
+            "scalable",
+            "8x8",
+            "16x16",
+            "18x18",
+            "22x22",
+            "24x24",
+            "32x32",
+            "42x42",
+            "48x48",
+            "64x64",
+            "84x84",
+            "96x96",
+            "128x128",
+        ],
+        kind: str = "any",
+    ) -> None:
+        prefix = f"/com/github/linkfrg/ignis/customicons{len(self._custom_icons)}"
+        res_path = RESOURCE_PATH_ICONS.format(resolution, kind)
+        actual_dest = f"/tmp/ignis/customico/{res_path}"
+        shutil.rmtree(actual_dest)
+        os.makedirs(actual_dest, exist_ok=True)
+        resource_files = ""
+
+        for filename in os.listdir(source):
+            source_file = os.path.join(source, filename)
+            destination_file = os.path.join(actual_dest, filename)
+
+            if os.path.isfile(source_file):
+                shutil.copy(source_file, destination_file)
+
+            resource_files += RESOURCE_FILE.format(f"{actual_dest}/{filename}") + "\n"
+
+        resource_xml = CUSTOM_ICONS_RESOURCE.format(prefix, resource_files)
+
+        path_to_resource_xml = "/tmp/ignis/customico/resources.xml"
+        path_to_compiled = "/tmp/ignis/customico/resources.gresource"
+        with open(path_to_resource_xml, "w") as file:
+            file.write(resource_xml)
+
+        Utils.exec_sh(f"glib-compile-resources {path_to_resource_xml}")
+
+        resource = Gio.Resource.load(path_to_compiled)
+        Gio.resources_register(resource)
+
+        icon_theme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default())
+        icon_theme.add_resource_path(f"{prefix}/data/icons")
+
     def do_activate(self) -> None:
         """
         :meta private:
@@ -294,6 +363,8 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         self._is_ready = True
         self.emit("ready")
         logger.info("Ready.")
+
+        self.apply_custom_icons("/home/link/Documents/pizdecc", "scalable")
 
     def get_window(self, window_name: str) -> Gtk.Window:
         """
