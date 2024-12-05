@@ -93,6 +93,7 @@ class NiriIPCNotFoundError(Exception):
             *args,
         )
 
+
 class NetworkManagerNotFoundError(Exception):
     """
     Raised when NetworkManager is not found.

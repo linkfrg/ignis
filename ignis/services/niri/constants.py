@@ -1,3 +1,3 @@
 import os
 
-NIRI_SOCKET = f'{os.getenv("NIRI_SOCKET")}'
+NIRI_SOCKET = os.getenv("NIRI_SOCKET")
