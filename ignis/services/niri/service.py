@@ -8,43 +8,6 @@ from ignis.exceptions import NiriIPCNotFoundError
 from ignis.base_service import BaseService
 from .constants import NIRI_SOCKET
 
-## FIXXME remove after maybe moving the listen_niri_socket function
-from collections.abc import Generator
-
-
-def listen_niri_socket(sock: socket.socket, message: str) -> Generator[str, None, None]:
-    """
-    Listen to the socket.
-    This function is a generator.
-
-    Args:
-        sock: An instance of a socket.
-
-    Returns:
-        A generator that yields responses from the socket.
-
-    Example usage:
-
-    .. code-block:: python
-
-        with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as sock:
-            sock.connect("path/to/socket.sock")
-
-            for message in Utils.listen_socket(sock):
-                print(message)
-    """
-
-    sock.send(message.encode())
-    buffer = b""
-    while True:
-        new_data = sock.recv(8192)
-        if not new_data:
-            break
-        buffer += new_data
-        while b"\n" in buffer:
-            data, buffer = buffer.split(b"\n", 1)
-            yield data.decode("utf-8")
-
 
 class NiriService(BaseService):
     """
@@ -134,8 +97,9 @@ class NiriService(BaseService):
     @Utils.run_in_thread
     def __listen_events(self) -> None:
         with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as sock:
-            sock.connect(f"{NIRI_SOCKET}")
-            for event in listen_niri_socket(sock, '"EventStream"\n'):
+            sock.connect(str(NIRI_SOCKET))
+            sock.send(b'"EventStream"\n')
+            for event in Utils.listen_socket(sock):
                 self.__on_event_received(event)
 
     def __on_event_received(self, event: str) -> None:
