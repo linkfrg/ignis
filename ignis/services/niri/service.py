@@ -8,7 +8,7 @@ from ignis.exceptions import NiriIPCNotFoundError
 from ignis.base_service import BaseService
 from .constants import NIRI_SOCKET
 ## FIXXME remove after maybe moving the listen_niri_socket function
-from typing import Generator
+from collections.abc import Generator
 
 def listen_niri_socket(sock: socket.socket, message: str) -> Generator[str, None, None]:
     """
@@ -169,7 +169,7 @@ class NiriService(BaseService):
             w, key=lambda x: x["idx"]
         )
         self._active_workspaces = list(
-            filter(lambda w: w['is_active'] == True, w)
+            filter(lambda w: w['is_active'], w)
         )
         self.notify("workspaces")
         self.notify("active-workspaces")
