@@ -6,6 +6,7 @@ from ignis.utils import Utils
 from typing import Any
 from ignis.exceptions import NiriIPCNotFoundError
 from ignis.base_service import BaseService
+from ignis.logging import logger
 from .constants import NIRI_SOCKET
 
 
@@ -130,7 +131,7 @@ class NiriService(BaseService):
                 self.__sync_active_window()
 
         except KeyError:
-            print("non matching event: " + event)
+            logger.warning(f"[Niri Service] non matching event: {event}")
 
     def __sync_workspaces(self) -> None:
         w = json.loads(self.send_command('"Workspaces"\n'))["Ok"]["Workspaces"]
