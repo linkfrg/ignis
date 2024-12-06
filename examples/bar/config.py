@@ -222,15 +222,6 @@ def speaker_volume() -> Widget.Box:
     )
 
 
-def keyboard_layout() -> Widget.EventBox:
-    if hyprland.is_available:
-        return hyprland_keyboard_layout()
-    elif niri.is_available:
-        return niri_keyboard_layout()
-    else:
-        return Widget.EventBox()
-
-
 def hyprland_keyboard_layout() -> Widget.EventBox:
     return Widget.EventBox(
         on_click=lambda self: hyprland.switch_kb_layout(),
@@ -251,6 +242,15 @@ def niri_keyboard_layout() -> Widget.EventBox:
             )
         ]
     )
+
+
+def keyboard_layout() -> Widget.EventBox:
+    if hyprland.is_available:
+        return hyprland_keyboard_layout()
+    elif niri.is_available:
+        return niri_keyboard_layout()
+    else:
+        return Widget.EventBox()
 
 
 def tray_item(item: SystemTrayItem) -> Widget.Button:
