@@ -5,6 +5,7 @@ from ignis.app import IgnisApp
 from ignis.services.audio import AudioService
 from ignis.services.system_tray import SystemTrayService, SystemTrayItem
 from ignis.services.hyprland import HyprlandService
+from ignis.services.niri import NiriService
 from ignis.services.notifications import NotificationService
 from ignis.services.mpris import MprisService, MprisPlayer
 
@@ -16,11 +17,21 @@ app.apply_css(f"{Utils.get_current_dir()}/style.scss")
 audio = AudioService.get_default()
 system_tray = SystemTrayService.get_default()
 hyprland = HyprlandService.get_default()
+niri = NiriService.get_default()
 notifications = NotificationService.get_default()
 mpris = MprisService.get_default()
 
 
 def workspace_button(workspace: dict) -> Widget.Button:
+    if hyprland.is_available:
+        return hyprland_workspace_button(workspace)
+    elif niri.is_available:
+        return niri_workspace_button(workspace)
+    else:
+        return Widget.Button()
+
+
+def hyprland_workspace_button(workspace: dict) -> Widget.Button:
     widget = Widget.Button(
         css_classes=["workspace"],
         on_click=lambda x, id=workspace["id"]: hyprland.switch_to_workspace(id),
@@ -32,7 +43,28 @@ def workspace_button(workspace: dict) -> Widget.Button:
     return widget
 
 
-def scroll_workspaces(direction: str) -> None:
+def niri_workspace_button(workspace: dict) -> Widget.Button:
+    widget = Widget.Button(
+        css_classes=["workspace"],
+        on_click=lambda x, id=workspace["idx"]: niri.switch_to_workspace(id),
+        child=Widget.Label(label=str(workspace["idx"])),
+    )
+    if workspace["is_active"]:
+        widget.add_css_class("active")
+
+    return widget
+
+
+def scroll_workspaces(direction: str, monitor_name="") -> None:
+    if hyprland.is_available:
+        hyprland_scroll_workspaces(direction)
+    elif niri.is_available:
+        niri_scroll_workspaces(monitor_name,direction)
+    else:
+        pass
+
+
+def hyprland_scroll_workspaces(direction: str) -> None:
     current = hyprland.active_workspace["id"]
     if direction == "up":
         target = current - 1
@@ -44,7 +76,26 @@ def scroll_workspaces(direction: str) -> None:
         hyprland.switch_to_workspace(target)
 
 
-def workspaces() -> Widget.EventBox:
+def niri_scroll_workspaces(monitor_name: str, direction: str) -> None:
+    current = list(filter(lambda w: w['is_active'] and w['output'] == monitor_name, niri.workspaces))[0]["idx"]
+    if direction == "up":
+        target = current + 1
+        niri.switch_to_workspace(target)
+    else:
+        target = current - 1
+        niri.switch_to_workspace(target)
+
+
+def workspaces(monitor_name: str) -> Widget.EventBox:
+    if hyprland.is_available:
+        return hyprland_workspaces()
+    elif niri.is_available:
+        return niri_workspaces(monitor_name)
+    else:
+        return Widget.EventBox()
+
+
+def hyprland_workspaces() -> Widget.EventBox:
     return Widget.EventBox(
         on_scroll_up=lambda x: scroll_workspaces("up"),
         on_scroll_down=lambda x: scroll_workspaces("down"),
@@ -53,6 +104,19 @@ def workspaces() -> Widget.EventBox:
         child=hyprland.bind(
             "workspaces",
             transform=lambda value: [workspace_button(i) for i in value],
+        ),
+    )
+
+
+def niri_workspaces(monitor_name: str) -> Widget.EventBox:
+    return Widget.EventBox(
+        on_scroll_up=lambda x: scroll_workspaces("up",monitor_name),
+        on_scroll_down=lambda x: scroll_workspaces("down",monitor_name),
+        css_classes=["workspaces"],
+        spacing=5,
+        child=niri.bind(
+            "workspaces",
+            transform=lambda value: [workspace_button(i) for i in value if i['output'] == monitor_name],
         ),
     )
 
@@ -90,7 +154,16 @@ def media() -> Widget.Box:
     )
 
 
-def client_title() -> Widget.Label:
+def client_title(monitor_name) -> Widget.Label:
+    if hyprland.is_available:
+        return hyprland_client_title()
+    elif niri.is_available:
+        return niri_client_title(monitor_name)
+    else:
+        return Widget.Label()
+
+
+def hyprland_client_title() -> Widget.Label:
     return Widget.Label(
         ellipsize="end",
         max_width_chars=40,
@@ -100,6 +173,18 @@ def client_title() -> Widget.Label:
                 "title",
                 "",  # sometimes there is no title, so return empty string
             ),
+        ),
+    )
+
+
+def niri_client_title(monitor_name) -> Widget.Label:
+    return Widget.Label(
+        ellipsize="end",
+        max_width_chars=40,
+        visible=niri.bind("active_output", lambda x: x["name"] == monitor_name),
+        label=niri.bind(
+            "active_window",
+            transform=lambda value: "" if value is None else value["title"]
         ),
     )
 
@@ -133,6 +218,37 @@ def speaker_volume() -> Widget.Box:
             Widget.Label(
                 label=audio.speaker.bind("volume", transform=lambda value: str(value))
             ),
+        ]
+    )
+
+
+def keyboard_layout() -> Widget.EventBox:
+    if hyprland.is_available:
+        return hyprland_keyboard_layout()
+    elif niri.is_available:
+        return niri_keyboard_layout()
+    else:
+        return Widget.EventBox()
+
+
+def hyprland_keyboard_layout() -> Widget.EventBox:
+    return Widget.EventBox(
+        on_click=lambda self: hyprland.switch_kb_layout(),
+        child=[
+            Widget.Label(
+                label=hyprland.bind("kb_layout")
+            )
+        ]
+    )
+
+
+def niri_keyboard_layout() -> Widget.EventBox:
+    return Widget.EventBox(
+        on_click=lambda self: niri.switch_kb_layout(),
+        child=[
+            Widget.Label(
+                label=niri.bind("kb_layout")
+            )
         ]
     )
 
@@ -178,8 +294,8 @@ def speaker_slider() -> Widget.Scale:
     )
 
 
-def left() -> Widget.Box:
-    return Widget.Box(child=[workspaces(), client_title()], spacing=10)
+def left(monitor_name: str) -> Widget.Box:
+    return Widget.Box(child=[workspaces(monitor_name), client_title(monitor_name)], spacing=10)
 
 
 def center() -> Widget.Box:
@@ -195,11 +311,12 @@ def center() -> Widget.Box:
 
 def right() -> Widget.Box:
     return Widget.Box(
-        child=[tray(), speaker_volume(), speaker_slider(), clock()], spacing=10
+        child=[tray(), keyboard_layout(), speaker_volume(), speaker_slider(), clock()], spacing=10
     )
 
 
 def bar(monitor_id: int = 0) -> Widget.Window:
+    monitor_name=Utils.get_monitor(monitor_id).get_connector()
     return Widget.Window(
         namespace=f"ignis_bar_{monitor_id}",
         monitor=monitor_id,
@@ -207,7 +324,7 @@ def bar(monitor_id: int = 0) -> Widget.Window:
         exclusivity="exclusive",
         child=Widget.CenterBox(
             css_classes=["bar"],
-            start_widget=left(),
+            start_widget=left(monitor_name),
             center_widget=center(),
             end_widget=right(),
         ),
