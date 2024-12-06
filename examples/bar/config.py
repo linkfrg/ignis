@@ -22,15 +22,6 @@ notifications = NotificationService.get_default()
 mpris = MprisService.get_default()
 
 
-def workspace_button(workspace: dict) -> Widget.Button:
-    if hyprland.is_available:
-        return hyprland_workspace_button(workspace)
-    elif niri.is_available:
-        return niri_workspace_button(workspace)
-    else:
-        return Widget.Button()
-
-
 def hyprland_workspace_button(workspace: dict) -> Widget.Button:
     widget = Widget.Button(
         css_classes=["workspace"],
@@ -55,13 +46,13 @@ def niri_workspace_button(workspace: dict) -> Widget.Button:
     return widget
 
 
-def scroll_workspaces(direction: str, monitor_name="") -> None:
+def workspace_button(workspace: dict) -> Widget.Button:
     if hyprland.is_available:
-        hyprland_scroll_workspaces(direction)
+        return hyprland_workspace_button(workspace)
     elif niri.is_available:
-        niri_scroll_workspaces(monitor_name,direction)
+        return niri_workspace_button(workspace)
     else:
-        pass
+        return Widget.Button()
 
 
 def hyprland_scroll_workspaces(direction: str) -> None:
@@ -86,13 +77,13 @@ def niri_scroll_workspaces(monitor_name: str, direction: str) -> None:
         niri.switch_to_workspace(target)
 
 
-def workspaces(monitor_name: str) -> Widget.EventBox:
+def scroll_workspaces(direction: str, monitor_name="") -> None:
     if hyprland.is_available:
-        return hyprland_workspaces()
+        hyprland_scroll_workspaces(direction)
     elif niri.is_available:
-        return niri_workspaces(monitor_name)
+        niri_scroll_workspaces(monitor_name,direction)
     else:
-        return Widget.EventBox()
+        pass
 
 
 def hyprland_workspaces() -> Widget.EventBox:
@@ -119,6 +110,15 @@ def niri_workspaces(monitor_name: str) -> Widget.EventBox:
             transform=lambda value: [workspace_button(i) for i in value if i['output'] == monitor_name],
         ),
     )
+
+
+def workspaces(monitor_name: str) -> Widget.EventBox:
+    if hyprland.is_available:
+        return hyprland_workspaces()
+    elif niri.is_available:
+        return niri_workspaces(monitor_name)
+    else:
+        return Widget.EventBox()
 
 
 def mpris_title(player: MprisPlayer) -> Widget.Box:
@@ -154,15 +154,6 @@ def media() -> Widget.Box:
     )
 
 
-def client_title(monitor_name) -> Widget.Label:
-    if hyprland.is_available:
-        return hyprland_client_title()
-    elif niri.is_available:
-        return niri_client_title(monitor_name)
-    else:
-        return Widget.Label()
-
-
 def hyprland_client_title() -> Widget.Label:
     return Widget.Label(
         ellipsize="end",
@@ -187,6 +178,15 @@ def niri_client_title(monitor_name) -> Widget.Label:
             transform=lambda value: "" if value is None else value["title"]
         ),
     )
+
+
+def client_title(monitor_name) -> Widget.Label:
+    if hyprland.is_available:
+        return hyprland_client_title()
+    elif niri.is_available:
+        return niri_client_title(monitor_name)
+    else:
+        return Widget.Label()
 
 
 def current_notification() -> Widget.Label:
