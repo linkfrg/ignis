@@ -13,10 +13,6 @@ class NiriService(BaseService):
     """
     Niri IPC client.
 
-    Raises:
-        NiriIPCNotFoundError: If Niri IPC is not found.
-
-
     Example usage:
 
     .. code-block:: python
@@ -33,8 +29,6 @@ class NiriService(BaseService):
 
     def __init__(self):
         super().__init__()
-        if not NIRI_SOCKET or not os.path.exists(NIRI_SOCKET):
-            raise NiriIPCNotFoundError()
 
         self._workspaces: list[dict[str, Any]] = []
         self._active_workspaces: list[dict[str, Any]] = []
@@ -42,12 +36,25 @@ class NiriService(BaseService):
         self._active_window: dict[str, Any] = {}
         self._active_output: dict[str, Any] = {}
 
-        self.__listen_events()
+        if self.is_available:
+            self.__listen_events()
 
-        self.__sync_kb_layout()
-        self.__sync_workspaces()
-        self.__sync_active_window()
-        self.__sync_active_output()
+            self.__sync_kb_layout()
+            self.__sync_workspaces()
+            self.__sync_active_window()
+            self.__sync_active_output()
+
+    @GObject.Property
+    def is_available(self) -> bool:
+        """
+        - read-only
+
+        Whether Niri IPC is available.
+        """
+        if NIRI_SOCKET is not None:
+            return os.path.exists(NIRI_SOCKET)
+        else:
+            return False
 
     @GObject.Property
     def workspaces(self) -> list[dict[str, Any]]:
@@ -160,7 +167,13 @@ class NiriService(BaseService):
 
         Returns:
             Response from Niri IPC.
+
+        Raises:
+            NiriIPCNotFoundError: If Niri IPC is not found.
         """
+        if not self.is_available:
+            raise NiriIPCNotFoundError()
+
         with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as sock:
             sock.connect(f"{NIRI_SOCKET}")
             return Utils.send_socket(sock, cmd)
