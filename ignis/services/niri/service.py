@@ -172,11 +172,11 @@ class NiriService(BaseService):
         Raises:
             NiriIPCNotFoundError: If Niri IPC is not found.
         """
-        if not self.is_available:
+        if not self.is_available or NIRI_SOCKET is None:
             raise NiriIPCNotFoundError()
 
         with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as sock:
-            sock.connect(f"{NIRI_SOCKET}")
+            sock.connect(NIRI_SOCKET)
             return Utils.send_socket(sock, cmd)
 
     def switch_kb_layout(self) -> None:
