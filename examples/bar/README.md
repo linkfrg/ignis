@@ -12,4 +12,5 @@ dart-sass python-requests
 
 
 > [!NOTE]
-> Currently works only on Hyprland.
+> Currently fully supported compositors are Hyprland and Niri (workspaces, window title
+> and keyboard layout). Under other compositors, the bar will not display those elements.
