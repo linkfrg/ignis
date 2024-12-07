@@ -15,9 +15,7 @@ def exec_sh(command: str, **kwargs) -> subprocess.CompletedProcess:
     Returns:
         The result of the command execution. You can use the ``stdout`` property to get the command's output.
     """
-    return subprocess.run(
-        command, shell=True, text=True, capture_output=True, **kwargs
-    )
+    return subprocess.run(command, shell=True, text=True, capture_output=True, **kwargs)
 
 
 class AsyncCompletedProcess:
