@@ -3,19 +3,21 @@ from gi.repository import Gio  # type: ignore
 from typing import Callable
 
 
-def exec_sh(command: str, *args, **kwargs) -> subprocess.CompletedProcess:
+def exec_sh(command: str, **kwargs) -> subprocess.CompletedProcess:
     """
     Execute a shell (bash) command.
 
     Args:
         command: The command to execute.
 
-    ``*args`` and ``**kwargs`` will be passed to ``subprocess.run()``.
+    ``**kwargs`` will be passed to ``subprocess.run()``.
 
     Returns:
         The result of the command execution. You can use the ``stdout`` property to get the command's output.
     """
-    return subprocess.run(command, *args, shell=True, text=True, capture_output=True, **kwargs)
+    return subprocess.run(
+        command, shell=True, text=True, capture_output=True, **kwargs
+    )
 
 
 class AsyncCompletedProcess:
