@@ -298,8 +298,12 @@ class IgnisApp(Gtk.Application, IgnisGObject):
 
             app.add_icons(f"{Utils.get_current_dir()}/icons")
         """
+        display = Gdk.Display.get_default()
 
-        icon_theme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default())
+        if not display:
+            raise DisplayNotFoundError()
+
+        icon_theme = Gtk.IconTheme.get_for_display(display)
         icon_theme.add_search_path(path)
 
     def do_activate(self) -> None:
