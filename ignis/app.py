@@ -267,7 +267,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
 
     def add_icons(self, path: str) -> None:
         """
-        Add custom svg icons from a directory.
+        Add custom SVG icons from a directory.
 
         The directory must contain ``hicolor/scalable/actions`` directory, icons must be inside ``actions`` directory.
 
