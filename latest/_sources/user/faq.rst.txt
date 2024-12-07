@@ -13,3 +13,8 @@ Render issues or Unresponsive UI after wake up from suspend
 -----------------------------------------------------------
 
 If you use Nvidia, see this: `Preserve video memory after suspend <https://wiki.archlinux.org/title/NVIDIA/Tips_and_tricks#Preserve_video_memory_after_suspend>`_.
+
+Custom SVG icons
+------------------
+
+See :func:`~ignis.app.IgnisApp.add_icons`.
