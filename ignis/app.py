@@ -1,8 +1,6 @@
 from __future__ import annotations
 import os
 import sys
-import shutil
-import subprocess
 from ignis.dbus import DBusService
 from ignis.utils import Utils
 from loguru import logger
@@ -18,20 +16,6 @@ from ignis.exceptions import (
 )
 from ignis.logging import configure_logger
 
-
-CUSTOM_ICONS_RESOURCE = """
-<?xml version="1.0" encoding="UTF-8"?>
-<gresources>
-  <gresource prefix="{}">
-    {}
-  </gresource>
-</gresources>
-"""
-
-RESOURCE_FILE = "<file>{}</file>"
-
-RESOURCE_PATH_ICONS = "data/icons/{}/{}"
-ICONS_TEMP_DIR = "/tmp/ignis/icons"
 
 def raise_css_parsing_error(
     css_provider: Gtk.CssProvider, section: Gtk.CssSection, gerror: GLib.GError
@@ -87,13 +71,10 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         self._css_providers: dict[
             str, Gtk.CssProvider
         ] = {}  # {style_path: Gtk.CssProvider}
-        self._custom_icons: dict[str, Gio.Resource] = {}  # {dir: Gio.Resource}
         self._windows: dict[str, Gtk.Window] = {}
         self._autoreload_config: bool = True
         self._autoreload_css: bool = True
         self._is_ready = False
-
-        os.makedirs(ICONS_TEMP_DIR, exist_ok=True)
 
     def __watch_config(
         self, file_monitor: Utils.FileMonitor, path: str, event_type: str
@@ -284,26 +265,42 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         for i in style_paths:
             self.apply_css(i)
 
-    def apply_custom_icons(self, source: str) -> None:
-        prefix = f"/com/github/linkfrg/ignis/customicons{len(self._custom_icons)}"
+    def add_icons(self, path: str) -> None:
+        """
+        Add custom svg icons from a directory.
 
-        if os.path.exists(ICONS_TEMP_DIR):
-            shutil.rmtree(ICONS_TEMP_DIR)
+        The directory must contain ``hicolor/scalable/actions`` directory, icons must be inside ``actions`` directory.
 
-        shutil.copytree(source, ICONS_TEMP_DIR)
+        Args:
+            path: Path to the directory.
 
-        resource_files = ""
-        for root, _, files in os.walk(ICONS_TEMP_DIR):
-            for file in files:
-                resource_files += RESOURCE_FILE.format(os.path.join(root, file))
+        For example, place icons inside the Ignis config directory:
 
-        resource_xml = CUSTOM_ICONS_RESOURCE.format(prefix, resource_files)
+        .. code-block:: bash
 
-        with open(f"{ICONS_TEMP_DIR}/resources.xml", "w") as file:
-            file.write(resource_xml)
+            ~/.config/ignis
+            ├── config.py
+            ├── icons
+            │   └── hicolor
+            │       └── scalable
+            │           └── actions
+            │               ├── aaaa-symbolic.svg
+            │               └── some-icon.svg
 
-        # subprocess.
+        then, add this to your ``config.py`` :
 
+        .. code-block:: python
+
+            from ignis.utils import Utils
+            from ignis.app import IgnisApp
+
+            app = IgnisApp.get_default()
+
+            app.add_icons(f"{Utils.get_current_dir()}/icons")
+        """
+
+        icon_theme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default())
+        icon_theme.add_search_path(path)
 
     def do_activate(self) -> None:
         """
