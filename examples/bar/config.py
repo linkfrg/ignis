@@ -335,7 +335,9 @@ def power_menu() -> Widget.Button:
         ]
     )
     return Widget.Button(
-        child=Widget.Box(child=[Widget.Icon(image="system-shutdown-symbolic", pixel_size=20), menu]),
+        child=Widget.Box(
+            child=[Widget.Icon(image="system-shutdown-symbolic", pixel_size=20), menu]
+        ),
         on_click=lambda x: menu.popup(),
     )
 
@@ -359,7 +361,14 @@ def center() -> Widget.Box:
 
 def right() -> Widget.Box:
     return Widget.Box(
-        child=[tray(), keyboard_layout(), speaker_volume(), speaker_slider(), clock(), power_menu()],
+        child=[
+            tray(),
+            keyboard_layout(),
+            speaker_volume(),
+            speaker_slider(),
+            clock(),
+            power_menu(),
+        ],
         spacing=10,
     )
 
