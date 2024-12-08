@@ -13,6 +13,9 @@ check_untyped_defs = true
 module = ["gi.repository.*"]
 disable_error_code = ["assignment"]
 
+[tool.ruff]
+include = ["ignis/**/*.py", "examples/**/*.py"]
+
 [tool.ruff.lint]
 select = [
     "F",   # pyflakes

@@ -51,11 +51,7 @@ jobs:
           pip install ruff
 
       - name: Check code
-        run: |
-          ruff check ignis/
-          ruff check examples/
+        run: ruff check
 
       - name: Check format
-        run: |
-          ruff format ignis/ --check
-          ruff format examples/ --check
+        run: ruff format --check
