@@ -1,6 +1,7 @@
 [tool.mypy]
 python_version = "3.10"
-packages = ["ignis"]
+packages = ["ignis", "examples"]
+#files = [""]
 exclude = ["venv"]
 disable_error_code = [
     "no-redef",  # allow variable redefinition (needed for GObject.Property decorator)
