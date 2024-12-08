@@ -200,7 +200,7 @@ def current_notification() -> Widget.Label:
         ellipsize="end",
         max_width_chars=20,
         label=notifications.bind(
-            "notifications", lambda value: value[0].summary if len(value) > 0 else None
+            "notifications", lambda value: value[-1].summary if len(value) > 0 else None
         ),
     )
 
