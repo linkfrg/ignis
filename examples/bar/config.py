@@ -292,6 +292,54 @@ def speaker_slider() -> Widget.Scale:
     )
 
 
+def logout() -> None:
+    if hyprland.is_available:
+        Utils.exec_sh_async("hyprctl dispatch exit 0")
+    elif niri.is_available:
+        Utils.exec_sh_async("niri msg action quit")
+    else:
+        pass
+
+
+def power_menu() -> Widget.Button:
+    menu = Widget.PopoverMenu(
+        items=[
+            Widget.MenuItem(
+                label="Lock",
+                on_activate=lambda x: Utils.exec_sh_async("swaylock"),
+            ),
+            Widget.Separator(),
+            Widget.MenuItem(
+                label="Suspend",
+                on_activate=lambda x: Utils.exec_sh_async("systemctl suspend"),
+            ),
+            Widget.MenuItem(
+                label="Hibernate",
+                on_activate=lambda x: Utils.exec_sh_async("systemctl hibernate"),
+            ),
+            Widget.Separator(),
+            Widget.MenuItem(
+                label="Reboot",
+                on_activate=lambda x: Utils.exec_sh_async("systemctl reboot"),
+            ),
+            Widget.MenuItem(
+                label="Shutdown",
+                on_activate=lambda x: Utils.exec_sh_async("systemctl poweroff"),
+            ),
+            Widget.Separator(),
+            Widget.MenuItem(
+                label="Logout",
+                enabled=hyprland.is_available or niri.is_available,
+                on_activate=lambda x: logout(),
+            ),
+        ]
+    )
+    return Widget.Button(
+        child=Widget.Box(child=[Widget.Icon(image="system-shutdown-symbolic", pixel_size=20), menu]),
+        on_click=lambda x: menu.popup(),
+    )
+
+
 def left(monitor_name: str) -> Widget.Box:
     return Widget.Box(
         child=[workspaces(monitor_name), client_title(monitor_name)], spacing=10
@@ -311,7 +359,7 @@ def center() -> Widget.Box:
 
 def right() -> Widget.Box:
     return Widget.Box(
-        child=[tray(), keyboard_layout(), speaker_volume(), speaker_slider(), clock()],
+        child=[tray(), keyboard_layout(), speaker_volume(), speaker_slider(), clock(), power_menu()],
         spacing=10,
     )
 
