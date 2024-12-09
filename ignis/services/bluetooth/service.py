@@ -11,14 +11,6 @@ class BluetoothService(BaseService):
     Requires ``gnome-bluetooth-3.0``.
     """
 
-    __gsignals__ = {
-        "device-added": (
-            GObject.SignalFlags.RUN_FIRST,
-            GObject.TYPE_NONE,
-            (BluetoothDevice,),
-        ),
-    }
-
     def __init__(self) -> None:
         super().__init__()
 
