@@ -265,6 +265,47 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         for i in style_paths:
             self.apply_css(i)
 
+    def add_icons(self, path: str) -> None:
+        """
+        Add custom SVG icons from a directory.
+
+        The directory must contain ``hicolor/scalable/actions`` directory, icons must be inside ``actions`` directory.
+
+        Args:
+            path: Path to the directory.
+
+        For example, place icons inside the Ignis config directory:
+
+        .. code-block:: bash
+
+            ~/.config/ignis
+            ├── config.py
+            ├── icons
+            │   └── hicolor
+            │       └── scalable
+            │           └── actions
+            │               ├── aaaa-symbolic.svg
+            │               └── some-icon.svg
+
+        then, add this to your ``config.py`` :
+
+        .. code-block:: python
+
+            from ignis.utils import Utils
+            from ignis.app import IgnisApp
+
+            app = IgnisApp.get_default()
+
+            app.add_icons(f"{Utils.get_current_dir()}/icons")
+        """
+        display = Gdk.Display.get_default()
+
+        if not display:
+            raise DisplayNotFoundError()
+
+        icon_theme = Gtk.IconTheme.get_for_display(display)
+        icon_theme.add_search_path(path)
+
     def do_activate(self) -> None:
         """
         :meta private:
