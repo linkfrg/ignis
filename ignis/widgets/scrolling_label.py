@@ -1,10 +1,9 @@
-from gi.repository import GLib
+from gi.repository import GLib  # type: ignore
 from ignis.widgets import Label
 
+
 class ScrollingLabel(Label):
-    def __init__(self, label: str, max_length: int = 10, scroll_speed: int = 500, 
-                 css_classes: list = None, justify: str = 'left', wrap: bool = True, 
-                 wrap_mode: str = 'word', **kwargs):
+    def __init__(self, label: str, max_length: int = 10, scroll_speed: int = 500, **kwargs):
         """
         :param text: Full text to be displayed.
         :param max_length: Maximum length of text in characters before scrolling.
@@ -21,14 +20,6 @@ class ScrollingLabel(Label):
         self.scroll_speed = scroll_speed
 
         super().__init__(label=self._get_display_text(), **kwargs)
-
-        self.justify = justify
-        self.wrap = wrap
-        self.wrap_mode = wrap_mode
-
-        if css_classes:
-            for css_class in css_classes:
-                self.get_style_context().add_class(css_class)
 
         if len(self.full_text) > self.max_length:
             self._start_scrolling()
