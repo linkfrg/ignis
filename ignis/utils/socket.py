@@ -1,5 +1,5 @@
 import socket
-from typing import Generator
+from collections.abc import Generator
 
 
 def send_socket(sock: socket.socket, message: str) -> str:

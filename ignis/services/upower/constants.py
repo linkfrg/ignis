@@ -1,5 +1,3 @@
-import enum
-
 DEVICE_KIND = {
     None: "unknown",
     0: "unknown",
@@ -44,11 +42,12 @@ TECHNOLOGY = {
 }
 
 
-class DeviceState(enum.Enum):
-    UNKNOWN = 0
-    CHARGING = 1
-    DISCHARGING = 2
-    EMPTY = 3
-    FULLY_CHARGED = 4
-    PENDING_CHARGE = 5
-    PENDING_DISCHARGE = 6
+DeviceState = {
+    "UNKNOWN": 0,
+    "CHARGING": 1,
+    "DISCHARGING": 2,
+    "EMPTY": 3,
+    "FULLY_CHARGED": 4,
+    "PENDING_CHARGE": 5,
+    "PENDING_DISCHARGE": 6,
+}

@@ -120,7 +120,7 @@ class UPowerDevice(IgnisGObject):
 
         Whether the device is currently charging.
         """
-        return self._proxy.State == DeviceState.CHARGING
+        return self._proxy.State == DeviceState["CHARGING"]
 
     @GObject.Property
     def charged(self) -> bool:
@@ -129,7 +129,7 @@ class UPowerDevice(IgnisGObject):
 
         Whether the device is charged.
         """
-        return self._proxy.State == DeviceState.FULLY_CHARGED
+        return self._proxy.State == DeviceState["FULLY_CHARGED"]
 
     @GObject.Property
     def icon_name(self) -> str:

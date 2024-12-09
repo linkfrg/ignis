@@ -2,10 +2,12 @@ on:
   push:
     paths:
       - "ignis/**"
+      - "examples/**"
       - ".github/workflows/static.yaml"
   pull_request:
     paths:
       - "ignis/**"
+      - "examples/**"
 
 name: Static Analysis
 jobs:
@@ -49,8 +51,7 @@ jobs:
           pip install ruff
 
       - name: Check code
-        run:
-          ruff check ignis/
+        run: ruff check
 
       - name: Check format
-        run: ruff format ignis/ --check
+        run: ruff format --check
