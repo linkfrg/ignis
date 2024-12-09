@@ -18,7 +18,7 @@ class BluetoothService(BaseService):
         self._devices: dict[str, BluetoothDevice] = {}
 
         self._client.connect("device-added", self.__add_device)
-        self._client.connect("device-added", self.__remove_device)
+        self._client.connect("device-removed", self.__remove_device)
 
         for gdevice in self._client.get_devices():
             self.__add_device(None, gdevice)  # type: ignore
