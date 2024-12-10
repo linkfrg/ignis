@@ -287,6 +287,9 @@ class IgnisApp(Gtk.Application, IgnisGObject):
             │               ├── aaaa-symbolic.svg
             │               └── some-icon.svg
 
+        .. note::
+            To apply a CSS color to an icon, its name and filename must end with ``-symbolic``.
+
         then, add this to your ``config.py`` :
 
         .. code-block:: python
