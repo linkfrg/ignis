@@ -18,6 +18,8 @@
 > [!NOTE]
 > Ignis is mostly stable, but still a work in progress.
 > The API is a subject to change.
+>
+> If something stopped working after an Ignis update, please check #60
 
 ## Getting started
 See the [Documentation](https://linkfrg.github.io/ignis)
