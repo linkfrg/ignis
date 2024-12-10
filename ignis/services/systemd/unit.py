@@ -25,7 +25,7 @@ class SystemdUnit(IgnisGObject):
             name="org.freedesktop.systemd1",
             object_path="/org/freedesktop/systemd1",
             interface_name="org.freedesktop.systemd1.Manager",
-            info=Utils.load_interface_xml("org.freedesktop.DBus"),
+            info=Utils.load_interface_xml("org.freedesktop.systemd1.Manager"),
             bus_type="session",
         )
 
