@@ -157,6 +157,7 @@ class Vpn(IgnisGObject):
                 VpnConnection(conn, self._client)
                 for conn in df()
                 if conn.get_connection_type() == "vpn"
+                or conn.get_connection_type() == "wireguard"
             ]
 
         self._connections = filter_conn(self._client.get_connections)
