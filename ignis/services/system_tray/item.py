@@ -1,9 +1,10 @@
 from typing import Union, Literal
 from ignis.utils import Utils
 from ignis.dbus import DBusProxy
-from gi.repository import GLib, GObject, GdkPixbuf  # type: ignore
+from gi.repository import GLib, GObject, GdkPixbuf, Gtk, Gdk  # type: ignore
 from ignis.gobject import IgnisGObject
 from ignis.dbus_menu import DBusMenu
+from ignis.exceptions import DisplayNotFoundError
 
 
 class SystemTrayItem(IgnisGObject):
@@ -60,6 +61,13 @@ class SystemTrayItem(IgnisGObject):
                 ),
             )
 
+        display = Gdk.Display.get_default()
+        if not display:
+            raise DisplayNotFoundError()
+
+        self._icon_theme = Gtk.IconTheme.get_for_display(display)
+        self._icon_theme.connect("changed", lambda x: self.__sync_icon())
+
         self.__ready()
 
     @Utils.run_in_thread
@@ -68,6 +76,11 @@ class SystemTrayItem(IgnisGObject):
         self.emit("ready")
 
     def __sync_icon(self) -> None:
+        if self.title == "spotify":
+            self._icon = self.__get_spotify_icon()
+            self.notify("icon")
+            return
+
         icon_name = self.__dbus.IconName
         attention_icon_name = self.__dbus.AttentionIconName
         icon_pixmap = self.__dbus.IconPixmap
@@ -89,6 +102,13 @@ class SystemTrayItem(IgnisGObject):
             self._icon = "image-missing"
 
         self.notify("icon")
+
+    def __get_spotify_icon(self) -> str:
+        icon_name = self.__dbus.IconName
+        if self._icon_theme.has_icon(icon_name):
+            return icon_name
+        else:
+            return "/opt/spotify/icons/" + icon_name + ".png"
 
     @GObject.Signal
     def ready(self): ...  # user shouldn't connect to this signal
