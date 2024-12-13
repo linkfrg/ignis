@@ -22,7 +22,7 @@ class BluetoothService(BaseService):
 
         for key, value in {
             "default-adapter-powered": "powered",
-            "default-adapter-setup-mode": "scanning",
+            "default-adapter-setup-mode": "setup-mode",
             "default-adapter-state": "state",
         }.items():
             self._client.connect(
