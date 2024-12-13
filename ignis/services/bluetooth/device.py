@@ -1,5 +1,6 @@
-from gi.repository import GObject  # type: ignore
+from gi.repository import GObject, GLib  # type: ignore
 from ignis.gobject import IgnisGObject
+from ignis.logging import logger
 from ._imports import GnomeBluetooth
 
 
@@ -152,7 +153,10 @@ class BluetoothDevice(IgnisGObject):
 
     def __connect_service(self, connect: bool) -> None:
         def callback(x, res):
-            self._client.connect_service_finish(res)
+            try:
+                self._client.connect_service_finish(res)
+            except GLib.GError as gerror:  # type: ignore
+                logger.warning(gerror.message)
 
         self._client.connect_service(
             self._gdevice.get_object_path(),
