@@ -20,6 +20,15 @@ class BluetoothService(BaseService):
         self._client.connect("device-added", self.__add_device)
         self._client.connect("device-removed", self.__remove_device)
 
+        for key, value in {
+            "default-adapter-powered": "powered",
+            "default-adapter-setup-mode": "scanning",
+            "default-adapter-state": "state",
+        }.items():
+            self._client.connect(
+                f"notify::{key}", lambda x, y, value=value: self.notify(value)
+            )
+
         for gdevice in self._client.get_devices():
             self.__add_device(None, gdevice)  # type: ignore
 
@@ -35,6 +44,15 @@ class BluetoothService(BaseService):
         """
 
     @GObject.Property
+    def client(self) -> GnomeBluetooth.Client:
+        """
+        - read-only
+
+        An instance of ``GnomeBluetooth.Client``.
+        """
+        return self._client
+
+    @GObject.Property
     def devices(self) -> list[BluetoothDevice]:
         """
         - read-only
@@ -42,6 +60,15 @@ class BluetoothService(BaseService):
         A list of all Bluetooth devices.
         """
         return list(self._devices.values())
+
+    @GObject.Property
+    def connected_devices(self) -> list[BluetoothDevice]:
+        """
+        - read-only
+
+        A list of currently connected Bluetooth devices.
+        """
+        return [i for i in self._devices.values() if i.connected]
 
     @GObject.Property
     def powered(self) -> bool:
@@ -72,10 +99,28 @@ class BluetoothService(BaseService):
         """
         return ADAPTER_STATE.get(self._client.props.default_adapter_state, "absent")
 
+    @GObject.Property
+    def setup_mode(self) -> bool:
+        """
+        - read-write
+
+        Whether the default Bluetooth adapter is in setup mode (discoverable, and discovering).
+
+        Set to ``True`` to start scanning devices.
+        """
+        return self._client.props.default_adapter_setup_mode
+
+    @setup_mode.setter
+    def setup_mode(self, value: bool) -> None:
+        self._client.props.default_adapter_setup_mode = value
+
     def __add_device(self, x, gdevice: GnomeBluetooth.Device) -> None:
         device = BluetoothDevice(self._client, gdevice)
         self._devices[gdevice.get_object_path()] = device
         self.emit("device-added", device)
+        device.connect(
+            "notify::connected", lambda x, y: self.notify("connected-devices")
+        )
         self.notify("devices")
 
     def __remove_device(self, x, object_path: str) -> None:
@@ -84,4 +129,5 @@ class BluetoothService(BaseService):
 
         device = self._devices.pop(object_path)
         device.emit("removed")
+        self.notify("connected-devices")
         self.notify("devices")
