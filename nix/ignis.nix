@@ -59,7 +59,7 @@ pkgs.stdenv.mkDerivation {
   installPhase = ''
     ninja -C build install
     wrapProgram $out/bin/ignis \
-      --set PATH "${pkgs.gst_all_1.gstreamer}/bin:${pkgs.dart-sass}/bin:$PATH" \
+      --prefix-each PATH ":" "${pkgs.gst_all_1.gstreamer}/bin ${pkgs.dart-sass}/bin" \
       --set PYTHONPATH "${concatStringsSep ":" (map (pkg: "${pkg}/lib/python3.12/site-packages") [
         pkgs.python312Packages.markupsafe
         pkgs.python312Packages.pygobject3
