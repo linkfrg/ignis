@@ -34,6 +34,8 @@ class SystemdService(BaseService):
     def __init__(self, bus_type: Literal["session", "system"] = "session") -> None:
         super().__init__()
 
+        self._bus_type = bus_type
+
         self._proxy = DBusProxy(
             name="org.freedesktop.systemd1",
             object_path="/org/freedesktop/systemd1",
@@ -65,9 +67,31 @@ class SystemdService(BaseService):
             setattr(cls, instance_attr, cls(bus_type))  # type: ignore
         return getattr(cls, instance_attr)
 
-    def get_unit(
-        self, unit: str, bus_type: Literal["session", "system"] = "session"
-    ) -> SystemdUnit:
+    @GObject.Property
+    def bus_type(self) -> Literal["session", "system"]:
+        """
+        - read-only
+
+        The bus type.
+        """
+        return self._bus_type
+
+    @GObject.Property
+    def units(self) -> list[SystemdUnit]:
+        """
+        - read-only
+
+        A list of all systemd units, for a given bus (defaults to the "session" bus).
+        """
+        units = []
+        for item in self._proxy.proxy.ListUnitFiles():
+            unit_name = os.path.basename(item[0])
+            if "@" not in unit_name:
+                units.append(self.get_unit(unit_name))
+
+        return units
+
+    def get_unit(self, unit: str) -> SystemdUnit:
         """
         Get :class:`~ignis.services.systemd.SystemdUnit` by unit name.
 
@@ -79,21 +103,4 @@ class SystemdService(BaseService):
             :class:`~ignis.services.systemd.SystemdUnit`
         """
         object_path = self._proxy.proxy.LoadUnit("(s)", unit)
-        return SystemdUnit(unit, object_path, bus_type)
-
-    @GObject.Property
-    def units(
-        self, bus_type: Literal["session", "system"] = "session"
-    ) -> list[SystemdUnit]:
-        """
-        - read-only
-
-        A list of all systemd units, for a given bus (defaults to the "session" bus).
-        """
-        units = []
-        for item in self._proxy.proxy.ListUnitFiles():
-            unit_name = os.path.basename(item[0])
-            if "@" not in unit_name:
-                units.append(self.get_unit(unit_name, bus_type))
-
-        return units
+        return SystemdUnit(unit, object_path, self._bus_type)
