@@ -1,7 +1,8 @@
-from gi.repository import GObject  # type: ignore
+from gi.repository import Gio, GObject  # type: ignore
 
 from ignis.dbus import DBusProxy
 from ignis.utils import Utils
+from ignis.logging import logger
 from ignis.gobject import IgnisGObject
 
 from typing import Literal
@@ -21,6 +22,11 @@ class SystemdUnit(IgnisGObject):
         self._unit = unit
         self._object_path = object_path
         self._bus_type = bus_type
+
+        if self._bus_type == "system":
+            self._flags = Gio.DBusCallFlags.ALLOW_INTERACTIVE_AUTHORIZATION
+        else:
+            self._flags = Gio.DBusCallFlags.NONE
 
         self.__manager_proxy = DBusProxy(
             name="org.freedesktop.systemd1",
@@ -45,19 +51,28 @@ class SystemdUnit(IgnisGObject):
         """
         Start this unit.
         """
-        self.__manager_proxy.proxy.StartUnit("(ss)", self._unit, "replace")
+        try:
+            self.__manager_proxy.proxy.StartUnit("(ss)", self._unit, "replace", flags=self._flags)
+        except Exception as e:
+            logger.warning(f"[Systemd Service] Failed to start unit {self._unit}: {e}")
 
     def stop_unit(self) -> None:
         """
         Stop this unit.
         """
-        self.__manager_proxy.proxy.StopUnit("(ss)", self._unit, "replace")
+        try:
+            self.__manager_proxy.proxy.StopUnit("(ss)", self._unit, "replace", flags=self._flags)
+        except Exception as e:
+            logger.warning(f"[Systemd Service] Failed to stop unit {self._unit}: {e}")
 
     def restart_unit(self) -> None:
         """
         Restart this unit.
         """
-        self.__manager_proxy.proxy.RestartUnit("(ss)", self._unit, "replace")
+        try:
+            self.__manager_proxy.proxy.RestartUnit("(ss)", self._unit, "replace", flags=self._flags)
+        except Exception as e:
+            logger.warning(f"[Systemd Service] Failed to restart unit {self._unit}: {e}")
 
     @GObject.Property
     def name(self) -> str:
