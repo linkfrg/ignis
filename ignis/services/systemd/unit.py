@@ -4,43 +4,69 @@ from ignis.dbus import DBusProxy
 from ignis.utils import Utils
 from ignis.gobject import IgnisGObject
 
+from typing import Literal
+
 
 class SystemdUnit(IgnisGObject):
     """
-    An object for tracking the state of a single systemd unit.
+    An object tracking a single systemd unit.
 
-    Example usage:
-
-    .. code-block:: python
-
-        from ignis.services.systemd import SystemdUnit
-
-        active = SystemdUnit("rot8.service").bind("is_active")
     """
 
-    def __init__(self, unit: str):
+    def __init__(
+        self, unit: str, object_path: str, bus_type: Literal["session", "system"]
+    ):
         super().__init__()
 
-        self.__dbus = DBusProxy(
+        self._unit = unit
+        self._object_path = object_path
+        self._bus_type = bus_type
+
+        self.__manager_proxy = DBusProxy(
             name="org.freedesktop.systemd1",
             object_path="/org/freedesktop/systemd1",
             interface_name="org.freedesktop.systemd1.Manager",
             info=Utils.load_interface_xml("org.freedesktop.systemd1.Manager"),
-            bus_type="session",
+            bus_type=self._bus_type,
         )
-
-        unit_path = self.__dbus.proxy.LoadUnit("(s)", unit)
 
         self.__service_proxy = DBusProxy(
             name="org.freedesktop.systemd1",
-            object_path=unit_path,
+            object_path=self._object_path,
             interface_name="org.freedesktop.DBus.Properties",
-            info=Utils.load_interface_xml("org.freedesktop.DBus"),
-            bus_type="session",
+            info=Utils.load_interface_xml("org.freedesktop.DBus.Properties"),
+            bus_type=self._bus_type,
         )
 
         self._is_active = self.__is_unit_active()
         self.__subscribe_unit()
+
+    def start_unit(self) -> None:
+        """
+        Start this unit.
+        """
+        self.__manager_proxy.proxy.StartUnit("(ss)", self._unit, "replace")
+
+    def stop_unit(self) -> None:
+        """
+        Stop this unit.
+        """
+        self.__manager_proxy.proxy.StopUnit("(ss)", self._unit, "replace")
+
+    def restart_unit(self) -> None:
+        """
+        Restart this unit.
+        """
+        self.__manager_proxy.proxy.RestartUnit("(ss)", self._unit, "replace")
+
+    @GObject.Property
+    def name(self) -> str:
+        """
+        - read-only
+
+        The name of the unit.
+        """
+        return self._unit
 
     @GObject.Property
     def is_active(self) -> bool:
