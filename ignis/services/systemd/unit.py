@@ -52,7 +52,9 @@ class SystemdUnit(IgnisGObject):
         Start this unit.
         """
         try:
-            self.__manager_proxy.proxy.StartUnit("(ss)", self._unit, "replace", flags=self._flags)
+            self.__manager_proxy.proxy.StartUnit(
+                "(ss)", self._unit, "replace", flags=self._flags
+            )
         except Exception as e:
             logger.warning(f"[Systemd Service] Failed to start unit {self._unit}: {e}")
 
@@ -61,7 +63,9 @@ class SystemdUnit(IgnisGObject):
         Stop this unit.
         """
         try:
-            self.__manager_proxy.proxy.StopUnit("(ss)", self._unit, "replace", flags=self._flags)
+            self.__manager_proxy.proxy.StopUnit(
+                "(ss)", self._unit, "replace", flags=self._flags
+            )
         except Exception as e:
             logger.warning(f"[Systemd Service] Failed to stop unit {self._unit}: {e}")
 
@@ -70,9 +74,13 @@ class SystemdUnit(IgnisGObject):
         Restart this unit.
         """
         try:
-            self.__manager_proxy.proxy.RestartUnit("(ss)", self._unit, "replace", flags=self._flags)
+            self.__manager_proxy.proxy.RestartUnit(
+                "(ss)", self._unit, "replace", flags=self._flags
+            )
         except Exception as e:
-            logger.warning(f"[Systemd Service] Failed to restart unit {self._unit}: {e}")
+            logger.warning(
+                f"[Systemd Service] Failed to restart unit {self._unit}: {e}"
+            )
 
     @GObject.Property
     def name(self) -> str:
