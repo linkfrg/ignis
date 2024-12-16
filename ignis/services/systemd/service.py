@@ -1,3 +1,4 @@
+from __future__ import annotations
 import os
 from gi.repository import GObject  # type: ignore
 
@@ -27,21 +28,42 @@ class SystemdService(BaseService):
 
     """
 
-    def __init__(self) -> None:
+    _session_instance: SystemdService | None = None
+    _system_instance: SystemdService | None = None
+
+    def __init__(self, bus_type: Literal["session", "system"] = "session") -> None:
         super().__init__()
 
-    def __get_proxy(self, bus_type: Literal["session", "system"]) -> DBusProxy:
-        """
-        Returns a dbus proxy for the given bus type.
-        """
-        self.__manager_proxy = DBusProxy(
+        self._proxy = DBusProxy(
             name="org.freedesktop.systemd1",
             object_path="/org/freedesktop/systemd1",
             interface_name="org.freedesktop.systemd1.Manager",
             info=Utils.load_interface_xml("org.freedesktop.systemd1.Manager"),
             bus_type=bus_type,
         )
-        return self.__manager_proxy
+
+    @classmethod
+    def get_default(  # type: ignore
+        cls: SystemdService, bus_type: Literal["session", "system"] = "session"
+    ) -> SystemdService:
+        """
+        Returns the default Service object for this process, creating it if necessary.
+
+        Args:
+            bus_type: The bus type.
+
+        Bus types:
+            - session: current user session
+            - system: entire system, requires interactive authorization when calling methods
+        """
+        if bus_type not in ("session", "system"):
+            raise TypeError(f"Invalid bus type: {bus_type}")
+
+        instance_attr = f"_{bus_type}_instance"
+
+        if getattr(cls, instance_attr) is None:
+            setattr(cls, instance_attr, cls(bus_type))  # type: ignore
+        return getattr(cls, instance_attr)
 
     def get_unit(
         self, unit: str, bus_type: Literal["session", "system"] = "session"
@@ -56,7 +78,7 @@ class SystemdService(BaseService):
         Returns:
             :class:`~ignis.services.systemd.SystemdUnit`
         """
-        object_path = self.__get_proxy(bus_type).proxy.LoadUnit("(s)", unit)
+        object_path = self._proxy.proxy.LoadUnit("(s)", unit)
         return SystemdUnit(unit, object_path, bus_type)
 
     @GObject.Property
@@ -69,7 +91,7 @@ class SystemdService(BaseService):
         A list of all systemd units, for a given bus (defaults to the "session" bus).
         """
         units = []
-        for item in self.__get_proxy(bus_type).proxy.ListUnitFiles():
+        for item in self._proxy.proxy.ListUnitFiles():
             unit_name = os.path.basename(item[0])
             if "@" not in unit_name:
                 units.append(self.get_unit(unit_name, bus_type))
