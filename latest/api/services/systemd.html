@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Hyprland &#8212; Ignis documentation</title>
+    <title>Systemd &#8212; Ignis documentation</title>
   
   
   
@@ -47,7 +47,7 @@
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'api/services/hyprland';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/services/systemd';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://linkfrg.github.io/ignis/latest/_static/switcher.json';
@@ -57,8 +57,8 @@
         </script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="MPRIS (media)" href="mpris.html" />
-    <link rel="prev" title="Fetch" href="fetch.html" />
+    <link rel="next" title="UPower" href="upower.html" />
+    <link rel="prev" title="System Tray" href="system_tray.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -418,7 +418,7 @@
 <li class="toctree-l2"><a class="reference internal" href="backlight.html">Backlight</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bluetooth.html">Bluetooth</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fetch.html">Fetch</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Hyprland</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hyprland.html">Hyprland</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mpris.html">MPRIS (media)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="network.html">Network</a></li>
 <li class="toctree-l2"><a class="reference internal" href="niri.html">Niri</a></li>
@@ -426,7 +426,7 @@
 <li class="toctree-l2"><a class="reference internal" href="options.html">Options</a></li>
 <li class="toctree-l2"><a class="reference internal" href="recorder.html">Recorder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="system_tray.html">System Tray</a></li>
-<li class="toctree-l2"><a class="reference internal" href="systemd.html">Systemd</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Systemd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="upower.html">UPower</a></li>
 <li class="toctree-l2"><a class="reference internal" href="wallpaper.html">Wallpaper</a></li>
 </ul>
@@ -504,7 +504,7 @@
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">Services</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Hyprland</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Systemd</span></li>
   </ul>
 </nav>
 </div>
@@ -521,151 +521,112 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="hyprland">
-<h1>Hyprland<a class="headerlink" href="#hyprland" title="Link to this heading">#</a></h1>
+  <section id="systemd">
+<h1>Systemd<a class="headerlink" href="#systemd" title="Link to this heading">#</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.hyprland.</span></span><span class="sig-name descname"><span class="pre">HyprlandService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.hyprland.HyprlandService" title="Link to this definition">#</a></dt>
-<dd><p>Hyprland IPC client.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The contents of <code class="docutils literal notranslate"><span class="pre">dict</span></code> properties are not described here.
-To find out their contents just print them into the terminal.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">hyprland</span><span class="o">.</span><span class="n">workspaces</span><span class="p">)</span>
-<span class="go">[</span>
-<span class="go">    {</span>
-<span class="go">        &quot;id&quot;: 1,</span>
-<span class="go">        &quot;name&quot;: &quot;1&quot;,</span>
-<span class="go">        &quot;monitor&quot;: &quot;DP-1&quot;,</span>
-<span class="go">        &quot;monitorID&quot;: 1,</span>
-<span class="go">        &quot;windows&quot;: 1,</span>
-<span class="go">        &quot;hasfullscreen&quot;: False,</span>
-<span class="go">        &quot;lastwindow&quot;: &quot;0x561dc35d2e80&quot;,</span>
-<span class="go">        &quot;lastwindowtitle&quot;: &quot;hyprland.py - ignis - Visual Studio Code&quot;,</span>
-<span class="go">    },</span>
-<span class="go">    {</span>
-<span class="go">        &quot;id&quot;: 10,</span>
-<span class="go">        &quot;name&quot;: &quot;10&quot;,</span>
-<span class="go">        &quot;monitor&quot;: &quot;HDMI-A-1&quot;,</span>
-<span class="go">        &quot;monitorID&quot;: 0,</span>
-<span class="go">        &quot;windows&quot;: 1,</span>
-<span class="go">        &quot;hasfullscreen&quot;: False,</span>
-<span class="go">        &quot;lastwindow&quot;: &quot;0x561dc3845f30&quot;,</span>
-<span class="go">        &quot;lastwindowtitle&quot;: &quot;Type hints cheat sheet - mypy 1.11.2 documentation — Mozilla Firefox&quot;,</span>
-<span class="go">    },</span>
-<span class="go">]</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">hyprland</span><span class="o">.</span><span class="n">active_window</span><span class="p">)</span>
-<span class="go">{</span>
-<span class="go">    &quot;address&quot;: &quot;0x561dc35d2e80&quot;,</span>
-<span class="go">    &quot;mapped&quot;: True,</span>
-<span class="go">    &quot;hidden&quot;: False,</span>
-<span class="go">    &quot;at&quot;: [1942, 22],</span>
-<span class="go">    &quot;size&quot;: [1876, 1036],</span>
-<span class="go">    &quot;workspace&quot;: {&quot;id&quot;: 1, &quot;name&quot;: &quot;1&quot;},</span>
-<span class="go">    &quot;floating&quot;: False,</span>
-<span class="go">    &quot;pseudo&quot;: False,</span>
-<span class="go">    &quot;monitor&quot;: 1,</span>
-<span class="go">    &quot;class&quot;: &quot;code-url-handler&quot;,</span>
-<span class="go">    &quot;title&quot;: &quot;hyprland.py - ignis - Visual Studio Code&quot;,</span>
-<span class="go">    &quot;initialClass&quot;: &quot;code-url-handler&quot;,</span>
-<span class="go">    &quot;initialTitle&quot;: &quot;Visual Studio Code&quot;,</span>
-<span class="go">    &quot;pid&quot;: 1674,</span>
-<span class="go">    &quot;xwayland&quot;: False,</span>
-<span class="go">    &quot;pinned&quot;: False,</span>
-<span class="go">    &quot;fullscreen&quot;: 0,</span>
-<span class="go">    &quot;fullscreenClient&quot;: 0,</span>
-<span class="go">    &quot;grouped&quot;: [],</span>
-<span class="go">    &quot;tags&quot;: [],</span>
-<span class="go">    &quot;swallowing&quot;: &quot;0x0&quot;,</span>
-<span class="go">    &quot;focusHistoryID&quot;: 0,</span>
-<span class="go">}</span>
-</pre></div>
-</div>
-</div>
+<dt class="sig sig-object py" id="ignis.services.systemd.SystemdService">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.systemd.</span></span><span class="sig-name descname"><span class="pre">SystemdService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bus_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.13)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'session'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'system'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'session'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.systemd.SystemdService" title="Link to this definition">#</a></dt>
+<dd><p>A service for managing systemd units through DBus.</p>
+<p>The default behaviour is to operate on the systemd <cite>user</cite> bus.
+To operate on the <cite>system</cite> bus, use <code class="docutils literal notranslate"><span class="pre">.get_default(&quot;system&quot;)</span></code>.</p>
 <p>Example usage:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.services.hyprland</span> <span class="kn">import</span> <span class="n">HyprlandService</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.services.systemd</span> <span class="kn">import</span> <span class="n">SystemdService</span>
 
-<span class="n">hyprland</span> <span class="o">=</span> <span class="n">HyprlandService</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span>
+<span class="n">systemd_session</span> <span class="o">=</span> <span class="n">SystemdService</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">hyprland</span><span class="o">.</span><span class="n">workspaces</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">hyprland</span><span class="o">.</span><span class="n">kb_layout</span><span class="p">)</span>
+<span class="n">example_unit</span> <span class="o">=</span> <span class="n">systemd_session</span><span class="o">.</span><span class="n">get_unit</span><span class="p">(</span><span class="s2">&quot;wluma.service&quot;</span><span class="p">)</span>
+<span class="n">example_unit</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;notify::is-active&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">example_unit</span><span class="o">.</span><span class="n">is_active</span><span class="p">))</span>
 
-<span class="n">hyprland</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;notify::kb-layout&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">hyprland</span><span class="o">.</span><span class="n">kb_layout</span><span class="p">))</span>
+<span class="n">systemd_system</span> <span class="o">=</span> <span class="n">SystemdService</span><span class="o">.</span><span class="n">get_default</span><span class="p">(</span><span class="s2">&quot;system&quot;</span><span class="p">)</span>
+
+<span class="n">system_example_unit</span> <span class="o">=</span> <span class="n">systemd_system</span><span class="o">.</span><span class="n">get_unit</span><span class="p">(</span><span class="s2">&quot;sshd.service&quot;</span><span class="p">)</span>
+<span class="n">system_example_unit</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 </pre></div>
 </div>
-<dl class="py property">
-<dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService.is_available">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_available</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.is_available" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>read-only</p></li>
-</ul>
-<p>Whether Hyprland IPC is available.</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService.workspaces">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">workspaces</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.workspaces" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>read-only</p></li>
-</ul>
-<p>A list of workspaces.</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService.active_workspace">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">active_workspace</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.active_workspace" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>read-only</p></li>
-</ul>
-<p>The currently active workspace.</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService.kb_layout">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">kb_layout</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.kb_layout" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>read-only</p></li>
-</ul>
-<p>The currenly active keyboard layout.</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService.active_window">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">active_window</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.active_window" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>read-only</p></li>
-</ul>
-<p>The currenly focused window.</p>
-</dd></dl>
-
 <dl class="py method">
-<dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService.send_command">
-<span class="sig-name descname"><span class="pre">send_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.send_command" title="Link to this definition">#</a></dt>
-<dd><p>Send a command to the Hyprland IPC.
-Supports the same commands as <code class="docutils literal notranslate"><span class="pre">hyprctl</span></code>.
-If you want to receive the response in JSON format, use this syntax: <code class="docutils literal notranslate"><span class="pre">j/COMMAND</span></code>.</p>
+<dt class="sig sig-object py" id="ignis.services.systemd.SystemdService.get_default">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_default</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bus_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.13)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'session'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'system'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'session'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#ignis.services.systemd.SystemdService" title="ignis.services.systemd.service.SystemdService"><span class="pre">SystemdService</span></a></span></span><a class="headerlink" href="#ignis.services.systemd.SystemdService.get_default" title="Link to this definition">#</a></dt>
+<dd><p>Returns the default Service object for this process, creating it if necessary.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>cmd</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The command to send.</p>
+<dd class="field-odd"><p><strong>bus_type</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code></a>[<code class="docutils literal notranslate"><span class="pre">'session'</span></code>, <code class="docutils literal notranslate"><span class="pre">'system'</span></code>]</span>, default: <code class="docutils literal notranslate"><span class="pre">'session'</span></code>) -- The bus type.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#ignis.services.systemd.SystemdService" title="ignis.services.systemd.service.SystemdService"><code class="xref py py-class docutils literal notranslate"><span class="pre">SystemdService</span></code></a></span></p>
 </dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Response from Hyprland IPC.</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="../exceptions.html#ignis.exceptions.HyprlandIPCNotFoundError" title="ignis.exceptions.HyprlandIPCNotFoundError"><strong>HyprlandIPCNotFoundError</strong></a> -- If Hyprland IPC is not found.</p>
+</dl>
+<dl class="simple">
+<dt>Bus types:</dt><dd><ul class="simple">
+<li><p>session: current user session</p></li>
+<li><p>system: entire system, requires interactive authorization when calling methods</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
 
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.systemd.SystemdService.bus_type">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bus_type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.13)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'session'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'system'</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.systemd.SystemdService.bus_type" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The bus type.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.systemd.SystemdService.units">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">units</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ignis.services.systemd.SystemdUnit" title="ignis.services.systemd.unit.SystemdUnit"><span class="pre">SystemdUnit</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.systemd.SystemdService.units" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>A list of all systemd units on the bus.</p>
+</dd></dl>
+
 <dl class="py method">
-<dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService.switch_kb_layout">
-<span class="sig-name descname"><span class="pre">switch_kb_layout</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.switch_kb_layout" title="Link to this definition">#</a></dt>
-<dd><p>Switch to the next keyboard layout.</p>
+<dt class="sig sig-object py" id="ignis.services.systemd.SystemdService.get_unit">
+<span class="sig-name descname"><span class="pre">get_unit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#ignis.services.systemd.SystemdUnit" title="ignis.services.systemd.unit.SystemdUnit"><span class="pre">SystemdUnit</span></a></span></span><a class="headerlink" href="#ignis.services.systemd.SystemdService.get_unit" title="Link to this definition">#</a></dt>
+<dd><p>Get <a class="reference internal" href="#ignis.services.systemd.SystemdUnit" title="ignis.services.systemd.SystemdUnit"><code class="xref py py-class docutils literal notranslate"><span class="pre">SystemdUnit</span></code></a> by the unit name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>unit</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The name of the unit to get.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#ignis.services.systemd.SystemdUnit" title="ignis.services.systemd.unit.SystemdUnit"><code class="xref py py-class docutils literal notranslate"><span class="pre">SystemdUnit</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#ignis.services.systemd.SystemdUnit" title="ignis.services.systemd.SystemdUnit"><code class="xref py py-class docutils literal notranslate"><span class="pre">SystemdUnit</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ignis.services.systemd.SystemdUnit">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.systemd.</span></span><span class="sig-name descname"><span class="pre">SystemdUnit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">bus_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.13)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'session'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'system'</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.systemd.SystemdUnit" title="Link to this definition">#</a></dt>
+<dd><p>An object tracking a single systemd unit.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.systemd.SystemdUnit.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.systemd.SystemdUnit.name" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The name of the unit.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.systemd.SystemdUnit.is_active">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_active</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.systemd.SystemdUnit.is_active" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>Whether the unit is active (running).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.systemd.SystemdUnit.start">
+<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.systemd.SystemdUnit.start" title="Link to this definition">#</a></dt>
+<dd><p>Start this unit.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
@@ -674,15 +635,23 @@ If you want to receive the response in JSON format, use this syntax: <code class
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService.switch_to_workspace">
-<span class="sig-name descname"><span class="pre">switch_to_workspace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">workspace_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.switch_to_workspace" title="Link to this definition">#</a></dt>
-<dd><p>Switch to a workspace by its ID.</p>
+<dt class="sig sig-object py" id="ignis.services.systemd.SystemdUnit.stop">
+<span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.systemd.SystemdUnit.stop" title="Link to this definition">#</a></dt>
+<dd><p>Stop this unit.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>workspace_id</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) -- The ID of the workspace to switch to.</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.systemd.SystemdUnit.restart">
+<span class="sig-name descname"><span class="pre">restart</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.systemd.SystemdUnit.restart" title="Link to this definition">#</a></dt>
+<dd><p>Restart this unit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
 </dd>
 </dl>
 </dd></dl>
@@ -702,20 +671,20 @@ If you want to receive the response in JSON format, use this syntax: <code class
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="fetch.html"
+       href="system_tray.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Fetch</p>
+        <p class="prev-next-title">System Tray</p>
       </div>
     </a>
     <a class="right-next"
-       href="mpris.html"
+       href="upower.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">MPRIS (media)</p>
+        <p class="prev-next-title">UPower</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -738,15 +707,19 @@ If you want to receive the response in JSON format, use this syntax: <code class
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService"><code class="docutils literal notranslate"><span class="pre">HyprlandService</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.is_available"><code class="docutils literal notranslate"><span class="pre">HyprlandService.is_available</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.workspaces"><code class="docutils literal notranslate"><span class="pre">HyprlandService.workspaces</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.active_workspace"><code class="docutils literal notranslate"><span class="pre">HyprlandService.active_workspace</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.kb_layout"><code class="docutils literal notranslate"><span class="pre">HyprlandService.kb_layout</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.active_window"><code class="docutils literal notranslate"><span class="pre">HyprlandService.active_window</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.send_command"><code class="docutils literal notranslate"><span class="pre">HyprlandService.send_command()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.switch_kb_layout"><code class="docutils literal notranslate"><span class="pre">HyprlandService.switch_kb_layout()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.switch_to_workspace"><code class="docutils literal notranslate"><span class="pre">HyprlandService.switch_to_workspace()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.systemd.SystemdService"><code class="docutils literal notranslate"><span class="pre">SystemdService</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.systemd.SystemdService.get_default"><code class="docutils literal notranslate"><span class="pre">SystemdService.get_default()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.systemd.SystemdService.bus_type"><code class="docutils literal notranslate"><span class="pre">SystemdService.bus_type</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.systemd.SystemdService.units"><code class="docutils literal notranslate"><span class="pre">SystemdService.units</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.systemd.SystemdService.get_unit"><code class="docutils literal notranslate"><span class="pre">SystemdService.get_unit()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.systemd.SystemdUnit"><code class="docutils literal notranslate"><span class="pre">SystemdUnit</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.systemd.SystemdUnit.name"><code class="docutils literal notranslate"><span class="pre">SystemdUnit.name</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.systemd.SystemdUnit.is_active"><code class="docutils literal notranslate"><span class="pre">SystemdUnit.is_active</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.systemd.SystemdUnit.start"><code class="docutils literal notranslate"><span class="pre">SystemdUnit.start()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.systemd.SystemdUnit.stop"><code class="docutils literal notranslate"><span class="pre">SystemdUnit.stop()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.systemd.SystemdUnit.restart"><code class="docutils literal notranslate"><span class="pre">SystemdUnit.restart()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -756,7 +729,7 @@ If you want to receive the response in JSON format, use this syntax: <code class
 
   
   <div class="tocsection editthispage">
-    <a href="https://github.com/linkfrg/ignis/edit/main/docs/api/services/hyprland.rst">
+    <a href="https://github.com/linkfrg/ignis/edit/main/docs/api/services/systemd.rst">
       <i class="fa-solid fa-pencil"></i>
       
       
@@ -772,7 +745,7 @@ If you want to receive the response in JSON format, use this syntax: <code class
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../../_sources/api/services/hyprland.rst.txt"
+      <li><a href="../../_sources/api/services/systemd.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div></div>
