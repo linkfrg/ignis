@@ -21,9 +21,9 @@ class SystemdService(BaseService):
 
         from ignis.services.systemd import SystemdService
 
-        systemd_user = SystemdService.get_default()
+        systemd_session = SystemdService.get_default()
 
-        example_unit = systemd_user.get_unit("wluma.service")
+        example_unit = systemd_session.get_unit("wluma.service")
         example_unit.connect("notify::is-active", lambda x, y: print(example_unit.is_active))
 
         systemd_system = SystemdService.get_default("system")
