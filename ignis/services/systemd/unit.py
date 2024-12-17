@@ -50,7 +50,7 @@ class SystemdUnit(IgnisGObject):
     def __handle_result(self, proxy, result, user_data) -> None:
         if isinstance(result, GLib.Error):
             logger.warning(
-                f"[Systemd Service] Start/stop/restart request failed: {result}"
+                f"[Systemd Service] Start/stop/restart request failed: {result.message}"
             )
 
     def start(self) -> None:
