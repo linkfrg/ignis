@@ -15,20 +15,17 @@ class SystemdUnit(IgnisGObject):
     def __init__(self, object_path: str, bus_type: Literal["session", "system"]):
         super().__init__()
 
-        self._object_path = object_path
-        self._bus_type = bus_type
-
-        if self._bus_type == "system":
+        if bus_type == "system":
             self._flags = Gio.DBusCallFlags.ALLOW_INTERACTIVE_AUTHORIZATION
         else:
             self._flags = Gio.DBusCallFlags.NONE
 
         self._proxy = DBusProxy(
             name="org.freedesktop.systemd1",
-            object_path=self._object_path,
+            object_path=object_path,
             interface_name="org.freedesktop.systemd1.Unit",
             info=Utils.load_interface_xml("org.freedesktop.systemd1.Unit"),
-            bus_type=self._bus_type,
+            bus_type=bus_type,
         )
 
         self._proxy.proxy.connect("g-properties-changed", self.__sync)
