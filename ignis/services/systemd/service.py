@@ -13,7 +13,7 @@ class SystemdService(BaseService):
     A service for managing systemd units through DBus.
 
     The default behaviour is to operate on the systemd `user` bus.
-    To operate on the `system` bus, use `get_default("system")`.
+    To operate on the `system` bus, use ``.get_default("system")``.
 
     Example usage:
 
@@ -98,7 +98,7 @@ class SystemdService(BaseService):
 
     def get_unit(self, unit: str) -> SystemdUnit:
         """
-        Get :class:`~ignis.services.systemd.SystemdUnit` by unit name.
+        Get :class:`~ignis.services.systemd.SystemdUnit` by the unit name.
 
         Args:
             unit: The name of the unit to get.
