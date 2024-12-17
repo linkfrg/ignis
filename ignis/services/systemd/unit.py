@@ -49,7 +49,7 @@ class SystemdUnit(IgnisGObject):
 
         The name of the unit.
         """
-        return self._unit
+        return self._proxy.Id
 
     @GObject.Property
     def is_active(self) -> bool:
