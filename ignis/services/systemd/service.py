@@ -23,14 +23,14 @@ class SystemdService(BaseService):
 
         from ignis.services.systemd import SystemdService
 
-        user_bus = SystemdService.get_default()
+        systemd_user = SystemdService.get_default()
 
-        example_unit = user_bus.get_unit("wluma.service")
+        example_unit = systemd_user.get_unit("wluma.service")
         example_status = example_unit.bind("is_active")
 
-        system_bus = SystemdService.get_default("system")
+        systemd_system = SystemdService.get_default("system")
 
-        system_example_unit = system_bus.get_unit("sshd.service")
+        system_example_unit = systemd_system.get_unit("sshd.service")
         system_example_unit.start()
 
     """
