@@ -1,4 +1,4 @@
-from gi.repository import Gio, GObject  # type: ignore
+from gi.repository import Gio, GLib, GObject  # type: ignore
 
 from ignis.dbus import DBusProxy
 from ignis.utils import Utils
@@ -47,40 +47,49 @@ class SystemdUnit(IgnisGObject):
         self._is_active = self.__is_unit_active()
         self.__subscribe_unit()
 
+    def __handle_result(
+        self, proxy: DBusProxy, result: str | GLib.Error, *args
+    ) -> None:
+        if type(result) is GLib.Error:
+            logger.warning(
+                f"[Systemd Service] Start/stop/restart request failed: {result}"
+            )
+
     def start_unit(self) -> None:
         """
         Start this unit.
         """
-        try:
-            self.__manager_proxy.proxy.StartUnit(
-                "(ss)", self._unit, "replace", flags=self._flags
-            )
-        except Exception as e:
-            logger.warning(f"[Systemd Service] Failed to start unit {self._unit}: {e}")
+        self.__manager_proxy.proxy.StartUnit(
+            "(ss)",
+            self._unit,
+            "replace",
+            flags=self._flags,
+            result_handler=self.__handle_result,
+        )
 
     def stop_unit(self) -> None:
         """
         Stop this unit.
         """
-        try:
-            self.__manager_proxy.proxy.StopUnit(
-                "(ss)", self._unit, "replace", flags=self._flags
-            )
-        except Exception as e:
-            logger.warning(f"[Systemd Service] Failed to stop unit {self._unit}: {e}")
+        self.__manager_proxy.proxy.StopUnit(
+            "(ss)",
+            self._unit,
+            "replace",
+            flags=self._flags,
+            result_handler=self.__handle_result,
+        )
 
     def restart_unit(self) -> None:
         """
         Restart this unit.
         """
-        try:
-            self.__manager_proxy.proxy.RestartUnit(
-                "(ss)", self._unit, "replace", flags=self._flags
-            )
-        except Exception as e:
-            logger.warning(
-                f"[Systemd Service] Failed to restart unit {self._unit}: {e}"
-            )
+        self.__manager_proxy.proxy.RestartUnit(
+            "(ss)",
+            self._unit,
+            "replace",
+            flags=self._flags,
+            result_handler=self.__handle_result,
+        )
 
     @GObject.Property
     def name(self) -> str:
