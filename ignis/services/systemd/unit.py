@@ -12,10 +12,8 @@ class SystemdUnit(IgnisGObject):
 
     """
 
-    def __init__(self, name: str, object_path: str, bus_type: Literal["session", "system"]):
+    def __init__(self, object_path: str, bus_type: Literal["session", "system"]):
         super().__init__()
-
-        self._name = name
 
         if bus_type == "system":
             self._flags = Gio.DBusCallFlags.ALLOW_INTERACTIVE_AUTHORIZATION
@@ -51,7 +49,7 @@ class SystemdUnit(IgnisGObject):
 
         The name of the unit.
         """
-        return self._name
+        return self._unit
 
     @GObject.Property
     def is_active(self) -> bool:

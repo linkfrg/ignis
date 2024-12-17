@@ -96,15 +96,15 @@ class SystemdService(BaseService):
 
         return units
 
-    def get_unit(self, name: str) -> SystemdUnit:
+    def get_unit(self, unit: str) -> SystemdUnit:
         """
         Get :class:`~ignis.services.systemd.SystemdUnit` by the unit name.
 
         Args:
-            name: The name of the unit to get.
+            unit: The name of the unit to get.
 
         Returns:
             :class:`~ignis.services.systemd.SystemdUnit`
         """
-        object_path = self._proxy.proxy.LoadUnit("(s)", name)
-        return SystemdUnit(name, object_path, self._bus_type)
+        object_path = self._proxy.proxy.LoadUnit("(s)", unit)
+        return SystemdUnit(object_path, self._bus_type)
