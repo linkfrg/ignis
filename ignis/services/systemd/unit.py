@@ -47,10 +47,8 @@ class SystemdUnit(IgnisGObject):
         self._is_active = self.__is_unit_active()
         self.__subscribe_unit()
 
-    def __handle_result(
-        self, proxy: DBusProxy, result: str | GLib.Error, *args
-    ) -> None:
-        if type(result) is GLib.Error:
+    def __handle_result(self, proxy, result, user_data) -> None:
+        if isinstance(result, GLib.Error):
             logger.warning(
                 f"[Systemd Service] Start/stop/restart request failed: {result}"
             )
