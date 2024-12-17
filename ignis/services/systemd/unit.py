@@ -53,7 +53,7 @@ class SystemdUnit(IgnisGObject):
                 f"[Systemd Service] Start/stop/restart request failed: {result}"
             )
 
-    def start_unit(self) -> None:
+    def start(self) -> None:
         """
         Start this unit.
         """
@@ -65,7 +65,7 @@ class SystemdUnit(IgnisGObject):
             result_handler=self.__handle_result,
         )
 
-    def stop_unit(self) -> None:
+    def stop(self) -> None:
         """
         Stop this unit.
         """
@@ -77,7 +77,7 @@ class SystemdUnit(IgnisGObject):
             result_handler=self.__handle_result,
         )
 
-    def restart_unit(self) -> None:
+    def restart(self) -> None:
         """
         Restart this unit.
         """
