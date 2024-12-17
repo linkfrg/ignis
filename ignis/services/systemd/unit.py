@@ -45,7 +45,11 @@ class SystemdUnit(IgnisGObject):
         )
 
         self._is_active = self.__is_unit_active()
-        self.__subscribe_unit()
+
+        self.__service_proxy.signal_subscribe(
+            signal_name="PropertiesChanged",
+            callback=self.__update_state,
+        )
 
     def __handle_result(self, proxy, result, user_data) -> None:
         if isinstance(result, GLib.Error):
@@ -131,9 +135,3 @@ class SystemdUnit(IgnisGObject):
             pass
 
         self.notify("is_active")
-
-    def __subscribe_unit(self) -> None:
-        self.__service_proxy.signal_subscribe(
-            signal_name="PropertiesChanged",
-            callback=self.__update_state,
-        )
