@@ -14,17 +14,24 @@ class SystemdService(BaseService):
     """
     A service for managing systemd units through DBus.
 
+    The default behaviour is to operate on the systemd `user` bus.
+    To operate on the `system` bus, use `get_default("system")`.
+
     Example usage:
 
     .. code-block:: python
 
         from ignis.services.systemd import SystemdService
 
-        systemd = SystemdService.get_default()
+        user_bus = SystemdService.get_default()
 
-        example_unit = systemd.get_unit("wluma.service")
+        example_unit = user_bus.get_unit("wluma.service")
         example_status = example_unit.bind("is_active")
-        example_unit.restart()
+
+        system_bus = SystemdService.get_default("system")
+
+        system_example_unit = system_bus.get_unit("sshd.service")
+        system_example_unit.start()
 
     """
 
@@ -81,7 +88,7 @@ class SystemdService(BaseService):
         """
         - read-only
 
-        A list of all systemd units, for a given bus (defaults to the "session" bus).
+        A list of all systemd units on the bus.
         """
         units = []
         for item in self._proxy.proxy.ListUnitFiles():
@@ -97,7 +104,6 @@ class SystemdService(BaseService):
 
         Args:
             unit: The name of the unit to get.
-            bus_type: The systemd bus to query ("session" or "system"). Default is "session".
 
         Returns:
             :class:`~ignis.services.systemd.SystemdUnit`
