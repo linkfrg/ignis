@@ -26,7 +26,7 @@ class SystemdService(BaseService):
         systemd_user = SystemdService.get_default()
 
         example_unit = systemd_user.get_unit("wluma.service")
-        example_status = example_unit.bind("is_active")
+        example_unit.connect("notify::is-active", lambda x, y: print(example_unit.is_active))
 
         systemd_system = SystemdService.get_default("system")
 
