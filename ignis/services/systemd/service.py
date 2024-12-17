@@ -1,11 +1,9 @@
 from __future__ import annotations
 import os
 from gi.repository import GObject  # type: ignore
-
 from ignis.dbus import DBusProxy
 from ignis.utils import Utils
 from ignis.base_service import BaseService
-
 from typing import Literal
 from .unit import SystemdUnit
 
@@ -109,4 +107,4 @@ class SystemdService(BaseService):
             :class:`~ignis.services.systemd.SystemdUnit`
         """
         object_path = self._proxy.proxy.LoadUnit("(s)", unit)
-        return SystemdUnit(unit, object_path, self._bus_type)
+        return SystemdUnit(object_path, self._bus_type)
