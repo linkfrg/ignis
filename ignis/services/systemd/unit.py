@@ -39,6 +39,34 @@ class SystemdUnit(IgnisGObject):
                 f"[Systemd Service] Start/stop/restart request failed: {result.message}"
             )
 
+    def __sync(self, proxy, properties: GLib.Variant, invalidated_properties) -> None:
+        prop_dict = properties.unpack()
+
+        if "ActiveState" in prop_dict.keys():
+            self.notify("is-active")
+
+    @GObject.Property
+    def name(self) -> str:
+        """
+        - read-only
+
+        The name of the unit.
+        """
+        return self._unit
+
+    @GObject.Property
+    def is_active(self) -> bool:
+        """
+        - read-only
+
+        Whether the unit is active (running).
+        """
+        state = self._proxy.ActiveState
+        if state == "active":
+            return True
+        else:
+            return False
+
     def start(self) -> None:
         """
         Start this unit.
@@ -71,31 +99,3 @@ class SystemdUnit(IgnisGObject):
             flags=self._flags,
             result_handler=self.__handle_result,
         )
-
-    @GObject.Property
-    def name(self) -> str:
-        """
-        - read-only
-
-        The name of the unit.
-        """
-        return self._unit
-
-    @GObject.Property
-    def is_active(self) -> bool:
-        """
-        - read-only
-
-        Whether the unit is active (running).
-        """
-        state = self._proxy.ActiveState
-        if state == "active":
-            return True
-        else:
-            return False
-
-    def __sync(self, proxy, properties: GLib.Variant, invalidated_properties) -> None:
-        prop_dict = properties.unpack()
-
-        if "ActiveState" in prop_dict.keys():
-            self.notify("is-active")
