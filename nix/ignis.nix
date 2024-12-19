@@ -85,7 +85,8 @@ pkgs.stdenv.mkDerivation {
         pkgs.gst_all_1.gst-plugins-bad
         pkgs.gst_all_1.gst-plugins-ugly
         pkgs.pipewire
-      ])}:$GST_PLUGIN_PATH"
+      ])}:$GST_PLUGIN_PATH" \
+      --set GDK_PIXBUF_MODULE_FILE "$(echo ${pkgs.librsvg.out}/lib/gdk-pixbuf-2.0/*/loaders.cache)"
   '';
 
   meta = with pkgs.lib; {
