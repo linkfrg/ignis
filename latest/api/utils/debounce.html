@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>get_monitor &#8212; Ignis documentation</title>
+    <title>Debounce &#8212; Ignis documentation</title>
   
   
   
@@ -47,7 +47,7 @@
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'api/utils/get_monitor';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/utils/debounce';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://linkfrg.github.io/ignis/latest/_static/switcher.json';
@@ -57,8 +57,8 @@
         </script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="get_n_monitors" href="get_n_monitors.html" />
-    <link rel="prev" title="get_ignis_version" href="get_ignis_version.html" />
+    <link rel="next" title="download_image" href="download_image.html" />
+    <link rel="prev" title="crop_pixbuf" href="crop_pixbuf.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -437,7 +437,7 @@
 <li class="toctree-l2"><a class="reference internal" href="ThreadTask.html">ThreadTask</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Timeout.html">Timeout</a></li>
 <li class="toctree-l2"><a class="reference internal" href="crop_pixbuf.html">crop_pixbuf</a></li>
-<li class="toctree-l2"><a class="reference internal" href="debounce.html">Debounce</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Debounce</a></li>
 <li class="toctree-l2"><a class="reference internal" href="download_image.html">download_image</a></li>
 <li class="toctree-l2"><a class="reference internal" href="exec_sh.html">exec_sh</a></li>
 <li class="toctree-l2"><a class="reference internal" href="exec_sh_async.html">exec_sh_async</a></li>
@@ -447,7 +447,7 @@
 <li class="toctree-l2"><a class="reference internal" href="get_ignis_commit.html">get_ignis_commit</a></li>
 <li class="toctree-l2"><a class="reference internal" href="get_ignis_commit_msg.html">get_ignis_commit_msg</a></li>
 <li class="toctree-l2"><a class="reference internal" href="get_ignis_version.html">get_ignis_version</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">get_monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="get_monitor.html">get_monitor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="get_n_monitors.html">get_n_monitors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="get_paintable.html">get_paintable</a></li>
 <li class="toctree-l2"><a class="reference internal" href="listen_socket.html">listen_socket</a></li>
@@ -505,7 +505,7 @@
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">Utils</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">get_monitor</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Debounce</span></li>
   </ul>
 </nav>
 </div>
@@ -522,23 +522,47 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="get-monitor">
-<h1>get_monitor<a class="headerlink" href="#get-monitor" title="Link to this heading">#</a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="ignis.utils.Utils.get_monitor">
-<span class="sig-prename descclassname"><span class="pre">ignis.utils.Utils.</span></span><span class="sig-name descname"><span class="pre">get_monitor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">monitor_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">gi.repository.Gdk.Monitor</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.utils.Utils.get_monitor" title="Link to this definition">#</a></dt>
-<dd><p>Get the <code class="docutils literal notranslate"><span class="pre">Gdk.Monitor</span></code> by its ID.</p>
+  <section id="debounce">
+<h1>Debounce<a class="headerlink" href="#debounce" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="ignis.utils.Utils.DebounceTask">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.utils.Utils.</span></span><span class="sig-name descname"><span class="pre">DebounceTask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.utils.Utils.DebounceTask" title="Link to this definition">#</a></dt>
+<dd><p>Delays function calls until a specified time elapses after the most recent call.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>See the decorator for this class <a class="reference internal" href="#ignis.utils.Utils.debounce" title="ignis.utils.Utils.debounce"><code class="xref py py-func docutils literal notranslate"><span class="pre">debounce()</span></code></a>.</p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>monitor_id</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) -- The ID of the monitor.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Monitor</span></code> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The monitor with the given ID, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if no such monitor exists.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ms</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) -- The delay time in milliseconds.</p></li>
+<li><p><strong>target</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a></span>) -- The function to invoke after the delay.</p></li>
+</ul>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ignis.utils.Utils.debounce">
+<span class="sig-prename descclassname"><span class="pre">ignis.utils.Utils.</span></span><span class="sig-name descname"><span class="pre">debounce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.utils.Utils.debounce" title="Link to this definition">#</a></dt>
+<dd><p>A decorator to delay function execution until a set time has passed since the last call.</p>
+<p>This is a convenient wrapper for the <a class="reference internal" href="#ignis.utils.Utils.DebounceTask" title="ignis.utils.Utils.DebounceTask"><code class="xref py py-class docutils literal notranslate"><span class="pre">DebounceTask</span></code></a> class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ms</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) -- The delay time in milliseconds.</p>
+</dd>
+</dl>
+<p>Example usage:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.utils</span> <span class="kn">import</span> <span class="n">Utils</span>
+
+<span class="nd">@Utils</span><span class="o">.</span><span class="n">debounce</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span> <span class="c1"># delay for 500 ms (0.5 s)</span>
+<span class="k">def</span> <span class="nf">some_func</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;called!&quot;</span><span class="p">)</span>
+
+<span class="n">some_func</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">some_func</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># only this call will execute</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </section>
@@ -554,20 +578,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="get_ignis_version.html"
+       href="crop_pixbuf.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">get_ignis_version</p>
+        <p class="prev-next-title">crop_pixbuf</p>
       </div>
     </a>
     <a class="right-next"
-       href="get_n_monitors.html"
+       href="download_image.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">get_n_monitors</p>
+        <p class="prev-next-title">download_image</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -590,7 +614,8 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.get_monitor"><code class="docutils literal notranslate"><span class="pre">get_monitor()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.DebounceTask"><code class="docutils literal notranslate"><span class="pre">DebounceTask</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.debounce"><code class="docutils literal notranslate"><span class="pre">debounce()</span></code></a></li>
 </ul>
   </nav></div>
 
@@ -598,7 +623,7 @@
 
   
   <div class="tocsection editthispage">
-    <a href="https://github.com/linkfrg/ignis/edit/main/docs/api/utils/get_monitor.rst">
+    <a href="https://github.com/linkfrg/ignis/edit/main/docs/api/utils/debounce.rst">
       <i class="fa-solid fa-pencil"></i>
       
       
@@ -614,7 +639,7 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../../_sources/api/utils/get_monitor.rst.txt"
+      <li><a href="../../_sources/api/utils/debounce.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div></div>
