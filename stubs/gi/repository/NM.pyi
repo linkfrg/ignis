@@ -13535,7 +13535,7 @@ class SriovEswitchMode(enum.Enum):
     PRESERVE = -1
     SWITCHDEV = 1
 
-class SriovVFVlanProtocol(enum.Enum): ...
+class SriovVFVlanProtocol: ...
 
 class State(enum.Enum):
     ASLEEP = 10
