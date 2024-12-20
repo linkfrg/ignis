@@ -50,6 +50,12 @@ class WifiAccessPoint(IgnisGObject):
 
         return NM.utils_ssid_to_utf8(data)
 
+    @GObject.Signal
+    def removed(self):
+        """
+        Emitted when this access point is removed.
+        """
+
     @GObject.Property
     def point(self) -> NM.AccessPoint:
         """

@@ -1,8 +1,7 @@
-from gi.repository import GObject, GLib  # type: ignore
+from gi.repository import GObject  # type: ignore
 from ignis.gobject import IgnisGObject
 from ._imports import NM
 from .wifi_device import WifiDevice
-from .util import get_devices
 
 
 class Wifi(IgnisGObject):
@@ -13,16 +12,26 @@ class Wifi(IgnisGObject):
     def __init__(self, client: NM.Client):
         super().__init__()
         self._client = client
-        self._devices: list[WifiDevice] = []
-        self._client.connect(
-            "notify::all-devices",
-            lambda *args: GLib.timeout_add_seconds(1, self.__sync),
-        )
+        self._devices: dict[NM.Device, WifiDevice] = {}
+
         self._client.connect(
             "notify::wireless-enabled",
             lambda *args: self.notify_list("enabled", "icon-name", "is-connected"),
         )
-        self.__sync()
+        self._client.connect("device-added", self.__add_device)
+        self._client.connect("device-removed", self.__remove_device)
+
+        for device in self._client.get_devices():
+            self.__add_device(None, device, False)
+
+    @GObject.Signal(arg_types=(WifiDevice,))
+    def new_device(self, *args):
+        """
+        Emitted when a new Wi-FI device is added.
+
+        Args:
+            device (:class:`~ignis.services.network.WifiDevice`): An instance of the device.
+        """
 
     @GObject.Property
     def devices(self) -> list[WifiDevice]:
@@ -31,7 +40,7 @@ class Wifi(IgnisGObject):
 
         A list of Wi-Fi devices.
         """
-        return self._devices
+        return list(self._devices.values())
 
     @GObject.Property
     def is_connected(self) -> bool:
@@ -40,7 +49,7 @@ class Wifi(IgnisGObject):
 
         Whether at least one Wi-Fi device is connected to the network.
         """
-        for i in self._devices:
+        for i in self.devices:
             if i.is_connected:
                 return True
         return False
@@ -53,7 +62,7 @@ class Wifi(IgnisGObject):
         The icon name of the first device in the list.
         """
         result = None
-        for i in self._devices:
+        for i in self.devices:
             if i.ap.icon_name != "network-wireless-offline-symbolic":
                 result = i.ap.icon_name
 
@@ -75,21 +84,29 @@ class Wifi(IgnisGObject):
     def enabled(self, value: bool) -> None:
         self._client.wireless_set_enabled(value)
 
-    def __sync(self) -> None:
-        self._devices = []
-        for device in get_devices(self._client, NM.DeviceType.WIFI):
-            self.__add_device(device)  # type: ignore
+    def __add_device(self, client, device: NM.Device, emit: bool = True) -> None:
+        if device.get_device_type() != NM.DeviceType.WIFI:
+            return
 
-        self.notify_all()
-
-    def __add_device(self, device: NM.DeviceWifi) -> None:
-        dev = WifiDevice(device, self._client)
-        dev.ap.connect(
+        obj = WifiDevice(device, self._client)
+        obj.ap.connect(
             "notify::icon-name",
             lambda x, y: self.notify("icon-name"),
         )
-        dev.ap.connect(
+        obj.ap.connect(
             "notify::is-connected",
             lambda x, y: self.notify("is-connected"),
         )
-        self._devices.append(dev)
+        self._devices[device] = obj
+
+        if emit:
+            self.emit("new-device", obj)
+            self.notify("devices")
+
+    def __remove_device(self, client, device: NM.Device) -> None:
+        if device.get_device_type() != NM.DeviceType.WIFI:
+            return
+
+        obj = self._devices.pop(device)
+        obj.emit("removed")
+        self.notify("devices")
