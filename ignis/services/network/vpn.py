@@ -9,7 +9,7 @@ class VpnConnection(IgnisGObject):
     A VPN connection.
     """
 
-    def __init__(self, connection: NM.RemoteConnection, client: NM.Client):
+    def __init__(self, connection: NM.Connection | NM.ActiveConnection, client: NM.Client):
         super().__init__()
         self._connection = connection
         self._client = client
@@ -64,7 +64,7 @@ class VpnConnection(IgnisGObject):
             self._client.activate_connection_finish(res)
 
         self._client.activate_connection_async(
-            self._connection,
+            self._connection,  # type: ignore
             None,
             None,
             None,
@@ -104,8 +104,8 @@ class Vpn(IgnisGObject):
     def __init__(self, client: NM.Client):
         super().__init__()
         self._client = client
-        self._connections: dict[NM.Connection, VpnConnection] = {}
-        self._active_connections: dict[NM.Connection, VpnConnection] = {}
+        self._connections: dict[NM.Connection | NM.ActiveConnection, VpnConnection] = {}
+        self._active_connections: dict[NM.Connection | NM.ActiveConnection, VpnConnection] = {}
 
         self._client.connect("active-connection-added", self.__add_active_connection)
         self._client.connect(
@@ -114,11 +114,11 @@ class Vpn(IgnisGObject):
         self._client.connect("connection-added", self.__add_connection)
         self._client.connect("connection-removed", self.__remove_connection)
 
-        for i in self._client.get_connections():
-            self.__add_connection(None, i, False)
+        for i in self._client.get_connections():  # type: ignore
+            self.__add_connection(None, i, False)  # type: ignore
 
-        for i in self._client.get_active_connections():
-            self.__add_active_connection(None, i, False)
+        for i in self._client.get_active_connections():   # type: ignore
+            self.__add_active_connection(None, i, False)  # type: ignore
 
     @GObject.Signal(arg_types=(VpnConnection,))
     def new_connection(self, *args):
@@ -129,7 +129,6 @@ class Vpn(IgnisGObject):
             connection (:class:`~ignis.services.network.WifiAccessPoint`): An instance of the VPN connection.
         """
 
-
     @GObject.Signal(arg_types=(VpnConnection,))
     def new_active_connection(self, *args):
         """
@@ -138,7 +137,6 @@ class Vpn(IgnisGObject):
         Args:
             connection (:class:`~ignis.services.network.WifiAccessPoint`): An instance of the newly activated VPN connection.
         """
-
 
     @GObject.Property
     def connections(self) -> list[VpnConnection]:
@@ -192,7 +190,9 @@ class Vpn(IgnisGObject):
             return "network-vpn-disconnected-symbolic"
 
     @check_is_vpn
-    def __add_connection(self, client, connection: NM.Connection, emit: bool = True) -> None:
+    def __add_connection(
+        self, client, connection: NM.Connection, emit: bool = True
+    ) -> None:
         obj = VpnConnection(connection=connection, client=self._client)
         self._connections[connection] = obj
 
@@ -207,7 +207,9 @@ class Vpn(IgnisGObject):
         self.notify("connections")
 
     @check_is_vpn
-    def __add_active_connection(self, client, connection: NM.ActiveConnection, emit: bool = True) -> None:
+    def __add_active_connection(
+        self, client, connection: NM.ActiveConnection, emit: bool = True
+    ) -> None:
         obj = VpnConnection(connection=connection, client=self._client)
         obj.connect(
             "notify::is-connected",

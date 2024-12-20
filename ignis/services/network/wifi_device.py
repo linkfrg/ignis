@@ -99,7 +99,9 @@ class WifiDevice(IgnisGObject):
 
         self._device.request_scan_async(None, finish)
 
-    def __add_access_point(self, device, access_point: NM.AccessPoint, emit: bool = True) -> None:
+    def __add_access_point(
+        self, device, access_point: NM.AccessPoint, emit: bool = True
+    ) -> None:
         obj = WifiAccessPoint(access_point, self._client, self._device)
         self._access_points[access_point] = obj
 

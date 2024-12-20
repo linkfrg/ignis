@@ -88,7 +88,7 @@ class Wifi(IgnisGObject):
         if device.get_device_type() != NM.DeviceType.WIFI:
             return
 
-        obj = WifiDevice(device, self._client)
+        obj = WifiDevice(device, self._client)  # type: ignore
         obj.ap.connect(
             "notify::icon-name",
             lambda x, y: self.notify("icon-name"),

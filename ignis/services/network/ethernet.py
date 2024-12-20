@@ -69,7 +69,7 @@ class Ethernet(IgnisGObject):
         if len(device.get_available_connections()) == 0:
             return
 
-        obj = EthernetDevice(device, self._client)
+        obj = EthernetDevice(device, self._client)  # type: ignore
         obj.connect(
             "notify::is-connected",
             lambda x, y: self.notify_list("is-connected", "icon-name"),
