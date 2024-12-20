@@ -1,5 +1,6 @@
 from gi.repository import GObject  # type: ignore
 from ignis.gobject import IgnisGObject
+from typing import Union
 from ._imports import NM
 from .util import check_is_vpn
 
@@ -9,7 +10,9 @@ class VpnConnection(IgnisGObject):
     A VPN connection.
     """
 
-    def __init__(self, connection: NM.Connection | NM.ActiveConnection, client: NM.Client):
+    def __init__(
+        self, connection: Union[NM.Connection, NM.ActiveConnection], client: NM.Client
+    ):
         super().__init__()
         self._connection = connection
         self._client = client
@@ -105,7 +108,9 @@ class Vpn(IgnisGObject):
         super().__init__()
         self._client = client
         self._connections: dict[NM.Connection | NM.ActiveConnection, VpnConnection] = {}
-        self._active_connections: dict[NM.Connection | NM.ActiveConnection, VpnConnection] = {}
+        self._active_connections: dict[
+            NM.Connection | NM.ActiveConnection, VpnConnection
+        ] = {}
 
         self._client.connect("active-connection-added", self.__add_active_connection)
         self._client.connect(
@@ -117,7 +122,7 @@ class Vpn(IgnisGObject):
         for i in self._client.get_connections():  # type: ignore
             self.__add_connection(None, i, False)  # type: ignore
 
-        for i in self._client.get_active_connections():   # type: ignore
+        for i in self._client.get_active_connections():  # type: ignore
             self.__add_active_connection(None, i, False)  # type: ignore
 
     @GObject.Signal(arg_types=(VpnConnection,))
