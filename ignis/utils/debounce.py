@@ -19,10 +19,13 @@ class DebounceTask:
         self._ms = ms
         self._target = target
 
-    def __call__(self, *args, **kwargs):
+    def run(self, *args, **kwargs):
+        """
+        Run the task.
+        ``*args`` and ``**kwargs`` will be passed to the ``target`` function.
+        """
         if self._timeout is not None:
             self._timeout.cancel()
-
         self._timeout = Timeout(self._ms, lambda: self._target(*args, **kwargs))
 
 
@@ -50,6 +53,11 @@ def debounce(ms: int):
     """
 
     def decorate_function(func: Callable):
-        return DebounceTask(ms, func)
+        task = DebounceTask(ms, func)
+
+        def wrapper(*args, **kwargs):
+            task.run(*args, **kwargs)
+
+        return wrapper
 
     return decorate_function
