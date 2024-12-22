@@ -65,9 +65,7 @@ class WifiDevice(IgnisGObject):
 
         Whether the device is connected to a Wi-Fi network.
         """
-        return (
-            not not self._device.get_active_connection()
-        )  # not not to convert to bool
+        return bool(self._device.get_active_connection())
 
     def scan(self) -> None:
         """
