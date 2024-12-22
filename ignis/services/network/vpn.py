@@ -131,7 +131,7 @@ class Vpn(IgnisGObject):
         Emitted when a new VPN connection is added.
 
         Args:
-            connection (:class:`~ignis.services.network.WifiAccessPoint`): An instance of the VPN connection.
+            connection (:class:`~ignis.services.network.VpnConnection`): An instance of the VPN connection.
         """
 
     @GObject.Signal(arg_types=(VpnConnection,))
@@ -140,7 +140,7 @@ class Vpn(IgnisGObject):
         Emitted when a VPN connection is activated.
 
         Args:
-            connection (:class:`~ignis.services.network.WifiAccessPoint`): An instance of the newly activated VPN connection.
+            connection (:class:`~ignis.services.network.VpnConnection`): An instance of the newly activated VPN connection.
         """
 
     @GObject.Property

@@ -26,7 +26,7 @@ class Ethernet(IgnisGObject):
         Emitted when a new Ethernet device is added.
 
         Args:
-            device (:class:`~ignis.services.network.WifiDevice`): An instance of the device.
+            device (:class:`~ignis.services.network.EthernetDevice`): An instance of the device.
         """
 
     @GObject.Property
