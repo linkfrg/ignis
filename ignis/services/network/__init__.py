@@ -2,7 +2,6 @@ from .access_point import WifiAccessPoint, ActiveAccessPoint
 from .ethernet_device import EthernetDevice
 from .ethernet import Ethernet
 from .service import NetworkService
-from .util import get_devices
 from .wifi_connect_dialog import WifiConnectDialog
 from .wifi_device import WifiDevice
 from .wifi import Wifi
@@ -16,7 +15,6 @@ __all__ = [
     "Ethernet",
     "NetworkService",
     "STATE",
-    "get_devices",
     "WifiConnectDialog",
     "WifiDevice",
     "Wifi",
