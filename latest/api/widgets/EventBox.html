@@ -541,6 +541,8 @@
     <span class="n">on_hover_lost</span><span class="o">=</span><span class="k">lambda</span> <span class="bp">self</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;hover lost(((&quot;</span><span class="p">),</span>
     <span class="n">on_scroll_up</span><span class="o">=</span><span class="k">lambda</span> <span class="bp">self</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;scrolled up!&quot;</span><span class="p">),</span>
     <span class="n">on_scroll_down</span><span class="o">=</span><span class="k">lambda</span> <span class="bp">self</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;scrolled down!&quot;</span><span class="p">)</span>
+    <span class="n">on_scroll_right</span><span class="o">=</span><span class="k">lambda</span> <span class="bp">self</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;scrolled right!&quot;</span><span class="p">)</span>
+    <span class="n">on_scroll_left</span><span class="o">=</span><span class="k">lambda</span> <span class="bp">self</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;scrolled left!&quot;</span><span class="p">),</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -607,6 +609,24 @@
 <p>The function to call on scroll down.</p>
 </dd></dl>
 
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.widgets.Widget.EventBox.on_scroll_right">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">on_scroll_right</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.EventBox.on_scroll_right" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>optional, read-write</p></li>
+</ul>
+<p>The function to call on scroll right.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.widgets.Widget.EventBox.on_scroll_left">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">on_scroll_left</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.EventBox.on_scroll_left" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>optional, read-write</p></li>
+</ul>
+<p>The function to call on scroll left.</p>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -666,6 +686,8 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.EventBox.on_hover_lost"><code class="docutils literal notranslate"><span class="pre">EventBox.on_hover_lost</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.EventBox.on_scroll_up"><code class="docutils literal notranslate"><span class="pre">EventBox.on_scroll_up</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.EventBox.on_scroll_down"><code class="docutils literal notranslate"><span class="pre">EventBox.on_scroll_down</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.EventBox.on_scroll_right"><code class="docutils literal notranslate"><span class="pre">EventBox.on_scroll_right</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.EventBox.on_scroll_left"><code class="docutils literal notranslate"><span class="pre">EventBox.on_scroll_left</span></code></a></li>
 </ul>
 </li>
 </ul>
