@@ -117,11 +117,11 @@ class Vpn(IgnisGObject):
         self._client.connect("connection-added", self.__add_connection)
         self._client.connect("connection-removed", self.__remove_connection)
 
-        for i in self._client.get_connections():  # type: ignore
-            self.__add_connection(None, i, False)  # type: ignore
+        for i in self._client.get_connections():
+            self.__add_connection(None, i, False)
 
-        for i in self._client.get_active_connections():  # type: ignore
-            self.__add_active_connection(None, i, False)  # type: ignore
+        for a in self._client.get_active_connections():
+            self.__add_active_connection(None, a, False)
 
     @GObject.Signal(arg_types=(VpnConnection,))
     def new_connection(self, *args):
