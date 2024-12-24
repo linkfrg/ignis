@@ -107,10 +107,8 @@ class Vpn(IgnisGObject):
     def __init__(self, client: NM.Client):
         super().__init__()
         self._client = client
-        self._connections: dict[NM.Connection | NM.ActiveConnection, VpnConnection] = {}
-        self._active_connections: dict[
-            NM.Connection | NM.ActiveConnection, VpnConnection
-        ] = {}
+        self._connections: dict[NM.Connection, VpnConnection] = {}
+        self._active_connections: dict[NM.ActiveConnection, VpnConnection] = {}
 
         self._client.connect("active-connection-added", self.__add_active_connection)
         self._client.connect(
