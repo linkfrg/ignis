@@ -14,7 +14,7 @@ class WifiDevice(IgnisGObject):
         super().__init__()
         self._device = device
         self._client = client
-        self._access_points: list[WifiAccessPoint] = []
+        self._access_points: dict[NM.AccessPoint, WifiAccessPoint] = {}
 
         self._client.connect(
             "notify::wireless-enabled", lambda *args: self.notify_all()
@@ -22,14 +22,31 @@ class WifiDevice(IgnisGObject):
 
         self._ap: ActiveAccessPoint = ActiveAccessPoint(self._device, self._client)
 
-        self._device.connect("access-point-added", self.__sync_access_points)
-        self._device.connect("access-point-removed", self.__sync_access_points)
+        self._device.connect("access-point-added", self.__add_access_point)
+        self._device.connect("access-point-removed", self.__remove_access_point)
+
         self._device.connect("notify::state", lambda x, y: self.notify("state"))
         self._device.connect(
             "notify::active-connection", lambda x, y: self.notify("is-connected")
         )
 
-        self.__sync_access_points()
+        for i in self._device.get_access_points():
+            self.__add_access_point(None, i, False)
+
+    @GObject.Signal
+    def removed(self):
+        """
+        Emitted when this Wi-Fi device is removed.
+        """
+
+    @GObject.Signal(arg_types=(WifiAccessPoint,))
+    def new_access_point(self, *args):
+        """
+        Emitted when a new access point is added.
+
+        Args:
+            access_point (:class:`~ignis.services.network.WifiAccessPoint`): An instance of the access point.
+        """
 
     @GObject.Property
     def access_points(self) -> list[WifiAccessPoint]:
@@ -38,7 +55,7 @@ class WifiDevice(IgnisGObject):
 
         A list of access points (Wi-FI networks).
         """
-        return self._access_points
+        return list(self._access_points.values())
 
     @GObject.Property
     def ap(self) -> WifiAccessPoint:
@@ -80,9 +97,17 @@ class WifiDevice(IgnisGObject):
 
         self._device.request_scan_async(None, finish)
 
-    def __sync_access_points(self, *args) -> None:
-        self._access_points = [
-            WifiAccessPoint(point, self._client, self._device)
-            for point in self._device.get_access_points()
-        ]
-        self.notify("access_points")
+    def __add_access_point(
+        self, device, access_point: NM.AccessPoint, emit: bool = True
+    ) -> None:
+        obj = WifiAccessPoint(access_point, self._client, self._device)
+        self._access_points[access_point] = obj
+
+        if emit:
+            self.emit("new-access-point", obj)
+            self.notify("access-points")
+
+    def __remove_access_point(self, device, access_point: NM.AccessPoint) -> None:
+        obj = self._access_points.pop(access_point)
+        obj.emit("removed")
+        self.notify("access-points")

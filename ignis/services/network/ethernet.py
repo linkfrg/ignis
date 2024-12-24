@@ -1,8 +1,7 @@
-from gi.repository import GObject, GLib  # type: ignore
+from gi.repository import GObject  # type: ignore
 from ignis.gobject import IgnisGObject
 from .ethernet_device import EthernetDevice
 from ._imports import NM
-from .util import get_devices
 
 
 class Ethernet(IgnisGObject):
@@ -13,12 +12,22 @@ class Ethernet(IgnisGObject):
     def __init__(self, client: NM.Client):
         super().__init__()
         self._client = client
-        self._devices: list[EthernetDevice] = []
-        self._client.connect(
-            "notify::all-devices",
-            lambda *args: GLib.timeout_add_seconds(1, self.__sync),
-        )
-        self.__sync()
+        self._devices: dict[NM.Device, EthernetDevice] = {}
+
+        self._client.connect("device-added", self.__add_device)
+        self._client.connect("device-removed", self.__remove_device)
+
+        for device in self._client.get_devices():
+            self.__add_device(None, device, False)
+
+    @GObject.Signal(arg_types=(EthernetDevice,))
+    def new_device(self, *args):
+        """
+        Emitted when a new Ethernet device is added.
+
+        Args:
+            device (:class:`~ignis.services.network.EthernetDevice`): An instance of the device.
+        """
 
     @GObject.Property
     def devices(self) -> list[EthernetDevice]:
@@ -27,7 +36,7 @@ class Ethernet(IgnisGObject):
 
         A list of Ethernet devices.
         """
-        return self._devices
+        return list(self._devices.values())
 
     @GObject.Property
     def is_connected(self) -> bool:
@@ -53,20 +62,28 @@ class Ethernet(IgnisGObject):
         else:
             return "network-wired-disconnected-symbolic"
 
-    def __sync(self) -> None:
-        self._devices = []
-        for device in get_devices(self._client, NM.DeviceType.ETHERNET):
-            self.__add_device(device)  # type: ignore
+    def __add_device(self, client, device: NM.Device, emit: bool = True) -> None:
+        if device.get_device_type() != NM.DeviceType.ETHERNET:
+            return
 
-        self.notify_all()
-
-    def __add_device(self, device: NM.DeviceEthernet) -> None:
         if len(device.get_available_connections()) == 0:
             return
 
-        dev = EthernetDevice(device, self._client)
-        dev.connect(
+        obj = EthernetDevice(device, self._client)  # type: ignore
+        obj.connect(
             "notify::is-connected",
             lambda x, y: self.notify_list("is-connected", "icon-name"),
         )
-        self._devices.append(dev)
+        self._devices[device] = obj
+
+        if emit:
+            self.emit("new-device", obj)
+            self.notify("devices")
+
+    def __remove_device(self, client, device: NM.DeviceEthernet) -> None:
+        if device.get_device_type() != NM.DeviceType.ETHERNET:
+            return
+
+        obj = self._devices.pop(device)
+        obj.emit("removed")
+        self.notify("devices")
