@@ -977,12 +977,12 @@
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="ignis.services.network.WifiAccessPoint.requires_password">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">requires_password</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.network.WifiAccessPoint.requires_password" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.services.network.WifiAccessPoint.security">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">security</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.13)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'WPA1'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'WPA2/WPA3'</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.network.WifiAccessPoint.security" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
-<p>Whether the access point requires a password to connect.</p>
+<p>The security protocol of the access point (<code class="docutils literal notranslate"><span class="pre">WPA1</span></code>, <code class="docutils literal notranslate"><span class="pre">WPA2/WPA3</span></code>).</p>
 </dd></dl>
 
 <dl class="py property">
@@ -1199,7 +1199,7 @@ The dialog will be shown only if the access point requires a password.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiAccessPoint.ssid"><code class="docutils literal notranslate"><span class="pre">WifiAccessPoint.ssid</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiAccessPoint.strength"><code class="docutils literal notranslate"><span class="pre">WifiAccessPoint.strength</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiAccessPoint.icon_name"><code class="docutils literal notranslate"><span class="pre">WifiAccessPoint.icon_name</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiAccessPoint.requires_password"><code class="docutils literal notranslate"><span class="pre">WifiAccessPoint.requires_password</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiAccessPoint.security"><code class="docutils literal notranslate"><span class="pre">WifiAccessPoint.security</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiAccessPoint.is_connected"><code class="docutils literal notranslate"><span class="pre">WifiAccessPoint.is_connected</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiAccessPoint.connect_to"><code class="docutils literal notranslate"><span class="pre">WifiAccessPoint.connect_to()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiAccessPoint.connect_to_graphical"><code class="docutils literal notranslate"><span class="pre">WifiAccessPoint.connect_to_graphical()</span></code></a></li>
