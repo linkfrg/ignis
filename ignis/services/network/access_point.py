@@ -1,5 +1,6 @@
 from gi.repository import GObject, GLib  # type: ignore
 from ignis.gobject import IgnisGObject
+from typing import Literal
 from ._imports import NM
 from .wifi_connect_dialog import WifiConnectDialog
 from .constants import WIFI_ICON_TEMPLATE
@@ -154,15 +155,19 @@ class WifiAccessPoint(IgnisGObject):
             return "network-wireless-offline-symbolic"
 
     @GObject.Property
-    def requires_password(self) -> bool:
+    def security(self) -> Literal["WPA1", "WPA2/WPA3"] | None:
         """
         - read-only
 
-        Whether the access point requires a password to connect.
+        The security protocol of the access point (``WPA1``, ``WPA2/WPA3``).
         """
-        NM_80211ApFlags = getattr(NM, "80211ApFlags")
-        privacy_flag = NM_80211ApFlags.PRIVACY
-        return self._point.get_flags() == privacy_flag
+        NM_80211ApSecurityFlags = getattr(NM, "80211ApSecurityFlags")
+        if self._point.props.wpa_flags != NM_80211ApSecurityFlags.NONE:
+            return "WPA1"
+        elif self._point.props.rsn_flags != NM_80211ApSecurityFlags.NONE:
+            return "WPA2/WPA3"
+        else:
+            return None
 
     @GObject.Property
     def is_connected(self) -> bool:
@@ -195,7 +200,7 @@ class WifiAccessPoint(IgnisGObject):
         connection.add_setting(wifi_setting)
 
         # WiFi security settings
-        if self.requires_password:
+        if self.security:
             wifi_sec_setting = NM.SettingWirelessSecurity.new()
             wifi_sec_setting.set_property("key-mgmt", "wpa-psk")
             wifi_sec_setting.set_property("psk", password)
@@ -239,7 +244,7 @@ class WifiAccessPoint(IgnisGObject):
         Display a graphical dialog to connect to the access point.
         The dialog will be shown only if the access point requires a password.
         """
-        if self.requires_password:
+        if self.security is not None:
             WifiConnectDialog(self)
         else:
             self.connect_to()
