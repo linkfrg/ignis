@@ -200,7 +200,7 @@ class WifiAccessPoint(IgnisGObject):
         connection.add_setting(wifi_setting)
 
         # WiFi security settings
-        if self.requires_password:
+        if self.security:
             wifi_sec_setting = NM.SettingWirelessSecurity.new()
             wifi_sec_setting.set_property("key-mgmt", "wpa-psk")
             wifi_sec_setting.set_property("psk", password)
