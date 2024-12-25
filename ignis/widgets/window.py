@@ -275,10 +275,6 @@ class Window(Gtk.Window, BaseWidget):
 
     @GObject.Property
     def monitor(self) -> int:
-        return self._monitor
-
-    @monitor.setter
-    def monitor(self, value: int) -> None:
         """
         - optional, read-write
 
@@ -287,6 +283,10 @@ class Window(Gtk.Window, BaseWidget):
         Raises:
             :class:`~ignis.exceptions.MonitorNotFoundError` if the monitor with the given ID is not found.
         """
+        return self._monitor
+
+    @monitor.setter
+    def monitor(self, value: int) -> None:
         if value is None:
             return
 
