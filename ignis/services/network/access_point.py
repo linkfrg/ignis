@@ -1,9 +1,13 @@
 from gi.repository import GObject, GLib  # type: ignore
 from ignis.gobject import IgnisGObject
 from typing import Literal
+from ignis.app import IgnisApp
+from .util import get_wifi_connect_window_name
 from ._imports import NM
 from .wifi_connect_dialog import WifiConnectDialog
 from .constants import WIFI_ICON_TEMPLATE
+
+app = IgnisApp.get_default()
 
 
 class WifiAccessPoint(IgnisGObject):
@@ -245,7 +249,8 @@ class WifiAccessPoint(IgnisGObject):
         The dialog will be shown only if the access point requires a password.
         """
         if self.security is not None:
-            WifiConnectDialog(self)
+            if get_wifi_connect_window_name(self.bssid) not in app._windows:
+                WifiConnectDialog(self)
         else:
             self.connect_to()
 
