@@ -1,4 +1,5 @@
 from ignis.widgets import Widget
+from .util import get_wifi_connect_window_name
 
 
 class WifiConnectDialog(Widget.RegularWindow):
@@ -15,7 +16,7 @@ class WifiConnectDialog(Widget.RegularWindow):
             resizable=False,
             width_request=400,
             height_request=200,
-            namespace="wifi_connect",
+            namespace=get_wifi_connect_window_name(access_point.bssid),
             style="padding: 1rem;",
             child=Widget.Box(
                 vertical=True,
