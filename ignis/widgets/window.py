@@ -3,7 +3,11 @@ from gi.repository import Gtk, GObject  # type: ignore
 from ignis.base_widget import BaseWidget
 from ignis.utils import Utils
 from gi.repository import Gtk4LayerShell as GtkLayerShell  # type: ignore
-from ignis.exceptions import MonitorNotFoundError, LayerShellNotSupportedError
+from ignis.exceptions import (
+    MonitorNotFoundError,
+    LayerShellNotSupportedError,
+    WindowNotFoundError,
+)
 from ignis.app import IgnisApp
 
 app = IgnisApp.get_default()
@@ -138,6 +142,8 @@ class Window(Gtk.Window, BaseWidget):
         key_controller.connect("key-pressed", self.__close_popup)
 
         BaseWidget.__init__(self, **kwargs)
+
+        self.connect("close-request", self.__remove)
 
     def __close_popup(self, event_controller_key, keyval, keycode, state):
         if self._popup:
@@ -403,3 +409,17 @@ class Window(Gtk.Window, BaseWidget):
             return
 
         surface.set_input_region(region)
+
+    def __remove(self, *args) -> None:
+        try:
+            app.remove_window(self.namespace)
+        except WindowNotFoundError:
+            pass
+
+    def destroy(self):
+        self.__remove()
+        return super().destroy()
+
+    def unrealize(self):
+        self.__remove()
+        return super().unrealize()
