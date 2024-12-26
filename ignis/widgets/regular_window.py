@@ -1,6 +1,7 @@
 from gi.repository import Gtk, GObject  # type: ignore
 from ignis.base_widget import BaseWidget
 from ignis.app import IgnisApp
+from ignis.exceptions import WindowNotFoundError
 
 app = IgnisApp.get_default()
 
@@ -32,6 +33,8 @@ class RegularWindow(Gtk.Window, BaseWidget):
 
         app.add_window(namespace, self)
 
+        self.connect("close-request", self.__remove)
+
     @GObject.Property
     def namespace(self) -> str:
         """
@@ -41,3 +44,17 @@ class RegularWindow(Gtk.Window, BaseWidget):
         It must be unique.
         """
         return self._namespace
+
+    def __remove(self, *args) -> None:
+        try:
+            app.remove_window(self.namespace)
+        except WindowNotFoundError:
+            pass
+
+    def destroy(self):
+        self.__remove()
+        return super().destroy()
+
+    def unrealize(self):
+        self.__remove()
+        return super().unrealize()

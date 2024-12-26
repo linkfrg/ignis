@@ -410,7 +410,6 @@ class IgnisApp(Gtk.Application, IgnisGObject):
             raise WindowAddedError(window_name)
 
         self._windows[window_name] = window
-        window.connect("close-request", lambda x: self.remove_window(window_name))
 
     def remove_window(self, window_name: str) -> None:  # type: ignore
         """
