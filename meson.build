@@ -6,18 +6,11 @@ project(
 
 
 # Find Python installation
-python = import('python').find_installation()
+python = import('python').find_installation(pure: false)
 
 # Set folders
-prefix = get_option('prefix')
-datadir = join_paths(prefix, get_option('datadir'))
-libdir = join_paths(prefix, get_option('libdir'))
 bindir = get_option('bindir')
-
 pylibdir = python.get_install_dir()
-
-pkgdatadir = join_paths(datadir, meson.project_name())
-
 pkginstalldir = join_paths(pylibdir, meson.project_name())
 
 # Dependencies
@@ -31,8 +24,6 @@ dependency('gtk4-layer-shell-0')
 subproject('gvc',
     default_options: [
         'package_name=' + meson.project_name(),
-        'pkgdatadir=' + pkgdatadir,
-        'pkglibdir=' + libdir,
         'static=false',
         'introspection=true',
         'alsa=false'
@@ -46,7 +37,6 @@ install_subdir(
 )
 
 config = configuration_data()
-config.set('LIB_DIR', libdir)
 config.set('COMMIT', run_command('git', 'rev-parse', 'HEAD').stdout().strip())
 config.set('BRANCH', run_command('git', 'branch', '--show-current').stdout().strip())
 config.set('COMMIT_MSG', run_command('git', 'log', '-1', '--pretty=%B').stdout().strip())
