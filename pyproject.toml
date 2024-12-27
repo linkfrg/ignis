@@ -20,20 +20,6 @@ Documentation = "https://linkfrg.github.io/ignis"
 Repository = "https://github.com/linkfrg/ignis"
 Issues = "https://github.com/linkfrg/ignis/issues"
 
-[project.optional-dependencies]
-dev = [
-    "types-requests>=2.32.0.20240712",
-    "PyGObject-stubs>=2.11.0 --config-settings=config=Gtk4,Gdk4",
-    "mypy>=1.11.2",
-    "ruff>=0.6.2",
-]
-docs = [
-    "pydata-sphinx-theme>=0.15.4",
-    "sphinx_design>=0.6.1",
-    "sphinx_copybutton>=0.5.2",
-    "sphinx-autodoc-typehints>=2.5.0",
-]
-
 [build-system]
 build-backend = 'mesonpy'
 requires = ['meson-python', 'setuptools']
