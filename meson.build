@@ -53,10 +53,3 @@ configure_file(
     configuration: config,
     install_dir: pkginstalldir
 )
-
-configure_file(
-    input: 'ignis/__lib_dir__.py.in',
-    output: '__lib_dir__.py',
-    configuration: config,
-    install_dir: pkginstalldir
-)
