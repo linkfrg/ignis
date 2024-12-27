@@ -1,6 +1,7 @@
 from gi.repository import Gtk, GObject  # type: ignore
 from ignis.widgets.box import Box
-from typing import Callable, Union
+from typing import Union
+from collections.abc import Callable
 
 
 class EventBox(Box):

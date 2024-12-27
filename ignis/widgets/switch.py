@@ -1,6 +1,7 @@
 from gi.repository import Gtk, GObject  # type: ignore
 from ignis.base_widget import BaseWidget
-from typing import Any, Callable
+from typing import Any
+from collections.abc import Callable
 
 
 class Switch(Gtk.Switch, BaseWidget):

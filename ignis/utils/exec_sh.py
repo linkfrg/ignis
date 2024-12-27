@@ -1,6 +1,6 @@
 import subprocess
 from gi.repository import Gio  # type: ignore
-from typing import Callable
+from collections.abc import Callable
 
 
 def exec_sh(command: str, **kwargs) -> subprocess.CompletedProcess:

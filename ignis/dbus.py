@@ -1,5 +1,6 @@
 from gi.repository import Gio, GLib, GObject  # type: ignore
-from typing import Any, Callable
+from typing import Any
+from collections.abc import Callable
 from ignis.utils import Utils
 from ignis.gobject import IgnisGObject
 from ignis.exceptions import DBusMethodNotFoundError, DBusPropertyNotFoundError

@@ -1,5 +1,6 @@
 from gi.repository import Gtk, GObject, GLib  # type: ignore
-from typing import Any, Callable, Union
+from typing import Any, Union
+from collections.abc import Callable
 from ignis.gobject import IgnisGObject
 from ignis.exceptions import CssParsingError
 
