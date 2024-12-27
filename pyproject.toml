@@ -1,7 +1,6 @@
 [project]
 name = 'ignis'
 description = 'A modern widget system'
-requires-python = '>=3.11'
 readme = 'README.md'
 license = { file = 'LICENSE' }
 authors = [{ name = 'linkfrg' }]
