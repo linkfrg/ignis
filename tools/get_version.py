@@ -2,7 +2,7 @@
 """Extract version number from __init__.py"""
 import os
 
-init_py = os.path.join(os.path.dirname(__file__), "../__init__.py")
+init_py = os.path.join(os.path.dirname(__file__), "../ignis/__init__.py")
 
 data = open(init_py).readlines()
 version_line = next(line for line in data if line.startswith("__version__ ="))
