@@ -1,6 +1,7 @@
 project(
     'ignis',
     license: 'GPL-3.0-only',
+    version: run_command(['tools/get_version.py'], check: true).stdout().strip(),
     default_options: ['warning_level=2', 'werror=false']
 )
 
