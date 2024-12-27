@@ -1,7 +1,7 @@
 import os
 from gi.repository import GObject, Gio  # type: ignore
 from ignis.gobject import IgnisGObject
-from collections.abc import Callable
+from typing import Callable
 
 FLAGS = {
     None: Gio.FileMonitorFlags.NONE,

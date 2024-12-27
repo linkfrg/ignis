@@ -58,7 +58,6 @@ ignore = [
     "C901", # too complex
     "W191", # indentation contains tabs
     "I001", # import block is un-sorted or un-formatted
-    "UP007", # Use `X | Y` for type annotations
 ]
 
 fixable = ["ALL"]

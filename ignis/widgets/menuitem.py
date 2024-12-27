@@ -1,8 +1,7 @@
 from gi.repository import GObject, Gio, Gtk  # type: ignore
 from ignis.gobject import IgnisGObject
 from ignis.app import IgnisApp
-from typing import Union
-from collections.abc import Callable
+from typing import Callable, Union
 
 app = IgnisApp.get_default()
 

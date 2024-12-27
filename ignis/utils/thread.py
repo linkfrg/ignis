@@ -1,5 +1,5 @@
 import threading
-from collections.abc import Callable
+from typing import Callable
 
 
 def thread(target: Callable, *args, **kwargs) -> threading.Thread:

@@ -1,6 +1,6 @@
 from gi.repository import Gtk, GObject, Gdk  # type: ignore
 from ignis.base_widget import BaseWidget
-from collections.abc import Callable
+from typing import Callable
 
 
 class Scale(Gtk.Scale, BaseWidget):

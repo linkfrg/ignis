@@ -1,7 +1,6 @@
 import os
 from gi.repository import Gtk, GObject, Gio, GLib  # type: ignore
-from typing import Union
-from collections.abc import Callable
+from typing import Callable, Union
 from ignis.widgets.file_filter import FileFilter
 from ignis.gobject import IgnisGObject
 

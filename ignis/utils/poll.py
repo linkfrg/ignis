@@ -1,7 +1,6 @@
 from ignis.gobject import IgnisGObject
 from gi.repository import GLib, GObject  # type: ignore
-from typing import Any
-from collections.abc import Callable
+from typing import Any, Callable
 
 
 class Poll(IgnisGObject):

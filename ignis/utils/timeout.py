@@ -1,6 +1,6 @@
 from gi.repository import GLib, GObject  # type: ignore
 from ignis.gobject import IgnisGObject
-from collections.abc import Callable
+from typing import Callable
 
 
 class Timeout(IgnisGObject):

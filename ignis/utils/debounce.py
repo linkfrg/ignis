@@ -1,4 +1,4 @@
-from collections.abc import Callable
+from typing import Callable
 from .timeout import Timeout
 
 

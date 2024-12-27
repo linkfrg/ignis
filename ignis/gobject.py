@@ -1,6 +1,5 @@
 from gi.repository import GObject, GLib  # type: ignore
-from typing import Any
-from collections.abc import Callable
+from typing import Any, Callable
 
 
 class Binding(GObject.Object):

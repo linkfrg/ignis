@@ -1,6 +1,6 @@
 from gi.repository import Gtk, GObject  # type: ignore
 from ignis.base_widget import BaseWidget
-from collections.abc import Callable
+from typing import Callable
 
 
 class Entry(Gtk.Entry, BaseWidget):  # type: ignore

@@ -1,6 +1,6 @@
 from gi.repository import GObject  # type: ignore
 from ignis.gobject import IgnisGObject
-from collections.abc import Callable
+from typing import Callable
 from .thread import run_in_thread
 
 
