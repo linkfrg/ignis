@@ -38,9 +38,9 @@ install_subdir(
 )
 
 config = configuration_data()
-config.set('COMMIT', run_command('git', 'rev-parse', 'HEAD').stdout().strip())
-config.set('BRANCH', run_command('git', 'branch', '--show-current').stdout().strip())
-config.set('COMMIT_MSG', run_command('git', 'log', '-1', '--pretty=%B').stdout().strip())
+config.set('COMMIT', run_command('git', 'rev-parse', 'HEAD', check: true).stdout().strip())
+config.set('BRANCH', run_command('git', 'branch', '--show-current', check: true).stdout().strip())
+config.set('COMMIT_MSG', run_command('git', 'log', '-1', '--pretty=%B', check: true).stdout().strip())
 
 install_data(
     files('bin/ignis'),
