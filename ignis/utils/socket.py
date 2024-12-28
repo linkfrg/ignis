@@ -1,14 +1,20 @@
 import socket
 from collections.abc import Generator
+from typing import Literal
 
 
-def send_socket(sock: socket.socket, message: str) -> str:
+def send_socket(
+    sock: socket.socket,
+    message: str,
+    errors: Literal["strict", "replace", "ignore"] = "strict",
+) -> str:
     """
     Send a message to the socket.
 
     Args:
         sock: An instance of a socket.
         message: The message to send.
+        errors: The error handling scheme that will be passed to :py:meth:`bytes.decode`.
 
     Returns:
         The response from the socket.
@@ -22,16 +28,19 @@ def send_socket(sock: socket.socket, message: str) -> str:
             break
         resp += new_data
 
-    return resp.decode()
+    return resp.decode("utf-8", errors=errors)
 
 
-def listen_socket(sock: socket.socket) -> Generator[str, None, None]:
+def listen_socket(
+    sock: socket.socket, errors: Literal["strict", "replace", "ignore"] = "strict"
+) -> Generator[str, None, None]:
     """
     Listen to the socket.
     This function is a generator.
 
     Args:
         sock: An instance of a socket.
+        errors: The error handling scheme that will be passed to :py:meth:`bytes.decode`.
 
     Returns:
         A generator that yields responses from the socket.
@@ -55,4 +64,4 @@ def listen_socket(sock: socket.socket) -> Generator[str, None, None]:
         buffer += new_data
         while b"\n" in buffer:
             data, buffer = buffer.split(b"\n", 1)
-            yield data.decode("utf-8")
+            yield data.decode("utf-8", errors=errors)
