@@ -30,7 +30,7 @@ try:
     from gi.repository import GIRepository  # type: ignore
 
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    parent_dir = os.path.abspath(os.path.join(current_dir, '..'))
+    parent_dir = os.path.abspath(os.path.join(current_dir, ".."))
 
     libdir_path = os.path.join(parent_dir, LIBDIR_NAME)
 
