@@ -33,7 +33,7 @@ class RegularWindow(Gtk.Window, BaseWidget):
 
         app.add_window(namespace, self)
 
-        self.connect("close-request", self.__remove)
+        self.connect("close-request", self.__on_close_request)
 
     @GObject.Property
     def namespace(self) -> str:
@@ -50,6 +50,10 @@ class RegularWindow(Gtk.Window, BaseWidget):
             app.remove_window(self.namespace)
         except WindowNotFoundError:
             pass
+
+    def __on_close_request(self, *args) -> None:
+        if not self.props.hide_on_close:
+            self.__remove()
 
     def destroy(self):
         self.__remove()

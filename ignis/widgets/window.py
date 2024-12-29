@@ -143,7 +143,7 @@ class Window(Gtk.Window, BaseWidget):
 
         BaseWidget.__init__(self, **kwargs)
 
-        self.connect("close-request", self.__remove)
+        self.connect("close-request", self.__on_close_request)
 
     def __close_popup(self, event_controller_key, keyval, keycode, state):
         if self._popup:
@@ -415,6 +415,10 @@ class Window(Gtk.Window, BaseWidget):
             app.remove_window(self.namespace)
         except WindowNotFoundError:
             pass
+
+    def __on_close_request(self, *args) -> None:
+        if not self.props.hide_on_close:
+            self.__remove()
 
     def destroy(self):
         self.__remove()
