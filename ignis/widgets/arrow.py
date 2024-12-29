@@ -154,7 +154,7 @@ class Arrow(Icon):
     @direction.setter
     def direction(self, value: str) -> None:
         self._direction = value
-        self.props.icon_name = value
+        self.icon_name = DIRECTION[value]
 
     @GObject.Property
     def counterclockwise(self) -> bool:

@@ -215,7 +215,7 @@ class Window(Gtk.Window, BaseWidget):
 
     @exclusivity.setter
     def exclusivity(self, value: str) -> None:
-        self._exclusivity = value
+        self._exclusive = value
         if value == "exclusive":
             GtkLayerShell.auto_exclusive_zone_enable(self)
         else:

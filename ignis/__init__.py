@@ -6,8 +6,8 @@ from gi.repository import GLib  # type: ignore
 from ignis._get_lib_dir import get_lib_dir
 
 __version__ = "0.3.dev0"
-__lib_dir__: str | None = None
-CACHE_DIR: str | None = None
+__lib_dir__ = None
+CACHE_DIR = None
 
 if "sphinx" not in sys.modules:
     CACHE_DIR = f"{GLib.get_user_cache_dir()}/ignis"
