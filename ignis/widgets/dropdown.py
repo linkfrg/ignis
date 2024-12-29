@@ -44,7 +44,7 @@ class DropDown(Gtk.DropDown, BaseWidget):
         for i in value:
             model.append(i)
 
-        self.model = model
+        self.set_model(model)
 
     @GObject.Property
     def on_selected(self) -> Callable | None:
