@@ -28,10 +28,11 @@ class Icon(Gtk.Image, BaseWidget):
     def __init__(self, pixel_size: int = -1, **kwargs):
         Gtk.Image.__init__(self)
         self.pixel_size = pixel_size  # this need to set pixel_size BEFORE image
+        self._image: Union[str, GdkPixbuf.Pixbuf, None] = None
         BaseWidget.__init__(self, **kwargs)
 
     @GObject.Property
-    def image(self) -> Union[str, GdkPixbuf.Pixbuf]:
+    def image(self) -> Union[str, GdkPixbuf.Pixbuf, None]:
         """
         - optional, read-write
 
