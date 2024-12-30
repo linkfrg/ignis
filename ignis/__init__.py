@@ -5,7 +5,7 @@ from ctypes import CDLL
 from gi.repository import GLib  # type: ignore
 from ignis._get_lib_dir import get_lib_dir
 
-__version__ = "0.3.dev0"
+__version__ = "0.4"
 __lib_dir__ = None
 CACHE_DIR = None
 
