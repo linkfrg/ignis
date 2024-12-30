@@ -287,7 +287,7 @@ class NotificationService(BaseService):
 
         if len(self.popups) >= self.max_popups_count:
             if not self.max_popups_count == 0:
-                self.popups[-1].dismiss()
+                self.popups[0].dismiss()
 
         if notification.popup:
             self._popups[notification.id] = notification

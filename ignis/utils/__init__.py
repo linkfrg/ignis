@@ -22,6 +22,7 @@ from .thread_task import ThreadTask
 from .download_image import download_image
 from .get_current_dir import get_current_dir
 from .socket import send_socket, listen_socket
+from .debounce import DebounceTask, debounce
 
 
 class Utils:
@@ -49,3 +50,5 @@ class Utils:
     get_ignis_commit_msg = get_ignis_commit_msg
     send_socket = send_socket
     listen_socket = listen_socket
+    DebounceTask = DebounceTask
+    debounce = debounce

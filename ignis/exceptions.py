@@ -82,6 +82,18 @@ class HyprlandIPCNotFoundError(Exception):
         )
 
 
+class NiriIPCNotFoundError(Exception):
+    """
+    Raised when Niri IPC is not found.
+    """
+
+    def __init__(self, *args: object) -> None:
+        super().__init__(
+            "Niri IPC not found! To use the Niri service, ensure that Niri is running",
+            *args,
+        )
+
+
 class NetworkManagerNotFoundError(Exception):
     """
     Raised when NetworkManager is not found.
@@ -464,5 +476,17 @@ class UPowerNotRunningError(Exception):
     def __init__(self, *args: object) -> None:
         super().__init__(
             "UPower is not running! To use the UPower Service, install UPower and run it",
+            *args,
+        )
+
+
+class GnomeBluetoothNotFoundError(Exception):
+    """
+    Raised when GnomeBluetooth-3.0 is not found.
+    """
+
+    def __init__(self, *args: object) -> None:
+        super().__init__(
+            "GnomeBluetooth-3.0 is not found! To use the Bluetooth Service, install GnomeBluetooth-3.0",
             *args,
         )

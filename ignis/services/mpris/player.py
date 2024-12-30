@@ -218,7 +218,7 @@ class MprisPlayer(IgnisGObject):
             return {}
 
     @GObject.Property
-    def track_id(self) -> str:
+    def track_id(self) -> str | None:
         """
         - read-only
 

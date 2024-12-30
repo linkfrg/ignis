@@ -3,7 +3,11 @@ from gi.repository import Gtk, GObject  # type: ignore
 from ignis.base_widget import BaseWidget
 from ignis.utils import Utils
 from gi.repository import Gtk4LayerShell as GtkLayerShell  # type: ignore
-from ignis.exceptions import MonitorNotFoundError, LayerShellNotSupportedError
+from ignis.exceptions import (
+    MonitorNotFoundError,
+    LayerShellNotSupportedError,
+    WindowNotFoundError,
+)
 from ignis.app import IgnisApp
 
 app = IgnisApp.get_default()
@@ -139,6 +143,8 @@ class Window(Gtk.Window, BaseWidget):
 
         BaseWidget.__init__(self, **kwargs)
 
+        self.connect("close-request", self.__on_close_request)
+
     def __close_popup(self, event_controller_key, keyval, keycode, state):
         if self._popup:
             if keyval == 65307:  # 65307 = ESC
@@ -209,7 +215,7 @@ class Window(Gtk.Window, BaseWidget):
 
     @exclusivity.setter
     def exclusivity(self, value: str) -> None:
-        self._exclusive = value
+        self._exclusivity = value
         if value == "exclusive":
             GtkLayerShell.auto_exclusive_zone_enable(self)
         else:
@@ -403,3 +409,21 @@ class Window(Gtk.Window, BaseWidget):
             return
 
         surface.set_input_region(region)
+
+    def __remove(self, *args) -> None:
+        try:
+            app.remove_window(self.namespace)
+        except WindowNotFoundError:
+            pass
+
+    def __on_close_request(self, *args) -> None:
+        if not self.props.hide_on_close:
+            self.__remove()
+
+    def destroy(self):
+        self.__remove()
+        return super().destroy()
+
+    def unrealize(self):
+        self.__remove()
+        return super().unrealize()

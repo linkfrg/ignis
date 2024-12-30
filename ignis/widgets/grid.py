@@ -26,10 +26,12 @@ class Grid(Gtk.Grid, BaseWidget):
     __gtype_name__ = "IgnisGrid"
     __gproperties__ = {**BaseWidget.gproperties}
 
-    def __init__(self, **kwargs):
+    def __init__(
+        self, column_num: int | None = None, row_num: int | None = None, **kwargs
+    ):
         Gtk.Grid.__init__(self)
-        self._column_num: int | None = None
-        self._row_num: int | None = None
+        self._column_num: int | None = column_num
+        self._row_num: int | None = row_num
         self._child: list[Gtk.Widget] = []
         BaseWidget.__init__(self, **kwargs)
 

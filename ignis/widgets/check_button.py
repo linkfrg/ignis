@@ -36,13 +36,15 @@ class CheckButton(Gtk.CheckButton, BaseWidget):
         Gtk.CheckButton.__init__(self)
         BaseWidget.__init__(self, **kwargs)
 
+        self._on_toggled: Callable | None = None
+
         self.connect(
             "toggled",
             lambda x: self.on_toggled(x, x.active) if self.on_toggled else None,
         )
 
     @GObject.Property
-    def on_toggled(self) -> Callable:
+    def on_toggled(self) -> Callable | None:
         """
         - optional, read-write
 

@@ -13,9 +13,6 @@ class HyprlandService(BaseService):
     """
     Hyprland IPC client.
 
-    Raises:
-        HyprlandIPCNotFoundError: If Hyprland IPC is not found.
-
     .. note::
         The contents of ``dict`` properties are not described here.
         To find out their contents just print them into the terminal.
@@ -86,19 +83,27 @@ class HyprlandService(BaseService):
 
     def __init__(self):
         super().__init__()
-        if not os.path.exists(HYPR_SOCKET_DIR):
-            raise HyprlandIPCNotFoundError()
 
         self._workspaces: list[dict[str, Any]] = []
         self._active_workspace: dict[str, Any] = {}
         self._kb_layout: str = ""
         self._active_window: dict[str, Any] = {}
 
-        self.__listen_events()
+        if self.is_available:
+            self.__listen_events()
 
-        self.__sync_kb_layout()
-        self.__sync_workspaces()
-        self.__sync_active_window()
+            self.__sync_kb_layout()
+            self.__sync_workspaces()
+            self.__sync_active_window()
+
+    @GObject.Property
+    def is_available(self) -> bool:
+        """
+        - read-only
+
+        Whether Hyprland IPC is available.
+        """
+        return os.path.exists(HYPR_SOCKET_DIR)
 
     @GObject.Property
     def workspaces(self) -> list[dict[str, Any]]:
@@ -140,7 +145,7 @@ class HyprlandService(BaseService):
     def __listen_events(self) -> None:
         with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as sock:
             sock.connect(f"{HYPR_SOCKET_DIR}/.socket2.sock")
-            for event in Utils.listen_socket(sock):
+            for event in Utils.listen_socket(sock, errors="ignore"):
                 self.__on_event_received(event)
 
     def __on_event_received(self, event: str) -> None:
@@ -185,10 +190,16 @@ class HyprlandService(BaseService):
 
         Returns:
             Response from Hyprland IPC.
+
+        Raises:
+            HyprlandIPCNotFoundError: If Hyprland IPC is not found.
         """
+        if not self.is_available:
+            raise HyprlandIPCNotFoundError()
+
         with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as sock:
             sock.connect(f"{HYPR_SOCKET_DIR}/.socket.sock")
-            return Utils.send_socket(sock, cmd)
+            return Utils.send_socket(sock, cmd, errors="ignore")
 
     def switch_kb_layout(self) -> None:
         """

@@ -2,6 +2,7 @@ import os
 from gi.repository import GObject, Gtk, Gdk  # type: ignore
 from ignis.exceptions import DisplayNotFoundError
 from ignis.base_service import BaseService
+import glob
 
 
 class FetchService(BaseService):
@@ -222,6 +223,27 @@ class FetchService(BaseService):
                     cpu_name = line.split(":")[1].strip()
                     break
         return cpu_name
+
+    @GObject.Property
+    def cpu_temp(self) -> float:
+        """
+        - read-only
+
+        Current CPU temperature.
+        """
+        for thermal_zone in glob.glob("/sys/class/thermal/thermal_zone*"):
+            type_path = os.path.join(thermal_zone, "type")
+            temp_path = os.path.join(thermal_zone, "temp")
+            try:
+                with open(type_path) as type_file:
+                    zone_type = type_file.read().strip().lower()
+
+                if zone_type == "x86_pkg_temp":
+                    with open(temp_path) as temp_file:
+                        return int(temp_file.read().strip()) / 1000.0
+            except FileNotFoundError:
+                continue
+        return -1.0
 
     @GObject.Property
     def mem_info(self) -> dict[str, int]:

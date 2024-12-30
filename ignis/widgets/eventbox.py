@@ -23,6 +23,8 @@ class EventBox(Box):
             on_hover_lost=lambda self: print("hover lost((("),
             on_scroll_up=lambda self: print("scrolled up!"),
             on_scroll_down=lambda self: print("scrolled down!")
+            on_scroll_right=lambda self: print("scrolled right!")
+            on_scroll_left=lambda self: print("scrolled left!"),
         )
     """
 
@@ -36,6 +38,8 @@ class EventBox(Box):
         self._on_hover_lost: Callable | None = None
         self._on_scroll_up: Callable | None = None
         self._on_scroll_down: Callable | None = None
+        self._on_scroll_right: Callable | None = None
+        self._on_scroll_left: Callable | None = None
 
         self.__click_controller: Union[Gtk.GestureClick, None] = None
         self.__right_click_controller: Union[Gtk.GestureClick, None] = None
@@ -85,8 +89,12 @@ class EventBox(Box):
     ):
         if dy > 0 and self.on_scroll_up:
             self.on_scroll_up(self)
-        elif self.on_scroll_down:
+        elif dy < 0 and self.on_scroll_down:
             self.on_scroll_down(self)
+        if dx > 0 and self.on_scroll_right:
+            self.on_scroll_right(self)
+        elif dx < 0 and self.on_scroll_left:
+            self.on_scroll_left(self)
 
     def __pointer_enter(self, event_controller_motion, x, y) -> None:
         if self.on_hover:
@@ -202,4 +210,32 @@ class EventBox(Box):
     @on_scroll_down.setter
     def on_scroll_down(self, on_scroll_down: Callable) -> None:
         self._on_scroll_down = on_scroll_down
+        self.__init_scroll_controller()
+
+    @GObject.Property
+    def on_scroll_right(self) -> Callable:
+        """
+        - optional, read-write
+
+        The function to call on scroll right.
+        """
+        return self._on_scroll_right
+
+    @on_scroll_right.setter
+    def on_scroll_right(self, on_scroll_right: Callable) -> None:
+        self._on_scroll_right = on_scroll_right
+        self.__init_scroll_controller()
+
+    @GObject.Property
+    def on_scroll_left(self) -> Callable:
+        """
+        - optional, read-write
+
+        The function to call on scroll left.
+        """
+        return self._on_scroll_left
+
+    @on_scroll_left.setter
+    def on_scroll_left(self, on_scroll_left: Callable) -> None:
+        self._on_scroll_left = on_scroll_left
         self.__init_scroll_controller()

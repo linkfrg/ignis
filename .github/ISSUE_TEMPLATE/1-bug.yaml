@@ -10,14 +10,6 @@ body:
       - label: I have searched the existing open and closed issues.
         required: true
 
-  - type: checkboxes
-    attributes:
-      label: Related to dotfiles ? *
-      description: Before opening a new bug report, please take a moment to make sure that the problem is not related to dotfiles specifically.
-      options:
-      - label: I'm sure the problem is related specifically to Ignis.
-        required: true
-
   - type: dropdown
     id: type
     attributes:
@@ -32,11 +24,11 @@ body:
       required: true
 
   - type: textarea
-    id: ver
+    id: sysinfo
     attributes:
-      label: Version
+      label: System Information
       description: |
-        Paste the output of `ignis --version` here.
+        Paste the output of `ignis systeminfo` here.
 
       value: "
         ```
@@ -44,16 +36,6 @@ body:
         <Paste the output of the command here>
 
         ```"
-    validations:
-      required: true
-
-  - type: textarea
-    id: distro
-    attributes:
-      label: Distro
-      description: |
-        Indicate your distro name.
-      value: "<Indicate your distro name here>"
     validations:
       required: true
 

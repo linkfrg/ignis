@@ -1,6 +1,14 @@
-{ pkgs, version ? "git", ... }:
+{ fetchFromGitLab, pkgs, version ? "git", ... }:
 let
   inherit (pkgs.lib) concatStringsSep;
+
+  gvc = fetchFromGitLab {
+    domain = "gitlab.gnome.org";
+    owner = "GNOME";
+    repo = "libgnome-volume-control";
+    rev = "5f9768a2eac29c1ed56f1fbb449a77a3523683b6";
+    hash = "sha256-gdgTnxzH8BeYQAsvv++Yq/8wHi7ISk2LTBfU8hk12NM=";
+  };
 in
 pkgs.stdenv.mkDerivation {
   inherit version;
@@ -26,15 +34,18 @@ pkgs.stdenv.mkDerivation {
     pkgs.python312Packages.pycairo
     pkgs.python312Packages.click
     pkgs.python312Packages.charset-normalizer
-  ];
-
-  runtimeInputs = [
     pkgs.gst_all_1.gstreamer
     pkgs.gst_all_1.gst-plugins-base
+    pkgs.gst_all_1.gst-plugins-good
+    pkgs.gst_all_1.gst-plugins-bad
+    pkgs.gst_all_1.gst-plugins-ugly
+    pkgs.pipewire
     pkgs.dart-sass
   ];
 
   patchPhase = ''
+    mkdir -p ./subprojects/gvc
+    cp -r ${gvc}/* ./subprojects/gvc
     substituteInPlace ignis/utils/sass.py \
       --replace-fail '/bin/sass' '${pkgs.dart-sass}/bin/sass'
   '';
@@ -48,7 +59,7 @@ pkgs.stdenv.mkDerivation {
   installPhase = ''
     ninja -C build install
     wrapProgram $out/bin/ignis \
-      --set PATH "${pkgs.gst_all_1.gstreamer}/bin:${pkgs.dart-sass}/bin:$PATH" \
+      --prefix-each PATH ":" "${pkgs.gst_all_1.gstreamer}/bin ${pkgs.dart-sass}/bin" \
       --set PYTHONPATH "${concatStringsSep ":" (map (pkg: "${pkg}/lib/python3.12/site-packages") [
         pkgs.python312Packages.markupsafe
         pkgs.python312Packages.pygobject3
@@ -65,17 +76,17 @@ pkgs.stdenv.mkDerivation {
         pkgs.glib
         pkgs.gobject-introspection
         pkgs.networkmanager
-        pkgs.gobject-introspection-unwrapped
         pkgs.gst_all_1.gstreamer
-        pkgs.gst_all_1.gst-plugins-base
-        pkgs.gst_all_1.gst-plugins-ugly
       ])}:$GI_TYPELIB_PATH" \
       --set LD_LIBRARY_PATH "$out/lib:${pkgs.gtk4-layer-shell}/lib:${pkgs.glib}/lib:$LD_LIBRARY_PATH" \
       --set GST_PLUGIN_PATH "${concatStringsSep ":" (map (pkg: "${pkg}/lib/gstreamer-1.0") [
         pkgs.gst_all_1.gst-plugins-base
         pkgs.gst_all_1.gst-plugins-good
+        pkgs.gst_all_1.gst-plugins-bad
         pkgs.gst_all_1.gst-plugins-ugly
-      ])}:$GST_PLUGIN_PATH"
+        pkgs.pipewire
+      ])}:$GST_PLUGIN_PATH" \
+      --set GDK_PIXBUF_MODULE_FILE "$(echo ${pkgs.librsvg.out}/lib/gdk-pixbuf-2.0/*/loaders.cache)"
   '';
 
   meta = with pkgs.lib; {

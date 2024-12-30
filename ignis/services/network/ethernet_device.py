@@ -27,6 +27,12 @@ class EthernetDevice(IgnisGObject):
         self._device.connect("notify::active-connection", self.__update_is_connected)
         self.__update_is_connected()
 
+    @GObject.Signal
+    def removed(self):
+        """
+        Emitted when this Ethernet device is removed.
+        """
+
     @GObject.Property
     def carrier(self) -> bool:
         """
