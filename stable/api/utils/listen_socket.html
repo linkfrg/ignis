@@ -41,7 +41,7 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../_static/documentation_options.js?v=a74d790d"></script>
+    <script src="../../_static/documentation_options.js?v=6cc4e9c0"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -51,7 +51,7 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://linkfrg.github.io/ignis/latest/_static/switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'v0.3';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'v0.4';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
@@ -416,14 +416,17 @@
 <li class="toctree-l2"><a class="reference internal" href="../services/applications.html">Applications</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../services/audio.html">Audio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../services/backlight.html">Backlight</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/bluetooth.html">Bluetooth</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../services/fetch.html">Fetch</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../services/hyprland.html">Hyprland</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../services/mpris.html">MPRIS (media)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../services/network.html">Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/niri.html">Niri</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../services/notifications.html">Notifications</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../services/options.html">Options</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../services/recorder.html">Recorder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../services/system_tray.html">System Tray</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../services/systemd.html">Systemd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../services/upower.html">UPower</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../services/wallpaper.html">Wallpaper</a></li>
 </ul>
@@ -434,6 +437,7 @@
 <li class="toctree-l2"><a class="reference internal" href="ThreadTask.html">ThreadTask</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Timeout.html">Timeout</a></li>
 <li class="toctree-l2"><a class="reference internal" href="crop_pixbuf.html">crop_pixbuf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debounce.html">Debounce</a></li>
 <li class="toctree-l2"><a class="reference internal" href="download_image.html">download_image</a></li>
 <li class="toctree-l2"><a class="reference internal" href="exec_sh.html">exec_sh</a></li>
 <li class="toctree-l2"><a class="reference internal" href="exec_sh_async.html">exec_sh_async</a></li>
@@ -522,15 +526,18 @@
 <h1>listen_socket<a class="headerlink" href="#listen-socket" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="ignis.utils.Utils.listen_socket">
-<span class="sig-prename descclassname"><span class="pre">ignis.utils.Utils.</span></span><span class="sig-name descname"><span class="pre">listen_socket</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sock</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/socket.html#socket.socket" title="(in Python v3.13)"><span class="pre">socket</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generator" title="(in Python v3.13)"><span class="pre">Generator</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ignis.utils.Utils.listen_socket" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">ignis.utils.Utils.</span></span><span class="sig-name descname"><span class="pre">listen_socket</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sock</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/socket.html#socket.socket" title="(in Python v3.13)"><span class="pre">socket</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">errors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.13)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'strict'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'replace'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'ignore'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'strict'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Generator" title="(in Python v3.13)"><span class="pre">Generator</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ignis.utils.Utils.listen_socket" title="Link to this definition">#</a></dt>
 <dd><p>Listen to the socket.
 This function is a generator.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>sock</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/socket.html#socket.socket" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">socket</span></code></a></span>) -- An instance of a socket.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sock</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/socket.html#socket.socket" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">socket</span></code></a></span>) -- An instance of a socket.</p></li>
+<li><p><strong>errors</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code></a>[<code class="docutils literal notranslate"><span class="pre">'strict'</span></code>, <code class="docutils literal notranslate"><span class="pre">'replace'</span></code>, <code class="docutils literal notranslate"><span class="pre">'ignore'</span></code>]</span>, default: <code class="docutils literal notranslate"><span class="pre">'strict'</span></code>) -- The error handling scheme that will be passed to <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes.decode" title="(in Python v3.13)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">bytes.decode()</span></code></a>.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generator" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Generator</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]</span></p>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Generator" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Generator</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]</span></p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>A generator that yields responses from the socket.</p>

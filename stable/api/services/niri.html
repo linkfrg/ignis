@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Hyprland &#8212; Ignis documentation</title>
+    <title>Niri &#8212; Ignis documentation</title>
   
   
   
@@ -47,7 +47,7 @@
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'api/services/hyprland';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/services/niri';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://linkfrg.github.io/ignis/latest/_static/switcher.json';
@@ -57,8 +57,8 @@
         </script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="MPRIS (media)" href="mpris.html" />
-    <link rel="prev" title="Fetch" href="fetch.html" />
+    <link rel="next" title="Notifications" href="notifications.html" />
+    <link rel="prev" title="Network" href="network.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -418,10 +418,10 @@
 <li class="toctree-l2"><a class="reference internal" href="backlight.html">Backlight</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bluetooth.html">Bluetooth</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fetch.html">Fetch</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Hyprland</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hyprland.html">Hyprland</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mpris.html">MPRIS (media)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="network.html">Network</a></li>
-<li class="toctree-l2"><a class="reference internal" href="niri.html">Niri</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Niri</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notifications.html">Notifications</a></li>
 <li class="toctree-l2"><a class="reference internal" href="options.html">Options</a></li>
 <li class="toctree-l2"><a class="reference internal" href="recorder.html">Recorder</a></li>
@@ -505,7 +505,7 @@
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">Services</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Hyprland</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Niri</span></li>
   </ul>
 </nav>
 </div>
@@ -522,92 +522,35 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="hyprland">
-<h1>Hyprland<a class="headerlink" href="#hyprland" title="Link to this heading">#</a></h1>
+  <section id="niri">
+<h1>Niri<a class="headerlink" href="#niri" title="Link to this heading">#</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.hyprland.</span></span><span class="sig-name descname"><span class="pre">HyprlandService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.hyprland.HyprlandService" title="Link to this definition">#</a></dt>
-<dd><p>Hyprland IPC client.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The contents of <code class="docutils literal notranslate"><span class="pre">dict</span></code> properties are not described here.
-To find out their contents just print them into the terminal.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">hyprland</span><span class="o">.</span><span class="n">workspaces</span><span class="p">)</span>
-<span class="go">[</span>
-<span class="go">    {</span>
-<span class="go">        &quot;id&quot;: 1,</span>
-<span class="go">        &quot;name&quot;: &quot;1&quot;,</span>
-<span class="go">        &quot;monitor&quot;: &quot;DP-1&quot;,</span>
-<span class="go">        &quot;monitorID&quot;: 1,</span>
-<span class="go">        &quot;windows&quot;: 1,</span>
-<span class="go">        &quot;hasfullscreen&quot;: False,</span>
-<span class="go">        &quot;lastwindow&quot;: &quot;0x561dc35d2e80&quot;,</span>
-<span class="go">        &quot;lastwindowtitle&quot;: &quot;hyprland.py - ignis - Visual Studio Code&quot;,</span>
-<span class="go">    },</span>
-<span class="go">    {</span>
-<span class="go">        &quot;id&quot;: 10,</span>
-<span class="go">        &quot;name&quot;: &quot;10&quot;,</span>
-<span class="go">        &quot;monitor&quot;: &quot;HDMI-A-1&quot;,</span>
-<span class="go">        &quot;monitorID&quot;: 0,</span>
-<span class="go">        &quot;windows&quot;: 1,</span>
-<span class="go">        &quot;hasfullscreen&quot;: False,</span>
-<span class="go">        &quot;lastwindow&quot;: &quot;0x561dc3845f30&quot;,</span>
-<span class="go">        &quot;lastwindowtitle&quot;: &quot;Type hints cheat sheet - mypy 1.11.2 documentation — Mozilla Firefox&quot;,</span>
-<span class="go">    },</span>
-<span class="go">]</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">hyprland</span><span class="o">.</span><span class="n">active_window</span><span class="p">)</span>
-<span class="go">{</span>
-<span class="go">    &quot;address&quot;: &quot;0x561dc35d2e80&quot;,</span>
-<span class="go">    &quot;mapped&quot;: True,</span>
-<span class="go">    &quot;hidden&quot;: False,</span>
-<span class="go">    &quot;at&quot;: [1942, 22],</span>
-<span class="go">    &quot;size&quot;: [1876, 1036],</span>
-<span class="go">    &quot;workspace&quot;: {&quot;id&quot;: 1, &quot;name&quot;: &quot;1&quot;},</span>
-<span class="go">    &quot;floating&quot;: False,</span>
-<span class="go">    &quot;pseudo&quot;: False,</span>
-<span class="go">    &quot;monitor&quot;: 1,</span>
-<span class="go">    &quot;class&quot;: &quot;code-url-handler&quot;,</span>
-<span class="go">    &quot;title&quot;: &quot;hyprland.py - ignis - Visual Studio Code&quot;,</span>
-<span class="go">    &quot;initialClass&quot;: &quot;code-url-handler&quot;,</span>
-<span class="go">    &quot;initialTitle&quot;: &quot;Visual Studio Code&quot;,</span>
-<span class="go">    &quot;pid&quot;: 1674,</span>
-<span class="go">    &quot;xwayland&quot;: False,</span>
-<span class="go">    &quot;pinned&quot;: False,</span>
-<span class="go">    &quot;fullscreen&quot;: 0,</span>
-<span class="go">    &quot;fullscreenClient&quot;: 0,</span>
-<span class="go">    &quot;grouped&quot;: [],</span>
-<span class="go">    &quot;tags&quot;: [],</span>
-<span class="go">    &quot;swallowing&quot;: &quot;0x0&quot;,</span>
-<span class="go">    &quot;focusHistoryID&quot;: 0,</span>
-<span class="go">}</span>
-</pre></div>
-</div>
-</div>
+<dt class="sig sig-object py" id="ignis.services.niri.NiriService">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.niri.</span></span><span class="sig-name descname"><span class="pre">NiriService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.niri.NiriService" title="Link to this definition">#</a></dt>
+<dd><p>Niri IPC client.</p>
 <p>Example usage:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.services.hyprland</span> <span class="kn">import</span> <span class="n">HyprlandService</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.services.niri</span> <span class="kn">import</span> <span class="n">NiriService</span>
 
-<span class="n">hyprland</span> <span class="o">=</span> <span class="n">HyprlandService</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span>
+<span class="n">niri</span> <span class="o">=</span> <span class="n">NiriService</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">hyprland</span><span class="o">.</span><span class="n">workspaces</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">hyprland</span><span class="o">.</span><span class="n">kb_layout</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">niri</span><span class="o">.</span><span class="n">workspaces</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">niri</span><span class="o">.</span><span class="n">kb_layout</span><span class="p">)</span>
 
-<span class="n">hyprland</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;notify::kb-layout&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">hyprland</span><span class="o">.</span><span class="n">kb_layout</span><span class="p">))</span>
+<span class="n">niri</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;notify::kb-layout&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">niri</span><span class="o">.</span><span class="n">kb_layout</span><span class="p">))</span>
 </pre></div>
 </div>
 <dl class="py property">
-<dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService.is_available">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_available</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.is_available" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.services.niri.NiriService.is_available">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_available</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.niri.NiriService.is_available" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
-<p>Whether Hyprland IPC is available.</p>
+<p>Whether Niri IPC is available.</p>
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService.workspaces">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">workspaces</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.workspaces" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.services.niri.NiriService.workspaces">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">workspaces</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.niri.NiriService.workspaces" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
@@ -615,17 +558,17 @@ To find out their contents just print them into the terminal.</p>
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService.active_workspace">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">active_workspace</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.active_workspace" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.services.niri.NiriService.active_workspaces">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">active_workspaces</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.niri.NiriService.active_workspaces" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
-<p>The currently active workspace.</p>
+<p>The currently active workspaces.</p>
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService.kb_layout">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">kb_layout</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.kb_layout" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.services.niri.NiriService.kb_layout">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">kb_layout</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.niri.NiriService.kb_layout" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
@@ -633,20 +576,27 @@ To find out their contents just print them into the terminal.</p>
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService.active_window">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">active_window</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.active_window" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.services.niri.NiriService.active_window">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">active_window</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.niri.NiriService.active_window" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>The currenly focused window.</p>
 </dd></dl>
 
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.niri.NiriService.active_output">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">active_output</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.niri.NiriService.active_output" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The currenly focused output.</p>
+</dd></dl>
+
 <dl class="py method">
-<dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService.send_command">
-<span class="sig-name descname"><span class="pre">send_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.send_command" title="Link to this definition">#</a></dt>
-<dd><p>Send a command to the Hyprland IPC.
-Supports the same commands as <code class="docutils literal notranslate"><span class="pre">hyprctl</span></code>.
-If you want to receive the response in JSON format, use this syntax: <code class="docutils literal notranslate"><span class="pre">j/COMMAND</span></code>.</p>
+<dt class="sig sig-object py" id="ignis.services.niri.NiriService.send_command">
+<span class="sig-name descname"><span class="pre">send_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#ignis.services.niri.NiriService.send_command" title="Link to this definition">#</a></dt>
+<dd><p>Send a command to the Niri IPC.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>cmd</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The command to send.</p>
@@ -655,17 +605,17 @@ If you want to receive the response in JSON format, use this syntax: <code class
 <dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Response from Hyprland IPC.</p>
+<dd class="field-odd"><p>Response from Niri IPC.</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="../exceptions.html#ignis.exceptions.HyprlandIPCNotFoundError" title="ignis.exceptions.HyprlandIPCNotFoundError"><strong>HyprlandIPCNotFoundError</strong></a> -- If Hyprland IPC is not found.</p>
+<dd class="field-even"><p><a class="reference internal" href="../exceptions.html#ignis.exceptions.NiriIPCNotFoundError" title="ignis.exceptions.NiriIPCNotFoundError"><strong>NiriIPCNotFoundError</strong></a> -- If Niri IPC is not found.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService.switch_kb_layout">
-<span class="sig-name descname"><span class="pre">switch_kb_layout</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.switch_kb_layout" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.services.niri.NiriService.switch_kb_layout">
+<span class="sig-name descname"><span class="pre">switch_kb_layout</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.niri.NiriService.switch_kb_layout" title="Link to this definition">#</a></dt>
 <dd><p>Switch to the next keyboard layout.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -675,8 +625,8 @@ If you want to receive the response in JSON format, use this syntax: <code class
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService.switch_to_workspace">
-<span class="sig-name descname"><span class="pre">switch_to_workspace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">workspace_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.switch_to_workspace" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.services.niri.NiriService.switch_to_workspace">
+<span class="sig-name descname"><span class="pre">switch_to_workspace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">workspace_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.niri.NiriService.switch_to_workspace" title="Link to this definition">#</a></dt>
 <dd><p>Switch to a workspace by its ID.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -703,20 +653,20 @@ If you want to receive the response in JSON format, use this syntax: <code class
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="fetch.html"
+       href="network.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Fetch</p>
+        <p class="prev-next-title">Network</p>
       </div>
     </a>
     <a class="right-next"
-       href="mpris.html"
+       href="notifications.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">MPRIS (media)</p>
+        <p class="prev-next-title">Notifications</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -739,15 +689,16 @@ If you want to receive the response in JSON format, use this syntax: <code class
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService"><code class="docutils literal notranslate"><span class="pre">HyprlandService</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.is_available"><code class="docutils literal notranslate"><span class="pre">HyprlandService.is_available</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.workspaces"><code class="docutils literal notranslate"><span class="pre">HyprlandService.workspaces</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.active_workspace"><code class="docutils literal notranslate"><span class="pre">HyprlandService.active_workspace</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.kb_layout"><code class="docutils literal notranslate"><span class="pre">HyprlandService.kb_layout</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.active_window"><code class="docutils literal notranslate"><span class="pre">HyprlandService.active_window</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.send_command"><code class="docutils literal notranslate"><span class="pre">HyprlandService.send_command()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.switch_kb_layout"><code class="docutils literal notranslate"><span class="pre">HyprlandService.switch_kb_layout()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.switch_to_workspace"><code class="docutils literal notranslate"><span class="pre">HyprlandService.switch_to_workspace()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.niri.NiriService"><code class="docutils literal notranslate"><span class="pre">NiriService</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.niri.NiriService.is_available"><code class="docutils literal notranslate"><span class="pre">NiriService.is_available</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.niri.NiriService.workspaces"><code class="docutils literal notranslate"><span class="pre">NiriService.workspaces</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.niri.NiriService.active_workspaces"><code class="docutils literal notranslate"><span class="pre">NiriService.active_workspaces</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.niri.NiriService.kb_layout"><code class="docutils literal notranslate"><span class="pre">NiriService.kb_layout</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.niri.NiriService.active_window"><code class="docutils literal notranslate"><span class="pre">NiriService.active_window</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.niri.NiriService.active_output"><code class="docutils literal notranslate"><span class="pre">NiriService.active_output</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.niri.NiriService.send_command"><code class="docutils literal notranslate"><span class="pre">NiriService.send_command()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.niri.NiriService.switch_kb_layout"><code class="docutils literal notranslate"><span class="pre">NiriService.switch_kb_layout()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.niri.NiriService.switch_to_workspace"><code class="docutils literal notranslate"><span class="pre">NiriService.switch_to_workspace()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -757,7 +708,7 @@ If you want to receive the response in JSON format, use this syntax: <code class
 
   
   <div class="tocsection editthispage">
-    <a href="https://github.com/linkfrg/ignis/edit/main/docs/api/services/hyprland.rst">
+    <a href="https://github.com/linkfrg/ignis/edit/main/docs/api/services/niri.rst">
       <i class="fa-solid fa-pencil"></i>
       
       
@@ -773,7 +724,7 @@ If you want to receive the response in JSON format, use this syntax: <code class
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../../_sources/api/services/hyprland.rst.txt"
+      <li><a href="../../_sources/api/services/niri.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div></div>

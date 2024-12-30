@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Recorder &#8212; Ignis documentation</title>
+    <title>Bluetooth &#8212; Ignis documentation</title>
   
   
   
@@ -47,7 +47,7 @@
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../_static/copybutton.js?v=f281be69"></script>
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'api/services/recorder';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/services/bluetooth';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://linkfrg.github.io/ignis/latest/_static/switcher.json';
@@ -57,8 +57,8 @@
         </script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="System Tray" href="system_tray.html" />
-    <link rel="prev" title="Options" href="options.html" />
+    <link rel="next" title="Fetch" href="fetch.html" />
+    <link rel="prev" title="Backlight" href="backlight.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -416,7 +416,7 @@
 <li class="toctree-l2"><a class="reference internal" href="applications.html">Applications</a></li>
 <li class="toctree-l2"><a class="reference internal" href="audio.html">Audio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="backlight.html">Backlight</a></li>
-<li class="toctree-l2"><a class="reference internal" href="bluetooth.html">Bluetooth</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Bluetooth</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fetch.html">Fetch</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hyprland.html">Hyprland</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mpris.html">MPRIS (media)</a></li>
@@ -424,7 +424,7 @@
 <li class="toctree-l2"><a class="reference internal" href="niri.html">Niri</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notifications.html">Notifications</a></li>
 <li class="toctree-l2"><a class="reference internal" href="options.html">Options</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Recorder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recorder.html">Recorder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="system_tray.html">System Tray</a></li>
 <li class="toctree-l2"><a class="reference internal" href="systemd.html">Systemd</a></li>
 <li class="toctree-l2"><a class="reference internal" href="upower.html">UPower</a></li>
@@ -505,7 +505,7 @@
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">Services</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Recorder</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Bluetooth</span></li>
   </ul>
 </nav>
 </div>
@@ -522,134 +522,220 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="recorder">
-<h1>Recorder<a class="headerlink" href="#recorder" title="Link to this heading">#</a></h1>
+  <section id="bluetooth">
+<h1>Bluetooth<a class="headerlink" href="#bluetooth" title="Link to this heading">#</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="ignis.services.recorder.RecorderService">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.recorder.</span></span><span class="sig-name descname"><span class="pre">RecorderService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.recorder.RecorderService" title="Link to this definition">#</a></dt>
-<dd><p>A screen recorder.
-Uses XDG Desktop portal and PipeWire.
-Allow record screen with microphone audio and internal system audio.</p>
-<dl class="simple">
-<dt>Dependencies:</dt><dd><ul class="simple">
-<li><p>GStreamer</p></li>
-<li><p>PipeWire</p></li>
-<li><p>gst-plugin-pipewire</p></li>
-<li><p>gst-plugins-good</p></li>
-<li><p>gst-plugins-ugly</p></li>
-<li><p>pipewire-pulse: for audio recording.</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="field-list simple">
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><a class="reference internal" href="../exceptions.html#ignis.exceptions.GstNotFoundError" title="ignis.exceptions.GstNotFoundError"><strong>GstNotFoundError</strong></a> -- If GStreamer is not found.</p></li>
-<li><p><a class="reference internal" href="../exceptions.html#ignis.exceptions.GstPluginNotFoundError" title="ignis.exceptions.GstPluginNotFoundError"><strong>GstPluginNotFoundError</strong></a> -- If GStreamer plugin is not found.</p></li>
-</ul>
-</dd>
-</dl>
-<p>Example usage:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.services.recorder</span> <span class="kn">import</span> <span class="n">RecorderService</span>
-<span class="kn">from</span> <span class="nn">ignis.utils</span> <span class="kn">import</span> <span class="n">Utils</span>
-
-<span class="n">recorder</span> <span class="o">=</span> <span class="n">RecorderService</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span>
-
-<span class="n">recorder</span><span class="o">.</span><span class="n">start_recording</span><span class="p">(</span><span class="n">record_internal_audio</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="c1"># record for 30 seconds and then stop</span>
-<span class="n">Utils</span><span class="o">.</span><span class="n">Timeout</span><span class="p">(</span><span class="n">ms</span><span class="o">=</span><span class="mi">30</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">recorder</span><span class="o">.</span><span class="n">stop_recording</span><span class="p">)</span>
-</pre></div>
-</div>
+<dt class="sig sig-object py" id="ignis.services.bluetooth.BluetoothService">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.bluetooth.</span></span><span class="sig-name descname"><span class="pre">BluetoothService</span></span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.bluetooth.BluetoothService" title="Link to this definition">#</a></dt>
+<dd><p>A Bluetooth service.
+Requires <code class="docutils literal notranslate"><span class="pre">gnome-bluetooth-3.0</span></code>.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="ignis.services.recorder.RecorderService.recording_started">
-<span class="sig-name descname"><span class="pre">recording_started</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.recorder.RecorderService.recording_started" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.services.bluetooth.BluetoothService.device_added">
+<span class="sig-name descname"><span class="pre">device_added</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.bluetooth.BluetoothService.device_added" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>Signal</p></li>
 </ul>
-<p>Emitted when recording starts.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ignis.services.recorder.RecorderService.recording_stopped">
-<span class="sig-name descname"><span class="pre">recording_stopped</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.recorder.RecorderService.recording_stopped" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>Signal</p></li>
-</ul>
-<p>Emitted when recording stops.</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="ignis.services.recorder.RecorderService.active">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">active</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.recorder.RecorderService.active" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>read-only</p></li>
-</ul>
-<p>Whether recording is currently active.</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="ignis.services.recorder.RecorderService.is_paused">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_paused</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.recorder.RecorderService.is_paused" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>read-only</p></li>
-</ul>
-<p>Whether recording is currently paused.</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="ignis.services.recorder.RecorderService.bitrate">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bitrate</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.services.recorder.RecorderService.bitrate" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>read-write</p></li>
-</ul>
-<p>The bitrate of the recording.</p>
-<p>Default: <code class="docutils literal notranslate"><span class="pre">8000</span></code></p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="ignis.services.recorder.RecorderService.default_file_location">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">default_file_location</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.recorder.RecorderService.default_file_location" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>read-write</p></li>
-</ul>
-<p>The default location for saving recordings.</p>
-<p>Default: <code class="docutils literal notranslate"><span class="pre">$HOME/Videos</span></code>.</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="ignis.services.recorder.RecorderService.default_filename">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">default_filename</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.recorder.RecorderService.default_filename" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>read-write</p></li>
-</ul>
-<p>The default filename for recordings. Supports time formating.</p>
-<p>Default: <code class="docutils literal notranslate"><span class="pre">%Y-%m-%d_%H-%M-%S.mp4</span></code></p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ignis.services.recorder.RecorderService.start_recording">
-<span class="sig-name descname"><span class="pre">start_recording</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">record_microphone</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">record_internal_audio</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">audio_devices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.recorder.RecorderService.start_recording" title="Link to this definition">#</a></dt>
-<dd><p>Start recording.</p>
+<p>Emitted when a Bluetooth device has been added.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>path</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">None</span></code>) -- Recording path. It will override <code class="docutils literal notranslate"><span class="pre">default_file_location</span></code> and <code class="docutils literal notranslate"><span class="pre">default_filename</span></code> properties.</p></li>
-<li><p><strong>record_microphone</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">False</span></code>) -- Whether record audio from microphone.</p></li>
-<li><p><strong>record_internal_audio</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">False</span></code>) -- Whether record internal audio.</p></li>
-<li><p><strong>audio_devices</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>] | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">None</span></code>) -- A list of audio devices names from which audio should be recorded.</p></li>
+<dd class="field-odd"><p><strong>device</strong> (<a class="reference internal" href="#ignis.services.bluetooth.BluetoothDevice" title="ignis.services.bluetooth.BluetoothDevice"><code class="xref py py-class docutils literal notranslate"><span class="pre">BluetoothDevice</span></code></a>) -- The instance of the Bluetooth device.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.bluetooth.BluetoothService.client">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">client</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">gi.repository.GnomeBluetooth.Client</span></em><a class="headerlink" href="#ignis.services.bluetooth.BluetoothService.client" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>An instance of <code class="docutils literal notranslate"><span class="pre">GnomeBluetooth.Client</span></code>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.bluetooth.BluetoothService.devices">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">devices</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ignis.services.bluetooth.BluetoothDevice" title="ignis.services.bluetooth.device.BluetoothDevice"><span class="pre">BluetoothDevice</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.bluetooth.BluetoothService.devices" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>A list of all Bluetooth devices.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.bluetooth.BluetoothService.connected_devices">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">connected_devices</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ignis.services.bluetooth.BluetoothDevice" title="ignis.services.bluetooth.device.BluetoothDevice"><span class="pre">BluetoothDevice</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.bluetooth.BluetoothService.connected_devices" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>A list of currently connected Bluetooth devices.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.bluetooth.BluetoothService.powered">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">powered</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.bluetooth.BluetoothService.powered" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-write</p></li>
+</ul>
+<p>Whether the default Bluetooth adapter is powered.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.bluetooth.BluetoothService.state">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">state</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.bluetooth.BluetoothService.state" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The current state of the default Bluetooth adapter.</p>
+<dl class="simple">
+<dt>Adapter state:</dt><dd><ul class="simple">
+<li><p>absent</p></li>
+<li><p>on</p></li>
+<li><p>turning-on</p></li>
+<li><p>turning-off</p></li>
+<li><p>off</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
-</dd>
 </dl>
 </dd></dl>
 
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.bluetooth.BluetoothService.setup_mode">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setup_mode</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.bluetooth.BluetoothService.setup_mode" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-write</p></li>
+</ul>
+<p>Whether the default Bluetooth adapter is in setup mode (discoverable, and discovering).</p>
+<p>Set to <code class="docutils literal notranslate"><span class="pre">True</span></code> to start scanning devices.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ignis.services.bluetooth.BluetoothDevice">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.bluetooth.</span></span><span class="sig-name descname"><span class="pre">BluetoothDevice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.GnomeBluetooth.Client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gdevice</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.GnomeBluetooth.Device</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.bluetooth.BluetoothDevice" title="Link to this definition">#</a></dt>
+<dd><p>A Bluetooth device.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="ignis.services.recorder.RecorderService.stop_recording">
-<span class="sig-name descname"><span class="pre">stop_recording</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.recorder.RecorderService.stop_recording" title="Link to this definition">#</a></dt>
-<dd><p>Stop recording.</p>
+<dt class="sig sig-object py" id="ignis.services.bluetooth.BluetoothDevice.removed">
+<span class="sig-name descname"><span class="pre">removed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.bluetooth.BluetoothDevice.removed" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>Signal</p></li>
+</ul>
+<p>Emitted when the device has been removed.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.bluetooth.BluetoothDevice.gdevice">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gdevice</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">gi.repository.GnomeBluetooth.Device</span></em><a class="headerlink" href="#ignis.services.bluetooth.BluetoothDevice.gdevice" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The instance of <code class="docutils literal notranslate"><span class="pre">GnomeBluetooth.Device</span></code> for this device.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.bluetooth.BluetoothDevice.address">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.bluetooth.BluetoothDevice.address" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The Bluetooth device address of the device.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.bluetooth.BluetoothDevice.alias">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">alias</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.bluetooth.BluetoothDevice.alias" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The name alias for the device.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.bluetooth.BluetoothDevice.battery_level">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">battery_level</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.services.bluetooth.BluetoothDevice.battery_level" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The current battery level of the device (if available).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.bluetooth.BluetoothDevice.battery_percentage">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">battery_percentage</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></em><a class="headerlink" href="#ignis.services.bluetooth.BluetoothDevice.battery_percentage" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The current battery percentage of the device (if available).</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.bluetooth.BluetoothDevice.connectable">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">connectable</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.bluetooth.BluetoothDevice.connectable" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>Whether it is possible to connect to the device.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.bluetooth.BluetoothDevice.connected">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">connected</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.bluetooth.BluetoothDevice.connected" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>Whether the device is currently connected.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.bluetooth.BluetoothDevice.icon_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">icon_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.bluetooth.BluetoothDevice.icon_name" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The current icon name of the device.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.bluetooth.BluetoothDevice.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.bluetooth.BluetoothDevice.name" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The complete device name. It is better to use the <code class="docutils literal notranslate"><span class="pre">alias</span></code> property when displaying the device name.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.bluetooth.BluetoothDevice.paired">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">paired</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.bluetooth.BluetoothDevice.paired" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>Whether the device is paired.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.bluetooth.BluetoothDevice.trusted">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">trusted</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.bluetooth.BluetoothDevice.trusted" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>Whether the remote is seen as trusted.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.bluetooth.BluetoothDevice.device_type">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">device_type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.bluetooth.BluetoothDevice.device_type" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The type of the device, e.g., <code class="docutils literal notranslate"><span class="pre">&quot;mouse&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;speakers&quot;</span></code>.</p>
+<p>For more device types, see <a class="reference external" href="https://lazka.github.io/pgi-docs/index.html#GnomeBluetooth-3.0/flags.html#GnomeBluetooth.Type">GnomeBluetooth.Type</a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.bluetooth.BluetoothDevice.connect_to">
+<span class="sig-name descname"><span class="pre">connect_to</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.bluetooth.BluetoothDevice.connect_to" title="Link to this definition">#</a></dt>
+<dd><p>Connect to this device.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
@@ -658,20 +744,9 @@ Allow record screen with microphone audio and internal system audio.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ignis.services.recorder.RecorderService.pause_recording">
-<span class="sig-name descname"><span class="pre">pause_recording</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.recorder.RecorderService.pause_recording" title="Link to this definition">#</a></dt>
-<dd><p>Pause recording. This has an effect only if the recording is active and not already paused.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ignis.services.recorder.RecorderService.continue_recording">
-<span class="sig-name descname"><span class="pre">continue_recording</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.recorder.RecorderService.continue_recording" title="Link to this definition">#</a></dt>
-<dd><p>Continue recording. This has an effect only if the recording is active and paused.</p>
+<dt class="sig sig-object py" id="ignis.services.bluetooth.BluetoothDevice.disconnect_from">
+<span class="sig-name descname"><span class="pre">disconnect_from</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.bluetooth.BluetoothDevice.disconnect_from" title="Link to this definition">#</a></dt>
+<dd><p>Disconnect from this device.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
@@ -694,20 +769,20 @@ Allow record screen with microphone audio and internal system audio.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="options.html"
+       href="backlight.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Options</p>
+        <p class="prev-next-title">Backlight</p>
       </div>
     </a>
     <a class="right-next"
-       href="system_tray.html"
+       href="fetch.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">System Tray</p>
+        <p class="prev-next-title">Fetch</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -730,18 +805,32 @@ Allow record screen with microphone audio and internal system audio.</p>
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService"><code class="docutils literal notranslate"><span class="pre">RecorderService</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.recording_started"><code class="docutils literal notranslate"><span class="pre">RecorderService.recording_started()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.recording_stopped"><code class="docutils literal notranslate"><span class="pre">RecorderService.recording_stopped()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.active"><code class="docutils literal notranslate"><span class="pre">RecorderService.active</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.is_paused"><code class="docutils literal notranslate"><span class="pre">RecorderService.is_paused</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.bitrate"><code class="docutils literal notranslate"><span class="pre">RecorderService.bitrate</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.default_file_location"><code class="docutils literal notranslate"><span class="pre">RecorderService.default_file_location</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.default_filename"><code class="docutils literal notranslate"><span class="pre">RecorderService.default_filename</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.start_recording"><code class="docutils literal notranslate"><span class="pre">RecorderService.start_recording()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.stop_recording"><code class="docutils literal notranslate"><span class="pre">RecorderService.stop_recording()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.pause_recording"><code class="docutils literal notranslate"><span class="pre">RecorderService.pause_recording()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.continue_recording"><code class="docutils literal notranslate"><span class="pre">RecorderService.continue_recording()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.bluetooth.BluetoothService"><code class="docutils literal notranslate"><span class="pre">BluetoothService</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.bluetooth.BluetoothService.device_added"><code class="docutils literal notranslate"><span class="pre">BluetoothService.device_added()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.bluetooth.BluetoothService.client"><code class="docutils literal notranslate"><span class="pre">BluetoothService.client</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.bluetooth.BluetoothService.devices"><code class="docutils literal notranslate"><span class="pre">BluetoothService.devices</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.bluetooth.BluetoothService.connected_devices"><code class="docutils literal notranslate"><span class="pre">BluetoothService.connected_devices</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.bluetooth.BluetoothService.powered"><code class="docutils literal notranslate"><span class="pre">BluetoothService.powered</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.bluetooth.BluetoothService.state"><code class="docutils literal notranslate"><span class="pre">BluetoothService.state</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.bluetooth.BluetoothService.setup_mode"><code class="docutils literal notranslate"><span class="pre">BluetoothService.setup_mode</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.bluetooth.BluetoothDevice"><code class="docutils literal notranslate"><span class="pre">BluetoothDevice</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.bluetooth.BluetoothDevice.removed"><code class="docutils literal notranslate"><span class="pre">BluetoothDevice.removed()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.bluetooth.BluetoothDevice.gdevice"><code class="docutils literal notranslate"><span class="pre">BluetoothDevice.gdevice</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.bluetooth.BluetoothDevice.address"><code class="docutils literal notranslate"><span class="pre">BluetoothDevice.address</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.bluetooth.BluetoothDevice.alias"><code class="docutils literal notranslate"><span class="pre">BluetoothDevice.alias</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.bluetooth.BluetoothDevice.battery_level"><code class="docutils literal notranslate"><span class="pre">BluetoothDevice.battery_level</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.bluetooth.BluetoothDevice.battery_percentage"><code class="docutils literal notranslate"><span class="pre">BluetoothDevice.battery_percentage</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.bluetooth.BluetoothDevice.connectable"><code class="docutils literal notranslate"><span class="pre">BluetoothDevice.connectable</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.bluetooth.BluetoothDevice.connected"><code class="docutils literal notranslate"><span class="pre">BluetoothDevice.connected</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.bluetooth.BluetoothDevice.icon_name"><code class="docutils literal notranslate"><span class="pre">BluetoothDevice.icon_name</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.bluetooth.BluetoothDevice.name"><code class="docutils literal notranslate"><span class="pre">BluetoothDevice.name</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.bluetooth.BluetoothDevice.paired"><code class="docutils literal notranslate"><span class="pre">BluetoothDevice.paired</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.bluetooth.BluetoothDevice.trusted"><code class="docutils literal notranslate"><span class="pre">BluetoothDevice.trusted</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.bluetooth.BluetoothDevice.device_type"><code class="docutils literal notranslate"><span class="pre">BluetoothDevice.device_type</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.bluetooth.BluetoothDevice.connect_to"><code class="docutils literal notranslate"><span class="pre">BluetoothDevice.connect_to()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.bluetooth.BluetoothDevice.disconnect_from"><code class="docutils literal notranslate"><span class="pre">BluetoothDevice.disconnect_from()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -751,7 +840,7 @@ Allow record screen with microphone audio and internal system audio.</p>
 
   
   <div class="tocsection editthispage">
-    <a href="https://github.com/linkfrg/ignis/edit/main/docs/api/services/recorder.rst">
+    <a href="https://github.com/linkfrg/ignis/edit/main/docs/api/services/bluetooth.rst">
       <i class="fa-solid fa-pencil"></i>
       
       
@@ -767,7 +856,7 @@ Allow record screen with microphone audio and internal system audio.</p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../../_sources/api/services/recorder.rst.txt"
+      <li><a href="../../_sources/api/services/bluetooth.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div></div>

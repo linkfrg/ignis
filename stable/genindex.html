@@ -40,7 +40,7 @@
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="_static/documentation_options.js?v=a74d790d"></script>
+    <script src="_static/documentation_options.js?v=6cc4e9c0"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
@@ -50,7 +50,7 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://linkfrg.github.io/ignis/latest/_static/switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'v0.3';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'v0.4';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
@@ -430,24 +430,42 @@
 </li>
       <li><a href="api/services/recorder.html#ignis.services.recorder.RecorderService.active">active (ignis.services.recorder.RecorderService property)</a>
 </li>
+      <li><a href="api/services/network.html#ignis.services.network.Vpn.active_connections">active_connections (ignis.services.network.Vpn property)</a>
+</li>
+      <li><a href="api/services/niri.html#ignis.services.niri.NiriService.active_output">active_output (ignis.services.niri.NiriService property)</a>
+</li>
       <li><a href="api/services/network.html#ignis.services.network.Vpn.active_vpn_id">active_vpn_id (ignis.services.network.Vpn property)</a>
 </li>
       <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandService.active_window">active_window (ignis.services.hyprland.HyprlandService property)</a>
+
+      <ul>
+        <li><a href="api/services/niri.html#ignis.services.niri.NiriService.active_window">(ignis.services.niri.NiriService property)</a>
 </li>
+      </ul></li>
       <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandService.active_workspace">active_workspace (ignis.services.hyprland.HyprlandService property)</a>
 </li>
+      <li><a href="api/services/niri.html#ignis.services.niri.NiriService.active_workspaces">active_workspaces (ignis.services.niri.NiriService property)</a>
+</li>
       <li><a href="api/widgets/FileDialog.html#ignis.widgets.Widget.FileDialog.add_filter">add_filter() (ignis.widgets.Widget.FileDialog method)</a>
+</li>
+      <li><a href="api/app.html#ignis.app.IgnisApp.add_icons">add_icons() (ignis.app.IgnisApp method)</a>
 </li>
       <li><a href="api/app.html#ignis.app.IgnisApp.add_window">add_window() (ignis.app.IgnisApp method)</a>
 </li>
       <li><a href="api/services/system_tray.html#ignis.services.system_tray.SystemTrayService.added">added() (ignis.services.system_tray.SystemTrayService method)</a>
 </li>
+      <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothDevice.address">address (ignis.services.bluetooth.BluetoothDevice property)</a>
+</li>
       <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.album">album (ignis.services.mpris.MprisPlayer property)</a>
+</li>
+      <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothDevice.alias">alias (ignis.services.bluetooth.BluetoothDevice property)</a>
 </li>
       <li><a href="api/widgets/Window.html#ignis.widgets.Widget.Window.anchor">anchor (ignis.widgets.Widget.Window property)</a>
 </li>
       <li><a href="api/exceptions.html#ignis.exceptions.AnotherNotificationDaemonRunningError">AnotherNotificationDaemonRunningError</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/exceptions.html#ignis.exceptions.AnotherSystemTrayRunningError">AnotherSystemTrayRunningError</a>
 </li>
       <li><a href="api/services/network.html#ignis.services.network.WifiDevice.ap">ap (ignis.services.network.WifiDevice property)</a>
@@ -456,8 +474,6 @@
 </li>
       <li><a href="api/services/audio.html#ignis.services.audio.AudioService.app_added">app_added() (ignis.services.audio.AudioService method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/services/notifications.html#ignis.services.notifications.Notification.app_name">app_name (ignis.services.notifications.Notification property)</a>
 </li>
       <li><a href="api/services/applications.html#ignis.services.applications.Application">Application (class in ignis.services.applications)</a>
@@ -520,6 +536,10 @@
 </li>
       <li><a href="api/services/upower.html#ignis.services.upower.UPowerService.battery_added">battery_added() (ignis.services.upower.UPowerService method)</a>
 </li>
+      <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothDevice.battery_level">battery_level (ignis.services.bluetooth.BluetoothDevice property)</a>
+</li>
+      <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothDevice.battery_percentage">battery_percentage (ignis.services.bluetooth.BluetoothDevice property)</a>
+</li>
       <li><a href="api/gobject.html#ignis.gobject.IgnisGObject.bind">bind() (ignis.gobject.IgnisGObject method)</a>
 </li>
       <li><a href="api/gobject.html#ignis.gobject.IgnisGObject.bind_property2">bind_property2() (ignis.gobject.IgnisGObject method)</a>
@@ -529,6 +549,10 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/services/recorder.html#ignis.services.recorder.RecorderService.bitrate">bitrate (ignis.services.recorder.RecorderService property)</a>
+</li>
+      <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothDevice">BluetoothDevice (class in ignis.services.bluetooth)</a>
+</li>
+      <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothService">BluetoothService (class in ignis.services.bluetooth)</a>
 </li>
       <li><a href="api/services/fetch.html#ignis.services.fetch.FetchService.board_name">board_name (ignis.services.fetch.FetchService property)</a>
 </li>
@@ -547,7 +571,11 @@
       <li><a href="api/services/network.html#ignis.services.network.WifiAccessPoint.bssid">bssid (ignis.services.network.WifiAccessPoint property)</a>
 </li>
       <li><a href="api/dbus.html#ignis.dbus.DBusProxy.bus_type">bus_type (ignis.dbus.DBusProxy property)</a>
+
+      <ul>
+        <li><a href="api/services/systemd.html#ignis.services.systemd.SystemdService.bus_type">(ignis.services.systemd.SystemdService property)</a>
 </li>
+      </ul></li>
       <li><a href="api/widgets/Button.html#ignis.widgets.Widget.Button">Button (class in ignis.widgets.Widget)</a>
 </li>
   </ul></td>
@@ -612,12 +640,14 @@
         <li><a href="api/widgets/Grid.html#ignis.widgets.Widget.Grid.child">(ignis.widgets.Widget.Grid property)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/services/notifications.html#ignis.services.notifications.NotificationService.clear_all">clear_all() (ignis.services.notifications.NotificationService method)</a>
+</li>
+      <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothService.client">client (ignis.services.bluetooth.BluetoothService property)</a>
 </li>
       <li><a href="api/services/notifications.html#ignis.services.notifications.Notification.close">close() (ignis.services.notifications.Notification method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/app.html#ignis.app.IgnisApp.close_window">close_window() (ignis.app.IgnisApp method)</a>
 
       <ul>
@@ -632,15 +662,23 @@
       </ul></li>
       <li><a href="api/widgets/Grid.html#ignis.widgets.Widget.Grid.column_num">column_num (ignis.widgets.Widget.Grid property)</a>
 </li>
-      <li><a href="api/services/network.html#ignis.services.network.EthernetDevice.connect_to">connect_to() (ignis.services.network.EthernetDevice method)</a>
+      <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothDevice.connect_to">connect_to() (ignis.services.bluetooth.BluetoothDevice method)</a>
 
       <ul>
+        <li><a href="api/services/network.html#ignis.services.network.EthernetDevice.connect_to">(ignis.services.network.EthernetDevice method)</a>
+</li>
         <li><a href="api/services/network.html#ignis.services.network.VpnConnection.connect_to">(ignis.services.network.VpnConnection method)</a>
 </li>
         <li><a href="api/services/network.html#ignis.services.network.WifiAccessPoint.connect_to">(ignis.services.network.WifiAccessPoint method)</a>
 </li>
       </ul></li>
       <li><a href="api/services/network.html#ignis.services.network.WifiAccessPoint.connect_to_graphical">connect_to_graphical() (ignis.services.network.WifiAccessPoint method)</a>
+</li>
+      <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothDevice.connectable">connectable (ignis.services.bluetooth.BluetoothDevice property)</a>
+</li>
+      <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothDevice.connected">connected (ignis.services.bluetooth.BluetoothDevice property)</a>
+</li>
+      <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothService.connected_devices">connected_devices (ignis.services.bluetooth.BluetoothService property)</a>
 </li>
       <li><a href="api/dbus.html#ignis.dbus.DBusProxy.connection">connection (ignis.dbus.DBusProxy property)</a>
 
@@ -661,6 +699,8 @@
       <li><a href="api/widgets/Arrow.html#ignis.widgets.Widget.Arrow.counterclockwise">counterclockwise (ignis.widgets.Widget.Arrow property)</a>
 </li>
       <li><a href="api/services/fetch.html#ignis.services.fetch.FetchService.cpu">cpu (ignis.services.fetch.FetchService property)</a>
+</li>
+      <li><a href="api/services/fetch.html#ignis.services.fetch.FetchService.cpu_temp">cpu_temp (ignis.services.fetch.FetchService property)</a>
 </li>
       <li><a href="api/services/options.html#ignis.services.options.OptionsService.create_group">create_group() (ignis.services.options.OptionsService method)</a>
 </li>
@@ -696,6 +736,10 @@
 </li>
       <li><a href="api/dbus.html#ignis.dbus.DBusService">DBusService (class in ignis.dbus)</a>
 </li>
+      <li><a href="api/utils/debounce.html#ignis.utils.Utils.debounce">debounce() (in module ignis.utils.Utils)</a>
+</li>
+      <li><a href="api/utils/debounce.html#ignis.utils.Utils.DebounceTask">DebounceTask (class in ignis.utils.Utils)</a>
+</li>
       <li><a href="api/widgets/FileFilter.html#ignis.widgets.Widget.FileFilter.default">default (ignis.widgets.Widget.FileFilter property)</a>
 </li>
       <li><a href="api/services/recorder.html#ignis.services.recorder.RecorderService.default_file_location">default_file_location (ignis.services.recorder.RecorderService property)</a>
@@ -714,15 +758,23 @@
 </li>
       <li><a href="api/services/applications.html#ignis.services.applications.Application.desktop_file">desktop_file (ignis.services.applications.Application property)</a>
 </li>
+      <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothService.device_added">device_added() (ignis.services.bluetooth.BluetoothService method)</a>
+
+      <ul>
+        <li><a href="api/services/upower.html#ignis.services.upower.UPowerService.device_added">(ignis.services.upower.UPowerService method)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/services/upower.html#ignis.services.upower.UPowerService.device_added">device_added() (ignis.services.upower.UPowerService method)</a>
-</li>
       <li><a href="api/services/backlight.html#ignis.services.backlight.BacklightDevice.device_name">device_name (ignis.services.backlight.BacklightDevice property)</a>
+</li>
+      <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothDevice.device_type">device_type (ignis.services.bluetooth.BluetoothDevice property)</a>
 </li>
       <li><a href="api/services/backlight.html#ignis.services.backlight.BacklightService.devices">devices (ignis.services.backlight.BacklightService property)</a>
 
       <ul>
+        <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothService.devices">(ignis.services.bluetooth.BluetoothService property)</a>
+</li>
         <li><a href="api/services/network.html#ignis.services.network.Ethernet.devices">(ignis.services.network.Ethernet property)</a>
 </li>
         <li><a href="api/services/network.html#ignis.services.network.Wifi.devices">(ignis.services.network.Wifi property)</a>
@@ -734,9 +786,11 @@
 </li>
       <li><a href="api/widgets/Arrow.html#ignis.widgets.Widget.Arrow.direction">direction (ignis.widgets.Widget.Arrow property)</a>
 </li>
-      <li><a href="api/services/network.html#ignis.services.network.EthernetDevice.disconnect_from">disconnect_from() (ignis.services.network.EthernetDevice method)</a>
+      <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothDevice.disconnect_from">disconnect_from() (ignis.services.bluetooth.BluetoothDevice method)</a>
 
       <ul>
+        <li><a href="api/services/network.html#ignis.services.network.EthernetDevice.disconnect_from">(ignis.services.network.EthernetDevice method)</a>
+</li>
         <li><a href="api/services/network.html#ignis.services.network.VpnConnection.disconnect_from">(ignis.services.network.VpnConnection method)</a>
 </li>
       </ul></li>
@@ -834,6 +888,8 @@
 <h2 id="G">G</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothDevice.gdevice">gdevice (ignis.services.bluetooth.BluetoothDevice property)</a>
+</li>
       <li><a href="api/exceptions.html#ignis.exceptions.CssParsingError.gerror">gerror (ignis.exceptions.CssParsingError property)</a>
 </li>
       <li><a href="api/utils/get_current_dir.html#ignis.utils.Utils.get_current_dir">get_current_dir() (in module ignis.utils.Utils)</a>
@@ -842,6 +898,8 @@
 
       <ul>
         <li><a href="api/base_service.html#ignis.base_service.BaseService.get_default">(ignis.base_service.BaseService class method)</a>
+</li>
+        <li><a href="api/services/systemd.html#ignis.services.systemd.SystemdService.get_default">(ignis.services.systemd.SystemdService class method)</a>
 </li>
       </ul></li>
       <li><a href="api/utils/get_file_icon_name.html#ignis.utils.Utils.get_file_icon_name">get_file_icon_name() (in module ignis.utils.Utils)</a>
@@ -868,7 +926,11 @@
 </li>
       <li><a href="api/utils/get_paintable.html#ignis.utils.Utils.get_paintable">get_paintable() (in module ignis.utils.Utils)</a>
 </li>
+      <li><a href="api/services/systemd.html#ignis.services.systemd.SystemdService.get_unit">get_unit() (ignis.services.systemd.SystemdService method)</a>
+</li>
       <li><a href="api/app.html#ignis.app.IgnisApp.get_window">get_window() (ignis.app.IgnisApp method)</a>
+</li>
+      <li><a href="api/exceptions.html#ignis.exceptions.GnomeBluetoothNotFoundError">GnomeBluetoothNotFoundError</a>
 </li>
       <li><a href="api/widgets/Grid.html#ignis.widgets.Widget.Grid">Grid (class in ignis.widgets.Widget)</a>
 </li>
@@ -927,6 +989,8 @@
       <li><a href="api/services/audio.html#ignis.services.audio.Stream.icon_name">icon_name (ignis.services.audio.Stream property)</a>
 
       <ul>
+        <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothDevice.icon_name">(ignis.services.bluetooth.BluetoothDevice property)</a>
+</li>
         <li><a href="api/services/network.html#ignis.services.network.Ethernet.icon_name">(ignis.services.network.Ethernet property)</a>
 </li>
         <li><a href="api/services/network.html#ignis.services.network.Vpn.icon_name">(ignis.services.network.Vpn property)</a>
@@ -975,14 +1039,14 @@
         <li><a href="api/widgets/Picture.html#ignis.widgets.Widget.Picture.image">(ignis.widgets.Widget.Picture property)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/dbus.html#ignis.dbus.DBusProxy.info">info (ignis.dbus.DBusProxy property)</a>
 
       <ul>
         <li><a href="api/dbus.html#ignis.dbus.DBusService.info">(ignis.dbus.DBusService property)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/widgets/FileDialog.html#ignis.widgets.Widget.FileDialog.initial_path">initial_path (ignis.widgets.Widget.FileDialog property)</a>
 </li>
       <li><a href="api/widgets/Window.html#ignis.widgets.Widget.Window.input_height">input_height (ignis.widgets.Widget.Window property)</a>
@@ -999,6 +1063,14 @@
 </li>
       <li><a href="api/services/notifications.html#ignis.services.notifications.NotificationAction.invoke">invoke() (ignis.services.notifications.NotificationAction method)</a>
 </li>
+      <li><a href="api/services/systemd.html#ignis.services.systemd.SystemdUnit.is_active">is_active (ignis.services.systemd.SystemdUnit property)</a>
+</li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandService.is_available">is_available (ignis.services.hyprland.HyprlandService property)</a>
+
+      <ul>
+        <li><a href="api/services/niri.html#ignis.services.niri.NiriService.is_available">(ignis.services.niri.NiriService property)</a>
+</li>
+      </ul></li>
       <li><a href="api/services/network.html#ignis.services.network.Ethernet.is_connected">is_connected (ignis.services.network.Ethernet property)</a>
 
       <ul>
@@ -1050,7 +1122,11 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandService.kb_layout">kb_layout (ignis.services.hyprland.HyprlandService property)</a>
+
+      <ul>
+        <li><a href="api/services/niri.html#ignis.services.niri.NiriService.kb_layout">(ignis.services.niri.NiriService property)</a>
 </li>
+      </ul></li>
       <li><a href="api/widgets/Window.html#ignis.widgets.Widget.Window.kb_mode">kb_mode (ignis.widgets.Widget.Window property)</a>
 </li>
   </ul></td>
@@ -1217,6 +1293,8 @@
 </li>
         <li><a href="api/services/audio.html#ignis.services.audio.Stream.name">(ignis.services.audio.Stream property)</a>
 </li>
+        <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothDevice.name">(ignis.services.bluetooth.BluetoothDevice property)</a>
+</li>
         <li><a href="api/services/network.html#ignis.services.network.EthernetDevice.name">(ignis.services.network.EthernetDevice property)</a>
 </li>
         <li><a href="api/services/network.html#ignis.services.network.VpnConnection.name">(ignis.services.network.VpnConnection property)</a>
@@ -1225,6 +1303,8 @@
 </li>
         <li><a href="api/services/options.html#ignis.services.options.OptionsGroup.name">(ignis.services.options.OptionsGroup property)</a>
 </li>
+        <li><a href="api/services/systemd.html#ignis.services.systemd.SystemdUnit.name">(ignis.services.systemd.SystemdUnit property)</a>
+</li>
       </ul></li>
       <li><a href="api/widgets/RegularWindow.html#ignis.widgets.Widget.RegularWindow.namespace">namespace (ignis.widgets.Widget.RegularWindow property)</a>
 
@@ -1232,17 +1312,33 @@
         <li><a href="api/widgets/Window.html#ignis.widgets.Widget.Window.namespace">(ignis.widgets.Widget.Window property)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/services/upower.html#ignis.services.upower.UPowerDevice.native_path">native_path (ignis.services.upower.UPowerDevice property)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/exceptions.html#ignis.exceptions.NetworkManagerNotFoundError">NetworkManagerNotFoundError</a>
 </li>
       <li><a href="api/services/network.html#ignis.services.network.NetworkService">NetworkService (class in ignis.services.network)</a>
 </li>
+      <li><a href="api/services/network.html#ignis.services.network.WifiDevice.new_access_point">new_access_point() (ignis.services.network.WifiDevice method)</a>
+</li>
+      <li><a href="api/services/network.html#ignis.services.network.Vpn.new_active_connection">new_active_connection() (ignis.services.network.Vpn method)</a>
+</li>
+      <li><a href="api/services/network.html#ignis.services.network.Vpn.new_connection">new_connection() (ignis.services.network.Vpn method)</a>
+</li>
+      <li><a href="api/services/network.html#ignis.services.network.Ethernet.new_device">new_device() (ignis.services.network.Ethernet method)</a>
+
+      <ul>
+        <li><a href="api/services/network.html#ignis.services.network.Wifi.new_device">(ignis.services.network.Wifi method)</a>
+</li>
+      </ul></li>
       <li><a href="api/services/notifications.html#ignis.services.notifications.NotificationService.new_popup">new_popup() (ignis.services.notifications.NotificationService method)</a>
 </li>
       <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.next">next() (ignis.services.mpris.MprisPlayer method)</a>
+</li>
+      <li><a href="api/exceptions.html#ignis.exceptions.NiriIPCNotFoundError">NiriIPCNotFoundError</a>
+</li>
+      <li><a href="api/services/niri.html#ignis.services.niri.NiriService">NiriService (class in ignis.services.niri)</a>
 </li>
       <li><a href="api/services/notifications.html#ignis.services.notifications.Notification">Notification (class in ignis.services.notifications)</a>
 </li>
@@ -1322,6 +1418,10 @@
       </ul></li>
       <li><a href="api/widgets/EventBox.html#ignis.widgets.Widget.EventBox.on_scroll_down">on_scroll_down (ignis.widgets.Widget.EventBox property)</a>
 </li>
+      <li><a href="api/widgets/EventBox.html#ignis.widgets.Widget.EventBox.on_scroll_left">on_scroll_left (ignis.widgets.Widget.EventBox property)</a>
+</li>
+      <li><a href="api/widgets/EventBox.html#ignis.widgets.Widget.EventBox.on_scroll_right">on_scroll_right (ignis.widgets.Widget.EventBox property)</a>
+</li>
       <li><a href="api/widgets/EventBox.html#ignis.widgets.Widget.EventBox.on_scroll_up">on_scroll_up (ignis.widgets.Widget.EventBox property)</a>
 </li>
       <li><a href="api/widgets/DropDown.html#ignis.widgets.Widget.DropDown.on_selected">on_selected (ignis.widgets.Widget.DropDown property)</a>
@@ -1334,14 +1434,14 @@
       </ul></li>
       <li><a href="api/widgets/FileDialog.html#ignis.widgets.Widget.FileDialog.open_dialog">open_dialog() (ignis.widgets.Widget.FileDialog method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/app.html#ignis.app.IgnisApp.open_window">open_window() (ignis.app.IgnisApp method)</a>
 
       <ul>
         <li><a href="api/client.html#ignis.client.IgnisClient.open_window">(ignis.client.IgnisClient method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/services/options.html#ignis.services.options.Option">Option (class in ignis.services.options)</a>
 </li>
       <li><a href="api/exceptions.html#ignis.exceptions.OptionExistsError.option_name">option_name (ignis.exceptions.OptionExistsError property)</a>
@@ -1408,6 +1508,8 @@
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothDevice.paired">paired (ignis.services.bluetooth.BluetoothDevice property)</a>
+</li>
       <li><a href="api/utils/FileMonitor.html#ignis.utils.FileMonitor.path">path (ignis.utils.FileMonitor property)</a>
 </li>
       <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.pause">pause() (ignis.services.mpris.MprisPlayer method)</a>
@@ -1461,6 +1563,8 @@
       <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.position">position (ignis.services.mpris.MprisPlayer property)</a>
 </li>
       <li><a href="api/services/upower.html#ignis.services.upower.UPowerDevice.power_supply">power_supply (ignis.services.upower.UPowerDevice property)</a>
+</li>
+      <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothService.powered">powered (ignis.services.bluetooth.BluetoothService property)</a>
 </li>
       <li><a href="api/utils/FileMonitor.html#ignis.utils.FileMonitor.prevent_gc">prevent_gc (ignis.utils.FileMonitor property)</a>
 </li>
@@ -1536,11 +1640,19 @@
 </li>
       <li><a href="api/app.html#ignis.app.IgnisApp.remove_window">remove_window() (ignis.app.IgnisApp method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/services/audio.html#ignis.services.audio.Stream.removed">removed() (ignis.services.audio.Stream method)</a>
 
       <ul>
+        <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothDevice.removed">(ignis.services.bluetooth.BluetoothDevice method)</a>
+</li>
+        <li><a href="api/services/network.html#ignis.services.network.EthernetDevice.removed">(ignis.services.network.EthernetDevice method)</a>
+</li>
+        <li><a href="api/services/network.html#ignis.services.network.VpnConnection.removed">(ignis.services.network.VpnConnection method)</a>
+</li>
+        <li><a href="api/services/network.html#ignis.services.network.WifiAccessPoint.removed">(ignis.services.network.WifiAccessPoint method)</a>
+</li>
+        <li><a href="api/services/network.html#ignis.services.network.WifiDevice.removed">(ignis.services.network.WifiDevice method)</a>
+</li>
         <li><a href="api/services/options.html#ignis.services.options.Option.removed">(ignis.services.options.Option method)</a>
 </li>
         <li><a href="api/services/options.html#ignis.services.options.OptionsGroup.removed">(ignis.services.options.OptionsGroup method)</a>
@@ -1550,9 +1662,11 @@
         <li><a href="api/services/upower.html#ignis.services.upower.UPowerDevice.removed">(ignis.services.upower.UPowerDevice method)</a>
 </li>
       </ul></li>
-      <li><a href="api/services/network.html#ignis.services.network.WifiAccessPoint.requires_password">requires_password (ignis.services.network.WifiAccessPoint property)</a>
-</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/app.html#ignis.app.IgnisApp.reset_css">reset_css() (ignis.app.IgnisApp method)</a>
+</li>
+      <li><a href="api/services/systemd.html#ignis.services.systemd.SystemdUnit.restart">restart() (ignis.services.systemd.SystemdUnit method)</a>
 </li>
       <li><a href="api/utils/exec_sh_async.html#ignis.utils.exec_sh.AsyncCompletedProcess.returncode">returncode (ignis.utils.exec_sh.AsyncCompletedProcess property)</a>
 </li>
@@ -1602,6 +1716,8 @@
 </li>
       <li><a href="api/exceptions.html#ignis.exceptions.CssParsingError.section">section (ignis.exceptions.CssParsingError property)</a>
 </li>
+      <li><a href="api/services/network.html#ignis.services.network.WifiAccessPoint.security">security (ignis.services.network.WifiAccessPoint property)</a>
+</li>
       <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.seek">seek() (ignis.services.mpris.MprisPlayer method)</a>
 </li>
       <li><a href="api/widgets/FileDialog.html#ignis.widgets.Widget.FileDialog.select_folder">select_folder (ignis.widgets.Widget.FileDialog property)</a>
@@ -1613,7 +1729,11 @@
 </li>
       </ul></li>
       <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandService.send_command">send_command() (ignis.services.hyprland.HyprlandService method)</a>
+
+      <ul>
+        <li><a href="api/services/niri.html#ignis.services.niri.NiriService.send_command">(ignis.services.niri.NiriService method)</a>
 </li>
+      </ul></li>
       <li><a href="api/utils/send_socket.html#ignis.utils.Utils.send_socket">send_socket() (in module ignis.utils.Utils)</a>
 </li>
       <li><a href="api/widgets/Separator.html#ignis.widgets.Widget.Separator">Separator (class in ignis.widgets.Widget)</a>
@@ -1625,6 +1745,8 @@
       <li><a href="api/exceptions.html#ignis.exceptions.ServiceNotFoundError">ServiceNotFoundError</a>
 </li>
       <li><a href="api/services/fetch.html#ignis.services.fetch.FetchService.session_type">session_type (ignis.services.fetch.FetchService property)</a>
+</li>
+      <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothService.setup_mode">setup_mode (ignis.services.bluetooth.BluetoothService property)</a>
 </li>
       <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.shuffle">shuffle (ignis.services.mpris.MprisPlayer property)</a>
 </li>
@@ -1640,17 +1762,21 @@
 </li>
       <li><a href="api/services/network.html#ignis.services.network.EthernetDevice.speed">speed (ignis.services.network.EthernetDevice property)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/widgets/SpinButton.html#ignis.widgets.Widget.SpinButton">SpinButton (class in ignis.widgets.Widget)</a>
 </li>
       <li><a href="api/services/network.html#ignis.services.network.WifiAccessPoint.ssid">ssid (ignis.services.network.WifiAccessPoint property)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/services/systemd.html#ignis.services.systemd.SystemdUnit.start">start() (ignis.services.systemd.SystemdUnit method)</a>
+</li>
       <li><a href="api/services/recorder.html#ignis.services.recorder.RecorderService.start_recording">start_recording() (ignis.services.recorder.RecorderService method)</a>
 </li>
-      <li><a href="api/services/network.html#ignis.services.network.EthernetDevice.state">state (ignis.services.network.EthernetDevice property)</a>
+      <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothService.state">state (ignis.services.bluetooth.BluetoothService property)</a>
 
       <ul>
+        <li><a href="api/services/network.html#ignis.services.network.EthernetDevice.state">(ignis.services.network.EthernetDevice property)</a>
+</li>
         <li><a href="api/services/network.html#ignis.services.network.WifiDevice.state">(ignis.services.network.WifiDevice property)</a>
 </li>
       </ul></li>
@@ -1671,7 +1797,11 @@
 </li>
       </ul></li>
       <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.stop">stop() (ignis.services.mpris.MprisPlayer method)</a>
+
+      <ul>
+        <li><a href="api/services/systemd.html#ignis.services.systemd.SystemdUnit.stop">(ignis.services.systemd.SystemdUnit method)</a>
 </li>
+      </ul></li>
       <li><a href="api/services/recorder.html#ignis.services.recorder.RecorderService.stop_recording">stop_recording() (ignis.services.recorder.RecorderService method)</a>
 </li>
       <li><a href="api/services/audio.html#ignis.services.audio.Stream">Stream (class in ignis.services.audio)</a>
@@ -1699,8 +1829,20 @@
       <li><a href="api/widgets/Switch.html#ignis.widgets.Widget.Switch">Switch (class in ignis.widgets.Widget)</a>
 </li>
       <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandService.switch_kb_layout">switch_kb_layout() (ignis.services.hyprland.HyprlandService method)</a>
+
+      <ul>
+        <li><a href="api/services/niri.html#ignis.services.niri.NiriService.switch_kb_layout">(ignis.services.niri.NiriService method)</a>
 </li>
+      </ul></li>
       <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandService.switch_to_workspace">switch_to_workspace() (ignis.services.hyprland.HyprlandService method)</a>
+
+      <ul>
+        <li><a href="api/services/niri.html#ignis.services.niri.NiriService.switch_to_workspace">(ignis.services.niri.NiriService method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/services/systemd.html#ignis.services.systemd.SystemdService">SystemdService (class in ignis.services.systemd)</a>
+</li>
+      <li><a href="api/services/systemd.html#ignis.services.systemd.SystemdUnit">SystemdUnit (class in ignis.services.systemd)</a>
 </li>
       <li><a href="api/services/system_tray.html#ignis.services.system_tray.SystemTrayItem">SystemTrayItem (class in ignis.services.system_tray)</a>
 </li>
@@ -1774,6 +1916,8 @@
 </li>
       <li><a href="api/gobject.html#ignis.gobject.Binding.transform">transform (ignis.gobject.Binding property)</a>
 </li>
+      <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothDevice.trusted">trusted (ignis.services.bluetooth.BluetoothDevice property)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -1781,6 +1925,8 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/widgets/MenuItem.html#ignis.widgets.Widget.MenuItem.uniq_name">uniq_name (ignis.widgets.Widget.MenuItem property)</a>
+</li>
+      <li><a href="api/services/systemd.html#ignis.services.systemd.SystemdService.units">units (ignis.services.systemd.SystemdService property)</a>
 </li>
       <li><a href="api/dbus.html#ignis.dbus.DBusService.unown_name">unown_name() (ignis.dbus.DBusService method)</a>
 </li>
@@ -1889,7 +2035,11 @@
       <li><a href="api/app.html#ignis.app.IgnisApp.windows">windows (ignis.app.IgnisApp property)</a>
 </li>
       <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandService.workspaces">workspaces (ignis.services.hyprland.HyprlandService property)</a>
+
+      <ul>
+        <li><a href="api/services/niri.html#ignis.services.niri.NiriService.workspaces">(ignis.services.niri.NiriService property)</a>
 </li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
