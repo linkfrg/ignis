@@ -1,6 +1,7 @@
 from __future__ import annotations
 import os
 import sys
+import datetime
 from ignis.dbus import DBusService
 from ignis.utils import Utils
 from loguru import logger
@@ -338,6 +339,16 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         self._is_ready = True
         self.emit("ready")
         logger.info("Ready.")
+
+        date = datetime.datetime.now()
+
+        if date.month == 12 and date.day in [30, 31]:
+            self.__happy_new_year()
+        elif date.month == 1 and date.day in [1, 2]:
+            self.__happy_new_year()
+
+    def __happy_new_year(self) -> None:
+        logger.success("Happy New Year!")
 
     def get_window(self, window_name: str) -> Gtk.Window:
         """
