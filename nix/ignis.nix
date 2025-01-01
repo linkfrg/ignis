@@ -77,7 +77,7 @@ pkgs.stdenv.mkDerivation {
         pkgs.gobject-introspection
         pkgs.networkmanager
         pkgs.gst_all_1.gstreamer
-	pkgs.gnome-bluetooth
+	      pkgs.gnome-bluetooth
       ])}:$GI_TYPELIB_PATH" \
       --set LD_LIBRARY_PATH "$out/lib:${pkgs.gtk4-layer-shell}/lib:${pkgs.glib}/lib:$LD_LIBRARY_PATH" \
       --set GST_PLUGIN_PATH "${concatStringsSep ":" (map (pkg: "${pkg}/lib/gstreamer-1.0") [
