@@ -1,74 +1,22 @@
 Setting up a Development Environment
 =====================================
 
-Clone repository
--------------------
+Firstly, clone the repository:
 
 .. code-block:: bash
 
+    # replace with the actual URL of your fork (if needed)
     git clone https://github.com/linkfrg/ignis.git
     cd ignis
 
-Update submodules
-------------------
-
-.. code-block:: bash
-
-    git submodule update --init --recursive
-
-Create Python Virtual Environment
-----------------------------------
-
-.. code-block:: bash
-
-    python -m venv venv
-
-Activate Virtual Environment
-----------------------------
-
-- For Bash:
-
-.. code-block:: bash
-
-    source venv/bin/activate
-
-- For Fish:
-
-.. code-block:: fish
-
-    . venv/bin/activate.fish
-
-Install dependencies to Virtual Environment
--------------------------------------------
-
-Common dependencies:
-
-.. code-block:: bash
-
-    pip install --upgrade -r requirements.txt
-
-Development dependencies:
-
-.. code-block:: bash
-
-    pip install --upgrade -r dev.txt
-
-
-Build and Install Ignis to Virtual Environment
-----------------------------------------------
-
-.. code-block:: bash
-
-    meson setup build --prefix=$(pwd)/venv --libdir "lib/ignis"
-    meson compile -C build
-    meson install -C build
-
-Make a symbolic link to Ignis sources
--------------------------------------
-
-Replace ``python3.12`` with actual version of python.
+Then, run the script:
 
 .. code-block:: bash
     
-    rm -R venv/lib/python3.12/site-packages/ignis
-    ln -sf $(pwd)/ignis venv/lib/python3.12/site-packages/ignis
+    bash tools/setup_devenv.sh
+
+It will create a Python virtual environment, 
+install Ignis with its dependencies (including dev dependencies), and create a symbolic link to the Ignis source files.
+
+Now you can edit the ``ignis`` directory at the root of the repository, 
+and the changes will be applied without the need to reinstall Ignis.
