@@ -1,5 +1,5 @@
 Options
 ==========
 
-.. autoclass:: ignis.options.IgnisOptions
+.. autoclass:: ignis.options.Options
     :members:
