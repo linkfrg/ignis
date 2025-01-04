@@ -105,6 +105,13 @@ class RootOptionsManager(OptionsManager):
             self.apply_from_dict(data)
 
 
+def get_recorder_default_file_location() -> str | None:
+    if "sphinx" not in sys.modules:
+        return GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_VIDEOS)
+    else:
+        return "XDG Videos directory"
+
+
 class Options(RootOptionsManager):
     def __init__(self):
         super().__init__(file=f"{CACHE_DIR}/ignis_options.json")
@@ -137,9 +144,7 @@ class Options(RootOptionsManager):
         bitrate: int = 8000
 
         #: The default location for saving recordings. Defaults to XDG Video directory.
-        default_file_location: str | None = GLib.get_user_special_dir(
-            GLib.UserDirectory.DIRECTORY_VIDEOS
-        )
+        default_file_location: str | None = get_recorder_default_file_location()
 
         #: The default filename for recordings. Supports time formating.
         default_filename: str = "%Y-%m-%d_%H-%M-%S.mp4"
