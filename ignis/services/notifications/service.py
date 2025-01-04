@@ -4,7 +4,6 @@ from ignis.dbus import DBusService, DBusProxy
 from gi.repository import GLib, GObject, GdkPixbuf  # type: ignore
 from ignis.utils import Utils
 from loguru import logger
-from ignis.services.options import OptionsService
 from datetime import datetime
 from ignis.base_service import BaseService
 from .notification import Notification
@@ -15,6 +14,7 @@ from .constants import (
     NOTIFICATIONS_IMAGE_DATA,
 )
 from ignis.exceptions import AnotherNotificationDaemonRunningError
+from ignis.options import options
 
 
 class NotificationService(BaseService):
@@ -63,20 +63,6 @@ class NotificationService(BaseService):
 
         os.makedirs(NOTIFICATIONS_CACHE_DIR, exist_ok=True)
         os.makedirs(NOTIFICATIONS_IMAGE_DATA, exist_ok=True)
-
-        options = OptionsService.get_default()
-
-        opt_group = options.create_group(name="notifications", exists_ok=True)
-
-        self._dnd_opt = opt_group.create_option(
-            name="dnd", default=False, exists_ok=True
-        )
-        self._popup_timeout_opt = opt_group.create_option(
-            name="timeout", default=5000, exists_ok=True
-        )
-        self._max_popups_count_opt = opt_group.create_option(
-            name="max_popups_count", default=3, exists_ok=True
-        )
 
         self.__load_notifications()
 
@@ -135,54 +121,6 @@ class NotificationService(BaseService):
         A list of currently active popup notifications.
         """
         return list(self._popups.values())
-
-    @GObject.Property
-    def dnd(self) -> bool:
-        """
-        - read-write
-
-        Do Not Disturb mode.
-        If set to ``True``, the ``new_popup`` signal will not be emitted,
-        and all new :class:`~ignis.services.notifications.Notification` instances will have ``popup`` set to ``False``.
-
-        Default: ``False``.
-        """
-        return self._dnd_opt.value
-
-    @dnd.setter
-    def dnd(self, value: bool) -> None:
-        self._dnd_opt.value = value
-
-    @GObject.Property
-    def popup_timeout(self) -> int:
-        """
-        - read-write
-
-        The timeout before a popup is automatically dismissed, in milliseconds.
-
-        Default: ``5000``.
-        """
-        return self._popup_timeout_opt.value
-
-    @popup_timeout.setter
-    def popup_timeout(self, value: int) -> None:
-        self._popup_timeout_opt.value = value
-
-    @GObject.Property
-    def max_popups_count(self) -> int:
-        """
-        - read-write
-
-        The Maximum number of popups.
-        If the length of the ``popups`` list exceeds ``max_popups_count``, the oldest popup will be dismissed.
-
-        Default: ``3``.
-        """
-        return self._max_popups_count_opt.value
-
-    @max_popups_count.setter
-    def max_popups_count(self, value: int) -> None:
-        self._max_popups_count_opt.value = value
 
     def __GetServerInformation(self, *args) -> GLib.Variant:
         return GLib.Variant(
@@ -280,13 +218,13 @@ class NotificationService(BaseService):
             body=body,
             actions=actions,
             urgency=hints.get("urgency", 1),
-            timeout=self.popup_timeout if timeout == -1 else timeout,
+            timeout=options.notifications.popup_timeout if timeout == -1 else timeout,
             time=datetime.now().timestamp(),
-            popup=not self.dnd,
+            popup=not options.notifications.dnd,
         )
 
-        if len(self.popups) >= self.max_popups_count:
-            if not self.max_popups_count == 0:
+        if len(self.popups) >= options.notifications.max_popups_count:
+            if not options.notifications.max_popups_count == 0:
                 self.popups[0].dismiss()
 
         if notification.popup:
