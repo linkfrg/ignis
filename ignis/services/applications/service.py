@@ -3,6 +3,7 @@ from ignis.base_service import BaseService
 from .application import Application
 from ignis.options import options
 
+
 class ApplicationsService(BaseService):
     """
     Provides a list of applications installed on the system.

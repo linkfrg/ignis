@@ -62,7 +62,7 @@ class OptionsManager(IgnisGObject):
             else:
                 self.__setattr__(key, value, False)
 
-    def __yield_options_managers(self) -> Generator["OptionsManager", None, None]:
+    def __yield_options_managers(self) -> Generator[tuple[str, "OptionsManager"], None, None]:
         for key, value in type(self).__dict__.items():
             if key.startswith("__"):
                 continue
@@ -98,9 +98,10 @@ class RootOptionsManager(OptionsManager):
             json.dump(self.to_dict(), file, indent=4)
 
     def load(self, file: str) -> None:
-        with open(self._file) as file:
-            data = json.load(file)
+        with open(file) as fp:
+            data = json.load(fp)
             self.apply_from_dict(data)
+
 
 class Options(RootOptionsManager):
     def __init__(self):
@@ -134,7 +135,9 @@ class Options(RootOptionsManager):
         bitrate: int = 8000
 
         #: The default location for saving recordings. Defaults to XDG Video directory.
-        default_file_location: str = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_VIDEOS)
+        default_file_location: str | None = GLib.get_user_special_dir(
+            GLib.UserDirectory.DIRECTORY_VIDEOS
+        )
 
         #: The default filename for recordings. Supports time formating.
         default_filename: str = "%Y-%m-%d_%H-%M-%S.mp4"
@@ -143,6 +146,7 @@ class Options(RootOptionsManager):
         """
         Options for the Applications Service
         """
+
         pinned_apps: list[str] = []
 
     notifications = Notifications()
