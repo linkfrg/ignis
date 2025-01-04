@@ -21,6 +21,11 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install system dependencies
+        run: |
+          sudo apt update
+          sudo apt install libcairo2-dev
+      
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
