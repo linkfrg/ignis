@@ -62,7 +62,9 @@ class OptionsManager(IgnisGObject):
             else:
                 self.__setattr__(key, value, False)
 
-    def __yield_options_managers(self) -> Generator[tuple[str, "OptionsManager"], None, None]:
+    def __yield_options_managers(
+        self,
+    ) -> Generator[tuple[str, "OptionsManager"], None, None]:
         for key, value in type(self).__dict__.items():
             if key.startswith("__"):
                 continue
