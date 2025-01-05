@@ -58,9 +58,18 @@ class Options(OptionsManager):
 
         pinned_apps: list[str] = []
 
+    class Wallpaper(OptionsGroup):
+        """
+        Options for the Wallpaper Service
+        """
+
+        #: The path to the wallpaper image.
+        wallpaper_path: str | None = None
+
     notifications = Notifications()
     recorder = Recorder()
     applications = Applications()
+    wallpaper = Wallpaper()
 
 
 options = Options()
