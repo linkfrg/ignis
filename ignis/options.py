@@ -12,6 +12,9 @@ def get_recorder_default_file_location() -> str | None:
 
 
 class Options(OptionsManager):
+    """
+    Options for Ignis.
+    """
     def __init__(self):
         super().__init__(file=f"{CACHE_DIR}/ignis_options.json")
 

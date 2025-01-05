@@ -50,6 +50,8 @@ class OptionsGroup(IgnisGObject):
     @GObject.Signal(arg_types=(str,))
     def changed(self, *args):
         """
+        - Signal
+
         Emitted when an option of this group has changed
 
         Args:
@@ -59,6 +61,8 @@ class OptionsGroup(IgnisGObject):
     @GObject.Signal(arg_types=(str, str))
     def subgroup_changed(self, *args):
         """
+        - Signal
+
         Emitted when an option of a subgroup has changed
 
         Args:
@@ -92,8 +96,22 @@ class OptionsGroup(IgnisGObject):
         Creates a fake GObject that represents an option
         and makes Binding for it
         """
-        opt_obj = Option(self, property_name)
+        opt_obj = Option(self, property_name.replace("-", "_"))
         return Binding(opt_obj, "value", transform)
+
+    def connect_option(self, option_name: str, callback: Callable, *args) -> None:
+        """
+        Connect an event of option change with the provided `callback`
+        This method made as replacement for ``notify`` signal, since options are simple python properties and not GObject properties.
+
+        Args:
+            option_name: The name of the option to connect.
+            callback: The callback to invoke when value of the option changes.
+
+        `*args` will be passed to the `callback`.
+        """
+        option_name = option_name.replace("-", "_")
+        self.connect("changed", lambda x, name: callback(*args) if option_name == name else None)
 
     def to_dict(self) -> dict:
         """
@@ -132,7 +150,7 @@ class OptionsGroup(IgnisGObject):
 
 class OptionsManager(OptionsGroup):
     """
-    Bases: ``~ignis.options_manager.OptionsGroup``.
+    Bases: :class:`OptionsGroup`.
 
     This is the top-level class in the options hierarchy.
 
