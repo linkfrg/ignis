@@ -28,7 +28,7 @@ class OptionsGroup(IgnisGObject):
         super().__init__()
         self._modified_options: dict[str, Any] = {}
 
-        for name, manager in self.__yield_options_managers():
+        for name, manager in self.__yield_subgroups():
             manager.connect("changed", lambda x, name: self.emit("changed", name))
 
     @GObject.Signal(arg_types=(str,))
@@ -47,7 +47,7 @@ class OptionsGroup(IgnisGObject):
 
     def to_dict(self) -> dict:
         data = self._modified_options.copy()
-        for name, manager in self.__yield_options_managers():
+        for name, manager in self.__yield_subgroups():
             data[name] = manager.to_dict()
 
         return data
@@ -61,7 +61,7 @@ class OptionsGroup(IgnisGObject):
             else:
                 self.__setattr__(key, value, False)
 
-    def __yield_options_managers(
+    def __yield_subgroups(
         self,
     ) -> Generator[tuple[str, "OptionsGroup"], None, None]:
         for key, value in type(self).__dict__.items():
