@@ -34,6 +34,7 @@ class OptionsGroup(IgnisGObject):
     """
     An options group.
     """
+
     def __init__(self):
         super().__init__()
         self._modified_options: dict[str, Any] = {}
@@ -160,6 +161,7 @@ class OptionsManager(OptionsGroup):
         options = Options()
 
     """
+
     def __init__(self, file: str):
         super().__init__()
         self._file = file
