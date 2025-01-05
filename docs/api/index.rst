@@ -11,6 +11,7 @@ This reference manual details functions, modules, and objects included in Ignis,
    variable
    client
    options
+   options_manager
    exceptions
    dbus
    dbus_menu
