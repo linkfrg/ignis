@@ -111,7 +111,9 @@ class OptionsGroup(IgnisGObject):
         `*args` will be passed to the `callback`.
         """
         option_name = option_name.replace("-", "_")
-        self.connect("changed", lambda x, name: callback(*args) if option_name == name else None)
+        self.connect(
+            "changed", lambda x, name: callback(*args) if option_name == name else None
+        )
 
     def to_dict(self) -> dict:
         """

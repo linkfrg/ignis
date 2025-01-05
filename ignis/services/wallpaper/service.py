@@ -36,7 +36,8 @@ class WallpaperService(BaseService):
 
     def __update_wallpaper(self) -> None:
         try:
-            shutil.copy(options.wallpaper.wallpaper_path, CACHE_WALLPAPER_PATH)
+            if options.wallpaper.wallpaper_path is not None:
+                shutil.copy(options.wallpaper.wallpaper_path, CACHE_WALLPAPER_PATH)
         except shutil.SameFileError:
             return
 
