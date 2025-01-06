@@ -22,6 +22,8 @@ class NotificationService(BaseService):
     A notification daemon.
     Allow receiving notifications and perform actions on them.
 
+    There are options available for this service: :class:`~ignis.options.Options.Notifications`.
+
     Raises:
         AnotherNotificationDaemonRunningError: If another notification daemon is already running.
 

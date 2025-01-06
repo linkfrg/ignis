@@ -12,6 +12,8 @@ class WallpaperService(BaseService):
     A simple service to set the wallpaper.
     Supports multiple monitors.
 
+    There are options available for this service: :class:`~ignis.options.Options.Wallpaper`.
+
     Example usage:
 
     .. code-block:: python

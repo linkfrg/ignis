@@ -20,6 +20,8 @@ class RecorderService(BaseService):
     Uses XDG Desktop portal and PipeWire.
     Allow record screen with microphone audio and internal system audio.
 
+    There are options available for this service: :class:`~ignis.options.Options.Recorder`.
+
     Dependencies:
         - GStreamer
         - PipeWire

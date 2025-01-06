@@ -9,6 +9,8 @@ class ApplicationsService(BaseService):
     Provides a list of applications installed on the system.
     It also allows "pinning" of apps and retrieving a list of pinned applications.
 
+    There are options available for this service: :class:`~ignis.options.Options.Applications`.
+
     Example usage:
 
     .. code-block:: python

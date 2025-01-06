@@ -42,7 +42,7 @@ class Options(OptionsManager):
 
     class Notifications(OptionsGroup):
         """
-        Options for the NotificationsService
+        Options for the :class:`~ignis.services.notifications.NotificationService`.
         """
 
         #: Do Not Disturb mode.
@@ -61,7 +61,7 @@ class Options(OptionsManager):
 
     class Recorder(OptionsGroup):
         """
-        Options for the Recorder Service
+        Options for the :class:`~ignis.services.recorder.RecorderService`.
         """
 
         #: The bitrate of the recording.
@@ -75,7 +75,7 @@ class Options(OptionsManager):
 
     class Applications(OptionsGroup):
         """
-        Options for the Applications Service
+        Options for the :class:`~ignis.services.applications.ApplicationsService`.
         """
 
         #: A list of the pinned applications desktop files, e.g. ``"firefox.desktop"``, ``"code.desktop"``.
@@ -85,7 +85,7 @@ class Options(OptionsManager):
 
     class Wallpaper(OptionsGroup):
         """
-        Options for the Wallpaper Service
+        Options for the :class:`~ignis.services.wallpaper.WallpaperService`.
         """
 
         #: The path to the wallpaper image.
