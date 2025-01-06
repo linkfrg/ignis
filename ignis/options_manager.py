@@ -78,7 +78,7 @@ class OptionsGroup(IgnisGObject):
         and makes Binding for it
         """
         opt_obj = Option(self, property_name.replace("-", "_"))
-        return Binding(opt_obj, "value", transform)
+        return opt_obj.bind("value", transform)
 
     def connect_option(self, option_name: str, callback: Callable, *args) -> None:
         """
