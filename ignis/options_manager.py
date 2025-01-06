@@ -70,25 +70,6 @@ class OptionsGroup(IgnisGObject):
             option_name: The name of the option.
         """
 
-    def __setattr__(self, name: str, value: Any, emit: bool = True) -> None:
-        if not name.startswith("_"):
-            self._modified_options[name] = value
-            if emit:
-                self.emit("changed", name)
-        return super().__setattr__(name, value)
-
-    def __getattribute__(self, name: str) -> Any:
-        if name.startswith("set_"):
-            property_name = name.replace("set_", "")
-            if hasattr(self, property_name):
-                return lambda value: setattr(self, property_name, value)
-        elif name.startswith("get_"):
-            property_name = name.replace("get_", "")
-            if hasattr(self, property_name):
-                return lambda: getattr(self, property_name)
-
-        return super().__getattribute__(name)
-
     def bind(self, property_name: str, transform: Callable | None = None) -> Binding:
         """
         :meta private:
@@ -149,6 +130,25 @@ class OptionsGroup(IgnisGObject):
                 continue
             if isinstance(value, OptionsGroup):
                 yield key, value
+
+    def __setattr__(self, name: str, value: Any, emit: bool = True) -> None:
+        if not name.startswith("_"):
+            self._modified_options[name] = value
+            if emit:
+                self.emit("changed", name)
+        return super().__setattr__(name, value)
+
+    def __getattribute__(self, name: str) -> Any:
+        if name.startswith("set_"):
+            property_name = name.replace("set_", "")
+            if hasattr(self, property_name):
+                return lambda value: setattr(self, property_name, value)
+        elif name.startswith("get_"):
+            property_name = name.replace("get_", "")
+            if hasattr(self, property_name):
+                return lambda: getattr(self, property_name)
+
+        return super().__getattribute__(name)
 
 
 class OptionsManager(OptionsGroup):
