@@ -1,11 +1,11 @@
 import datetime
 from gi.repository import GObject, GLib  # type: ignore
 from ignis.app import IgnisApp
-from ignis.services.options import OptionsService
 from ignis.services.audio import AudioService
 from ignis.exceptions import GstPluginNotFoundError
 from ignis.base_service import BaseService
 from typing import Union
+from ignis.options import options
 from .session import SessionManager
 from .util import gst_inspect
 from ._imports import Gst
@@ -19,6 +19,8 @@ class RecorderService(BaseService):
     A screen recorder.
     Uses XDG Desktop portal and PipeWire.
     Allow record screen with microphone audio and internal system audio.
+
+    There are options available for this service: :class:`~ignis.options.Options.Recorder`.
 
     Dependencies:
         - GStreamer
@@ -60,23 +62,7 @@ class RecorderService(BaseService):
 
         self._N_THREADS: str = str(min(max(1, GLib.get_num_processors()), 64))
 
-        options = OptionsService.get_default()
         self._audio = AudioService.get_default()
-
-        opt_group = options.create_group(name="recorder", exists_ok=True)
-        self._bitrate_opt = opt_group.create_option(
-            name="bitrate", default=8000, exists_ok=True
-        )
-        self._default_file_location_opt = opt_group.create_option(
-            name="default_file_location",
-            default=GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_VIDEOS),
-            exists_ok=True,
-        )
-        self._default_filename_opt = opt_group.create_option(
-            name="default_filename",
-            default="%Y-%m-%d_%H-%M-%S.mp4",
-            exists_ok=True,
-        )
 
         app.connect("shutdown", lambda x: self.stop_recording())
 
@@ -124,51 +110,6 @@ class RecorderService(BaseService):
         """
         return self._is_paused
 
-    @GObject.Property
-    def bitrate(self) -> int:
-        """
-        - read-write
-
-        The bitrate of the recording.
-
-        Default: ``8000``
-        """
-        return self._bitrate_opt.value
-
-    @bitrate.setter
-    def bitrate(self, value: int) -> None:
-        self._bitrate_opt.value = value
-
-    @GObject.Property
-    def default_file_location(self) -> str:
-        """
-        - read-write
-
-        The default location for saving recordings.
-
-        Default: ``$HOME/Videos``.
-        """
-        return self._default_file_location_opt.value
-
-    @default_file_location.setter
-    def default_file_location(self, value: str) -> None:
-        self._default_file_location_opt.value = value
-
-    @GObject.Property
-    def default_filename(self) -> str:
-        """
-        - read-write
-
-        The default filename for recordings. Supports time formating.
-
-        Default: ``%Y-%m-%d_%H-%M-%S.mp4``
-        """
-        return self._default_filename_opt.value
-
-    @default_filename.setter
-    def default_filename(self, value: str) -> None:
-        self._default_filename_opt.value = value
-
     def start_recording(
         self,
         path: str | None = None,
@@ -187,12 +128,12 @@ class RecorderService(BaseService):
         """
 
         if path is None:
-            path = f"{self.default_file_location}/{datetime.datetime.now().strftime(self.default_filename)}"
+            path = f"{options.recorder.default_file_location}/{datetime.datetime.now().strftime(options.recorder.default_filename)}"
 
         pipeline_description = (
             PIPELINE_TEMPLATE.replace("{n_threads}", self._N_THREADS)
             .replace("{path}", path)
-            .replace("{bitrate}", str(self.bitrate))
+            .replace("{bitrate}", str(options.recorder.bitrate))
         )
 
         audio_pipeline = ""
