@@ -191,14 +191,14 @@ class OptionsManager(OptionsGroup):
         super().__init__()
         self._file = file
 
-        if "sphinx" not in sys.modules and file is not None:
+        if "sphinx" not in sys.modules and self._file is not None:
             self.connect("changed", self.__autosave)
             self.connect("subgroup-changed", self.__autosave)
 
             self.load_from_file(self._file)
 
     def __autosave(self, *args) -> None:
-        self.save_to_file(self._file)
+        self.save_to_file(self._file)  # type: ignore
 
     def save_to_file(self, file: str) -> None:
         """
@@ -207,8 +207,8 @@ class OptionsManager(OptionsGroup):
         Args:
             file: The path to the file where options will be saved.
         """
-        with open(self._file, "w") as file:
-            json.dump(self.to_dict(), file, indent=4)
+        with open(file, "w") as fp:
+            json.dump(self.to_dict(), fp, indent=4)
 
     def load_from_file(self, file: str) -> None:
         """
