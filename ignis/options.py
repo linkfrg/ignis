@@ -35,6 +35,27 @@ class Options(OptionsManager):
         * and etc.
 
     You can use classes (not instances of them) to obtain default values of options.
+
+    Example usage:
+
+    .. code-block::
+
+        from ignis.options import options
+
+        # Get an option value
+        print(options.notifications.dnd)
+
+        # Set a new value for an option
+        options.notifications.dnd = True
+
+        # Connect to an option change event
+        options.notifications.connect_option("dnd", lambda: print("option dnd changed! new value:", options.notifications.dnd))
+
+        # You can also bind to an option!
+        options.notifications.bind("dnd")
+
+        # Obtain the default value of an option
+        print(options.Notifications.popup_timeout)
     """
 
     def __init__(self):
