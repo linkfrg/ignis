@@ -30,7 +30,7 @@
   <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=fe5c0044" />
@@ -58,7 +58,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="System Tray" href="system_tray.html" />
-    <link rel="prev" title="Options" href="options.html" />
+    <link rel="prev" title="Notifications" href="notifications.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -371,6 +371,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../gobject.html">GObject</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../variable.html">Variable</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../client.html">Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../options.html">Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../options_manager.html">Options Manager</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../exceptions.html">Exceptions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dbus.html">D-Bus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dbus_menu.html">D-Bus menu</a></li>
@@ -423,7 +425,6 @@
 <li class="toctree-l2"><a class="reference internal" href="network.html">Network</a></li>
 <li class="toctree-l2"><a class="reference internal" href="niri.html">Niri</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notifications.html">Notifications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="options.html">Options</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Recorder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="system_tray.html">System Tray</a></li>
 <li class="toctree-l2"><a class="reference internal" href="systemd.html">Systemd</a></li>
@@ -530,6 +531,7 @@
 <dd><p>A screen recorder.
 Uses XDG Desktop portal and PipeWire.
 Allow record screen with microphone audio and internal system audio.</p>
+<p>There are options available for this service: <a class="reference internal" href="../options.html#ignis.options.Options.Recorder" title="ignis.options.Options.Recorder"><code class="xref py py-class docutils literal notranslate"><span class="pre">Recorder</span></code></a>.</p>
 <dl class="simple">
 <dt>Dependencies:</dt><dd><ul class="simple">
 <li><p>GStreamer</p></li>
@@ -550,8 +552,8 @@ Allow record screen with microphone audio and internal system audio.</p>
 </dd>
 </dl>
 <p>Example usage:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.services.recorder</span> <span class="kn">import</span> <span class="n">RecorderService</span>
-<span class="kn">from</span> <span class="nn">ignis.utils</span> <span class="kn">import</span> <span class="n">Utils</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ignis.services.recorder</span><span class="w"> </span><span class="kn">import</span> <span class="n">RecorderService</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ignis.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">Utils</span>
 
 <span class="n">recorder</span> <span class="o">=</span> <span class="n">RecorderService</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span>
 
@@ -595,36 +597,6 @@ Allow record screen with microphone audio and internal system audio.</p>
 <li><p>read-only</p></li>
 </ul>
 <p>Whether recording is currently paused.</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="ignis.services.recorder.RecorderService.bitrate">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bitrate</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.services.recorder.RecorderService.bitrate" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>read-write</p></li>
-</ul>
-<p>The bitrate of the recording.</p>
-<p>Default: <code class="docutils literal notranslate"><span class="pre">8000</span></code></p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="ignis.services.recorder.RecorderService.default_file_location">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">default_file_location</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.recorder.RecorderService.default_file_location" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>read-write</p></li>
-</ul>
-<p>The default location for saving recordings.</p>
-<p>Default: <code class="docutils literal notranslate"><span class="pre">$HOME/Videos</span></code>.</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="ignis.services.recorder.RecorderService.default_filename">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">default_filename</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.recorder.RecorderService.default_filename" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>read-write</p></li>
-</ul>
-<p>The default filename for recordings. Supports time formating.</p>
-<p>Default: <code class="docutils literal notranslate"><span class="pre">%Y-%m-%d_%H-%M-%S.mp4</span></code></p>
 </dd></dl>
 
 <dl class="py method">
@@ -694,12 +666,12 @@ Allow record screen with microphone audio and internal system audio.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="options.html"
+       href="notifications.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Options</p>
+        <p class="prev-next-title">Notifications</p>
       </div>
     </a>
     <a class="right-next"
@@ -735,9 +707,6 @@ Allow record screen with microphone audio and internal system audio.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.recording_stopped"><code class="docutils literal notranslate"><span class="pre">RecorderService.recording_stopped()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.active"><code class="docutils literal notranslate"><span class="pre">RecorderService.active</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.is_paused"><code class="docutils literal notranslate"><span class="pre">RecorderService.is_paused</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.bitrate"><code class="docutils literal notranslate"><span class="pre">RecorderService.bitrate</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.default_file_location"><code class="docutils literal notranslate"><span class="pre">RecorderService.default_file_location</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.default_filename"><code class="docutils literal notranslate"><span class="pre">RecorderService.default_filename</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.start_recording"><code class="docutils literal notranslate"><span class="pre">RecorderService.start_recording()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.stop_recording"><code class="docutils literal notranslate"><span class="pre">RecorderService.stop_recording()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.recorder.RecorderService.pause_recording"><code class="docutils literal notranslate"><span class="pre">RecorderService.pause_recording()</span></code></a></li>

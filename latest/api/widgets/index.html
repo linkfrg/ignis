@@ -30,7 +30,7 @@
   <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=fe5c0044" />
@@ -371,6 +371,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../gobject.html">GObject</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../variable.html">Variable</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../client.html">Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../options.html">Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../options_manager.html">Options Manager</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../exceptions.html">Exceptions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dbus.html">D-Bus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dbus_menu.html">D-Bus menu</a></li>
@@ -423,7 +425,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../services/network.html">Network</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../services/niri.html">Niri</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../services/notifications.html">Notifications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../services/options.html">Options</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../services/recorder.html">Recorder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../services/system_tray.html">System Tray</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../services/systemd.html">Systemd</a></li>
@@ -522,7 +523,7 @@
   <section id="widgets">
 <h1>Widgets<a class="headerlink" href="#widgets" title="Link to this heading">#</a></h1>
 <p>To get widgets, use the universal <code class="docutils literal notranslate"><span class="pre">Widget</span></code> class.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.widgets</span> <span class="kn">import</span> <span class="n">Widget</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ignis.widgets</span><span class="w"> </span><span class="kn">import</span> <span class="n">Widget</span>
 
 <span class="n">Widget</span><span class="o">.</span><span class="n">WIDGET_NAME</span><span class="p">()</span>
 </pre></div>
@@ -545,7 +546,7 @@ For example, you cannot pass an enum to the <code class="docutils literal notran
 <p>You can pass a callback function to the widget costructor as the <code class="docutils literal notranslate"><span class="pre">setup</span></code> property.
 The widget will be passed to the callback function as an argument.
 This can be useful when you need to perform actions when the widget is initialized (for example, connect to signal).</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.widgets</span> <span class="kn">import</span> <span class="n">Widget</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ignis.widgets</span><span class="w"> </span><span class="kn">import</span> <span class="n">Widget</span>
 
 <span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span>
    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;you will not see this text&quot;</span><span class="p">,</span>

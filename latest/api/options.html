@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>BaseWidget &#8212; Ignis documentation</title>
+    <title>Options &#8212; Ignis documentation</title>
   
   
   
@@ -47,7 +47,7 @@
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'api/base_widget';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/options';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://linkfrg.github.io/ignis/latest/_static/switcher.json';
@@ -57,8 +57,8 @@
         </script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="BaseService" href="base_service.html" />
-    <link rel="prev" title="D-Bus menu" href="dbus_menu.html" />
+    <link rel="next" title="Options Manager" href="options_manager.html" />
+    <link rel="prev" title="Client" href="client.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -371,12 +371,12 @@
 <li class="toctree-l1"><a class="reference internal" href="gobject.html">GObject</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variable.html">Variable</a></li>
 <li class="toctree-l1"><a class="reference internal" href="client.html">Client</a></li>
-<li class="toctree-l1"><a class="reference internal" href="options.html">Options</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="options_manager.html">Options Manager</a></li>
 <li class="toctree-l1"><a class="reference internal" href="exceptions.html">Exceptions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dbus.html">D-Bus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dbus_menu.html">D-Bus menu</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">BaseWidget</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base_widget.html">BaseWidget</a></li>
 <li class="toctree-l1"><a class="reference internal" href="base_service.html">BaseService</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="widgets/index.html">Widgets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="widgets/Arrow.html">Arrow</a></li>
@@ -503,7 +503,7 @@
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">API reference</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">BaseWidget</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Options</span></li>
   </ul>
 </nav>
 </div>
@@ -520,29 +520,126 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="basewidget">
-<h1>BaseWidget<a class="headerlink" href="#basewidget" title="Link to this heading">#</a></h1>
+  <section id="options">
+<h1>Options<a class="headerlink" href="#options" title="Link to this heading">#</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="ignis.base_widget.BaseWidget">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.base_widget.</span></span><span class="sig-name descname"><span class="pre">BaseWidget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">setup</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vexpand</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hexpand</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">visible</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.base_widget.BaseWidget" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gobject.html#ignis.gobject.IgnisGObject" title="ignis.gobject.IgnisGObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">IgnisGObject</span></code></a>.</p>
-<p>The base class for all widgets.
-Provides <code class="docutils literal notranslate"><span class="pre">style</span></code> property and allows overriding enums.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="ignis.base_widget.BaseWidget.override_enum">
-<span class="sig-name descname"><span class="pre">override_enum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">property_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">enum</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.base_widget.BaseWidget.override_enum" title="Link to this definition">#</a></dt>
-<dd><p>Override an enum.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>property_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The name of the property to override.</p></li>
-<li><p><strong>enum</strong> (<code class="docutils literal notranslate"><span class="pre">GObject.GEnum</span></code>) -- An enum that accepts the property to be overridden. For example, for <code class="docutils literal notranslate"><span class="pre">valign</span></code> it will be <code class="docutils literal notranslate"><span class="pre">Gtk.Align</span></code>.</p></li>
+<dt class="sig sig-object py" id="ignis.options.Options">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.options.</span></span><span class="sig-name descname"><span class="pre">Options</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.options.Options" title="Link to this definition">#</a></dt>
+<dd><p>Options for Ignis.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Use already initialized instance of this class:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ignis.options</span><span class="w"> </span><span class="kn">import</span> <span class="n">options</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">options</span><span class="o">.</span><span class="n">notifications</span><span class="o">.</span><span class="n">dnd</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Below are classes with options, their names begin with a capital letter.
+However, if you want to get the current value of an option or set a value,
+use an initialized instance that starts with a lowercase letter.</p>
+<dl class="simple">
+<dt>For example:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Notifications</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">notifications</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Recorder</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">recorder</span></code></p></li>
+<li><p>and etc.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
-</dd>
 </dl>
+<p>You can use classes (not instances of them) to obtain default values of options.</p>
+<p>Example usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ignis.options</span><span class="w"> </span><span class="kn">import</span> <span class="n">options</span>
+
+<span class="c1"># Get an option value</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">options</span><span class="o">.</span><span class="n">notifications</span><span class="o">.</span><span class="n">dnd</span><span class="p">)</span>
+
+<span class="c1"># Set a new value for an option</span>
+<span class="n">options</span><span class="o">.</span><span class="n">notifications</span><span class="o">.</span><span class="n">dnd</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># Connect to an option change event</span>
+<span class="n">options</span><span class="o">.</span><span class="n">notifications</span><span class="o">.</span><span class="n">connect_option</span><span class="p">(</span><span class="s2">&quot;dnd&quot;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;option dnd changed! new value:&quot;</span><span class="p">,</span> <span class="n">options</span><span class="o">.</span><span class="n">notifications</span><span class="o">.</span><span class="n">dnd</span><span class="p">))</span>
+
+<span class="c1"># You can also bind to an option!</span>
+<span class="n">options</span><span class="o">.</span><span class="n">notifications</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s2">&quot;dnd&quot;</span><span class="p">)</span>
+
+<span class="c1"># Obtain the default value of an option</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">options</span><span class="o">.</span><span class="n">Notifications</span><span class="o">.</span><span class="n">popup_timeout</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="ignis.options.Options.Notifications">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Notifications</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.options.Options.Notifications" title="Link to this definition">#</a></dt>
+<dd><p>Options for the <a class="reference internal" href="services/notifications.html#ignis.services.notifications.NotificationService" title="ignis.services.notifications.NotificationService"><code class="xref py py-class docutils literal notranslate"><span class="pre">NotificationService</span></code></a>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ignis.options.Options.Notifications.dnd">
+<span class="sig-name descname"><span class="pre">dnd</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#ignis.options.Options.Notifications.dnd" title="Link to this definition">#</a></dt>
+<dd><p>Do Not Disturb mode.</p>
+<p>If set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, the <code class="docutils literal notranslate"><span class="pre">new_popup</span></code> signal will not be emitted,
+and all new <a class="reference internal" href="services/notifications.html#ignis.services.notifications.Notification" title="ignis.services.notifications.Notification"><code class="xref py py-class docutils literal notranslate"><span class="pre">Notification</span></code></a> instances will have <code class="docutils literal notranslate"><span class="pre">popup</span></code> set to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ignis.options.Options.Notifications.popup_timeout">
+<span class="sig-name descname"><span class="pre">popup_timeout</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5000</span></em><a class="headerlink" href="#ignis.options.Options.Notifications.popup_timeout" title="Link to this definition">#</a></dt>
+<dd><p>The timeout before a popup is automatically dismissed, in milliseconds.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ignis.options.Options.Notifications.max_popups_count">
+<span class="sig-name descname"><span class="pre">max_popups_count</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#ignis.options.Options.Notifications.max_popups_count" title="Link to this definition">#</a></dt>
+<dd><p>The maximum number of popups.</p>
+<p>If the length of the <code class="docutils literal notranslate"><span class="pre">popups</span></code> list exceeds <code class="docutils literal notranslate"><span class="pre">max_popups_count</span></code>, the oldest popup will be dismissed.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ignis.options.Options.Recorder">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Recorder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.options.Options.Recorder" title="Link to this definition">#</a></dt>
+<dd><p>Options for the <a class="reference internal" href="services/recorder.html#ignis.services.recorder.RecorderService" title="ignis.services.recorder.RecorderService"><code class="xref py py-class docutils literal notranslate"><span class="pre">RecorderService</span></code></a>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ignis.options.Options.Recorder.bitrate">
+<span class="sig-name descname"><span class="pre">bitrate</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8000</span></em><a class="headerlink" href="#ignis.options.Options.Recorder.bitrate" title="Link to this definition">#</a></dt>
+<dd><p>The bitrate of the recording.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ignis.options.Options.Recorder.default_file_location">
+<span class="sig-name descname"><span class="pre">default_file_location</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> <span class="pre">|</span> <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'XDG</span> <span class="pre">Videos</span> <span class="pre">directory'</span></em><a class="headerlink" href="#ignis.options.Options.Recorder.default_file_location" title="Link to this definition">#</a></dt>
+<dd><p>The default location for saving recordings. Defaults to XDG Video directory.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ignis.options.Options.Recorder.default_filename">
+<span class="sig-name descname"><span class="pre">default_filename</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'%Y-%m-%d_%H-%M-%S.mp4'</span></em><a class="headerlink" href="#ignis.options.Options.Recorder.default_filename" title="Link to this definition">#</a></dt>
+<dd><p>The default filename for recordings. Supports time formating.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ignis.options.Options.Applications">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Applications</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.options.Options.Applications" title="Link to this definition">#</a></dt>
+<dd><p>Options for the <a class="reference internal" href="services/applications.html#ignis.services.applications.ApplicationsService" title="ignis.services.applications.ApplicationsService"><code class="xref py py-class docutils literal notranslate"><span class="pre">ApplicationsService</span></code></a>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ignis.options.Options.Applications.pinned_apps">
+<span class="sig-name descname"><span class="pre">pinned_apps</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><span class="pre">]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#ignis.options.Options.Applications.pinned_apps" title="Link to this definition">#</a></dt>
+<dd><p>A list of the pinned applications desktop files, e.g. <code class="docutils literal notranslate"><span class="pre">&quot;firefox.desktop&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;code.desktop&quot;</span></code>.</p>
+<p>You shouldn't modify this option, use Application Service methods instead.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ignis.options.Options.Wallpaper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Wallpaper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.options.Options.Wallpaper" title="Link to this definition">#</a></dt>
+<dd><p>Options for the <a class="reference internal" href="services/wallpaper.html#ignis.services.wallpaper.WallpaperService" title="ignis.services.wallpaper.WallpaperService"><code class="xref py py-class docutils literal notranslate"><span class="pre">WallpaperService</span></code></a>.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ignis.options.Options.Wallpaper.wallpaper_path">
+<span class="sig-name descname"><span class="pre">wallpaper_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> <span class="pre">|</span> <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#ignis.options.Options.Wallpaper.wallpaper_path" title="Link to this definition">#</a></dt>
+<dd><p>The path to the wallpaper image.</p>
+</dd></dl>
+
 </dd></dl>
 
 </dd></dl>
@@ -560,20 +657,20 @@ Provides <code class="docutils literal notranslate"><span class="pre">style</spa
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="dbus_menu.html"
+       href="client.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">D-Bus menu</p>
+        <p class="prev-next-title">Client</p>
       </div>
     </a>
     <a class="right-next"
-       href="base_service.html"
+       href="options_manager.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">BaseService</p>
+        <p class="prev-next-title">Options Manager</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -596,8 +693,27 @@ Provides <code class="docutils literal notranslate"><span class="pre">style</spa
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.base_widget.BaseWidget"><code class="docutils literal notranslate"><span class="pre">BaseWidget</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.base_widget.BaseWidget.override_enum"><code class="docutils literal notranslate"><span class="pre">BaseWidget.override_enum()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.options.Options"><code class="docutils literal notranslate"><span class="pre">Options</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.options.Options.Notifications"><code class="docutils literal notranslate"><span class="pre">Options.Notifications</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.options.Options.Notifications.dnd"><code class="docutils literal notranslate"><span class="pre">Options.Notifications.dnd</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.options.Options.Notifications.popup_timeout"><code class="docutils literal notranslate"><span class="pre">Options.Notifications.popup_timeout</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.options.Options.Notifications.max_popups_count"><code class="docutils literal notranslate"><span class="pre">Options.Notifications.max_popups_count</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.options.Options.Recorder"><code class="docutils literal notranslate"><span class="pre">Options.Recorder</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.options.Options.Recorder.bitrate"><code class="docutils literal notranslate"><span class="pre">Options.Recorder.bitrate</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.options.Options.Recorder.default_file_location"><code class="docutils literal notranslate"><span class="pre">Options.Recorder.default_file_location</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.options.Options.Recorder.default_filename"><code class="docutils literal notranslate"><span class="pre">Options.Recorder.default_filename</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.options.Options.Applications"><code class="docutils literal notranslate"><span class="pre">Options.Applications</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.options.Options.Applications.pinned_apps"><code class="docutils literal notranslate"><span class="pre">Options.Applications.pinned_apps</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.options.Options.Wallpaper"><code class="docutils literal notranslate"><span class="pre">Options.Wallpaper</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.options.Options.Wallpaper.wallpaper_path"><code class="docutils literal notranslate"><span class="pre">Options.Wallpaper.wallpaper_path</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -607,7 +723,7 @@ Provides <code class="docutils literal notranslate"><span class="pre">style</spa
 
   
   <div class="tocsection editthispage">
-    <a href="https://github.com/linkfrg/ignis/edit/main/docs/api/base_widget.rst">
+    <a href="https://github.com/linkfrg/ignis/edit/main/docs/api/options.rst">
       <i class="fa-solid fa-pencil"></i>
       
       
@@ -623,7 +739,7 @@ Provides <code class="docutils literal notranslate"><span class="pre">style</spa
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/api/base_widget.rst.txt"
+      <li><a href="../_sources/api/options.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div></div>

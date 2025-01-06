@@ -10,6 +10,8 @@ This reference manual details functions, modules, and objects included in Ignis,
    gobject
    variable
    client
+   options
+   options_manager
    exceptions
    dbus
    dbus_menu

@@ -30,7 +30,7 @@
   <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=fe5c0044" />
@@ -57,7 +57,7 @@
         </script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Options" href="options.html" />
+    <link rel="next" title="Recorder" href="recorder.html" />
     <link rel="prev" title="Niri" href="niri.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -371,6 +371,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../gobject.html">GObject</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../variable.html">Variable</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../client.html">Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../options.html">Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../options_manager.html">Options Manager</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../exceptions.html">Exceptions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dbus.html">D-Bus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dbus_menu.html">D-Bus menu</a></li>
@@ -423,7 +425,6 @@
 <li class="toctree-l2"><a class="reference internal" href="network.html">Network</a></li>
 <li class="toctree-l2"><a class="reference internal" href="niri.html">Niri</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Notifications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="options.html">Options</a></li>
 <li class="toctree-l2"><a class="reference internal" href="recorder.html">Recorder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="system_tray.html">System Tray</a></li>
 <li class="toctree-l2"><a class="reference internal" href="systemd.html">Systemd</a></li>
@@ -529,13 +530,14 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.notifications.</span></span><span class="sig-name descname"><span class="pre">NotificationService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.notifications.NotificationService" title="Link to this definition">#</a></dt>
 <dd><p>A notification daemon.
 Allow receiving notifications and perform actions on them.</p>
+<p>There are options available for this service: <a class="reference internal" href="../options.html#ignis.options.Options.Notifications" title="ignis.options.Options.Notifications"><code class="xref py py-class docutils literal notranslate"><span class="pre">Notifications</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="../exceptions.html#ignis.exceptions.AnotherNotificationDaemonRunningError" title="ignis.exceptions.AnotherNotificationDaemonRunningError"><strong>AnotherNotificationDaemonRunningError</strong></a> -- If another notification daemon is already running.</p>
 </dd>
 </dl>
 <p>Example usage:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.services.notifications</span> <span class="kn">import</span> <span class="n">NotificationsService</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ignis.services.notifications</span><span class="w"> </span><span class="kn">import</span> <span class="n">NotificationsService</span>
 
 <span class="n">notifications</span> <span class="o">=</span> <span class="n">NotificationsService</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span>
 
@@ -587,39 +589,6 @@ Only emitted if <code class="docutils literal notranslate"><span class="pre">dnd
 <li><p>read-only</p></li>
 </ul>
 <p>A list of currently active popup notifications.</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="ignis.services.notifications.NotificationService.dnd">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dnd</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.notifications.NotificationService.dnd" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>read-write</p></li>
-</ul>
-<p>Do Not Disturb mode.
-If set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, the <code class="docutils literal notranslate"><span class="pre">new_popup</span></code> signal will not be emitted,
-and all new <a class="reference internal" href="#ignis.services.notifications.Notification" title="ignis.services.notifications.Notification"><code class="xref py py-class docutils literal notranslate"><span class="pre">Notification</span></code></a> instances will have <code class="docutils literal notranslate"><span class="pre">popup</span></code> set to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
-<p>Default: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="ignis.services.notifications.NotificationService.popup_timeout">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">popup_timeout</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.services.notifications.NotificationService.popup_timeout" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>read-write</p></li>
-</ul>
-<p>The timeout before a popup is automatically dismissed, in milliseconds.</p>
-<p>Default: <code class="docutils literal notranslate"><span class="pre">5000</span></code>.</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="ignis.services.notifications.NotificationService.max_popups_count">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">max_popups_count</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.services.notifications.NotificationService.max_popups_count" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>read-write</p></li>
-</ul>
-<p>The Maximum number of popups.
-If the length of the <code class="docutils literal notranslate"><span class="pre">popups</span></code> list exceeds <code class="docutils literal notranslate"><span class="pre">max_popups_count</span></code>, the oldest popup will be dismissed.</p>
-<p>Default: <code class="docutils literal notranslate"><span class="pre">3</span></code>.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -866,11 +835,11 @@ This will remove it from notifications history.</p>
       </div>
     </a>
     <a class="right-next"
-       href="options.html"
+       href="recorder.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Options</p>
+        <p class="prev-next-title">Recorder</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -898,9 +867,6 @@ This will remove it from notifications history.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.NotificationService.new_popup"><code class="docutils literal notranslate"><span class="pre">NotificationService.new_popup()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.NotificationService.notifications"><code class="docutils literal notranslate"><span class="pre">NotificationService.notifications</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.NotificationService.popups"><code class="docutils literal notranslate"><span class="pre">NotificationService.popups</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.NotificationService.dnd"><code class="docutils literal notranslate"><span class="pre">NotificationService.dnd</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.NotificationService.popup_timeout"><code class="docutils literal notranslate"><span class="pre">NotificationService.popup_timeout</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.NotificationService.max_popups_count"><code class="docutils literal notranslate"><span class="pre">NotificationService.max_popups_count</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.NotificationService.get_notification"><code class="docutils literal notranslate"><span class="pre">NotificationService.get_notification()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.NotificationService.clear_all"><code class="docutils literal notranslate"><span class="pre">NotificationService.clear_all()</span></code></a></li>
 </ul>

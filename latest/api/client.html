@@ -30,7 +30,7 @@
   <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=fe5c0044" />
@@ -57,7 +57,7 @@
         </script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Exceptions" href="exceptions.html" />
+    <link rel="next" title="Options" href="options.html" />
     <link rel="prev" title="Variable" href="variable.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -371,6 +371,8 @@
 <li class="toctree-l1"><a class="reference internal" href="gobject.html">GObject</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variable.html">Variable</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="options.html">Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="options_manager.html">Options Manager</a></li>
 <li class="toctree-l1"><a class="reference internal" href="exceptions.html">Exceptions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dbus.html">D-Bus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dbus_menu.html">D-Bus menu</a></li>
@@ -423,7 +425,6 @@
 <li class="toctree-l2"><a class="reference internal" href="services/network.html">Network</a></li>
 <li class="toctree-l2"><a class="reference internal" href="services/niri.html">Niri</a></li>
 <li class="toctree-l2"><a class="reference internal" href="services/notifications.html">Notifications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="services/options.html">Options</a></li>
 <li class="toctree-l2"><a class="reference internal" href="services/recorder.html">Recorder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="services/system_tray.html">System Tray</a></li>
 <li class="toctree-l2"><a class="reference internal" href="services/systemd.html">Systemd</a></li>
@@ -534,7 +535,7 @@ Provides the same functionality as the CLI.</p>
 It's unnecessary; use <a class="reference internal" href="app.html#ignis.app.IgnisApp" title="ignis.app.IgnisApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">IgnisApp</span></code></a> instead.</p>
 </div>
 <p>Example usage:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.client</span> <span class="kn">import</span> <span class="n">IgnisClient</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ignis.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">IgnisClient</span>
 
 <span class="n">client</span> <span class="o">=</span> <span class="n">IgnisClient</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">list_windows</span><span class="p">())</span>
@@ -683,11 +684,11 @@ It's unnecessary; use <a class="reference internal" href="app.html#ignis.app.Ign
       </div>
     </a>
     <a class="right-next"
-       href="exceptions.html"
+       href="options.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Exceptions</p>
+        <p class="prev-next-title">Options</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

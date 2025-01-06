@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>BaseWidget &#8212; Ignis documentation</title>
+    <title>Options Manager &#8212; Ignis documentation</title>
   
   
   
@@ -47,7 +47,7 @@
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'api/base_widget';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/options_manager';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://linkfrg.github.io/ignis/latest/_static/switcher.json';
@@ -57,8 +57,8 @@
         </script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="BaseService" href="base_service.html" />
-    <link rel="prev" title="D-Bus menu" href="dbus_menu.html" />
+    <link rel="next" title="Exceptions" href="exceptions.html" />
+    <link rel="prev" title="Options" href="options.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -372,11 +372,11 @@
 <li class="toctree-l1"><a class="reference internal" href="variable.html">Variable</a></li>
 <li class="toctree-l1"><a class="reference internal" href="client.html">Client</a></li>
 <li class="toctree-l1"><a class="reference internal" href="options.html">Options</a></li>
-<li class="toctree-l1"><a class="reference internal" href="options_manager.html">Options Manager</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Options Manager</a></li>
 <li class="toctree-l1"><a class="reference internal" href="exceptions.html">Exceptions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dbus.html">D-Bus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dbus_menu.html">D-Bus menu</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">BaseWidget</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base_widget.html">BaseWidget</a></li>
 <li class="toctree-l1"><a class="reference internal" href="base_service.html">BaseService</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="widgets/index.html">Widgets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="widgets/Arrow.html">Arrow</a></li>
@@ -503,7 +503,7 @@
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">API reference</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">BaseWidget</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Options Manager</span></li>
   </ul>
 </nav>
 </div>
@@ -520,24 +520,143 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="basewidget">
-<h1>BaseWidget<a class="headerlink" href="#basewidget" title="Link to this heading">#</a></h1>
+  <section id="options-manager">
+<h1>Options Manager<a class="headerlink" href="#options-manager" title="Link to this heading">#</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="ignis.base_widget.BaseWidget">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.base_widget.</span></span><span class="sig-name descname"><span class="pre">BaseWidget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">setup</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vexpand</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hexpand</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">visible</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.base_widget.BaseWidget" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gobject.html#ignis.gobject.IgnisGObject" title="ignis.gobject.IgnisGObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">IgnisGObject</span></code></a>.</p>
-<p>The base class for all widgets.
-Provides <code class="docutils literal notranslate"><span class="pre">style</span></code> property and allows overriding enums.</p>
+<dt class="sig sig-object py" id="ignis.options.OptionsManager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.options.</span></span><span class="sig-name descname"><span class="pre">OptionsManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.options.OptionsManager" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ignis.options.OptionsGroup" title="ignis.options.OptionsGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">OptionsGroup</span></code></a>.</p>
+<p>This is the top-level class in the option structure.
+It provides support for loading and saving options to a file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">None</span></code>) -- The path to the file used for saving and loading options. Cannot be changed after initialization.</p>
+</dd>
+</dl>
+<p>The standard option structure must follow this format:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ignis.options_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">OptionsManager</span><span class="p">,</span> <span class="n">OptionsGroup</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SomeOptions</span><span class="p">(</span><span class="n">OptionsManager</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="s2">&quot;PATH/TO/FILE&quot;</span><span class="p">)</span>
+
+    <span class="k">class</span><span class="w"> </span><span class="nc">Subgroup1</span><span class="p">(</span><span class="n">OptionsGroup</span><span class="p">):</span>
+        <span class="n">option1</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">option2</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5000</span>
+
+    <span class="k">class</span><span class="w"> </span><span class="nc">SomeSubgroup</span><span class="p">(</span><span class="n">OptionsGroup</span><span class="p">):</span>
+        <span class="n">example_option</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">get_something</span><span class="o">...</span><span class="p">()</span>
+        <span class="n">test</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">_%H-%M-%S.mp4&quot;</span>
+
+
+    <span class="n">subgroup1</span> <span class="o">=</span> <span class="n">Subgroup1</span><span class="p">()</span>
+    <span class="n">some_subgroup</span> <span class="o">=</span> <span class="n">SomeSubgroup</span><span class="p">()</span>
+
+<span class="n">some_options</span> <span class="o">=</span> <span class="n">SomeOptions</span><span class="p">()</span>
+</pre></div>
+</div>
 <dl class="py method">
-<dt class="sig sig-object py" id="ignis.base_widget.BaseWidget.override_enum">
-<span class="sig-name descname"><span class="pre">override_enum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">property_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">enum</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.base_widget.BaseWidget.override_enum" title="Link to this definition">#</a></dt>
-<dd><p>Override an enum.</p>
+<dt class="sig sig-object py" id="ignis.options.OptionsManager.save_to_file">
+<span class="sig-name descname"><span class="pre">save_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.options.OptionsManager.save_to_file" title="Link to this definition">#</a></dt>
+<dd><p>Manually save options to the specified file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The path to the file where options will be saved.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.options.OptionsManager.load_from_file">
+<span class="sig-name descname"><span class="pre">load_from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.options.OptionsManager.load_from_file" title="Link to this definition">#</a></dt>
+<dd><p>Manually load options from the specified file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The path to the file from which options will be loaded.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ignis.options.OptionsGroup">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.options.</span></span><span class="sig-name descname"><span class="pre">OptionsGroup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.options.OptionsGroup" title="Link to this definition">#</a></dt>
+<dd><p>An options group.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.options.OptionsGroup.changed">
+<span class="sig-name descname"><span class="pre">changed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.options.OptionsGroup.changed" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>Signal</p></li>
+</ul>
+<p>Emitted when an option of this group has changed</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>option_name</strong> -- The name of the option.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.options.OptionsGroup.subgroup_changed">
+<span class="sig-name descname"><span class="pre">subgroup_changed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.options.OptionsGroup.subgroup_changed" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>Signal</p></li>
+</ul>
+<p>Emitted when an option of a subgroup has changed</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>property_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The name of the property to override.</p></li>
-<li><p><strong>enum</strong> (<code class="docutils literal notranslate"><span class="pre">GObject.GEnum</span></code>) -- An enum that accepts the property to be overridden. For example, for <code class="docutils literal notranslate"><span class="pre">valign</span></code> it will be <code class="docutils literal notranslate"><span class="pre">Gtk.Align</span></code>.</p></li>
+<li><p><strong>subgroup_name</strong> -- The name of the subgroup.</p></li>
+<li><p><strong>option_name</strong> -- The name of the option.</p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.options.OptionsGroup.connect_option">
+<span class="sig-name descname"><span class="pre">connect_option</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">option_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.options.OptionsGroup.connect_option" title="Link to this definition">#</a></dt>
+<dd><p>Connect an option change event to the specified <cite>callback</cite>.</p>
+<p>This method serves as a replacement for the <code class="docutils literal notranslate"><span class="pre">notify</span></code> signal, as options are simple Python properties, not GObject properties.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>option_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The name of the option to connect.</p></li>
+<li><p><strong>callback</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a></span>) -- The function to invoke when the value of the option changes.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+<p>Any <code class="docutils literal notranslate"><span class="pre">*args</span></code> will be passed to the <code class="docutils literal notranslate"><span class="pre">callback</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.options.OptionsGroup.to_dict">
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ignis.options.OptionsGroup.to_dict" title="Link to this definition">#</a></dt>
+<dd><p>Returns a dictionary representation of all options and subgroups.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.options.OptionsGroup.apply_from_dict">
+<span class="sig-name descname"><span class="pre">apply_from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.options.OptionsGroup.apply_from_dict" title="Link to this definition">#</a></dt>
+<dd><p>Apply values to options from a dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]</span>) -- A dictionary containing the values to apply.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
@@ -560,20 +679,20 @@ Provides <code class="docutils literal notranslate"><span class="pre">style</spa
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="dbus_menu.html"
+       href="options.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">D-Bus menu</p>
+        <p class="prev-next-title">Options</p>
       </div>
     </a>
     <a class="right-next"
-       href="base_service.html"
+       href="exceptions.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">BaseService</p>
+        <p class="prev-next-title">Exceptions</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -596,8 +715,17 @@ Provides <code class="docutils literal notranslate"><span class="pre">style</spa
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.base_widget.BaseWidget"><code class="docutils literal notranslate"><span class="pre">BaseWidget</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.base_widget.BaseWidget.override_enum"><code class="docutils literal notranslate"><span class="pre">BaseWidget.override_enum()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.options.OptionsManager"><code class="docutils literal notranslate"><span class="pre">OptionsManager</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.options.OptionsManager.save_to_file"><code class="docutils literal notranslate"><span class="pre">OptionsManager.save_to_file()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.options.OptionsManager.load_from_file"><code class="docutils literal notranslate"><span class="pre">OptionsManager.load_from_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.options.OptionsGroup"><code class="docutils literal notranslate"><span class="pre">OptionsGroup</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.options.OptionsGroup.changed"><code class="docutils literal notranslate"><span class="pre">OptionsGroup.changed()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.options.OptionsGroup.subgroup_changed"><code class="docutils literal notranslate"><span class="pre">OptionsGroup.subgroup_changed()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.options.OptionsGroup.connect_option"><code class="docutils literal notranslate"><span class="pre">OptionsGroup.connect_option()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.options.OptionsGroup.to_dict"><code class="docutils literal notranslate"><span class="pre">OptionsGroup.to_dict()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.options.OptionsGroup.apply_from_dict"><code class="docutils literal notranslate"><span class="pre">OptionsGroup.apply_from_dict()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -607,7 +735,7 @@ Provides <code class="docutils literal notranslate"><span class="pre">style</spa
 
   
   <div class="tocsection editthispage">
-    <a href="https://github.com/linkfrg/ignis/edit/main/docs/api/base_widget.rst">
+    <a href="https://github.com/linkfrg/ignis/edit/main/docs/api/options_manager.rst">
       <i class="fa-solid fa-pencil"></i>
       
       
@@ -623,7 +751,7 @@ Provides <code class="docutils literal notranslate"><span class="pre">style</spa
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/api/base_widget.rst.txt"
+      <li><a href="../_sources/api/options_manager.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div></div>

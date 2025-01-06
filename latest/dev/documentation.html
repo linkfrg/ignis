@@ -30,7 +30,7 @@
   <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=fe5c0044" />
@@ -455,7 +455,7 @@ Here are some examples for functions and classes.</p>
 <h3>Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h3>
 <p>For functions, use the standard Google docstring style.
 Type hints will be added automatically.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">some_func</span><span class="p">(</span><span class="n">arg1</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">arg2</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">some_func</span><span class="p">(</span><span class="n">arg1</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">arg2</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Description of the function.</span>
 
@@ -496,14 +496,14 @@ in properties of Services and classes related to them, since the user shouldn't 
 </li>
 <li><p>If possible, please provide a code example.</p></li>
 </ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SomeClass</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SomeClass</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This is an example docstring for a class.</span>
 <span class="sd">    Further info goes here...</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <span class="nd">@GObject</span><span class="o">.</span><span class="n">Signal</span>
-<span class="k">def</span> <span class="nf">some_signal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">some_signal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    - Signal</span>
 
@@ -511,7 +511,7 @@ in properties of Services and classes related to them, since the user shouldn't 
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <span class="nd">@GObject</span><span class="o">.</span><span class="n">Signal</span><span class="p">(</span><span class="n">arg_types</span><span class="o">=</span><span class="p">(</span><span class="nb">int</span><span class="p">,))</span>
-<span class="k">def</span> <span class="nf">arg_signal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">arg_signal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    - Signal</span>
 
@@ -522,21 +522,21 @@ in properties of Services and classes related to them, since the user shouldn't 
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <span class="nd">@GObject</span><span class="o">.</span><span class="n">Property</span>
-<span class="k">def</span> <span class="nf">some_prop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">some_prop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    - optional, read-only</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="o">...</span>
 
 <span class="nd">@GObject</span><span class="o">.</span><span class="n">Property</span>
-<span class="k">def</span> <span class="nf">rw_prop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">rw_prop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    - optional, read-write</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="o">...</span>
 
 <span class="nd">@rw_prop</span><span class="o">.</span><span class="n">setter</span>
-<span class="k">def</span> <span class="nf">rw_prop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">rw_prop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="o">...</span>
 </pre></div>
 </div>
@@ -547,7 +547,7 @@ in properties of Services and classes related to them, since the user shouldn't 
 <li><p>Use the same patterns as described above for general classes.</p></li>
 <li><p>Specify the base widget using the <code class="docutils literal notranslate"><span class="pre">:class:</span></code> directive.</p></li>
 </ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SomeWidget</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SomeWidget</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Bases: :class:`Gtk.WIDGET_NAME`</span>
 

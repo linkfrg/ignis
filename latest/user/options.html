@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Code Style Guidelines &#8212; Ignis documentation</title>
+    <title>Options &#8212; Ignis documentation</title>
   
   
   
@@ -47,7 +47,7 @@
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'dev/code_style';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user/options';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://linkfrg.github.io/ignis/latest/_static/switcher.json';
@@ -57,8 +57,8 @@
         </script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Examples" href="../examples/index.html" />
-    <link rel="prev" title="Documentation Guidelines" href="documentation.html" />
+    <link rel="next" title="Expanding functionality" href="expanding_functionality.html" />
+    <link rel="prev" title="CLI" href="cli.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -157,8 +157,8 @@
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../user/index.html">
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
     User guide
   </a>
 </li>
@@ -171,8 +171,8 @@
 </li>
 
 
-<li class="nav-item current active">
-  <a class="nav-link nav-internal" href="index.html">
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../dev/index.html">
     Developer Guide
   </a>
 </li>
@@ -296,8 +296,8 @@
 <nav>
   <ul class="bd-navbar-elements navbar-nav">
     
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../user/index.html">
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
     User guide
   </a>
 </li>
@@ -310,8 +310,8 @@
 </li>
 
 
-<li class="nav-item current active">
-  <a class="nav-link nav-internal" href="index.html">
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../dev/index.html">
     Developer Guide
   </a>
 </li>
@@ -367,12 +367,14 @@
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="env.html">Setting up a Development Environment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gobject.html">GObject</a></li>
-<li class="toctree-l1"><a class="reference internal" href="subclassing_widgets.html">Subclassing Widgets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="creating_service.html">Creating a Service</a></li>
-<li class="toctree-l1"><a class="reference internal" href="documentation.html">Documentation Guidelines</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Code Style Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="first_widgets.html">First widgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dynamic_content.html">Dynamic content</a></li>
+<li class="toctree-l1"><a class="reference internal" href="styling.html">Styling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">CLI</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expanding_functionality.html">Expanding functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
 </ul>
 </div>
 </nav></div>
@@ -414,9 +416,9 @@
       </a>
     </li>
     
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Developer Guide</a></li>
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">User guide</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Code Style Guidelines</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Options</span></li>
   </ul>
 </nav>
 </div>
@@ -433,34 +435,15 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="code-style-guidelines">
-<h1>Code Style Guidelines<a class="headerlink" href="#code-style-guidelines" title="Link to this heading">#</a></h1>
-<section id="code-formatting">
-<h2>Code Formatting<a class="headerlink" href="#code-formatting" title="Link to this heading">#</a></h2>
-<p>All code must be formatted using <a class="reference external" href="https://github.com/astral-sh/ruff">Ruff</a>.</p>
-</section>
-<section id="type-checking">
-<h2>Type checking<a class="headerlink" href="#type-checking" title="Link to this heading">#</a></h2>
-<p>The use of type hints is encouraged,
-and all code must be checked using <a class="reference external" href="https://mypy-lang.org/">mypy</a>.</p>
-</section>
-<section id="commit-messages">
-<h2>Commit messages<a class="headerlink" href="#commit-messages" title="Link to this heading">#</a></h2>
-<p>Commit messages should follow the <a class="reference external" href="https://www.conventionalcommits.org/en/v1.0.0/#summary">Conventional Commits</a>.</p>
-</section>
-<section id="versioning">
-<h2>Versioning<a class="headerlink" href="#versioning" title="Link to this heading">#</a></h2>
-<p>Ignis follows <a class="reference external" href="https://semver.org/">Semantic Versioning</a>.</p>
-</section>
-<section id="definitions-and-naming">
-<h2>Definitions and Naming<a class="headerlink" href="#definitions-and-naming" title="Link to this heading">#</a></h2>
-<p>Use the following naming conventions for different purposes:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">snake_case</span></code>: Functions, variables, GObject properties (except D-Bus methods/properties)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">SCREAMING_SNAKE_CASE</span></code>: Constants</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">PascalCase</span></code>: Classes, D-Bus methods/properties</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">kebab-case</span></code>: GObject signals</p></li>
-</ul>
+  <section id="options">
+<h1>Options<a class="headerlink" href="#options" title="Link to this heading">#</a></h1>
+<p>Some services provide <cite>options</cite> - user-specific settings that allow you to customize their behavior to suit your needs.</p>
+<p>For a complete list of available options, refer to <a class="reference internal" href="../api/options.html#ignis.options.Options" title="ignis.options.Options"><code class="xref py py-class docutils literal notranslate"><span class="pre">Options</span></code></a>.
+There is also detailed documentation about using them.</p>
+<section id="user-options">
+<h2>User Options<a class="headerlink" href="#user-options" title="Link to this heading">#</a></h2>
+<p>You can define your own options!</p>
+<p>Just follow the structure described in <a class="reference internal" href="../api/options_manager.html#ignis.options.OptionsManager" title="ignis.options.OptionsManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">OptionsManager</span></code></a>.</p>
 </section>
 </section>
 
@@ -475,20 +458,20 @@ and all code must be checked using <a class="reference external" href="https://m
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="documentation.html"
+       href="cli.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Documentation Guidelines</p>
+        <p class="prev-next-title">CLI</p>
       </div>
     </a>
     <a class="right-next"
-       href="../examples/index.html"
+       href="expanding_functionality.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Examples</p>
+        <p class="prev-next-title">Expanding functionality</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -511,11 +494,7 @@ and all code must be checked using <a class="reference external" href="https://m
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-formatting">Code Formatting</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#type-checking">Type checking</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#commit-messages">Commit messages</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#versioning">Versioning</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definitions-and-naming">Definitions and Naming</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-options">User Options</a></li>
 </ul>
   </nav></div>
 
@@ -523,7 +502,7 @@ and all code must be checked using <a class="reference external" href="https://m
 
   
   <div class="tocsection editthispage">
-    <a href="https://github.com/linkfrg/ignis/edit/main/docs/dev/code_style.rst">
+    <a href="https://github.com/linkfrg/ignis/edit/main/docs/user/options.rst">
       <i class="fa-solid fa-pencil"></i>
       
       
@@ -539,7 +518,7 @@ and all code must be checked using <a class="reference external" href="https://m
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/dev/code_style.rst.txt"
+      <li><a href="../_sources/user/options.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div></div>
