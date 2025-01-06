@@ -14,6 +14,26 @@ def get_recorder_default_file_location() -> str | None:
 class Options(OptionsManager):
     """
     Options for Ignis.
+
+    .. warning::
+        Use already initialized instance of this class:
+
+        ```
+        from ignis.options import options
+
+        print(options.notifications.dnd)
+        ```
+
+    Below are classes with options, their names begin with a capital letter.
+    However, if you want to get the current value of an option or set a value,
+    use an initialized instance that starts with a lowercase letter.
+
+    For example:
+        * ``Notifications`` -> ``notifications``
+        * ``Recorder`` -> ``recorder``
+        * and etc.
+
+    You can use classes (not instances of them) to obtain default values of options.
     """
 
     def __init__(self):
@@ -57,6 +77,9 @@ class Options(OptionsManager):
         Options for the Applications Service
         """
 
+        #: A list of the pinned applications desktop files, e.g. ``"firefox.desktop"``, ``"code.desktop"``.
+        #:
+        #: You shouldn't modify this option, use Application Service methods instead.
         pinned_apps: list[str] = []
 
     class Wallpaper(OptionsGroup):

@@ -162,7 +162,7 @@ class OptionsManager(OptionsGroup):
 
         from ignis.options_manager import OptionsManager, OptionsGroup
 
-        class Options(OptionsManager):
+        class SomeOptions(OptionsManager):
             def __init__(self):
                 super().__init__(file="PATH/TO/FILE")
 
@@ -178,7 +178,7 @@ class OptionsManager(OptionsGroup):
             subgroup1 = Subgroup1()
             some_subgroup = SomeSubgroup()
 
-        options = Options()
+        some_options = SomeOptions()
 
     """
 
