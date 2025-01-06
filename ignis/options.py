@@ -16,13 +16,14 @@ class Options(OptionsManager):
     Options for Ignis.
 
     .. warning::
+
         Use already initialized instance of this class:
 
-        ```
-        from ignis.options import options
+        .. code-block:: python
 
-        print(options.notifications.dnd)
-        ```
+            from ignis.options import options
+
+            print(options.notifications.dnd)
 
     Below are classes with options, their names begin with a capital letter.
     However, if you want to get the current value of an option or set a value,
