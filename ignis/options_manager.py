@@ -101,21 +101,22 @@ class OptionsGroup(IgnisGObject):
 
     def connect_option(self, option_name: str, callback: Callable, *args) -> None:
         """
-        Connect an event of option change with the provided `callback`
-        This method made as replacement for ``notify`` signal, since options are simple python properties and not GObject properties.
+        Connect an option change event to the specified `callback`.
+
+        This method serves as a replacement for the ``notify`` signal, as options are simple Python properties, not GObject properties.
 
         Args:
             option_name: The name of the option to connect.
-            callback: The callback to invoke when value of the option changes.
+            callback: The function to invoke when the value of the option changes.
 
-        `*args` will be passed to the `callback`.
+        Any ``*args`` will be passed to the ``callback``.
         """
         option_name = option_name.replace("-", "_")
         self.connect(
             "changed", lambda x, name: callback(*args) if option_name == name else None
         )
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, Any]:
         """
         Returns a dictionary representation of all options and subgroups.
         """
@@ -125,12 +126,12 @@ class OptionsGroup(IgnisGObject):
 
         return data
 
-    def apply_from_dict(self, data: dict) -> None:
+    def apply_from_dict(self, data: dict[str, Any]) -> None:
         """
-        Apply values for options from a dict.
+        Apply values to options from a dictionary.
 
         Args:
-            data: A dict with values to apply.
+            data: A dictionary containing the values to apply.
         """
         for key, value in data.items():
             if not hasattr(self, key):
@@ -154,9 +155,13 @@ class OptionsManager(OptionsGroup):
     """
     Bases: :class:`OptionsGroup`.
 
-    This is the top-level class in the options hierarchy.
+    This is the top-level class in the option structure.
+    It provides support for loading and saving options to a file.
 
-    The common options hierarchy must look like this:
+    Args:
+        file: The path to the file used for saving and loading options. Cannot be changed after initialization.
+
+    The standard option structure must follow this format:
 
     .. code-block:: python
 
@@ -182,22 +187,36 @@ class OptionsManager(OptionsGroup):
 
     """
 
-    def __init__(self, file: str):
+    def __init__(self, file: str | None = None):
         super().__init__()
         self._file = file
-        if "sphinx" not in sys.modules:
-            self.connect("changed", self.__dump)
-            self.connect("subgroup-changed", self.__dump)
-            try:
-                self.load(self._file)
-            except json.decoder.JSONDecodeError:
-                pass
 
-    def __dump(self, *args) -> None:
+        if "sphinx" not in sys.modules and file is not None:
+            self.connect("changed", self.__autosave)
+            self.connect("subgroup-changed", self.__autosave)
+
+            self.load_from_file(self._file)
+
+    def __autosave(self, *args) -> None:
+        self.save_to_file(self._file)
+
+    def save_to_file(self, file: str) -> None:
+        """
+        Manually save options to the specified file.
+
+        Args:
+            file: The path to the file where options will be saved.
+        """
         with open(self._file, "w") as file:
             json.dump(self.to_dict(), file, indent=4)
 
-    def load(self, file: str) -> None:
+    def load_from_file(self, file: str) -> None:
+        """
+        Manually load options from the specified file.
+
+        Args:
+            file: The path to the file from which options will be loaded.
+        """
         with open(file) as fp:
             data = json.load(fp)
             self.apply_from_dict(data)
