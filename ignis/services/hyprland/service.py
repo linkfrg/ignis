@@ -204,9 +204,10 @@ class HyprlandService(BaseService):
 
     def __sync_active_window(self) -> None:
         self._active_window = json.loads(self.send_command("j/activewindow"))
-        active_window_id = self._active_window["address"][len("0x"):]
-        if active_window_id in self._urgent_windows:
-            self._urgent_windows.remove(active_window_id)
+        if self._active_window:
+            active_window_id = self._active_window["address"][len("0x"):]
+            if active_window_id in self._urgent_windows:
+                self._urgent_windows.remove(active_window_id)
         self.notify("active_window")
         self.notify("urgent_windows")
         self.notify("urgent_workspaces")
