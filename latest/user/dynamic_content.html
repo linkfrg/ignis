@@ -514,6 +514,18 @@ Use the <code class="docutils literal notranslate"><span class="pre">.bind()</sp
 <p>Try changing the speaker volume using a tool like <code class="docutils literal notranslate"><span class="pre">pavucontrol</span></code>.</p>
 <p>When the property changes, the transform function (if provided) will be called with the new value, and it should return the processed result.</p>
 </section>
+<section id="multiple-binding">
+<h2>Multiple Binding<a class="headerlink" href="#multiple-binding" title="Link to this heading">#</a></h2>
+<p>You can bind multiple properties at the same time with <code class="docutils literal notranslate"><span class="pre">bind_many()</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Widget</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span>
+    <span class="n">value</span><span class="o">=</span><span class="n">audio</span><span class="o">.</span><span class="n">speaker</span><span class="o">.</span><span class="n">bind_many</span><span class="p">(</span>
+        <span class="p">[</span><span class="s2">&quot;volume&quot;</span><span class="p">,</span> <span class="s2">&quot;is_muted&quot;</span><span class="p">],</span>
+        <span class="k">lambda</span> <span class="n">volume</span><span class="p">,</span> <span class="n">is_muted</span><span class="p">:</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">is_muted</span> <span class="k">else</span> <span class="n">volume</span><span class="p">,</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
 <section id="notify-signal">
 <h2><code class="docutils literal notranslate"><span class="pre">notify</span></code> signal<a class="headerlink" href="#notify-signal" title="Link to this heading">#</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">notify</span></code> is a special signal that emits when a property changes.
@@ -578,6 +590,7 @@ Otherwise, the signal will not be triggered.</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#signals">Signals</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binding">Binding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-binding">Multiple Binding</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notify-signal"><code class="docutils literal notranslate"><span class="pre">notify</span></code> signal</a></li>
 </ul>
   </nav></div>
