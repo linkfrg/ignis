@@ -227,6 +227,8 @@ class Vpn(IgnisGObject):
         if emit:
             self.emit("new-active-connection", obj)
             self.notify("active-connections")
+            self.notify("active-vpn-id")
+            self.notify("is-connected")
 
     @check_is_vpn
     def __remove_active_connection(
@@ -236,5 +238,7 @@ class Vpn(IgnisGObject):
             obj = self._active_connections.pop(connection)
             obj.emit("removed")
             self.notify("active-connections")
+            self.notify("active-vpn-id")
+            self.notify("is-connected")
         except KeyError:
             pass
