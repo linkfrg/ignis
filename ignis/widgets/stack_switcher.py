@@ -13,5 +13,5 @@ class StackSwitcher(Gtk.StackSwitcher, BaseWidget):
     __gproperties__ = {**BaseWidget.gproperties}
 
     def __init__(self, **kwargs):
-        Gtk.Label.__init__(self)
+        Gtk.StackSwitcher.__init__(self)
         BaseWidget.__init__(self, **kwargs)

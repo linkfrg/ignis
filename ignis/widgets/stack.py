@@ -39,11 +39,12 @@ class Stack(Gtk.Stack, BaseWidget):
             child=[Widget.StackSwitcher(stack=stack), stack],
         )
     """
+
     __gtype_name__ = "IgnisStack"
     __gproperties__ = {**BaseWidget.gproperties}
 
     def __init__(self, **kwargs):
-        Gtk.Label.__init__(self)
+        Gtk.Stack.__init__(self)
         self.override_enum("transition_type", Gtk.StackTransitionType)
         self._child: list[StackPage] = []
         BaseWidget.__init__(self, **kwargs)
