@@ -130,9 +130,10 @@ class IgnisGObject(GObject.Object):
         """
 
         def callback(*args):
-            values = []
-            for target_property in target_properties:
-                values.append(target.get_property(target_property.replace("-", "_")))
+            values = [
+                target.get_property(target_property.replace("-", "_"))
+                for target_property in target_properties
+            ]
 
             if transform:
                 value = transform(*values)
@@ -140,10 +141,12 @@ class IgnisGObject(GObject.Object):
                 if len(values) != 1:
                     raise IndexError("No transform function on multiple binding")
                 value = values[0]
+
             self.set_property(source_property, value)
 
         for target_property in target_properties:
             target.connect(f"notify::{target_property.replace('_', '-')}", callback)
+
         callback()
 
     def bind(self, property_name: str, transform: Callable | None = None) -> Binding:
