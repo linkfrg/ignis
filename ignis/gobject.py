@@ -138,7 +138,7 @@ class IgnisGObject(GObject.Object):
                 value = transform(*values)
             else:
                 if len(values) != 1:
-                    raise IndexError("No transform function on muliple binding")
+                    raise IndexError("No transform function on multiple binding")
                 value = values[0]
             self.set_property(source_property, value)
 
