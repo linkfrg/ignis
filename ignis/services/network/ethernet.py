@@ -106,6 +106,9 @@ class Ethernet(IgnisGObject):
         if device.get_device_type() != NM.DeviceType.ETHERNET:
             return
 
-        obj = self._devices.pop(device)
-        obj.emit("removed")
-        self.notify("devices")
+        try:
+            obj = self._devices.pop(device)
+            obj.emit("removed")
+            self.notify("devices")
+        except KeyError:
+            pass

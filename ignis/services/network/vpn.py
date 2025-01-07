@@ -205,9 +205,12 @@ class Vpn(IgnisGObject):
 
     @check_is_vpn
     def __remove_connection(self, client, connection: NM.Connection) -> None:
-        obj = self._connections.pop(connection)
-        obj.emit("removed")
-        self.notify("connections")
+        try:
+            obj = self._connections.pop(connection)
+            obj.emit("removed")
+            self.notify("connections")
+        except KeyError:
+            pass
 
     @check_is_vpn
     def __add_active_connection(
@@ -229,6 +232,9 @@ class Vpn(IgnisGObject):
     def __remove_active_connection(
         self, client, connection: NM.ActiveConnection
     ) -> None:
-        obj = self._active_connections.pop(connection)
-        obj.emit("removed")
-        self.notify("active-connections")
+        try:
+            obj = self._active_connections.pop(connection)
+            obj.emit("removed")
+            self.notify("active-connections")
+        except KeyError:
+            pass
