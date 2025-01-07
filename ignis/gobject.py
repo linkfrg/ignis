@@ -160,11 +160,11 @@ class IgnisGObject(GObject.Object):
 
     def bind_many(self, property_names: list[str], transform: Callable) -> Binding:
         """
-        Creates ``Binding`` from property name on ``self``.
+        Creates ``Binding`` from property names on ``self``.
 
         Args:
             property_names: List of property names of ``self``.
-            transform: The function that accepts a new property value and returns the processed value.
+            transform: The function that accepts a new property values and returns the processed value. The values will be passed according to the order in ``property_names``.
         Returns:
             :class:`~ignis.gobject.Binding`
         """
