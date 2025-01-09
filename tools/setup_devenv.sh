@@ -1,6 +1,6 @@
 #!/bin/bash
 
-git submodule update --init --recursive
+meson subprojects download
 
 python -m venv venv
 source venv/bin/activate
