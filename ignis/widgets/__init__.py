@@ -32,6 +32,9 @@ from .overlay import Overlay
 from .arrow import Arrow
 from .arrow_button import ArrowButton
 from .revealer_window import RevealerWindow
+from .stack import Stack
+from .stack_switcher import StackSwitcher
+from .stack_page import StackPage
 
 
 class Widget:
@@ -68,3 +71,6 @@ class Widget:
     Arrow: TypeAlias = Arrow
     ArrowButton: TypeAlias = ArrowButton
     RevealerWindow: TypeAlias = RevealerWindow
+    Stack: TypeAlias = Stack
+    StackSwitcher: TypeAlias = StackSwitcher
+    StackPage = StackPage
