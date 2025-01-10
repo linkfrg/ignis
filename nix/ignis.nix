@@ -6,7 +6,7 @@ let
     owner = "linkfrg";
     repo = "libgnome-volume-control-wheel";
     rev = "60c21982203cad242938efb6295e535e1c28a10d";
-    hash = "sha256-gdgTnxzH8BeYQAsvv++Yq/8wHi7ISk2LTBfU8hk12NM=";
+    hash = "sha256-ts7GKD1eXGEx/2/2NBDDx+QhumlydMh8pnQtzpCBGUU=";
   };
 in
 pkgs.stdenv.mkDerivation {
