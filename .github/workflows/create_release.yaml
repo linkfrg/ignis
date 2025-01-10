@@ -13,11 +13,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: 'recursive'
+      - name: Install meson
+        run: |
+          sudo apt update
+          sudo apt install meson
       - name: Create tar file
         run: |
             cd ..
+            meson subprojects download
             tar -czf "ignis-${{ github.ref_name }}.tar.gz" "ignis"
       - name: Upload assets
         uses: softprops/action-gh-release@v2
