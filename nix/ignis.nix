@@ -1,4 +1,4 @@
-{ fetchFromGitLab, pkgs, version ? "git", ... }:
+{ fetchFromGitHub, pkgs, version ? "git", ... }:
 let
   inherit (pkgs.lib) concatStringsSep;
 
