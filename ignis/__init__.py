@@ -7,7 +7,6 @@ from gi.repository import GLib  # type: ignore
 __version__ = "0.4.dev0"
 __lib_dir__ = None
 CACHE_DIR = None
-LIBDIR_NAME = ".ignis.mesonpy.libs"
 
 if "sphinx" not in sys.modules:
     CACHE_DIR = f"{GLib.get_user_cache_dir()}/ignis"
@@ -30,11 +29,8 @@ try:
     from gi.repository import GIRepository  # type: ignore
 
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    parent_dir = os.path.abspath(os.path.join(current_dir, ".."))
 
-    libdir_path = os.path.join(parent_dir, LIBDIR_NAME)
-
-    GIRepository.Repository.prepend_library_path(libdir_path)
-    GIRepository.Repository.prepend_search_path(libdir_path)
+    GIRepository.Repository.prepend_library_path(current_dir)
+    GIRepository.Repository.prepend_search_path(current_dir)
 except TypeError:
     pass
