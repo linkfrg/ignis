@@ -108,6 +108,9 @@ class WifiDevice(IgnisGObject):
             self.notify("access-points")
 
     def __remove_access_point(self, device, access_point: NM.AccessPoint) -> None:
-        obj = self._access_points.pop(access_point)
-        obj.emit("removed")
-        self.notify("access-points")
+        try:
+            obj = self._access_points.pop(access_point)
+            obj.emit("removed")
+            self.notify("access-points")
+        except KeyError:
+            pass

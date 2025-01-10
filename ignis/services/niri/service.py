@@ -107,7 +107,7 @@ class NiriService(BaseService):
         with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as sock:
             sock.connect(str(NIRI_SOCKET))
             sock.send(b'"EventStream"\n')
-            for event in Utils.listen_socket(sock):
+            for event in Utils.listen_socket(sock, errors="ignore"):
                 self.__on_event_received(event)
 
     def __on_event_received(self, event: str) -> None:
@@ -177,7 +177,7 @@ class NiriService(BaseService):
 
         with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as sock:
             sock.connect(NIRI_SOCKET)
-            return Utils.send_socket(sock, cmd)
+            return Utils.send_socket(sock, cmd, errors="ignore")
 
     def switch_kb_layout(self) -> None:
         """

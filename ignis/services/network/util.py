@@ -8,3 +8,7 @@ def check_is_vpn(func):
             func(*args, **kwargs)
 
     return wrapper
+
+
+def get_wifi_connect_window_name(bssid: str) -> str:
+    return f"wifi-connect_{bssid}"

@@ -145,7 +145,7 @@ class HyprlandService(BaseService):
     def __listen_events(self) -> None:
         with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as sock:
             sock.connect(f"{HYPR_SOCKET_DIR}/.socket2.sock")
-            for event in Utils.listen_socket(sock):
+            for event in Utils.listen_socket(sock, errors="ignore"):
                 self.__on_event_received(event)
 
     def __on_event_received(self, event: str) -> None:
@@ -199,7 +199,7 @@ class HyprlandService(BaseService):
 
         with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as sock:
             sock.connect(f"{HYPR_SOCKET_DIR}/.socket.sock")
-            return Utils.send_socket(sock, cmd)
+            return Utils.send_socket(sock, cmd, errors="ignore")
 
     def switch_kb_layout(self) -> None:
         """

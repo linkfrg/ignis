@@ -4,7 +4,7 @@ import sys
 from ctypes import CDLL
 from gi.repository import GLib  # type: ignore
 
-__version__ = "0.3.dev0"
+__version__ = "0.4.dev0"
 __lib_dir__ = None
 CACHE_DIR = None
 LIBDIR_NAME = ".ignis.mesonpy.libs"

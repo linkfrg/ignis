@@ -10,11 +10,11 @@ class Binding(GObject.Object):
     def __init__(
         self,
         target: GObject.Object,
-        target_property: str,
+        target_properties: list[str],
         transform: Callable | None = None,
     ):
         self._target = target
-        self._target_property = target_property
+        self._target_properties = target_properties
         self._transform = transform
         super().__init__()
 
@@ -28,13 +28,13 @@ class Binding(GObject.Object):
         return self._target
 
     @GObject.Property
-    def target_property(self) -> str:
+    def target_properties(self) -> list[str]:
         """
         - required, read-only
 
-        The property on the target GObject.
+        The properties on the target GObject to bind.
         """
-        return self._target_property
+        return self._target_properties
 
     @GObject.Property
     def transform(self) -> Callable | None:
@@ -106,7 +106,7 @@ class IgnisGObject(GObject.Object):
             self.bind_property2(
                 source_property=property_name,
                 target=value.target,
-                target_property=value.target_property,
+                target_properties=value.target_properties,
                 transform=value.transform,
             )
         else:
@@ -116,26 +116,37 @@ class IgnisGObject(GObject.Object):
         self,
         source_property: str,
         target: GObject.Object,
-        target_property: str,
+        target_properties: list[str],
         transform: Callable | None = None,
     ) -> None:
         """
-        Bind ``source_property`` on ``self`` with ``target_property`` on ``target``.
+        Bind ``source_property`` on ``self`` with ``target_properties`` on ``target``.
 
         Args:
             source_property: The property on ``self`` to bind.
             target: the target ``GObject.Object``.
-            target_property: the property on ``target`` to bind.
+            target_properties: the properties on ``target`` to bind.
             transform: The function that accepts a new property value and returns the processed value.
         """
 
         def callback(*args):
-            value = target.get_property(target_property.replace("-", "_"))
+            values = [
+                target.get_property(target_property.replace("-", "_"))
+                for target_property in target_properties
+            ]
+
             if transform:
-                value = transform(value)
+                value = transform(*values)
+            else:
+                if len(values) != 1:
+                    raise IndexError("No transform function on multiple binding")
+                value = values[0]
+
             self.set_property(source_property, value)
 
-        target.connect(f"notify::{target_property.replace('_', '-')}", callback)
+        for target_property in target_properties:
+            target.connect(f"notify::{target_property.replace('_', '-')}", callback)
+
         callback()
 
     def bind(self, property_name: str, transform: Callable | None = None) -> Binding:
@@ -148,7 +159,19 @@ class IgnisGObject(GObject.Object):
         Returns:
             :class:`~ignis.gobject.Binding`
         """
-        return Binding(self, property_name, transform)
+        return Binding(self, [property_name], transform)
+
+    def bind_many(self, property_names: list[str], transform: Callable) -> Binding:
+        """
+        Creates ``Binding`` from property names on ``self``.
+
+        Args:
+            property_names: List of property names of ``self``.
+            transform: The function that accepts a new property values and returns the processed value. The values will be passed according to the order in ``property_names``.
+        Returns:
+            :class:`~ignis.gobject.Binding`
+        """
+        return Binding(self, property_names, transform)
 
     def __getattribute__(self, name: str) -> Any:
         # This modified __getattribute__ method redirect all "set_" methods to set_property method to provive bindings support.

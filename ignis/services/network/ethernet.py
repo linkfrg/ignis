@@ -17,6 +17,8 @@ class Ethernet(IgnisGObject):
         self._client.connect("device-added", self.__add_device)
         self._client.connect("device-removed", self.__remove_device)
 
+        self._connected_ids: dict[NM.Device, int] = {}
+
         for device in self._client.get_devices():
             self.__add_device(None, device, False)
 
@@ -63,10 +65,21 @@ class Ethernet(IgnisGObject):
             return "network-wired-disconnected-symbolic"
 
     def __add_device(self, client, device: NM.Device, emit: bool = True) -> None:
+        if device in self._connected_ids:
+            _id = self._connected_ids.pop(device)
+            IgnisGObject.disconnect(
+                device, _id
+            )  # disconnect() is overrided in NM.Device
+
         if device.get_device_type() != NM.DeviceType.ETHERNET:
             return
 
         if len(device.get_available_connections()) == 0:
+            _id = device.connect(
+                "notify::available-connections",
+                lambda x, y: self.__add_device(client, device),
+            )
+            self._connected_ids[device] = _id
             return
 
         obj = EthernetDevice(device, self._client)  # type: ignore
@@ -76,14 +89,26 @@ class Ethernet(IgnisGObject):
         )
         self._devices[device] = obj
 
+        device.connect(
+            "notify::available-connections",
+            lambda x, y: self.__remove_device_on_zero_available_connections(device),
+        )
+
         if emit:
             self.emit("new-device", obj)
             self.notify("devices")
 
-    def __remove_device(self, client, device: NM.DeviceEthernet) -> None:
+    def __remove_device_on_zero_available_connections(self, device: NM.Device) -> None:
+        if device.get_available_connections() == 0:
+            self.__remove_device(None, device)
+
+    def __remove_device(self, client, device: NM.Device) -> None:
         if device.get_device_type() != NM.DeviceType.ETHERNET:
             return
 
-        obj = self._devices.pop(device)
-        obj.emit("removed")
-        self.notify("devices")
+        try:
+            obj = self._devices.pop(device)
+            obj.emit("removed")
+            self.notify("devices")
+        except KeyError:
+            pass
