@@ -29,8 +29,17 @@ try:
     from gi.repository import GIRepository  # type: ignore
 
     current_dir = os.path.dirname(os.path.abspath(__file__))
+    build_libdir = os.path.join(
+        os.path.abspath(os.path.join(current_dir, "..")),
+        "build",
+        f"cp{sys.version_info.major}{sys.version_info.minor}",
+        "subprojects",
+        "gvc",
+    )
 
-    GIRepository.Repository.prepend_library_path(current_dir)
-    GIRepository.Repository.prepend_search_path(current_dir)
+    for directory in current_dir, build_libdir:
+        GIRepository.Repository.prepend_library_path(directory)
+        GIRepository.Repository.prepend_search_path(directory)
+
 except TypeError:
     pass
