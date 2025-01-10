@@ -2,11 +2,10 @@
 let
   inherit (pkgs.lib) concatStringsSep;
 
-  gvc = fetchFromGitLab {
-    domain = "gitlab.gnome.org";
-    owner = "GNOME";
-    repo = "libgnome-volume-control";
-    rev = "5f9768a2eac29c1ed56f1fbb449a77a3523683b6";
+  gvc = fetchFromGitHub {
+    owner = "linkfrg";
+    repo = "libgnome-volume-control-wheel";
+    rev = "60c21982203cad242938efb6295e535e1c28a10d";
     hash = "sha256-gdgTnxzH8BeYQAsvv++Yq/8wHi7ISk2LTBfU8hk12NM=";
   };
 in
