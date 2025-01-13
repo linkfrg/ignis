@@ -1,7 +1,12 @@
 Setting up a Development Environment
 =====================================
 
-Firstly, clone the repository:
+This guide with walk you through process of setting up a Development Environment for working on Ignis.
+
+Source
+------
+
+Firstly, you have to grab the Ignis sources:
 
 .. code-block:: bash
 
@@ -9,14 +14,39 @@ Firstly, clone the repository:
     git clone https://github.com/linkfrg/ignis.git
     cd ignis
 
-Then, run the script:
+Virtual Environment
+-------------------
+
+It's always a good practice to work within a Python virtual environment.
 
 .. code-block:: bash
-    
-    bash tools/setup_devenv.sh
 
-It will create a Python virtual environment, 
-install Ignis with its dependencies (including dev dependencies), and create a symbolic link to the Ignis source files.
+    python -m venv venv
+    source venv/bin/activate  # for fish: . venv/bin/activate.fish
 
-Now you can edit the ``ignis`` directory at the root of the repository, 
+Editable install
+----------------
+
+Ignis is build with Meson and meson-python. 
+In order to support editable installs, Meson-python, Meson, and Ninja should be installed in the virtual environment.
+
+.. code-block:: python
+
+    pip install meson-python meson ninja
+
+Now, install Ignis in the local virtual environment with the ``--no-build-isolation`` and ``-e`` options for an editable install.
+
+.. code-block:: bash
+
+    pip install --no-build-isolation -e .
+
+Additionally, you can install useful development tools by running:
+
+.. code-block:: bash
+
+    pip install -r dev.txt
+
+Done!
+
+You can now edit the ``ignis`` directory at the root of the repository,
 and the changes will be applied without the need to reinstall Ignis.
