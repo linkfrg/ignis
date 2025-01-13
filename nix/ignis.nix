@@ -51,7 +51,7 @@ pkgs.stdenv.mkDerivation {
 
   buildPhase = ''
     cd ..
-    meson setup build --prefix=$out --libdir=lib/ignis
+    meson setup build --prefix=$out
     ninja -C build
   '';
 
