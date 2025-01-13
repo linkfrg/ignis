@@ -3,7 +3,6 @@ import os
 import sys
 from ctypes import CDLL
 from gi.repository import GLib  # type: ignore
-from ignis._get_lib_dir import get_lib_dir
 
 __version__ = "0.4.dev0"
 __lib_dir__ = None
@@ -29,8 +28,18 @@ gi.require_version("GIRepository", "2.0")
 try:
     from gi.repository import GIRepository  # type: ignore
 
-    __lib_dir__ = get_lib_dir()
-    GIRepository.Repository.prepend_library_path(__lib_dir__)  # type: ignore
-    GIRepository.Repository.prepend_search_path(__lib_dir__)  # type: ignore
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    build_libdir = os.path.join(
+        os.path.abspath(os.path.join(current_dir, "..")),
+        "build",
+        f"cp{sys.version_info.major}{sys.version_info.minor}",
+        "subprojects",
+        "gvc",
+    )
+
+    for directory in current_dir, build_libdir:
+        GIRepository.Repository.prepend_library_path(directory)
+        GIRepository.Repository.prepend_search_path(directory)
+
 except TypeError:
     pass
