@@ -84,7 +84,7 @@ class FileDialog(Gtk.FileDialog, IgnisGObject):
         """
 
     @GObject.Property
-    def file(self) -> Gio.File | None:
+    def file(self) -> "Gio.File | None":
         """
         - not argument, read-only
 

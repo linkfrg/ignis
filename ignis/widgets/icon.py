@@ -31,7 +31,7 @@ class Icon(Gtk.Image, BaseWidget):
         BaseWidget.__init__(self, **kwargs)
 
     @GObject.Property
-    def image(self) -> str | GdkPixbuf.Pixbuf | None:
+    def image(self) -> "str | GdkPixbuf.Pixbuf | None":
         """
         - optional, read-write
 
@@ -40,7 +40,7 @@ class Icon(Gtk.Image, BaseWidget):
         return self._image
 
     @image.setter
-    def image(self, value: str | GdkPixbuf.Pixbuf) -> None:
+    def image(self, value: "str | GdkPixbuf.Pixbuf") -> None:
         self._image = value
 
         pixbuf = None

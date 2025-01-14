@@ -167,7 +167,7 @@ class SystemTrayItem(IgnisGObject):
         return self.__dbus.WindowId
 
     @GObject.Property
-    def icon(self) -> str | GdkPixbuf.Pixbuf | None:
+    def icon(self) -> "str | GdkPixbuf.Pixbuf | None":
         """
         - read-only
 

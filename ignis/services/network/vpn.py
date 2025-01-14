@@ -10,7 +10,7 @@ class VpnConnection(IgnisGObject):
     """
 
     def __init__(
-        self, connection: NM.Connection | NM.ActiveConnection, client: NM.Client
+        self, connection: "NM.Connection | NM.ActiveConnection", client: NM.Client
     ):
         super().__init__()
         self._connection = connection

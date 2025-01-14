@@ -14,7 +14,7 @@ class Stream(IgnisGObject):
         GvcNotFoundError: If Gvc is not found.
     """
 
-    def __init__(self, control: Gvc.MixerControl, stream: Gvc.MixerStream | None):
+    def __init__(self, control: Gvc.MixerControl, stream: "Gvc.MixerStream | None"):
         super().__init__()
         self._control = control
         self._stream = stream
@@ -60,7 +60,7 @@ class Stream(IgnisGObject):
         """
 
     @GObject.Property
-    def stream(self) -> Gvc.MixerStream | None:
+    def stream(self) -> "Gvc.MixerStream | None":
         """
         - read-only
 

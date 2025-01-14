@@ -4,7 +4,7 @@ from ignis.exceptions import DisplayNotFoundError
 
 def get_paintable(
     widget: Gtk.Widget, icon_name: str, size: int
-) -> Gtk.IconPaintable | None:
+) -> "Gtk.IconPaintable | None":
     """
     Get a ``Gdk.Paintable`` by icon name.
 

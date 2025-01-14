@@ -2,7 +2,7 @@ from gi.repository import Gdk  # type: ignore
 from ignis.exceptions import DisplayNotFoundError
 
 
-def get_monitor(monitor_id: int) -> Gdk.Monitor | None:
+def get_monitor(monitor_id: int) -> "Gdk.Monitor | None":
     """
     Get the ``Gdk.Monitor`` by its ID.
 

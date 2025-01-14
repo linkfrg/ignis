@@ -218,7 +218,7 @@ class DBusService(IgnisGObject):
         self._properties[name] = method
 
     def emit_signal(
-        self, signal_name: str, parameters: GLib.Variant | None = None
+        self, signal_name: str, parameters: "GLib.Variant | None" = None
     ) -> None:
         """
         Emit a D-Bus signal on this service.

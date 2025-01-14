@@ -51,7 +51,7 @@ class Picture(Gtk.Picture, BaseWidget):
         BaseWidget.__init__(self, **kwargs)
 
     @GObject.Property
-    def image(self) -> str | GdkPixbuf.Pixbuf | None:
+    def image(self) -> "str | GdkPixbuf.Pixbuf | None":
         """
         - optional, read-write
 
@@ -60,7 +60,7 @@ class Picture(Gtk.Picture, BaseWidget):
         return self._image
 
     @image.setter
-    def image(self, value: str | GdkPixbuf.Pixbuf) -> None:
+    def image(self, value: "str | GdkPixbuf.Pixbuf") -> None:
         self._image = value
         self.__draw(value)
 
@@ -94,7 +94,7 @@ class Picture(Gtk.Picture, BaseWidget):
         self.height_request = value
         self.__draw(self.image)
 
-    def __draw(self, image: str | GdkPixbuf.Pixbuf):
+    def __draw(self, image: "str | GdkPixbuf.Pixbuf") -> None:
         if isinstance(image, GdkPixbuf.Pixbuf):
             self.__set_from_pixbuf(image)
         elif isinstance(image, str):
@@ -159,7 +159,7 @@ class Picture(Gtk.Picture, BaseWidget):
 
     def __scale_pixbuf(
         self, pixbuf: GdkPixbuf.Pixbuf, width: int, height: int
-    ) -> GdkPixbuf.Pixbuf | None:
+    ) -> "GdkPixbuf.Pixbuf | None":
         if width <= 0:
             return pixbuf
 
