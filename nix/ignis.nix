@@ -5,8 +5,8 @@ let
   gvc = fetchFromGitHub {
     owner = "linkfrg";
     repo = "libgnome-volume-control-wheel";
-    rev = "60c21982203cad242938efb6295e535e1c28a10d";
-    hash = "sha256-ts7GKD1eXGEx/2/2NBDDx+QhumlydMh8pnQtzpCBGUU=";
+    rev = "2d1cb33dacdae43127bb843a48b159ea7b8925d0";
+    hash = "sha256-ikF9EzFlsRH8i4+SVUHETF4Jk1ob2JX1RLsuMdzrQOQ=";
   };
 in
 pkgs.stdenv.mkDerivation {
@@ -51,7 +51,7 @@ pkgs.stdenv.mkDerivation {
 
   buildPhase = ''
     cd ..
-    meson setup build --prefix=$out --libdir=lib/ignis
+    meson setup build --prefix=$out
     ninja -C build
   '';
 
