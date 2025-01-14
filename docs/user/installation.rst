@@ -45,6 +45,33 @@ Then add the following to ``environment.systemPackages`` or ``home.packages``:
   
     inputs.ignis.packages.${system}.ignis
 
+Pip
+----
+
+Pip is the standard package manager for Python.  
+You can install Ignis directly from the Git repository using Pip.
+
+.. hint::
+    
+    You can do this in a Python virtual environment.
+    Create and activate one with the following commands:
+    
+    .. code-block:: bash
+
+        python -m venv venv
+        source venv/bin/activate  # for fish: . venv/bin/activate.fish
+
+To install the latest (Git) version of Ignis:
+
+.. code-block:: bash
+
+    pip install git+https://github.com/linkfrg/ignis.git
+
+.. seealso::
+
+    For advanced usage, you can `set up a development environment <../dev/env.html>`_ and install Ignis in editable mode.
+    This allows you to easily switch between commits, versions, branches, or pull requests using `git`, without having to reinstall Ignis.
+
 Building from source
 ---------------------
 
