@@ -3,6 +3,9 @@ from typing import Any
 from collections.abc import Callable
 from ignis.gobject import IgnisGObject
 from ignis.exceptions import CssParsingError
+from ignis.app import IgnisApp, Gtk_Style_Priority, GTK_STYLE_PRIORITIES
+
+app = IgnisApp.get_default()
 
 
 def raise_css_parsing_error(
@@ -34,6 +37,7 @@ class BaseWidget(Gtk.Widget, IgnisGObject):
 
         self._style: str | None = None
         self._css_provider: Gtk.CssProvider | None = None
+        self._style_priority: Gtk_Style_Priority = app.style_priority
 
         self.vexpand = vexpand
         self.hexpand = hexpand
@@ -65,11 +69,19 @@ class BaseWidget(Gtk.Widget, IgnisGObject):
         css_provider.load_from_data(value.encode())
 
         self.get_style_context().add_provider(
-            css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+            css_provider, GTK_STYLE_PRIORITIES[self._style_priority]
         )
 
         self._css_provider = css_provider
         self._style = value
+
+    @GObject.property
+    def style_priority(self) -> Gtk_Style_Priority:
+        return self._style_priority
+
+    @style_priority.setter
+    def style_priority(self, value: Gtk_Style_Priority) -> None:
+        self._style_priority = value
 
     def set_property(self, property_name: str, value: Any) -> None:
         """

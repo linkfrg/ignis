@@ -2,6 +2,7 @@ from __future__ import annotations
 import os
 import sys
 import datetime
+from typing import Literal
 from ignis.dbus import DBusService
 from ignis.utils import Utils
 from loguru import logger
@@ -16,6 +17,16 @@ from ignis.exceptions import (
     CssParsingError,
 )
 from ignis.logging import configure_logger
+
+Gtk_Style_Priority = Literal["application", "fallback", "settings", "theme", "user"]
+
+GTK_STYLE_PRIORITIES: dict[Gtk_Style_Priority, int] = {
+    "application": Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION,
+    "fallback": Gtk.STYLE_PROVIDER_PRIORITY_FALLBACK,
+    "settings": Gtk.STYLE_PROVIDER_PRIORITY_SETTINGS,
+    "theme": Gtk.STYLE_PROVIDER_PRIORITY_THEME,
+    "user": Gtk.STYLE_PROVIDER_PRIORITY_USER,
+}
 
 
 def raise_css_parsing_error(
@@ -76,6 +87,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         self._autoreload_config: bool = True
         self._autoreload_css: bool = True
         self._is_ready = False
+        self._style_priority: Gtk_Style_Priority = "application"
 
     def __watch_config(
         self, file_monitor: Utils.FileMonitor, path: str, event_type: str
@@ -158,13 +170,30 @@ class IgnisApp(Gtk.Application, IgnisGObject):
     def autoreload_css(self, value: bool) -> None:
         self._autoreload_css = value
 
+    @GObject.Property
+    def style_priority(self) -> Gtk_Style_Priority:
+        """
+        - read-write
+
+        The priority that the CSS style set in Ignis has in GTK.
+
+        Default: ``Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION``.
+        """
+        return self._style_priority
+
+    @style_priority.setter
+    def style_priority(self, value: Gtk_Style_Priority) -> None:
+        self._style_priority = value
+
     def _setup(self, config_path: str) -> None:
         """
         :meta private:
         """
         self._config_path = config_path
 
-    def apply_css(self, style_path: str) -> None:
+    def apply_css(
+        self, style_path: str, style_priority: Gtk_Style_Priority | None = None
+    ) -> None:
         """
         Apply a CSS/SCSS/SASS style from a path.
         If ``style_path`` has a ``.sass`` or ``.scss`` extension, it will be automatically compiled.
@@ -172,12 +201,16 @@ class IgnisApp(Gtk.Application, IgnisGObject):
 
         Args:
             style_path: Path to the .css/.scss/.sass file.
+            style_priority: Priority for applying CSS style in GTK. Defaults to self.style_priority
 
         Raises:
             StylePathAppliedError: if the given style path is already to the application.
             DisplayNotFoundError
             CssParsingError: If an error occured while parsing the CSS/SCSS file. NOTE: If you compile a SASS/SCSS file, it will print the wrong section.
         """
+
+        if style_priority is None:
+            style_priority = self._style_priority
 
         display = Gdk.Display.get_default()
 
@@ -210,7 +243,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         Gtk.StyleContext.add_provider_for_display(
             display,
             provider,
-            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION,
+            GTK_STYLE_PRIORITIES[style_priority],
         )
 
         self._css_providers[style_path] = provider
