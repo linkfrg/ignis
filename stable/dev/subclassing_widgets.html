@@ -30,7 +30,7 @@
   <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=fe5c0044" />
@@ -440,15 +440,15 @@
 <h2>Widget Class Template<a class="headerlink" href="#widget-class-template" title="Link to this heading">#</a></h2>
 <p>Here is the template for the widget that you want to override.
 Replace <code class="docutils literal notranslate"><span class="pre">WIDGET_NAME</span></code> with the actual name of the widget.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gi.repository</span> <span class="kn">import</span> <span class="n">Gtk</span><span class="p">,</span> <span class="n">GObject</span>
-<span class="kn">from</span> <span class="nn">ignis.base_widget</span> <span class="kn">import</span> <span class="n">BaseWidget</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">gi.repository</span><span class="w"> </span><span class="kn">import</span> <span class="n">Gtk</span><span class="p">,</span> <span class="n">GObject</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ignis.base_widget</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseWidget</span>
 
 
-<span class="k">class</span> <span class="nc">WIDGET_NAME</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">WIDGET_NAME</span><span class="p">,</span> <span class="n">BaseWidget</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">WIDGET_NAME</span><span class="p">(</span><span class="n">Gtk</span><span class="o">.</span><span class="n">WIDGET_NAME</span><span class="p">,</span> <span class="n">BaseWidget</span><span class="p">):</span>
     <span class="n">__gtype_name__</span> <span class="o">=</span> <span class="s2">&quot;IgnisWIDGET_NAME&quot;</span>
     <span class="n">__gproperties__</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">BaseWidget</span><span class="o">.</span><span class="n">gproperties</span><span class="p">}</span>  <span class="c1"># this need to inherit properties from BaseWidget</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>  <span class="c1"># accept keyword arguments</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>  <span class="c1"># accept keyword arguments</span>
         <span class="n">Gtk</span><span class="o">.</span><span class="n">Label</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="c1"># if you want to override enums, do it BEFORE BaseWidget.__init__(self, **kwargs)</span>
         <span class="c1"># otherwise, the property will be set before it is overridden.</span>
@@ -457,11 +457,11 @@ Replace <code class="docutils literal notranslate"><span class="pre">WIDGET_NAME
         <span class="n">BaseWidget</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># this sets all properties transferred to kwargs</span>
 
     <span class="nd">@GObject</span><span class="o">.</span><span class="n">Property</span>
-    <span class="k">def</span> <span class="nf">custom_property</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">custom_property</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_custom_property</span>
 
     <span class="nd">@custom_property</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">custom_property</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">custom_property</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_custom_property</span> <span class="o">=</span> <span class="n">value</span>
 </pre></div>
 </div>

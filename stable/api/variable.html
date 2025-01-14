@@ -30,7 +30,7 @@
   <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=fe5c0044" />
@@ -527,7 +527,7 @@
 <dd><p>Bases: <a class="reference internal" href="gobject.html#ignis.gobject.IgnisGObject" title="ignis.gobject.IgnisGObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">IgnisGObject</span></code></a></p>
 <p>Simple class that holds a value.</p>
 <p>Example usage:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ignis.variable</span> <span class="kn">import</span> <span class="n">Variable</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ignis.variable</span><span class="w"> </span><span class="kn">import</span> <span class="n">Variable</span>
 
 <span class="n">var</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">var</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;notify::value&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Value changed!: &quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">value</span><span class="p">))</span>
