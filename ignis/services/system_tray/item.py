@@ -1,4 +1,4 @@
-from typing import Union, Literal
+from typing import Literal
 from ignis.utils import Utils
 from ignis.dbus import DBusProxy
 from gi.repository import GLib, GObject, GdkPixbuf, Gtk, Gdk  # type: ignore
@@ -16,7 +16,7 @@ class SystemTrayItem(IgnisGObject):
         super().__init__()
 
         self._title: str | None = None
-        self._icon: Union[str, GdkPixbuf.Pixbuf, None] = None
+        self._icon: str | GdkPixbuf.Pixbuf | None = None
         self._tooltip: str | None = None
         self._status: str | None = None
         self._menu: DBusMenu | None = None
@@ -167,7 +167,7 @@ class SystemTrayItem(IgnisGObject):
         return self.__dbus.WindowId
 
     @GObject.Property
-    def icon(self) -> Union[str, GdkPixbuf.Pixbuf, None]:
+    def icon(self) -> str | GdkPixbuf.Pixbuf | None:
         """
         - read-only
 

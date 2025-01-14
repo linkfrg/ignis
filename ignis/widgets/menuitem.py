@@ -1,7 +1,7 @@
 from gi.repository import GObject, Gio, Gtk  # type: ignore
 from ignis.gobject import IgnisGObject
 from ignis.app import IgnisApp
-from typing import Callable, Union
+from collections.abc import Callable
 
 app = IgnisApp.get_default()
 
@@ -34,7 +34,7 @@ class MenuItem(IgnisGObject):
         label: str,
         enabled: bool = True,
         on_activate: Callable | None = None,
-        submenu: Union[Gtk.PopoverMenu, None] = None,
+        submenu: Gtk.PopoverMenu | None = None,
     ):
         super().__init__()
         self._label = label
@@ -93,7 +93,7 @@ class MenuItem(IgnisGObject):
         self.on_activate(self)
 
     @GObject.Property
-    def submenu(self) -> Union[Gtk.PopoverMenu, None]:
+    def submenu(self) -> Gtk.PopoverMenu | None:
         """
         - optional, read-only
 

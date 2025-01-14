@@ -1,9 +1,10 @@
 from gi.repository import Gio, GLib, GObject  # type: ignore
-from typing import Any, Callable
+from typing import Any
+from collections.abc import Callable
 from ignis.utils import Utils
 from ignis.gobject import IgnisGObject
 from ignis.exceptions import DBusMethodNotFoundError, DBusPropertyNotFoundError
-from typing import Literal, Union
+from typing import Literal
 
 BUS_TYPE = {"session": Gio.BusType.SESSION, "system": Gio.BusType.SYSTEM}
 
@@ -217,7 +218,7 @@ class DBusService(IgnisGObject):
         self._properties[name] = method
 
     def emit_signal(
-        self, signal_name: str, parameters: Union[GLib.Variant, None] = None
+        self, signal_name: str, parameters: GLib.Variant | None = None
     ) -> None:
         """
         Emit a D-Bus signal on this service.

@@ -1,7 +1,7 @@
 from gi.repository import GLib  # type: ignore
 from ignis.dbus import DBusProxy
 from ignis.utils import Utils
-from typing import Callable
+from collections.abc import Callable
 
 
 class SessionManager:

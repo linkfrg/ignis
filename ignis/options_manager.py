@@ -2,7 +2,8 @@ import sys
 import json
 from gi.repository import GObject  # type: ignore
 from ignis.gobject import IgnisGObject, Binding
-from typing import Any, Callable
+from typing import Any
+from collections.abc import Callable
 from collections.abc import Generator
 
 

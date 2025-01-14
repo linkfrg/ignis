@@ -2,7 +2,6 @@ import os
 from ignis.base_widget import BaseWidget
 from gi.repository import Gtk, GObject, GdkPixbuf, Gdk  # type: ignore
 from ignis.utils import Utils
-from typing import Union
 
 
 class Picture(Gtk.Picture, BaseWidget):
@@ -41,7 +40,7 @@ class Picture(Gtk.Picture, BaseWidget):
         self.override_enum("content_fit", Gtk.ContentFit)
 
         # avoid custom setters to avoid running the __draw function multiple times during initialization
-        self._image: Union[str, GdkPixbuf.Pixbuf, None] = None
+        self._image: str | GdkPixbuf.Pixbuf | None = None
         self._width = width
         self._height = height
         self.width_request = width
@@ -52,7 +51,7 @@ class Picture(Gtk.Picture, BaseWidget):
         BaseWidget.__init__(self, **kwargs)
 
     @GObject.Property
-    def image(self) -> Union[str, GdkPixbuf.Pixbuf, None]:
+    def image(self) -> str | GdkPixbuf.Pixbuf | None:
         """
         - optional, read-write
 
@@ -61,7 +60,7 @@ class Picture(Gtk.Picture, BaseWidget):
         return self._image
 
     @image.setter
-    def image(self, value: Union[str, GdkPixbuf.Pixbuf]) -> None:
+    def image(self, value: str | GdkPixbuf.Pixbuf) -> None:
         self._image = value
         self.__draw(value)
 
@@ -95,7 +94,7 @@ class Picture(Gtk.Picture, BaseWidget):
         self.height_request = value
         self.__draw(self.image)
 
-    def __draw(self, image: Union[str, GdkPixbuf.Pixbuf]):
+    def __draw(self, image: str | GdkPixbuf.Pixbuf):
         if isinstance(image, GdkPixbuf.Pixbuf):
             self.__set_from_pixbuf(image)
         elif isinstance(image, str):
@@ -160,7 +159,7 @@ class Picture(Gtk.Picture, BaseWidget):
 
     def __scale_pixbuf(
         self, pixbuf: GdkPixbuf.Pixbuf, width: int, height: int
-    ) -> Union[GdkPixbuf.Pixbuf, None]:
+    ) -> GdkPixbuf.Pixbuf | None:
         if width <= 0:
             return pixbuf
 

@@ -4,7 +4,6 @@ from ignis.app import IgnisApp
 from ignis.services.audio import AudioService
 from ignis.exceptions import GstPluginNotFoundError
 from ignis.base_service import BaseService
-from typing import Union
 from ignis.options import options
 from .session import SessionManager
 from .util import gst_inspect
@@ -58,7 +57,7 @@ class RecorderService(BaseService):
 
         self._active: bool = False
         self._is_paused: bool = False
-        self.__pipeline: Union[Gst.Element, None] = None
+        self.__pipeline: Gst.Element | None = None
 
         self._N_THREADS: str = str(min(max(1, GLib.get_num_processors()), 64))
 

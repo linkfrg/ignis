@@ -1,6 +1,6 @@
 from gi.repository import GObject  # type: ignore
 from ignis.gobject import IgnisGObject
-from typing import Literal, Union
+from typing import Literal
 from ._imports import Gvc
 from .constants import SPEAKER_ICON_TEMPLATE, MICROPHONE_ICON_TEMPLATE
 
@@ -14,7 +14,7 @@ class Stream(IgnisGObject):
         GvcNotFoundError: If Gvc is not found.
     """
 
-    def __init__(self, control: Gvc.MixerControl, stream: Union[Gvc.MixerStream, None]):
+    def __init__(self, control: Gvc.MixerControl, stream: Gvc.MixerStream | None):
         super().__init__()
         self._control = control
         self._stream = stream
@@ -60,7 +60,7 @@ class Stream(IgnisGObject):
         """
 
     @GObject.Property
-    def stream(self) -> Union[Gvc.MixerStream, None]:
+    def stream(self) -> Gvc.MixerStream | None:
         """
         - read-only
 
