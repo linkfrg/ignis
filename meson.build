@@ -15,11 +15,13 @@ pylibdir = python.get_install_dir()
 pkginstalldir = join_paths(pylibdir, meson.project_name())
 
 # Dependencies
-dependency('glib-2.0')
-dependency('gobject-introspection-1.0')
-dependency('gio-2.0')
-dependency('gtk4')
-dependency('gtk4-layer-shell-0')
+if get_option('dependency_check')
+    dependency('glib-2.0')
+    dependency('gobject-introspection-1.0')
+    dependency('gio-2.0')
+    dependency('gtk4')
+    dependency('gtk4-layer-shell-0')
+endif
 
 # gvc
 if get_option('build_gvc')
