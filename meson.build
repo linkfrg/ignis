@@ -22,14 +22,16 @@ dependency('gtk4')
 dependency('gtk4-layer-shell-0')
 
 # gvc
-subproject('gvc',
-    default_options: [
-        'package_name=' + meson.project_name(),
-        'static=false',
-        'introspection=true',
-        'alsa=false'
-    ]
-)
+if get_option('build_gvc')
+    subproject('gvc',
+        default_options: [
+            'package_name=' + meson.project_name(),
+            'static=false',
+            'introspection=true',
+            'alsa=false'
+        ]
+    )
+endif
 
 # Do installation
 install_subdir(

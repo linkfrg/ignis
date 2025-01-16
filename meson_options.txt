@@ -1,0 +1,6 @@
+option(
+    'build_gvc',
+    type: 'boolean',
+    value: true,
+    description: 'Build gnome-volume-control (required for Audio Service).',
+)
