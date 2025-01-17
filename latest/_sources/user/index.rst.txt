@@ -18,4 +18,5 @@ Get started
    cli
    options
    expanding_functionality
+   troubleshooting
    faq

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>FAQ &#8212; Ignis documentation</title>
+    <title>Troubleshooting &#8212; Ignis documentation</title>
   
   
   
@@ -47,7 +47,7 @@
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'user/faq';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user/troubleshooting';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://linkfrg.github.io/ignis/latest/_static/switcher.json';
@@ -57,8 +57,8 @@
         </script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="API reference" href="../api/index.html" />
-    <link rel="prev" title="Troubleshooting" href="troubleshooting.html" />
+    <link rel="next" title="FAQ" href="faq.html" />
+    <link rel="prev" title="Expanding functionality" href="expanding_functionality.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -374,8 +374,8 @@
 <li class="toctree-l1"><a class="reference internal" href="cli.html">CLI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="options.html">Options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="expanding_functionality.html">Expanding functionality</a></li>
-<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">FAQ</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
 </ul>
 </div>
 </nav></div>
@@ -419,7 +419,7 @@
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">User guide</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">FAQ</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Troubleshooting</span></li>
   </ul>
 </nav>
 </div>
@@ -436,11 +436,17 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="faq">
-<h1>FAQ<a class="headerlink" href="#faq" title="Link to this heading">#</a></h1>
-<section id="custom-svg-icons">
-<h2>Custom SVG icons<a class="headerlink" href="#custom-svg-icons" title="Link to this heading">#</a></h2>
-<p>See <a class="reference internal" href="../api/app.html#ignis.app.IgnisApp.add_icons" title="ignis.app.IgnisApp.add_icons"><code class="xref py py-func docutils literal notranslate"><span class="pre">add_icons()</span></code></a>.</p>
+  <section id="troubleshooting">
+<h1>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h1>
+<section id="cannot-view-children-of-widget-scroll">
+<h2>Cannot view children of <code class="docutils literal notranslate"><span class="pre">Widget.Scroll</span></code><a class="headerlink" href="#cannot-view-children-of-widget-scroll" title="Link to this heading">#</a></h2>
+<p>Set <code class="docutils literal notranslate"><span class="pre">min-height:</span> <span class="pre">100px;</span></code> or <code class="docutils literal notranslate"><span class="pre">min-width:</span> <span class="pre">100px;</span></code> to your <code class="docutils literal notranslate"><span class="pre">Widget.Scroll</span></code> in CSS.
+Where <code class="docutils literal notranslate"><span class="pre">100px</span></code> you can set any value.</p>
+<p>Alternatively, set <code class="docutils literal notranslate"><span class="pre">vexpand=True</span></code> or <code class="docutils literal notranslate"><span class="pre">hexpand=True</span></code> to your <code class="docutils literal notranslate"><span class="pre">Widget.Scroll</span></code>.</p>
+</section>
+<section id="render-issues-or-unresponsive-ui-after-wake-up-from-suspend">
+<h2>Render issues or Unresponsive UI after wake up from suspend<a class="headerlink" href="#render-issues-or-unresponsive-ui-after-wake-up-from-suspend" title="Link to this heading">#</a></h2>
+<p>If you use Nvidia, see this: <a class="reference external" href="https://wiki.archlinux.org/title/NVIDIA/Tips_and_tricks#Preserve_video_memory_after_suspend">Preserve video memory after suspend</a>.</p>
 </section>
 </section>
 
@@ -455,20 +461,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="troubleshooting.html"
+       href="expanding_functionality.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Troubleshooting</p>
+        <p class="prev-next-title">Expanding functionality</p>
       </div>
     </a>
     <a class="right-next"
-       href="../api/index.html"
+       href="faq.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">API reference</p>
+        <p class="prev-next-title">FAQ</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -491,7 +497,8 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-svg-icons">Custom SVG icons</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cannot-view-children-of-widget-scroll">Cannot view children of <code class="docutils literal notranslate"><span class="pre">Widget.Scroll</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#render-issues-or-unresponsive-ui-after-wake-up-from-suspend">Render issues or Unresponsive UI after wake up from suspend</a></li>
 </ul>
   </nav></div>
 
@@ -499,7 +506,7 @@
 
   
   <div class="tocsection editthispage">
-    <a href="https://github.com/linkfrg/ignis/edit/main/docs/user/faq.rst">
+    <a href="https://github.com/linkfrg/ignis/edit/main/docs/user/troubleshooting.rst">
       <i class="fa-solid fa-pencil"></i>
       
       
@@ -515,7 +522,7 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/user/faq.rst.txt"
+      <li><a href="../_sources/user/troubleshooting.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div></div>
