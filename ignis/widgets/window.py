@@ -99,6 +99,7 @@ class Window(Gtk.Window, BaseWidget):
         margin_left: int = 0,
         margin_right: int = 0,
         margin_top: int = 0,
+        dynamic_input_region: bool = False,
         **kwargs,
     ):
         if not GtkLayerShell.is_supported():
@@ -120,6 +121,7 @@ class Window(Gtk.Window, BaseWidget):
         self._margin_left = 0
         self._margin_right = 0
         self._margin_top = 0
+        self._dynamic_input_region = dynamic_input_region
 
         self.anchor = anchor
         self.exclusivity = exclusivity
@@ -144,6 +146,25 @@ class Window(Gtk.Window, BaseWidget):
         BaseWidget.__init__(self, **kwargs)
 
         self.connect("close-request", self.__on_close_request)
+
+        if dynamic_input_region is True:
+            self.__set_dynamic_input_region()
+
+    def __set_dynamic_input_region(self) -> None:
+        def sync(child: Gtk.Widget) -> None:
+            self.input_width = child.get_width()
+            self.input_height = child.get_height()
+
+        child = self.get_child()
+        if not child or not child.find_property("child"):
+            raise TypeError(
+                """Trying to set dynamic_input_region to True but the child widget doesn't implement "child" property"""
+            )
+
+        child.connect(
+            "notify::child", lambda x, y: Utils.Timeout(50, sync, child)
+        )  # timeout so that the size has time to update
+        sync(child)
 
     def __close_popup(self, event_controller_key, keyval, keycode, state):
         if self._popup:
@@ -330,6 +351,18 @@ class Window(Gtk.Window, BaseWidget):
     def input_height(self, value: int) -> None:
         self._input_height = value
         self.__change_input_region()
+
+    @GObject.Property
+    def dynamic_input_region(self) -> bool:
+        """
+        - optional, read-only
+
+        Whether to dynamically update an input region depending on the :attr:`child` size.
+
+        :attr:`child` must implement ``child`` property. E.g., :class:`Widget.Box`, :class:`Widget.EventBox` and etc.
+        The input region will change when ``child`` is changed.
+        """
+        return self._dynamic_input_region
 
     @GObject.Property
     def margin_bottom(self) -> int:
