@@ -406,6 +406,7 @@ class Window(Gtk.Window, BaseWidget):
         region = cairo.Region(rectangle)
         surface = self.get_surface()
         if not surface:
+            self.connect("realize", lambda *args: self.__change_input_region())
             return
 
         surface.set_input_region(region)
