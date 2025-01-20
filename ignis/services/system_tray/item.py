@@ -82,16 +82,9 @@ class SystemTrayItem(IgnisGObject):
         attention_icon_pixmap = self.__dbus.AttentionIconPixmap
 
         if icon_name:
-            if self._icon_theme.has_icon(icon_name):
-                self._icon = icon_name
-            else:
-                icon_path = self.__dbus.IconThemePath
-                display = Gdk.Display.get_default()
-                if not display:
-                    raise DisplayNotFoundError()
-                icon_theme = Gtk.IconTheme.get_for_display(display)
-                icon_theme.add_search_path(icon_path)
-                self._icon = icon_name
+            self._icon = icon_name
+            if not self._icon_theme.has_icon(icon_name):
+                self._icon_theme.add_search_path(self.__dbus.IconThemePath)
 
         elif attention_icon_name:
             self._icon = attention_icon_name
