@@ -76,10 +76,6 @@ class SystemTrayItem(IgnisGObject):
         self.emit("ready")
 
     def __sync_icon(self) -> None:
-        if self.title == "spotify":
-            self._icon = self.__get_spotify_icon()
-            self.notify("icon")
-            return
 
         icon_name = self.__dbus.IconName
         attention_icon_name = self.__dbus.AttentionIconName
@@ -87,7 +83,18 @@ class SystemTrayItem(IgnisGObject):
         attention_icon_pixmap = self.__dbus.AttentionIconPixmap
 
         if icon_name:
-            self._icon = icon_name
+            if self._icon_theme.has_icon(icon_name):
+                self._icon = icon_name
+            else:
+                icon_path = self.__dbus.IconThemePath
+                display = Gdk.Display.get_default()
+                if not display:
+                    raise DisplayNotFoundError("No display found!")
+                icon_theme = Gtk.IconTheme.get_for_display(display)
+                icon_theme.add_search_path(icon_path)
+                self._icon = icon_name
+
+
 
         elif attention_icon_name:
             self._icon = attention_icon_name
@@ -103,12 +110,6 @@ class SystemTrayItem(IgnisGObject):
 
         self.notify("icon")
 
-    def __get_spotify_icon(self) -> str:
-        icon_name = self.__dbus.IconName
-        if self._icon_theme.has_icon(icon_name):
-            return icon_name
-        else:
-            return "/opt/spotify/icons/" + icon_name + ".png"
 
     @GObject.Signal
     def ready(self): ...  # user shouldn't connect to this signal
