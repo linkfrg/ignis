@@ -81,10 +81,11 @@ class SystemTrayItem(IgnisGObject):
         icon_pixmap = self.__dbus.IconPixmap
         attention_icon_pixmap = self.__dbus.AttentionIconPixmap
 
+        icon_theme_path: str | None = self.__dbus.IconThemePath
         if icon_name:
             self._icon = icon_name
-            if not self._icon_theme.has_icon(icon_name):
-                self._icon_theme.add_search_path(self.__dbus.IconThemePath)
+            if not self._icon_theme.has_icon(icon_name) and icon_theme_path is not None:
+                self._icon_theme.add_search_path(icon_theme_path)
 
         elif attention_icon_name:
             self._icon = attention_icon_name
