@@ -76,7 +76,6 @@ class SystemTrayItem(IgnisGObject):
         self.emit("ready")
 
     def __sync_icon(self) -> None:
-
         icon_name = self.__dbus.IconName
         attention_icon_name = self.__dbus.AttentionIconName
         icon_pixmap = self.__dbus.IconPixmap
@@ -94,8 +93,6 @@ class SystemTrayItem(IgnisGObject):
                 icon_theme.add_search_path(icon_path)
                 self._icon = icon_name
 
-
-
         elif attention_icon_name:
             self._icon = attention_icon_name
 
@@ -109,7 +106,6 @@ class SystemTrayItem(IgnisGObject):
             self._icon = "image-missing"
 
         self.notify("icon")
-
 
     @GObject.Signal
     def ready(self): ...  # user shouldn't connect to this signal
