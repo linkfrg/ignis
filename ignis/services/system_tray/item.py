@@ -88,7 +88,7 @@ class SystemTrayItem(IgnisGObject):
                 icon_path = self.__dbus.IconThemePath
                 display = Gdk.Display.get_default()
                 if not display:
-                    raise DisplayNotFoundError("No display found!")
+                    raise DisplayNotFoundError()
                 icon_theme = Gtk.IconTheme.get_for_display(display)
                 icon_theme.add_search_path(icon_path)
                 self._icon = icon_name
