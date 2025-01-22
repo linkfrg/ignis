@@ -227,7 +227,7 @@ class GstPluginNotFoundError(Exception):
 
 class SassCompilationError(Exception):
     """
-    Raised when Dart Sass compilation fails.
+    Raised when the Sass compilation fails.
     """
 
     def __init__(self, stderr: str, *args: object) -> None:
@@ -239,19 +239,19 @@ class SassCompilationError(Exception):
         """
         - required, read-only
 
-        The stderr output from Dart Sass.
+        The stderr output from the Sass compiler.
         """
         return self._stderr
 
 
-class DartSassNotFoundError(Exception):
+class SassNotFoundError(Exception):
     """
-    Raised when Dart Sass is not found.
+    Raised when a compatible Sass compiler is not found.
     """
 
     def __init__(self, *args: object) -> None:
         super().__init__(
-            "Dart Sass not found! To compile SCSS/SASS, install dart-sass", *args
+            "Sass compiler not found! To compile SCSS/SASS, install either dart-sass or grass-sass", *args
         )
 
 
