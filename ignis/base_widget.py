@@ -28,6 +28,7 @@ class BaseWidget(Gtk.Widget, IgnisGObject):
     def __init__(
         self,
         setup: Callable | None = None,
+        style_priority: GtkStylePriority | None = None,
         vexpand: bool = False,
         hexpand: bool = False,
         visible: bool = True,
@@ -37,7 +38,9 @@ class BaseWidget(Gtk.Widget, IgnisGObject):
 
         self._style: str | None = None
         self._css_provider: Gtk.CssProvider | None = None
-        self._style_priority: GtkStylePriority = app.widgets_style_priority
+        self._style_priority: GtkStylePriority = (
+            app.widgets_style_priority if style_priority is None else style_priority
+        )
 
         self.vexpand = vexpand
         self.hexpand = hexpand
