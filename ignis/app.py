@@ -87,7 +87,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         self._autoreload_config: bool = True
         self._autoreload_css: bool = True
         self._is_ready = False
-        self._style_priority: GtkStylePriority = "application"
+        self._widgets_style_priority: GtkStylePriority = "application"
 
     def __watch_config(
         self, file_monitor: Utils.FileMonitor, path: str, event_type: str
@@ -171,19 +171,33 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         self._autoreload_css = value
 
     @GObject.Property
-    def style_priority(self) -> GtkStylePriority:
+    def widgets_style_priority(self) -> GtkStylePriority:
         """
         - read-write
 
-        The priority that the CSS style set in Ignis has in GTK.
+        The priority used for each widget style unless a widget doesn't specify custom style priority using :attr:`BaseWidget.style_priority`.
 
-        Default: ``Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION``.
+        .. warning::
+            Changing this property won't affect already initialized widgets!
+            If you want to specify a custom global style priority for all widgets, do this at the start of the configuration.
+
+            .. code-block:: python
+
+                from ignis.app import IgnisApp
+
+                app = IgnisApp.get_default()
+
+                app.widgets_style_priority = "user"
+
+                # ... rest of config goes here
+
+        Default: ``"application"``.
         """
-        return self._style_priority
+        return self._widgets_style_priority
 
-    @style_priority.setter
-    def style_priority(self, value: GtkStylePriority) -> None:
-        self._style_priority = value
+    @widgets_style_priority.setter
+    def widgets_style_priority(self, value: GtkStylePriority) -> None:
+        self._widgets_style_priority = value
 
     def _setup(self, config_path: str) -> None:
         """
@@ -192,7 +206,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         self._config_path = config_path
 
     def apply_css(
-        self, style_path: str, style_priority: GtkStylePriority | None = None
+        self, style_path: str, style_priority: GtkStylePriority = "application"
     ) -> None:
         """
         Apply a CSS/SCSS/SASS style from a path.
@@ -201,16 +215,17 @@ class IgnisApp(Gtk.Application, IgnisGObject):
 
         Args:
             style_path: Path to the .css/.scss/.sass file.
-            style_priority: Priority for applying CSS style in GTK. Defaults to self.style_priority
+            style_priority: A priority of the CSS style. More info about style priorities: :obj:`Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION`.
+
+        .. warning::
+            ``style_priority`` won't affect a style applied to widgets using the `style` property,
+            for these purposes use :attr:`widgets_style_priority` or :attr:`~ignis.base_widget.BaseWidget.style_priority`.
 
         Raises:
             StylePathAppliedError: if the given style path is already to the application.
             DisplayNotFoundError
             CssParsingError: If an error occured while parsing the CSS/SCSS file. NOTE: If you compile a SASS/SCSS file, it will print the wrong section.
         """
-
-        if style_priority is None:
-            style_priority = self._style_priority
 
         display = Gdk.Display.get_default()
 

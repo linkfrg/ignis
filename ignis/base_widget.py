@@ -37,7 +37,7 @@ class BaseWidget(Gtk.Widget, IgnisGObject):
 
         self._style: str | None = None
         self._css_provider: Gtk.CssProvider | None = None
-        self._style_priority: GtkStylePriority = app.style_priority
+        self._style_priority: GtkStylePriority = app.widgets_style_priority
 
         self.vexpand = vexpand
         self.hexpand = hexpand
