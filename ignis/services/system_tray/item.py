@@ -76,18 +76,16 @@ class SystemTrayItem(IgnisGObject):
         self.emit("ready")
 
     def __sync_icon(self) -> None:
-        if self.title == "spotify":
-            self._icon = self.__get_spotify_icon()
-            self.notify("icon")
-            return
-
         icon_name = self.__dbus.IconName
         attention_icon_name = self.__dbus.AttentionIconName
         icon_pixmap = self.__dbus.IconPixmap
         attention_icon_pixmap = self.__dbus.AttentionIconPixmap
 
+        icon_theme_path: str | None = self.__dbus.IconThemePath
         if icon_name:
             self._icon = icon_name
+            if not self._icon_theme.has_icon(icon_name) and icon_theme_path is not None:
+                self._icon_theme.add_search_path(icon_theme_path)
 
         elif attention_icon_name:
             self._icon = attention_icon_name
@@ -102,13 +100,6 @@ class SystemTrayItem(IgnisGObject):
             self._icon = "image-missing"
 
         self.notify("icon")
-
-    def __get_spotify_icon(self) -> str:
-        icon_name = self.__dbus.IconName
-        if self._icon_theme.has_icon(icon_name):
-            return icon_name
-        else:
-            return "/opt/spotify/icons/" + icon_name + ".png"
 
     @GObject.Signal
     def ready(self): ...  # user shouldn't connect to this signal

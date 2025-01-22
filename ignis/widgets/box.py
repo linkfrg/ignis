@@ -57,14 +57,17 @@ class Box(Gtk.Box, BaseWidget):
     def append(self, child: Gtk.Widget) -> None:
         self._child.append(child)
         super().append(child)
+        self.notify("child")
 
     def remove(self, child: Gtk.Widget) -> None:
         self._child.remove(child)
         super().remove(child)
+        self.notify("child")
 
     def prepend(self, child: Gtk.Widget) -> None:
         self._child.insert(0, child)
         super().prepend(child)
+        self.notify("child")
 
     @GObject.Property
     def vertical(self) -> bool:

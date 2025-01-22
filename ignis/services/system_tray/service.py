@@ -109,6 +109,9 @@ class SystemTrayService(BaseService):
     def __on_item_ready(
         self, item: SystemTrayItem, bus_name: str, object_path: str
     ) -> None:
+        if bus_name in self._items:
+            return
+
         self._items[bus_name] = item
         item.connect("removed", self.__remove_item, bus_name)
         self.emit("added", item)
