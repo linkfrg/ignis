@@ -78,8 +78,6 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         self._reload_on_monitors_change: bool = True
         self._is_ready = False
 
-        self.__watch_monitors()
-
     def __watch_config(
         self, file_monitor: Utils.FileMonitor, path: str, event_type: str
     ) -> None:
@@ -340,6 +338,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         :meta private:
         """
         self.hold()
+        self.__watch_monitors()
 
         if not self._config_path:
             raise ValueError("Set up config_path before trying to run application")
