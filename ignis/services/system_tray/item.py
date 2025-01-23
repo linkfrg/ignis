@@ -84,7 +84,10 @@ class SystemTrayItem(IgnisGObject):
         icon_theme_path: str | None = self.__dbus.IconThemePath
         if icon_name:
             self._icon = icon_name
-            if not self._icon_theme.has_icon(icon_name) and icon_theme_path is not None:
+            if (
+                not self._icon_theme.has_icon(icon_name)
+                and icon_theme_path not in self._icon_theme.get_search_path()
+            ):
                 self._icon_theme.add_search_path(icon_theme_path)
 
         elif attention_icon_name:
