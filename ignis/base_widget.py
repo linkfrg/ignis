@@ -89,12 +89,12 @@ class BaseWidget(Gtk.Widget, IgnisGObject):
 
             .. code-block:: python
 
-            some_widget = WIDGET_NAME(
-                style="some style",
-                style_priority="user"  # do
-            )
-            some_widget.style_priority = "application"  # nothing change
-            some_widget.style = "new style"  # this style will have "application" priority
+                some_widget = WIDGET_NAME(
+                    style="some style",
+                    style_priority="user"  # do
+                )
+                some_widget.style_priority = "application"  # nothing change
+                some_widget.style = "new style"  # this style will have "application" priority
         """
         return self._style_priority
 
