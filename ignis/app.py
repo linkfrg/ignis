@@ -75,7 +75,10 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         self._windows: dict[str, Gtk.Window] = {}
         self._autoreload_config: bool = True
         self._autoreload_css: bool = True
+        self._reload_on_monitors_change: bool = True
         self._is_ready = False
+
+        self.__watch_monitors()
 
     def __watch_config(
         self, file_monitor: Utils.FileMonitor, path: str, event_type: str
@@ -89,6 +92,15 @@ class IgnisApp(Gtk.Application, IgnisGObject):
                 self.reload()
             elif extension in (".css", ".scss", ".sass") and self.autoreload_css:
                 self.reload_css()
+
+    def __watch_monitors(self) -> None:
+        def callback(*_) -> None:
+            if self._reload_on_monitors_change is True:
+                logger.info("Monitors have changed, reloading.")
+                self.reload()
+
+        monitors = Utils.get_monitors()
+        monitors.connect("items-changed", callback)
 
     @classmethod
     def get_default(cls: type[IgnisApp]) -> IgnisApp:
@@ -157,6 +169,19 @@ class IgnisApp(Gtk.Application, IgnisGObject):
     @autoreload_css.setter
     def autoreload_css(self, value: bool) -> None:
         self._autoreload_css = value
+
+    @GObject.Property
+    def reload_on_monitors_change(self) -> bool:
+        """
+        Whether to reload Ignis on monitors change (connect/disconnect).
+
+        Default: ``True``.
+        """
+        return self._reload_on_monitors_change
+
+    @reload_on_monitors_change.setter
+    def reload_on_monitors_change(self, value: bool) -> None:
+        self._reload_on_monitors_change = value
 
     def _setup(self, config_path: str) -> None:
         """
