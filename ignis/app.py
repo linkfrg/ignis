@@ -171,6 +171,8 @@ class IgnisApp(Gtk.Application, IgnisGObject):
     @GObject.Property
     def reload_on_monitors_change(self) -> bool:
         """
+        - read-write
+
         Whether to reload Ignis on monitors change (connect/disconnect).
 
         Default: ``True``.
