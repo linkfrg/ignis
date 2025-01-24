@@ -202,6 +202,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
 
         The priority used for each widget style
         unless a widget specifies a custom style priority using :attr:`~ignis.base_widget.BaseWidget.style_priority`.
+        More info about style priorities: :obj:`Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION`.
 
         Default: ``"application"``.
 
