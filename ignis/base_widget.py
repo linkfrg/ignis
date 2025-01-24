@@ -3,6 +3,9 @@ from typing import Any
 from collections.abc import Callable
 from ignis.gobject import IgnisGObject
 from ignis.exceptions import CssParsingError
+from ignis.app import IgnisApp, StylePriority, GTK_STYLE_PRIORITIES
+
+app = IgnisApp.get_default()
 
 
 def raise_css_parsing_error(
@@ -25,6 +28,7 @@ class BaseWidget(Gtk.Widget, IgnisGObject):
     def __init__(
         self,
         setup: Callable | None = None,
+        style_priority: StylePriority | None = None,
         vexpand: bool = False,
         hexpand: bool = False,
         visible: bool = True,
@@ -34,6 +38,9 @@ class BaseWidget(Gtk.Widget, IgnisGObject):
 
         self._style: str | None = None
         self._css_provider: Gtk.CssProvider | None = None
+        self._style_priority: StylePriority = (
+            app.widgets_style_priority if style_priority is None else style_priority
+        )
 
         self.vexpand = vexpand
         self.hexpand = hexpand
@@ -65,11 +72,39 @@ class BaseWidget(Gtk.Widget, IgnisGObject):
         css_provider.load_from_data(value.encode())
 
         self.get_style_context().add_provider(
-            css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+            css_provider, GTK_STYLE_PRIORITIES[self._style_priority]
         )
 
         self._css_provider = css_provider
         self._style = value
+
+    @GObject.Property
+    def style_priority(self) -> StylePriority:
+        """
+        - read-write
+
+        The style priority for this widget.
+        Overrides :attr:`~ignis.app.IgnisApp.widgets_style_priority`.
+
+        More info about style priorities: :obj:`Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION`.
+
+        .. warning::
+            Changing this property won't affect an already applied style!
+
+            .. code-block:: python
+
+                some_widget = WIDGET_NAME(
+                    style="some style",
+                    style_priority="user"
+                )
+                some_widget.style_priority = "application"  # nothing change for current style
+                some_widget.style = "new style"  # this style will have "application" priority
+        """
+        return self._style_priority
+
+    @style_priority.setter
+    def style_priority(self, value: StylePriority) -> None:
+        self._style_priority = value
 
     def set_property(self, property_name: str, value: Any) -> None:
         """
