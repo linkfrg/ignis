@@ -180,6 +180,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
     def autoreload_css(self, value: bool) -> None:
         self._autoreload_css = value
 
+    @GObject.Property
     def reload_on_monitors_change(self) -> bool:
         """
         - read-write
