@@ -86,6 +86,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         self._windows: dict[str, Gtk.Window] = {}
         self._autoreload_config: bool = True
         self._autoreload_css: bool = True
+        self._reload_on_monitors_change: bool = True
         self._is_ready = False
         self._widgets_style_priority: GtkStylePriority = "application"
 
@@ -101,6 +102,15 @@ class IgnisApp(Gtk.Application, IgnisGObject):
                 self.reload()
             elif extension in (".css", ".scss", ".sass") and self.autoreload_css:
                 self.reload_css()
+
+    def __watch_monitors(self) -> None:
+        def callback(*_) -> None:
+            if self._reload_on_monitors_change is True:
+                logger.info("Monitors have changed, reloading.")
+                self.reload()
+
+        monitors = Utils.get_monitors()
+        monitors.connect("items-changed", callback)
 
     @classmethod
     def get_default(cls: type[IgnisApp]) -> IgnisApp:
@@ -199,6 +209,20 @@ class IgnisApp(Gtk.Application, IgnisGObject):
     @widgets_style_priority.setter
     def widgets_style_priority(self, value: GtkStylePriority) -> None:
         self._widgets_style_priority = value
+
+    def reload_on_monitors_change(self) -> bool:
+        """
+        - read-write
+
+        Whether to reload Ignis on monitors change (connect/disconnect).
+
+        Default: ``True``.
+        """
+        return self._reload_on_monitors_change
+
+    @reload_on_monitors_change.setter
+    def reload_on_monitors_change(self, value: bool) -> None:
+        self._reload_on_monitors_change = value
 
     def _setup(self, config_path: str) -> None:
         """
@@ -364,6 +388,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         :meta private:
         """
         self.hold()
+        self.__watch_monitors()
 
         if not self._config_path:
             raise ValueError("Set up config_path before trying to run application")

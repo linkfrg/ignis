@@ -23,6 +23,7 @@ from .download_image import download_image
 from .get_current_dir import get_current_dir
 from .socket import send_socket, listen_socket
 from .debounce import DebounceTask, debounce
+from .get_monitors import get_monitors
 
 
 class Utils:
@@ -52,3 +53,4 @@ class Utils:
     listen_socket = listen_socket
     DebounceTask = DebounceTask
     debounce = debounce
+    get_monitors = get_monitors
