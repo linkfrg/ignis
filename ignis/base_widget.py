@@ -3,7 +3,7 @@ from typing import Any
 from collections.abc import Callable
 from ignis.gobject import IgnisGObject
 from ignis.exceptions import CssParsingError
-from ignis.app import IgnisApp, GtkStylePriority, GTK_STYLE_PRIORITIES
+from ignis.app import IgnisApp, StylePriority, GTK_STYLE_PRIORITIES
 
 app = IgnisApp.get_default()
 
@@ -28,7 +28,7 @@ class BaseWidget(Gtk.Widget, IgnisGObject):
     def __init__(
         self,
         setup: Callable | None = None,
-        style_priority: GtkStylePriority | None = None,
+        style_priority: StylePriority | None = None,
         vexpand: bool = False,
         hexpand: bool = False,
         visible: bool = True,
@@ -38,7 +38,7 @@ class BaseWidget(Gtk.Widget, IgnisGObject):
 
         self._style: str | None = None
         self._css_provider: Gtk.CssProvider | None = None
-        self._style_priority: GtkStylePriority = (
+        self._style_priority: StylePriority = (
             app.widgets_style_priority if style_priority is None else style_priority
         )
 
@@ -79,7 +79,7 @@ class BaseWidget(Gtk.Widget, IgnisGObject):
         self._style = value
 
     @GObject.Property
-    def style_priority(self) -> GtkStylePriority:
+    def style_priority(self) -> StylePriority:
         """
         - read-write
 
@@ -103,7 +103,7 @@ class BaseWidget(Gtk.Widget, IgnisGObject):
         return self._style_priority
 
     @style_priority.setter
-    def style_priority(self, value: GtkStylePriority) -> None:
+    def style_priority(self, value: StylePriority) -> None:
         self._style_priority = value
 
     def set_property(self, property_name: str, value: Any) -> None:

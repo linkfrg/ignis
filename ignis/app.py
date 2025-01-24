@@ -18,9 +18,9 @@ from ignis.exceptions import (
 )
 from ignis.logging import configure_logger
 
-GtkStylePriority = Literal["application", "fallback", "settings", "theme", "user"]
+StylePriority = Literal["application", "fallback", "settings", "theme", "user"]
 
-GTK_STYLE_PRIORITIES: dict[GtkStylePriority, int] = {
+GTK_STYLE_PRIORITIES: dict[StylePriority, int] = {
     "application": Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION,
     "fallback": Gtk.STYLE_PROVIDER_PRIORITY_FALLBACK,
     "settings": Gtk.STYLE_PROVIDER_PRIORITY_SETTINGS,
@@ -88,7 +88,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         self._autoreload_css: bool = True
         self._reload_on_monitors_change: bool = True
         self._is_ready = False
-        self._widgets_style_priority: GtkStylePriority = "application"
+        self._widgets_style_priority: StylePriority = "application"
 
     def __watch_config(
         self, file_monitor: Utils.FileMonitor, path: str, event_type: str
@@ -196,7 +196,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         self._reload_on_monitors_change = value
 
     @GObject.Property
-    def widgets_style_priority(self) -> GtkStylePriority:
+    def widgets_style_priority(self) -> StylePriority:
         """
         - read-write
 
@@ -222,7 +222,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         return self._widgets_style_priority
 
     @widgets_style_priority.setter
-    def widgets_style_priority(self, value: GtkStylePriority) -> None:
+    def widgets_style_priority(self, value: StylePriority) -> None:
         self._widgets_style_priority = value
 
     def _setup(self, config_path: str) -> None:
@@ -232,7 +232,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         self._config_path = config_path
 
     def apply_css(
-        self, style_path: str, style_priority: GtkStylePriority = "application"
+        self, style_path: str, style_priority: StylePriority = "application"
     ) -> None:
         """
         Apply a CSS/SCSS/SASS style from a path.
