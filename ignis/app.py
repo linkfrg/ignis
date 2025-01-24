@@ -180,6 +180,20 @@ class IgnisApp(Gtk.Application, IgnisGObject):
     def autoreload_css(self, value: bool) -> None:
         self._autoreload_css = value
 
+    def reload_on_monitors_change(self) -> bool:
+        """
+        - read-write
+
+        Whether to reload Ignis on monitors change (connect/disconnect).
+
+        Default: ``True``.
+        """
+        return self._reload_on_monitors_change
+
+    @reload_on_monitors_change.setter
+    def reload_on_monitors_change(self, value: bool) -> None:
+        self._reload_on_monitors_change = value
+
     @GObject.Property
     def widgets_style_priority(self) -> GtkStylePriority:
         """
@@ -209,20 +223,6 @@ class IgnisApp(Gtk.Application, IgnisGObject):
     @widgets_style_priority.setter
     def widgets_style_priority(self, value: GtkStylePriority) -> None:
         self._widgets_style_priority = value
-
-    def reload_on_monitors_change(self) -> bool:
-        """
-        - read-write
-
-        Whether to reload Ignis on monitors change (connect/disconnect).
-
-        Default: ``True``.
-        """
-        return self._reload_on_monitors_change
-
-    @reload_on_monitors_change.setter
-    def reload_on_monitors_change(self, value: bool) -> None:
-        self._reload_on_monitors_change = value
 
     def _setup(self, config_path: str) -> None:
         """
