@@ -78,7 +78,7 @@ class BaseWidget(Gtk.Widget, IgnisGObject):
         self._css_provider = css_provider
         self._style = value
 
-    @GObject.property
+    @GObject.Property
     def style_priority(self) -> GtkStylePriority:
         """
         The style priority for this widget.
