@@ -81,8 +81,12 @@ class BaseWidget(Gtk.Widget, IgnisGObject):
     @GObject.Property
     def style_priority(self) -> GtkStylePriority:
         """
+        - read-write
+
         The style priority for this widget.
-        Overrides :attr:`IgnisApp.widgets_style_priority`.
+        Overrides :attr:`~ignis.app.IgnisApp.widgets_style_priority`.
+
+        More info about style priorities: :obj:`Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION`.
 
         .. warning::
             Changing this property won't affect an already applied style!
@@ -91,9 +95,9 @@ class BaseWidget(Gtk.Widget, IgnisGObject):
 
                 some_widget = WIDGET_NAME(
                     style="some style",
-                    style_priority="user"  # do
+                    style_priority="user"
                 )
-                some_widget.style_priority = "application"  # nothing change
+                some_widget.style_priority = "application"  # nothing change for current style
                 some_widget.style = "new style"  # this style will have "application" priority
         """
         return self._style_priority

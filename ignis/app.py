@@ -175,11 +175,14 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         """
         - read-write
 
-        The priority used for each widget style unless a widget doesn't specify custom style priority using :attr:`BaseWidget.style_priority`.
+        The priority used for each widget style
+        unless a widget specifies a custom style priority using :attr:`~ignis.base_widget.BaseWidget.style_priority`.
+
+        Default: ``"application"``.
 
         .. warning::
             Changing this property won't affect already initialized widgets!
-            If you want to specify a custom global style priority for all widgets, do this at the start of the configuration.
+            If you want to set a custom global style priority for all widgets, do this at the start of the configuration.
 
             .. code-block:: python
 
@@ -190,8 +193,6 @@ class IgnisApp(Gtk.Application, IgnisGObject):
                 app.widgets_style_priority = "user"
 
                 # ... rest of config goes here
-
-        Default: ``"application"``.
         """
         return self._widgets_style_priority
 
@@ -218,8 +219,8 @@ class IgnisApp(Gtk.Application, IgnisGObject):
             style_priority: A priority of the CSS style. More info about style priorities: :obj:`Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION`.
 
         .. warning::
-            ``style_priority`` won't affect a style applied to widgets using the `style` property,
-            for these purposes use :attr:`widgets_style_priority` or :attr:`~ignis.base_widget.BaseWidget.style_priority`.
+            ``style_priority`` won't affect a style applied to widgets using the ``style`` property,
+            for these purposes use :attr:`widgets_style_priority` or :attr:`ignis.base_widget.BaseWidget.style_priority`.
 
         Raises:
             StylePathAppliedError: if the given style path is already to the application.
