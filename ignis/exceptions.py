@@ -251,7 +251,8 @@ class SassNotFoundError(Exception):
 
     def __init__(self, *args: object) -> None:
         super().__init__(
-            "Sass compiler not found! To compile SCSS/SASS, install either dart-sass or grass-sass", *args
+            "Sass compiler not found! To compile SCSS/SASS, install either dart-sass or grass-sass",
+            *args,
         )
 
 

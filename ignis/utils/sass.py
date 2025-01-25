@@ -43,7 +43,11 @@ def compile_string(string: str, compiler_path: str) -> str:
         return stdout.decode()
 
 
-def sass_compile(path: str | None = None, string: str | None = None, compiler: Literal["sass", "grass"] | None = None) -> str:
+def sass_compile(
+    path: str | None = None,
+    string: str | None = None,
+    compiler: Literal["sass", "grass"] | None = None,
+) -> str:
     """
     Compile a SASS/SCSS file or string.
     Requires either `Dart Sass <https://sass-lang.com/dart-sass/>`_

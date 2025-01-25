@@ -236,7 +236,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         self,
         style_path: str,
         style_priority: StylePriority = "application",
-        compiler: Literal["sass", "grass"] | None = None
+        compiler: Literal["sass", "grass"] | None = None,
     ) -> None:
         """
         Apply a CSS/SCSS/SASS style from a path.
