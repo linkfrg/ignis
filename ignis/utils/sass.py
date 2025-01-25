@@ -1,7 +1,7 @@
 import os
 import shutil
 import subprocess
-import typing
+from typing import Literal
 from ignis.exceptions import SassCompilationError, SassNotFoundError
 
 TEMP_DIR = "/tmp/ignis"
@@ -11,13 +11,12 @@ os.makedirs(TEMP_DIR, exist_ok=True)
 # resolve Sass compiler paths and pick a default one
 # "sass" (dart-sass) is the default,
 # "grass" is an API-compatible drop-in replacement
-known_compilers = typing.Literal["sass", "grass"]
 sass_compilers = {}
-for cmd in typing.get_args(known_compilers):
+for cmd in ("sass", "grass"):
     path = shutil.which(cmd)
     if path:
         sass_compilers[cmd] = path
-        
+
 
 def compile_file(path: str, compiler_path: str) -> str:
     result = subprocess.run([compiler_path, path, COMPILED_CSS], capture_output=True)
@@ -44,7 +43,7 @@ def compile_string(string: str, compiler_path: str) -> str:
         return stdout.decode()
 
 
-def sass_compile(path: str | None = None, string: str | None = None, compiler: known_compilers | None = None) -> str:
+def sass_compile(path: str | None = None, string: str | None = None, compiler: Literal["sass", "grass"] | None = None) -> str:
     """
     Compile a SASS/SCSS file or string.
     Requires either `Dart Sass <https://sass-lang.com/dart-sass/>`_
