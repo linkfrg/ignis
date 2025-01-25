@@ -233,16 +233,20 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         self._config_path = config_path
 
     def apply_css(
-        self, style_path: str, style_priority: StylePriority = "application"
+        self,
+        style_path: str,
+        style_priority: StylePriority = "application",
+        compiler: Literal["sass", "grass"] | None = None,
     ) -> None:
         """
         Apply a CSS/SCSS/SASS style from a path.
         If ``style_path`` has a ``.sass`` or ``.scss`` extension, it will be automatically compiled.
-        Requires ``dart-sass`` for SASS/SCSS compilation.
+        Requires either ``dart-sass`` or ``grass-sass`` for SASS/SCSS compilation.
 
         Args:
             style_path: Path to the .css/.scss/.sass file.
             style_priority: A priority of the CSS style. More info about style priorities: :obj:`Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION`.
+            compiler: The desired Sass compiler.
 
         .. warning::
             ``style_priority`` won't affect a style applied to widgets using the ``style`` property,
@@ -268,7 +272,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
             )
 
         if style_path.endswith(".scss") or style_path.endswith(".sass"):
-            css_style = Utils.sass_compile(path=style_path)
+            css_style = Utils.sass_compile(path=style_path, compiler=compiler)
         elif style_path.endswith(".css"):
             with open(style_path) as file:
                 css_style = file.read()
