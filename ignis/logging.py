@@ -2,9 +2,11 @@ import os
 import sys
 from loguru import logger
 from gi.repository import GLib  # type: ignore
+from . import CACHE_DIR
 
 LOG_DIR = os.path.expanduser("~/.ignis")
-LOG_FILE = f"{LOG_DIR}/ignis.log"
+DEFAULT_LOG_FILE = f"{LOG_DIR}/ignis.log"
+GREETD_LOG_FILE = f"{CACHE_DIR}/ignis_greetd.log"
 LOG_FORMAT = "{time:YYYY-MM-DD HH:mm:ss} [<level>{level}</level>] {message}"
 
 
@@ -51,7 +53,13 @@ def configure_logger(debug: bool) -> None:
         LEVEL = "INFO"
 
     logger.add(sys.stderr, colorize=True, format=LOG_FORMAT, level=LEVEL)
-    logger.add(LOG_FILE, format=LOG_FORMAT, level=LEVEL, rotation="1 day")
+
+    if not os.getenv("GREETD_SOCK"):
+        log_file = DEFAULT_LOG_FILE
+    else:
+        log_file = GREETD_LOG_FILE
+
+    logger.add(log_file, format=LOG_FORMAT, level=LEVEL, rotation="1 day")
 
     logger.level("INFO", color="<green>")
 

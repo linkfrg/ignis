@@ -9,7 +9,11 @@ __lib_dir__ = None
 CACHE_DIR = None
 
 if "sphinx" not in sys.modules:
-    CACHE_DIR = f"{GLib.get_user_cache_dir()}/ignis"
+    if not os.getenv("GREETD_SOCK"):
+        CACHE_DIR = f"{GLib.get_user_cache_dir()}/ignis"
+    else:
+        CACHE_DIR = "/tmp/ignis_greetd"
+
     os.makedirs(CACHE_DIR, exist_ok=True)
 
     try:

@@ -491,3 +491,14 @@ class GnomeBluetoothNotFoundError(Exception):
             "GnomeBluetooth-3.0 is not found! To use the Bluetooth Service, install GnomeBluetooth-3.0",
             *args,
         )
+
+class GreetdSockNotFoundError(Exception):
+    """
+    Raised when greetd socket is not found.
+    """
+
+    def __init__(self, *args: object) -> None:
+        super().__init__(
+            "Greetd socket is not found! To use the Greetd Service, ensure you are running Ignis in greetd",
+            *args,
+        )
