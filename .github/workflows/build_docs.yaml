@@ -36,6 +36,13 @@ jobs:
         cd docs
         make html
 
+    - name: Upload Documentation Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: documentation-${{ inputs.DOC_TAG }}
+        path: docs/_build/html
+        retention-days: 7
+
     - name: Deploy to GitHub Pages
       if: ${{ github.event_name != 'pull_request' }}
       uses: peaceiris/actions-gh-pages@v4
