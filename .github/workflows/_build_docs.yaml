@@ -1,4 +1,4 @@
-name: Build documentation
+name: Build Documentation
 
 on:
   workflow_call:
@@ -6,12 +6,6 @@ on:
       DOC_TAG:
         required: true
         type: string
-  pull_request:
-    paths:
-      - "ignis/**"
-      - "docs/**"
-    branches:
-      - '*'
 
 jobs:
   build:
@@ -42,14 +36,3 @@ jobs:
         name: documentation-${{ inputs.DOC_TAG }}
         path: docs/_build/html
         retention-days: 7
-
-    - name: Deploy to GitHub Pages
-      if: ${{ github.event_name != 'pull_request' }}
-      uses: peaceiris/actions-gh-pages@v4
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: docs/_build/html
-        destination_dir: ${{ inputs.DOC_TAG }}
-        allow_empty_commit: true
-        force_orphan: false
-        keep_files: true
