@@ -45,8 +45,6 @@ pkgs.stdenv.mkDerivation {
   patchPhase = ''
     mkdir -p ./subprojects/gvc
     cp -r ${gvc}/* ./subprojects/gvc
-    substituteInPlace ignis/utils/sass.py \
-      --replace-fail '/bin/sass' '${pkgs.dart-sass}/bin/sass'
   '';
 
   buildPhase = ''
