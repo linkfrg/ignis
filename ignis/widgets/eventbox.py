@@ -30,12 +30,18 @@ class EventBox(Box):
 
     __gtype_name__ = "IgnisEventBox"
 
-    def __init__(self, **kwargs):
+    def __init__(
+        self,
+        scroll_flags: Gtk.EventControllerScrollFlags = Gtk.EventControllerScrollFlags.BOTH_AXES,
+        **kwargs,
+    ):
         self._on_click: Callable | None = None
         self._on_right_click: Callable | None = None
         self._on_middle_click: Callable | None = None
         self._on_hover: Callable | None = None
         self._on_hover_lost: Callable | None = None
+
+        self._scroll_flags: Gtk.EventControllerScrollFlags = scroll_flags
         self._on_scroll_up: Callable | None = None
         self._on_scroll_down: Callable | None = None
         self._on_scroll_right: Callable | None = None
@@ -67,9 +73,7 @@ class EventBox(Box):
         if self.__scroll_controller:
             return
 
-        controller = Gtk.EventControllerScroll.new(
-            Gtk.EventControllerScrollFlags.BOTH_AXES
-        )
+        controller = Gtk.EventControllerScroll.new(self._scroll_flags)
         self.add_controller(controller)
         controller.connect("scroll", self.__on_scroll)
         self.__scroll_controller = controller
@@ -183,6 +187,20 @@ class EventBox(Box):
     def on_hover_lost(self, on_hover_lost: Callable) -> None:
         self._on_hover_lost = on_hover_lost
         self.__init_motion_controller()
+
+    @GObject.Property
+    def scroll_flags(self) -> Gtk.EventControllerScrollFlags:
+        """
+        - optional, read-only
+
+        Flags affecting the :class:`Gtk.EventControllerScroll` behavior.
+
+        .. warning::
+            Can only be set during initialization.
+
+        Default: :obj:`Gtk.EventControllerScrollFlags.BOTH_AXES`.
+        """
+        return self._scroll_flags
 
     @GObject.Property
     def on_scroll_up(self) -> Callable:
