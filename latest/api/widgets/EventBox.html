@@ -529,7 +529,7 @@
 <h1>EventBox<a class="headerlink" href="#eventbox" title="Link to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="ignis.widgets.Widget.EventBox">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.widgets.Widget.</span></span><span class="sig-name descname"><span class="pre">EventBox</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.widgets.Widget.EventBox" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.widgets.Widget.</span></span><span class="sig-name descname"><span class="pre">EventBox</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scroll_flags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.Gtk.EventControllerScrollFlags</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">gi.repository.Gtk.EventControllerScrollFlags.BOTH_AXES</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.widgets.Widget.EventBox" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="Box.html#ignis.widgets.Widget.Box" title="ignis.widgets.box.Box"><code class="xref py py-class docutils literal notranslate"><span class="pre">Box</span></code></a></p>
 <p>The same <a class="reference internal" href="Box.html#ignis.widgets.Widget.Box" title="ignis.widgets.box.Box"><code class="xref py py-class docutils literal notranslate"><span class="pre">Box</span></code></a>, but it can receive events.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Widget</span><span class="o">.</span><span class="n">EventBox</span><span class="p">(</span>
@@ -592,6 +592,20 @@
 <li><p>optional, read-write</p></li>
 </ul>
 <p>The function to call on hover lost.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.widgets.Widget.EventBox.scroll_flags">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">scroll_flags</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">gi.repository.Gtk.EventControllerScrollFlags</span></em><a class="headerlink" href="#ignis.widgets.Widget.EventBox.scroll_flags" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>optional, read-only</p></li>
+</ul>
+<p>Flags affecting the <a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-4.0/classes/EventControllerScroll.html#Gtk.EventControllerScroll" title="(in Gtk 4.0 v4.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gtk.EventControllerScroll</span></code></a> behavior.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Can only be set during initialization.</p>
+</div>
+<p>Default: <a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-4.0/flags.html#Gtk.EventControllerScrollFlags.BOTH_AXES" title="(in Gtk 4.0 v4.0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Gtk.EventControllerScrollFlags.BOTH_AXES</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py property">
@@ -687,6 +701,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.EventBox.on_middle_click"><code class="docutils literal notranslate"><span class="pre">EventBox.on_middle_click</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.EventBox.on_hover"><code class="docutils literal notranslate"><span class="pre">EventBox.on_hover</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.EventBox.on_hover_lost"><code class="docutils literal notranslate"><span class="pre">EventBox.on_hover_lost</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.EventBox.scroll_flags"><code class="docutils literal notranslate"><span class="pre">EventBox.scroll_flags</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.EventBox.on_scroll_up"><code class="docutils literal notranslate"><span class="pre">EventBox.on_scroll_up</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.EventBox.on_scroll_down"><code class="docutils literal notranslate"><span class="pre">EventBox.on_scroll_down</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.EventBox.on_scroll_right"><code class="docutils literal notranslate"><span class="pre">EventBox.on_scroll_right</span></code></a></li>
