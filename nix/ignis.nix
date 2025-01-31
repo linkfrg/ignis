@@ -88,7 +88,7 @@ pkgs.stdenv.mkDerivation {
   '';
 
   meta = with pkgs.lib; {
-    description = "Full-featured Python framework for building desktop shells using GTK4";
+    description = "A widget framework for building desktop shells, written and configurable in Python";
     homepage = "https://github.com/linkfrg/ignis";
     changelog = "https://github.com/linkfrg/ignis/releases/tag/v${version}";
     license = licenses.gpl3;

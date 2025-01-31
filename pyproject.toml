@@ -1,6 +1,6 @@
 [project]
 name = 'ignis'
-description = 'A modern widget system'
+description = 'A widget framework for building desktop shells, written and configurable in Python'
 readme = 'README.md'
 license = { file = 'LICENSE' }
 authors = [{ name = 'linkfrg' }]
