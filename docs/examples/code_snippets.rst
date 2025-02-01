@@ -1,7 +1,7 @@
 Code Snippets
 ==============
 
-This page provides useful code snippets to help you implementing additional functionality. 
+This page provides useful code snippets to help you implement additional functionality. 
 
 Clicking outside of a window
 ----------------------------
