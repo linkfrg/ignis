@@ -14,7 +14,7 @@ class WifiDevice(IgnisGObject):
         super().__init__()
         self._device = device
         self._client = client
-        self._access_points: dict[NM.AccessPoint, WifiAccessPoint] = {}
+        self._access_points: dict[str, WifiAccessPoint] = {}  # bssid: WifiAccessPoint
 
         self._client.connect(
             "notify::wireless-enabled", lambda *args: self.notify_all()
@@ -100,8 +100,11 @@ class WifiDevice(IgnisGObject):
     def __add_access_point(
         self, device, access_point: NM.AccessPoint, emit: bool = True
     ) -> None:
+        if access_point.props.bssid in self._access_points:
+            return
+
         obj = WifiAccessPoint(access_point, self._client, self._device)
-        self._access_points[access_point] = obj
+        self._access_points[access_point.props.bssid] = obj
 
         if emit:
             self.emit("new-access-point", obj)
@@ -109,7 +112,7 @@ class WifiDevice(IgnisGObject):
 
     def __remove_access_point(self, device, access_point: NM.AccessPoint) -> None:
         try:
-            obj = self._access_points.pop(access_point)
+            obj = self._access_points.pop(access_point.props.bssid)
             obj.emit("removed")
             self.notify("access-points")
         except KeyError:

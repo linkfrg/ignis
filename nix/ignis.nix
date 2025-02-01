@@ -45,8 +45,6 @@ pkgs.stdenv.mkDerivation {
   patchPhase = ''
     mkdir -p ./subprojects/gvc
     cp -r ${gvc}/* ./subprojects/gvc
-    substituteInPlace ignis/utils/sass.py \
-      --replace-fail '/bin/sass' '${pkgs.dart-sass}/bin/sass'
   '';
 
   buildPhase = ''
@@ -90,7 +88,7 @@ pkgs.stdenv.mkDerivation {
   '';
 
   meta = with pkgs.lib; {
-    description = "Full-featured Python framework for building desktop shells using GTK4";
+    description = "A widget framework for building desktop shells, written and configurable in Python";
     homepage = "https://github.com/linkfrg/ignis";
     changelog = "https://github.com/linkfrg/ignis/releases/tag/v${version}";
     license = licenses.gpl3;
