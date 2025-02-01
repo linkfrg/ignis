@@ -18,7 +18,7 @@ def get_wifi_connect_window_name(bssid: str) -> str:
 
 
 def filter_connections(
-    obj: NM.AccessPoint | NM.Device, connections: list[NM.Connection]
+    obj: "NM.AccessPoint | NM.Device", connections: list[NM.Connection]
 ) -> list[NM.Connection]:
     # Filter manually using connection_valid()
     # Because the transfer annotation for this function may not work correctly with bindings
