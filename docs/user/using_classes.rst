@@ -13,6 +13,8 @@ and the ability to use ``self``, which is especially useful for complex widgets.
 
 
     class Bar(Widget.Window):  # inheriting from Widget.Window
+        __gtype_name__ = "MyBar"  # optional, this will change the widget's display name in the GTK inspector.
+
         def __init__(self, monitor: int):
             button1 = Widget.Button(
                 child=Widget.Label(label="Click me!"),
@@ -30,19 +32,14 @@ and the ability to use ``self``, which is especially useful for complex widgets.
             super().__init__(  # calling the constructor of the parent class (Widget.Window)
                 namespace=f"some-window-{monitor}",
                 monitor=monitor,
+                anchor=["left", "top", "right"],
                 child=Widget.Box(
-                    vertical=True,
                     spacing=10,
                     child=[
-                        Widget.Label(label="Click buttons)))"),
-                        Widget.Box(
-                            spacing=26,
-                            child=[
-                                button1,
-                                button2,
-                                button3,
-                            ],
-                        ),
+                        Widget.Label(label="This window created using a custom class!"),
+                        button1,
+                        button2,
+                        button3,
                     ],
                 ),
             )
