@@ -260,6 +260,7 @@ class WifiAccessPoint(IgnisGObject):
         """
         Disconnect from this access point.
         """
+
         def finish(x, res) -> None:
             self._client.deactivate_connection_finish(res)
 
