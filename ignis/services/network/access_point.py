@@ -234,7 +234,7 @@ class WifiAccessPoint(IgnisGObject):
 
         return self._point.connection_valid(ac.get_connection())
 
-    def connect_to(self, password: str | None = None) -> None:
+    def connect_to(self, password: str | None = None, on_state_changed: Callable | None = None) -> None:
         """
         Connect to this access point.
 
@@ -243,19 +243,16 @@ class WifiAccessPoint(IgnisGObject):
         """
 
         if len(self._connections) > 0:
-            self.__connect_existing_connection(password)
+            self.__connect_existing_connection(password, on_state_changed)
         else:
-            self.__create_new_connection(password)
+            self.__create_new_connection(password, on_state_changed)
 
     def connect_to_graphical(self) -> None:
         """
         Display a graphical dialog to connect to the access point.
         The dialog will be shown only if the access point requires a password.
         """
-        if len(self._connections) > 0:
-            self.__connect_existing_connection(on_state_changed=self.__check_new_state)
-        else:
-            self.__create_new_connection(on_state_changed=self.__check_new_state)
+        self.connect_to(on_state_changed=self.__check_new_state)
 
     def disconnect_from(self) -> None:
         """
