@@ -387,7 +387,7 @@ class ActiveAccessPoint(WifiAccessPoint):
 
     def __sync(self) -> None:
         ap = self._device.get_active_access_point()
-        if ap:
+        if ap and self._device.get_state() == NM.DeviceState.ACTIVATED:
             self._point = ap
             self._setup()
         else:
