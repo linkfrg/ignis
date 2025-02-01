@@ -234,7 +234,9 @@ class WifiAccessPoint(IgnisGObject):
 
         return self._point.connection_valid(ac.get_connection())
 
-    def connect_to(self, password: str | None = None, on_state_changed: Callable | None = None) -> None:
+    def connect_to(
+        self, password: str | None = None, on_state_changed: Callable | None = None
+    ) -> None:
         """
         Connect to this access point.
 
