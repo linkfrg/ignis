@@ -372,7 +372,7 @@ class WifiAccessPoint(IgnisGObject):
             self._connect_dialog.destroy()
 
     def __invoke_wifi_dialog(self) -> None:
-        if self._connect_dialog is None:
+        if self._connect_dialog is None or not self._connect_dialog.is_visible():
             self._connect_dialog = WifiConnectDialog(
                 self, on_state_changed=self.__check_new_state
             )
