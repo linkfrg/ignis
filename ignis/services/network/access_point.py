@@ -189,6 +189,12 @@ class WifiAccessPoint(IgnisGObject):
 
     @GObject.Property
     def psk(self) -> str | None:
+        """
+        - read-write
+
+        The stored Pre-shared key (password) for the access point.
+        ``None`` if there is no a saved psk for this access point.
+        """
         for conn in self._connections:
             secrets: dict = conn.get_secrets("802-11-wireless-security").unpack()
             return secrets.get("802-11-wireless-security", {}).get("psk", None)
@@ -251,6 +257,9 @@ class WifiAccessPoint(IgnisGObject):
         self.connect_to(on_state_changed=self.__check_new_state)
 
     def disconnect_from(self) -> None:
+        """
+        Disconnect from this access point.
+        """
         def finish(x, res) -> None:
             self._client.deactivate_connection_finish(res)
 
