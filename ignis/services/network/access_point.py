@@ -250,6 +250,16 @@ class WifiAccessPoint(IgnisGObject):
         """
         self.connect_to(on_state_changed=self.__check_new_state)
 
+    def disconnect_from(self) -> None:
+        def finish(x, res) -> None:
+            self._client.deactivate_connection_finish(res)
+
+        self._client.deactivate_connection_async(
+            self._device.get_active_connection(),
+            None,
+            finish,
+        )
+
     def __connect_existing_connection(
         self, password: str | None = None, on_state_changed: Callable | None = None
     ) -> None:
