@@ -29,9 +29,7 @@ class WifiAccessPoint(IgnisGObject):
 
         self._state_changed_ids: dict[NM.ActiveConnection, int] = {}
 
-        self._device.connect(
-            "notify::active-access-point", lambda x, y: self.notify("is-connected")
-        )
+        self._device.connect("state-changed", lambda *_: self.notify("is-connected"))
         self._client.connect(
             "notify::activating-connection", lambda *args: self.notify("icon-name")
         )
@@ -224,11 +222,11 @@ class WifiAccessPoint(IgnisGObject):
         if not self._device:
             return False
 
-        ap = self._device.get_active_access_point()
-        if not ap:
+        ac = self._device.get_active_connection()
+        if not ac:
             return False
 
-        return ap.props.bssid == self.bssid
+        return self._point.connection_valid(ac.get_connection())
 
     def connect_to(
         self, password: str | None = None, on_state_changed: Callable | None = None
