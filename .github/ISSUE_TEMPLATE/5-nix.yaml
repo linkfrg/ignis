@@ -1,0 +1,19 @@
+name: Nix/NixOS
+description: Related to the Nix package manager or NixOS
+labels: ["nix"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before opening a new issue, take a moment to search through the current open ones.
+        Please note that I (linkfrg) don't maintain the Nix flake for Ignis, any help or pull request would be highly appreciated.
+
+        ---
+
+  - type: textarea
+    id: desc
+    attributes:
+      label: Description
+      description: "Describe"
+    validations:
+      required: true
