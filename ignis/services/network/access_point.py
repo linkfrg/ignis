@@ -252,7 +252,10 @@ class WifiAccessPoint(IgnisGObject):
         Display a graphical dialog to connect to the access point.
         The dialog will be shown only if the access point requires a password.
         """
-        self.connect_to(on_state_changed=self.__check_new_state)
+        if len(self._connections) > 0:
+            self.connect_to(on_state_changed=self.__check_new_state)
+        else:
+            self.__invoke_wifi_dialog()
 
     def disconnect_from(self) -> None:
         """
