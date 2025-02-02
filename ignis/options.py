@@ -61,7 +61,7 @@ class Options(OptionsManager):
     def __init__(self):
         try:
             super().__init__(file=f"{CACHE_DIR}/ignis_options.json")
-        except FileNotFoundError:
+        except (FileNotFoundError, PermissionError):
             pass
 
     class Notifications(OptionsGroup):
