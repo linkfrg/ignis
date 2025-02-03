@@ -25,7 +25,7 @@ class WifiAccessPoint(IgnisGObject):
 
         self._ssid: str | None = None
         self._connect_dialog: WifiConnectDialog | None = None
-        self._connections: list[NM.Connection] = []
+        self._connections: list[NM.RemoteConnection] = []
 
         self._state_changed_ids: dict[NM.ActiveConnection, int] = {}
 
@@ -213,11 +213,7 @@ class WifiAccessPoint(IgnisGObject):
             wireless_sec.set_property("key-mgmt", "wpa-psk")
             wireless_sec.set_secret_flags("psk", NM.SettingSecretFlags.NONE)
             conn.add_setting(wireless_sec)
-            conn.commit_changes_async(
-                True,
-                None,
-                lambda x, res, conn=conn: conn.commit_changes_finish(res),
-            )
+            self.__commit_changes_async(conn)
 
     @GObject.Property
     def is_connected(self) -> bool:
@@ -284,11 +280,7 @@ class WifiAccessPoint(IgnisGObject):
         """
         for conn in self._connections:
             conn.remove_setting(NM.SettingWirelessSecurity)
-            conn.commit_changes_async(  # type: ignore
-                True,
-                None,
-                lambda x, res, conn=conn: conn.commit_changes_finish(res),
-            )
+            self.__commit_changes_async(conn)
 
     def forget(self) -> None:
         """
@@ -400,6 +392,13 @@ class WifiAccessPoint(IgnisGObject):
             self._connect_dialog = WifiConnectDialog(
                 self, on_state_changed=self.__check_new_state
             )
+
+    def __commit_changes_async(self, conn: NM.RemoteConnection) -> None:
+        conn.commit_changes_async(
+            True,
+            None,
+            lambda x, res, conn=conn: conn.commit_changes_finish(res),
+        )
 
 
 class ActiveAccessPoint(WifiAccessPoint):
