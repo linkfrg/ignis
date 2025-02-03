@@ -196,7 +196,11 @@ class WifiAccessPoint(IgnisGObject):
         ``None`` if there is no a saved psk for this access point.
         """
         for conn in self._connections:
-            secrets: dict = conn.get_secrets("802-11-wireless-security").unpack()
+            try:
+                secrets: dict = conn.get_secrets("802-11-wireless-security").unpack()
+            except GLib.GError:  # if couldn't get secrets
+                return None
+
             return secrets.get("802-11-wireless-security", {}).get("psk", None)
         else:
             return None
