@@ -273,6 +273,19 @@ class WifiAccessPoint(IgnisGObject):
             finish,
         )
 
+    def clear_secrets(self) -> None:
+        """
+        Clear a stored secret.
+        This will reset security settings (PSK and security protocol).
+        """
+        for conn in self._connections:
+            conn.remove_setting(NM.SettingWirelessSecurity)
+            conn.commit_changes_async(  # type: ignore
+                True,
+                None,
+                lambda x, res, conn=conn: conn.commit_changes_finish(res),
+            )
+
     def __connect_existing_connection(
         self, password: str | None = None, on_state_changed: Callable | None = None
     ) -> None:
