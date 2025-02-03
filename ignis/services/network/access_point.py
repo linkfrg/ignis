@@ -290,6 +290,13 @@ class WifiAccessPoint(IgnisGObject):
                 lambda x, res, conn=conn: conn.commit_changes_finish(res),
             )
 
+    def forget(self) -> None:
+        """
+        Forget (delete) the stored connection.
+        """
+        for conn in self._connections:
+            conn.delete_async(None, lambda x, res, conn=conn: (conn.delete_finish(res)))
+
     def __connect_existing_connection(
         self, password: str | None = None, on_state_changed: Callable | None = None
     ) -> None:
