@@ -190,3 +190,9 @@ class Application(IgnisGObject):
             cwd=GLib.get_home_dir(),
             env=custom_env,
         )
+
+    def launch_uwsm(self) -> None:
+        """
+        Launch the application using UWSM (Universal Wayland Session Manager).
+        """
+        self.launch(command_format="uwsm app -- %command%")
