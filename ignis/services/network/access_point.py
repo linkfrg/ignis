@@ -46,6 +46,7 @@ class WifiAccessPoint(IgnisGObject):
             self._point,
             filter_connections(self._device, self._client.get_connections()),  # type: ignore
         )
+        self.notify("psk")
 
     def _setup(self) -> None:
         """
