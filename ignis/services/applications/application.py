@@ -163,9 +163,12 @@ class Application(IgnisGObject):
         """
         self.is_pinned = False
 
-    def launch(self) -> None:
+    def launch(self, command_format: str | None = None) -> None:
         """
         Launch the application.
+
+        Args:
+            command_format: A format string for the command to launch. ``%command%`` will be replaced with the actual command. Shell syntax is supported.
         """
         exec_string = re.sub(r"%\S*", "", self.exec_string)
         custom_env = os.environ.copy()
@@ -177,7 +180,9 @@ class Application(IgnisGObject):
         custom_env["PATH"] = os.defpath
 
         subprocess.Popen(
-            exec_string,
+            exec_string
+            if command_format is None
+            else command_format.replace("%command%", exec_string),
             shell=True,
             start_new_session=True,
             stdout=subprocess.DEVNULL,
