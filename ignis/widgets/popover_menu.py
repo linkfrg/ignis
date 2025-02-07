@@ -39,31 +39,32 @@ class PopoverMenu(Gtk.PopoverMenu, BaseWidget):
     def __init__(self, **kwargs):
         Gtk.PopoverMenu.__init__(self)
         self._items: list[MenuItem] = []
-        self._sections: list[Gio.Menu] = []
-        self._menu = Gio.Menu()
-        self._current_section = Gio.Menu()
-        self._sections.append(self._current_section)
-
         BaseWidget.__init__(self, visible=False, **kwargs)
 
-    def __add_item(self, item: MenuItem) -> None:
-        self._items.append(item)
-
+    def __add_item(
+        self, item: MenuItem, menu: Gio.Menu, current_section: Gio.Menu
+    ) -> Gio.Menu:
         if isinstance(item, Gtk.Separator):
-            self._current_section = Gio.Menu()
-            self._sections.append(self._current_section)
-            return
+            current_section = Gio.Menu()
+            menu.append_section(None, current_section)
+            return current_section
 
         if item.submenu:
-            self._current_section.append_submenu(item.label, item.submenu.menu_model)
+            current_section.append_submenu(item.label, item.submenu.menu_model)
         else:
-            self._current_section.append(item.label, f"app.{item.uniq_name}")
+            current_section.append(item.label, f"app.{item.uniq_name}")
 
-        self._menu.remove_all()
-        for i in self._sections:
-            self._menu.append_section(None, i)
+        return current_section
 
-        self.set_menu_model(self._menu)
+    def __generate_menu(self, items: list[MenuItem]) -> Gio.Menu:
+        menu = Gio.Menu.new()
+        current_section = Gio.Menu()
+        menu.append_section(None, current_section)
+
+        for item in items:
+            current_section = self.__add_item(item, menu, current_section)
+
+        return menu
 
     @GObject.Property
     def items(self) -> list[MenuItem]:
@@ -76,8 +77,5 @@ class PopoverMenu(Gtk.PopoverMenu, BaseWidget):
 
     @items.setter
     def items(self, value: list[MenuItem]) -> None:
-        self._menu = Gio.Menu()
-        self.set_menu_model(self._menu)
-
-        for item in value:
-            self.__add_item(item)
+        self._items = value
+        self.set_menu_model(self.__generate_menu(items=value))
