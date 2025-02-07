@@ -12,7 +12,7 @@ class SessionManager:
     """
 
     def __init__(self) -> None:
-        self.__dbus = DBusProxy(
+        self.__dbus = DBusProxy.new(
             name="org.freedesktop.portal.Desktop",
             object_path="/org/freedesktop/portal/desktop",
             interface_name="org.freedesktop.portal.ScreenCast",
@@ -50,7 +50,7 @@ class SessionManager:
         self._request_token_counter += 1
         request_token = f"u{self._request_token_counter}"
         request_path = f"/org/freedesktop/portal/desktop/request/{self._sender_name}/{request_token}"
-        request_proxy = DBusProxy(
+        request_proxy = DBusProxy.new(
             name="org.freedesktop.portal.Desktop",
             object_path=request_path,
             interface_name="org.freedesktop.portal.Request",

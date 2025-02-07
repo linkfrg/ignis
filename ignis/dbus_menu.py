@@ -54,7 +54,7 @@ class DBusMenu(Gtk.PopoverMenu):
         self._name = name
         self._object_path = object_path
 
-        self.__proxy = DBusProxy(
+        self.__proxy = DBusProxy.new(
             name=name,
             object_path=object_path,
             interface_name="com.canonical.dbusmenu",

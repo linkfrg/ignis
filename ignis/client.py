@@ -30,7 +30,7 @@ class IgnisClient:
     """
 
     def __init__(self):
-        self.__dbus = DBusProxy(
+        self.__dbus = DBusProxy.new(
             name="com.github.linkfrg.ignis",
             object_path="/com/github/linkfrg/ignis",
             interface_name="com.github.linkfrg.ignis",
