@@ -151,6 +151,17 @@ class Application(IgnisGObject):
         else:
             self.emit("unpinned")
 
+    @GObject.Property
+    def is_terminal(self) -> bool:
+        """
+        - read-only
+
+        Whether the application have to be launched in a terminal.
+        """
+        return {"true": True, "false": False, None: False}.get(
+            self._app.get_string("Terminal"), False
+        )
+
     def pin(self) -> None:
         """
         Pin the application.
