@@ -174,7 +174,9 @@ class Application(IgnisGObject):
         """
         self.is_pinned = False
 
-    def launch(self, command_format: str | None = None) -> None:
+    def launch(
+        self, command_format: str | None = None, terminal_format: str | None = None
+    ) -> None:
         """
         Launch the application.
 
@@ -190,10 +192,17 @@ class Application(IgnisGObject):
         custom_env.pop("PYTHONPATH", None)
         custom_env["PATH"] = os.defpath
 
+        cmd: str
+
+        if self.is_terminal is True and terminal_format is not None:
+            cmd = terminal_format.replace("%command%", exec_string)
+        elif command_format is not None:
+            cmd = command_format.replace("%command%", exec_string)
+        else:
+            cmd = exec_string
+
         subprocess.Popen(
-            exec_string
-            if command_format is None
-            else command_format.replace("%command%", exec_string),
+            cmd,
             shell=True,
             start_new_session=True,
             stdout=subprocess.DEVNULL,
