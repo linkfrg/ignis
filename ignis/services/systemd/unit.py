@@ -20,7 +20,7 @@ class SystemdUnit(IgnisGObject):
         else:
             self._flags = Gio.DBusCallFlags.NONE
 
-        self._proxy = DBusProxy(
+        self._proxy = DBusProxy.new(
             name="org.freedesktop.systemd1",
             object_path=object_path,
             interface_name="org.freedesktop.systemd1.Unit",

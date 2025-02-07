@@ -41,7 +41,7 @@ class SystemdService(BaseService):
 
         self._bus_type = bus_type
 
-        self._proxy = DBusProxy(
+        self._proxy = DBusProxy.new(
             name="org.freedesktop.systemd1",
             object_path="/org/freedesktop/systemd1",
             interface_name="org.freedesktop.systemd1.Manager",

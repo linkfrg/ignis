@@ -24,7 +24,7 @@ class MprisService(BaseService):
         super().__init__()
         self._players: dict[str, MprisPlayer] = {}
 
-        self.__dbus = DBusProxy(
+        self.__dbus = DBusProxy.new(
             name="org.freedesktop.DBus",
             object_path="/org/freedesktop/DBus",
             interface_name="org.freedesktop.DBus",

@@ -69,7 +69,7 @@ class NotificationService(BaseService):
         self.__load_notifications()
 
     def __on_name_lost(self, *args) -> None:
-        proxy = DBusProxy(
+        proxy = DBusProxy.new(
             name="org.freedesktop.Notifications",
             interface_name="org.freedesktop.Notifications",
             object_path="/org/freedesktop/Notifications",

@@ -52,7 +52,7 @@ class SystemTrayService(BaseService):
         )
 
     def __on_name_lost(self, *args) -> None:
-        proxy = DBusProxy(
+        proxy = DBusProxy.new(
             name="org.kde.StatusNotifierWatcher",
             interface_name="org.kde.StatusNotifierWatcher",
             object_path="/StatusNotifierWatcher",

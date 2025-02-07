@@ -21,7 +21,7 @@ class SystemTrayItem(IgnisGObject):
         self._status: str | None = None
         self._menu: DBusMenu | None = None
 
-        self.__dbus: DBusProxy = DBusProxy(
+        self.__dbus = DBusProxy.new(
             name=name,
             object_path=object_path,
             interface_name="org.kde.StatusNotifierItem",
