@@ -297,7 +297,7 @@ class DBusProxy(IgnisGObject):
         self._methods: list[str] = []
         self._properties: list[str] = []
 
-        self._proxy = Gio.DBusProxy.new_for_bus_sync(
+        self._gproxy = Gio.DBusProxy.new_for_bus_sync(
             BUS_TYPE[bus_type],
             Gio.DBusProxyFlags.NONE,
             info,
@@ -363,13 +363,13 @@ class DBusProxy(IgnisGObject):
         return self._bus_type
 
     @GObject.Property
-    def proxy(self) -> Gio.DBusProxy:
+    def gproxy(self) -> Gio.DBusProxy:
         """
         - not argument, read-only
 
         The :class:`Gio.DBusProxy` instance.
         """
-        return self._proxy
+        return self._gproxy
 
     @GObject.Property
     def connection(self) -> Gio.DBusConnection:
@@ -378,7 +378,7 @@ class DBusProxy(IgnisGObject):
 
         The instance of :class:`Gio.DBusConnection` for this proxy.
         """
-        return self._proxy.get_connection()
+        return self._gproxy.get_connection()
 
     @GObject.Property
     def methods(self) -> list[str]:
@@ -416,7 +416,7 @@ class DBusProxy(IgnisGObject):
 
     def __getattr__(self, name: str) -> Any:
         if name in self.methods:
-            return getattr(self._proxy, name)
+            return getattr(self._gproxy, name)
         elif name in self.properties:
             return self.__get_dbus_property(name)
         else:

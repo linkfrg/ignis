@@ -31,7 +31,7 @@ class SystemTrayItem(IgnisGObject):
         if not self.__dbus.has_owner:
             return
 
-        self.__dbus.proxy.connect(
+        self.__dbus.gproxy.connect(
             "notify::g-name-owner", lambda *args: self.emit("removed")
         )
 

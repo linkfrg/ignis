@@ -58,7 +58,7 @@ class SystemTrayService(BaseService):
             object_path="/StatusNotifierWatcher",
             info=Utils.load_interface_xml("org.kde.StatusNotifierWatcher"),
         )
-        name = proxy.proxy.get_name_owner()
+        name = proxy.gproxy.get_name_owner()
         raise AnotherSystemTrayRunningError(name)
 
     @GObject.Signal(arg_types=(SystemTrayItem,))

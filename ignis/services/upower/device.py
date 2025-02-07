@@ -23,7 +23,7 @@ class UPowerDevice(IgnisGObject):
             info=Utils.load_interface_xml("org.freedesktop.UPower.Device"),
             bus_type="system",
         )
-        self._proxy.proxy.connect("g-properties-changed", self.__sync)
+        self._proxy.gproxy.connect("g-properties-changed", self.__sync)
 
         self.__watch_property("Percentage", "percent")
         self.__watch_property("Energy", "energy")

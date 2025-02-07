@@ -35,7 +35,7 @@ class MprisPlayer(IgnisGObject):
             info=Utils.load_interface_xml("org.mpris.MediaPlayer2.Player"),
         )
 
-        self.__player_proxy.proxy.connect("g-properties-changed", self.__sync)
+        self.__player_proxy.gproxy.connect("g-properties-changed", self.__sync)
 
         self.__mpris_proxy.watch_name(
             on_name_vanished=lambda *args: self.emit("closed")

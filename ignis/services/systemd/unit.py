@@ -28,7 +28,7 @@ class SystemdUnit(IgnisGObject):
             bus_type=bus_type,
         )
 
-        self._proxy.proxy.connect("g-properties-changed", self.__sync)
+        self._proxy.gproxy.connect("g-properties-changed", self.__sync)
 
     def __handle_result(self, proxy, result, user_data) -> None:
         if isinstance(result, GLib.Error):
