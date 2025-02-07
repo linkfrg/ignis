@@ -708,7 +708,7 @@ It also allows &quot;pinning&quot; of apps and retrieving a list of pinned appli
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
-<p>Whether the application have to be launched in a terminal.</p>
+<p>Whether the application has to be launched in a terminal.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -739,12 +739,20 @@ It also allows &quot;pinning&quot; of apps and retrieving a list of pinned appli
 <dd><p>Launch the application.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>command_format</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">None</span></code>) -- A format string for the command to launch. <code class="docutils literal notranslate"><span class="pre">%command%</span></code> will be replaced with the actual command. Shell syntax is supported.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>command_format</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">None</span></code>) -- A format string for the command to launch. <code class="docutils literal notranslate"><span class="pre">%command%</span></code> will be replaced with the actual command. Shell syntax is supported.</p></li>
+<li><p><strong>terminal_format</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">None</span></code>) -- A format string for the command to launch if the application has to be run in a terminal. <code class="docutils literal notranslate"><span class="pre">%command%</span></code> will be replaced with the actual command. Shell syntax is supported.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
 </dd>
 </dl>
+<p>To launch terminal applications, pass the <code class="docutils literal notranslate"><span class="pre">terminal_format</span></code> argument:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># kitty for example, format may differ for other terminals</span>
+<span class="n">APPLICATION</span><span class="o">.</span><span class="n">launch</span><span class="p">(</span><span class="n">terminal_format</span><span class="o">=</span><span class="s2">&quot;kitty </span><span class="si">%c</span><span class="s2">ommand%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
