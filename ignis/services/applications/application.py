@@ -156,7 +156,7 @@ class Application(IgnisGObject):
         """
         - read-only
 
-        Whether the application have to be launched in a terminal.
+        Whether the application has to be launched in a terminal.
         """
         return {"true": True, "false": False, None: False}.get(
             self._app.get_string("Terminal"), False
@@ -182,6 +182,14 @@ class Application(IgnisGObject):
 
         Args:
             command_format: A format string for the command to launch. ``%command%`` will be replaced with the actual command. Shell syntax is supported.
+            terminal_format: A format string for the command to launch if the application has to be run in a terminal. ``%command%`` will be replaced with the actual command. Shell syntax is supported.
+
+        To launch terminal applications, pass the ``terminal_format`` argument:
+
+        .. code-block:: python
+
+            # kitty for example, format may differ for other terminals
+            APPLICATION.launch(terminal_format="kitty %command%")
         """
         exec_string = re.sub(r"%\S*", "", self.exec_string)
         custom_env = os.environ.copy()
