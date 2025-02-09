@@ -336,6 +336,7 @@ class DBusProxy(IgnisGObject):
         info: Gio.DBusInterfaceInfo,
         bus_type: Literal["session", "system"] = "session",
         callback: Callable | None = None,
+        *user_data,
     ) -> None:
         """
         Asynchronously initialize a new instance.
@@ -347,6 +348,7 @@ class DBusProxy(IgnisGObject):
             info: A :class:`Gio.DBusInterfaceInfo` instance. You can get it from XML using :class:`~ignis.utils.Utils.load_interface_xml`.
             bus_type: The type of the bus.
             callback: A function to call when the initialization is complete. The function will receive a newly initialized instance of this class.
+            *user_data: User data to pass to ``callback``.
         """
 
         def finish(x, res):
@@ -364,6 +366,7 @@ class DBusProxy(IgnisGObject):
             interface_name,
             None,
             finish,
+            *user_data,
         )
 
     @GObject.Property
