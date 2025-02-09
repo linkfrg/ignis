@@ -472,13 +472,13 @@ class DBusProxy(IgnisGObject):
         if name in self.methods:
             return getattr(self._gproxy, name)
         elif name in self.properties:
-            return self.__get_dbus_property(name)
+            return self.get_dbus_property(name)
         else:
             return super().__getattribute__(name)
 
     def __setattr__(self, name: str, value: Any) -> None:
         if name in self.__dict__.get("_properties", {}):  # avoid recursion
-            self.__set_dbus_property(name, value)
+            self.set_dbus_property(name, value)
         else:
             return super().__setattr__(name, value)
 
@@ -515,7 +515,13 @@ class DBusProxy(IgnisGObject):
         """
         self.connection.signal_unsubscribe(id)
 
-    def __get_dbus_property(self, property_name: str) -> Any:
+    def get_dbus_property(self, property_name: str) -> Any:
+        """
+        Get the value of a D-Bus property by its name.
+
+        Args:
+            property_name: The name of the property.
+        """
         try:
             return self.connection.call_sync(
                 self.name,
@@ -534,7 +540,14 @@ class DBusProxy(IgnisGObject):
         except GLib.GError:  # type: ignore
             return None
 
-    def __set_dbus_property(self, property_name: str, value: GLib.Variant) -> None:
+    def set_dbus_property(self, property_name: str, value: GLib.Variant) -> None:
+        """
+        Set a D-Bus property's value.
+
+        Args:
+            property_name: The name of the property to set.
+            value: The new value for the property.
+        """
         self.connection.call_sync(
             self.name,
             self.object_path,
