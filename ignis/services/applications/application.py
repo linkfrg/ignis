@@ -223,4 +223,22 @@ class Application(IgnisGObject):
         """
         Launch the application using UWSM (Universal Wayland Session Manager).
         """
-        self.launch(command_format="uwsm app -- %command%")
+        custom_env = os.environ.copy()
+
+        # Disable Python virtual environment
+        custom_env.pop("VIRTUAL_ENV", None)
+        custom_env.pop("PYTHONHOME", None)
+        custom_env.pop("PYTHONPATH", None)
+        custom_env["PATH"] = os.defpath
+
+        cmd: str = f"uwsm app -- {self.desktop_file}"
+
+        subprocess.Popen(
+            cmd,
+            shell=True,
+            start_new_session=True,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            cwd=GLib.get_home_dir(),
+            env=custom_env,
+        )
