@@ -540,6 +540,39 @@ class DBusProxy(IgnisGObject):
         except GLib.GError:  # type: ignore
             return None
 
+    def get_dbus_property_async(
+        self, property_name: str, callback: Callable | None = None, *user_data
+    ) -> None:
+        """
+        Asynchronously get the value of a D-Bus property by its name.
+
+        Args:
+            property_name: The name of the property.
+            callback: A function to call when the retrieval is complete. The function will receive the property's value.
+            *user_data: User data to pass to ``callback``.
+        """
+
+        def finish(x, res):
+            result = self.connection.call_finish(res)
+            if callback:
+                callback(result[0], *user_data)
+
+        return self.connection.call(
+            self.name,
+            self.object_path,
+            "org.freedesktop.DBus.Properties",
+            "Get",
+            GLib.Variant(
+                "(ss)",
+                (self.interface_name, property_name),
+            ),
+            None,
+            Gio.DBusCallFlags.NONE,
+            -1,
+            None,
+            finish,
+        )
+
     def set_dbus_property(self, property_name: str, value: GLib.Variant) -> None:
         """
         Set a D-Bus property's value.
@@ -561,6 +594,44 @@ class DBusProxy(IgnisGObject):
             Gio.DBusCallFlags.NONE,
             -1,
             None,
+        )
+
+    def set_dbus_property_async(
+        self,
+        property_name: str,
+        value: GLib.Variant,
+        callback: Callable | None = None,
+        *user_data,
+    ) -> None:
+        """
+        Asynchronously set a D-Bus property's value.
+
+        Args:
+            property_name: The name of the property to set.
+            value: The new value for the property.
+            callback: A function to call when the operation is complete.
+            *user_data: User data to pass to ``callback``.
+        """
+
+        def finish(x, res):
+            self.connection.call_finish(res)
+            if callback:
+                callback(*user_data)
+
+        self.connection.call(
+            self.name,
+            self.object_path,
+            "org.freedesktop.DBus.Properties",
+            "Set",
+            GLib.Variant(
+                "(ssv)",
+                (self.interface_name, property_name, value),
+            ),
+            None,
+            Gio.DBusCallFlags.NONE,
+            -1,
+            None,
+            finish,
         )
 
     def watch_name(
