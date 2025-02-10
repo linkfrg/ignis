@@ -548,14 +548,19 @@ class DBusProxy(IgnisGObject):
 
         Args:
             property_name: The name of the property.
-            callback: A function to call when the retrieval is complete. The function will receive the property's value.
+            callback: A function to call when the retrieval is complete. The function will receive the property's value or :class:`GLib.GError` in case of an error.
             *user_data: User data to pass to ``callback``.
         """
 
         def finish(x, res):
-            result = self.connection.call_finish(res)
+            try:
+                result = self.connection.call_finish(res)
+                value = result[0]
+            except GLib.GError as gerror:
+                value = gerror
+
             if callback:
-                callback(result[0], *user_data)
+                callback(value, *user_data)
 
         return self.connection.call(
             self.name,
