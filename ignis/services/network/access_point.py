@@ -312,7 +312,7 @@ class WifiAccessPoint(IgnisGObject):
         This will reset security settings (PSK and security protocol).
 
         .. warning::
-            After setting this property, you have to manually call :func:`commit_changes_async` to save changes to the disk.
+            After calling this method, you have to manually call :func:`commit_changes_async` to save changes to the disk.
         """
         for conn in self._connections:
             conn.remove_setting(NM.SettingWirelessSecurity)
