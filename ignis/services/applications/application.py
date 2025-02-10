@@ -151,6 +151,17 @@ class Application(IgnisGObject):
         else:
             self.emit("unpinned")
 
+    @GObject.Property
+    def is_terminal(self) -> bool:
+        """
+        - read-only
+
+        Whether the application has to be launched in a terminal.
+        """
+        return {"true": True, "false": False, None: False}.get(
+            self._app.get_string("Terminal"), False
+        )
+
     def pin(self) -> None:
         """
         Pin the application.
@@ -163,9 +174,22 @@ class Application(IgnisGObject):
         """
         self.is_pinned = False
 
-    def launch(self) -> None:
+    def launch(
+        self, command_format: str | None = None, terminal_format: str | None = None
+    ) -> None:
         """
         Launch the application.
+
+        Args:
+            command_format: A format string for the command to launch. ``%command%`` will be replaced with the actual command. Shell syntax is supported.
+            terminal_format: A format string for the command to launch if the application has to be run in a terminal. ``%command%`` will be replaced with the actual command. Shell syntax is supported.
+
+        To launch terminal applications, pass the ``terminal_format`` argument:
+
+        .. code-block:: python
+
+            # kitty for example, format may differ for other terminals
+            APPLICATION.launch(terminal_format="kitty %command%")
         """
         exec_string = re.sub(r"%\S*", "", self.exec_string)
         custom_env = os.environ.copy()
@@ -176,8 +200,17 @@ class Application(IgnisGObject):
         custom_env.pop("PYTHONPATH", None)
         custom_env["PATH"] = os.defpath
 
+        cmd: str
+
+        if self.is_terminal is True and terminal_format is not None:
+            cmd = terminal_format.replace("%command%", exec_string)
+        elif command_format is not None:
+            cmd = command_format.replace("%command%", exec_string)
+        else:
+            cmd = exec_string
+
         subprocess.Popen(
-            exec_string,
+            cmd,
             shell=True,
             start_new_session=True,
             stdout=subprocess.DEVNULL,
@@ -185,3 +218,9 @@ class Application(IgnisGObject):
             cwd=GLib.get_home_dir(),
             env=custom_env,
         )
+
+    def launch_uwsm(self) -> None:
+        """
+        Launch the application using UWSM (Universal Wayland Session Manager).
+        """
+        self.launch(command_format="uwsm app -- %command%")

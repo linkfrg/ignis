@@ -20,7 +20,7 @@ class SystemdUnit(IgnisGObject):
         else:
             self._flags = Gio.DBusCallFlags.NONE
 
-        self._proxy = DBusProxy(
+        self._proxy = DBusProxy.new(
             name="org.freedesktop.systemd1",
             object_path=object_path,
             interface_name="org.freedesktop.systemd1.Unit",
@@ -28,7 +28,7 @@ class SystemdUnit(IgnisGObject):
             bus_type=bus_type,
         )
 
-        self._proxy.proxy.connect("g-properties-changed", self.__sync)
+        self._proxy.gproxy.connect("g-properties-changed", self.__sync)
 
     def __handle_result(self, proxy, result, user_data) -> None:
         if isinstance(result, GLib.Error):

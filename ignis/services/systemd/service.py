@@ -41,7 +41,7 @@ class SystemdService(BaseService):
 
         self._bus_type = bus_type
 
-        self._proxy = DBusProxy(
+        self._proxy = DBusProxy.new(
             name="org.freedesktop.systemd1",
             object_path="/org/freedesktop/systemd1",
             interface_name="org.freedesktop.systemd1.Manager",
@@ -89,7 +89,7 @@ class SystemdService(BaseService):
         A list of all systemd units on the bus.
         """
         units = []
-        for item in self._proxy.proxy.ListUnitFiles():
+        for item in self._proxy.gproxy.ListUnitFiles():
             unit_name = os.path.basename(item[0])
             if "@" not in unit_name:
                 units.append(self.get_unit(unit_name))
@@ -106,5 +106,5 @@ class SystemdService(BaseService):
         Returns:
             :class:`~ignis.services.systemd.SystemdUnit`
         """
-        object_path = self._proxy.proxy.LoadUnit("(s)", unit)
+        object_path = self._proxy.gproxy.LoadUnit("(s)", unit)
         return SystemdUnit(object_path, self._bus_type)

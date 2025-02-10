@@ -35,7 +35,7 @@ class BacklightDevice(IgnisGObject):
             else None,
         )
 
-        self.__session_proxy = DBusProxy(
+        self.__session_proxy = DBusProxy.new(
             name="org.freedesktop.login1",
             object_path=get_session_path(),
             info=Utils.load_interface_xml("org.freedesktop.login1.Session"),

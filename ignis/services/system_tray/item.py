@@ -21,17 +21,21 @@ class SystemTrayItem(IgnisGObject):
         self._status: str | None = None
         self._menu: DBusMenu | None = None
 
-        self.__dbus: DBusProxy = DBusProxy(
+        DBusProxy.new_async(
             name=name,
             object_path=object_path,
             interface_name="org.kde.StatusNotifierItem",
             info=Utils.load_interface_xml("org.kde.StatusNotifierItem"),
+            callback=self.__on_proxy_initialized,
         )
+
+    def __on_proxy_initialized(self, proxy: DBusProxy) -> None:
+        self.__dbus = proxy
 
         if not self.__dbus.has_owner:
             return
 
-        self.__dbus.proxy.connect(
+        self.__dbus.gproxy.connect(
             "notify::g-name-owner", lambda *args: self.emit("removed")
         )
 

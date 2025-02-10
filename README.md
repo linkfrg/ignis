@@ -5,15 +5,13 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Linting: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
-<div align="center">
-<strong>A widget framework for building desktop shells, written and configurable in Python.</strong>
-</div>
+A widget framework for building desktop shells, written and configurable in Python.
 
-## Features
 - Configurable in Python
-- Uses GTK4
-- Batteries Included
-- Simplified work with widgets
+- Easy to use
+- GTK4-based
+- Batteries Included (a lot of built-in Services and Utilities!)
+- Flexible work with widgets
 
 > [!NOTE]
 > Ignis is mostly stable, but still a work in progress.
@@ -32,6 +30,12 @@ See the [Documentation](https://linkfrg.github.io/ignis)
 
 ...and all other compositors that implement the Layer Shell protocol.
 
+Ignis __is not supported__ on:
+- GNOME Wayland
+- X11
+
+...because they don't support the Layer Shell protocol.
+
 ## Examples
 * A simple bar, see [examples](./examples/bar)
 ![simple-bar](./examples/bar/simple-bar.png)
@@ -43,5 +47,4 @@ See the [Documentation](https://linkfrg.github.io/ignis)
 Check out the [Developer Guide](https://linkfrg.github.io/ignis/latest/dev/index.html)
 
 ## Special Thanks
-
 [AGS](https://github.com/aylur/ags) - for inspiration

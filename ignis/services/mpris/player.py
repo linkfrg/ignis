@@ -21,21 +21,21 @@ class MprisPlayer(IgnisGObject):
         self._position: int = -1
         self._art_url: str | None = None
 
-        self.__mpris_proxy = DBusProxy(
+        self.__mpris_proxy = DBusProxy.new(
             name=name,
             object_path="/org/mpris/MediaPlayer2",
             interface_name="org.mpris.MediaPlayer2",
             info=Utils.load_interface_xml("org.mpris.MediaPlayer2"),
         )
 
-        self.__player_proxy = DBusProxy(
+        self.__player_proxy = DBusProxy.new(
             name=self.__mpris_proxy.name,
             object_path=self.__mpris_proxy.object_path,
             interface_name="org.mpris.MediaPlayer2.Player",
             info=Utils.load_interface_xml("org.mpris.MediaPlayer2.Player"),
         )
 
-        self.__player_proxy.proxy.connect("g-properties-changed", self.__sync)
+        self.__player_proxy.gproxy.connect("g-properties-changed", self.__sync)
 
         self.__mpris_proxy.watch_name(
             on_name_vanished=lambda *args: self.emit("closed")

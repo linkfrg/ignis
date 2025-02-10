@@ -13,6 +13,7 @@ Get started
 
    installation
    first_widgets
+   using_classes
    dynamic_content
    styling
    cli

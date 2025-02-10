@@ -18,7 +18,7 @@ class UPowerService(BaseService):
     def __init__(self) -> None:
         super().__init__()
 
-        self._proxy = DBusProxy(
+        self._proxy = DBusProxy.new(
             name="org.freedesktop.UPower",
             object_path="/org/freedesktop/UPower",
             interface_name="org.freedesktop.UPower",

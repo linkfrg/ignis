@@ -246,7 +246,7 @@ class DBusService(IgnisGObject):
 class DBusProxy(IgnisGObject):
     """
     A class to interact with D-Bus services (create a D-Bus proxy).
-    Unlike :class:`Gio.DBusProxy>`,
+    Unlike :class:`Gio.DBusProxy`,
     this class also provides convenient pythonic property access.
 
     To call a D-Bus method, use the standart pythonic way.
@@ -257,7 +257,7 @@ class DBusProxy(IgnisGObject):
     .. code-block:: python
 
         from ignis.dbus import DBusProxy
-        proxy = DBusProxy(...)
+        proxy = DBusProxy.new(...)
         result = proxy.MyMethod("(is)", 42, "hello")
         print(result)
 
@@ -266,7 +266,7 @@ class DBusProxy(IgnisGObject):
     .. code-block:: python
 
         from ignis.dbus import DBusProxy
-        proxy = DBusProxy(...)
+        proxy = DBusProxy.new(...)
         print(proxy.MyValue)
 
     To set a D-Bus property:
@@ -274,30 +274,49 @@ class DBusProxy(IgnisGObject):
     .. code-block:: python
 
         from ignis.dbus import DBusProxy
-        proxy = DBusProxy(...)
+        proxy = DBusProxy.new(...)
         # pass GLib.Variant as new property value
         proxy.MyValue = GLib.Variant("s", "Hello world!")
+
+    Args:
+        bus_type: The type of the bus.
+        gproxy: An instance of :class:`Gio.DBusProxy`.
     """
 
-    def __init__(
-        self,
+    def __init__(self, bus_type: Literal["session", "system"], gproxy: Gio.DBusProxy):
+        super().__init__()
+        self._bus_type = bus_type
+        self._methods: list[str] = []
+        self._properties: list[str] = []
+
+        self._gproxy = gproxy
+
+        for method in self.info.methods:
+            self._methods.append(method.name)
+
+        for prop in self.info.properties:
+            self._properties.append(prop.name)
+
+    @classmethod
+    def new(
+        cls,
         name: str,
         object_path: str,
         interface_name: str,
         info: Gio.DBusInterfaceInfo,
         bus_type: Literal["session", "system"] = "session",
-    ):
-        super().__init__()
-        self._name = name
-        self._object_path = object_path
-        self._interface_name = interface_name
-        self._info = info
-        self._bus_type = bus_type
+    ) -> "DBusProxy":
+        """
+        Synchronously initialize a new instance.
 
-        self._methods: list[str] = []
-        self._properties: list[str] = []
-
-        self._proxy = Gio.DBusProxy.new_for_bus_sync(
+        Args:
+            name: A bus name (well-known or unique).
+            object_path: An object path.
+            interface_name: A D-Bus interface name.
+            info: A :class:`Gio.DBusInterfaceInfo` instance. You can get it from XML using :class:`~ignis.utils.Utils.load_interface_xml`.
+            bus_type: The type of the bus.
+        """
+        gproxy = Gio.DBusProxy.new_for_bus_sync(
             BUS_TYPE[bus_type],
             Gio.DBusProxyFlags.NONE,
             info,
@@ -306,84 +325,119 @@ class DBusProxy(IgnisGObject):
             interface_name,
             None,
         )
+        return cls(bus_type=bus_type, gproxy=gproxy)
 
-        for i in info.methods:
-            self._methods.append(i.name)
+    @classmethod
+    def new_async(
+        cls,
+        name: str,
+        object_path: str,
+        interface_name: str,
+        info: Gio.DBusInterfaceInfo,
+        bus_type: Literal["session", "system"] = "session",
+        callback: Callable | None = None,
+        *user_data,
+    ) -> None:
+        """
+        Asynchronously initialize a new instance.
 
-        for i in info.properties:  # type: ignore
-            self._properties.append(i.name)
+        Args:
+            name: A bus name (well-known or unique).
+            object_path: An object path.
+            interface_name: A D-Bus interface name.
+            info: A :class:`Gio.DBusInterfaceInfo` instance. You can get it from XML using :class:`~ignis.utils.Utils.load_interface_xml`.
+            bus_type: The type of the bus.
+            callback: A function to call when the initialization is complete. The function will receive a newly initialized instance of this class.
+            *user_data: User data to pass to ``callback``.
+        """
+
+        def finish(x, res):
+            gproxy = Gio.DBusProxy.new_for_bus_finish(res)
+            proxy = cls(bus_type=bus_type, gproxy=gproxy)
+            if callback:
+                callback(proxy)
+
+        Gio.DBusProxy.new_for_bus(
+            BUS_TYPE[bus_type],
+            Gio.DBusProxyFlags.NONE,
+            info,
+            name,
+            object_path,
+            interface_name,
+            None,
+            finish,
+            *user_data,
+        )
 
     @GObject.Property
     def name(self) -> str:
         """
-        - required, read-only
+        - read-only
 
         A bus name (well-known or unique).
         """
-        return self._name
+        return self._gproxy.props.g_name
 
     @GObject.Property
     def object_path(self) -> str:
         """
-        - required, read-only
+        - read-only
 
         An object path.
         """
-        return self._object_path
+        return self._gproxy.props.g_object_path
 
     @GObject.Property
     def interface_name(self) -> str:
         """
-        - required, read-only
+        - read-only
 
         A D-Bus interface name.
         """
-        return self._interface_name
+        return self._gproxy.props.g_interface_name
 
     @GObject.Property
     def info(self) -> Gio.DBusInterfaceInfo:
         """
-        - required, read-only
+        - read-only
 
         A :class:`Gio.DBusInterfaceInfo` instance.
 
         You can get it from XML using :class:`~ignis.utils.Utils.load_interface_xml`.
         """
-        return self._info
+        return self._gproxy.props.g_interface_info
 
     @GObject.Property
     def bus_type(self) -> Literal["session", "system"]:
         """
-        - optional, read-only
+        - read-only
 
         The type of the bus.
-
-        Default: ``session``.
         """
         return self._bus_type
 
     @GObject.Property
-    def proxy(self) -> Gio.DBusProxy:
+    def gproxy(self) -> Gio.DBusProxy:
         """
-        - not argument, read-only
+        - read-only
 
         The :class:`Gio.DBusProxy` instance.
         """
-        return self._proxy
+        return self._gproxy
 
     @GObject.Property
     def connection(self) -> Gio.DBusConnection:
         """
-        - not argument, read-only
+        - read-only
 
         The instance of :class:`Gio.DBusConnection` for this proxy.
         """
-        return self._proxy.get_connection()
+        return self._gproxy.get_connection()
 
     @GObject.Property
     def methods(self) -> list[str]:
         """
-        - not argument, read-only
+        - read-only
 
         A list of methods exposed by D-Bus service.
         """
@@ -392,7 +446,7 @@ class DBusProxy(IgnisGObject):
     @GObject.Property
     def properties(self) -> list[str]:
         """
-        - not argument, read-only
+        - read-only
 
         A list of properties exposed by D-Bus service.
         """
@@ -401,30 +455,30 @@ class DBusProxy(IgnisGObject):
     @GObject.Property
     def has_owner(self) -> bool:
         """
-        - not argument, read-only
+        - read-only
 
         Whether the ``name`` has an owner.
         """
-        dbus = DBusProxy(
+        dbus = DBusProxy.new(
             name="org.freedesktop.DBus",
             object_path="/org/freedesktop/DBus",
             interface_name="org.freedesktop.DBus",
             info=Utils.load_interface_xml("org.freedesktop.DBus"),
-            bus_type=self._bus_type,
+            bus_type=self.bus_type,
         )
         return dbus.NameHasOwner("(s)", self.name)
 
     def __getattr__(self, name: str) -> Any:
         if name in self.methods:
-            return getattr(self._proxy, name)
+            return getattr(self._gproxy, name)
         elif name in self.properties:
-            return self.__get_dbus_property(name)
+            return self.get_dbus_property(name)
         else:
             return super().__getattribute__(name)
 
     def __setattr__(self, name: str, value: Any) -> None:
         if name in self.__dict__.get("_properties", {}):  # avoid recursion
-            self.__set_dbus_property(name, value)
+            self.set_dbus_property(name, value)
         else:
             return super().__setattr__(name, value)
 
@@ -461,7 +515,13 @@ class DBusProxy(IgnisGObject):
         """
         self.connection.signal_unsubscribe(id)
 
-    def __get_dbus_property(self, property_name: str) -> Any:
+    def get_dbus_property(self, property_name: str) -> Any:
+        """
+        Get the value of a D-Bus property by its name.
+
+        Args:
+            property_name: The name of the property.
+        """
         try:
             return self.connection.call_sync(
                 self.name,
@@ -480,7 +540,52 @@ class DBusProxy(IgnisGObject):
         except GLib.GError:  # type: ignore
             return None
 
-    def __set_dbus_property(self, property_name: str, value: GLib.Variant) -> None:
+    def get_dbus_property_async(
+        self, property_name: str, callback: Callable | None = None, *user_data
+    ) -> None:
+        """
+        Asynchronously get the value of a D-Bus property by its name.
+
+        Args:
+            property_name: The name of the property.
+            callback: A function to call when the retrieval is complete. The function will receive the property's value or :class:`GLib.GError` in case of an error.
+            *user_data: User data to pass to ``callback``.
+        """
+
+        def finish(x, res):
+            try:
+                result = self.connection.call_finish(res)
+                value = result[0]
+            except GLib.GError as gerror:  # type: ignore
+                value = gerror
+
+            if callback:
+                callback(value, *user_data)
+
+        return self.connection.call(
+            self.name,
+            self.object_path,
+            "org.freedesktop.DBus.Properties",
+            "Get",
+            GLib.Variant(
+                "(ss)",
+                (self.interface_name, property_name),
+            ),
+            None,
+            Gio.DBusCallFlags.NONE,
+            -1,
+            None,
+            finish,
+        )
+
+    def set_dbus_property(self, property_name: str, value: GLib.Variant) -> None:
+        """
+        Set a D-Bus property's value.
+
+        Args:
+            property_name: The name of the property to set.
+            value: The new value for the property.
+        """
         self.connection.call_sync(
             self.name,
             self.object_path,
@@ -494,6 +599,44 @@ class DBusProxy(IgnisGObject):
             Gio.DBusCallFlags.NONE,
             -1,
             None,
+        )
+
+    def set_dbus_property_async(
+        self,
+        property_name: str,
+        value: GLib.Variant,
+        callback: Callable | None = None,
+        *user_data,
+    ) -> None:
+        """
+        Asynchronously set a D-Bus property's value.
+
+        Args:
+            property_name: The name of the property to set.
+            value: The new value for the property.
+            callback: A function to call when the operation is complete.
+            *user_data: User data to pass to ``callback``.
+        """
+
+        def finish(x, res):
+            self.connection.call_finish(res)
+            if callback:
+                callback(*user_data)
+
+        self.connection.call(
+            self.name,
+            self.object_path,
+            "org.freedesktop.DBus.Properties",
+            "Set",
+            GLib.Variant(
+                "(ssv)",
+                (self.interface_name, property_name, value),
+            ),
+            None,
+            Gio.DBusCallFlags.NONE,
+            -1,
+            None,
+            finish,
         )
 
     def watch_name(

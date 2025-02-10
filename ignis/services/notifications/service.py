@@ -69,7 +69,7 @@ class NotificationService(BaseService):
         self.__load_notifications()
 
     def __on_name_lost(self, *args) -> None:
-        proxy = DBusProxy(
+        proxy = DBusProxy.new(
             name="org.freedesktop.Notifications",
             interface_name="org.freedesktop.Notifications",
             object_path="/org/freedesktop/Notifications",
@@ -79,7 +79,7 @@ class NotificationService(BaseService):
             info = proxy.GetServerInformation()
             name = info[0]
         except Exception:  # notification daemon can simply not implement GetServerInformation method, or do it wrongly, so we except all errors
-            name = proxy.proxy.get_name_owner()
+            name = proxy.gproxy.get_name_owner()
 
         raise AnotherNotificationDaemonRunningError(name)
 

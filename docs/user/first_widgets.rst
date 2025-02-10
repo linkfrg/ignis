@@ -159,19 +159,14 @@ The solution is to create functions that return widget instances.
         return Widget.Window(
             namespace=f"some-window-{monitor}",  # the namespace must be unique
             monitor=monitor,
+            anchor=["left", "top", "right"],  # btw put this window in the top
             child=Widget.Box(
-                vertical=True,
                 spacing=10,
                 child=[
                     Widget.Label(label="Click buttons)))"),
-                    Widget.Box(
-                        spacing=26,
-                        child=[
-                            button1,
-                            button2,
-                            button3,
-                        ],
-                    ),
+                    button1,
+                    button2,
+                    button3,
                 ],
             ),
         )

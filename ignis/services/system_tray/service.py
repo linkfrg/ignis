@@ -52,13 +52,13 @@ class SystemTrayService(BaseService):
         )
 
     def __on_name_lost(self, *args) -> None:
-        proxy = DBusProxy(
+        proxy = DBusProxy.new(
             name="org.kde.StatusNotifierWatcher",
             interface_name="org.kde.StatusNotifierWatcher",
             object_path="/StatusNotifierWatcher",
             info=Utils.load_interface_xml("org.kde.StatusNotifierWatcher"),
         )
-        name = proxy.proxy.get_name_owner()
+        name = proxy.gproxy.get_name_owner()
         raise AnotherSystemTrayRunningError(name)
 
     @GObject.Signal(arg_types=(SystemTrayItem,))

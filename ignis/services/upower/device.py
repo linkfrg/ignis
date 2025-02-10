@@ -16,14 +16,14 @@ class UPowerDevice(IgnisGObject):
         self.__watching_props: dict[str, tuple[str, ...]] = {}
         self._object_path = object_path
 
-        self._proxy = DBusProxy(
+        self._proxy = DBusProxy.new(
             name="org.freedesktop.UPower",
             object_path=object_path,
             interface_name="org.freedesktop.UPower.Device",
             info=Utils.load_interface_xml("org.freedesktop.UPower.Device"),
             bus_type="system",
         )
-        self._proxy.proxy.connect("g-properties-changed", self.__sync)
+        self._proxy.gproxy.connect("g-properties-changed", self.__sync)
 
         self.__watch_property("Percentage", "percent")
         self.__watch_property("Energy", "energy")
