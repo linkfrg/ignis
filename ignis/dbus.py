@@ -556,7 +556,7 @@ class DBusProxy(IgnisGObject):
             try:
                 result = self.connection.call_finish(res)
                 value = result[0]
-            except GLib.GError as gerror:
+            except GLib.GError as gerror:  # type: ignore
                 value = gerror
 
             if callback:
