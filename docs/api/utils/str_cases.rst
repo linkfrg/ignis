@@ -1,5 +1,5 @@
 String Cases
-=============
+============
 
 .. autofunction:: ignis.utils.Utils.snake_to_pascal
 
