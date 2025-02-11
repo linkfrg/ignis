@@ -24,6 +24,7 @@ from .get_current_dir import get_current_dir
 from .socket import send_socket, listen_socket
 from .debounce import DebounceTask, debounce
 from .get_monitors import get_monitors
+from .str_cases import snake_to_pascal, pascal_to_snake
 
 
 class Utils:
@@ -54,3 +55,5 @@ class Utils:
     DebounceTask = DebounceTask
     debounce = debounce
     get_monitors = get_monitors
+    snake_to_pascal = snake_to_pascal
+    pascal_to_snake = pascal_to_snake
