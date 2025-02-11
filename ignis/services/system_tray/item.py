@@ -15,11 +15,15 @@ class SystemTrayItem(IgnisGObject):
     def __init__(self, name: str, object_path: str):
         super().__init__()
 
+        self._id: str | None = None
+        self._category: str | None = None
         self._title: str | None = None
-        self._icon: str | GdkPixbuf.Pixbuf | None = None
-        self._tooltip: str | None = None
         self._status: str | None = None
+        self._window_id: int = -1
+        self._icon: str | GdkPixbuf.Pixbuf | None = None
+        self._item_is_menu: bool = False
         self._menu: DBusMenu | None = None
+        self._tooltip: str | None = None
 
         DBusProxy.new_async(
             name=name,
@@ -50,7 +54,7 @@ class SystemTrayItem(IgnisGObject):
         ]:
             self.__dbus.signal_subscribe(
                 signal_name=signal_name,
-                callback=lambda *args: Utils.thread(self.__sync_icon),
+                callback=lambda *args: self.__sync_icon(),
             )
 
         for signal_name in [
@@ -60,7 +64,7 @@ class SystemTrayItem(IgnisGObject):
         ]:
             self.__dbus.signal_subscribe(
                 signal_name=signal_name,
-                callback=lambda *args, signal_name=signal_name: self.notify(
+                callback=lambda *args, signal_name=signal_name: self.__sync_property(
                     signal_name.replace("New", "").lower()
                 ),
             )
@@ -72,44 +76,94 @@ class SystemTrayItem(IgnisGObject):
         self._icon_theme = Gtk.IconTheme.get_for_display(display)
         self._icon_theme.connect("changed", lambda x: self.__sync_icon())
 
-        self.__ready()
-
-    @Utils.run_in_thread
-    def __ready(self) -> None:
+        # sync icon
         self.__sync_icon()
+
+        # sync all properties
+        self.__sync_property("id")
+        self.__sync_property("category")
+        self.__sync_property("title")
+        self.__sync_property("status")
+        self.__sync_property("window_id")
+        self.__sync_property("item_is_menu")
+        self.__sync_property("tooltip")
+
         self.emit("ready")
 
+    def __sync_property(self, py_name: str) -> None:
+        def callback(value):
+            if isinstance(value, GLib.GError):
+                return
+
+            setattr(self, f"_{py_name}", value)
+            self.notify(py_name.replace("_", "-"))
+
+        self.__dbus.get_dbus_property_async(
+            Utils.snake_to_pascal(py_name), callback=callback
+        )
+
     def __sync_icon(self) -> None:
-        icon_name = self.__dbus.IconName
-        attention_icon_name = self.__dbus.AttentionIconName
-        icon_pixmap = self.__dbus.IconPixmap
-        attention_icon_pixmap = self.__dbus.AttentionIconPixmap
+        def handle_icon_name(
+            icon_name: str | None, icon_theme_path: str | None
+        ) -> None:
+            if icon_name and not isinstance(icon_name, GLib.Error):
+                self._icon = icon_name
+                search_path = self._icon_theme.get_search_path()
+                if (
+                    not self._icon_theme.has_icon(icon_name)
+                    and icon_theme_path is not None
+                    and search_path is not None
+                    and icon_theme_path not in search_path
+                ):
+                    self._icon_theme.add_search_path(icon_theme_path)
+                self.notify("icon")
+            else:
+                self.__dbus.get_dbus_property_async(
+                    "AttentionIconName", handle_attention_icon_name, icon_theme_path
+                )
 
-        icon_theme_path: str | None = self.__dbus.IconThemePath
-        search_path = self._icon_theme.get_search_path()
-        if icon_name:
-            self._icon = icon_name
-            if (
-                not self._icon_theme.has_icon(icon_name)
-                and icon_theme_path is not None
-                and search_path is not None
-                and icon_theme_path not in search_path
+        def handle_attention_icon_name(
+            attention_icon_name: str | None, icon_theme_path: str | None
+        ) -> None:
+            if attention_icon_name and not isinstance(attention_icon_name, GLib.Error):
+                self._icon = attention_icon_name
+                search_path = self._icon_theme.get_search_path()
+                if (
+                    not self._icon_theme.has_icon(attention_icon_name)
+                    and icon_theme_path is not None
+                    and search_path is not None
+                    and icon_theme_path not in search_path
+                ):
+                    self._icon_theme.add_search_path(icon_theme_path)
+                self.notify("icon")
+            else:
+                self.__dbus.get_dbus_property_async("IconPixmap", handle_icon_pixmap)
+
+        def handle_icon_pixmap(icon_pixmap) -> None:
+            if icon_pixmap and not isinstance(icon_pixmap, GLib.Error):
+                self._icon = self.__get_pixbuf(icon_pixmap)
+                self.notify("icon")
+            else:
+                self.__dbus.get_dbus_property_async(
+                    "AttentionIconPixmap", handle_attention_icon_pixmap
+                )
+
+        def handle_attention_icon_pixmap(attention_icon_pixmap) -> None:
+            if attention_icon_pixmap and not isinstance(
+                attention_icon_pixmap, GLib.Error
             ):
-                self._icon_theme.add_search_path(icon_theme_path)
+                self._icon = self.__get_pixbuf(attention_icon_pixmap)
+                self.notify("icon")
+            else:
+                self._icon = "image-missing"
+                self.notify("icon")
 
-        elif attention_icon_name:
-            self._icon = attention_icon_name
+        def handle_icon_theme_path(icon_theme_path: str | None) -> None:
+            self.__dbus.get_dbus_property_async(
+                "IconName", handle_icon_name, icon_theme_path
+            )
 
-        elif icon_pixmap:
-            self._icon = self.__get_pixbuf(icon_pixmap)
-
-        elif attention_icon_pixmap:
-            self._icon = self.__get_pixbuf(attention_icon_pixmap)
-
-        else:
-            self._icon = "image-missing"
-
-        self.notify("icon")
+        self.__dbus.get_dbus_property_async("IconThemePath", handle_icon_theme_path)
 
     @GObject.Signal
     def ready(self): ...  # user shouldn't connect to this signal
@@ -123,40 +177,40 @@ class SystemTrayItem(IgnisGObject):
         """
 
     @GObject.Property
-    def id(self) -> str:
+    def id(self) -> str | None:
         """
         - read-only
 
         The ID of the item.
         """
-        return self.__dbus.Id
+        return self._id
 
     @GObject.Property
-    def category(self) -> str:
+    def category(self) -> str | None:
         """
         - read-only
 
         The category of the item.
         """
-        return self.__dbus.Category
+        return self._category
 
     @GObject.Property
-    def title(self) -> str:
+    def title(self) -> str | None:
         """
         - read-only
 
         The title of the item.
         """
-        return self.__dbus.Title
+        return self._title
 
     @GObject.Property
-    def status(self) -> str:
+    def status(self) -> str | None:
         """
         - read-only
 
         The status of the item.
         """
-        return self.__dbus.Status
+        return self._status
 
     @GObject.Property
     def window_id(self) -> int:
@@ -165,7 +219,7 @@ class SystemTrayItem(IgnisGObject):
 
         The window ID.
         """
-        return self.__dbus.WindowId
+        return self._window_id
 
     @GObject.Property
     def icon(self) -> "str | GdkPixbuf.Pixbuf | None":
@@ -183,7 +237,7 @@ class SystemTrayItem(IgnisGObject):
 
         Whether the item has a menu.
         """
-        return self.__dbus.ItemIsMenu
+        return self._item_is_menu
 
     @GObject.Property
     def menu(self) -> DBusMenu | None:
@@ -207,14 +261,13 @@ class SystemTrayItem(IgnisGObject):
         return self._menu
 
     @GObject.Property
-    def tooltip(self) -> str:
+    def tooltip(self) -> str | None:
         """
         - read-only
 
         A tooltip, the text should be displayed when you hover cursor over the icon.
         """
-        tooltip = self.__dbus.ToolTip
-        return self.title if not tooltip else tooltip[2]
+        return self._title if not self._tooltip else self._tooltip[2]
 
     def __get_pixbuf(self, pixmap_array) -> GdkPixbuf.Pixbuf:
         pixmap = sorted(pixmap_array, key=lambda x: x[0])[-1]
