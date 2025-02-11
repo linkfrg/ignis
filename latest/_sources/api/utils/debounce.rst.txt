@@ -1,5 +1,5 @@
 Debounce
------------
+========
 
 .. autoclass:: ignis.utils.Utils.DebounceTask
 

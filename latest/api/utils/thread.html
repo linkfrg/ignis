@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>thread &#8212; Ignis documentation</title>
+    <title>Thread &#8212; Ignis documentation</title>
   
   
   
@@ -57,7 +57,7 @@
         </script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Developer Guide" href="../../dev/index.html" />
+    <link rel="next" title="Version" href="version.html" />
     <link rel="prev" title="String Cases" href="str_cases.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -436,31 +436,18 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Utils</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="FileMonitor.html">FileMonitor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Poll.html">Poll</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ThreadTask.html">ThreadTask</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Timeout.html">Timeout</a></li>
-<li class="toctree-l2"><a class="reference internal" href="crop_pixbuf.html">crop_pixbuf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="debounce.html">Debounce</a></li>
-<li class="toctree-l2"><a class="reference internal" href="download_image.html">download_image</a></li>
-<li class="toctree-l2"><a class="reference internal" href="exec_sh.html">exec_sh</a></li>
-<li class="toctree-l2"><a class="reference internal" href="exec_sh_async.html">exec_sh_async</a></li>
-<li class="toctree-l2"><a class="reference internal" href="get_current_dir.html">get_current_dir</a></li>
-<li class="toctree-l2"><a class="reference internal" href="get_file_icon_name.html">get_file_icon_name</a></li>
-<li class="toctree-l2"><a class="reference internal" href="get_ignis_branch.html">get_ignis_branch</a></li>
-<li class="toctree-l2"><a class="reference internal" href="get_ignis_commit.html">get_ignis_commit</a></li>
-<li class="toctree-l2"><a class="reference internal" href="get_ignis_commit_msg.html">get_ignis_commit_msg</a></li>
-<li class="toctree-l2"><a class="reference internal" href="get_ignis_version.html">get_ignis_version</a></li>
-<li class="toctree-l2"><a class="reference internal" href="get_monitor.html">get_monitor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="get_monitors.html">get_monitors</a></li>
-<li class="toctree-l2"><a class="reference internal" href="get_n_monitors.html">get_n_monitors</a></li>
-<li class="toctree-l2"><a class="reference internal" href="get_paintable.html">get_paintable</a></li>
-<li class="toctree-l2"><a class="reference internal" href="listen_socket.html">listen_socket</a></li>
-<li class="toctree-l2"><a class="reference internal" href="load_interface_xml.html">load_interface_xml</a></li>
-<li class="toctree-l2"><a class="reference internal" href="run_in_thread.html">run_in_thread</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sass_compile.html">sass_compile</a></li>
-<li class="toctree-l2"><a class="reference internal" href="scale_pixbuf.html">scale_pixbuf</a></li>
-<li class="toctree-l2"><a class="reference internal" href="send_socket.html">send_socket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="icon.html">Icon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="misc.html">Misc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitor.html">Monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pixbuf.html">Pixbuf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sass.html">Sass</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sh.html">Shell Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="socket.html">Socket</a></li>
 <li class="toctree-l2"><a class="reference internal" href="str_cases.html">String Cases</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">thread</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Thread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="version.html">Version</a></li>
 </ul>
 </details></li>
 </ul>
@@ -509,7 +496,7 @@
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">Utils</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">thread</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Thread</span></li>
   </ul>
 </nav>
 </div>
@@ -527,7 +514,7 @@
                 <article class="bd-article">
                   
   <section id="thread">
-<h1>thread<a class="headerlink" href="#thread" title="Link to this heading">#</a></h1>
+<h1>Thread<a class="headerlink" href="#thread" title="Link to this heading">#</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="ignis.utils.Utils.thread">
 <span class="sig-prename descclassname"><span class="pre">ignis.utils.Utils.</span></span><span class="sig-name descname"><span class="pre">thread</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/threading.html#threading.Thread" title="(in Python v3.13)"><span class="pre">Thread</span></a></span></span><a class="headerlink" href="#ignis.utils.Utils.thread" title="Link to this definition">#</a></dt>
@@ -544,6 +531,56 @@ The provided args and kwargs will be passed to the function.</p>
 <dd class="field-odd"><p>The thread in which the function is running.</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ignis.utils.Utils.run_in_thread">
+<span class="sig-prename descclassname"><span class="pre">ignis.utils.Utils.</span></span><span class="sig-name descname"><span class="pre">run_in_thread</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></span></span><a class="headerlink" href="#ignis.utils.Utils.run_in_thread" title="Link to this definition">#</a></dt>
+<dd><p>Decorator to run the decorated function in a thread.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ignis.utils.ThreadTask">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.utils.</span></span><span class="sig-name descname"><span class="pre">ThreadTask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.utils.ThreadTask" title="Link to this definition">#</a></dt>
+<dd><p>Execute a function in another thread and call a callback when it's finished.
+The output from the function is passed to the callback.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a></span>) -- The function to execute in another thread.</p></li>
+<li><p><strong>callback</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a></span>) -- The function to call when <code class="docutils literal notranslate"><span class="pre">target</span></code> has finished.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.utils.ThreadTask.finished">
+<span class="sig-name descname"><span class="pre">finished</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.utils.ThreadTask.finished" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>Signal</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>output</strong> (<code class="docutils literal notranslate"><span class="pre">Any</span></code>) -- The output from the function.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.utils.ThreadTask.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.utils.ThreadTask.run" title="Link to this definition">#</a></dt>
+<dd><p>Run this task.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -568,11 +605,11 @@ The provided args and kwargs will be passed to the function.</p>
       </div>
     </a>
     <a class="right-next"
-       href="../../dev/index.html"
+       href="version.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Developer Guide</p>
+        <p class="prev-next-title">Version</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -596,6 +633,12 @@ The provided args and kwargs will be passed to the function.</p>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.thread"><code class="docutils literal notranslate"><span class="pre">thread()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.run_in_thread"><code class="docutils literal notranslate"><span class="pre">run_in_thread()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.ThreadTask"><code class="docutils literal notranslate"><span class="pre">ThreadTask</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.ThreadTask.finished"><code class="docutils literal notranslate"><span class="pre">ThreadTask.finished()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.ThreadTask.run"><code class="docutils literal notranslate"><span class="pre">ThreadTask.run()</span></code></a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

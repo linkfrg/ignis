@@ -436,31 +436,18 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="utils/index.html">Utils</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="utils/FileMonitor.html">FileMonitor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils/Poll.html">Poll</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/ThreadTask.html">ThreadTask</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils/Timeout.html">Timeout</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/crop_pixbuf.html">crop_pixbuf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils/debounce.html">Debounce</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/download_image.html">download_image</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/exec_sh.html">exec_sh</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/exec_sh_async.html">exec_sh_async</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_current_dir.html">get_current_dir</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_file_icon_name.html">get_file_icon_name</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_ignis_branch.html">get_ignis_branch</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_ignis_commit.html">get_ignis_commit</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_ignis_commit_msg.html">get_ignis_commit_msg</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_ignis_version.html">get_ignis_version</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_monitor.html">get_monitor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_monitors.html">get_monitors</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_n_monitors.html">get_n_monitors</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_paintable.html">get_paintable</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/listen_socket.html">listen_socket</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/load_interface_xml.html">load_interface_xml</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/run_in_thread.html">run_in_thread</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/sass_compile.html">sass_compile</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/scale_pixbuf.html">scale_pixbuf</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/send_socket.html">send_socket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/icon.html">Icon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/misc.html">Misc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/monitor.html">Monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/pixbuf.html">Pixbuf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/sass.html">Sass</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/sh.html">Shell Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/socket.html">Socket</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils/str_cases.html">String Cases</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/thread.html">thread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/thread.html">Thread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/version.html">Version</a></li>
 </ul>
 </details></li>
 </ul>
@@ -570,7 +557,7 @@
 <li><p>required, read-only</p></li>
 </ul>
 <p>An instance of <a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/classes/DBusInterfaceInfo.html#Gio.DBusInterfaceInfo" title="(in Gio 2.0 v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gio.DBusInterfaceInfo</span></code></a></p>
-<p>You can get it from XML using <a class="reference internal" href="utils/load_interface_xml.html#ignis.utils.Utils.load_interface_xml" title="ignis.utils.Utils.load_interface_xml"><code class="xref py py-func docutils literal notranslate"><span class="pre">load_interface_xml()</span></code></a>.</p>
+<p>You can get it from XML using <a class="reference internal" href="utils/misc.html#ignis.utils.Utils.load_interface_xml" title="ignis.utils.Utils.load_interface_xml"><code class="xref py py-func docutils literal notranslate"><span class="pre">load_interface_xml()</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py property">
@@ -740,7 +727,7 @@ If the D-Bus method does not accept any arguments, do not pass them.</p>
 <li><p><strong>name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- A bus name (well-known or unique).</p></li>
 <li><p><strong>object_path</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- An object path.</p></li>
 <li><p><strong>interface_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- A D-Bus interface name.</p></li>
-<li><p><strong>info</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">DBusInterfaceInfo</span></code></span>) -- A <a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/classes/DBusInterfaceInfo.html#Gio.DBusInterfaceInfo" title="(in Gio 2.0 v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gio.DBusInterfaceInfo</span></code></a> instance. You can get it from XML using <a class="reference internal" href="utils/load_interface_xml.html#ignis.utils.Utils.load_interface_xml" title="ignis.utils.Utils.load_interface_xml"><code class="xref py py-class docutils literal notranslate"><span class="pre">load_interface_xml</span></code></a>.</p></li>
+<li><p><strong>info</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">DBusInterfaceInfo</span></code></span>) -- A <a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/classes/DBusInterfaceInfo.html#Gio.DBusInterfaceInfo" title="(in Gio 2.0 v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gio.DBusInterfaceInfo</span></code></a> instance. You can get it from XML using <a class="reference internal" href="utils/misc.html#ignis.utils.Utils.load_interface_xml" title="ignis.utils.Utils.load_interface_xml"><code class="xref py py-class docutils literal notranslate"><span class="pre">load_interface_xml</span></code></a>.</p></li>
 <li><p><strong>bus_type</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code></a>[<code class="docutils literal notranslate"><span class="pre">'session'</span></code>, <code class="docutils literal notranslate"><span class="pre">'system'</span></code>]</span>, default: <code class="docutils literal notranslate"><span class="pre">'session'</span></code>) -- The type of the bus.</p></li>
 </ul>
 </dd>
@@ -760,7 +747,7 @@ If the D-Bus method does not accept any arguments, do not pass them.</p>
 <li><p><strong>name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- A bus name (well-known or unique).</p></li>
 <li><p><strong>object_path</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- An object path.</p></li>
 <li><p><strong>interface_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- A D-Bus interface name.</p></li>
-<li><p><strong>info</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">DBusInterfaceInfo</span></code></span>) -- A <a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/classes/DBusInterfaceInfo.html#Gio.DBusInterfaceInfo" title="(in Gio 2.0 v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gio.DBusInterfaceInfo</span></code></a> instance. You can get it from XML using <a class="reference internal" href="utils/load_interface_xml.html#ignis.utils.Utils.load_interface_xml" title="ignis.utils.Utils.load_interface_xml"><code class="xref py py-class docutils literal notranslate"><span class="pre">load_interface_xml</span></code></a>.</p></li>
+<li><p><strong>info</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">DBusInterfaceInfo</span></code></span>) -- A <a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/classes/DBusInterfaceInfo.html#Gio.DBusInterfaceInfo" title="(in Gio 2.0 v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gio.DBusInterfaceInfo</span></code></a> instance. You can get it from XML using <a class="reference internal" href="utils/misc.html#ignis.utils.Utils.load_interface_xml" title="ignis.utils.Utils.load_interface_xml"><code class="xref py py-class docutils literal notranslate"><span class="pre">load_interface_xml</span></code></a>.</p></li>
 <li><p><strong>bus_type</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code></a>[<code class="docutils literal notranslate"><span class="pre">'session'</span></code>, <code class="docutils literal notranslate"><span class="pre">'system'</span></code>]</span>, default: <code class="docutils literal notranslate"><span class="pre">'session'</span></code>) -- The type of the bus.</p></li>
 <li><p><strong>callback</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">None</span></code>) -- A function to call when the initialization is complete. The function will receive a newly initialized instance of this class.</p></li>
 <li><p><strong>*user_data</strong> -- User data to pass to <code class="docutils literal notranslate"><span class="pre">callback</span></code>.</p></li>
@@ -806,7 +793,7 @@ If the D-Bus method does not accept any arguments, do not pass them.</p>
 <li><p>read-only</p></li>
 </ul>
 <p>A <a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/classes/DBusInterfaceInfo.html#Gio.DBusInterfaceInfo" title="(in Gio 2.0 v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gio.DBusInterfaceInfo</span></code></a> instance.</p>
-<p>You can get it from XML using <a class="reference internal" href="utils/load_interface_xml.html#ignis.utils.Utils.load_interface_xml" title="ignis.utils.Utils.load_interface_xml"><code class="xref py py-class docutils literal notranslate"><span class="pre">load_interface_xml</span></code></a>.</p>
+<p>You can get it from XML using <a class="reference internal" href="utils/misc.html#ignis.utils.Utils.load_interface_xml" title="ignis.utils.Utils.load_interface_xml"><code class="xref py py-class docutils literal notranslate"><span class="pre">load_interface_xml</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py property">
