@@ -36,4 +36,4 @@ body:
       label: Additional Information
       description: |
         Anything that can help (Logs, Images, Videos, Configs, etc.). Please avoid pasting large text directly.
-        Logs can be found at `~/.ignis/ignis.log`.
+        Logs can be found at `$XDG_STATE_HOME/ignis/ignis.log` (`~/.local/state/ignis/ignis.log`).

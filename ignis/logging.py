@@ -2,7 +2,7 @@ import sys
 from loguru import logger
 from gi.repository import GLib  # type: ignore
 
-LOG_DIR = f"{GLib.get_home_dir()}/.ignis"
+LOG_DIR = f"{GLib.get_user_state_dir()}/ignis"
 LOG_FILE = f"{LOG_DIR}/ignis.log"
 LOG_FORMAT = "{time:YYYY-MM-DD HH:mm:ss} [<level>{level}</level>] {message}"
 
