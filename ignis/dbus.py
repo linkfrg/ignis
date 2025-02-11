@@ -553,14 +553,18 @@ class DBusProxy(IgnisGObject):
         """
 
         def finish(x, res):
+            def run_callback(value):
+                if callback:
+                    callback(value, *user_data)
+
             try:
                 result = self.connection.call_finish(res)
-                value = result[0]
+                # python is slow arghhh
+                # GLib.Variant can contain a lot of data, e.g., pixbuf
+                # so unpack it in another thread to prevent the mainloop from blocking
+                Utils.ThreadTask(target=lambda: result[0], callback=run_callback).run()
             except GLib.GError as gerror:  # type: ignore
-                value = gerror
-
-            if callback:
-                callback(value, *user_data)
+                run_callback(gerror)
 
         return self.connection.call(
             self.name,
