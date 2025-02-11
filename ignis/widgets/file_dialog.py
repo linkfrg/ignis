@@ -64,7 +64,7 @@ class FileDialog(Gtk.FileDialog, IgnisGObject):
                 file = self.select_folder_finish(result)
             else:
                 file = dialog.open_finish(result)
-        except GLib.GError:  # type: ignore
+        except GLib.Error:
             return
 
         if file is not None:

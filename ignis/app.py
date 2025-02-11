@@ -30,7 +30,7 @@ GTK_STYLE_PRIORITIES: dict[StylePriority, int] = {
 
 
 def raise_css_parsing_error(
-    css_provider: Gtk.CssProvider, section: Gtk.CssSection, gerror: GLib.GError
+    css_provider: Gtk.CssProvider, section: Gtk.CssSection, gerror: GLib.Error
 ) -> None:
     raise CssParsingError(section, gerror)
 

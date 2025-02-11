@@ -155,7 +155,7 @@ class BluetoothDevice(IgnisGObject):
         def callback(x, res):
             try:
                 self._client.connect_service_finish(res)
-            except GLib.GError as gerror:  # type: ignore
+            except GLib.Error as gerror:
                 logger.warning(gerror.message)
 
         self._client.connect_service(
