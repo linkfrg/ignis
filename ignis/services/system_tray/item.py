@@ -92,7 +92,7 @@ class SystemTrayItem(IgnisGObject):
 
     def __sync_property(self, py_name: str) -> None:
         def callback(value):
-            if isinstance(value, GLib.GError):
+            if isinstance(value, GLib.Error):
                 return
 
             setattr(self, f"_{py_name}", value)
