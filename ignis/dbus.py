@@ -537,7 +537,7 @@ class DBusProxy(IgnisGObject):
                 -1,
                 None,
             )[0]
-        except GLib.GError:  # type: ignore
+        except GLib.Error:
             return None
 
     def get_dbus_property_async(
@@ -548,7 +548,7 @@ class DBusProxy(IgnisGObject):
 
         Args:
             property_name: The name of the property.
-            callback: A function to call when the retrieval is complete. The function will receive the property's value or :class:`GLib.GError` in case of an error.
+            callback: A function to call when the retrieval is complete. The function will receive the property's value or :class:`GLib.Error` in case of an error.
             *user_data: User data to pass to ``callback``.
         """
 
@@ -563,7 +563,7 @@ class DBusProxy(IgnisGObject):
                 # GLib.Variant can contain a lot of data, e.g., pixbuf
                 # so unpack it in another thread to prevent the mainloop from blocking
                 Utils.ThreadTask(target=lambda: result[0], callback=run_callback).run()
-            except GLib.GError as gerror:  # type: ignore
+            except GLib.Error as gerror:
                 run_callback(gerror)
 
         return self.connection.call(
