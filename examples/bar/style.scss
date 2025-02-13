@@ -8,6 +8,7 @@ $bg-light: #261d1e;
 $fg: #f0dedf;
 $active: #ffb2bc;
 $unactive: #d7c1c3;
+$urgent: #eb6f92;
 
 .bar {
     padding: 0.4rem 1rem;
@@ -47,6 +48,11 @@ $unactive: #d7c1c3;
 
 .workspace:hover {
     background-color: lighten($bg, 10%);
+}
+
+.workspace.urgent {
+    background-color: $urgent;
+    color: $bg;
 }
 
 .workspace.active {
