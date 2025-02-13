@@ -88,6 +88,7 @@ class HyprlandService(BaseService):
         self._active_workspace: dict[str, Any] = {}
         self._kb_layout: str = ""
         self._active_window: dict[str, Any] = {}
+        self._urgent_windows: set[str] = set()
 
         if self.is_available:
             self.__listen_events()
@@ -113,6 +114,29 @@ class HyprlandService(BaseService):
         A list of workspaces.
         """
         return self._workspaces
+
+    @GObject.Property
+    def urgent_windows(self) -> list[str]:
+        """
+        - read-only
+
+        A list of urgent windows.
+        """
+        return list(self._urgent_windows)
+
+    @GObject.Property
+    def urgent_workspaces(self) -> list[str]:
+        """
+        - read-only
+
+        A list of urgent workspaces.
+        """
+        clients = json.loads(self.send_command("j/clients"))
+        urgent_workspaces = []
+        for i in clients:
+            if i["address"][len("0x"):] in self._urgent_windows:
+                urgent_workspaces.append(i["workspace"]["id"])
+        return urgent_workspaces
 
     @GObject.Property
     def active_workspace(self) -> dict[str, Any]:
@@ -161,6 +185,9 @@ class HyprlandService(BaseService):
         elif event.startswith("activewindow>>"):
             self.__sync_active_window()
 
+        elif event.startswith("urgent>>"):
+            self.__sync_urgent(event[len("urgent>>"):])
+
     def __sync_workspaces(self) -> None:
         self._workspaces = sorted(
             json.loads(self.send_command("j/workspaces")), key=lambda x: x["id"]
@@ -177,7 +204,18 @@ class HyprlandService(BaseService):
 
     def __sync_active_window(self) -> None:
         self._active_window = json.loads(self.send_command("j/activewindow"))
+        if self._active_window:
+            active_window_id = self._active_window["address"][len("0x"):]
+            if active_window_id in self._urgent_windows:
+                self._urgent_windows.remove(active_window_id)
         self.notify("active_window")
+        self.notify("urgent_windows")
+        self.notify("urgent_workspaces")
+
+    def __sync_urgent(self, urgent_window) -> None:
+        self._urgent_windows.add(urgent_window)
+        self.notify("urgent_windows")
+        self.notify("urgent_workspaces")
 
     def send_command(self, cmd: str) -> str:
         """
