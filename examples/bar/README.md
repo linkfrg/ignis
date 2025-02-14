@@ -7,7 +7,7 @@ Place ``config.py`` and ``style.css`` in the ``~/.config/ignis/`` directory.
 
 **Dependencies:**
 ```
-dart-sass python-requests
+dart-sass
 ```
 
 
