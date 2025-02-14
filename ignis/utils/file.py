@@ -1,4 +1,4 @@
-from gi.repository import Gio  # type: ignore
+from gi.repository import GLib, Gio  # type: ignore
 from collections.abc import Callable
 
 
@@ -219,6 +219,13 @@ def write_file_async(
         if callback:
             callback(*user_data)
 
-    gfile.replace_contents_async(
-        contents, None, False, Gio.FileCreateFlags.REPLACE_DESTINATION, None, finish
+    # use replace_contents_bytes_async() because it will keep ref on contents
+    # otherwise, just random noise will be written to the file
+    gfile.replace_contents_bytes_async(
+        GLib.Bytes.new(contents),
+        None,
+        False,
+        Gio.FileCreateFlags.REPLACE_DESTINATION,
+        None,
+        finish,
     )
