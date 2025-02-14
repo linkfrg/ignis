@@ -25,6 +25,7 @@ from .socket import send_socket, listen_socket
 from .debounce import DebounceTask, debounce
 from .get_monitors import get_monitors
 from .str_cases import snake_to_pascal, pascal_to_snake
+from .file import read_file, read_file_async, write_file, write_file_async
 
 
 class Utils:
@@ -57,3 +58,7 @@ class Utils:
     get_monitors = get_monitors
     snake_to_pascal = snake_to_pascal
     pascal_to_snake = pascal_to_snake
+    read_file = read_file
+    read_file_async = read_file_async
+    write_file = write_file
+    write_file_async = write_file_async
