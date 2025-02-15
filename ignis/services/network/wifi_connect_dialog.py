@@ -1,5 +1,6 @@
 from ignis.widgets import Widget
 from .util import get_wifi_connect_window_name
+from collections.abc import Callable
 
 
 class WifiConnectDialog(Widget.RegularWindow):
@@ -7,11 +8,12 @@ class WifiConnectDialog(Widget.RegularWindow):
     :meta private:
     """
 
-    def __init__(self, access_point) -> None:
+    def __init__(self, access_point, callback: Callable | None = None) -> None:
         self._password_entry = Widget.Entry(
             visibility=False, hexpand=True, on_accept=lambda x: self.__connect_to()
         )
         self._access_point = access_point
+        self._callback = callback
         super().__init__(
             resizable=False,
             width_request=400,
@@ -83,5 +85,7 @@ class WifiConnectDialog(Widget.RegularWindow):
 
     def __connect_to(self) -> None:
         if len(self._password_entry.text) >= 8:
-            self._access_point.connect_to(self._password_entry.text)
+            self._access_point.connect_to(
+                self._password_entry.text, callback=self._callback
+            )
             self.unrealize()
