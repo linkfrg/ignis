@@ -30,6 +30,8 @@ def hyprland_workspace_button(workspace: dict) -> Widget.Button:
     )
     if workspace["id"] == hyprland.active_workspace["id"]:
         widget.add_css_class("active")
+    if workspace["id"] in hyprland.urgent_workspaces:
+        widget.add_css_class("urgent")
 
     return widget
 
@@ -96,9 +98,9 @@ def hyprland_workspaces() -> Widget.EventBox:
         on_scroll_down=lambda x: scroll_workspaces("down"),
         css_classes=["workspaces"],
         spacing=5,
-        child=hyprland.bind(
-            "workspaces",
-            transform=lambda value: [workspace_button(i) for i in value],
+        child=hyprland.bind_many(
+            ["workspaces", "urgent_workspaces"],
+            transform=lambda value, _: [workspace_button(i) for i in value],
         ),
     )
 
