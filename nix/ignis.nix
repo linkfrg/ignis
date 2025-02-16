@@ -65,6 +65,7 @@ pkgs.stdenv.mkDerivation {
         pkgs.python312Packages.certifi
         pkgs.python312Packages.idna
         pkgs.python312Packages.urllib3
+        pkgs.python312Packages.requests
         pkgs.python312Packages.click
         pkgs.python312Packages.charset-normalizer
       ])}:$out/lib/python3.12/site-packages:$PYTHONPATH" \
