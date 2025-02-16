@@ -1,7 +1,9 @@
 import gi
 import os
 import sys
+import asyncio
 from ctypes import CDLL
+from gi.events import GLibEventLoopPolicy  # type: ignore
 from gi.repository import GLib  # type: ignore
 
 __version__ = "0.4.dev0"
@@ -9,6 +11,9 @@ __lib_dir__ = None
 CACHE_DIR = None
 
 if "sphinx" not in sys.modules:
+    policy = GLibEventLoopPolicy()
+    asyncio.set_event_loop_policy(policy)
+
     CACHE_DIR = f"{GLib.get_user_cache_dir()}/ignis"
     os.makedirs(CACHE_DIR, exist_ok=True)
 

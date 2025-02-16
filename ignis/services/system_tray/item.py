@@ -1,4 +1,6 @@
+import asyncio
 from typing import Literal
+from collections.abc import Callable
 from ignis.utils import Utils
 from ignis.dbus import DBusProxy
 from gi.repository import GLib, GObject, GdkPixbuf, Gtk, Gdk  # type: ignore
@@ -25,16 +27,15 @@ class SystemTrayItem(IgnisGObject):
         self._menu: DBusMenu | None = None
         self._tooltip: str | None = None
 
-        DBusProxy.new_async(
+        asyncio.create_task(self.__init_proxy(name, object_path))
+
+    async def __init_proxy(self, name: str, object_path: str) -> None:
+        self.__dbus: DBusProxy = await DBusProxy.new_async(
             name=name,
             object_path=object_path,
             interface_name="org.kde.StatusNotifierItem",
             info=Utils.load_interface_xml("org.kde.StatusNotifierItem"),
-            callback=self.__on_proxy_initialized,
         )
-
-    def __on_proxy_initialized(self, proxy: DBusProxy) -> None:
-        self.__dbus = proxy
 
         if not self.__dbus.has_owner:
             return
@@ -43,7 +44,8 @@ class SystemTrayItem(IgnisGObject):
             "notify::g-name-owner", lambda *args: self.emit("removed")
         )
 
-        menu_path: str = self.__dbus.Menu
+        menu_path: str = await self.__dbus.get_dbus_property_async("Menu")
+
         if menu_path:
             self._menu = DBusMenu(name=self.__dbus.name, object_path=menu_path)
 
@@ -54,7 +56,7 @@ class SystemTrayItem(IgnisGObject):
         ]:
             self.__dbus.signal_subscribe(
                 signal_name=signal_name,
-                callback=lambda *args: self.__sync_icon(),
+                callback=lambda *_: asyncio.create_task(self.__sync_icon()),
             )
 
         for signal_name in [
@@ -74,96 +76,96 @@ class SystemTrayItem(IgnisGObject):
             raise DisplayNotFoundError()
 
         self._icon_theme = Gtk.IconTheme.get_for_display(display)
-        self._icon_theme.connect("changed", lambda x: self.__sync_icon())
+        self._icon_theme.connect(
+            "changed", lambda x: asyncio.create_task(self.__sync_icon())
+        )
 
         # sync icon
-        self.__sync_icon()
+        await self.__sync_icon()
 
         # sync all properties
-        self.__sync_property("id")
-        self.__sync_property("category")
-        self.__sync_property("title")
-        self.__sync_property("status")
-        self.__sync_property("window_id")
-        self.__sync_property("item_is_menu")
-        self.__sync_property("tooltip")
+        await self.__sync_property("id")
+        await self.__sync_property("category")
+        await self.__sync_property("title")
+        await self.__sync_property("status")
+        await self.__sync_property("window_id")
+        await self.__sync_property("item_is_menu")
+        await self.__sync_property("tooltip")
 
         self.emit("ready")
 
-    def __sync_property(self, py_name: str) -> None:
-        def callback(value):
-            if isinstance(value, GLib.Error):
+    async def __sync_property(self, py_name: str) -> None:
+        try:
+            value = await self.__dbus.get_dbus_property_async(
+                Utils.snake_to_pascal(py_name)
+            )
+        except GLib.Error:
+            return
+
+        setattr(self, f"_{py_name}", value)
+        self.notify(py_name.replace("_", "-"))
+
+    async def __sync_icon(self) -> None:
+        async def add_to_search_path(icon_name: str) -> None:
+            search_path = self._icon_theme.get_search_path()
+            try:
+                icon_theme_path = await self.__dbus.get_dbus_property_async("IconName")
+            except GLib.Error:
                 return
-
-            setattr(self, f"_{py_name}", value)
-            self.notify(py_name.replace("_", "-"))
-
-        self.__dbus.get_dbus_property_async(
-            Utils.snake_to_pascal(py_name), callback=callback
-        )
-
-    def __sync_icon(self) -> None:
-        def handle_icon_name(
-            icon_name: str | None, icon_theme_path: str | None
-        ) -> None:
-            if icon_name and not isinstance(icon_name, GLib.Error):
-                self._icon = icon_name
-                search_path = self._icon_theme.get_search_path()
-                if (
-                    not self._icon_theme.has_icon(icon_name)
-                    and icon_theme_path is not None
-                    and search_path is not None
-                    and icon_theme_path not in search_path
-                ):
-                    self._icon_theme.add_search_path(icon_theme_path)
-                self.notify("icon")
-            else:
-                self.__dbus.get_dbus_property_async(
-                    "AttentionIconName", handle_attention_icon_name, icon_theme_path
-                )
-
-        def handle_attention_icon_name(
-            attention_icon_name: str | None, icon_theme_path: str | None
-        ) -> None:
-            if attention_icon_name and not isinstance(attention_icon_name, GLib.Error):
-                self._icon = attention_icon_name
-                search_path = self._icon_theme.get_search_path()
-                if (
-                    not self._icon_theme.has_icon(attention_icon_name)
-                    and icon_theme_path is not None
-                    and search_path is not None
-                    and icon_theme_path not in search_path
-                ):
-                    self._icon_theme.add_search_path(icon_theme_path)
-                self.notify("icon")
-            else:
-                self.__dbus.get_dbus_property_async("IconPixmap", handle_icon_pixmap)
-
-        def handle_icon_pixmap(icon_pixmap) -> None:
-            if icon_pixmap and not isinstance(icon_pixmap, GLib.Error):
-                self._icon = self.__get_pixbuf(icon_pixmap)
-                self.notify("icon")
-            else:
-                self.__dbus.get_dbus_property_async(
-                    "AttentionIconPixmap", handle_attention_icon_pixmap
-                )
-
-        def handle_attention_icon_pixmap(attention_icon_pixmap) -> None:
-            if attention_icon_pixmap and not isinstance(
-                attention_icon_pixmap, GLib.Error
+            if (
+                not self._icon_theme.has_icon(icon_name)
+                and icon_theme_path is not None
+                and search_path is not None
+                and icon_theme_path not in search_path
             ):
-                self._icon = self.__get_pixbuf(attention_icon_pixmap)
+                self._icon_theme.add_search_path(icon_theme_path)
+
+        async def try_set_prop(
+            property_name: str,
+            callback: Callable | None = None,
+            add_search_path: bool = False,
+        ) -> bool:
+            try:
+                value = await self.__dbus.get_dbus_property_async(property_name)
+            except GLib.Error:
+                return False
+
+            if value:
+                if add_search_path:
+                    await add_to_search_path(value)
+                if callback:
+                    self._icon = callback(value)
+                else:
+                    self._icon = value
                 self.notify("icon")
+                return True
             else:
+                return False
+
+        async def try_set_icon_name() -> None:
+            is_success = await try_set_prop("IconName", add_search_path=True)
+            if not is_success:
+                await try_set_attention_icon_name()
+
+        async def try_set_attention_icon_name() -> None:
+            is_success = await try_set_prop("AttentionIconName", add_search_path=True)
+            if not is_success:
+                await try_set_icon_pixmap()
+
+        async def try_set_icon_pixmap() -> None:
+            is_success = await try_set_prop("IconPixmap", callback=self.__get_pixbuf)
+            if not is_success:
+                await try_set_attention_icon_pixmap()
+
+        async def try_set_attention_icon_pixmap() -> None:
+            is_success = await try_set_prop(
+                "AttentionIconPixmap", callback=self.__get_pixbuf
+            )
+            if not is_success:
                 self._icon = "image-missing"
                 self.notify("icon")
 
-        def handle_icon_theme_path(icon_theme_path: str | None) -> None:
-            self.__dbus.get_dbus_property_async(
-                "IconName", handle_icon_name, icon_theme_path
-            )
-
-        self.__dbus.get_dbus_property_async("IconThemePath", handle_icon_theme_path)
+        await try_set_icon_name()
 
     @GObject.Signal
     def ready(self): ...  # user shouldn't connect to this signal
