@@ -1,6 +1,5 @@
 import subprocess
 from gi.repository import Gio  # type: ignore
-from collections.abc import Callable
 
 
 def exec_sh(command: str, **kwargs) -> subprocess.CompletedProcess:
@@ -61,7 +60,7 @@ class AsyncCompletedProcess:
         return self._stderr
 
 
-def exec_sh_async(command: str, on_finished: Callable | None = None) -> Gio.Subprocess:
+async def exec_sh_async(command: str) -> AsyncCompletedProcess:
     """
     Execute a shell (bash) command asynchronously.
 
@@ -73,15 +72,10 @@ def exec_sh_async(command: str, on_finished: Callable | None = None) -> Gio.Subp
         The instance of ``Gio.Subprocess``.
     """
 
-    def wait_check_callback(process: Gio.Subprocess, result: Gio.AsyncResult) -> None:
-        process.wait_check_finish(result)
-        on_finished(AsyncCompletedProcess(process))  # type: ignore
-
     process = Gio.Subprocess.new(
         ["bash", "-c", command],
         Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE,
     )
-    if on_finished:
-        process.wait_check_async(None, wait_check_callback)
 
-    return process
+    await process.wait_check_async()
+    return AsyncCompletedProcess(process)

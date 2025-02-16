@@ -1,8 +1,14 @@
 import gi
 import os
 import sys
+import asyncio
 from ctypes import CDLL
+from gi.events import GLibEventLoopPolicy # type: ignore
 from gi.repository import GLib  # type: ignore
+
+# Set up the GLib event loop
+policy = GLibEventLoopPolicy()
+asyncio.set_event_loop_policy(policy)
 
 __version__ = "0.4.dev0"
 __lib_dir__ = None

@@ -1,5 +1,4 @@
-from gi.repository import GLib, Gio  # type: ignore
-from collections.abc import Callable
+from gi.repository import Gio  # type: ignore
 
 
 def _get_gfile(
@@ -79,13 +78,11 @@ def read_file(
         return contents
 
 
-def read_file_async(
+async def read_file_async(
     path: str | None = None,
     uri: str | None = None,
     gfile: "Gio.File | None" = None,
     decode: bool = True,
-    callback: Callable | None = None,
-    *user_data,
 ) -> None:
     """
     Asynchronously read the contents of a file.
@@ -119,17 +116,12 @@ def read_file_async(
     """
     gfile = _get_gfile(func_name="read_file_async()", path=path, uri=uri, gfile=gfile)
 
-    def finish(gfile: Gio.File, res: Gio.AsyncResult) -> None:
-        _, contents, _ = gfile.load_contents_finish(res)
-        if not callback:
-            return
+    _, contents, _ = await gfile.load_contents_async()  # type: ignore
 
-        if decode:
-            callback(contents.decode(), *user_data)
-        else:
-            callback(contents, *user_data)
-
-    gfile.load_contents_async(None, finish)
+    if decode:
+        return contents.decode()
+    else:
+        return contents
 
 
 def write_file(
@@ -171,14 +163,12 @@ def write_file(
     )
 
 
-def write_file_async(
+async def write_file_async(
     path: str | None = None,
     uri: str | None = None,
     gfile: "Gio.File | None" = None,
     contents: bytes | None = None,
     string: str | None = None,
-    callback: Callable | None = None,
-    *user_data,
 ) -> None:
     """
     Asynchronously write contents to a file.
@@ -214,18 +204,9 @@ def write_file_async(
         func_name="write_file_async()", contents=contents, string=string
     )
 
-    def finish(gfile: Gio.File, res: Gio.AsyncResult) -> None:
-        gfile.replace_contents_finish(res)
-        if callback:
-            callback(*user_data)
-
-    # use replace_contents_bytes_async() because it will keep ref on contents
-    # otherwise, just random noise will be written to the file
-    gfile.replace_contents_bytes_async(
-        GLib.Bytes.new(contents),
+    await gfile.replace_contents_async(   # type: ignore
+        contents,
         None,
         False,
         Gio.FileCreateFlags.REPLACE_DESTINATION,
-        None,
-        finish,
     )
