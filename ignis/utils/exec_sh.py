@@ -77,5 +77,5 @@ async def exec_sh_async(command: str) -> AsyncCompletedProcess:
         Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE,
     )
 
-    await process.wait_check_async()
+    await process.wait_check_async()  # type: ignore
     return AsyncCompletedProcess(process)

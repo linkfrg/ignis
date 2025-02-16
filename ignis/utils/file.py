@@ -204,7 +204,7 @@ async def write_file_async(
         func_name="write_file_async()", contents=contents, string=string
     )
 
-    await gfile.replace_contents_async(   # type: ignore
+    await gfile.replace_contents_async(  # type: ignore
         contents,
         None,
         False,

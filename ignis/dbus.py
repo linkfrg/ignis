@@ -350,7 +350,7 @@ class DBusProxy(IgnisGObject):
             *user_data: User data to pass to ``callback``.
         """
 
-        gproxy = await Gio.DBusProxy.new_for_bus(   # type: ignore
+        gproxy = await Gio.DBusProxy.new_for_bus(  # type: ignore
             BUS_TYPE[bus_type],
             Gio.DBusProxyFlags.NONE,
             info,
