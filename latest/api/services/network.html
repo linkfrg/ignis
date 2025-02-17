@@ -978,6 +978,20 @@
 </dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="ignis.services.network.WifiAccessPoint.psk">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">psk</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.network.WifiAccessPoint.psk" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-write</p></li>
+</ul>
+<p>The stored Pre-shared key (password) for the access point.
+<code class="docutils literal notranslate"><span class="pre">None</span></code> if there is no a saved psk for this access point.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>After setting this property, you have to manually call <a class="reference internal" href="#ignis.services.network.WifiAccessPoint.commit_changes_async" title="ignis.services.network.WifiAccessPoint.commit_changes_async"><code class="xref py py-func docutils literal notranslate"><span class="pre">commit_changes_async()</span></code></a> to save changes to the disk.</p>
+</div>
+</dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="ignis.services.network.WifiAccessPoint.is_connected">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_connected</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.network.WifiAccessPoint.is_connected" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
@@ -987,30 +1001,88 @@
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.network.WifiAccessPoint.commit_changes_async">
+<span class="sig-name descname"><span class="pre">commit_changes_async</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.network.WifiAccessPoint.commit_changes_async" title="Link to this definition">#</a></dt>
+<dd><p>Asynchronously commit changes to the connection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>callback</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">None</span></code>) -- A function to call when the changes committing is complete. The function will receive <code class="docutils literal notranslate"><span class="pre">self</span></code> and a boolean value: <code class="docutils literal notranslate"><span class="pre">True</span></code> on success, <code class="docutils literal notranslate"><span class="pre">False</span></code> on failure.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.network.WifiAccessPoint.connect_to">
-<span class="sig-name descname"><span class="pre">connect_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.network.WifiAccessPoint.connect_to" title="Link to this definition">#</a></dt>
-<dd><p>Connect to this access point.</p>
+<span class="sig-name descname"><span class="pre">connect_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.network.WifiAccessPoint.connect_to" title="Link to this definition">#</a></dt>
+<dd><p>Asynchronously connect to this access point.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
 </dd>
 </dl>
 <dl class="simple">
-<dt>Args</dt><dd><p>password: Password to use. This has an effect only if the access point requires a password.</p>
+<dt>Args</dt><dd><p>password: Password to use. This has an effect only if the access point requires a password.
+callback: A function to call when connection is established or added. The function will receive <code class="docutils literal notranslate"><span class="pre">self</span></code> and an instance of <a class="reference external" href="https://lazka.github.io/pgi-docs/NM-1.0/classes/ActiveConnection.html#NM.ActiveConnection" title="(in NM 1.0 v1.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NM.ActiveConnection</span></code></a> as arguments.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.network.WifiAccessPoint.connect_to_graphical">
-<span class="sig-name descname"><span class="pre">connect_to_graphical</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.network.WifiAccessPoint.connect_to_graphical" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">connect_to_graphical</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.network.WifiAccessPoint.connect_to_graphical" title="Link to this definition">#</a></dt>
 <dd><p>Display a graphical dialog to connect to the access point.
-The dialog will be shown only if the access point requires a password.</p>
+The dialog will be shown only if the access point requires a password.
+This function is asynchronous.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>callback</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">None</span></code>) -- A function to call when connection is established or added. The function will receive <code class="docutils literal notranslate"><span class="pre">self</span></code> and an instance of <a class="reference external" href="https://lazka.github.io/pgi-docs/NM-1.0/classes/ActiveConnection.html#NM.ActiveConnection" title="(in NM 1.0 v1.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NM.ActiveConnection</span></code></a> as arguments.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.network.WifiAccessPoint.disconnect_from">
+<span class="sig-name descname"><span class="pre">disconnect_from</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.network.WifiAccessPoint.disconnect_from" title="Link to this definition">#</a></dt>
+<dd><p>Asynchronously disconnect from this access point.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>callback</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">None</span></code>) -- A function to call when the connection deactivation is complete. The function will receive <code class="docutils literal notranslate"><span class="pre">self</span></code> and a boolean value: <code class="docutils literal notranslate"><span class="pre">True</span></code> on success, <code class="docutils literal notranslate"><span class="pre">False</span></code> on failure.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.network.WifiAccessPoint.clear_secrets">
+<span class="sig-name descname"><span class="pre">clear_secrets</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.network.WifiAccessPoint.clear_secrets" title="Link to this definition">#</a></dt>
+<dd><p>Clear a stored secret.
+This will reset security settings (PSK and security protocol).
+:rtype: <span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>After calling this method, you have to manually call <a class="reference internal" href="#ignis.services.network.WifiAccessPoint.commit_changes_async" title="ignis.services.network.WifiAccessPoint.commit_changes_async"><code class="xref py py-func docutils literal notranslate"><span class="pre">commit_changes_async()</span></code></a> to save changes to the disk.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.network.WifiAccessPoint.forget">
+<span class="sig-name descname"><span class="pre">forget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.network.WifiAccessPoint.forget" title="Link to this definition">#</a></dt>
+<dd><p>Forget (delete) the stored connection.
+:rtype: <span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+<blockquote>
+<div><dl class="simple">
+<dt>Args:</dt><dd><p>callback: A function to call when the connection deletion is complete. The function will receive <code class="docutils literal notranslate"><span class="pre">self</span></code> and a boolean value: <code class="docutils literal notranslate"><span class="pre">True</span></code> on success, <code class="docutils literal notranslate"><span class="pre">False</span></code> on failure.</p>
+</dd>
+</dl>
+</div></blockquote>
 </dd></dl>
 
 </dd></dl>
@@ -1192,9 +1264,14 @@ The dialog will be shown only if the access point requires a password.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiAccessPoint.strength"><code class="docutils literal notranslate"><span class="pre">WifiAccessPoint.strength</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiAccessPoint.icon_name"><code class="docutils literal notranslate"><span class="pre">WifiAccessPoint.icon_name</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiAccessPoint.security"><code class="docutils literal notranslate"><span class="pre">WifiAccessPoint.security</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiAccessPoint.psk"><code class="docutils literal notranslate"><span class="pre">WifiAccessPoint.psk</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiAccessPoint.is_connected"><code class="docutils literal notranslate"><span class="pre">WifiAccessPoint.is_connected</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiAccessPoint.commit_changes_async"><code class="docutils literal notranslate"><span class="pre">WifiAccessPoint.commit_changes_async()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiAccessPoint.connect_to"><code class="docutils literal notranslate"><span class="pre">WifiAccessPoint.connect_to()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiAccessPoint.connect_to_graphical"><code class="docutils literal notranslate"><span class="pre">WifiAccessPoint.connect_to_graphical()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiAccessPoint.disconnect_from"><code class="docutils literal notranslate"><span class="pre">WifiAccessPoint.disconnect_from()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiAccessPoint.clear_secrets"><code class="docutils literal notranslate"><span class="pre">WifiAccessPoint.clear_secrets()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.WifiAccessPoint.forget"><code class="docutils literal notranslate"><span class="pre">WifiAccessPoint.forget()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.network.VpnConnection"><code class="docutils literal notranslate"><span class="pre">VpnConnection</span></code></a><ul class="nav section-nav flex-column">
