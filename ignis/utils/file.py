@@ -83,7 +83,7 @@ async def read_file_async(
     uri: str | None = None,
     gfile: "Gio.File | None" = None,
     decode: bool = True,
-) -> None:
+) -> str | bytes:
     """
     Asynchronously read the contents of a file.
 
@@ -92,8 +92,9 @@ async def read_file_async(
         uri: The URI of the file.
         gfile: An instance of :class:`Gio.File`.
         decode: Whether to decode the file's contents. If ``True``, the callback will receive :obj:`str`, otherwise :obj:`bytes`.
-        callback: A function to call when the operation is complete. It will receive the file's contents (:obj:`bytes` or :obj:`str`).
-        *user_data: User data to pass to ``callback``.
+
+    Returns:
+        The contents of the file.
 
     At least one of the arguments, ``path``, ``uri``, or ``gfile``, must be provided.
 
@@ -101,18 +102,26 @@ async def read_file_async(
 
     .. code-block:: python
 
+        import asyncio
         from ignis.utils import Utils
 
-        def some_callback(contents: bytes | str) -> None:
-            print(contents)
 
-        # regular file
-        Utils.read_file_async(path="/path/to/file", decode=True, callback=some_callback)
+        async def some_func() -> None:
 
-        # URI
-        Utils.read_file_async(uri="file:///path/to/file", decode=True, callback=some_callback)
-        # Web also supported
-        Utils.read_file_async(uri="https://SOME_SITE.org/example_content", decode=False, callback=some_callback)
+            # regular file
+            res1 = await Utils.read_file_async(path="/path/to/file", decode=True)
+            print("Contents 1: ", res1)
+
+            # URI
+            res2 = await Utils.read_file_async(uri="file:///path/to/file", decode=True)
+            print("Contents 2: ", res2)
+
+            # Web also supported
+            res3 = await Utils.read_file_async(uri="https://SOME_SITE.org/example_content", decode=False)
+            print("Contents 3: ", res3)
+
+
+        asyncio.create_task(some_func())
     """
     gfile = _get_gfile(func_name="read_file_async()", path=path, uri=uri, gfile=gfile)
 
@@ -148,12 +157,18 @@ def write_file(
 
     .. code-block:: python
 
+        import asyncio
         from ignis.utils import Utils
 
-        # write string
-        Utils.write_file(path="/path/to/file", string="some_string")
-        # or bytes
-        Utils.write_file(path="/path/to/file", bytes=b"some bytes")
+
+        async def some_write_func() -> None:
+            # write string
+            await Utils.write_file(path="/path/to/file", string="some_string")
+            # or bytes
+            await Utils.write_file(path="/path/to/file", bytes=b"some bytes")
+
+
+        asyncio.create_task(some_write_func())
     """
     gfile = _get_gfile(func_name="write_file()", path=path, uri=uri, gfile=gfile)
     contents = _get_contents(func_name="write_file()", contents=contents, string=string)

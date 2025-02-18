@@ -239,9 +239,6 @@ class WifiAccessPoint(IgnisGObject):
     async def commit_changes_async(self) -> None:
         """
         Asynchronously commit changes to the connection.
-
-        Args:
-            callback: A function to call when the changes committing is complete. The function will receive ``self`` and a boolean value: ``True`` on success, ``False`` on failure.
         """
 
         for conn in self._connections:
@@ -253,7 +250,6 @@ class WifiAccessPoint(IgnisGObject):
 
         Args
             password: Password to use. This has an effect only if the access point requires a password.
-            callback: A function to call when connection is established or added. The function will receive ``self`` and an instance of :class:`NM.ActiveConnection` as arguments.
         """
 
         if len(self._connections) > 0:
@@ -266,9 +262,6 @@ class WifiAccessPoint(IgnisGObject):
         Display a graphical dialog to connect to the access point.
         The dialog will be shown only if the access point requires a password.
         This function is asynchronous.
-
-        Args:
-            callback: A function to call when connection is established or added. The function will receive ``self`` and an instance of :class:`NM.ActiveConnection` as arguments.
         """
 
         if len(self._connections) > 0:
@@ -280,9 +273,6 @@ class WifiAccessPoint(IgnisGObject):
     async def disconnect_from(self) -> None:
         """
         Asynchronously disconnect from this access point.
-
-        Args:
-            callback: A function to call when the connection deactivation is complete. The function will receive ``self`` and a boolean value: ``True`` on success, ``False`` on failure.
         """
 
         await self._client.deactivate_connection_async(  # type: ignore
@@ -303,9 +293,6 @@ class WifiAccessPoint(IgnisGObject):
     async def forget(self) -> None:
         """
         Forget (delete) the stored connection.
-
-         Args:
-            callback: A function to call when the connection deletion is complete. The function will receive ``self`` and a boolean value: ``True`` on success, ``False`` on failure.
         """
 
         for conn in self._connections:

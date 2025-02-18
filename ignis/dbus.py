@@ -532,19 +532,17 @@ class DBusProxy(IgnisGObject):
         except GLib.Error:
             return None
 
-    async def get_dbus_property_async(
-        self, property_name: str, unpack: bool = True
-    ) -> Any:
+    async def get_dbus_property_async(self, property_name: str) -> Any:
         """
         Asynchronously get the value of a D-Bus property by its name.
 
         Args:
             property_name: The name of the property.
-            callback: A function to call when the retrieval is complete. The function will receive the property's value or :class:`GLib.Error` in case of an error.
-            *user_data: User data to pass to ``callback``.
+        Returns:
+            The value of the D-Bus property.
         """
 
-        result = await self.connection.call(
+        variant = await self.connection.call(
             self.name,
             self.object_path,
             "org.freedesktop.DBus.Properties",
@@ -558,11 +556,8 @@ class DBusProxy(IgnisGObject):
             -1,
         )
 
-        if unpack and not isinstance(result, GLib.Error):
-            # unpack in thread
-            return await asyncio.to_thread(lambda: result[0])
-        else:
-            return result
+        # unpack in thread
+        return await asyncio.to_thread(lambda: variant[0])
 
     def set_dbus_property(self, property_name: str, value: GLib.Variant) -> None:
         """
