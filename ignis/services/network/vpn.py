@@ -48,45 +48,35 @@ class VpnConnection(IgnisGObject):
         """
         return self._connection.get_id()
 
-    def toggle_connection(self) -> None:
+    async def toggle_connection(self) -> None:
         """
         Toggle this VPN depending on it's `is_connected` property
         """
         if self.is_connected:
-            self.disconnect_from()
+            await self.disconnect_from()
         else:
-            self.connect_to()
+            await self.connect_to()
 
-    def connect_to(self) -> None:
+    async def connect_to(self) -> None:
         """
         Connect to this VPN.
         """
 
-        def finish(x, res) -> None:
-            self._client.activate_connection_finish(res)
-
-        self._client.activate_connection_async(
+        await self._client.activate_connection_async(
             self._connection,  # type: ignore
             None,
             None,
-            None,
-            finish,
         )
 
-    def disconnect_from(self) -> None:
+    async def disconnect_from(self) -> None:
         """
         Disconnect from this VPN.
         """
 
-        def finish(x, res) -> None:
-            self._client.deactivate_connection_finish(res)
-
         for conn in self._client.get_active_connections():
             if conn.get_uuid() == self._connection.get_uuid():
-                self._client.deactivate_connection_async(
+                await self._client.deactivate_connection_async(  # type: ignore
                     conn,
-                    None,
-                    finish,
                 )
 
     def __update_is_connected(self, *args) -> None:

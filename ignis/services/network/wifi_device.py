@@ -84,18 +84,15 @@ class WifiDevice(IgnisGObject):
         """
         return bool(self._device.get_active_connection())
 
-    def scan(self) -> None:
+    async def scan(self) -> None:
         """
         Scan for Wi-Fi networks.
         """
 
-        def finish(x, res) -> None:
-            self._device.request_scan_finish(res)
-
         if self.state == "unavailable":
             return
 
-        self._device.request_scan_async(None, finish)
+        await self._device.request_scan_async()  # type: ignore
 
     def __add_access_point(
         self, device, access_point: NM.AccessPoint, emit: bool = True

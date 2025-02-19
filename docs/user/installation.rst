@@ -89,7 +89,7 @@ Building from source
 - gtk4 
 - gtk4-layer-shell
 - glib-mkenums (glib2-devel)
-- pygobject
+- pygobject >= 3.50.0
 - pycairo
 - python-click
 - python-loguru
