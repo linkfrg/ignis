@@ -1,4 +1,5 @@
 import sys
+import warnings
 from loguru import logger
 from gi.repository import GLib  # type: ignore
 
@@ -21,6 +22,14 @@ def logging_excepthook(exc_type, exc_value, exc_traceback):
     logger.opt(exception=(exc_type, exc_value, exc_traceback)).error(
         f"{exc_type.__name__}: {exc_value}"
     )
+
+
+showwarning_ = warnings.showwarning
+
+
+def logging_showwarning(message, *args, **kwargs):
+    logger.opt(depth=2).warning(message)
+    showwarning_(message, *args, **kwargs)
 
 
 def g_log_writer(
@@ -55,5 +64,6 @@ def configure_logger(debug: bool) -> None:
     logger.level("INFO", color="<green>")
 
     sys.excepthook = logging_excepthook
+    warnings.showwarning = logging_showwarning
 
     GLib.log_set_writer_func(g_log_writer)
