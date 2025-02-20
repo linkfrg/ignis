@@ -1,3 +1,4 @@
+import sys
 from types import UnionType
 from gi.repository import GObject, GLib  # type: ignore
 from typing import Any, Literal, get_args, get_origin
@@ -241,6 +242,9 @@ class IgnisProperty(GObject.Property):
             return object
 
     def __process_default(self, tp: type) -> Any:
+        if 'sphinx' in sys.modules:
+            return None
+
         if tp is bool:
             return False
         elif tp is float:
