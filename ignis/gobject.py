@@ -242,7 +242,7 @@ class IgnisProperty(GObject.Property):
             return object
 
     def __process_default(self, tp: type) -> Any:
-        if 'sphinx' in sys.modules:
+        if "sphinx" in sys.modules:
             return None
 
         if tp is bool:
