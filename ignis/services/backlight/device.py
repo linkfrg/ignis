@@ -1,6 +1,5 @@
 import os
-from ignis.gobject import IgnisGObject
-from gi.repository import GObject  # type: ignore
+from ignis.gobject import IgnisGObject, IgnisProperty
 from ignis.utils import Utils
 from ignis.dbus import DBusProxy
 from .constants import SYS_BACKLIGHT
@@ -51,7 +50,7 @@ class BacklightDevice(IgnisGObject):
 
         self.notify("brightness")
 
-    @GObject.Property
+    @IgnisProperty
     def device_name(self) -> str:
         """
         - read-only
@@ -60,7 +59,7 @@ class BacklightDevice(IgnisGObject):
         """
         return self._device_name
 
-    @GObject.Property
+    @IgnisProperty
     def max_brightness(self) -> int:
         """
         - read-only
@@ -69,7 +68,7 @@ class BacklightDevice(IgnisGObject):
         """
         return self._max_brightness
 
-    @GObject.Property
+    @IgnisProperty
     def brightness(self) -> int:
         """
         - read-write

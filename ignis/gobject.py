@@ -196,27 +196,32 @@ class IgnisProperty(GObject.Property):
         self,
         getter: Callable | None = None,
         setter: Callable | None = None,
-        type: type = None,
+        type: type | None = None,
         default: Any = None,
         **kwargs,
     ):
         processed_type = (
-            self.__process_getter_return_type(getter) if type is None else type
+            self.__process_getter_return_type(getter)
+            if type is None and getter
+            else type
         )
         processed_default = (
-            self.__process_default(processed_type) if default is None else default
+            self.__process_default(processed_type)
+            if default is None and processed_type
+            else default
         )
 
         super().__init__(
             getter=getter,
             setter=setter,
-            type=processed_type,
+            type=processed_type,  # type: ignore
             default=processed_default,
             **kwargs,
         )
 
-    def __process_getter_return_type(self, getter: Callable) -> type:
+    def __process_getter_return_type(self, getter: Callable) -> type | None:
         getter_return_type = getter.__annotations__.get("return", None)
+        type_: type | None = None
         if getter_return_type:
             if isinstance(getter_return_type, UnionType):
                 type_ = self.__get_type_from_union(getter_return_type)
@@ -229,7 +234,8 @@ class IgnisProperty(GObject.Property):
 
         try:
             # check is valid type
-            self._type_from_python(type_)
+            # a little bit hacky, but why rewrite ready-made code, right?
+            self._type_from_python(type_)  # type: ignore
             return type_
         except TypeError:
             return object
@@ -240,7 +246,8 @@ class IgnisProperty(GObject.Property):
         elif tp is float:
             return 0.0
         elif issubclass(tp, GObject.GFlags):
-            first_value = list(tp.__flags_values__.values())[0]
+            # gflags has  __flags_values__ attr, trust me
+            first_value = list(tp.__flags_values__.values())[0]  # type: ignore
             return first_value
 
     def __get_type_from_union(self, tp: UnionType) -> type:
@@ -250,6 +257,6 @@ class IgnisProperty(GObject.Property):
         else:
             return object
 
-    def __get_type_from_literal(self, tp: Literal) -> type:
+    def __get_type_from_literal(self, tp: type) -> type | None:
         values = get_args(tp)
         return type(values[0]) if values else None

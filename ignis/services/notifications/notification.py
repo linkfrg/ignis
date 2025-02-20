@@ -1,7 +1,7 @@
 from ignis.dbus import DBusService
 from gi.repository import GObject  # type: ignore
 from ignis.utils import Utils
-from ignis.gobject import IgnisGObject
+from ignis.gobject import IgnisGObject, IgnisProperty
 from .action import NotificationAction
 
 
@@ -65,7 +65,7 @@ class Notification(IgnisGObject):
         Emitted when notification has been dismissed.
         """
 
-    @GObject.Property
+    @IgnisProperty
     def id(self) -> int:
         """
         - read-only
@@ -74,7 +74,7 @@ class Notification(IgnisGObject):
         """
         return self._id
 
-    @GObject.Property
+    @IgnisProperty
     def app_name(self) -> str:
         """
         - read-only
@@ -83,7 +83,7 @@ class Notification(IgnisGObject):
         """
         return self._app_name
 
-    @GObject.Property
+    @IgnisProperty
     def icon(self) -> str:
         """
         - read-only
@@ -92,7 +92,7 @@ class Notification(IgnisGObject):
         """
         return self._icon
 
-    @GObject.Property
+    @IgnisProperty
     def summary(self) -> str:
         """
         - read-only
@@ -101,7 +101,7 @@ class Notification(IgnisGObject):
         """
         return self._summary
 
-    @GObject.Property
+    @IgnisProperty
     def body(self) -> str:
         """
         - read-only
@@ -110,7 +110,7 @@ class Notification(IgnisGObject):
         """
         return self._body
 
-    @GObject.Property
+    @IgnisProperty
     def actions(self) -> list["NotificationAction"]:
         """
         - read-only
@@ -119,7 +119,7 @@ class Notification(IgnisGObject):
         """
         return self._actions
 
-    @GObject.Property
+    @IgnisProperty
     def timeout(self) -> int:
         """
         - read-only
@@ -129,7 +129,7 @@ class Notification(IgnisGObject):
         """
         return self._timeout
 
-    @GObject.Property
+    @IgnisProperty
     def time(self) -> float:
         """
         - read-only
@@ -138,7 +138,7 @@ class Notification(IgnisGObject):
         """
         return self._time
 
-    @GObject.Property
+    @IgnisProperty
     def urgency(self) -> int:
         """
         - read-only
@@ -153,7 +153,7 @@ class Notification(IgnisGObject):
         """
         return self._urgency
 
-    @GObject.Property
+    @IgnisProperty
     def popup(self) -> bool:
         """
         - read-only
@@ -162,7 +162,7 @@ class Notification(IgnisGObject):
         """
         return self._popup
 
-    @GObject.Property
+    @IgnisProperty
     def json(self) -> dict:
         """
         - read-only

@@ -7,7 +7,7 @@ from ignis.dbus import DBusService
 from ignis.utils import Utils
 from loguru import logger
 from gi.repository import Gtk, Gdk, Gio, GObject, GLib  # type: ignore
-from ignis.gobject import IgnisGObject
+from ignis.gobject import IgnisGObject, IgnisProperty
 from ignis.exceptions import (
     WindowAddedError,
     WindowNotFoundError,
@@ -132,7 +132,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
             To handle shutdown of the application use the ``shutdown`` signal.
         """
 
-    @GObject.Property
+    @IgnisProperty
     def is_ready(self) -> bool:
         """
         - read-only
@@ -141,7 +141,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         """
         return self._is_ready
 
-    @GObject.Property
+    @IgnisProperty
     def windows(self) -> list[Gtk.Window]:
         """
         - read-only
@@ -150,7 +150,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         """
         return list(self._windows.values())
 
-    @GObject.Property
+    @IgnisProperty
     def autoreload_config(self) -> bool:
         """
         - read-write
@@ -165,7 +165,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
     def autoreload_config(self, value: bool) -> None:
         self._autoreload_config = value
 
-    @GObject.Property
+    @IgnisProperty
     def autoreload_css(self) -> bool:
         """
         - read-write
@@ -180,7 +180,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
     def autoreload_css(self, value: bool) -> None:
         self._autoreload_css = value
 
-    @GObject.Property
+    @IgnisProperty
     def reload_on_monitors_change(self) -> bool:
         """
         - read-write
@@ -195,7 +195,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
     def reload_on_monitors_change(self, value: bool) -> None:
         self._reload_on_monitors_change = value
 
-    @GObject.Property
+    @IgnisProperty
     def widgets_style_priority(self) -> StylePriority:
         """
         - read-write

@@ -4,6 +4,7 @@ from gi.repository import Gio, GLib, GObject  # type: ignore
 from ignis.base_service import BaseService
 from .item import SystemTrayItem
 from ignis.exceptions import AnotherSystemTrayRunningError
+from ignis.gobject import IgnisProperty
 
 
 class SystemTrayService(BaseService):
@@ -72,7 +73,7 @@ class SystemTrayService(BaseService):
             item (:class:`~ignis.services.system_tray.SystemTrayItem`): The instance of the system tray item.
         """
 
-    @GObject.Property
+    @IgnisProperty
     def items(self) -> list[SystemTrayItem]:
         """
         - read-only

@@ -2,6 +2,7 @@ from ignis.dbus import DBusProxy
 from gi.repository import GObject  # type: ignore
 from ignis.utils import Utils
 from ignis.base_service import BaseService
+from ignis.gobject import IgnisProperty
 from .player import MprisPlayer
 
 
@@ -75,7 +76,7 @@ class MprisService(BaseService):
         """
         pass
 
-    @GObject.Property
+    @IgnisProperty
     def players(self) -> list[MprisPlayer]:
         """
         - read-only

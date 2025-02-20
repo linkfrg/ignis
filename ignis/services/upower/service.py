@@ -3,6 +3,7 @@ from gi.repository import GObject  # type: ignore
 from ignis.dbus import DBusProxy
 from ignis.utils import Utils
 from ignis.exceptions import UPowerNotRunningError
+from ignis.gobject import IgnisProperty
 from .device import UPowerDevice
 
 
@@ -70,7 +71,7 @@ class UPowerService(BaseService):
             battery (:class:`~ignis.services.upower.UPowerDevice`): The instance of the battery.
         """
 
-    @GObject.Property
+    @IgnisProperty
     def devices(self) -> list[UPowerDevice]:
         """
         - read-only
@@ -79,7 +80,7 @@ class UPowerService(BaseService):
         """
         return list(self._devices.values())
 
-    @GObject.Property
+    @IgnisProperty
     def batteries(self) -> list[UPowerDevice]:
         """
         - read-only
@@ -88,7 +89,7 @@ class UPowerService(BaseService):
         """
         return list(self._batteries.values())
 
-    @GObject.Property
+    @IgnisProperty
     def display_device(self) -> UPowerDevice:
         """
         - read-only

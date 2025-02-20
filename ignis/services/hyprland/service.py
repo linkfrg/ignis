@@ -1,11 +1,11 @@
 import json
 import os
 import socket
-from gi.repository import GObject  # type: ignore
 from ignis.utils import Utils
 from typing import Any
 from ignis.exceptions import HyprlandIPCNotFoundError
 from ignis.base_service import BaseService
+from ignis.gobject import IgnisProperty
 from .constants import HYPR_SOCKET_DIR
 
 
@@ -96,7 +96,7 @@ class HyprlandService(BaseService):
             self.__sync_workspaces()
             self.__sync_active_window()
 
-    @GObject.Property
+    @IgnisProperty
     def is_available(self) -> bool:
         """
         - read-only
@@ -105,7 +105,7 @@ class HyprlandService(BaseService):
         """
         return os.path.exists(HYPR_SOCKET_DIR)
 
-    @GObject.Property
+    @IgnisProperty
     def workspaces(self) -> list[dict[str, Any]]:
         """
         - read-only
@@ -114,7 +114,7 @@ class HyprlandService(BaseService):
         """
         return self._workspaces
 
-    @GObject.Property
+    @IgnisProperty
     def active_workspace(self) -> dict[str, Any]:
         """
         - read-only
@@ -123,7 +123,7 @@ class HyprlandService(BaseService):
         """
         return self._active_workspace
 
-    @GObject.Property
+    @IgnisProperty
     def kb_layout(self) -> str:
         """
         - read-only
@@ -132,7 +132,7 @@ class HyprlandService(BaseService):
         """
         return self._kb_layout
 
-    @GObject.Property
+    @IgnisProperty
     def active_window(self) -> dict[str, Any]:
         """
         - read-only
