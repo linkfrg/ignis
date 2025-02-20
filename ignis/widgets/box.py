@@ -1,5 +1,6 @@
-from gi.repository import Gtk, GObject  # type: ignore
+from gi.repository import Gtk  # type: ignore
 from ignis.base_widget import BaseWidget
+from ignis.gobject import IgnisProperty
 
 
 class Box(Gtk.Box, BaseWidget):
@@ -35,7 +36,7 @@ class Box(Gtk.Box, BaseWidget):
         self._child: list[Gtk.Widget] = []
         BaseWidget.__init__(self, **kwargs)
 
-    @GObject.Property
+    @IgnisProperty
     def child(self) -> list[Gtk.Widget]:
         """
         - optional, read-write
@@ -69,7 +70,7 @@ class Box(Gtk.Box, BaseWidget):
         super().prepend(child)
         self.notify("child")
 
-    @GObject.Property
+    @IgnisProperty
     def vertical(self) -> bool:
         """
         - optional, read-write

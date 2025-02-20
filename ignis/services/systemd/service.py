@@ -1,9 +1,9 @@
 from __future__ import annotations
 import os
-from gi.repository import GObject  # type: ignore
 from ignis.dbus import DBusProxy
 from ignis.utils import Utils
 from ignis.base_service import BaseService
+from ignis.gobject import IgnisProperty
 from typing import Literal
 from .unit import SystemdUnit
 
@@ -72,7 +72,7 @@ class SystemdService(BaseService):
             setattr(cls, instance_attr, cls(bus_type))  # type: ignore
         return getattr(cls, instance_attr)
 
-    @GObject.Property
+    @IgnisProperty
     def bus_type(self) -> Literal["session", "system"]:
         """
         - read-only
@@ -81,7 +81,7 @@ class SystemdService(BaseService):
         """
         return self._bus_type
 
-    @GObject.Property
+    @IgnisProperty
     def units(self) -> list[SystemdUnit]:
         """
         - read-only

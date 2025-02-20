@@ -1,8 +1,8 @@
-from gi.repository import Gio, GLib, GObject  # type: ignore
+from gi.repository import Gio, GLib  # type: ignore
 from typing import Any
 from collections.abc import Callable
 from ignis.utils import Utils
-from ignis.gobject import IgnisGObject
+from ignis.gobject import IgnisGObject, IgnisProperty
 from ignis.exceptions import DBusMethodNotFoundError, DBusPropertyNotFoundError
 from typing import Literal
 
@@ -58,7 +58,7 @@ class DBusService(IgnisGObject):
             self._on_name_lost,
         )
 
-    @GObject.Property
+    @IgnisProperty
     def name(self) -> str:
         """
         - required, read-only
@@ -67,7 +67,7 @@ class DBusService(IgnisGObject):
         """
         return self._name
 
-    @GObject.Property
+    @IgnisProperty
     def object_path(self) -> str:
         """
         - required, read-only
@@ -76,7 +76,7 @@ class DBusService(IgnisGObject):
         """
         return self._object_path
 
-    @GObject.Property
+    @IgnisProperty
     def info(self) -> Gio.DBusInterfaceInfo:
         """
         - required, read-only
@@ -87,7 +87,7 @@ class DBusService(IgnisGObject):
         """
         return self._info
 
-    @GObject.Property
+    @IgnisProperty
     def on_name_acquired(self) -> Callable:
         """
         - optional, read-write
@@ -100,7 +100,7 @@ class DBusService(IgnisGObject):
     def on_name_acquired(self, value: Callable) -> None:
         self._on_name_acquired = value
 
-    @GObject.Property
+    @IgnisProperty
     def on_name_lost(self) -> Callable:
         """
         - optional, read-write
@@ -113,7 +113,7 @@ class DBusService(IgnisGObject):
     def on_name_lost(self, value: Callable) -> None:
         self._on_name_lost = value
 
-    @GObject.Property
+    @IgnisProperty
     def connection(self) -> Gio.DBusConnection:
         """
         - not argument, read-only
@@ -122,7 +122,7 @@ class DBusService(IgnisGObject):
         """
         return self._connection
 
-    @GObject.Property
+    @IgnisProperty
     def methods(self) -> dict[str, Callable]:
         """
         - not argument, read-only
@@ -131,7 +131,7 @@ class DBusService(IgnisGObject):
         """
         return self._methods
 
-    @GObject.Property
+    @IgnisProperty
     def properties(self) -> dict[str, Callable]:
         """
         - not argument, read-only
@@ -369,7 +369,7 @@ class DBusProxy(IgnisGObject):
             *user_data,
         )
 
-    @GObject.Property
+    @IgnisProperty
     def name(self) -> str:
         """
         - read-only
@@ -378,7 +378,7 @@ class DBusProxy(IgnisGObject):
         """
         return self._gproxy.props.g_name
 
-    @GObject.Property
+    @IgnisProperty
     def object_path(self) -> str:
         """
         - read-only
@@ -387,7 +387,7 @@ class DBusProxy(IgnisGObject):
         """
         return self._gproxy.props.g_object_path
 
-    @GObject.Property
+    @IgnisProperty
     def interface_name(self) -> str:
         """
         - read-only
@@ -396,7 +396,7 @@ class DBusProxy(IgnisGObject):
         """
         return self._gproxy.props.g_interface_name
 
-    @GObject.Property
+    @IgnisProperty
     def info(self) -> Gio.DBusInterfaceInfo:
         """
         - read-only
@@ -407,7 +407,7 @@ class DBusProxy(IgnisGObject):
         """
         return self._gproxy.props.g_interface_info
 
-    @GObject.Property
+    @IgnisProperty
     def bus_type(self) -> Literal["session", "system"]:
         """
         - read-only
@@ -416,7 +416,7 @@ class DBusProxy(IgnisGObject):
         """
         return self._bus_type
 
-    @GObject.Property
+    @IgnisProperty
     def gproxy(self) -> Gio.DBusProxy:
         """
         - read-only
@@ -425,7 +425,7 @@ class DBusProxy(IgnisGObject):
         """
         return self._gproxy
 
-    @GObject.Property
+    @IgnisProperty
     def connection(self) -> Gio.DBusConnection:
         """
         - read-only
@@ -434,7 +434,7 @@ class DBusProxy(IgnisGObject):
         """
         return self._gproxy.get_connection()
 
-    @GObject.Property
+    @IgnisProperty
     def methods(self) -> list[str]:
         """
         - read-only
@@ -443,7 +443,7 @@ class DBusProxy(IgnisGObject):
         """
         return self._methods
 
-    @GObject.Property
+    @IgnisProperty
     def properties(self) -> list[str]:
         """
         - read-only
@@ -452,7 +452,7 @@ class DBusProxy(IgnisGObject):
         """
         return self._properties
 
-    @GObject.Property
+    @IgnisProperty
     def has_owner(self) -> bool:
         """
         - read-only

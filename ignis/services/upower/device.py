@@ -1,4 +1,4 @@
-from ignis.gobject import IgnisGObject
+from ignis.gobject import IgnisGObject, IgnisProperty
 from gi.repository import GObject, GLib  # type: ignore
 from ignis.dbus import DBusProxy
 from ignis.utils import Utils
@@ -59,7 +59,7 @@ class UPowerDevice(IgnisGObject):
         Emitted when the device has been removed.
         """
 
-    @GObject.Property
+    @IgnisProperty
     def object_path(self) -> str:
         """
         - read-only
@@ -68,7 +68,7 @@ class UPowerDevice(IgnisGObject):
         """
         return self._object_path
 
-    @GObject.Property
+    @IgnisProperty
     def proxy(self) -> DBusProxy:
         """
         - read-only
@@ -77,7 +77,7 @@ class UPowerDevice(IgnisGObject):
         """
         return self._proxy
 
-    @GObject.Property
+    @IgnisProperty
     def native_path(self) -> str:
         """
         - read-only
@@ -86,7 +86,7 @@ class UPowerDevice(IgnisGObject):
         """
         return self._proxy.NativePath
 
-    @GObject.Property
+    @IgnisProperty
     def kind(self) -> str:
         """
         - read-only
@@ -95,7 +95,7 @@ class UPowerDevice(IgnisGObject):
         """
         return DEVICE_KIND.get(self._proxy.Type, "unknown")
 
-    @GObject.Property
+    @IgnisProperty
     def available(self) -> bool:
         """
         - read-only
@@ -104,7 +104,7 @@ class UPowerDevice(IgnisGObject):
         """
         return self._proxy.IsPresent
 
-    @GObject.Property
+    @IgnisProperty
     def percent(self) -> float:
         """
         - read-only
@@ -113,7 +113,7 @@ class UPowerDevice(IgnisGObject):
         """
         return self._proxy.Percentage
 
-    @GObject.Property
+    @IgnisProperty
     def charging(self) -> bool:
         """
         - read-only
@@ -122,7 +122,7 @@ class UPowerDevice(IgnisGObject):
         """
         return self._proxy.State == DeviceState["CHARGING"]
 
-    @GObject.Property
+    @IgnisProperty
     def charged(self) -> bool:
         """
         - read-only
@@ -131,7 +131,7 @@ class UPowerDevice(IgnisGObject):
         """
         return self._proxy.State == DeviceState["FULLY_CHARGED"]
 
-    @GObject.Property
+    @IgnisProperty
     def icon_name(self) -> str:
         """
         - read-only
@@ -140,7 +140,7 @@ class UPowerDevice(IgnisGObject):
         """
         return self._proxy.IconName
 
-    @GObject.Property
+    @IgnisProperty
     def time_remaining(self) -> int:
         """
         - read-only
@@ -149,7 +149,7 @@ class UPowerDevice(IgnisGObject):
         """
         return self._proxy.TimeToFull if self.charging else self._proxy.TimeToEmpty
 
-    @GObject.Property
+    @IgnisProperty
     def energy(self) -> float:
         """
         - read-only
@@ -158,7 +158,7 @@ class UPowerDevice(IgnisGObject):
         """
         return self._proxy.Energy
 
-    @GObject.Property
+    @IgnisProperty
     def energy_full(self) -> float:
         """
         - read-only
@@ -167,7 +167,7 @@ class UPowerDevice(IgnisGObject):
         """
         return self._proxy.EnergyFull
 
-    @GObject.Property
+    @IgnisProperty
     def energy_full_design(self) -> float:
         """
         - read-only
@@ -176,7 +176,7 @@ class UPowerDevice(IgnisGObject):
         """
         return self._proxy.EnergyDesign
 
-    @GObject.Property
+    @IgnisProperty
     def energy_rate(self) -> float:
         """
         - read-only
@@ -185,7 +185,7 @@ class UPowerDevice(IgnisGObject):
         """
         return self._proxy.EnergyRate
 
-    @GObject.Property
+    @IgnisProperty
     def charge_cycles(self) -> int:
         """
         - read-only
@@ -194,7 +194,7 @@ class UPowerDevice(IgnisGObject):
         """
         return self._proxy.ChargeCycles
 
-    @GObject.Property
+    @IgnisProperty
     def vendor(self) -> str:
         """
         - read-only
@@ -203,7 +203,7 @@ class UPowerDevice(IgnisGObject):
         """
         return self._proxy.Vendor
 
-    @GObject.Property
+    @IgnisProperty
     def model(self) -> str:
         """
         - read-only
@@ -212,7 +212,7 @@ class UPowerDevice(IgnisGObject):
         """
         return self._proxy.Model
 
-    @GObject.Property
+    @IgnisProperty
     def serial(self) -> str:
         """
         - read-only
@@ -221,7 +221,7 @@ class UPowerDevice(IgnisGObject):
         """
         return self._proxy.Serial
 
-    @GObject.Property
+    @IgnisProperty
     def power_supply(self) -> bool:
         """
         - read-only
@@ -230,7 +230,7 @@ class UPowerDevice(IgnisGObject):
         """
         return self._proxy.PowerSupply
 
-    @GObject.Property
+    @IgnisProperty
     def technology(self) -> str:
         """
         - read-only
@@ -239,7 +239,7 @@ class UPowerDevice(IgnisGObject):
         """
         return DEVICE_KIND.get(self._proxy.Technology, "unknown")
 
-    @GObject.Property
+    @IgnisProperty
     def temperature(self) -> float:
         """
         - read-only
@@ -248,7 +248,7 @@ class UPowerDevice(IgnisGObject):
         """
         return self._proxy.Temperature
 
-    @GObject.Property
+    @IgnisProperty
     def voltage(self) -> float:
         """
         - read-only

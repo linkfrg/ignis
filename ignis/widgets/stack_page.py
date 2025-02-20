@@ -1,5 +1,6 @@
-from gi.repository import Gtk, GObject  # type: ignore
+from gi.repository import Gtk  # type: ignore
 from ignis.gobject import IgnisGObject
+from ignis.gobject import IgnisProperty
 
 
 class StackPage(IgnisGObject):
@@ -17,7 +18,7 @@ class StackPage(IgnisGObject):
         self._title = title
         self._child = child
 
-    @GObject.Property
+    @IgnisProperty
     def title(self) -> str:
         """
         - required, read-only
@@ -27,7 +28,7 @@ class StackPage(IgnisGObject):
         """
         return self._title
 
-    @GObject.Property
+    @IgnisProperty
     def child(self) -> Gtk.Widget:
         """
         - required, read-only

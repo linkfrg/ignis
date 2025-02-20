@@ -1,6 +1,7 @@
-from gi.repository import Gtk, GObject  # type: ignore
+from gi.repository import Gtk  # type: ignore
 from ignis.widgets.box import Box
 from collections.abc import Callable
+from ignis.gobject import IgnisProperty
 
 
 class EventBox(Box):
@@ -108,7 +109,7 @@ class EventBox(Box):
         if self.on_hover_lost:
             self.on_hover_lost(self)
 
-    @GObject.Property
+    @IgnisProperty
     def on_click(self) -> Callable:
         """
         - optional, read-write
@@ -124,7 +125,7 @@ class EventBox(Box):
         if not self.__click_controller:
             self.__click_controller = self.__init_click_controller(1, self._on_click)
 
-    @GObject.Property
+    @IgnisProperty
     def on_right_click(self) -> Callable:
         """
         - optional, read-write
@@ -142,7 +143,7 @@ class EventBox(Box):
                 3, self._on_right_click
             )
 
-    @GObject.Property
+    @IgnisProperty
     def on_middle_click(self) -> Callable:
         """
         - optional, read-write
@@ -160,7 +161,7 @@ class EventBox(Box):
                 2, self._on_middle_click
             )
 
-    @GObject.Property
+    @IgnisProperty
     def on_hover(self) -> Callable:
         """
         - optional, read-write
@@ -174,7 +175,7 @@ class EventBox(Box):
         self._on_hover = on_hover
         self.__init_motion_controller()
 
-    @GObject.Property
+    @IgnisProperty
     def on_hover_lost(self) -> Callable:
         """
         - optional, read-write
@@ -188,7 +189,7 @@ class EventBox(Box):
         self._on_hover_lost = on_hover_lost
         self.__init_motion_controller()
 
-    @GObject.Property
+    @IgnisProperty
     def scroll_flags(self) -> Gtk.EventControllerScrollFlags:
         """
         - optional, read-only
@@ -202,7 +203,7 @@ class EventBox(Box):
         """
         return self._scroll_flags
 
-    @GObject.Property
+    @IgnisProperty
     def on_scroll_up(self) -> Callable:
         """
         - optional, read-write
@@ -216,7 +217,7 @@ class EventBox(Box):
         self._on_scroll_up = on_scroll_up
         self.__init_scroll_controller()
 
-    @GObject.Property
+    @IgnisProperty
     def on_scroll_down(self) -> Callable:
         """
         - optional, read-write
@@ -230,7 +231,7 @@ class EventBox(Box):
         self._on_scroll_down = on_scroll_down
         self.__init_scroll_controller()
 
-    @GObject.Property
+    @IgnisProperty
     def on_scroll_right(self) -> Callable:
         """
         - optional, read-write
@@ -244,7 +245,7 @@ class EventBox(Box):
         self._on_scroll_right = on_scroll_right
         self.__init_scroll_controller()
 
-    @GObject.Property
+    @IgnisProperty
     def on_scroll_left(self) -> Callable:
         """
         - optional, read-write

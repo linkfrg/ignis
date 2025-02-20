@@ -1,8 +1,8 @@
-from gi.repository import Gio, GLib, GObject  # type: ignore
+from gi.repository import Gio, GLib  # type: ignore
 from ignis.dbus import DBusProxy
 from ignis.utils import Utils
 from ignis.logging import logger
-from ignis.gobject import IgnisGObject
+from ignis.gobject import IgnisGObject, IgnisProperty
 from typing import Literal
 
 
@@ -42,7 +42,7 @@ class SystemdUnit(IgnisGObject):
         if "ActiveState" in prop_dict.keys():
             self.notify("is-active")
 
-    @GObject.Property
+    @IgnisProperty
     def name(self) -> str:
         """
         - read-only
@@ -51,7 +51,7 @@ class SystemdUnit(IgnisGObject):
         """
         return self._proxy.Id
 
-    @GObject.Property
+    @IgnisProperty
     def is_active(self) -> bool:
         """
         - read-only

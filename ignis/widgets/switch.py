@@ -1,7 +1,8 @@
-from gi.repository import Gtk, GObject  # type: ignore
+from gi.repository import Gtk  # type: ignore
 from ignis.base_widget import BaseWidget
 from typing import Any
 from collections.abc import Callable
+from ignis.gobject import IgnisProperty
 
 
 class Switch(Gtk.Switch, BaseWidget):
@@ -29,7 +30,7 @@ class Switch(Gtk.Switch, BaseWidget):
 
         self.connect("state-set", self.__invoke_on_change)
 
-    @GObject.Property
+    @IgnisProperty
     def on_change(self) -> Callable | None:
         """
         - optional, read-write

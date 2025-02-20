@@ -1,6 +1,7 @@
-from gi.repository import Gtk, GObject  # type: ignore
+from gi.repository import Gtk  # type: ignore
 from ignis.base_widget import BaseWidget
 from collections.abc import Callable
+from ignis.gobject import IgnisProperty
 
 
 class DropDown(Gtk.DropDown, BaseWidget):
@@ -28,7 +29,7 @@ class DropDown(Gtk.DropDown, BaseWidget):
 
         self.connect("notify::selected-item", self.__invoke_on_selected)
 
-    @GObject.Property
+    @IgnisProperty
     def items(self) -> list[str]:
         """
         - optional, read-write
@@ -46,7 +47,7 @@ class DropDown(Gtk.DropDown, BaseWidget):
 
         self.model = model
 
-    @GObject.Property
+    @IgnisProperty
     def on_selected(self) -> Callable | None:
         """
         - optional, read-write
@@ -63,7 +64,7 @@ class DropDown(Gtk.DropDown, BaseWidget):
         if self.on_selected:
             self.on_selected(self, self.selected)
 
-    @GObject.Property
+    @IgnisProperty
     def selected(self) -> str:
         """
         - not argument, read-only

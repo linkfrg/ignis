@@ -1,7 +1,8 @@
 import os
 from ignis.base_widget import BaseWidget
-from gi.repository import Gtk, GObject, GdkPixbuf, Gdk  # type: ignore
+from gi.repository import Gtk, GdkPixbuf, Gdk  # type: ignore
 from ignis.utils import Utils
+from ignis.gobject import IgnisProperty
 
 
 class Picture(Gtk.Picture, BaseWidget):
@@ -50,7 +51,7 @@ class Picture(Gtk.Picture, BaseWidget):
 
         BaseWidget.__init__(self, **kwargs)
 
-    @GObject.Property
+    @IgnisProperty
     def image(self) -> "str | GdkPixbuf.Pixbuf | None":
         """
         - optional, read-write
@@ -64,7 +65,7 @@ class Picture(Gtk.Picture, BaseWidget):
         self._image = value
         self.__draw(value)
 
-    @GObject.Property
+    @IgnisProperty
     def width(self) -> int:
         """
         - optional, read-write
@@ -79,7 +80,7 @@ class Picture(Gtk.Picture, BaseWidget):
         self.width_request = value
         self.__draw(self.image)
 
-    @GObject.Property
+    @IgnisProperty
     def height(self) -> int:
         """
         - optional, read-write

@@ -1,6 +1,7 @@
-from gi.repository import Gtk, GObject  # type: ignore
+from gi.repository import Gtk  # type: ignore
 from ignis.base_widget import BaseWidget
 from collections.abc import Callable
+from ignis.gobject import IgnisProperty
 
 
 class SpinButton(Gtk.SpinButton, BaseWidget):  # type: ignore
@@ -35,7 +36,7 @@ class SpinButton(Gtk.SpinButton, BaseWidget):  # type: ignore
 
         self.connect("value-changed", self.__invoke_on_change)
 
-    @GObject.Property
+    @IgnisProperty
     def value(self) -> float:
         """
         - optional, read-write
@@ -48,7 +49,7 @@ class SpinButton(Gtk.SpinButton, BaseWidget):  # type: ignore
     def value(self, value: float) -> None:
         self.adjustment.set_value(value)
 
-    @GObject.Property
+    @IgnisProperty
     def min(self) -> float:
         """
         - optional, read-write
@@ -61,7 +62,7 @@ class SpinButton(Gtk.SpinButton, BaseWidget):  # type: ignore
     def min(self, value: float) -> None:
         self.adjustment.props.lower = value
 
-    @GObject.Property
+    @IgnisProperty
     def max(self) -> float:
         """
         - optional, read-write
@@ -74,7 +75,7 @@ class SpinButton(Gtk.SpinButton, BaseWidget):  # type: ignore
     def max(self, value: float) -> None:
         self.adjustment.props.upper = value
 
-    @GObject.Property
+    @IgnisProperty
     def step(self) -> float:
         """
         - optional, read-write
@@ -87,7 +88,7 @@ class SpinButton(Gtk.SpinButton, BaseWidget):  # type: ignore
     def step(self, value: float) -> None:
         self.adjustment.props.step_increment = value
 
-    @GObject.Property
+    @IgnisProperty
     def on_change(self) -> Callable | None:
         """
         - optional, read-write

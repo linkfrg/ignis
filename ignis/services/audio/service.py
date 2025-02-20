@@ -1,5 +1,6 @@
 from gi.repository import GObject  # type: ignore
 from ignis.base_service import BaseService
+from ignis.gobject import IgnisProperty
 from ._imports import Gvc
 from .stream import Stream, DefaultStream
 
@@ -96,7 +97,7 @@ class AudioService(BaseService):
             stream (:class:`~ignis.services.audio.Stream`): The instance of the stream.
         """
 
-    @GObject.Property
+    @IgnisProperty
     def control(self) -> Gvc.MixerControl:
         """
         - read-only
@@ -105,7 +106,7 @@ class AudioService(BaseService):
         """
         return self._control
 
-    @GObject.Property
+    @IgnisProperty
     def speaker(self) -> Stream:
         """
         - read-write
@@ -118,7 +119,7 @@ class AudioService(BaseService):
     def speaker(self, value: Stream):
         self._control.set_default_sink(value.stream)
 
-    @GObject.Property
+    @IgnisProperty
     def microphone(self) -> Stream:
         """
         - read-write
@@ -131,7 +132,7 @@ class AudioService(BaseService):
     def microphone(self, value: Stream):
         self._control.set_default_source(value.stream)
 
-    @GObject.Property
+    @IgnisProperty
     def streams(self) -> list[Stream]:
         """
         - read-only
@@ -140,7 +141,7 @@ class AudioService(BaseService):
         """
         return list(self._streams.values())
 
-    @GObject.Property
+    @IgnisProperty
     def speakers(self) -> list[Stream]:
         """
         - read-only
@@ -149,7 +150,7 @@ class AudioService(BaseService):
         """
         return list(self._speakers.values())
 
-    @GObject.Property
+    @IgnisProperty
     def microphones(self) -> list[Stream]:
         """
         - read-only
@@ -158,7 +159,7 @@ class AudioService(BaseService):
         """
         return list(self._microphones.values())
 
-    @GObject.Property
+    @IgnisProperty
     def apps(self) -> list[Stream]:
         """
         - read-only
@@ -167,7 +168,7 @@ class AudioService(BaseService):
         """
         return list(self._apps.values())
 
-    @GObject.Property
+    @IgnisProperty
     def recorders(self) -> list[Stream]:
         """
         - read-only

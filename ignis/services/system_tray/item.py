@@ -2,7 +2,7 @@ from typing import Literal
 from ignis.utils import Utils
 from ignis.dbus import DBusProxy
 from gi.repository import GLib, GObject, GdkPixbuf, Gtk, Gdk  # type: ignore
-from ignis.gobject import IgnisGObject
+from ignis.gobject import IgnisGObject, IgnisProperty
 from ignis.dbus_menu import DBusMenu
 from ignis.exceptions import DisplayNotFoundError
 
@@ -176,7 +176,7 @@ class SystemTrayItem(IgnisGObject):
         Emitted when the item is removed.
         """
 
-    @GObject.Property
+    @IgnisProperty
     def id(self) -> str | None:
         """
         - read-only
@@ -185,7 +185,7 @@ class SystemTrayItem(IgnisGObject):
         """
         return self._id
 
-    @GObject.Property
+    @IgnisProperty
     def category(self) -> str | None:
         """
         - read-only
@@ -194,7 +194,7 @@ class SystemTrayItem(IgnisGObject):
         """
         return self._category
 
-    @GObject.Property
+    @IgnisProperty
     def title(self) -> str | None:
         """
         - read-only
@@ -203,7 +203,7 @@ class SystemTrayItem(IgnisGObject):
         """
         return self._title
 
-    @GObject.Property
+    @IgnisProperty
     def status(self) -> str | None:
         """
         - read-only
@@ -212,7 +212,7 @@ class SystemTrayItem(IgnisGObject):
         """
         return self._status
 
-    @GObject.Property
+    @IgnisProperty
     def window_id(self) -> int:
         """
         - read-only
@@ -221,7 +221,7 @@ class SystemTrayItem(IgnisGObject):
         """
         return self._window_id
 
-    @GObject.Property
+    @IgnisProperty
     def icon(self) -> "str | GdkPixbuf.Pixbuf | None":
         """
         - read-only
@@ -230,7 +230,7 @@ class SystemTrayItem(IgnisGObject):
         """
         return self._icon
 
-    @GObject.Property
+    @IgnisProperty
     def item_is_menu(self) -> bool:
         """
         - read-only
@@ -239,7 +239,7 @@ class SystemTrayItem(IgnisGObject):
         """
         return self._item_is_menu
 
-    @GObject.Property
+    @IgnisProperty
     def menu(self) -> DBusMenu | None:
         """
         - read-only
@@ -260,7 +260,7 @@ class SystemTrayItem(IgnisGObject):
         """
         return self._menu
 
-    @GObject.Property
+    @IgnisProperty
     def tooltip(self) -> str | None:
         """
         - read-only

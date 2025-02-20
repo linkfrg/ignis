@@ -1,5 +1,6 @@
-from gi.repository import Gtk, GObject  # type: ignore
+from gi.repository import Gtk  # type: ignore
 from ignis.gobject import IgnisGObject
+from ignis.gobject import IgnisProperty
 
 
 class FileFilter(Gtk.FileFilter, IgnisGObject):
@@ -34,7 +35,7 @@ class FileFilter(Gtk.FileFilter, IgnisGObject):
         for i in mime_types:
             self.add_mime_type(i)
 
-    @GObject.Property
+    @IgnisProperty
     def mime_types(self) -> list[str]:
         """
         - required, read-only
@@ -43,7 +44,7 @@ class FileFilter(Gtk.FileFilter, IgnisGObject):
         """
         return self._mime_types
 
-    @GObject.Property
+    @IgnisProperty
     def default(self) -> bool:
         """
         - optional, read-write

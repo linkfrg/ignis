@@ -1,6 +1,6 @@
-from gi.repository import GObject  # type: ignore
 from ignis.widgets.button import Button
 from ignis.widgets.arrow import Arrow
+from ignis.gobject import IgnisProperty
 
 
 class ArrowButton(Button):
@@ -26,7 +26,7 @@ class ArrowButton(Button):
         super().__init__(child=self._arrow, **kwargs)
         self.connect("clicked", lambda x: self._arrow.toggle())
 
-    @GObject.Property
+    @IgnisProperty
     def arrow(self) -> Arrow:
         """
         - required, read-only

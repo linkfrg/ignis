@@ -5,6 +5,7 @@ from ignis.services.audio import AudioService
 from ignis.exceptions import GstPluginNotFoundError
 from ignis.base_service import BaseService
 from ignis.options import options
+from ignis.gobject import IgnisProperty
 from .session import SessionManager
 from .util import gst_inspect
 from ._imports import Gst
@@ -91,7 +92,7 @@ class RecorderService(BaseService):
         Emitted when recording stops.
         """
 
-    @GObject.Property
+    @IgnisProperty
     def active(self) -> bool:
         """
         - read-only
@@ -100,7 +101,7 @@ class RecorderService(BaseService):
         """
         return self._active
 
-    @GObject.Property
+    @IgnisProperty
     def is_paused(self) -> bool:
         """
         - read-only

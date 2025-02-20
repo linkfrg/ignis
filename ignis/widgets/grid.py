@@ -1,5 +1,6 @@
-from gi.repository import Gtk, GObject  # type: ignore
+from gi.repository import Gtk  # type: ignore
 from ignis.base_widget import BaseWidget
+from ignis.gobject import IgnisProperty
 
 
 class Grid(Gtk.Grid, BaseWidget):
@@ -35,7 +36,7 @@ class Grid(Gtk.Grid, BaseWidget):
         self._child: list[Gtk.Widget] = []
         BaseWidget.__init__(self, **kwargs)
 
-    @GObject.Property
+    @IgnisProperty
     def column_num(self) -> int:
         """
         - optional, read-write
@@ -49,7 +50,7 @@ class Grid(Gtk.Grid, BaseWidget):
         self._column_num = value
         self.__apply()
 
-    @GObject.Property
+    @IgnisProperty
     def row_num(self) -> int:
         """
         - optional, read-write
@@ -63,7 +64,7 @@ class Grid(Gtk.Grid, BaseWidget):
         self._row_num = value
         self.__apply()
 
-    @GObject.Property
+    @IgnisProperty
     def child(self) -> list[Gtk.Widget]:
         """
         - optional, read-write

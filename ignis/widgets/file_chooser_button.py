@@ -1,11 +1,12 @@
 import os
-from gi.repository import Gtk, GObject  # type: ignore
+from gi.repository import Gtk  # type: ignore
 from ignis.base_widget import BaseWidget
 from ignis.widgets.label import Label
 from ignis.widgets.box import Box
 from ignis.widgets.icon import Icon
 from ignis.widgets.file_dialog import FileDialog
 from ignis.utils import Utils
+from ignis.gobject import IgnisProperty
 
 
 class FileChooserButton(Gtk.Button, BaseWidget):
@@ -65,7 +66,7 @@ class FileChooserButton(Gtk.Button, BaseWidget):
             lambda *args: self.dialog.open_dialog(),
         )
 
-    @GObject.Property
+    @IgnisProperty
     def dialog(self) -> FileDialog:
         """
         - required, read-only
@@ -74,7 +75,7 @@ class FileChooserButton(Gtk.Button, BaseWidget):
         """
         return self._dialog
 
-    @GObject.Property
+    @IgnisProperty
     def label(self) -> Label:
         """
         - required, read-only

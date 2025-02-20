@@ -1,7 +1,8 @@
-from gi.repository import GObject, Gio  # type: ignore
+from gi.repository import Gio  # type: ignore
 from ignis.base_service import BaseService
 from .application import Application
 from ignis.options import options
+from ignis.gobject import IgnisProperty
 
 
 class ApplicationsService(BaseService):
@@ -33,7 +34,7 @@ class ApplicationsService(BaseService):
 
         self.__sync()
 
-    @GObject.Property
+    @IgnisProperty
     def apps(self) -> list[Application]:
         """
         - read-only
@@ -42,7 +43,7 @@ class ApplicationsService(BaseService):
         """
         return sorted(self._apps.values(), key=lambda x: x.name)
 
-    @GObject.Property
+    @IgnisProperty
     def pinned(self) -> list[Application]:
         """
         - read-only
