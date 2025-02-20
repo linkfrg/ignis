@@ -1,6 +1,7 @@
-from gi.repository import Gtk, GObject  # type: ignore
+from gi.repository import Gtk  # type: ignore
 from ignis.base_widget import BaseWidget
 from .stack_page import StackPage
+from ignis.gobject import IgnisProperty
 
 
 class Stack(Gtk.Stack, BaseWidget):
@@ -49,7 +50,7 @@ class Stack(Gtk.Stack, BaseWidget):
         self._child: list[StackPage] = []
         BaseWidget.__init__(self, **kwargs)
 
-    @GObject.Property
+    @IgnisProperty
     def child(self) -> list[StackPage]:
         """
         - optional, read-write

@@ -1,6 +1,7 @@
-from gi.repository import Gtk, GObject, Gio  # type: ignore
+from gi.repository import Gtk, Gio  # type: ignore
 from ignis.base_widget import BaseWidget
 from ignis.widgets.menuitem import MenuItem
+from ignis.gobject import IgnisProperty
 
 
 class PopoverMenu(Gtk.PopoverMenu, BaseWidget):
@@ -66,7 +67,7 @@ class PopoverMenu(Gtk.PopoverMenu, BaseWidget):
 
         return menu
 
-    @GObject.Property
+    @IgnisProperty
     def items(self) -> list[MenuItem]:
         """
         - optional, read-write

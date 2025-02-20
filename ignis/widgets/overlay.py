@@ -1,5 +1,6 @@
-from gi.repository import Gtk, GObject  # type: ignore
+from gi.repository import Gtk  # type: ignore
 from ignis.base_widget import BaseWidget
+from ignis.gobject import IgnisProperty
 
 
 class Overlay(Gtk.Overlay, BaseWidget):
@@ -29,7 +30,7 @@ class Overlay(Gtk.Overlay, BaseWidget):
         self._overlays: list[Gtk.Widget] = []
         BaseWidget.__init__(self, **kwargs)
 
-    @GObject.Property
+    @IgnisProperty
     def overlays(self) -> list[Gtk.Widget]:
         """
         - optional, read-write

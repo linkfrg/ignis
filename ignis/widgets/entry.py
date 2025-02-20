@@ -1,6 +1,7 @@
-from gi.repository import Gtk, GObject  # type: ignore
+from gi.repository import Gtk  # type: ignore
 from ignis.base_widget import BaseWidget
 from collections.abc import Callable
+from ignis.gobject import IgnisProperty
 
 
 class Entry(Gtk.Entry, BaseWidget):  # type: ignore
@@ -34,7 +35,7 @@ class Entry(Gtk.Entry, BaseWidget):  # type: ignore
             "notify::text", lambda x, y: self.on_change(x) if self.on_change else None
         )
 
-    @GObject.Property
+    @IgnisProperty
     def on_accept(self) -> Callable:
         """
         - optional, read-write
@@ -47,7 +48,7 @@ class Entry(Gtk.Entry, BaseWidget):  # type: ignore
     def on_accept(self, value: Callable) -> None:
         self._on_accept = value
 
-    @GObject.Property
+    @IgnisProperty
     def on_change(self) -> Callable:
         """
         - optional, read-write

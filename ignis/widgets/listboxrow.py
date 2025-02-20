@@ -1,6 +1,7 @@
-from gi.repository import Gtk, GObject  # type: ignore
+from gi.repository import Gtk  # type: ignore
 from ignis.base_widget import BaseWidget
 from collections.abc import Callable
+from ignis.gobject import IgnisProperty
 
 
 class ListBoxRow(Gtk.ListBoxRow, BaseWidget):
@@ -27,7 +28,7 @@ class ListBoxRow(Gtk.ListBoxRow, BaseWidget):
         self._selected: bool = False
         BaseWidget.__init__(self, **kwargs)
 
-    @GObject.Property
+    @IgnisProperty
     def on_activate(self) -> Callable:
         """
         - optional, read-write
@@ -40,7 +41,7 @@ class ListBoxRow(Gtk.ListBoxRow, BaseWidget):
     def on_activate(self, value: Callable) -> None:
         self._on_activate = value
 
-    @GObject.Property
+    @IgnisProperty
     def selected(self) -> bool:
         """
         - optional, read-write

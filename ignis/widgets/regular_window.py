@@ -1,7 +1,8 @@
-from gi.repository import Gtk, GObject  # type: ignore
+from gi.repository import Gtk  # type: ignore
 from ignis.base_widget import BaseWidget
 from ignis.app import IgnisApp
 from ignis.exceptions import WindowNotFoundError
+from ignis.gobject import IgnisProperty
 
 app = IgnisApp.get_default()
 
@@ -35,7 +36,7 @@ class RegularWindow(Gtk.Window, BaseWidget):
 
         self.connect("close-request", self.__on_close_request)
 
-    @GObject.Property
+    @IgnisProperty
     def namespace(self) -> str:
         """
         - required, read-only

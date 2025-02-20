@@ -1,5 +1,6 @@
+from types import UnionType
 from gi.repository import GObject, GLib  # type: ignore
-from typing import Any
+from typing import Any, Literal, get_args, get_origin
 from collections.abc import Callable
 
 
@@ -188,3 +189,67 @@ class IgnisGObject(GObject.Object):
                 return lambda: self.get_property(property_name)
 
         return super().__getattribute__(name)
+
+
+class IgnisProperty(GObject.Property):
+    def __init__(
+        self,
+        getter: Callable | None = None,
+        setter: Callable | None = None,
+        type: type = None,
+        default: Any = None,
+        **kwargs,
+    ):
+        processed_type = (
+            self.__process_getter_return_type(getter) if type is None else type
+        )
+        processed_default = (
+            self.__process_default(processed_type) if default is None else default
+        )
+
+        super().__init__(
+            getter=getter,
+            setter=setter,
+            type=processed_type,
+            default=processed_default,
+            **kwargs,
+        )
+
+    def __process_getter_return_type(self, getter: Callable) -> type:
+        getter_return_type = getter.__annotations__.get("return", None)
+        if getter_return_type:
+            if isinstance(getter_return_type, UnionType):
+                type_ = self.__get_type_from_union(getter_return_type)
+            elif get_origin(getter_return_type) is Literal:
+                type_ = self.__get_type_from_literal(getter_return_type)
+            else:
+                type_ = getter_return_type
+        else:
+            return object
+
+        try:
+            # check is valid type
+            self._type_from_python(type_)
+            return type_
+        except TypeError:
+            return object
+
+    def __process_default(self, tp: type) -> Any:
+        if tp is bool:
+            return False
+        elif tp is float:
+            return 0.0
+        elif issubclass(tp, GObject.GFlags):
+            first_value = list(tp.__flags_values__.values())[0]
+            return first_value
+
+    def __get_type_from_union(self, tp: UnionType) -> type:
+        non_none_types = tuple(t for t in tp.__args__ if t is not type(None))
+        if len(non_none_types) == 1:
+            return non_none_types[0]
+        else:
+            return object
+
+    def __get_type_from_literal(self, tp: Literal) -> type:
+        values = get_args(tp)
+        return type(values[0]) if values else None
