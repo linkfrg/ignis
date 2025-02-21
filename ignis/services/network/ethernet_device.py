@@ -87,36 +87,26 @@ class EthernetDevice(IgnisGObject):
         """
         return self._name
 
-    def connect_to(self) -> None:
+    async def connect_to(self) -> None:
         """
         Connect this Ethernet device to the network.
         """
 
-        def finish(x, res) -> None:
-            self._client.activate_connection_finish(res)
-
-        self._client.activate_connection_async(
+        await self._client.activate_connection_async(  # type: ignore
             self._connection,
             self._device,
             None,
-            None,
-            finish,
         )
 
-    def disconnect_from(self) -> None:
+    async def disconnect_from(self) -> None:
         """
         Disconnect this Ethernet device from the network.
         """
         if not self.is_connected:
             return
 
-        def finish(x, res) -> None:
-            self._client.deactivate_connection_finish(res)
-
-        self._client.deactivate_connection_async(
+        await self._client.deactivate_connection_async(  # type: ignore
             self._device.get_active_connection(),
-            None,
-            finish,
         )
 
     def __update_is_connected(self, *args) -> None:

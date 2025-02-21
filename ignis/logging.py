@@ -1,5 +1,5 @@
 import sys
-import warnings
+import asyncio
 from loguru import logger
 from gi.repository import GLib  # type: ignore
 
@@ -24,12 +24,12 @@ def logging_excepthook(exc_type, exc_value, exc_traceback):
     )
 
 
-showwarning_ = warnings.showwarning
-
-
-def logging_showwarning(message, *args, **kwargs):
-    logger.opt(depth=2).warning(message)
-    showwarning_(message, *args, **kwargs)
+def async_exception_handler(loop, context):
+    exception = context.get("exception")
+    if exception:
+        logging_excepthook(type(exception), exception, exception.__traceback__)
+    else:
+        logger.error(f"Caught an unhandled exception: {context}\n")
 
 
 def g_log_writer(
@@ -64,6 +64,8 @@ def configure_logger(debug: bool) -> None:
     logger.level("INFO", color="<green>")
 
     sys.excepthook = logging_excepthook
-    warnings.showwarning = logging_showwarning
+
+    loop = asyncio.get_event_loop()
+    loop.set_exception_handler(async_exception_handler)
 
     GLib.log_set_writer_func(g_log_writer)

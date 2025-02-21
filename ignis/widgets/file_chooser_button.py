@@ -1,4 +1,5 @@
 import os
+import asyncio
 from gi.repository import Gtk  # type: ignore
 from ignis.base_widget import BaseWidget
 from ignis.widgets.label import Label
@@ -63,7 +64,7 @@ class FileChooserButton(Gtk.Button, BaseWidget):
 
         self.connect(
             "clicked",
-            lambda *args: self.dialog.open_dialog(),
+            lambda *args: asyncio.create_task(self.dialog.open_dialog()),
         )
 
     @IgnisProperty

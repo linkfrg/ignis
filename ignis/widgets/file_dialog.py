@@ -1,5 +1,5 @@
 import os
-from gi.repository import Gtk, Gio, GLib, GObject  # type: ignore
+from gi.repository import Gtk, Gio, GObject  # type: ignore
 from collections.abc import Callable
 from ignis.widgets.file_filter import FileFilter
 from ignis.gobject import IgnisGObject
@@ -50,23 +50,14 @@ class FileDialog(Gtk.FileDialog, IgnisGObject):
             lambda x, file: self.on_file_set(x, file) if self.on_file_set else None,
         )
 
-    def open_dialog(self) -> None:
+    async def open_dialog(self) -> None:
         """
         Open dialog.
         """
         if self.select_folder:
-            super().select_folder(Gtk.Window(), None, self.__open_callback)
+            file = await super().select_folder(Gtk.Window())  # type: ignore
         else:
-            super().open(Gtk.Window(), None, self.__open_callback)
-
-    def __open_callback(self, dialog, result) -> None:
-        try:
-            if self.select_folder:
-                file = self.select_folder_finish(result)
-            else:
-                file = dialog.open_finish(result)
-        except GLib.Error:
-            return
+            file = await super().open(Gtk.Window())  # type: ignore
 
         if file is not None:
             self._file = file

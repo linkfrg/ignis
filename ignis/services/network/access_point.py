@@ -1,7 +1,6 @@
 from gi.repository import GObject, GLib  # type: ignore
 from ignis.gobject import IgnisGObject, IgnisProperty
 from typing import Literal
-from collections.abc import Callable
 from ignis.app import IgnisApp
 from .util import filter_connections
 from ._imports import NM
@@ -237,73 +236,47 @@ class WifiAccessPoint(IgnisGObject):
 
         return self._point.connection_valid(ac.get_connection())
 
-    def commit_changes_async(self, callback: Callable | None = None) -> None:
+    async def commit_changes_async(self) -> None:
         """
         Asynchronously commit changes to the connection.
-
-        Args:
-            callback: A function to call when the changes committing is complete. The function will receive ``self`` and a boolean value: ``True`` on success, ``False`` on failure.
         """
 
-        def finish(x, res, conn):
-            is_success = conn.commit_changes_finish(res)
-            if callback:
-                callback(self, is_success)
-
         for conn in self._connections:
-            conn.commit_changes_async(True, None, finish, conn)
+            await conn.commit_changes_async(True)  # type: ignore
 
-    def connect_to(
-        self, password: str | None = None, callback: Callable | None = None
-    ) -> None:
+    async def connect_to(self, password: str | None = None) -> NM.ActiveConnection:
         """
         Asynchronously connect to this access point.
 
         Args
             password: Password to use. This has an effect only if the access point requires a password.
-            callback: A function to call when connection is established or added. The function will receive ``self`` and an instance of :class:`NM.ActiveConnection` as arguments.
         """
 
         if len(self._connections) > 0:
-            self.__connect_existing_connection(password, callback)
+            return await self.__connect_existing_connection(password)
         else:
-            self.__create_new_connection(password, callback)
+            return await self.__create_new_connection(password)
 
-    def connect_to_graphical(self, callback: Callable | None = None) -> None:
+    async def connect_to_graphical(self) -> None:
         """
         Display a graphical dialog to connect to the access point.
         The dialog will be shown only if the access point requires a password.
         This function is asynchronous.
-
-        Args:
-            callback: A function to call when connection is established or added. The function will receive ``self`` and an instance of :class:`NM.ActiveConnection` as arguments.
         """
-
-        def callback_wrapper(x, conn):
-            return self.__connect_to_graphical_callback(conn, callback)
 
         if len(self._connections) > 0:
-            self.connect_to(callback=callback_wrapper)
+            conn = await self.connect_to()
+            self.__connect_to_graphical_callback(conn)
         else:
-            self.__invoke_wifi_dialog(callback=callback_wrapper)
+            self.__invoke_wifi_dialog()
 
-    def disconnect_from(self, callback: Callable | None = None) -> None:
+    async def disconnect_from(self) -> None:
         """
         Asynchronously disconnect from this access point.
-
-        Args:
-            callback: A function to call when the connection deactivation is complete. The function will receive ``self`` and a boolean value: ``True`` on success, ``False`` on failure.
         """
 
-        def finish(x, res) -> None:
-            is_success = self._client.deactivate_connection_finish(res)
-            if callback:
-                callback(self, is_success)
-
-        self._client.deactivate_connection_async(
+        await self._client.deactivate_connection_async(  # type: ignore
             self._device.get_active_connection(),
-            None,
-            finish,
         )
 
     def clear_secrets(self) -> None:
@@ -317,50 +290,31 @@ class WifiAccessPoint(IgnisGObject):
         for conn in self._connections:
             conn.remove_setting(NM.SettingWirelessSecurity)
 
-    def forget(self, callback: Callable | None = None) -> None:
+    async def forget(self) -> None:
         """
         Forget (delete) the stored connection.
-
-         Args:
-            callback: A function to call when the connection deletion is complete. The function will receive ``self`` and a boolean value: ``True`` on success, ``False`` on failure.
         """
 
-        def finish(x, res, conn):
-            is_success = conn.delete_finish(res)
-            if callback:
-                callback(self, is_success)
-
         for conn in self._connections:
-            conn.delete_async(None, finish, conn)
+            await conn.delete_async()  # type: ignore
 
-    def __connect_existing_connection(
-        self, password: str | None = None, callback: Callable | None = None
-    ) -> None:
-        def finish(x, res) -> None:
-            conn = self._client.activate_connection_finish(res)
-            if callback:
-                callback(self, conn)
-
-        def activate_conn():
-            for conn in self._connections:
-                self._client.activate_connection_async(
-                    conn,
-                    self._device,
-                    self._point.get_path(),
-                    None,
-                    finish,
-                )
-                return
-
+    async def __connect_existing_connection(  # type: ignore
+        self, password: str | None = None
+    ) -> NM.ActiveConnection:
         if password is not None:
             self.psk = password
-            self.commit_changes_async(callback=lambda *_: activate_conn())
-        else:
-            activate_conn()
+            await self.commit_changes_async()
 
-    def __create_new_connection(
-        self, password: str | None = None, callback: Callable | None = None
-    ) -> None:
+        for conn in self._connections:
+            return await self._client.activate_connection_async(  # type: ignore
+                conn,
+                self._device,
+                self._point.get_path(),
+            )
+
+    async def __create_new_connection(
+        self, password: str | None = None
+    ) -> NM.ActiveConnection:
         connection = NM.RemoteConnection()
 
         # WiFi settings
@@ -397,51 +351,31 @@ class WifiAccessPoint(IgnisGObject):
         proxy_setting = NM.SettingProxy.new()
         connection.add_setting(proxy_setting)
 
-        def finish(x, res) -> None:
-            conn = self._client.add_and_activate_connection_finish(res)
-            self.__sync_connections()
-            if callback:
-                callback(self, conn)
-
-        self._client.add_and_activate_connection_async(
+        conn = await self._client.add_and_activate_connection_async(  # type: ignore
             connection,
             self._device,
             self._point.get_path(),
-            None,
-            finish,
         )
+        self.__sync_connections()
+        return conn
 
-    def __connect_to_graphical_callback(
-        self, conn: NM.ActiveConnection, user_callback: Callable | None = None
-    ) -> None:
+    def __connect_to_graphical_callback(self, conn: NM.ActiveConnection) -> None:
         id_ = conn.connect(
             "state-changed",
-            lambda x,
-            new_state,
-            reason,
-            user_callback=user_callback: self.__check_new_state(
-                conn=x, new_state=new_state, reason=reason, user_callback=user_callback
+            lambda x, new_state, reason: self.__check_new_state(
+                conn=x, new_state=new_state, reason=reason
             ),
         )
         self._state_changed_ids[conn] = id_
 
-        if user_callback:
-            user_callback(self, conn)
-
-    def __check_new_state(
-        self, conn, new_state, reason, user_callback: Callable | None = None
-    ) -> None:
+    def __check_new_state(self, conn, new_state, reason) -> None:
         if new_state != NM.ActiveConnectionState.ACTIVATING:
             id_ = self._state_changed_ids.pop(conn, None)
             if id_:
                 conn.disconnect(id_)
 
         if reason == NM.ActiveConnectionStateReason.DEVICE_DISCONNECTED:
-
-            def callback_wrapper(x, conn):
-                return self.__connect_to_graphical_callback(conn, user_callback)
-
-            self.__invoke_wifi_dialog(callback=callback_wrapper)
+            self.__invoke_wifi_dialog()
 
         if (
             new_state == NM.ActiveConnectionState.ACTIVATED
@@ -449,9 +383,11 @@ class WifiAccessPoint(IgnisGObject):
         ):
             self._connect_dialog.destroy()
 
-    def __invoke_wifi_dialog(self, callback: Callable | None = None) -> None:
+    def __invoke_wifi_dialog(self) -> None:
         if self._connect_dialog not in app.windows:
-            self._connect_dialog = WifiConnectDialog(self, callback=callback)
+            self._connect_dialog = WifiConnectDialog(
+                self, self.__connect_to_graphical_callback
+            )
 
 
 class ActiveAccessPoint(WifiAccessPoint):
