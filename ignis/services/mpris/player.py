@@ -60,13 +60,6 @@ class MprisPlayer(IgnisGObject):
             info=Utils.load_interface_xml("org.mpris.MediaPlayer2.Player"),
         )
 
-        self.__player_proxy.gproxy.connect(
-            "g-properties-changed", lambda *_: asyncio.create_task(self.__sync_all())
-        )
-        self.connect(
-            "notify::metadata", lambda *_: asyncio.create_task(self.__sync_metadata())
-        )
-
         self.__mpris_proxy.watch_name(
             on_name_vanished=lambda *args: self.emit("closed")
         )
@@ -75,6 +68,14 @@ class MprisPlayer(IgnisGObject):
         await self.__sync_all()
         await self.__sync_metadata()
         await self.__update_position()
+
+        self.__player_proxy.gproxy.connect(
+            "g-properties-changed", lambda *_: asyncio.create_task(self.__sync_all())
+        )
+        self.connect(
+            "notify::metadata", lambda *_: asyncio.create_task(self.__sync_metadata())
+        )
+
         self.emit("ready")
 
     async def __sync_property(self, proxy: DBusProxy, py_name: str) -> None:
