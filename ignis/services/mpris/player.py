@@ -4,6 +4,7 @@ from ignis.dbus import DBusProxy
 from gi.repository import GObject, GLib  # type: ignore
 from ignis.gobject import IgnisGObject
 from ignis.utils import Utils
+from ignis.connection_manager import ConnectionManager
 from collections.abc import Callable
 from .constants import ART_URL_CACHE_DIR
 from .util import uri_to_unix_path
@@ -16,6 +17,8 @@ class MprisPlayer(IgnisGObject):
 
     def __init__(self, name: str):
         super().__init__()
+
+        self._conn_mgr = ConnectionManager()
 
         self._can_control: bool = False
         self._can_go_next: bool = False
@@ -60,23 +63,31 @@ class MprisPlayer(IgnisGObject):
             info=Utils.load_interface_xml("org.mpris.MediaPlayer2.Player"),
         )
 
-        self.__mpris_proxy.watch_name(
-            on_name_vanished=lambda *args: self.emit("closed")
-        )
+        self.__mpris_proxy.watch_name(on_name_vanished=lambda *_: self.__close())
 
-        asyncio.create_task(self.__sync_position())
+        self._sync_pos_task = asyncio.create_task(self.__sync_position())
         await self.__sync_all()
         await self.__sync_metadata()
         await self.__update_position()
 
-        self.__player_proxy.gproxy.connect(
-            "g-properties-changed", lambda *_: asyncio.create_task(self.__sync_all())
+        self._conn_mgr.connect(
+            self.__player_proxy.gproxy,
+            "g-properties-changed",
+            lambda *_: asyncio.create_task(self.__sync_all()),
         )
-        self.connect(
-            "notify::metadata", lambda *_: asyncio.create_task(self.__sync_metadata())
+        self._conn_mgr.connect(
+            self,
+            "notify::metadata",
+            lambda *_: asyncio.create_task(self.__sync_metadata()),
         )
 
         self.emit("ready")
+
+    def __close(self) -> None:
+        self.__mpris_proxy.unwatch_name()
+        self._conn_mgr.disconnect_all()
+        self._sync_pos_task.cancel()
+        self.emit("closed")
 
     async def __sync_property(self, proxy: DBusProxy, py_name: str) -> None:
         try:
