@@ -93,7 +93,6 @@ Building from source
 - pycairo
 - python-click
 - python-loguru
-- python-requests
 - libpulse (if using PipeWire, install ``pipewire-pulse``)
 
 .. code-block:: bash
