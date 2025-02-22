@@ -7,6 +7,7 @@ from gi.repository import GLib, GObject, GdkPixbuf, Gtk, Gdk  # type: ignore
 from ignis.gobject import IgnisGObject
 from ignis.dbus_menu import DBusMenu
 from ignis.exceptions import DisplayNotFoundError
+from ignis.connection_manager import ConnectionManager, DBusConnectionManager
 
 
 class SystemTrayItem(IgnisGObject):
@@ -16,6 +17,9 @@ class SystemTrayItem(IgnisGObject):
 
     def __init__(self, name: str, object_path: str):
         super().__init__()
+
+        self._conn_mgr = ConnectionManager()
+        self._dbus_conn_mgr = DBusConnectionManager()
 
         self._id: str | None = None
         self._category: str | None = None
@@ -40,8 +44,8 @@ class SystemTrayItem(IgnisGObject):
         if not self.__dbus.has_owner:
             return
 
-        self.__dbus.gproxy.connect(
-            "notify::g-name-owner", lambda *args: self.emit("removed")
+        self._conn_mgr.connect(
+            self.__dbus.gproxy, "notify::g-name-owner", lambda *_: self.__remove()
         )
 
         menu_path: str = await self.__dbus.get_dbus_property_async("Menu")
@@ -54,9 +58,10 @@ class SystemTrayItem(IgnisGObject):
             "NewAttentionIcon",
             "NewOverlayIcon",
         ]:
-            self.__dbus.signal_subscribe(
-                signal_name=signal_name,
-                callback=lambda *_: asyncio.create_task(self.__sync_icon()),
+            self._dbus_conn_mgr.subscribe(
+                self.__dbus,
+                signal_name,
+                lambda *_: asyncio.create_task(self.__sync_icon()),
             )
 
         for signal_name in [
@@ -64,9 +69,10 @@ class SystemTrayItem(IgnisGObject):
             "NewToolTip",
             "NewStatus",
         ]:
-            self.__dbus.signal_subscribe(
-                signal_name=signal_name,
-                callback=lambda *args, signal_name=signal_name: self.__sync_property(
+            self._dbus_conn_mgr.subscribe(
+                self.__dbus,
+                signal_name,
+                lambda *args, signal_name=signal_name: self.__sync_property(
                     signal_name.replace("New", "").lower()
                 ),
             )
@@ -76,8 +82,10 @@ class SystemTrayItem(IgnisGObject):
             raise DisplayNotFoundError()
 
         self._icon_theme = Gtk.IconTheme.get_for_display(display)
-        self._icon_theme.connect(
-            "changed", lambda x: asyncio.create_task(self.__sync_icon())
+        self._conn_mgr.connect(
+            self._icon_theme,
+            "changed",
+            lambda x: asyncio.create_task(self.__sync_icon()),
         )
 
         # sync icon
@@ -93,6 +101,11 @@ class SystemTrayItem(IgnisGObject):
         await self.__sync_property("tooltip")
 
         self.emit("ready")
+
+    def __remove(self) -> None:
+        self._conn_mgr.disconnect_all()
+        self._dbus_conn_mgr.unsubscribe_all()
+        self.emit("removed")
 
     async def __sync_property(self, py_name: str) -> None:
         try:
