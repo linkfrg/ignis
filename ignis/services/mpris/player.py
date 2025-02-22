@@ -190,7 +190,8 @@ class MprisPlayer(IgnisGObject):
 
     async def __sync_position(self) -> None:
         while True:
-            await self.__update_position()
+            if self.playback_status != "Paused":
+                await self.__update_position()
             await asyncio.sleep(1)
 
     @GObject.Signal
@@ -363,6 +364,7 @@ class MprisPlayer(IgnisGObject):
         self.__player_proxy.SetPosition(
             "(ox)", self.track_id, value * 1_000_000, result_handler=lambda *args: None
         )
+        asyncio.create_task(self.__update_position())
 
     @GObject.Property
     def shuffle(self) -> bool:
