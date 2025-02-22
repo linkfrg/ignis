@@ -75,7 +75,6 @@ class MprisPlayer(IgnisGObject):
         await self.__sync_all()
         await self.__sync_metadata()
         await self.__update_position()
-        await self.__cache_art_url()
         self.emit("ready")
 
     async def __sync_property(self, proxy: DBusProxy, py_name: str) -> None:
