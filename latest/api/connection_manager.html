@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Client &#8212; Ignis documentation</title>
+    <title>Connection Manager &#8212; Ignis documentation</title>
   
   
   
@@ -47,7 +47,7 @@
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'api/client';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/connection_manager';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://linkfrg.github.io/ignis/latest/_static/switcher.json';
@@ -57,8 +57,8 @@
         </script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Options" href="options.html" />
-    <link rel="prev" title="Variable" href="variable.html" />
+    <link rel="next" title="Widgets" href="widgets/index.html" />
+    <link rel="prev" title="BaseService" href="base_service.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -370,7 +370,7 @@
 <li class="toctree-l1"><a class="reference internal" href="app.html">Application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gobject.html">GObject</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variable.html">Variable</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="client.html">Client</a></li>
 <li class="toctree-l1"><a class="reference internal" href="options.html">Options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="options_manager.html">Options Manager</a></li>
 <li class="toctree-l1"><a class="reference internal" href="exceptions.html">Exceptions</a></li>
@@ -378,7 +378,7 @@
 <li class="toctree-l1"><a class="reference internal" href="dbus_menu.html">D-Bus menu</a></li>
 <li class="toctree-l1"><a class="reference internal" href="base_widget.html">BaseWidget</a></li>
 <li class="toctree-l1"><a class="reference internal" href="base_service.html">BaseService</a></li>
-<li class="toctree-l1"><a class="reference internal" href="connection_manager.html">Connection Manager</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Connection Manager</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="widgets/index.html">Widgets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="widgets/Arrow.html">Arrow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="widgets/ArrowButton.html">ArrowButton</a></li>
@@ -495,7 +495,7 @@
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">API reference</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Client</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Connection Manager</span></li>
   </ul>
 </nav>
 </div>
@@ -512,114 +512,52 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="client">
-<h1>Client<a class="headerlink" href="#client" title="Link to this heading">#</a></h1>
+  <section id="connection-manager">
+<h1>Connection Manager<a class="headerlink" href="#connection-manager" title="Link to this heading">#</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="ignis.client.IgnisClient">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.client.</span></span><span class="sig-name descname"><span class="pre">IgnisClient</span></span><a class="headerlink" href="#ignis.client.IgnisClient" title="Link to this definition">#</a></dt>
-<dd><p>Class for interacting with Ignis D-Bus interface.
-Provides the same functionality as the CLI.</p>
-<p>Useful for scripts that run outside the Ignis process.</p>
-<p>All methods will raise <a class="reference internal" href="exceptions.html#ignis.exceptions.IgnisNotRunningError" title="ignis.exceptions.IgnisNotRunningError"><code class="xref py py-class docutils literal notranslate"><span class="pre">IgnisNotRunningError</span></code></a> if Ignis is not running.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Do not use this class inside the main Ignis process (e.g., in the config file).
-It's unnecessary; use <a class="reference internal" href="app.html#ignis.app.IgnisApp" title="ignis.app.IgnisApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">IgnisApp</span></code></a> instead.</p>
-</div>
-<p>Example usage:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ignis.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">IgnisClient</span>
-
-<span class="n">client</span> <span class="o">=</span> <span class="n">IgnisClient</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">list_windows</span><span class="p">())</span>
-
-<span class="n">client</span><span class="o">.</span><span class="n">reload</span><span class="p">()</span>
-</pre></div>
-</div>
+<dt class="sig sig-object py" id="ignis.connection_manager.ConnectionManager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.connection_manager.</span></span><span class="sig-name descname"><span class="pre">ConnectionManager</span></span><a class="headerlink" href="#ignis.connection_manager.ConnectionManager" title="Link to this definition">#</a></dt>
+<dd><p>A helper class for managing connection handler IDs.</p>
 <dl class="py property">
-<dt class="sig sig-object py" id="ignis.client.IgnisClient.has_owner">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">has_owner</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.client.IgnisClient.has_owner" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>read-only</p></li>
+<dt class="sig sig-object py" id="ignis.connection_manager.ConnectionManager.ids">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ids</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><span class="pre">gi.repository.GObject.Object</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.connection_manager.ConnectionManager.ids" title="Link to this definition">#</a></dt>
+<dd><p>A dictionary mapping GObject instances to lists of handler IDs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.connection_manager.ConnectionManager.connect">
+<span class="sig-name descname"><span class="pre">connect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gobject</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.GObject.Object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signal_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">handler</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#ignis.connection_manager.ConnectionManager.connect" title="Link to this definition">#</a></dt>
+<dd><p>Connect to a signal and store the handler ID.
+Equivalent to <code class="xref py py-func docutils literal notranslate"><span class="pre">GObject.Object.connect()</span></code>, but also saves the handler ID in <a class="reference internal" href="#ignis.connection_manager.ConnectionManager.ids" title="ignis.connection_manager.ConnectionManager.ids"><code class="xref py py-attr docutils literal notranslate"><span class="pre">ids</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gobject</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Object</span></code></span>) -- The GObject instance.</p></li>
+<li><p><strong>signal_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The signal name.</p></li>
+<li><p><strong>handler</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a></span>) -- The handler function.</p></li>
+<li><p><strong>*args</strong> -- Arguments to pass to <code class="docutils literal notranslate"><span class="pre">handler</span></code>.</p></li>
 </ul>
-<p>Whether D-Bus name has the owner (Whether Ignis is running).</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ignis.client.IgnisClient.open_window">
-<span class="sig-name descname"><span class="pre">open_window</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.client.IgnisClient.open_window" title="Link to this definition">#</a></dt>
-<dd><p>Same as <a class="reference internal" href="app.html#ignis.app.IgnisApp.open_window" title="ignis.app.IgnisApp.open_window"><code class="xref py py-func docutils literal notranslate"><span class="pre">open_window()</span></code></a>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
 </dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ignis.client.IgnisClient.close_window">
-<span class="sig-name descname"><span class="pre">close_window</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.client.IgnisClient.close_window" title="Link to this definition">#</a></dt>
-<dd><p>Same as <a class="reference internal" href="app.html#ignis.app.IgnisApp.close_window" title="ignis.app.IgnisApp.close_window"><code class="xref py py-func docutils literal notranslate"><span class="pre">close_window()</span></code></a>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
 </dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ignis.client.IgnisClient.toggle_window">
-<span class="sig-name descname"><span class="pre">toggle_window</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.client.IgnisClient.toggle_window" title="Link to this definition">#</a></dt>
-<dd><p>Same as <a class="reference internal" href="app.html#ignis.app.IgnisApp.toggle_window" title="ignis.app.IgnisApp.toggle_window"><code class="xref py py-func docutils literal notranslate"><span class="pre">toggle_window()</span></code></a>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ignis.client.IgnisClient.list_windows">
-<span class="sig-name descname"><span class="pre">list_windows</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ignis.client.IgnisClient.list_windows" title="Link to this definition">#</a></dt>
-<dd><p>Get a list of all window names.</p>
-<dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>A list of all window names.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a>]</p>
+<dd class="field-odd"><p>The handler ID.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ignis.client.IgnisClient.quit">
-<span class="sig-name descname"><span class="pre">quit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.client.IgnisClient.quit" title="Link to this definition">#</a></dt>
-<dd><p>Same as <a class="reference internal" href="app.html#ignis.app.IgnisApp.quit" title="ignis.app.IgnisApp.quit"><code class="xref py py-func docutils literal notranslate"><span class="pre">quit()</span></code></a>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ignis.client.IgnisClient.inspector">
-<span class="sig-name descname"><span class="pre">inspector</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.client.IgnisClient.inspector" title="Link to this definition">#</a></dt>
-<dd><p>Same as <a class="reference internal" href="app.html#ignis.app.IgnisApp.inspector" title="ignis.app.IgnisApp.inspector"><code class="xref py py-func docutils literal notranslate"><span class="pre">inspector()</span></code></a>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ignis.client.IgnisClient.run_python">
-<span class="sig-name descname"><span class="pre">run_python</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.client.IgnisClient.run_python" title="Link to this definition">#</a></dt>
-<dd><p>Run a Python code inside the Ignis process.</p>
+<dt class="sig sig-object py" id="ignis.connection_manager.ConnectionManager.disconnect">
+<span class="sig-name descname"><span class="pre">disconnect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gobject</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.GObject.Object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">handler_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.connection_manager.ConnectionManager.disconnect" title="Link to this definition">#</a></dt>
+<dd><p>Disconnect from a signal by the <code class="docutils literal notranslate"><span class="pre">handler_id</span></code>.
+Equivalent to <code class="xref py py-func docutils literal notranslate"><span class="pre">GObject.Object.disconnect()</span></code>, but also removes the stored handler ID from <a class="reference internal" href="#ignis.connection_manager.ConnectionManager.ids" title="ignis.connection_manager.ConnectionManager.ids"><code class="xref py py-attr docutils literal notranslate"><span class="pre">ids</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>code</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The Python code to execute.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gobject</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Object</span></code></span>) -- The GObject instance.</p></li>
+<li><p><strong>handler_id</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) -- The handler ID.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
@@ -628,12 +566,12 @@ It's unnecessary; use <a class="reference internal" href="app.html#ignis.app.Ign
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ignis.client.IgnisClient.run_file">
-<span class="sig-name descname"><span class="pre">run_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.client.IgnisClient.run_file" title="Link to this definition">#</a></dt>
-<dd><p>Run a Python file inside Ignis daemon.</p>
+<dt class="sig sig-object py" id="ignis.connection_manager.ConnectionManager.disconnect_gobject">
+<span class="sig-name descname"><span class="pre">disconnect_gobject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gobject</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.GObject.Object</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.connection_manager.ConnectionManager.disconnect_gobject" title="Link to this definition">#</a></dt>
+<dd><p>Disconnect the given GObject from ALL signals that were connected using <a class="reference internal" href="#ignis.connection_manager.ConnectionManager.connect" title="ignis.connection_manager.ConnectionManager.connect"><code class="xref py py-func docutils literal notranslate"><span class="pre">connect()</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>path</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The path to the Python file to execute.</p>
+<dd class="field-odd"><p><strong>gobject</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Object</span></code></span>) -- The GObject to disconnect.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
@@ -642,9 +580,86 @@ It's unnecessary; use <a class="reference internal" href="app.html#ignis.app.Ign
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ignis.client.IgnisClient.reload">
-<span class="sig-name descname"><span class="pre">reload</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.client.IgnisClient.reload" title="Link to this definition">#</a></dt>
-<dd><p>Same as <a class="reference internal" href="app.html#ignis.app.IgnisApp.reload" title="ignis.app.IgnisApp.reload"><code class="xref py py-func docutils literal notranslate"><span class="pre">reload()</span></code></a>.</p>
+<dt class="sig sig-object py" id="ignis.connection_manager.ConnectionManager.disconnect_all">
+<span class="sig-name descname"><span class="pre">disconnect_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.connection_manager.ConnectionManager.disconnect_all" title="Link to this definition">#</a></dt>
+<dd><p>Disconnect ALL GObjects from ALL signals that were connected using <a class="reference internal" href="#ignis.connection_manager.ConnectionManager.connect" title="ignis.connection_manager.ConnectionManager.connect"><code class="xref py py-func docutils literal notranslate"><span class="pre">connect()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ignis.connection_manager.DBusConnectionManager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.connection_manager.</span></span><span class="sig-name descname"><span class="pre">DBusConnectionManager</span></span><a class="headerlink" href="#ignis.connection_manager.DBusConnectionManager" title="Link to this definition">#</a></dt>
+<dd><p>A helper class for managing <code class="xref py py-class docutils literal notranslate"><span class="pre">DBusProxy</span></code> subscription IDs.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.connection_manager.DBusConnectionManager.ids">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ids</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="dbus.html#ignis.dbus.DBusProxy" title="ignis.dbus.DBusProxy"><span class="pre">DBusProxy</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.connection_manager.DBusConnectionManager.ids" title="Link to this definition">#</a></dt>
+<dd><p>A dictionary mapping <code class="xref py py-class docutils literal notranslate"><span class="pre">DBusProxy</span></code> instances to lists of subscription IDs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.connection_manager.DBusConnectionManager.subscribe">
+<span class="sig-name descname"><span class="pre">subscribe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">proxy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="dbus.html#ignis.dbus.DBusProxy" title="ignis.dbus.DBusProxy"><span class="pre">DBusProxy</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">signal_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#ignis.connection_manager.DBusConnectionManager.subscribe" title="Link to this definition">#</a></dt>
+<dd><p>Subscribe to a D-Bus signal.
+The same as <code class="xref py py-class docutils literal notranslate"><span class="pre">DBusProxy.signal_subscribe</span></code>, but saves the subscription ID to <a class="reference internal" href="#ignis.connection_manager.DBusConnectionManager.ids" title="ignis.connection_manager.DBusConnectionManager.ids"><code class="xref py py-attr docutils literal notranslate"><span class="pre">ids</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>proxy</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="dbus.html#ignis.dbus.DBusProxy" title="ignis.dbus.DBusProxy"><code class="xref py py-class docutils literal notranslate"><span class="pre">DBusProxy</span></code></a></span>) -- The D-Bus proxy instance.</p></li>
+<li><p><strong>signal_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The signal name.</p></li>
+<li><p><strong>callback</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a></span>) -- The callback function.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The subscription ID.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.connection_manager.DBusConnectionManager.unsubscribe">
+<span class="sig-name descname"><span class="pre">unsubscribe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">proxy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="dbus.html#ignis.dbus.DBusProxy" title="ignis.dbus.DBusProxy"><span class="pre">DBusProxy</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">subscription_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.connection_manager.DBusConnectionManager.unsubscribe" title="Link to this definition">#</a></dt>
+<dd><p>Unsubscribe from a signal by the <code class="docutils literal notranslate"><span class="pre">subscription_id</span></code>.
+Equivalent to <code class="xref py py-func docutils literal notranslate"><span class="pre">DBusProxy.unsubscribe()</span></code>, but also removes the stored subscription ID from <a class="reference internal" href="#ignis.connection_manager.DBusConnectionManager.ids" title="ignis.connection_manager.DBusConnectionManager.ids"><code class="xref py py-attr docutils literal notranslate"><span class="pre">ids</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gobject</strong> -- The D-Bus proxy instance.</p></li>
+<li><p><strong>subscription_id</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) -- The subscription ID.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.connection_manager.DBusConnectionManager.unsubscribe_proxy">
+<span class="sig-name descname"><span class="pre">unsubscribe_proxy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">proxy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="dbus.html#ignis.dbus.DBusProxy" title="ignis.dbus.DBusProxy"><span class="pre">DBusProxy</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.connection_manager.DBusConnectionManager.unsubscribe_proxy" title="Link to this definition">#</a></dt>
+<dd><p>Unsubscribe the given proxy from ALL signals that were subscribed using <a class="reference internal" href="#ignis.connection_manager.DBusConnectionManager.subscribe" title="ignis.connection_manager.DBusConnectionManager.subscribe"><code class="xref py py-func docutils literal notranslate"><span class="pre">subscribe()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>proxy</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="dbus.html#ignis.dbus.DBusProxy" title="ignis.dbus.DBusProxy"><code class="xref py py-class docutils literal notranslate"><span class="pre">DBusProxy</span></code></a></span>) -- The proxy to unsubscribe.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.connection_manager.DBusConnectionManager.unsubscribe_all">
+<span class="sig-name descname"><span class="pre">unsubscribe_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.connection_manager.DBusConnectionManager.unsubscribe_all" title="Link to this definition">#</a></dt>
+<dd><p>Unsubscribe ALL proxys from ALL signals that were subscribed using <a class="reference internal" href="#ignis.connection_manager.DBusConnectionManager.subscribe" title="ignis.connection_manager.DBusConnectionManager.subscribe"><code class="xref py py-func docutils literal notranslate"><span class="pre">subscribe()</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
@@ -667,20 +682,20 @@ It's unnecessary; use <a class="reference internal" href="app.html#ignis.app.Ign
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="variable.html"
+       href="base_service.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Variable</p>
+        <p class="prev-next-title">BaseService</p>
       </div>
     </a>
     <a class="right-next"
-       href="options.html"
+       href="widgets/index.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Options</p>
+        <p class="prev-next-title">Widgets</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -703,17 +718,20 @@ It's unnecessary; use <a class="reference internal" href="app.html#ignis.app.Ign
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.client.IgnisClient"><code class="docutils literal notranslate"><span class="pre">IgnisClient</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.client.IgnisClient.has_owner"><code class="docutils literal notranslate"><span class="pre">IgnisClient.has_owner</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.client.IgnisClient.open_window"><code class="docutils literal notranslate"><span class="pre">IgnisClient.open_window()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.client.IgnisClient.close_window"><code class="docutils literal notranslate"><span class="pre">IgnisClient.close_window()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.client.IgnisClient.toggle_window"><code class="docutils literal notranslate"><span class="pre">IgnisClient.toggle_window()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.client.IgnisClient.list_windows"><code class="docutils literal notranslate"><span class="pre">IgnisClient.list_windows()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.client.IgnisClient.quit"><code class="docutils literal notranslate"><span class="pre">IgnisClient.quit()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.client.IgnisClient.inspector"><code class="docutils literal notranslate"><span class="pre">IgnisClient.inspector()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.client.IgnisClient.run_python"><code class="docutils literal notranslate"><span class="pre">IgnisClient.run_python()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.client.IgnisClient.run_file"><code class="docutils literal notranslate"><span class="pre">IgnisClient.run_file()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.client.IgnisClient.reload"><code class="docutils literal notranslate"><span class="pre">IgnisClient.reload()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.connection_manager.ConnectionManager"><code class="docutils literal notranslate"><span class="pre">ConnectionManager</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.connection_manager.ConnectionManager.ids"><code class="docutils literal notranslate"><span class="pre">ConnectionManager.ids</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.connection_manager.ConnectionManager.connect"><code class="docutils literal notranslate"><span class="pre">ConnectionManager.connect()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.connection_manager.ConnectionManager.disconnect"><code class="docutils literal notranslate"><span class="pre">ConnectionManager.disconnect()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.connection_manager.ConnectionManager.disconnect_gobject"><code class="docutils literal notranslate"><span class="pre">ConnectionManager.disconnect_gobject()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.connection_manager.ConnectionManager.disconnect_all"><code class="docutils literal notranslate"><span class="pre">ConnectionManager.disconnect_all()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.connection_manager.DBusConnectionManager"><code class="docutils literal notranslate"><span class="pre">DBusConnectionManager</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.connection_manager.DBusConnectionManager.ids"><code class="docutils literal notranslate"><span class="pre">DBusConnectionManager.ids</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.connection_manager.DBusConnectionManager.subscribe"><code class="docutils literal notranslate"><span class="pre">DBusConnectionManager.subscribe()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.connection_manager.DBusConnectionManager.unsubscribe"><code class="docutils literal notranslate"><span class="pre">DBusConnectionManager.unsubscribe()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.connection_manager.DBusConnectionManager.unsubscribe_proxy"><code class="docutils literal notranslate"><span class="pre">DBusConnectionManager.unsubscribe_proxy()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.connection_manager.DBusConnectionManager.unsubscribe_all"><code class="docutils literal notranslate"><span class="pre">DBusConnectionManager.unsubscribe_all()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -723,7 +741,7 @@ It's unnecessary; use <a class="reference internal" href="app.html#ignis.app.Ign
 
   
   <div class="tocsection editthispage">
-    <a href="https://github.com/linkfrg/ignis/edit/main/docs/api/client.rst">
+    <a href="https://github.com/linkfrg/ignis/edit/main/docs/api/connection_manager.rst">
       <i class="fa-solid fa-pencil"></i>
       
       
@@ -739,7 +757,7 @@ It's unnecessary; use <a class="reference internal" href="app.html#ignis.app.Ign
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/api/client.rst.txt"
+      <li><a href="../_sources/api/connection_manager.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div></div>
