@@ -44,6 +44,8 @@ class MprisPlayer(IgnisGObject):
         self._title: str | None = None
         self._url: str | None = None
 
+        self._previous_art_url: str | None = None
+
         os.makedirs(ART_URL_CACHE_DIR, exist_ok=True)
 
         asyncio.create_task(self.__init_proxy(name))
@@ -157,8 +159,10 @@ class MprisPlayer(IgnisGObject):
         art_url = self.metadata.get("mpris:artUrl", None)
         result = None
 
-        if art_url == self._art_url:
+        if art_url == self._previous_art_url:
             return
+
+        self._previous_art_url = art_url
 
         if art_url:
             result = await self.__load_art_url(art_url)
