@@ -19,7 +19,6 @@ from .crop_pixbuf import crop_pixbuf
 from .get_paintable import get_paintable
 from .get_file_icon_name import get_file_icon_name
 from .thread_task import ThreadTask
-from .download_image import download_image
 from .get_current_dir import get_current_dir
 from .socket import send_socket, listen_socket
 from .debounce import DebounceTask, debounce
@@ -47,7 +46,6 @@ class Utils:
     get_file_icon_name = get_file_icon_name
     ThreadTask: TypeAlias = ThreadTask
     get_ignis_commit = get_ignis_commit
-    download_image = download_image
     get_current_dir = get_current_dir
     get_ignis_branch = get_ignis_branch
     get_ignis_commit_msg = get_ignis_commit_msg

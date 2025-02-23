@@ -192,7 +192,7 @@ class AudioService(BaseService):
         stream_type = self.__get_stream_type(audio_stream.stream)
         if stream_type:
             getattr(self, f"_{stream_type}s").pop(id)
-            audio_stream.emit("removed")
+            audio_stream._remove()
             self.notify(f"{stream_type}s")
 
     def __get_stream_type(self, stream: Gvc.MixerStream) -> str | None:

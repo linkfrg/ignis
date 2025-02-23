@@ -1,5 +1,6 @@
 from gi.repository import GObject  # type: ignore
 from ignis.gobject import IgnisGObject, IgnisProperty
+from ignis.connection_manager import ConnectionManager
 from typing import Literal
 from ._imports import Gvc
 from .constants import SPEAKER_ICON_TEMPLATE, MICROPHONE_ICON_TEMPLATE
@@ -16,9 +17,9 @@ class Stream(IgnisGObject):
 
     def __init__(self, control: Gvc.MixerControl, stream: "Gvc.MixerStream | None"):
         super().__init__()
+        self._conn_mgr = ConnectionManager()
         self._control = control
         self._stream = stream
-        self._connection_ids: list[int] = []
 
         self._setup()
 
@@ -34,22 +35,23 @@ class Stream(IgnisGObject):
             "is-muted",
             "volume",
         ]:
-            id_ = self._stream.connect(
+            self._conn_mgr.connect(
+                self._stream,
                 f"notify::{property_name}",
-                lambda *args, property_name=property_name: self.notify(property_name),
+                lambda *_, property_name=property_name: self.notify(property_name),
             )
-            self._connection_ids.append(id_)
-
-        id_ = self._stream.connect(
-            "notify::volume", lambda *args: self.notify("icon_name")
+        self._conn_mgr.connect(
+            self._stream, "notify::volume", lambda *_: self.notify("icon_name")
         )
-        self._connection_ids.append(id_)
-        id_ = self._stream.connect(
-            "notify::is-muted", lambda *args: self.notify("icon_name")
+        self._conn_mgr.connect(
+            self._stream, "notify::is-muted", lambda *_: self.notify("icon_name")
         )
-        self._connection_ids.append(id_)
 
         self.notify_all()
+
+    def _remove(self) -> None:
+        self._conn_mgr.disconnect_all()
+        self.emit("removed")
 
     @GObject.Signal
     def removed(self):
