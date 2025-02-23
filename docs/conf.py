@@ -36,7 +36,7 @@ suppress_warnings = ["config.cache"]
 
 # ============================ AUTODOC/TYPEHINTS ============================
 
-autodoc_mock_imports = ["gi", "loguru", "setuptools", "click", "cairo", "requests"]
+autodoc_mock_imports = ["gi", "loguru", "setuptools", "click", "cairo"]
 autodoc_member_order = "bysource"
 
 smartquotes = False

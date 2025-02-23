@@ -1,3 +1,4 @@
+import asyncio
 from gi.repository import Gio, GLib, GObject  # type: ignore
 from typing import Any
 from collections.abc import Callable
@@ -328,16 +329,14 @@ class DBusProxy(IgnisGObject):
         return cls(bus_type=bus_type, gproxy=gproxy)
 
     @classmethod
-    def new_async(
+    async def new_async(
         cls,
         name: str,
         object_path: str,
         interface_name: str,
         info: Gio.DBusInterfaceInfo,
         bus_type: Literal["session", "system"] = "session",
-        callback: Callable | None = None,
-        *user_data,
-    ) -> None:
+    ) -> "DBusProxy":
         """
         Asynchronously initialize a new instance.
 
@@ -351,23 +350,16 @@ class DBusProxy(IgnisGObject):
             *user_data: User data to pass to ``callback``.
         """
 
-        def finish(x, res):
-            gproxy = Gio.DBusProxy.new_for_bus_finish(res)
-            proxy = cls(bus_type=bus_type, gproxy=gproxy)
-            if callback:
-                callback(proxy)
-
-        Gio.DBusProxy.new_for_bus(
+        gproxy = await Gio.DBusProxy.new_for_bus(  # type: ignore
             BUS_TYPE[bus_type],
             Gio.DBusProxyFlags.NONE,
             info,
             name,
             object_path,
             interface_name,
-            None,
-            finish,
-            *user_data,
         )
+
+        return cls(bus_type=bus_type, gproxy=gproxy)
 
     @GObject.Property
     def name(self) -> str:
@@ -537,27 +529,20 @@ class DBusProxy(IgnisGObject):
                 -1,
                 None,
             )[0]
-        except GLib.GError:  # type: ignore
+        except GLib.Error:
             return None
 
-    def get_dbus_property_async(
-        self, property_name: str, callback: Callable | None = None, *user_data
-    ) -> None:
+    async def get_dbus_property_async(self, property_name: str) -> Any:
         """
         Asynchronously get the value of a D-Bus property by its name.
 
         Args:
             property_name: The name of the property.
-            callback: A function to call when the retrieval is complete. The function will receive the property's value.
-            *user_data: User data to pass to ``callback``.
+        Returns:
+            The value of the D-Bus property.
         """
 
-        def finish(x, res):
-            result = self.connection.call_finish(res)
-            if callback:
-                callback(result[0], *user_data)
-
-        return self.connection.call(
+        variant = await self.connection.call(
             self.name,
             self.object_path,
             "org.freedesktop.DBus.Properties",
@@ -569,9 +554,10 @@ class DBusProxy(IgnisGObject):
             None,
             Gio.DBusCallFlags.NONE,
             -1,
-            None,
-            finish,
         )
+
+        # unpack in thread
+        return await asyncio.to_thread(lambda: variant[0])
 
     def set_dbus_property(self, property_name: str, value: GLib.Variant) -> None:
         """
@@ -596,12 +582,8 @@ class DBusProxy(IgnisGObject):
             None,
         )
 
-    def set_dbus_property_async(
-        self,
-        property_name: str,
-        value: GLib.Variant,
-        callback: Callable | None = None,
-        *user_data,
+    async def set_dbus_property_async(
+        self, property_name: str, value: GLib.Variant
     ) -> None:
         """
         Asynchronously set a D-Bus property's value.
@@ -609,16 +591,9 @@ class DBusProxy(IgnisGObject):
         Args:
             property_name: The name of the property to set.
             value: The new value for the property.
-            callback: A function to call when the operation is complete.
-            *user_data: User data to pass to ``callback``.
         """
 
-        def finish(x, res):
-            self.connection.call_finish(res)
-            if callback:
-                callback(*user_data)
-
-        self.connection.call(
+        await self.connection.call(
             self.name,
             self.object_path,
             "org.freedesktop.DBus.Properties",
@@ -630,8 +605,6 @@ class DBusProxy(IgnisGObject):
             None,
             Gio.DBusCallFlags.NONE,
             -1,
-            None,
-            finish,
         )
 
     def watch_name(

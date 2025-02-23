@@ -1,9 +1,9 @@
-import os
 import sys
+import asyncio
 from loguru import logger
 from gi.repository import GLib  # type: ignore
 
-LOG_DIR = os.path.expanduser("~/.ignis")
+LOG_DIR = f"{GLib.get_user_state_dir()}/ignis"
 LOG_FILE = f"{LOG_DIR}/ignis.log"
 LOG_FORMAT = "{time:YYYY-MM-DD HH:mm:ss} [<level>{level}</level>] {message}"
 
@@ -22,6 +22,14 @@ def logging_excepthook(exc_type, exc_value, exc_traceback):
     logger.opt(exception=(exc_type, exc_value, exc_traceback)).error(
         f"{exc_type.__name__}: {exc_value}"
     )
+
+
+def async_exception_handler(loop, context):
+    exception = context.get("exception")
+    if exception:
+        logging_excepthook(type(exception), exception, exception.__traceback__)
+    else:
+        logger.error(f"Caught an unhandled exception: {context}\n")
 
 
 def g_log_writer(
@@ -56,5 +64,8 @@ def configure_logger(debug: bool) -> None:
     logger.level("INFO", color="<green>")
 
     sys.excepthook = logging_excepthook
+
+    loop = asyncio.get_event_loop()
+    loop.set_exception_handler(async_exception_handler)
 
     GLib.log_set_writer_func(g_log_writer)

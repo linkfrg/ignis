@@ -109,7 +109,7 @@ class DBusMenu(Gtk.PopoverMenu):
         )
 
     def __load_layout(self, proxy, result, user_data) -> None:
-        if isinstance(result, GLib.GError):
+        if isinstance(result, GLib.Error):
             return
 
         self._menu_id = result[1][0]
@@ -167,6 +167,6 @@ class DBusMenu(Gtk.PopoverMenu):
     def popup(self) -> None:
         try:
             self.__proxy.AboutToShow("(i)", self._menu_id)
-        except GLib.GError:  # type: ignore
+        except GLib.Error:
             pass
         return super().popup()

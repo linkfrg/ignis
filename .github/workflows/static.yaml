@@ -4,10 +4,6 @@ on:
       - "ignis/**"
       - "examples/**"
       - ".github/workflows/static.yaml"
-  pull_request:
-    paths:
-      - "ignis/**"
-      - "examples/**"
 
 name: Static Analysis
 jobs:

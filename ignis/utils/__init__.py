@@ -19,11 +19,12 @@ from .crop_pixbuf import crop_pixbuf
 from .get_paintable import get_paintable
 from .get_file_icon_name import get_file_icon_name
 from .thread_task import ThreadTask
-from .download_image import download_image
 from .get_current_dir import get_current_dir
 from .socket import send_socket, listen_socket
 from .debounce import DebounceTask, debounce
 from .get_monitors import get_monitors
+from .str_cases import snake_to_pascal, pascal_to_snake
+from .file import read_file, read_file_async, write_file, write_file_async
 
 
 class Utils:
@@ -45,7 +46,6 @@ class Utils:
     get_file_icon_name = get_file_icon_name
     ThreadTask: TypeAlias = ThreadTask
     get_ignis_commit = get_ignis_commit
-    download_image = download_image
     get_current_dir = get_current_dir
     get_ignis_branch = get_ignis_branch
     get_ignis_commit_msg = get_ignis_commit_msg
@@ -54,3 +54,9 @@ class Utils:
     DebounceTask = DebounceTask
     debounce = debounce
     get_monitors = get_monitors
+    snake_to_pascal = snake_to_pascal
+    pascal_to_snake = pascal_to_snake
+    read_file = read_file
+    read_file_async = read_file_async
+    write_file = write_file
+    write_file_async = write_file_async

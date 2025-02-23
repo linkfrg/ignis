@@ -1,4 +1,5 @@
 import datetime
+import asyncio
 from ignis.widgets import Widget
 from ignis.utils import Utils
 from ignis.app import IgnisApp
@@ -292,11 +293,16 @@ def speaker_slider() -> Widget.Scale:
     )
 
 
+def create_exec_task(cmd: str) -> None:
+    # use create_task to run async function in a regular (sync) one
+    asyncio.create_task(Utils.exec_sh_async(cmd))
+
+
 def logout() -> None:
     if hyprland.is_available:
-        Utils.exec_sh_async("hyprctl dispatch exit 0")
+        create_exec_task("hyprctl dispatch exit 0")
     elif niri.is_available:
-        Utils.exec_sh_async("niri msg action quit")
+        create_exec_task("niri msg action quit")
     else:
         pass
 
@@ -306,25 +312,25 @@ def power_menu() -> Widget.Button:
         items=[
             Widget.MenuItem(
                 label="Lock",
-                on_activate=lambda x: Utils.exec_sh_async("swaylock"),
+                on_activate=lambda x: create_exec_task("swaylock"),
             ),
             Widget.Separator(),
             Widget.MenuItem(
                 label="Suspend",
-                on_activate=lambda x: Utils.exec_sh_async("systemctl suspend"),
+                on_activate=lambda x: create_exec_task("systemctl suspend"),
             ),
             Widget.MenuItem(
                 label="Hibernate",
-                on_activate=lambda x: Utils.exec_sh_async("systemctl hibernate"),
+                on_activate=lambda x: create_exec_task("systemctl hibernate"),
             ),
             Widget.Separator(),
             Widget.MenuItem(
                 label="Reboot",
-                on_activate=lambda x: Utils.exec_sh_async("systemctl reboot"),
+                on_activate=lambda x: create_exec_task("systemctl reboot"),
             ),
             Widget.MenuItem(
                 label="Shutdown",
-                on_activate=lambda x: Utils.exec_sh_async("systemctl poweroff"),
+                on_activate=lambda x: create_exec_task("systemctl poweroff"),
             ),
             Widget.Separator(),
             Widget.MenuItem(

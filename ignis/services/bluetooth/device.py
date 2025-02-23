@@ -151,28 +151,20 @@ class BluetoothDevice(IgnisGObject):
         """
         return GnomeBluetooth.type_to_string(self._gdevice.props.type)  # type: ignore
 
-    def __connect_service(self, connect: bool) -> None:
-        def callback(x, res):
-            try:
-                self._client.connect_service_finish(res)
-            except GLib.GError as gerror:  # type: ignore
-                logger.warning(gerror.message)
+    async def __connect_service(self, connect: bool) -> None:
+        try:
+            await self._client.connect_service(self._gdevice.get_object_path(), connect)  # type: ignore
+        except GLib.Error as gerror:
+            logger.warning(gerror.message)
 
-        self._client.connect_service(
-            self._gdevice.get_object_path(),
-            connect,
-            None,
-            callback,
-        )
-
-    def connect_to(self) -> None:
+    async def connect_to(self) -> None:
         """
         Connect to this device.
         """
-        self.__connect_service(True)
+        await self.__connect_service(True)
 
-    def disconnect_from(self) -> None:
+    async def disconnect_from(self) -> None:
         """
         Disconnect from this device.
         """
-        self.__connect_service(False)
+        await self.__connect_service(False)

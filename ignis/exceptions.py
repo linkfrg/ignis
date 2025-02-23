@@ -404,7 +404,7 @@ class CssParsingError(Exception):
     """
 
     def __init__(
-        self, section: Gtk.CssSection, gerror: GLib.GError, *args: object
+        self, section: Gtk.CssSection, gerror: GLib.Error, *args: object
     ) -> None:
         self._section = section
         self._gerror = gerror
@@ -420,7 +420,7 @@ class CssParsingError(Exception):
         return self._section
 
     @property
-    def gerror(self) -> GLib.GError:
+    def gerror(self) -> GLib.Error:
         """
         - required, read-only
 
