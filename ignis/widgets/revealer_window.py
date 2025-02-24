@@ -80,4 +80,3 @@ class RevealerWindow(Window):
     @revealer.setter
     def revealer(self, value: Revealer) -> None:
         self._revealer = value
-        self.set_child(value)
