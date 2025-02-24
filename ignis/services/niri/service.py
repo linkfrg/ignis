@@ -33,6 +33,7 @@ class NiriService(BaseService):
 
         self._workspaces: list[dict[str, Any]] = []
         self._active_workspaces: list[dict[str, Any]] = []
+        self._windows: list[dict[str, Any]] = []
         self._kb_layout: str = ""
         self._active_window: dict[str, Any] = {}
         self._active_output: dict[str, Any] = {}
@@ -44,6 +45,7 @@ class NiriService(BaseService):
             self.__sync_workspaces()
             self.__sync_active_window()
             self.__sync_active_output()
+            self.__sync_windows()
 
     @GObject.Property
     def is_available(self) -> bool:
@@ -74,6 +76,15 @@ class NiriService(BaseService):
         The currently active workspaces.
         """
         return self._active_workspaces
+
+    @GObject.Property
+    def windows(self) -> list[dict[str, Any]]:
+        """
+        - read-only
+
+        The currently opened windows.
+        """
+        return self._windows
 
     @GObject.Property
     def kb_layout(self) -> str:
@@ -129,6 +140,7 @@ class NiriService(BaseService):
                 self.__sync_active_output()
             elif eventtype.startswith("WindowOpenedOrChanged"):
                 self.__sync_active_window()
+                self.__sync_windows()
 
         except KeyError:
             logger.warning(f"[Niri Service] non matching event: {event}")
@@ -158,6 +170,10 @@ class NiriService(BaseService):
             "FocusedOutput"
         ]
         self.notify("active-output")
+
+    def __sync_windows(self) -> None:
+        self._windows = json.loads(self.send_command('"Windows"\n'))["Ok"]["Windows"]
+        self.notify("windows")
 
     def send_command(self, cmd: str) -> str:
         """
