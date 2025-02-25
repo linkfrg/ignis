@@ -5,5 +5,5 @@ Shell Commands
 
 .. autofunction:: ignis.utils.Utils.exec_sh_async
 
-.. autoclass:: ignis.utils.shell.AsyncCompletedProcess
+.. autoclass:: ignis.utils.Utils.AsyncCompletedProcess
     :members:
