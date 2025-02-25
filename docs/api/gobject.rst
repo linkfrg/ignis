@@ -6,3 +6,6 @@ GObject
 
 .. autoclass:: ignis.gobject.Binding
     :members:
+
+.. autoclass:: ignis.gobject.IgnisProperty
+    :members:

@@ -193,6 +193,13 @@ class IgnisGObject(GObject.Object):
 
 
 class IgnisProperty(GObject.Property):
+    """
+    Bases: :obj:`~gi.repository.GObject.Property`.
+
+    Like ``GObject.Property``, but determines the property type automatically based on the return type of the ``getter``.
+    You can override this behaviour by explicitly passing ``type`` argument to the constructor.
+    Arguments for the constructor are the same as for ``GObject.Property``.
+    """
     def __init__(
         self,
         getter: Callable | None = None,

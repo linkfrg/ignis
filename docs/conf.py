@@ -28,6 +28,7 @@ intersphinx_mapping = {
     "gdkpixbuf": ("https://lazka.github.io/pgi-docs/GdkPixbuf-2.0", None),
     "nm": ("https://lazka.github.io/pgi-docs/NM-1.0", None),
     "gobject": ("https://lazka.github.io/pgi-docs/GObject-2.0", None),
+    "pygobject": ("https://pygobject.gnome.org", None),
 }
 
 templates_path = ["_templates"]
