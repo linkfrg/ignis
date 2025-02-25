@@ -142,6 +142,10 @@ class NiriService(BaseService):
                 case "WindowOpenedOrChanged":
                     self.__sync_active_window()
                     self.__sync_windows()
+                case "WindowsChanged":
+                    self.__sync_windows()
+                case "WindowClosed":
+                    self.__sync_windows()
 
         except KeyError:
             logger.warning(f"[Niri Service] non matching event: {event}")
