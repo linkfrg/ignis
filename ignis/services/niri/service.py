@@ -124,23 +124,24 @@ class NiriService(BaseService):
     def __on_event_received(self, event: str) -> None:
         try:
             eventtype = list(json.loads(event).keys())[0]
-            if eventtype.startswith("WorkspaceActivated") or eventtype.startswith(
-                "WorkspacesChanged"
-            ):
-                self.__sync_workspaces()
-            elif eventtype.startswith("KeyboardLayoutsChanged") or eventtype.startswith(
-                "KeyboardLayoutSwitched"
-            ):
-                self.__sync_kb_layout()
-
-            elif eventtype.startswith(
-                "WorkspaceActiveWindowChanged"
-            ) or eventtype.startswith("WindowFocusChanged"):
-                self.__sync_active_window()
-                self.__sync_active_output()
-            elif eventtype.startswith("WindowOpenedOrChanged"):
-                self.__sync_active_window()
-                self.__sync_windows()
+            match eventtype:
+                case "WorkspaceActivated":
+                    self.__sync_workspaces()
+                case "WorkspacesChanged":
+                    self.__sync_workspaces()
+                case "KeyboardLayoutsChanged":
+                    self.__sync_kb_layout()
+                case "KeyboardLayoutSwitched":
+                    self.__sync_kb_layout()
+                case "WorkspaceActiveWindowChanged":
+                    self.__sync_active_window()
+                    self.__sync_active_output()
+                case "WindowFocusChanged":
+                    self.__sync_active_window()
+                    self.__sync_active_output()
+                case "WindowOpenedOrChanged":
+                    self.__sync_active_window()
+                    self.__sync_windows()
 
         except KeyError:
             logger.warning(f"[Niri Service] non matching event: {event}")
