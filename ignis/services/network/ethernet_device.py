@@ -1,5 +1,5 @@
 from gi.repository import GObject  # type: ignore
-from ignis.gobject import IgnisGObject
+from ignis.gobject import IgnisGObject, IgnisProperty
 from ._imports import NM
 from .constants import STATE
 
@@ -33,7 +33,7 @@ class EthernetDevice(IgnisGObject):
         Emitted when this Ethernet device is removed.
         """
 
-    @GObject.Property
+    @IgnisProperty
     def carrier(self) -> bool:
         """
         - read-only
@@ -42,7 +42,7 @@ class EthernetDevice(IgnisGObject):
         """
         return self._device.props.carrier
 
-    @GObject.Property
+    @IgnisProperty
     def perm_hw_address(self) -> str:
         """
         - read-only
@@ -51,7 +51,7 @@ class EthernetDevice(IgnisGObject):
         """
         return self._device.props.perm_hw_address
 
-    @GObject.Property
+    @IgnisProperty
     def speed(self) -> int:
         """
         - read-only
@@ -60,7 +60,7 @@ class EthernetDevice(IgnisGObject):
         """
         return self._device.props.speed
 
-    @GObject.Property
+    @IgnisProperty
     def state(self) -> str | None:
         """
         - read-only
@@ -69,7 +69,7 @@ class EthernetDevice(IgnisGObject):
         """
         return STATE.get(self._device.get_state(), None)
 
-    @GObject.Property
+    @IgnisProperty
     def is_connected(self) -> bool:
         """
         - read-only
@@ -78,7 +78,7 @@ class EthernetDevice(IgnisGObject):
         """
         return self._is_connected
 
-    @GObject.Property
+    @IgnisProperty
     def name(self) -> str | None:
         """
         - read-only

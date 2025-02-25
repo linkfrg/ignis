@@ -65,6 +65,8 @@ General Classes
 
 .. code-block:: python
 
+    from ignis.gobject import IgnisProperty
+
     class SomeClass:
         """
         This is an example docstring for a class.
@@ -90,14 +92,14 @@ General Classes
             some_arg (``int``): Description of the argument...
         """
 
-    @GObject.Property
+    @IgnisProperty
     def some_prop(self) -> int:
         """
         - optional, read-only
         """
         ...
 
-    @GObject.Property
+    @IgnisProperty
     def rw_prop(self) -> str:
         """
         - optional, read-write

@@ -1,5 +1,5 @@
 from gi.repository import GObject, GLib  # type: ignore
-from ignis.gobject import IgnisGObject
+from ignis.gobject import IgnisGObject, IgnisProperty
 from typing import Literal
 from ignis.app import IgnisApp
 from .util import filter_connections
@@ -75,7 +75,7 @@ class WifiAccessPoint(IgnisGObject):
         Emitted when this access point is removed.
         """
 
-    @GObject.Property
+    @IgnisProperty
     def point(self) -> NM.AccessPoint:
         """
         - read-only
@@ -84,7 +84,7 @@ class WifiAccessPoint(IgnisGObject):
         """
         return self._point
 
-    @GObject.Property
+    @IgnisProperty
     def bandwidth(self) -> int:
         """
         - read-only
@@ -93,7 +93,7 @@ class WifiAccessPoint(IgnisGObject):
         """
         return self._point.props.bandwidth
 
-    @GObject.Property
+    @IgnisProperty
     def bssid(self) -> str:
         """
         - read-only
@@ -102,7 +102,7 @@ class WifiAccessPoint(IgnisGObject):
         """
         return self._point.props.bssid
 
-    @GObject.Property
+    @IgnisProperty
     def frequency(self) -> int:
         """
         - read-only
@@ -111,7 +111,7 @@ class WifiAccessPoint(IgnisGObject):
         """
         return self._point.props.frequency
 
-    @GObject.Property
+    @IgnisProperty
     def last_seen(self) -> int:
         """
         - read-only
@@ -120,7 +120,7 @@ class WifiAccessPoint(IgnisGObject):
         """
         return self._point.props.last_seen
 
-    @GObject.Property
+    @IgnisProperty
     def max_bitrate(self) -> int:
         """
         - read-only
@@ -129,7 +129,7 @@ class WifiAccessPoint(IgnisGObject):
         """
         return self._point.props.max_bitrate
 
-    @GObject.Property
+    @IgnisProperty
     def ssid(self) -> str | None:
         """
         - read-only
@@ -138,7 +138,7 @@ class WifiAccessPoint(IgnisGObject):
         """
         return self._ssid
 
-    @GObject.Property
+    @IgnisProperty
     def strength(self) -> int:
         """
         - read-only
@@ -147,7 +147,7 @@ class WifiAccessPoint(IgnisGObject):
         """
         return self._point.props.strength
 
-    @GObject.Property
+    @IgnisProperty
     def icon_name(self) -> str:
         """
         - read-only
@@ -172,7 +172,7 @@ class WifiAccessPoint(IgnisGObject):
         else:
             return "network-wireless-offline-symbolic"
 
-    @GObject.Property
+    @IgnisProperty
     def security(self) -> Literal["WPA1", "WPA2/WPA3"] | None:
         """
         - read-only
@@ -187,7 +187,7 @@ class WifiAccessPoint(IgnisGObject):
         else:
             return None
 
-    @GObject.Property
+    @IgnisProperty
     def psk(self) -> str | None:
         """
         - read-write
@@ -217,7 +217,7 @@ class WifiAccessPoint(IgnisGObject):
             wireless_sec.set_secret_flags("psk", NM.SettingSecretFlags.NONE)
             conn.add_setting(wireless_sec)
 
-    @GObject.Property
+    @IgnisProperty
     def is_connected(self) -> bool:
         """
         - read-only

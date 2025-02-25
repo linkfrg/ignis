@@ -1,6 +1,7 @@
-from gi.repository import Gtk, GObject  # type: ignore
+from gi.repository import Gtk  # type: ignore
 from ignis.base_widget import BaseWidget
 from ignis.widgets.listboxrow import ListBoxRow
+from ignis.gobject import IgnisProperty
 
 
 class ListBox(Gtk.ListBox, BaseWidget):
@@ -38,7 +39,7 @@ class ListBox(Gtk.ListBox, BaseWidget):
         super().select_row(row)
         self.__on_row_activated(None, row)
 
-    @GObject.Property
+    @IgnisProperty
     def rows(self) -> list[ListBoxRow]:
         """
         - optional, read-write

@@ -1,6 +1,7 @@
-from gi.repository import Gtk, GObject  # type: ignore
+from gi.repository import Gtk  # type: ignore
 from ignis.base_widget import BaseWidget
 from collections.abc import Callable
+from ignis.gobject import IgnisProperty
 
 
 class Button(Gtk.Button, BaseWidget):
@@ -45,7 +46,7 @@ class Button(Gtk.Button, BaseWidget):
         controller.connect("pressed", on_pressed)
         return controller
 
-    @GObject.Property
+    @IgnisProperty
     def on_click(self) -> Callable:
         """
         - optional, read-write
@@ -58,7 +59,7 @@ class Button(Gtk.Button, BaseWidget):
     def on_click(self, value: Callable) -> None:
         self._on_click = value
 
-    @GObject.Property
+    @IgnisProperty
     def on_right_click(self) -> Callable:
         """
         - optional, read-write
@@ -75,7 +76,7 @@ class Button(Gtk.Button, BaseWidget):
                 3, self._on_right_click
             )
 
-    @GObject.Property
+    @IgnisProperty
     def on_middle_click(self) -> Callable:
         """
         - optional, read-write

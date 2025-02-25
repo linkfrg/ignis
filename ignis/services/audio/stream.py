@@ -1,5 +1,5 @@
 from gi.repository import GObject  # type: ignore
-from ignis.gobject import IgnisGObject
+from ignis.gobject import IgnisGObject, IgnisProperty
 from ignis.connection_manager import ConnectionManager
 from typing import Literal
 from ._imports import Gvc
@@ -61,7 +61,7 @@ class Stream(IgnisGObject):
         Emitted when the stream has been removed.
         """
 
-    @GObject.Property
+    @IgnisProperty
     def stream(self) -> "Gvc.MixerStream | None":
         """
         - read-only
@@ -70,7 +70,7 @@ class Stream(IgnisGObject):
         """
         return self._stream
 
-    @GObject.Property
+    @IgnisProperty
     def application_id(self) -> str | None:
         """
         - read-only
@@ -82,7 +82,7 @@ class Stream(IgnisGObject):
 
         return self._stream.get_application_id()
 
-    @GObject.Property
+    @IgnisProperty
     def icon_name(self) -> str | None:
         """
         - read-only
@@ -106,7 +106,7 @@ class Stream(IgnisGObject):
         else:
             return template.format("low")
 
-    @GObject.Property
+    @IgnisProperty
     def id(self) -> int | None:
         """
         - read-only
@@ -118,7 +118,7 @@ class Stream(IgnisGObject):
 
         return self._stream.get_id()
 
-    @GObject.Property
+    @IgnisProperty
     def name(self) -> str | None:
         """
         - read-only
@@ -130,7 +130,7 @@ class Stream(IgnisGObject):
 
         return self._stream.get_name()
 
-    @GObject.Property
+    @IgnisProperty
     def description(self) -> str | None:
         """
         - read-only
@@ -142,7 +142,7 @@ class Stream(IgnisGObject):
 
         return self._stream.get_description()
 
-    @GObject.Property
+    @IgnisProperty
     def is_muted(self) -> bool | None:
         """
         - read-only
@@ -159,7 +159,7 @@ class Stream(IgnisGObject):
         self._stream.set_is_muted(value)
         self._stream.change_is_muted(value)
 
-    @GObject.Property
+    @IgnisProperty
     def volume(self) -> float | None:
         """
         - read-only
@@ -179,7 +179,7 @@ class Stream(IgnisGObject):
         self._stream.set_volume(value * self._control.get_vol_max_norm() / 100)
         self._stream.push_volume()
 
-    @GObject.Property
+    @IgnisProperty
     def is_default(self) -> bool:
         """
         - read-only

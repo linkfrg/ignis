@@ -1,5 +1,5 @@
-from gi.repository import GObject  # type: ignore
 from ignis.base_service import BaseService
+from ignis.gobject import IgnisProperty
 from ._imports import NM
 from .wifi import Wifi
 from .ethernet import Ethernet
@@ -18,7 +18,7 @@ class NetworkService(BaseService):
         self._ethernet = Ethernet(self._client)
         self._vpn = Vpn(self._client)
 
-    @GObject.Property
+    @IgnisProperty
     def wifi(self) -> Wifi:
         """
         - read-only
@@ -27,7 +27,7 @@ class NetworkService(BaseService):
         """
         return self._wifi
 
-    @GObject.Property
+    @IgnisProperty
     def ethernet(self) -> Ethernet:
         """
         - read-only
@@ -36,7 +36,7 @@ class NetworkService(BaseService):
         """
         return self._ethernet
 
-    @GObject.Property
+    @IgnisProperty
     def vpn(self) -> Vpn:
         """
         - read-only

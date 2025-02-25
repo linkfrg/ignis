@@ -1,12 +1,12 @@
 import json
 import os
 import socket
-from gi.repository import GObject  # type: ignore
 from ignis.utils import Utils
 from typing import Any
 from ignis.exceptions import NiriIPCNotFoundError
 from ignis.base_service import BaseService
 from ignis.logging import logger
+from ignis.gobject import IgnisProperty
 from .constants import NIRI_SOCKET
 
 
@@ -47,7 +47,7 @@ class NiriService(BaseService):
             self.__sync_active_output()
             self.__sync_windows()
 
-    @GObject.Property
+    @IgnisProperty
     def is_available(self) -> bool:
         """
         - read-only
@@ -59,7 +59,7 @@ class NiriService(BaseService):
         else:
             return False
 
-    @GObject.Property
+    @IgnisProperty
     def workspaces(self) -> list[dict[str, Any]]:
         """
         - read-only
@@ -68,7 +68,7 @@ class NiriService(BaseService):
         """
         return self._workspaces
 
-    @GObject.Property
+    @IgnisProperty
     def active_workspaces(self) -> list[dict[str, Any]]:
         """
         - read-only
@@ -77,7 +77,7 @@ class NiriService(BaseService):
         """
         return self._active_workspaces
 
-    @GObject.Property
+    @IgnisProperty
     def windows(self) -> list[dict[str, Any]]:
         """
         - read-only
@@ -86,7 +86,7 @@ class NiriService(BaseService):
         """
         return self._windows
 
-    @GObject.Property
+    @IgnisProperty
     def kb_layout(self) -> str:
         """
         - read-only
@@ -95,7 +95,7 @@ class NiriService(BaseService):
         """
         return self._kb_layout
 
-    @GObject.Property
+    @IgnisProperty
     def active_window(self) -> dict[str, Any]:
         """
         - read-only
@@ -104,7 +104,7 @@ class NiriService(BaseService):
         """
         return self._active_window
 
-    @GObject.Property
+    @IgnisProperty
     def active_output(self) -> dict[str, Any]:
         """
         - read-only

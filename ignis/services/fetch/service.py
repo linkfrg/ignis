@@ -1,8 +1,9 @@
 import os
-from gi.repository import GObject, Gtk, Gdk  # type: ignore
+import glob
+from gi.repository import Gtk, Gdk  # type: ignore
 from ignis.exceptions import DisplayNotFoundError
 from ignis.base_service import BaseService
-import glob
+from ignis.gobject import IgnisProperty
 
 
 class FetchService(BaseService):
@@ -36,7 +37,7 @@ class FetchService(BaseService):
 
         return os_info
 
-    @GObject.Property
+    @IgnisProperty
     def os_name(self) -> str:
         """
         - read-only
@@ -45,7 +46,7 @@ class FetchService(BaseService):
         """
         return self._os_info.get("NAME", "Unknown")
 
-    @GObject.Property
+    @IgnisProperty
     def os_id(self) -> str:
         """
         - read-only
@@ -54,7 +55,7 @@ class FetchService(BaseService):
         """
         return self._os_info.get("ID", "Unknown")
 
-    @GObject.Property
+    @IgnisProperty
     def os_build_id(self) -> str:
         """
         - read-only
@@ -63,7 +64,7 @@ class FetchService(BaseService):
         """
         return self._os_info.get("BUILD_ID", "Unknown")
 
-    @GObject.Property
+    @IgnisProperty
     def os_ansi_color(self) -> str:
         """
         - read-only
@@ -72,7 +73,7 @@ class FetchService(BaseService):
         """
         return self._os_info.get("ANSI_COLOR", "Unknown")
 
-    @GObject.Property
+    @IgnisProperty
     def os_home_url(self) -> str:
         """
         - read-only
@@ -81,7 +82,7 @@ class FetchService(BaseService):
         """
         return self._os_info.get("HOME_URL", "Unknown")
 
-    @GObject.Property
+    @IgnisProperty
     def os_documentation_url(self) -> str:
         """
         - read-only
@@ -90,7 +91,7 @@ class FetchService(BaseService):
         """
         return self._os_info.get("DOCUMENTATION_URL", "Unknown")
 
-    @GObject.Property
+    @IgnisProperty
     def os_support_url(self) -> str:
         """
         - read-only
@@ -99,7 +100,7 @@ class FetchService(BaseService):
         """
         return self._os_info.get("SUPPORT_URL", "Unknown")
 
-    @GObject.Property
+    @IgnisProperty
     def os_bug_report_url(self) -> str:
         """
         - read-only
@@ -108,7 +109,7 @@ class FetchService(BaseService):
         """
         return self._os_info.get("BUG_REPORT_URL", "Unknown")
 
-    @GObject.Property
+    @IgnisProperty
     def os_privacy_policy_url(self) -> str:
         """
         - read-only
@@ -117,7 +118,7 @@ class FetchService(BaseService):
         """
         return self._os_info.get("PRIVACY_POLICY_URL", "Unknown")
 
-    @GObject.Property
+    @IgnisProperty
     def os_logo(self) -> str:
         """
         - read-only
@@ -126,7 +127,7 @@ class FetchService(BaseService):
         """
         return self._os_info.get("LOGO", "Unknown")
 
-    @GObject.Property
+    @IgnisProperty
     def os_logo_dark(self) -> str:
         """
         - read-only
@@ -135,7 +136,7 @@ class FetchService(BaseService):
         """
         return f"{self.os_logo}-dark"
 
-    @GObject.Property
+    @IgnisProperty
     def os_logo_text(self) -> str:
         """
         - read-only
@@ -144,7 +145,7 @@ class FetchService(BaseService):
         """
         return f"{self.os_logo}-text"
 
-    @GObject.Property
+    @IgnisProperty
     def os_logo_text_dark(self) -> str:
         """
         - read-only
@@ -153,7 +154,7 @@ class FetchService(BaseService):
         """
         return f"{self.os_logo}-text-dark"
 
-    @GObject.Property
+    @IgnisProperty
     def session_type(self) -> str | None:
         """
         - read-only
@@ -162,7 +163,7 @@ class FetchService(BaseService):
         """
         return os.environ.get("XDG_SESSION_TYPE")
 
-    @GObject.Property
+    @IgnisProperty
     def current_desktop(self) -> str | None:
         """
         - read-only
@@ -171,7 +172,7 @@ class FetchService(BaseService):
         """
         return os.environ.get("XDG_CURRENT_DESKTOP")
 
-    @GObject.Property
+    @IgnisProperty
     def hostname(self) -> str:
         """
         - read-only
@@ -182,7 +183,7 @@ class FetchService(BaseService):
             data = file.read()
         return data
 
-    @GObject.Property
+    @IgnisProperty
     def kernel(self) -> str:
         """
         - read-only
@@ -191,7 +192,7 @@ class FetchService(BaseService):
         """
         return os.uname().release
 
-    @GObject.Property
+    @IgnisProperty
     def uptime(self) -> tuple[int, int, int, int]:
         """
         - read-only
@@ -209,7 +210,7 @@ class FetchService(BaseService):
 
         return int(days), int(hours), int(minutes), int(seconds)
 
-    @GObject.Property
+    @IgnisProperty
     def cpu(self) -> str:
         """
         - read-only
@@ -224,7 +225,7 @@ class FetchService(BaseService):
                     break
         return cpu_name
 
-    @GObject.Property
+    @IgnisProperty
     def cpu_temp(self) -> float:
         """
         - read-only
@@ -245,7 +246,7 @@ class FetchService(BaseService):
                 continue
         return -1.0
 
-    @GObject.Property
+    @IgnisProperty
     def mem_info(self) -> dict[str, int]:
         """
         - read-only
@@ -261,7 +262,7 @@ class FetchService(BaseService):
                 mem_info[key.strip()] = int(value)
         return mem_info
 
-    @GObject.Property
+    @IgnisProperty
     def mem_total(self) -> int:
         """
         - read-only
@@ -270,7 +271,7 @@ class FetchService(BaseService):
         """
         return self.mem_info.get("MemTotal", None)
 
-    @GObject.Property
+    @IgnisProperty
     def mem_available(self) -> int:
         """
         - read-only
@@ -279,7 +280,7 @@ class FetchService(BaseService):
         """
         return self.mem_info.get("MemAvailable", None)
 
-    @GObject.Property
+    @IgnisProperty
     def mem_used(self) -> int:
         """
         - read-only
@@ -288,7 +289,7 @@ class FetchService(BaseService):
         """
         return self.mem_total - self.mem_available
 
-    @GObject.Property
+    @IgnisProperty
     def board_vendor(self) -> str:
         """
         - read-only
@@ -300,7 +301,7 @@ class FetchService(BaseService):
 
         return data.strip()
 
-    @GObject.Property
+    @IgnisProperty
     def board_name(self) -> str:
         """
         - read-only
@@ -312,14 +313,14 @@ class FetchService(BaseService):
 
         return data.strip()
 
-    @GObject.Property
+    @IgnisProperty
     def bios_version(self) -> str:
         with open("/sys/devices/virtual/dmi/id/bios_version") as file:
             data = file.read()
 
         return data.strip()
 
-    @GObject.Property
+    @IgnisProperty
     def gtk_theme(self) -> str | None:
         """
         - read-only
@@ -332,7 +333,7 @@ class FetchService(BaseService):
 
         return settings.get_property("gtk-theme-name")
 
-    @GObject.Property
+    @IgnisProperty
     def icon_theme(self) -> str | None:
         """
         - read-only

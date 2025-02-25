@@ -1,6 +1,7 @@
-from gi.repository import GObject, Gtk  # type: ignore
+from gi.repository import Gtk  # type: ignore
 from ignis.base_widget import BaseWidget
 from collections.abc import Callable
+from ignis.gobject import IgnisProperty
 
 
 class ToggleButton(Gtk.ToggleButton, BaseWidget):
@@ -29,7 +30,7 @@ class ToggleButton(Gtk.ToggleButton, BaseWidget):
             lambda x: self.on_toggled(self, self.active) if self.on_toggled else None,
         )
 
-    @GObject.Property
+    @IgnisProperty
     def on_toggled(self) -> Callable | None:
         """
         - optional, read-write

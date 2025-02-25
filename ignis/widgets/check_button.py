@@ -1,6 +1,7 @@
-from gi.repository import Gtk, GObject  # type: ignore
+from gi.repository import Gtk  # type: ignore
 from ignis.base_widget import BaseWidget
 from collections.abc import Callable
+from ignis.gobject import IgnisProperty
 
 
 class CheckButton(Gtk.CheckButton, BaseWidget):
@@ -43,7 +44,7 @@ class CheckButton(Gtk.CheckButton, BaseWidget):
             lambda x: self.on_toggled(x, x.active) if self.on_toggled else None,
         )
 
-    @GObject.Property
+    @IgnisProperty
     def on_toggled(self) -> Callable | None:
         """
         - optional, read-write

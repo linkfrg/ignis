@@ -1,9 +1,9 @@
 import os
-from gi.repository import GObject  # type: ignore
 from ignis.base_service import BaseService
 from .device import BacklightDevice
 from .constants import SYS_BACKLIGHT
 from ignis.utils import Utils
+from ignis.gobject import IgnisProperty
 
 
 class BacklightService(BaseService):
@@ -57,7 +57,7 @@ class BacklightService(BaseService):
 
         self.notify_all()
 
-    @GObject.Property
+    @IgnisProperty
     def available(self) -> bool:
         """
         - read-only
@@ -66,7 +66,7 @@ class BacklightService(BaseService):
         """
         return len(self._devices) > 0
 
-    @GObject.Property
+    @IgnisProperty
     def devices(self) -> list[BacklightDevice]:
         """
         - read-only
@@ -75,7 +75,7 @@ class BacklightService(BaseService):
         """
         return self._devices
 
-    @GObject.Property
+    @IgnisProperty
     def brightness(self) -> int:
         """
         - read-write
@@ -93,7 +93,7 @@ class BacklightService(BaseService):
         for device in self._devices:
             device.brightness = value
 
-    @GObject.Property
+    @IgnisProperty
     def max_brightness(self) -> int:
         """
         - read-only

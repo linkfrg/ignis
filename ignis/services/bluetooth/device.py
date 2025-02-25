@@ -1,5 +1,5 @@
 from gi.repository import GObject, GLib  # type: ignore
-from ignis.gobject import IgnisGObject
+from ignis.gobject import IgnisGObject, IgnisProperty
 from ignis.logging import logger
 from ._imports import GnomeBluetooth
 
@@ -41,7 +41,7 @@ class BluetoothDevice(IgnisGObject):
         Emitted when the device has been removed.
         """
 
-    @GObject.Property
+    @IgnisProperty
     def gdevice(self) -> GnomeBluetooth.Device:
         """
         - read-only
@@ -50,7 +50,7 @@ class BluetoothDevice(IgnisGObject):
         """
         return self._gdevice
 
-    @GObject.Property
+    @IgnisProperty
     def address(self) -> str:
         """
         - read-only
@@ -59,7 +59,7 @@ class BluetoothDevice(IgnisGObject):
         """
         return self._gdevice.props.address
 
-    @GObject.Property
+    @IgnisProperty
     def alias(self) -> str:
         """
         - read-only
@@ -68,7 +68,7 @@ class BluetoothDevice(IgnisGObject):
         """
         return self._gdevice.props.alias
 
-    @GObject.Property
+    @IgnisProperty
     def battery_level(self) -> int:
         """
         - read-only
@@ -77,7 +77,7 @@ class BluetoothDevice(IgnisGObject):
         """
         return self._gdevice.props.battery_level
 
-    @GObject.Property
+    @IgnisProperty
     def battery_percentage(self) -> float:
         """
         - read-only
@@ -86,7 +86,7 @@ class BluetoothDevice(IgnisGObject):
         """
         return self._gdevice.props.battery_percentage
 
-    @GObject.Property
+    @IgnisProperty
     def connectable(self) -> bool:
         """
         - read-only
@@ -95,7 +95,7 @@ class BluetoothDevice(IgnisGObject):
         """
         return self._gdevice.props.connectable
 
-    @GObject.Property
+    @IgnisProperty
     def connected(self) -> bool:
         """
         - read-only
@@ -104,7 +104,7 @@ class BluetoothDevice(IgnisGObject):
         """
         return self._gdevice.props.connected
 
-    @GObject.Property
+    @IgnisProperty
     def icon_name(self) -> str:
         """
         - read-only
@@ -113,7 +113,7 @@ class BluetoothDevice(IgnisGObject):
         """
         return self._gdevice.props.icon
 
-    @GObject.Property
+    @IgnisProperty
     def name(self) -> str:
         """
         - read-only
@@ -122,7 +122,7 @@ class BluetoothDevice(IgnisGObject):
         """
         return self._gdevice.props.name
 
-    @GObject.Property
+    @IgnisProperty
     def paired(self) -> bool:
         """
         - read-only
@@ -131,7 +131,7 @@ class BluetoothDevice(IgnisGObject):
         """
         return self._gdevice.props.paired
 
-    @GObject.Property
+    @IgnisProperty
     def trusted(self) -> bool:
         """
         - read-only
@@ -140,7 +140,7 @@ class BluetoothDevice(IgnisGObject):
         """
         return self._gdevice.props.trusted
 
-    @GObject.Property
+    @IgnisProperty
     def device_type(self) -> str:
         """
         - read-only

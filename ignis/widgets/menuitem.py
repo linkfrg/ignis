@@ -1,7 +1,8 @@
-from gi.repository import GObject, Gio, Gtk  # type: ignore
+from gi.repository import Gio, Gtk  # type: ignore
 from ignis.gobject import IgnisGObject
 from ignis.app import IgnisApp
 from collections.abc import Callable
+from ignis.gobject import IgnisProperty
 
 app = IgnisApp.get_default()
 
@@ -49,7 +50,7 @@ class MenuItem(IgnisGObject):
 
         app.add_action(action)
 
-    @GObject.Property
+    @IgnisProperty
     def label(self) -> str:
         """
         - required, read-only
@@ -58,7 +59,7 @@ class MenuItem(IgnisGObject):
         """
         return self._label
 
-    @GObject.Property
+    @IgnisProperty
     def uniq_name(self) -> str:
         """
         - not argument, read-only
@@ -67,7 +68,7 @@ class MenuItem(IgnisGObject):
         """
         return self._uniq_name
 
-    @GObject.Property
+    @IgnisProperty
     def enabled(self) -> bool:
         """
         - optional, read-write
@@ -76,7 +77,7 @@ class MenuItem(IgnisGObject):
         """
         return self._enabled
 
-    @GObject.Property
+    @IgnisProperty
     def on_activate(self) -> Callable:
         """
         - optional, read-write
@@ -92,7 +93,7 @@ class MenuItem(IgnisGObject):
     def __on_activate(self, *args) -> None:
         self.on_activate(self)
 
-    @GObject.Property
+    @IgnisProperty
     def submenu(self) -> "Gtk.PopoverMenu | None":
         """
         - optional, read-only

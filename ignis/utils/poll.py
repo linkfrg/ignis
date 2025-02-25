@@ -1,4 +1,4 @@
-from ignis.gobject import IgnisGObject
+from ignis.gobject import IgnisGObject, IgnisProperty
 from gi.repository import GLib, GObject  # type: ignore
 from typing import Any
 from collections.abc import Callable
@@ -39,7 +39,7 @@ class Poll(IgnisGObject):
         Emitted at each iteration.
         """
 
-    @GObject.Property
+    @IgnisProperty
     def timeout(self) -> int:
         """
         - required, read-write
@@ -52,7 +52,7 @@ class Poll(IgnisGObject):
     def timeout(self, value: int) -> None:
         self._timeout = value
 
-    @GObject.Property
+    @IgnisProperty
     def callback(self) -> Callable:
         """
         - required, read-write
@@ -65,7 +65,7 @@ class Poll(IgnisGObject):
     def callback(self, value: Callable) -> None:
         self._callback = value
 
-    @GObject.Property
+    @IgnisProperty
     def output(self) -> Any:
         """
         - not argument, read-only

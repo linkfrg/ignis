@@ -2,7 +2,7 @@ import os
 import re
 import subprocess
 from gi.repository import GObject, Gio, GLib  # type: ignore
-from ignis.gobject import IgnisGObject
+from ignis.gobject import IgnisGObject, IgnisProperty
 from .action import ApplicationAction
 
 
@@ -37,7 +37,7 @@ class Application(IgnisGObject):
         Emitted when the application has been unpinned.
         """
 
-    @GObject.Property
+    @IgnisProperty
     def app(self) -> Gio.DesktopAppInfo:
         """
         - read-only
@@ -46,7 +46,7 @@ class Application(IgnisGObject):
         """
         return self._app
 
-    @GObject.Property
+    @IgnisProperty
     def id(self) -> str | None:
         """
         - read-only
@@ -55,7 +55,7 @@ class Application(IgnisGObject):
         """
         return self._app.get_id()
 
-    @GObject.Property
+    @IgnisProperty
     def name(self) -> str:
         """
         - read-only
@@ -64,7 +64,7 @@ class Application(IgnisGObject):
         """
         return self._app.get_display_name()
 
-    @GObject.Property
+    @IgnisProperty
     def description(self) -> str | None:
         """
         - read-only
@@ -73,7 +73,7 @@ class Application(IgnisGObject):
         """
         return self._app.get_description()
 
-    @GObject.Property
+    @IgnisProperty
     def icon(self) -> str:
         """
         - read-only
@@ -86,7 +86,7 @@ class Application(IgnisGObject):
         else:
             return icon
 
-    @GObject.Property
+    @IgnisProperty
     def keywords(self) -> list[str]:
         """
         - read-only
@@ -95,7 +95,7 @@ class Application(IgnisGObject):
         """
         return self._app.get_keywords()
 
-    @GObject.Property
+    @IgnisProperty
     def desktop_file(self) -> str | None:
         """
         - read-only
@@ -104,7 +104,7 @@ class Application(IgnisGObject):
         """
         return self._app.get_filename()
 
-    @GObject.Property
+    @IgnisProperty
     def executable(self) -> str:
         """
         - read-only
@@ -113,7 +113,7 @@ class Application(IgnisGObject):
         """
         return self._app.get_executable()
 
-    @GObject.Property
+    @IgnisProperty
     def exec_string(self) -> str | None:
         """
         - read-only
@@ -122,7 +122,7 @@ class Application(IgnisGObject):
         """
         return self._app.get_string("Exec")
 
-    @GObject.Property
+    @IgnisProperty
     def actions(self) -> list[ApplicationAction]:
         """
         - read-only
@@ -131,7 +131,7 @@ class Application(IgnisGObject):
         """
         return self._actions
 
-    @GObject.Property
+    @IgnisProperty
     def is_pinned(self) -> bool:
         """
         - read-write
@@ -151,7 +151,7 @@ class Application(IgnisGObject):
         else:
             self.emit("unpinned")
 
-    @GObject.Property
+    @IgnisProperty
     def is_terminal(self) -> bool:
         """
         - read-only

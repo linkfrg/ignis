@@ -1,7 +1,8 @@
 import os
 from ignis.base_widget import BaseWidget
-from gi.repository import Gtk, GObject, GdkPixbuf, Gdk  # type: ignore
+from gi.repository import Gtk, GdkPixbuf, Gdk  # type: ignore
 from ignis.utils import Utils
+from ignis.gobject import IgnisProperty
 
 
 class Icon(Gtk.Image, BaseWidget):
@@ -30,7 +31,7 @@ class Icon(Gtk.Image, BaseWidget):
         self._image: str | GdkPixbuf.Pixbuf | None = None
         BaseWidget.__init__(self, **kwargs)
 
-    @GObject.Property
+    @IgnisProperty
     def image(self) -> "str | GdkPixbuf.Pixbuf | None":
         """
         - optional, read-write
