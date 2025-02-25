@@ -33,6 +33,7 @@ class NiriService(BaseService):
 
         self._workspaces: list[dict[str, Any]] = []
         self._active_workspaces: list[dict[str, Any]] = []
+        self._windows: list[dict[str, Any]] = []
         self._kb_layout: str = ""
         self._active_window: dict[str, Any] = {}
         self._active_output: dict[str, Any] = {}
@@ -44,6 +45,7 @@ class NiriService(BaseService):
             self.__sync_workspaces()
             self.__sync_active_window()
             self.__sync_active_output()
+            self.__sync_windows()
 
     @IgnisProperty
     def is_available(self) -> bool:
@@ -74,6 +76,15 @@ class NiriService(BaseService):
         The currently active workspaces.
         """
         return self._active_workspaces
+
+    @IgnisProperty
+    def windows(self) -> list[dict[str, Any]]:
+        """
+        - read-only
+
+        The currently opened windows.
+        """
+        return self._windows
 
     @IgnisProperty
     def kb_layout(self) -> str:
@@ -113,22 +124,24 @@ class NiriService(BaseService):
     def __on_event_received(self, event: str) -> None:
         try:
             eventtype = list(json.loads(event).keys())[0]
-            if eventtype.startswith("WorkspaceActivated") or eventtype.startswith(
-                "WorkspacesChanged"
-            ):
-                self.__sync_workspaces()
-            elif eventtype.startswith("KeyboardLayoutsChanged") or eventtype.startswith(
-                "KeyboardLayoutSwitched"
-            ):
-                self.__sync_kb_layout()
-
-            elif eventtype.startswith(
-                "WorkspaceActiveWindowChanged"
-            ) or eventtype.startswith("WindowFocusChanged"):
-                self.__sync_active_window()
-                self.__sync_active_output()
-            elif eventtype.startswith("WindowOpenedOrChanged"):
-                self.__sync_active_window()
+            match eventtype:
+                case "WorkspaceActivated":
+                    self.__sync_workspaces()
+                case "WorkspacesChanged":
+                    self.__sync_workspaces()
+                case "KeyboardLayoutsChanged":
+                    self.__sync_kb_layout()
+                case "KeyboardLayoutSwitched":
+                    self.__sync_kb_layout()
+                case "WorkspaceActiveWindowChanged":
+                    self.__sync_active_window()
+                    self.__sync_active_output()
+                case "WindowFocusChanged":
+                    self.__sync_active_window()
+                    self.__sync_active_output()
+                case "WindowOpenedOrChanged":
+                    self.__sync_active_window()
+                    self.__sync_windows()
 
         except KeyError:
             logger.warning(f"[Niri Service] non matching event: {event}")
@@ -158,6 +171,10 @@ class NiriService(BaseService):
             "FocusedOutput"
         ]
         self.notify("active-output")
+
+    def __sync_windows(self) -> None:
+        self._windows = json.loads(self.send_command('"Windows"\n'))["Ok"]["Windows"]
+        self.notify("windows")
 
     def send_command(self, cmd: str) -> str:
         """
