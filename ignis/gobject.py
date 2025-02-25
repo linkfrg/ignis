@@ -200,13 +200,18 @@ class IgnisProperty(GObject.Property):
     You can override this behaviour by explicitly passing ``type`` argument to the constructor.
     Arguments for the constructor are the same as for ``GObject.Property``.
     """
+
     def __init__(
         self,
         getter: Callable | None = None,
         setter: Callable | None = None,
         type: type | None = None,
         default: Any = None,
-        **kwargs,
+        nick: str = "",
+        blurb: str = "",
+        flags: GObject.ParamFlags = GObject.ParamFlags.READWRITE,
+        minimum: Any = None,
+        maximum: Any = None,
     ):
         processed_type = (
             self.__process_getter_return_type(getter)
@@ -224,7 +229,11 @@ class IgnisProperty(GObject.Property):
             setter=setter,
             type=processed_type,  # type: ignore
             default=processed_default,
-            **kwargs,
+            nick=nick,
+            blurb=blurb,
+            flags=flags,
+            minimum=minimum,
+            maximum=maximum,
         )
 
     def __process_getter_return_type(self, getter: Callable) -> type | None:
