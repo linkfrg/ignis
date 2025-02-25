@@ -59,3 +59,24 @@ def get_file_icon_name(path: str, symbolic: bool = False) -> str | None:
         return icon_names[0]
 
     return None
+
+
+def get_app_icon_name(app_id: str) -> str | None:
+    """
+    Get the application icon name by the application ID.
+
+    Args:
+        app_id: The application ID, without ``.desktop`` extension.
+
+    Returns:
+        The application icon name, or ``None`` if the application with the given ID doesn't exist or has no icon.
+    """
+    try:
+        app_info = Gio.DesktopAppInfo.new(app_id + ".desktop")
+    except TypeError:
+        return None
+
+    if not app_info:
+        return None
+
+    return app_info.get_string("Icon")
