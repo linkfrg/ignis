@@ -1,5 +1,16 @@
+import os
+import inspect
 from gi.repository import Gio  # type: ignore
-from .get_current_dir import get_current_dir
+
+
+def get_current_dir() -> str:
+    """
+    Returns the directory of the Python file where this function is called.
+    """
+    frame = inspect.stack()[1]
+    caller_file = frame.filename
+    return os.path.dirname(os.path.abspath(caller_file))
+
 
 DBUS_DIR = get_current_dir() + "/../dbus"
 
