@@ -8,7 +8,7 @@ from .monitor import get_monitor, get_n_monitors, get_monitors
 from .pixbuf import scale_pixbuf, crop_pixbuf
 from .poll import Poll
 from .sass import sass_compile
-from .shell import exec_sh, exec_sh_async
+from .shell import exec_sh, exec_sh_async, AsyncCompletedProcess
 from .socket import send_socket, listen_socket
 from .str_cases import snake_to_pascal, pascal_to_snake
 from .thread import thread, run_in_thread, ThreadTask
@@ -24,6 +24,7 @@ from .version import (
 class Utils:
     exec_sh = exec_sh
     exec_sh_async = exec_sh_async
+    AsyncCompletedProcess: TypeAlias = AsyncCompletedProcess
     load_interface_xml = load_interface_xml
     Poll: TypeAlias = Poll
     get_monitor = get_monitor
