@@ -518,8 +518,8 @@
   <section id="filemonitor">
 <h1>FileMonitor<a class="headerlink" href="#filemonitor" title="Link to this heading">#</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="ignis.utils.FileMonitor">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.utils.</span></span><span class="sig-name descname"><span class="pre">FileMonitor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prevent_gc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.utils.FileMonitor" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.utils.Utils.FileMonitor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.utils.Utils.</span></span><span class="sig-name descname"><span class="pre">FileMonitor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prevent_gc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.utils.Utils.FileMonitor" title="Link to this definition">#</a></dt>
 <dd><p>Monitor changes of the file or directory.</p>
 <p>Example usage:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Utils</span><span class="o">.</span><span class="n">FileMonitor</span><span class="p">(</span>
@@ -530,8 +530,8 @@
 </pre></div>
 </div>
 <dl class="py method">
-<dt class="sig sig-object py" id="ignis.utils.FileMonitor.changed">
-<span class="sig-name descname"><span class="pre">changed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.utils.FileMonitor.changed" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.utils.Utils.FileMonitor.changed">
+<span class="sig-name descname"><span class="pre">changed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.utils.Utils.FileMonitor.changed" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>Signal</p></li>
 </ul>
@@ -540,15 +540,15 @@
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>path</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The path to the changed file or directory.</p></li>
-<li><p><strong>event_type</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The event type. A list of all event types described in <a class="reference internal" href="#ignis.utils.FileMonitor.callback" title="ignis.utils.FileMonitor.callback"><code class="xref py py-attr docutils literal notranslate"><span class="pre">callback</span></code></a>.</p></li>
+<li><p><strong>event_type</strong> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) -- The event type. A list of all event types described in <a class="reference internal" href="#ignis.utils.Utils.FileMonitor.callback" title="ignis.utils.Utils.FileMonitor.callback"><code class="xref py py-attr docutils literal notranslate"><span class="pre">callback</span></code></a>.</p></li>
 </ul>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="ignis.utils.FileMonitor.path">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.utils.FileMonitor.path" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.utils.Utils.FileMonitor.path">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.utils.Utils.FileMonitor.path" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>required, read-only</p></li>
 </ul>
@@ -556,8 +556,8 @@
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="ignis.utils.FileMonitor.flags">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">flags</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.utils.FileMonitor.flags" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.utils.Utils.FileMonitor.flags">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">flags</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.utils.Utils.FileMonitor.flags" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>optional, read-only</p></li>
 </ul>
@@ -575,8 +575,8 @@
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="ignis.utils.FileMonitor.callback">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">callback</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.utils.FileMonitor.callback" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.utils.Utils.FileMonitor.callback">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">callback</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.utils.Utils.FileMonitor.callback" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>optional, read-write</p></li>
 </ul>
@@ -603,8 +603,8 @@ It should take two arguments:
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="ignis.utils.FileMonitor.recursive">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">recursive</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.utils.FileMonitor.recursive" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.utils.Utils.FileMonitor.recursive">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">recursive</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.utils.Utils.FileMonitor.recursive" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>optional, read-only</p></li>
 </ul>
@@ -613,8 +613,8 @@ It should take two arguments:
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="ignis.utils.FileMonitor.prevent_gc">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">prevent_gc</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.utils.FileMonitor.prevent_gc" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.utils.Utils.FileMonitor.prevent_gc">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">prevent_gc</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.utils.Utils.FileMonitor.prevent_gc" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>optional, read-only</p></li>
 </ul>
@@ -623,8 +623,8 @@ It should take two arguments:
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ignis.utils.FileMonitor.cancel">
-<span class="sig-name descname"><span class="pre">cancel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.utils.FileMonitor.cancel" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.utils.Utils.FileMonitor.cancel">
+<span class="sig-name descname"><span class="pre">cancel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.utils.Utils.FileMonitor.cancel" title="Link to this definition">#</a></dt>
 <dd><p>Cancel the monitoring process.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -684,14 +684,14 @@ It should take two arguments:
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.FileMonitor"><code class="docutils literal notranslate"><span class="pre">FileMonitor</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.FileMonitor.changed"><code class="docutils literal notranslate"><span class="pre">FileMonitor.changed()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.FileMonitor.path"><code class="docutils literal notranslate"><span class="pre">FileMonitor.path</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.FileMonitor.flags"><code class="docutils literal notranslate"><span class="pre">FileMonitor.flags</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.FileMonitor.callback"><code class="docutils literal notranslate"><span class="pre">FileMonitor.callback</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.FileMonitor.recursive"><code class="docutils literal notranslate"><span class="pre">FileMonitor.recursive</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.FileMonitor.prevent_gc"><code class="docutils literal notranslate"><span class="pre">FileMonitor.prevent_gc</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.FileMonitor.cancel"><code class="docutils literal notranslate"><span class="pre">FileMonitor.cancel()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.FileMonitor"><code class="docutils literal notranslate"><span class="pre">FileMonitor</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.FileMonitor.changed"><code class="docutils literal notranslate"><span class="pre">FileMonitor.changed()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.FileMonitor.path"><code class="docutils literal notranslate"><span class="pre">FileMonitor.path</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.FileMonitor.flags"><code class="docutils literal notranslate"><span class="pre">FileMonitor.flags</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.FileMonitor.callback"><code class="docutils literal notranslate"><span class="pre">FileMonitor.callback</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.FileMonitor.recursive"><code class="docutils literal notranslate"><span class="pre">FileMonitor.recursive</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.FileMonitor.prevent_gc"><code class="docutils literal notranslate"><span class="pre">FileMonitor.prevent_gc</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.FileMonitor.cancel"><code class="docutils literal notranslate"><span class="pre">FileMonitor.cancel()</span></code></a></li>
 </ul>
 </li>
 </ul>

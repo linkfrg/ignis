@@ -518,8 +518,8 @@
   <section id="poll">
 <h1>Poll<a class="headerlink" href="#poll" title="Link to this heading">#</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="ignis.utils.Poll">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.utils.</span></span><span class="sig-name descname"><span class="pre">Poll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.utils.Poll" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.utils.Utils.Poll">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.utils.Utils.</span></span><span class="sig-name descname"><span class="pre">Poll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.utils.Utils.Poll" title="Link to this definition">#</a></dt>
 <dd><p>Calls a callback every n milliseconds specified by the timeout.</p>
 <p>You can pass arguments to the constructor, and they will be passed to the callback.</p>
 <p>Example usage:</p>
@@ -530,8 +530,8 @@
 </pre></div>
 </div>
 <dl class="py method">
-<dt class="sig sig-object py" id="ignis.utils.Poll.changed">
-<span class="sig-name descname"><span class="pre">changed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ignis.utils.Poll.changed" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.utils.Utils.Poll.changed">
+<span class="sig-name descname"><span class="pre">changed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ignis.utils.Utils.Poll.changed" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>Signal</p></li>
 </ul>
@@ -539,8 +539,8 @@
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="ignis.utils.Poll.timeout">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">timeout</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.utils.Poll.timeout" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.utils.Utils.Poll.timeout">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">timeout</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.utils.Utils.Poll.timeout" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>required, read-write</p></li>
 </ul>
@@ -548,8 +548,8 @@
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="ignis.utils.Poll.callback">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">callback</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></em><a class="headerlink" href="#ignis.utils.Poll.callback" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.utils.Utils.Poll.callback">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">callback</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></em><a class="headerlink" href="#ignis.utils.Utils.Poll.callback" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>required, read-write</p></li>
 </ul>
@@ -557,8 +557,8 @@
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="ignis.utils.Poll.output">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">output</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a></em><a class="headerlink" href="#ignis.utils.Poll.output" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.utils.Utils.Poll.output">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">output</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a></em><a class="headerlink" href="#ignis.utils.Utils.Poll.output" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>not argument, read-only</p></li>
 </ul>
@@ -570,8 +570,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ignis.utils.Poll.cancel">
-<span class="sig-name descname"><span class="pre">cancel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.utils.Poll.cancel" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.utils.Utils.Poll.cancel">
+<span class="sig-name descname"><span class="pre">cancel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.utils.Utils.Poll.cancel" title="Link to this definition">#</a></dt>
 <dd><p>Cancel polling.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -631,12 +631,12 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Poll"><code class="docutils literal notranslate"><span class="pre">Poll</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Poll.changed"><code class="docutils literal notranslate"><span class="pre">Poll.changed()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Poll.timeout"><code class="docutils literal notranslate"><span class="pre">Poll.timeout</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Poll.callback"><code class="docutils literal notranslate"><span class="pre">Poll.callback</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Poll.output"><code class="docutils literal notranslate"><span class="pre">Poll.output</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Poll.cancel"><code class="docutils literal notranslate"><span class="pre">Poll.cancel()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.Poll"><code class="docutils literal notranslate"><span class="pre">Poll</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.Poll.changed"><code class="docutils literal notranslate"><span class="pre">Poll.changed()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.Poll.timeout"><code class="docutils literal notranslate"><span class="pre">Poll.timeout</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.Poll.callback"><code class="docutils literal notranslate"><span class="pre">Poll.callback</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.Poll.output"><code class="docutils literal notranslate"><span class="pre">Poll.output</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.Poll.cancel"><code class="docutils literal notranslate"><span class="pre">Poll.cancel()</span></code></a></li>
 </ul>
 </li>
 </ul>
