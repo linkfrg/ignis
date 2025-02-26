@@ -496,7 +496,9 @@ in properties of Services and classes related to them, since the user shouldn't 
 </li>
 <li><p>If possible, please provide a code example.</p></li>
 </ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SomeClass</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ignis.gobject</span><span class="w"> </span><span class="kn">import</span> <span class="n">IgnisProperty</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SomeClass</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This is an example docstring for a class.</span>
 <span class="sd">    Further info goes here...</span>
@@ -521,14 +523,14 @@ in properties of Services and classes related to them, since the user shouldn't 
 <span class="sd">        some_arg (``int``): Description of the argument...</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<span class="nd">@GObject</span><span class="o">.</span><span class="n">Property</span>
+<span class="nd">@IgnisProperty</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">some_prop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    - optional, read-only</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="o">...</span>
 
-<span class="nd">@GObject</span><span class="o">.</span><span class="n">Property</span>
+<span class="nd">@IgnisProperty</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">rw_prop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    - optional, read-write</span>
