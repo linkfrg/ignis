@@ -1,5 +1,5 @@
 from gi.repository import GObject  # type: ignore
-from ignis.gobject import IgnisGObject
+from ignis.gobject import IgnisGObject, IgnisProperty
 from ._imports import NM
 from .util import check_is_vpn
 
@@ -30,7 +30,7 @@ class VpnConnection(IgnisGObject):
         Emitted when this VPN connection is removed.
         """
 
-    @GObject.Property
+    @IgnisProperty
     def is_connected(self) -> bool:
         """
         - read-only
@@ -39,7 +39,7 @@ class VpnConnection(IgnisGObject):
         """
         return self._is_connected
 
-    @GObject.Property
+    @IgnisProperty
     def name(self) -> str | None:
         """
         - read-only
@@ -130,7 +130,7 @@ class Vpn(IgnisGObject):
             connection (:class:`~ignis.services.network.VpnConnection`): An instance of the newly activated VPN connection.
         """
 
-    @GObject.Property
+    @IgnisProperty
     def connections(self) -> list[VpnConnection]:
         """
         - read-only
@@ -139,7 +139,7 @@ class Vpn(IgnisGObject):
         """
         return list(self._connections.values())
 
-    @GObject.Property
+    @IgnisProperty
     def active_connections(self) -> list[VpnConnection]:
         """
         - read-only
@@ -148,7 +148,7 @@ class Vpn(IgnisGObject):
         """
         return list(self._active_connections.values())
 
-    @GObject.Property
+    @IgnisProperty
     def active_vpn_id(self) -> str | None:
         """
         - read-only
@@ -160,7 +160,7 @@ class Vpn(IgnisGObject):
         else:
             return self.active_connections[0].name
 
-    @GObject.Property
+    @IgnisProperty
     def is_connected(self) -> bool:
         """
         - read-only
@@ -169,7 +169,7 @@ class Vpn(IgnisGObject):
         """
         return len(self._active_connections) != 0
 
-    @GObject.Property
+    @IgnisProperty
     def icon_name(self) -> str:
         """
         - read-only

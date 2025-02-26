@@ -1,7 +1,7 @@
 import sys
 import json
 from gi.repository import GObject  # type: ignore
-from ignis.gobject import IgnisGObject, Binding
+from ignis.gobject import IgnisGObject, Binding, IgnisProperty
 from typing import Any
 from collections.abc import Callable
 from collections.abc import Generator
@@ -26,7 +26,7 @@ class Option(IgnisGObject):
         if name == self._name:
             self.notify("value")
 
-    @GObject.Property
+    @IgnisProperty
     def value(self):
         return getattr(self._manager, self._name)
 

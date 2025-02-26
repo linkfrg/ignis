@@ -28,6 +28,7 @@ intersphinx_mapping = {
     "gdkpixbuf": ("https://lazka.github.io/pgi-docs/GdkPixbuf-2.0", None),
     "nm": ("https://lazka.github.io/pgi-docs/NM-1.0", None),
     "gobject": ("https://lazka.github.io/pgi-docs/GObject-2.0", None),
+    "pygobject": ("https://pygobject.gnome.org", None),
 }
 
 templates_path = ["_templates"]
@@ -129,7 +130,7 @@ html_context = {
 
 def replace_gobject_property(target_dir: str) -> None:
     """
-    This function replaces @GObject.Property with @property.
+    This function replaces @GObject.Property and @IgnisProperty with @property.
     For what? To indicate to Sphinx that GObject.Property functions are actually properties.
     """
     for dirpath, _, filenames in os.walk(target_dir):
@@ -139,7 +140,9 @@ def replace_gobject_property(target_dir: str) -> None:
                 with open(file_path) as file:
                     content = file.read()
 
-                new_content = content.replace("@GObject.Property", "@property")
+                new_content = content.replace("@GObject.Property", "@property").replace(
+                    "@IgnisProperty", "@property"
+                )
 
                 with open(file_path, "w", encoding="utf-8") as file:
                     file.write(new_content)

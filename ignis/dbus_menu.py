@@ -2,6 +2,7 @@ from gi.repository import Gtk, Gio, GObject, GLib  # type: ignore
 from ignis.dbus import DBusProxy
 from ignis.app import IgnisApp
 from ignis.utils import Utils
+from ignis.gobject import IgnisProperty
 
 app = IgnisApp.get_default()
 
@@ -25,7 +26,7 @@ class MenuItem(GObject.Object):
         action.connect("activate", self.__on_activate, item_id)
         app.add_action(action)
 
-    @GObject.Property
+    @IgnisProperty
     def uniq_name(self) -> str:
         return self._uniq_name
 
@@ -72,7 +73,7 @@ class DBusMenu(Gtk.PopoverMenu):
 
         self.__update_menu()
 
-    @GObject.Property
+    @IgnisProperty
     def name(self) -> str:
         """
         - required, read-only
@@ -81,7 +82,7 @@ class DBusMenu(Gtk.PopoverMenu):
         """
         return self._name
 
-    @GObject.Property
+    @IgnisProperty
     def object_path(self) -> str:
         """
         - required, read-only

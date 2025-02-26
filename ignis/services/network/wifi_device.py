@@ -1,5 +1,5 @@
 from gi.repository import GObject  # type: ignore
-from ignis.gobject import IgnisGObject
+from ignis.gobject import IgnisGObject, IgnisProperty
 from ._imports import NM
 from .access_point import WifiAccessPoint, ActiveAccessPoint
 from .constants import STATE
@@ -48,7 +48,7 @@ class WifiDevice(IgnisGObject):
             access_point (:class:`~ignis.services.network.WifiAccessPoint`): An instance of the access point.
         """
 
-    @GObject.Property
+    @IgnisProperty
     def access_points(self) -> list[WifiAccessPoint]:
         """
         - read-only
@@ -57,7 +57,7 @@ class WifiDevice(IgnisGObject):
         """
         return list(self._access_points.values())
 
-    @GObject.Property
+    @IgnisProperty
     def ap(self) -> WifiAccessPoint:
         """
         - read-only
@@ -66,7 +66,7 @@ class WifiDevice(IgnisGObject):
         """
         return self._ap
 
-    @GObject.Property
+    @IgnisProperty
     def state(self) -> str | None:
         """
         - read-only
@@ -75,7 +75,7 @@ class WifiDevice(IgnisGObject):
         """
         return STATE.get(self._device.get_state(), None)
 
-    @GObject.Property
+    @IgnisProperty
     def is_connected(self) -> bool:
         """
         - read-only

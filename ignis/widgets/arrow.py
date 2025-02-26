@@ -1,6 +1,6 @@
-from gi.repository import GObject  # type: ignore
 from ignis.widgets.icon import Icon
 from ignis.utils import Utils
+from ignis.gobject import IgnisProperty
 
 DIRECTION = {
     "right": "pan-end-symbolic",
@@ -72,7 +72,7 @@ class Arrow(Icon):
 
         self.style = f"-gtk-icon-transform: rotate({self.__deg}deg);"
 
-    @GObject.Property
+    @IgnisProperty
     def rotated(self) -> bool:
         """
         - optional, read-write
@@ -100,7 +100,7 @@ class Arrow(Icon):
         )  # Calculate steps based on time, with a minimum of 9 steps
         self.__step = max(1, self.degree // steps)  # Ensure step is at least 1 degree
 
-    @GObject.Property
+    @IgnisProperty
     def degree(self) -> int:
         """
         - optional, read-write
@@ -117,7 +117,7 @@ class Arrow(Icon):
         self._degree = value
         self.__update_step()
 
-    @GObject.Property
+    @IgnisProperty
     def time(self) -> int:
         """
         - optional, read-write
@@ -133,7 +133,7 @@ class Arrow(Icon):
         self._time = value
         self.__update_step()
 
-    @GObject.Property
+    @IgnisProperty
     def direction(self) -> str:
         """
         - optional, read-write
@@ -156,7 +156,7 @@ class Arrow(Icon):
         self._direction = value
         self.icon_name = DIRECTION[value]
 
-    @GObject.Property
+    @IgnisProperty
     def counterclockwise(self) -> bool:
         """
         - optional, read-write

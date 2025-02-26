@@ -2,7 +2,7 @@ import os
 import asyncio
 from ignis.dbus import DBusProxy
 from gi.repository import GObject, GLib  # type: ignore
-from ignis.gobject import IgnisGObject
+from ignis.gobject import IgnisGObject, IgnisProperty
 from ignis.utils import Utils
 from ignis.connection_manager import ConnectionManager
 from collections.abc import Callable
@@ -204,7 +204,7 @@ class MprisPlayer(IgnisGObject):
         Emitted when a player has been closed or removed.
         """
 
-    @GObject.Property
+    @IgnisProperty
     def can_control(self) -> bool:
         """
         - read-only
@@ -213,7 +213,7 @@ class MprisPlayer(IgnisGObject):
         """
         return self._can_control
 
-    @GObject.Property
+    @IgnisProperty
     def can_go_next(self) -> bool:
         """
         - read-only
@@ -222,7 +222,7 @@ class MprisPlayer(IgnisGObject):
         """
         return self._can_go_next
 
-    @GObject.Property
+    @IgnisProperty
     def can_go_previous(self) -> bool:
         """
         - read-only
@@ -231,7 +231,7 @@ class MprisPlayer(IgnisGObject):
         """
         return self._can_go_previous
 
-    @GObject.Property
+    @IgnisProperty
     def can_pause(self) -> bool:
         """
         - read-only
@@ -240,7 +240,7 @@ class MprisPlayer(IgnisGObject):
         """
         return self._can_pause
 
-    @GObject.Property
+    @IgnisProperty
     def can_play(self) -> bool:
         """
         - read-only
@@ -249,7 +249,7 @@ class MprisPlayer(IgnisGObject):
         """
         return self._can_play
 
-    @GObject.Property
+    @IgnisProperty
     def can_seek(self) -> bool:
         """
         - read-only
@@ -258,7 +258,7 @@ class MprisPlayer(IgnisGObject):
         """
         return self._can_seek
 
-    @GObject.Property
+    @IgnisProperty
     def loop_status(self) -> str | None:
         """
         - read-only
@@ -267,7 +267,7 @@ class MprisPlayer(IgnisGObject):
         """
         return self._loop_status
 
-    @GObject.Property
+    @IgnisProperty
     def metadata(self) -> dict:
         """
         - read-only
@@ -276,7 +276,7 @@ class MprisPlayer(IgnisGObject):
         """
         return self._metadata
 
-    @GObject.Property
+    @IgnisProperty
     def track_id(self) -> str | None:
         """
         - read-only
@@ -285,7 +285,7 @@ class MprisPlayer(IgnisGObject):
         """
         return self._track_id
 
-    @GObject.Property
+    @IgnisProperty
     def length(self) -> int:
         """
         - read-only
@@ -295,7 +295,7 @@ class MprisPlayer(IgnisGObject):
         """
         return self._length
 
-    @GObject.Property
+    @IgnisProperty
     def art_url(self) -> str | None:
         """
         - read-only
@@ -304,7 +304,7 @@ class MprisPlayer(IgnisGObject):
         """
         return self._art_url
 
-    @GObject.Property
+    @IgnisProperty
     def album(self) -> str | None:
         """
         - read-only
@@ -313,7 +313,7 @@ class MprisPlayer(IgnisGObject):
         """
         return self._album
 
-    @GObject.Property
+    @IgnisProperty
     def artist(self) -> str | None:
         """
         - read-only
@@ -322,7 +322,7 @@ class MprisPlayer(IgnisGObject):
         """
         return self._artist
 
-    @GObject.Property
+    @IgnisProperty
     def title(self) -> str | None:
         """
         - read-only
@@ -331,7 +331,7 @@ class MprisPlayer(IgnisGObject):
         """
         return self._title
 
-    @GObject.Property
+    @IgnisProperty
     def url(self) -> str | None:
         """
         - read-only
@@ -340,7 +340,7 @@ class MprisPlayer(IgnisGObject):
         """
         return self._url
 
-    @GObject.Property
+    @IgnisProperty
     def playback_status(self) -> str | None:
         """
         - read-only
@@ -349,7 +349,7 @@ class MprisPlayer(IgnisGObject):
         """
         return self._playback_status
 
-    @GObject.Property
+    @IgnisProperty
     def position(self) -> int:
         """
         - read-write
@@ -364,7 +364,7 @@ class MprisPlayer(IgnisGObject):
             "(ox)", self.track_id, value * 1_000_000, result_handler=lambda *args: None
         )
 
-    @GObject.Property
+    @IgnisProperty
     def shuffle(self) -> bool:
         """
         - read-only
@@ -373,7 +373,7 @@ class MprisPlayer(IgnisGObject):
         """
         return self._shuffle
 
-    @GObject.Property
+    @IgnisProperty
     def volume(self) -> float:
         """
         - read-only
@@ -382,7 +382,7 @@ class MprisPlayer(IgnisGObject):
         """
         return self._volume
 
-    @GObject.Property
+    @IgnisProperty
     def identity(self) -> str | None:
         """
         - read-only
@@ -391,7 +391,7 @@ class MprisPlayer(IgnisGObject):
         """
         return self._identity
 
-    @GObject.Property
+    @IgnisProperty
     def desktop_entry(self) -> str | None:
         """
         - read-only

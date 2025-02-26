@@ -15,6 +15,7 @@ from .constants import (
 )
 from ignis.exceptions import AnotherNotificationDaemonRunningError
 from ignis.options import options
+from ignis.gobject import IgnisProperty
 
 
 class NotificationService(BaseService):
@@ -106,7 +107,7 @@ class NotificationService(BaseService):
             notification (:class:`~ignis.services.notifications.Notification`): The instance of the notification.
         """
 
-    @GObject.Property
+    @IgnisProperty
     def notifications(self) -> list[Notification]:
         """
         - read-only
@@ -115,7 +116,7 @@ class NotificationService(BaseService):
         """
         return list(self._notifications.values())
 
-    @GObject.Property
+    @IgnisProperty
     def popups(self) -> list[Notification]:
         """
         - read-only
