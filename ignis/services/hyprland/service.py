@@ -229,3 +229,14 @@ class HyprlandService(BaseService):
             workspace_id: The ID of the workspace to switch to.
         """
         self.send_command(f"dispatch workspace {workspace_id}")
+
+    def get_workspace_by_id(self, workspace_id: int) -> HyprlandWorkspace | None:
+        """
+        Get a workspace by its ID.
+
+        Args:
+            workspace_id: The ID of the workspace.
+        Returns:
+            The workspace instance, or ``None`` if the workspace with the given ID doesn't exist.
+        """
+        return self._workspaces.get(workspace_id, None)
