@@ -1,71 +1,20 @@
 import json
 import os
 import socket
+from gi.repository import GObject  # type: ignore
 from ignis.utils import Utils
-from typing import Any
 from ignis.exceptions import HyprlandIPCNotFoundError
 from ignis.base_service import BaseService
 from ignis.gobject import IgnisProperty
 from .constants import HYPR_SOCKET_DIR
+from .workspace import HyprlandWorkspace
+from .keyboard import HyprlandKeyboard
+from .window import HyprlandWindow
 
 
 class HyprlandService(BaseService):
     """
     Hyprland IPC client.
-
-    .. note::
-        The contents of ``dict`` properties are not described here.
-        To find out their contents just print them into the terminal.
-
-        >>> print(hyprland.workspaces)
-        [
-            {
-                "id": 1,
-                "name": "1",
-                "monitor": "DP-1",
-                "monitorID": 1,
-                "windows": 1,
-                "hasfullscreen": False,
-                "lastwindow": "0x561dc35d2e80",
-                "lastwindowtitle": "hyprland.py - ignis - Visual Studio Code",
-            },
-            {
-                "id": 10,
-                "name": "10",
-                "monitor": "HDMI-A-1",
-                "monitorID": 0,
-                "windows": 1,
-                "hasfullscreen": False,
-                "lastwindow": "0x561dc3845f30",
-                "lastwindowtitle": "Type hints cheat sheet - mypy 1.11.2 documentation — Mozilla Firefox",
-            },
-        ]
-
-        >>> print(hyprland.active_window)
-        {
-            "address": "0x561dc35d2e80",
-            "mapped": True,
-            "hidden": False,
-            "at": [1942, 22],
-            "size": [1876, 1036],
-            "workspace": {"id": 1, "name": "1"},
-            "floating": False,
-            "pseudo": False,
-            "monitor": 1,
-            "class": "code-url-handler",
-            "title": "hyprland.py - ignis - Visual Studio Code",
-            "initialClass": "code-url-handler",
-            "initialTitle": "Visual Studio Code",
-            "pid": 1674,
-            "xwayland": False,
-            "pinned": False,
-            "fullscreen": 0,
-            "fullscreenClient": 0,
-            "grouped": [],
-            "tags": [],
-            "swallowing": "0x0",
-            "focusHistoryID": 0,
-        }
 
     Example usage:
 
@@ -75,26 +24,45 @@ class HyprlandService(BaseService):
 
         hyprland = HyprlandService.get_default()
 
-        print(hyprland.workspaces)
-        print(hyprland.kb_layout)
+        # Get IDs of all workspaces
+        print([i.id for i in hyprland.workspaces])
 
-        hyprland.connect("notify::kb-layout", lambda x, y: print(hyprland.kb_layout))
+        # Get the ID of the active workspace
+        print(hyprland.active_workspace.id)
+
+        # Get the currently active keyboard layout
+        print(hyprland.main_keyboard.active_keymap)
+
+        # Get the title of the active window
+        print(hyprland.active_window.title)
     """
 
     def __init__(self):
         super().__init__()
 
-        self._workspaces: list[dict[str, Any]] = []
-        self._active_workspace: dict[str, Any] = {}
-        self._kb_layout: str = ""
-        self._active_window: dict[str, Any] = {}
+        self._workspaces: dict[int, HyprlandWorkspace] = {}
+        self._active_workspace: HyprlandWorkspace = HyprlandWorkspace(self)
+        self._main_keyboard: HyprlandKeyboard = HyprlandKeyboard(self)
+        self._active_window: HyprlandWindow = HyprlandWindow()
 
         if self.is_available:
             self.__listen_events()
 
-            self.__sync_kb_layout()
             self.__sync_workspaces()
+            self.__sync_active_workspace()
+            self.__sync_main_keyboard()
             self.__sync_active_window()
+
+    @GObject.Signal(arg_types=(HyprlandWorkspace,))
+    def workspace_added(self, *_):
+        """
+        - Signal
+
+        Emitted when a new workspace has been added.
+
+        Args:
+            workspace (:class:`~ignis.services.hyprland.HyprlandWorkspace`): The instance of the workspace.
+        """
 
     @IgnisProperty
     def is_available(self) -> bool:
@@ -106,16 +74,16 @@ class HyprlandService(BaseService):
         return os.path.exists(HYPR_SOCKET_DIR)
 
     @IgnisProperty
-    def workspaces(self) -> list[dict[str, Any]]:
+    def workspaces(self) -> list[HyprlandWorkspace]:
         """
         - read-only
 
         A list of workspaces.
         """
-        return self._workspaces
+        return list(self._workspaces.values())
 
     @IgnisProperty
-    def active_workspace(self) -> dict[str, Any]:
+    def active_workspace(self) -> HyprlandWorkspace:
         """
         - read-only
 
@@ -124,16 +92,16 @@ class HyprlandService(BaseService):
         return self._active_workspace
 
     @IgnisProperty
-    def kb_layout(self) -> str:
+    def main_keyboard(self) -> HyprlandKeyboard:
         """
         - read-only
 
-        The currenly active keyboard layout.
+        The main keyboard.
         """
-        return self._kb_layout
+        return self._main_keyboard
 
     @IgnisProperty
-    def active_window(self) -> dict[str, Any]:
+    def active_window(self) -> HyprlandWindow:
         """
         - read-only
 
@@ -149,35 +117,87 @@ class HyprlandService(BaseService):
                 self.__on_event_received(event)
 
     def __on_event_received(self, event: str) -> None:
-        if (
-            event.startswith("workspace>>")
-            or event.startswith("destroyworkspace>>")
-            or event.startswith("focusedmon>>")
-        ):
-            self.__sync_workspaces()
-        elif event.startswith("activelayout>>"):
-            self.__sync_kb_layout()
+        event_data = event.split(">>")
+        event_type = event_data[0]
+        event_value = event_data[1]
 
-        elif event.startswith("activewindow>>"):
-            self.__sync_active_window()
+        match event_type:
+            case "destroyworkspace":
+                self.__destroy_workspace(int(event_value))
+            case "createworkspace":
+                self.__create_workspace(int(event_value))
+            case "workspace":
+                self.__sync_active_workspace()
+            case "focusedmon":
+                self.__sync_active_workspace()
+            case "activelayout":
+                self.__sync_active_layout(event_value.split(",")[1])
+            case "activewindow":
+                self.__sync_active_window()
+
+    def __create_workspace(self, id_: int) -> None:
+        for i in json.loads(self.send_command("j/workspaces")):
+            if id_ == i["id"]:
+                workspace_data = i
+                break
+        else:
+            workspace_data = None
+
+        if workspace_data:
+            workspace = HyprlandWorkspace(self)
+            workspace._sync(workspace_data)
+            self._workspaces[workspace_data["id"]] = workspace
+            self.__sort_workspaces()
+            self.emit("workspace-added", workspace)
+            self.notify("workspaces")
+
+    def __destroy_workspace(self, id_: int) -> None:
+        workspace = self._workspaces.pop(int(id_), None)
+        if workspace:
+            workspace.emit("destroyed")
+            self.__sort_workspaces()
+            self.notify("workspaces")
+
+    def __sort_workspaces(self) -> None:
+        self._workspaces = dict(sorted(self._workspaces.items()))
 
     def __sync_workspaces(self) -> None:
-        self._workspaces = sorted(
+        workspaces = sorted(
             json.loads(self.send_command("j/workspaces")), key=lambda x: x["id"]
         )
-        self._active_workspace = json.loads(self.send_command("j/activeworkspace"))
+        for workspace_data in workspaces:
+            workspace = self._workspaces.get(workspace_data["id"], None)
+            if workspace is None:
+                workspace = HyprlandWorkspace(self)
+
+            workspace._sync(workspace_data)
+            self._workspaces[workspace_data["id"]] = workspace
+
+        self.__sort_workspaces()
+
         self.notify("workspaces")
+
+    def __sync_active_workspace(self) -> None:
+        workspace_data = json.loads(self.send_command("j/activeworkspace"))
+        self._active_workspace._sync(workspace_data)
         self.notify("active-workspace")
 
-    def __sync_kb_layout(self) -> None:
-        for kb in json.loads(self.send_command("j/devices"))["keyboards"]:
-            if kb["main"]:
-                self._kb_layout = kb["active_keymap"]
-                self.notify("kb_layout")
+    def __sync_main_keyboard(self) -> None:
+        data_list = json.loads(self.send_command("j/devices"))["keyboards"]
+
+        for kb_data in data_list:
+            if kb_data["main"] is True:
+                self._main_keyboard._sync(kb_data)
+
+        self.notify("main-keyboard")
+
+    def __sync_active_layout(self, layout: str) -> None:
+        self._main_keyboard._sync({"active_keymap": layout})
 
     def __sync_active_window(self) -> None:
-        self._active_window = json.loads(self.send_command("j/activewindow"))
-        self.notify("active_window")
+        active_window_data = json.loads(self.send_command("j/activewindow"))
+        self.active_window._sync(active_window_data)
+        self.notify("active-window")
 
     def send_command(self, cmd: str) -> str:
         """
@@ -200,14 +220,6 @@ class HyprlandService(BaseService):
         with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as sock:
             sock.connect(f"{HYPR_SOCKET_DIR}/.socket.sock")
             return Utils.send_socket(sock, cmd, errors="ignore")
-
-    def switch_kb_layout(self) -> None:
-        """
-        Switch to the next keyboard layout.
-        """
-        for kb in json.loads(self.send_command("j/devices"))["keyboards"]:
-            if kb["main"]:
-                self.send_command(f"switchxkblayout {kb['name']} next")
 
     def switch_to_workspace(self, workspace_id: int) -> None:
         """
