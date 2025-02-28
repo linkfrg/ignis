@@ -583,21 +583,21 @@ It provides support for loading and saving options to a file.</p>
 <dd><p>An options group.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.options.OptionsGroup.changed">
-<span class="sig-name descname"><span class="pre">changed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.options.OptionsGroup.changed" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">changed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">option_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.options.OptionsGroup.changed" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>Signal</p></li>
 </ul>
 <p>Emitted when an option of this group has changed</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>option_name</strong> -- The name of the option.</p>
+<dd class="field-odd"><p><strong>option_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The name of the option.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.options.OptionsGroup.subgroup_changed">
-<span class="sig-name descname"><span class="pre">subgroup_changed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.options.OptionsGroup.subgroup_changed" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">subgroup_changed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subgroup_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">option_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.options.OptionsGroup.subgroup_changed" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>Signal</p></li>
 </ul>
@@ -605,8 +605,8 @@ It provides support for loading and saving options to a file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>subgroup_name</strong> -- The name of the subgroup.</p></li>
-<li><p><strong>option_name</strong> -- The name of the option.</p></li>
+<li><p><strong>subgroup_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The name of the subgroup.</p></li>
+<li><p><strong>option_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The name of the option.</p></li>
 </ul>
 </dd>
 </dl>

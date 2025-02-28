@@ -512,15 +512,15 @@ in properties of Services and classes related to them, since the user shouldn't 
 <span class="sd">    Emitted when the something happens.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<span class="nd">@GObject</span><span class="o">.</span><span class="n">Signal</span><span class="p">(</span><span class="n">arg_types</span><span class="o">=</span><span class="p">(</span><span class="nb">int</span><span class="p">,))</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">arg_signal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="nd">@GObject</span><span class="o">.</span><span class="n">Signal</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">arg_signal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">some_arg</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    - Signal</span>
 
 <span class="sd">    Emitted when the something another happens.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        some_arg (``int``): Description of the argument...</span>
+<span class="sd">        some_arg: Description of the argument...</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <span class="nd">@IgnisProperty</span>

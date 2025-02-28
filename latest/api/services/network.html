@@ -556,11 +556,11 @@
 <dd><p>The class for controlling Wi-Fi devices.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.network.Wifi.new_device">
-<span class="sig-name descname"><span class="pre">new_device</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.network.Wifi.new_device" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">new_device</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ignis.services.network.WifiDevice" title="ignis.services.network.wifi_device.WifiDevice"><span class="pre">WifiDevice</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.network.Wifi.new_device" title="Link to this definition">#</a></dt>
 <dd><p>Emitted when a new Wi-FI device is added.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>device</strong> (<a class="reference internal" href="#ignis.services.network.WifiDevice" title="ignis.services.network.WifiDevice"><code class="xref py py-class docutils literal notranslate"><span class="pre">WifiDevice</span></code></a>) -- An instance of the device.</p>
+<dd class="field-odd"><p><strong>device</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#ignis.services.network.WifiDevice" title="ignis.services.network.wifi_device.WifiDevice"><code class="xref py py-class docutils literal notranslate"><span class="pre">WifiDevice</span></code></a></span>) -- An instance of the device.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -609,11 +609,11 @@
 <dd><p>The class for controlling Ethernet devices.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.network.Ethernet.new_device">
-<span class="sig-name descname"><span class="pre">new_device</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.network.Ethernet.new_device" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">new_device</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ignis.services.network.EthernetDevice" title="ignis.services.network.ethernet_device.EthernetDevice"><span class="pre">EthernetDevice</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.network.Ethernet.new_device" title="Link to this definition">#</a></dt>
 <dd><p>Emitted when a new Ethernet device is added.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>device</strong> (<a class="reference internal" href="#ignis.services.network.EthernetDevice" title="ignis.services.network.EthernetDevice"><code class="xref py py-class docutils literal notranslate"><span class="pre">EthernetDevice</span></code></a>) -- An instance of the device.</p>
+<dd class="field-odd"><p><strong>device</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#ignis.services.network.EthernetDevice" title="ignis.services.network.ethernet_device.EthernetDevice"><code class="xref py py-class docutils literal notranslate"><span class="pre">EthernetDevice</span></code></a></span>) -- An instance of the device.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -653,22 +653,22 @@
 <dd><p>The class for controlling VPN connections.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.network.Vpn.new_connection">
-<span class="sig-name descname"><span class="pre">new_connection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.network.Vpn.new_connection" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">new_connection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ignis.services.network.VpnConnection" title="ignis.services.network.vpn.VpnConnection"><span class="pre">VpnConnection</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.network.Vpn.new_connection" title="Link to this definition">#</a></dt>
 <dd><p>Emitted when a new VPN connection is added.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>connection</strong> (<a class="reference internal" href="#ignis.services.network.VpnConnection" title="ignis.services.network.VpnConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">VpnConnection</span></code></a>) -- An instance of the VPN connection.</p>
+<dd class="field-odd"><p><strong>connection</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#ignis.services.network.VpnConnection" title="ignis.services.network.vpn.VpnConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">VpnConnection</span></code></a></span>) -- An instance of the VPN connection.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.network.Vpn.new_active_connection">
-<span class="sig-name descname"><span class="pre">new_active_connection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.network.Vpn.new_active_connection" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">new_active_connection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ignis.services.network.VpnConnection" title="ignis.services.network.vpn.VpnConnection"><span class="pre">VpnConnection</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.network.Vpn.new_active_connection" title="Link to this definition">#</a></dt>
 <dd><p>Emitted when a VPN connection is activated.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>connection</strong> (<a class="reference internal" href="#ignis.services.network.VpnConnection" title="ignis.services.network.VpnConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">VpnConnection</span></code></a>) -- An instance of the newly activated VPN connection.</p>
+<dd class="field-odd"><p><strong>connection</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#ignis.services.network.VpnConnection" title="ignis.services.network.vpn.VpnConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">VpnConnection</span></code></a></span>) -- An instance of the newly activated VPN connection.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -732,11 +732,11 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.network.WifiDevice.new_access_point">
-<span class="sig-name descname"><span class="pre">new_access_point</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.network.WifiDevice.new_access_point" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">new_access_point</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">access_point</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ignis.services.network.WifiAccessPoint" title="ignis.services.network.access_point.WifiAccessPoint"><span class="pre">WifiAccessPoint</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.network.WifiDevice.new_access_point" title="Link to this definition">#</a></dt>
 <dd><p>Emitted when a new access point is added.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>access_point</strong> (<a class="reference internal" href="#ignis.services.network.WifiAccessPoint" title="ignis.services.network.WifiAccessPoint"><code class="xref py py-class docutils literal notranslate"><span class="pre">WifiAccessPoint</span></code></a>) -- An instance of the access point.</p>
+<dd class="field-odd"><p><strong>access_point</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#ignis.services.network.WifiAccessPoint" title="ignis.services.network.access_point.WifiAccessPoint"><code class="xref py py-class docutils literal notranslate"><span class="pre">WifiAccessPoint</span></code></a></span>) -- An instance of the access point.</p>
 </dd>
 </dl>
 </dd></dl>
