@@ -48,8 +48,8 @@ class OptionsGroup(IgnisGObject):
                 ),
             )
 
-    @GObject.Signal(arg_types=(str,))
-    def changed(self, *args):
+    @GObject.Signal
+    def changed(self, option_name: str):
         """
         - Signal
 
@@ -59,8 +59,8 @@ class OptionsGroup(IgnisGObject):
             option_name: The name of the option.
         """
 
-    @GObject.Signal(arg_types=(str, str))
-    def subgroup_changed(self, *args):
+    @GObject.Signal
+    def subgroup_changed(self, subgroup_name: str, option_name: str):
         """
         - Signal
 

@@ -79,16 +79,16 @@ class FileMonitor(IgnisGObject):
             "changed", lambda *args: self._callback(*args) if self._callback else None
         )
 
-    @GObject.Signal(arg_types=(str, str))
-    def changed(self, *args):
+    @GObject.Signal
+    def changed(self, path: str, event_type: str):
         """
         - Signal
 
         Emitted when the file or directory changed.
 
         Args:
-            path (``str``): The path to the changed file or directory.
-            event_type (``str``): The event type. A list of all event types described in :attr:`callback`.
+            path: The path to the changed file or directory.
+            event_type: The event type. A list of all event types described in :attr:`callback`.
         """
         pass
 

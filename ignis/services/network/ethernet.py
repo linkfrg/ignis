@@ -22,13 +22,13 @@ class Ethernet(IgnisGObject):
         for device in self._client.get_devices():
             self.__add_device(None, device, False)
 
-    @GObject.Signal(arg_types=(EthernetDevice,))
-    def new_device(self, *args):
+    @GObject.Signal
+    def new_device(self, device: EthernetDevice):
         """
         Emitted when a new Ethernet device is added.
 
         Args:
-            device (:class:`~ignis.services.network.EthernetDevice`): An instance of the device.
+            device: An instance of the device.
         """
 
     @IgnisProperty

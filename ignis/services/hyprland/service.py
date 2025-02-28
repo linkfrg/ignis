@@ -53,15 +53,15 @@ class HyprlandService(BaseService):
             self.__sync_main_keyboard()
             self.__sync_active_window()
 
-    @GObject.Signal(arg_types=(HyprlandWorkspace,))
-    def workspace_added(self, *_):
+    @GObject.Signal
+    def workspace_added(self, workspace: HyprlandWorkspace):
         """
         - Signal
 
         Emitted when a new workspace has been added.
 
         Args:
-            workspace (:class:`~ignis.services.hyprland.HyprlandWorkspace`): The instance of the workspace.
+            workspace: The instance of the workspace.
         """
 
     @IgnisProperty
