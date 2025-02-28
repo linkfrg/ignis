@@ -112,22 +112,22 @@ class Vpn(IgnisGObject):
         for a in self._client.get_active_connections():
             self.__add_active_connection(None, a, False)
 
-    @GObject.Signal(arg_types=(VpnConnection,))
-    def new_connection(self, *args):
+    @GObject.Signal
+    def new_connection(self, connection: VpnConnection):
         """
         Emitted when a new VPN connection is added.
 
         Args:
-            connection (:class:`~ignis.services.network.VpnConnection`): An instance of the VPN connection.
+            connection: An instance of the VPN connection.
         """
 
-    @GObject.Signal(arg_types=(VpnConnection,))
-    def new_active_connection(self, *args):
+    @GObject.Signal
+    def new_active_connection(self, connection: VpnConnection):
         """
         Emitted when a VPN connection is activated.
 
         Args:
-            connection (:class:`~ignis.services.network.VpnConnection`): An instance of the newly activated VPN connection.
+            connection: An instance of the newly activated VPN connection.
         """
 
     @IgnisProperty

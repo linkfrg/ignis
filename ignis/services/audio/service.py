@@ -53,48 +53,48 @@ class AudioService(BaseService):
         for stream in getattr(self, f"{_type}s"):
             stream.notify("is_default")
 
-    @GObject.Signal(arg_types=(Stream,))
-    def speaker_added(self, *args):
+    @GObject.Signal
+    def speaker_added(self, stream: Stream):
         """
         - Signal
 
         Emitted when a speaker is added.
 
         Args:
-            stream (:class:`~ignis.services.audio.Stream`): The instance of the stream.
+            stream: The instance of the stream.
         """
 
-    @GObject.Signal(arg_types=(Stream,))
-    def microphone_added(self, *args):
+    @GObject.Signal
+    def microphone_added(self, stream: Stream):
         """
         - Signal
 
         Emitted when a microphone is added.
 
         Args:
-            stream (:class:`~ignis.services.audio.Stream`): The instance of the stream.
+            stream: The instance of the stream.
         """
 
-    @GObject.Signal(arg_types=(Stream,))
-    def app_added(self, *args):
+    @GObject.Signal
+    def app_added(self, stream: Stream):
         """
         - Signal
 
         Emitted when an app is added.
 
         Args:
-            stream (:class:`~ignis.services.audio.Stream`): The instance of the stream.
+            stream: The instance of the stream.
         """
 
-    @GObject.Signal(arg_types=(Stream,))
-    def recorder_added(self, *args):
+    @GObject.Signal
+    def recorder_added(self, stream: Stream):
         """
         - Signal
 
         Emitted when a recorder is added.
 
         Args:
-            stream (:class:`~ignis.services.audio.Stream`): The instance of the stream.
+            stream: The instance of the stream.
         """
 
     @IgnisProperty

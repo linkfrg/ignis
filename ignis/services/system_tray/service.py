@@ -62,15 +62,15 @@ class SystemTrayService(BaseService):
         name = proxy.gproxy.get_name_owner()
         raise AnotherSystemTrayRunningError(name)
 
-    @GObject.Signal(arg_types=(SystemTrayItem,))
-    def added(self, *args):
+    @GObject.Signal
+    def added(self, item: SystemTrayItem):
         """
         - Signal
 
         Emitted when a new item is added.
 
         Args:
-            item (:class:`~ignis.services.system_tray.SystemTrayItem`): The instance of the system tray item.
+            item: The instance of the system tray item.
         """
 
     @IgnisProperty

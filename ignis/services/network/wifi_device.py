@@ -39,13 +39,13 @@ class WifiDevice(IgnisGObject):
         Emitted when this Wi-Fi device is removed.
         """
 
-    @GObject.Signal(arg_types=(WifiAccessPoint,))
-    def new_access_point(self, *args):
+    @GObject.Signal
+    def new_access_point(self, access_point: WifiAccessPoint):
         """
         Emitted when a new access point is added.
 
         Args:
-            access_point (:class:`~ignis.services.network.WifiAccessPoint`): An instance of the access point.
+            access_point: An instance of the access point.
         """
 
     @IgnisProperty

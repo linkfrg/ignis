@@ -64,15 +64,15 @@ class MprisService(BaseService):
             self._players.pop(name)
             self.notify("players")
 
-    @GObject.Signal(arg_types=(MprisPlayer,))
-    def player_added(self, *args):
+    @GObject.Signal
+    def player_added(self, player: MprisPlayer):
         """
         - Signal
 
         Emitted when a player has been added.
 
         Args:
-            player (:class:`~ignis.services.mpris.MprisPlayer`): The instance of the player.
+            player: The instance of the player.
         """
         pass
 
