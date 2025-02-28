@@ -134,6 +134,8 @@ class HyprlandService(BaseService):
                 self.__sync_active_layout(event_value.split(",")[1])
             case "activewindow":
                 self.__sync_active_window()
+            case "renameworkspace":
+                self.__sync_workspaces()
 
     def __create_workspace(self, id_: int) -> None:
         for i in json.loads(self.send_command("j/workspaces")):
