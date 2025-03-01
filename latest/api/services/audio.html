@@ -694,16 +694,16 @@ A general class for speakers, microphones, applications, and recorders.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ignis.services.audio.Stream.application_id">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">application_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.audio.Stream.application_id" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">application_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.audio.Stream.application_id" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
-<p>The application ID or <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p>The application ID, or <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> if unknown.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ignis.services.audio.Stream.icon_name">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">icon_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.audio.Stream.icon_name" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">icon_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.audio.Stream.icon_name" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
@@ -713,34 +713,34 @@ Works only for speakers and microphones.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ignis.services.audio.Stream.id">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.audio.Stream.id" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.services.audio.Stream.id" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
-<p>The ID of the stream.</p>
+<p>The ID of the stream, or <code class="docutils literal notranslate"><span class="pre">-1</span></code> if unknown.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ignis.services.audio.Stream.name">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.audio.Stream.name" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.audio.Stream.name" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
-<p>The name of the stream.</p>
+<p>The name of the stream, or <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> if unknown.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ignis.services.audio.Stream.description">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.audio.Stream.description" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.audio.Stream.description" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
-<p>The description of the stream.</p>
+<p>The description of the stream, or <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> if unknown.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ignis.services.audio.Stream.is_muted">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_muted</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.audio.Stream.is_muted" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_muted</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.audio.Stream.is_muted" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
@@ -749,11 +749,11 @@ Works only for speakers and microphones.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ignis.services.audio.Stream.volume">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">volume</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.audio.Stream.volume" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">volume</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></em><a class="headerlink" href="#ignis.services.audio.Stream.volume" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
-<p>The current volume of the stream.</p>
+<p>The current volume of the stream, or <code class="docutils literal notranslate"><span class="pre">-1.0</span></code> if unknown.</p>
 </dd></dl>
 
 <dl class="py property">
