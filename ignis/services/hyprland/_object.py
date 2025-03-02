@@ -11,7 +11,12 @@ class HyprlandObject(IgnisGObject):
 
     def _sync(self, data: dict[str, Any]) -> None:
         for key, value in data.items():
-            prop_name = self._match_dict.get(key, key)
-            if value != getattr(self, f"_{prop_name}"):
-                setattr(self, f"_{prop_name}", value)
-                self.notify(prop_name)
+            public_prop_name = self._match_dict.get(key, key)
+            protected_prop_name = f"_{public_prop_name}"
+
+            if not hasattr(self, protected_prop_name):
+                continue
+
+            if value != getattr(self, protected_prop_name):
+                setattr(self, protected_prop_name, value)
+                self.notify(public_prop_name)
