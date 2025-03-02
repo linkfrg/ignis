@@ -1,7 +1,9 @@
 import os
 import sys
-import shutil
 from sphinx.ext.autodoc.mock import mock
+
+sys.path.insert(0, os.path.abspath("."))
+sys.path.insert(0, os.path.abspath(".."))
 
 # ============================== PROJECT INFO ===============================
 
@@ -18,6 +20,7 @@ extensions = [
     "sphinx_design",
     "sphinx_copybutton",
     "sphinx_autodoc_typehints",
+    "_ext.ignis_directives",
 ]
 
 intersphinx_mapping = {
@@ -47,24 +50,6 @@ typehints_use_signature = True
 typehints_use_signature_return = True
 typehints_defaults = "comma"
 always_use_bars_union = True
-
-# =============================== PATH STUFF ================================
-
-TMP_DIR = "./tmp"
-SOURCE_DIR = "../ignis"
-TARGET_DIR = TMP_DIR + "/ignis"
-
-
-def copy_dir(source_dir: str, target_dir: str) -> None:
-    if os.path.exists(target_dir):
-        shutil.rmtree(target_dir)
-
-    shutil.copytree(source_dir, target_dir)
-
-
-copy_dir(SOURCE_DIR, TARGET_DIR)
-
-sys.path.insert(0, os.path.abspath(TMP_DIR))
 
 # =============================== VERSIONING ================================
 
@@ -124,28 +109,3 @@ html_context = {
     "github_version": "main",
     "doc_path": "docs/",
 }
-
-# ============================== CUSTOM STUFF ===============================
-
-
-def replace_gobject_property(target_dir: str) -> None:
-    """
-    This function replaces @GObject.Property and @IgnisProperty with @property.
-    For what? To indicate to Sphinx that GObject.Property functions are actually properties.
-    """
-    for dirpath, _, filenames in os.walk(target_dir):
-        for filename in filenames:
-            if filename.endswith(".py"):
-                file_path = os.path.join(dirpath, filename)
-                with open(file_path) as file:
-                    content = file.read()
-
-                new_content = content.replace("@GObject.Property", "@property").replace(
-                    "@IgnisProperty", "@property"
-                )
-
-                with open(file_path, "w", encoding="utf-8") as file:
-                    file.write(new_content)
-
-
-replace_gobject_property(TARGET_DIR)
