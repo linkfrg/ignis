@@ -45,8 +45,6 @@ class SystemdUnit(IgnisGObject):
     @IgnisProperty
     def name(self) -> str:
         """
-        - read-only
-
         The name of the unit.
         """
         return self._proxy.Id
@@ -54,8 +52,6 @@ class SystemdUnit(IgnisGObject):
     @IgnisProperty
     def is_active(self) -> bool:
         """
-        - read-only
-
         Whether the unit is active (running).
         """
         state = self._proxy.ActiveState

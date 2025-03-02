@@ -40,8 +40,6 @@ class IgnisClient:
     @property
     def has_owner(self) -> bool:
         """
-        - read-only
-
         Whether D-Bus name has the owner (Whether Ignis is running).
         """
         return self.__dbus.has_owner

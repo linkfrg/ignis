@@ -18,8 +18,6 @@ class NotificationAction(IgnisGObject):
     @IgnisProperty
     def id(self) -> str:
         """
-        - read-only
-
         The ID of the action.
         """
         return self._id
@@ -27,8 +25,6 @@ class NotificationAction(IgnisGObject):
     @IgnisProperty
     def label(self) -> str:
         """
-        - read-only
-
         The label of the notification. This one should be displayed to user.
         """
         return self._label

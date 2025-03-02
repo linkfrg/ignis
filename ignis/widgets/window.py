@@ -176,8 +176,6 @@ class Window(Gtk.Window, BaseWidget):
     @IgnisProperty
     def namespace(self) -> str:
         """
-        - required, read-only
-
         The name of the window, used to access it from the CLI and :class:`~ignis.app.IgnisApp`.
 
         It must be unique.
@@ -193,8 +191,6 @@ class Window(Gtk.Window, BaseWidget):
     @IgnisProperty
     def anchor(self) -> list[str] | None:
         """
-        - optional, read-write
-
         A list of anchors.
         If the list is empty, the window will be centered on the screen.
         ``None`` will unset all anchors.
@@ -223,8 +219,6 @@ class Window(Gtk.Window, BaseWidget):
     @IgnisProperty
     def exclusivity(self) -> str:
         """
-        - optional, read-write
-
         Defines how the compositor should avoid occluding a window area with other surfaces/layers.
 
         Default: ``normal``.
@@ -247,8 +241,6 @@ class Window(Gtk.Window, BaseWidget):
     @IgnisProperty
     def layer(self) -> str:
         """
-        - optional, read-write
-
         The layer of the surface.
 
         Default: ``top``.
@@ -269,8 +261,6 @@ class Window(Gtk.Window, BaseWidget):
     @IgnisProperty
     def kb_mode(self) -> str:
         """
-        - optional, read-write
-
         Whether the window should receive keyboard events from the compositor.
 
         Default: ``none``.
@@ -290,8 +280,6 @@ class Window(Gtk.Window, BaseWidget):
     @IgnisProperty
     def popup(self) -> bool:
         """
-        - optional, read-write
-
         Whether the window should close on ESC.
 
         Works only if ``kb_mode`` is set to ``exclusive`` or ``on_demand``.
@@ -305,8 +293,6 @@ class Window(Gtk.Window, BaseWidget):
     @IgnisProperty
     def monitor(self) -> int:
         """
-        - optional, read-write
-
         The monitor number on which to display the window.
 
         Raises:
@@ -329,8 +315,6 @@ class Window(Gtk.Window, BaseWidget):
     @IgnisProperty
     def input_width(self) -> int:
         """
-        - optional, read-write
-
         The width at which the window can receive keyboard and mouse input. Must be > 0.
         """
         return self._input_width
@@ -343,8 +327,6 @@ class Window(Gtk.Window, BaseWidget):
     @IgnisProperty
     def input_height(self) -> int:
         """
-        - optional, read-write
-
         The height at which the window can receive keyboard and mouse input. Must be > 0.
         """
         return self._input_height
@@ -357,8 +339,6 @@ class Window(Gtk.Window, BaseWidget):
     @IgnisProperty
     def dynamic_input_region(self) -> bool:
         """
-        - optional, read-only
-
         Whether to dynamically update an input region depending on the :attr:`child` size.
 
         :attr:`child` must implement ``child`` property. E.g., :class:`Widget.Box`, :class:`Widget.EventBox` and etc.
@@ -369,8 +349,6 @@ class Window(Gtk.Window, BaseWidget):
     @IgnisProperty
     def margin_bottom(self) -> int:
         """
-        - optional, read-write
-
         The bottom margin.
 
         Default: ``0``.
@@ -385,8 +363,6 @@ class Window(Gtk.Window, BaseWidget):
     @IgnisProperty
     def margin_left(self) -> int:
         """
-        - optional, read-write
-
         The left margin.
 
         Default: ``0``.
@@ -401,8 +377,6 @@ class Window(Gtk.Window, BaseWidget):
     @IgnisProperty
     def margin_right(self) -> int:
         """
-        - optional, read-write
-
         The right margin.
 
         Default: ``0``.
@@ -417,8 +391,6 @@ class Window(Gtk.Window, BaseWidget):
     @IgnisProperty
     def margin_top(self) -> int:
         """
-        - optional, read-write
-
         The top margin.
 
         Default: ``0``.

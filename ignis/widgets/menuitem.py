@@ -53,8 +53,6 @@ class MenuItem(IgnisGObject):
     @IgnisProperty
     def label(self) -> str:
         """
-        - required, read-only
-
         The label of item.
         """
         return self._label
@@ -62,8 +60,6 @@ class MenuItem(IgnisGObject):
     @IgnisProperty
     def uniq_name(self) -> str:
         """
-        - not argument, read-only
-
         The unique name of the ``Gio.Action``.
         """
         return self._uniq_name
@@ -71,8 +67,6 @@ class MenuItem(IgnisGObject):
     @IgnisProperty
     def enabled(self) -> bool:
         """
-        - optional, read-write
-
         Whether the item is enabled. If ``False``, the item cannot be selected.
         """
         return self._enabled
@@ -80,8 +74,6 @@ class MenuItem(IgnisGObject):
     @IgnisProperty
     def on_activate(self) -> Callable:
         """
-        - optional, read-write
-
         The function to call when the user clicks on the item.
         """
         return self._on_activate
@@ -96,8 +88,6 @@ class MenuItem(IgnisGObject):
     @IgnisProperty
     def submenu(self) -> "Gtk.PopoverMenu | None":
         """
-        - optional, read-only
-
         The :class:`~ignis.widgets.Widget.PopoverMenu` that will appear when activated.
         """
         return self._submenu

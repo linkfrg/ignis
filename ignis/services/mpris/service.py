@@ -66,8 +66,6 @@ class MprisService(BaseService):
     @IgnisSignal
     def player_added(self, player: MprisPlayer):
         """
-        - Signal
-
         Emitted when a player has been added.
 
         Args:
@@ -78,8 +76,6 @@ class MprisService(BaseService):
     @IgnisProperty
     def players(self) -> list[MprisPlayer]:
         """
-        - read-only
-
         A list of currently active players.
         """
         return list(self._players.values())

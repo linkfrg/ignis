@@ -55,8 +55,6 @@ class ThreadTask(IgnisGObject):
     @IgnisSignal
     def finished(self, output: object):
         """
-        - Signal
-
         Args:
             output: The output from the function.
         """

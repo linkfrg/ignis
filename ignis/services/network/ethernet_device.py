@@ -35,8 +35,6 @@ class EthernetDevice(IgnisGObject):
     @IgnisProperty
     def carrier(self) -> bool:
         """
-        - read-only
-
         Whether the device has a carrier.
         """
         return self._device.props.carrier
@@ -44,8 +42,6 @@ class EthernetDevice(IgnisGObject):
     @IgnisProperty
     def perm_hw_address(self) -> str:
         """
-        - read-only
-
         The permanent hardware (MAC) address of the device.
         """
         return self._device.props.perm_hw_address
@@ -53,8 +49,6 @@ class EthernetDevice(IgnisGObject):
     @IgnisProperty
     def speed(self) -> int:
         """
-        - read-only
-
         The speed of the device.
         """
         return self._device.props.speed
@@ -62,8 +56,6 @@ class EthernetDevice(IgnisGObject):
     @IgnisProperty
     def state(self) -> str | None:
         """
-        - read-only
-
         The current state of the device or ``None`` if unknown.
         """
         return STATE.get(self._device.get_state(), None)
@@ -71,8 +63,6 @@ class EthernetDevice(IgnisGObject):
     @IgnisProperty
     def is_connected(self) -> bool:
         """
-        - read-only
-
         Whether the device is connected to the network.
         """
         return self._is_connected
@@ -80,8 +70,6 @@ class EthernetDevice(IgnisGObject):
     @IgnisProperty
     def name(self) -> str | None:
         """
-        - read-only
-
         The name of the connection or ``None`` if unknown.
         """
         return self._name

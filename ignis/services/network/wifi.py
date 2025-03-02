@@ -35,8 +35,6 @@ class Wifi(IgnisGObject):
     @IgnisProperty
     def devices(self) -> list[WifiDevice]:
         """
-        - read-only
-
         A list of Wi-Fi devices.
         """
         return list(self._devices.values())
@@ -44,8 +42,6 @@ class Wifi(IgnisGObject):
     @IgnisProperty
     def is_connected(self) -> bool:
         """
-        - read-only
-
         Whether at least one Wi-Fi device is connected to the network.
         """
         for i in self.devices:
@@ -56,8 +52,6 @@ class Wifi(IgnisGObject):
     @IgnisProperty
     def icon_name(self) -> str:
         """
-        - read-only
-
         The icon name of the first device in the list.
         """
         result = None
@@ -73,8 +67,6 @@ class Wifi(IgnisGObject):
     @IgnisProperty
     def enabled(self) -> bool:
         """
-        - read-write
-
         Whether Wi-Fi is enabled.
         """
         return self._client.wireless_get_enabled()

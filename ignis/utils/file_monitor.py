@@ -82,8 +82,6 @@ class FileMonitor(IgnisGObject):
     @IgnisSignal
     def changed(self, path: str, event_type: str):
         """
-        - Signal
-
         Emitted when the file or directory changed.
 
         Args:
@@ -112,8 +110,6 @@ class FileMonitor(IgnisGObject):
     @IgnisProperty
     def path(self) -> str:
         """
-        - required, read-only
-
         The path to the file or directory to be monitored.
         """
         return self._path
@@ -121,8 +117,6 @@ class FileMonitor(IgnisGObject):
     @IgnisProperty
     def flags(self) -> str | None:
         """
-        - optional, read-only
-
         What the monitor will watch for.
 
         Possible values:
@@ -142,8 +136,6 @@ class FileMonitor(IgnisGObject):
     @IgnisProperty
     def callback(self) -> Callable | None:
         """
-        - optional, read-write
-
         A function to call when the file or directory changes.
         It should take two arguments:
         1. The path to the changed file or directory
@@ -177,8 +169,6 @@ class FileMonitor(IgnisGObject):
     @IgnisProperty
     def recursive(self) -> bool:
         """
-        - optional, read-only
-
         Whether monitoring is recursive (monitor all subdirectories and files).
 
         Default: ``False``.
@@ -188,8 +178,6 @@ class FileMonitor(IgnisGObject):
     @IgnisProperty
     def prevent_gc(self) -> bool:
         """
-        - optional, read-only
-
         Whether to prevent the garbage collector from collecting this file monitor.
 
         Default: ``True``.

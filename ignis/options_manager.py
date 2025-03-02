@@ -50,8 +50,6 @@ class OptionsGroup(IgnisGObject):
     @IgnisSignal
     def changed(self, option_name: str):
         """
-        - Signal
-
         Emitted when an option of this group has changed
 
         Args:
@@ -61,8 +59,6 @@ class OptionsGroup(IgnisGObject):
     @IgnisSignal
     def subgroup_changed(self, subgroup_name: str, option_name: str):
         """
-        - Signal
-
         Emitted when an option of a subgroup has changed
 
         Args:

@@ -53,8 +53,6 @@ class BacklightDevice(IgnisGObject):
     @IgnisProperty
     def device_name(self) -> str:
         """
-        - read-only
-
         The name of the directory in ``/sys/class/backlight``.
         """
         return self._device_name
@@ -62,8 +60,6 @@ class BacklightDevice(IgnisGObject):
     @IgnisProperty
     def max_brightness(self) -> int:
         """
-        - read-only
-
         The maximum brightness allowed by the device.
         """
         return self._max_brightness
@@ -71,8 +67,6 @@ class BacklightDevice(IgnisGObject):
     @IgnisProperty
     def brightness(self) -> int:
         """
-        - read-write
-
         The current brightness of the device.
         """
         return self._brightness

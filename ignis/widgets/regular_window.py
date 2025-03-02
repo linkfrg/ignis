@@ -39,8 +39,6 @@ class RegularWindow(Gtk.Window, BaseWidget):
     @IgnisProperty
     def namespace(self) -> str:
         """
-        - required, read-only
-
         The name of the window, used for accessing it from the CLI and :class:`~ignis.app.IgnisApp`.
         It must be unique.
         """

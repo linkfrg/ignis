@@ -79,24 +79,18 @@ class RecorderService(BaseService):
     @IgnisSignal
     def recording_started(self):
         """
-        - Signal
-
         Emitted when recording starts.
         """
 
     @IgnisSignal
     def recording_stopped(self):
         """
-        - Signal
-
         Emitted when recording stops.
         """
 
     @IgnisProperty
     def active(self) -> bool:
         """
-        - read-only
-
         Whether recording is currently active.
         """
         return self._active
@@ -104,8 +98,6 @@ class RecorderService(BaseService):
     @IgnisProperty
     def is_paused(self) -> bool:
         """
-        - read-only
-
         Whether recording is currently paused.
         """
         return self._is_paused

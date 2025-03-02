@@ -70,8 +70,6 @@ class FileChooserButton(Gtk.Button, BaseWidget):
     @IgnisProperty
     def dialog(self) -> FileDialog:
         """
-        - required, read-only
-
         An instance of :class:`~ignis.widgets.Widget.FileDialog`.
         """
         return self._dialog
@@ -79,8 +77,6 @@ class FileChooserButton(Gtk.Button, BaseWidget):
     @IgnisProperty
     def label(self) -> Label:
         """
-        - required, read-only
-
         An instance of :class:`~ignis.widgets.Widget.Label`.
         """
         return self._label

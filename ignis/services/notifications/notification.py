@@ -51,24 +51,18 @@ class Notification(IgnisGObject):
     @IgnisSignal
     def closed(self):
         """
-        - Signal
-
         Emitted when notification has been closed.
         """
 
     @IgnisSignal
     def dismissed(self):
         """
-        - Signal
-
         Emitted when notification has been dismissed.
         """
 
     @IgnisProperty
     def id(self) -> int:
         """
-        - read-only
-
         The ID of the notification.
         """
         return self._id
@@ -76,8 +70,6 @@ class Notification(IgnisGObject):
     @IgnisProperty
     def app_name(self) -> str:
         """
-        - read-only
-
         The name of the application that sent the notification.
         """
         return self._app_name
@@ -85,8 +77,6 @@ class Notification(IgnisGObject):
     @IgnisProperty
     def icon(self) -> str:
         """
-        - read-only
-
         The icon name, path to image or ``None``.
         """
         return self._icon
@@ -94,8 +84,6 @@ class Notification(IgnisGObject):
     @IgnisProperty
     def summary(self) -> str:
         """
-        - read-only
-
         The summary text of the notification, usually the title.
         """
         return self._summary
@@ -103,8 +91,6 @@ class Notification(IgnisGObject):
     @IgnisProperty
     def body(self) -> str:
         """
-        - read-only
-
         The body text of the notification, usually containing additional information.
         """
         return self._body
@@ -112,8 +98,6 @@ class Notification(IgnisGObject):
     @IgnisProperty
     def actions(self) -> list["NotificationAction"]:
         """
-        - read-only
-
         A list of actions associated with the notification.
         """
         return self._actions
@@ -121,8 +105,6 @@ class Notification(IgnisGObject):
     @IgnisProperty
     def timeout(self) -> int:
         """
-        - read-only
-
         The timeout for the notification.
         Usually equal to the ``popup_timeout`` property of the :class:`~ignis.services.NotificationService` unless the notification specifies otherwise.
         """
@@ -131,8 +113,6 @@ class Notification(IgnisGObject):
     @IgnisProperty
     def time(self) -> float:
         """
-        - read-only
-
         Time in POSIX format when the notification was sent.
         """
         return self._time
@@ -140,8 +120,6 @@ class Notification(IgnisGObject):
     @IgnisProperty
     def urgency(self) -> int:
         """
-        - read-only
-
         The urgency of the notification.
 
         Levels:
@@ -155,8 +133,6 @@ class Notification(IgnisGObject):
     @IgnisProperty
     def popup(self) -> bool:
         """
-        - read-only
-
         Whether the notification is a popup.
         """
         return self._popup
@@ -164,8 +140,6 @@ class Notification(IgnisGObject):
     @IgnisProperty
     def json(self) -> dict:
         """
-        - read-only
-
         The notification data in dictionary format.
         """
         return {

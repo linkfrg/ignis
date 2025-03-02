@@ -55,8 +55,6 @@ class HyprlandService(BaseService):
     @IgnisSignal
     def workspace_added(self, workspace: HyprlandWorkspace):
         """
-        - Signal
-
         Emitted when a new workspace has been added.
 
         Args:
@@ -66,8 +64,6 @@ class HyprlandService(BaseService):
     @IgnisProperty
     def is_available(self) -> bool:
         """
-        - read-only
-
         Whether Hyprland IPC is available.
         """
         return os.path.exists(HYPR_SOCKET_DIR)
@@ -75,8 +71,6 @@ class HyprlandService(BaseService):
     @IgnisProperty
     def workspaces(self) -> list[HyprlandWorkspace]:
         """
-        - read-only
-
         A list of workspaces.
         """
         return list(self._workspaces.values())
@@ -84,8 +78,6 @@ class HyprlandService(BaseService):
     @IgnisProperty
     def active_workspace(self) -> HyprlandWorkspace:
         """
-        - read-only
-
         The currently active workspace.
         """
         return self._active_workspace
@@ -93,8 +85,6 @@ class HyprlandService(BaseService):
     @IgnisProperty
     def main_keyboard(self) -> HyprlandKeyboard:
         """
-        - read-only
-
         The main keyboard.
         """
         return self._main_keyboard
@@ -102,8 +92,6 @@ class HyprlandService(BaseService):
     @IgnisProperty
     def active_window(self) -> HyprlandWindow:
         """
-        - read-only
-
         The currenly focused window.
         """
         return self._active_window

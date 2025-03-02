@@ -31,8 +31,6 @@ class ListBoxRow(Gtk.ListBoxRow, BaseWidget):
     @IgnisProperty
     def on_activate(self) -> Callable:
         """
-        - optional, read-write
-
         The function to call when the user selects the row.
         """
         return self._on_activate
@@ -44,8 +42,6 @@ class ListBoxRow(Gtk.ListBoxRow, BaseWidget):
     @IgnisProperty
     def selected(self) -> bool:
         """
-        - optional, read-write
-
         Whether the row is selected by default.
         """
         return self._selected

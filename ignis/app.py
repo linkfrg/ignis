@@ -124,8 +124,6 @@ class IgnisApp(Gtk.Application, IgnisGObject):
     @IgnisSignal
     def ready(self):
         """
-        - Signal
-
         Emitted when the configuration has been parsed.
 
         .. hint::
@@ -135,8 +133,6 @@ class IgnisApp(Gtk.Application, IgnisGObject):
     @IgnisProperty
     def is_ready(self) -> bool:
         """
-        - read-only
-
         Whether configuration is parsed and app is ready.
         """
         return self._is_ready
@@ -144,8 +140,6 @@ class IgnisApp(Gtk.Application, IgnisGObject):
     @IgnisProperty
     def windows(self) -> list[Gtk.Window]:
         """
-        - read-only
-
         A list of windows added to this application.
         """
         return list(self._windows.values())
@@ -153,8 +147,6 @@ class IgnisApp(Gtk.Application, IgnisGObject):
     @IgnisProperty
     def autoreload_config(self) -> bool:
         """
-        - read-write
-
         Whether to automatically reload the configuration when it changes (only .py files).
 
         Default: ``True``.
@@ -168,8 +160,6 @@ class IgnisApp(Gtk.Application, IgnisGObject):
     @IgnisProperty
     def autoreload_css(self) -> bool:
         """
-        - read-write
-
         Whether to automatically reload the CSS style when it changes (only .css/.scss/.sass files).
 
         Default: ``True``.
@@ -183,8 +173,6 @@ class IgnisApp(Gtk.Application, IgnisGObject):
     @IgnisProperty
     def reload_on_monitors_change(self) -> bool:
         """
-        - read-write
-
         Whether to reload Ignis on monitors change (connect/disconnect).
 
         Default: ``True``.
@@ -198,8 +186,6 @@ class IgnisApp(Gtk.Application, IgnisGObject):
     @IgnisProperty
     def widgets_style_priority(self) -> StylePriority:
         """
-        - read-write
-
         The priority used for each widget style
         unless a widget specifies a custom style priority using :attr:`~ignis.base_widget.BaseWidget.style_priority`.
         More info about style priorities: :obj:`Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION`.

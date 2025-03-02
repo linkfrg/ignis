@@ -29,16 +29,12 @@ class HyprlandWorkspace(HyprlandObject):
     @IgnisSignal
     def destroyed(self):
         """
-        - Signal
-
         Emitted when the workspace has been destroyed.
         """
 
     @IgnisProperty
     def id(self) -> int:
         """
-        - read-only
-
         The ID of the workspace.
         """
         return self._id
@@ -46,8 +42,6 @@ class HyprlandWorkspace(HyprlandObject):
     @IgnisProperty
     def name(self) -> str:
         """
-        - read-only
-
         The name of the workspace.
         """
         return self._name
@@ -55,8 +49,6 @@ class HyprlandWorkspace(HyprlandObject):
     @IgnisProperty
     def monitor(self) -> str:
         """
-        - read-only
-
         The monitor on which the workspace is placed.
         """
         return self._monitor
@@ -64,8 +56,6 @@ class HyprlandWorkspace(HyprlandObject):
     @IgnisProperty
     def monitor_id(self) -> int:
         """
-        - read-only
-
         The ID of the monitor on which the workspace is placed.
         """
         return self._monitor_id
@@ -73,8 +63,6 @@ class HyprlandWorkspace(HyprlandObject):
     @IgnisProperty
     def windows(self) -> int:
         """
-        - read-only
-
         The amount of windows on the workspace.
         """
         return self._windows
@@ -82,8 +70,6 @@ class HyprlandWorkspace(HyprlandObject):
     @IgnisProperty
     def has_fullscreen(self) -> bool:
         """
-        - read-only
-
         Whether the workspace has a fullscreen window.
         """
         return self._has_fullscreen
@@ -91,8 +77,6 @@ class HyprlandWorkspace(HyprlandObject):
     @IgnisProperty
     def last_window(self) -> str:
         """
-        - read-only
-
         The latest window.
         """
         return self._last_window
@@ -100,8 +84,6 @@ class HyprlandWorkspace(HyprlandObject):
     @IgnisProperty
     def last_window_title(self) -> str:
         """
-        - read-only
-
         The latest window title.
         """
         return self._last_window_title

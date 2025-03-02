@@ -38,8 +38,6 @@ class Entry(Gtk.Entry, BaseWidget):  # type: ignore
     @IgnisProperty
     def on_accept(self) -> Callable:
         """
-        - optional, read-write
-
         The function that will be called when the user hits the Enter key.
         """
         return self._on_accept
@@ -51,8 +49,6 @@ class Entry(Gtk.Entry, BaseWidget):  # type: ignore
     @IgnisProperty
     def on_change(self) -> Callable:
         """
-        - optional, read-write
-
         The function that will be called when the text in the widget is changed (e.g., when the user types something into the entry).
         """
         return self._on_change

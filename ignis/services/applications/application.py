@@ -24,24 +24,18 @@ class Application(IgnisGObject):
     @IgnisSignal
     def pinned(self):
         """
-        - Signal
-
         Emitted when the application has been pinned.
         """
 
     @IgnisSignal
     def unpinned(self):
         """
-        - Signal
-
         Emitted when the application has been unpinned.
         """
 
     @IgnisProperty
     def app(self) -> Gio.DesktopAppInfo:
         """
-        - read-only
-
         An instance of :class:`Gio.DesktopAppInfo`.
         """
         return self._app
@@ -49,8 +43,6 @@ class Application(IgnisGObject):
     @IgnisProperty
     def id(self) -> str | None:
         """
-        - read-only
-
         The ID of the application.
         """
         return self._app.get_id()
@@ -58,8 +50,6 @@ class Application(IgnisGObject):
     @IgnisProperty
     def name(self) -> str:
         """
-        - read-only
-
         The name of the application.
         """
         return self._app.get_display_name()
@@ -67,8 +57,6 @@ class Application(IgnisGObject):
     @IgnisProperty
     def description(self) -> str | None:
         """
-        - read-only
-
         The description of the application.
         """
         return self._app.get_description()
@@ -76,8 +64,6 @@ class Application(IgnisGObject):
     @IgnisProperty
     def icon(self) -> str:
         """
-        - read-only
-
         The icon of the application. If the app has no icon, "image-missing" will be returned.
         """
         icon = self._app.get_string("Icon")
@@ -89,8 +75,6 @@ class Application(IgnisGObject):
     @IgnisProperty
     def keywords(self) -> list[str]:
         """
-        - read-only
-
         Keywords of the application. Ususally, these are words that describe the application.
         """
         return self._app.get_keywords()
@@ -98,8 +82,6 @@ class Application(IgnisGObject):
     @IgnisProperty
     def desktop_file(self) -> str | None:
         """
-        - read-only
-
         The full path to the ``.desktop`` file of the application.
         """
         return self._app.get_filename()
@@ -107,8 +89,6 @@ class Application(IgnisGObject):
     @IgnisProperty
     def executable(self) -> str:
         """
-        - read-only
-
         The executable of the application.
         """
         return self._app.get_executable()
@@ -116,8 +96,6 @@ class Application(IgnisGObject):
     @IgnisProperty
     def exec_string(self) -> str | None:
         """
-        - read-only
-
         The string that contains the executable with command line arguments, used to launch the application.
         """
         return self._app.get_string("Exec")
@@ -125,8 +103,6 @@ class Application(IgnisGObject):
     @IgnisProperty
     def actions(self) -> list[ApplicationAction]:
         """
-        - read-only
-
         A list of actions.
         """
         return self._actions
@@ -134,8 +110,6 @@ class Application(IgnisGObject):
     @IgnisProperty
     def is_pinned(self) -> bool:
         """
-        - read-write
-
         Whether the application is pinned.
         """
         return self._is_pinned
@@ -154,8 +128,6 @@ class Application(IgnisGObject):
     @IgnisProperty
     def is_terminal(self) -> bool:
         """
-        - read-only
-
         Whether the application has to be launched in a terminal.
         """
         return {"true": True, "false": False, None: False}.get(

@@ -87,8 +87,6 @@ class NotificationService(BaseService):
     @IgnisSignal
     def notified(self, notification: Notification):
         """
-        - Signal
-
         Emitted when a new notification appears.
 
         Args:
@@ -98,8 +96,6 @@ class NotificationService(BaseService):
     @IgnisSignal
     def new_popup(self, notification: Notification):
         """
-        - Signal
-
         Emitted when a new popup notification appears.
         Only emitted if ``dnd`` is set to ``False``.
 
@@ -110,8 +106,6 @@ class NotificationService(BaseService):
     @IgnisProperty
     def notifications(self) -> list[Notification]:
         """
-        - read-only
-
         A list of all notifications.
         """
         return list(self._notifications.values())
@@ -119,8 +113,6 @@ class NotificationService(BaseService):
     @IgnisProperty
     def popups(self) -> list[Notification]:
         """
-        - read-only
-
         A list of currently active popup notifications.
         """
         return list(self._popups.values())

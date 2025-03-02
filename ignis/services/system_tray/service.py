@@ -65,8 +65,6 @@ class SystemTrayService(BaseService):
     @IgnisSignal
     def added(self, item: SystemTrayItem):
         """
-        - Signal
-
         Emitted when a new item is added.
 
         Args:
@@ -76,8 +74,6 @@ class SystemTrayService(BaseService):
     @IgnisProperty
     def items(self) -> list[SystemTrayItem]:
         """
-        - read-only
-
         A list of system tray items.
         """
         return list(self._items.values())

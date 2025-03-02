@@ -55,8 +55,6 @@ class AudioService(BaseService):
     @IgnisSignal
     def speaker_added(self, stream: Stream):
         """
-        - Signal
-
         Emitted when a speaker is added.
 
         Args:
@@ -66,8 +64,6 @@ class AudioService(BaseService):
     @IgnisSignal
     def microphone_added(self, stream: Stream):
         """
-        - Signal
-
         Emitted when a microphone is added.
 
         Args:
@@ -77,8 +73,6 @@ class AudioService(BaseService):
     @IgnisSignal
     def app_added(self, stream: Stream):
         """
-        - Signal
-
         Emitted when an app is added.
 
         Args:
@@ -88,8 +82,6 @@ class AudioService(BaseService):
     @IgnisSignal
     def recorder_added(self, stream: Stream):
         """
-        - Signal
-
         Emitted when a recorder is added.
 
         Args:
@@ -99,8 +91,6 @@ class AudioService(BaseService):
     @IgnisProperty
     def control(self) -> Gvc.MixerControl:
         """
-        - read-only
-
         An instance of ``Gvc.MixerControl``.
         """
         return self._control
@@ -108,8 +98,6 @@ class AudioService(BaseService):
     @IgnisProperty
     def speaker(self) -> Stream:
         """
-        - read-write
-
         The default speaker.
         """
         return self._speaker
@@ -121,8 +109,6 @@ class AudioService(BaseService):
     @IgnisProperty
     def microphone(self) -> Stream:
         """
-        - read-write
-
         The default microphone.
         """
         return self._microphone
@@ -134,8 +120,6 @@ class AudioService(BaseService):
     @IgnisProperty
     def streams(self) -> list[Stream]:
         """
-        - read-only
-
         A list of all streams.
         """
         return list(self._streams.values())
@@ -143,8 +127,6 @@ class AudioService(BaseService):
     @IgnisProperty
     def speakers(self) -> list[Stream]:
         """
-        - read-only
-
         A list of speakers.
         """
         return list(self._speakers.values())
@@ -152,8 +134,6 @@ class AudioService(BaseService):
     @IgnisProperty
     def microphones(self) -> list[Stream]:
         """
-        - read-only
-
         A list of microphones.
         """
         return list(self._microphones.values())
@@ -161,8 +141,6 @@ class AudioService(BaseService):
     @IgnisProperty
     def apps(self) -> list[Stream]:
         """
-        - read-only
-
         A list of applications currently playing sound.
         """
         return list(self._apps.values())
@@ -170,8 +148,6 @@ class AudioService(BaseService):
     @IgnisProperty
     def recorders(self) -> list[Stream]:
         """
-        - read-only
-
         A list of audio recorders.
         """
         return list(self._recorders.values())

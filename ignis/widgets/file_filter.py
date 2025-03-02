@@ -38,8 +38,6 @@ class FileFilter(Gtk.FileFilter, IgnisGObject):
     @IgnisProperty
     def mime_types(self) -> list[str]:
         """
-        - required, read-only
-
         A list of MIME types.
         """
         return self._mime_types
@@ -47,8 +45,6 @@ class FileFilter(Gtk.FileFilter, IgnisGObject):
     @IgnisProperty
     def default(self) -> bool:
         """
-        - optional, read-write
-
         Whether the filter will be selected by default.
         """
         return self._default

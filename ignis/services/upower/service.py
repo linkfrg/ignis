@@ -51,8 +51,6 @@ class UPowerService(BaseService):
     @IgnisSignal
     def device_added(self, device: UPowerDevice):
         """
-        - Signal
-
         Emitted when a power device has been added.
 
         Args:
@@ -62,8 +60,6 @@ class UPowerService(BaseService):
     @IgnisSignal
     def battery_added(self, battery: UPowerDevice):
         """
-        - Signal
-
         Emitted when a battery has been added.
 
         Args:
@@ -73,8 +69,6 @@ class UPowerService(BaseService):
     @IgnisProperty
     def devices(self) -> list[UPowerDevice]:
         """
-        - read-only
-
         A list of all power devices.
         """
         return list(self._devices.values())
@@ -82,8 +76,6 @@ class UPowerService(BaseService):
     @IgnisProperty
     def batteries(self) -> list[UPowerDevice]:
         """
-        - read-only
-
         A list of batteries.
         """
         return list(self._batteries.values())
@@ -91,8 +83,6 @@ class UPowerService(BaseService):
     @IgnisProperty
     def display_device(self) -> UPowerDevice:
         """
-        - read-only
-
         The currently active device intended for display.
         """
         return self._display_device
