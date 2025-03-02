@@ -59,6 +59,9 @@ class Options(OptionsManager):
     """
 
     def __init__(self):
+        if 'sphinx' in sys.modules:
+            return
+
         try:
             super().__init__(file=f"{CACHE_DIR}/ignis_options.json")
         except FileNotFoundError:
