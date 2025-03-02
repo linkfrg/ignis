@@ -9,3 +9,6 @@ GObject
 
 .. autoclass:: ignis.gobject.IgnisProperty
     :members:
+
+.. autoclass:: ignis.gobject.IgnisSignal
+    :members:
