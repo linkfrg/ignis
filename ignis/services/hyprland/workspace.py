@@ -1,5 +1,4 @@
-from gi.repository import GObject  # type: ignore
-from ignis.gobject import IgnisProperty
+from ignis.gobject import IgnisProperty, IgnisSignal
 from ._object import HyprlandObject
 
 MATCH_DICT = {
@@ -27,7 +26,7 @@ class HyprlandWorkspace(HyprlandObject):
         self._last_window: str = ""
         self._last_window_title: str = ""
 
-    @GObject.Signal
+    @IgnisSignal
     def destroyed(self):
         """
         - Signal

@@ -1,7 +1,6 @@
 from ignis.dbus import DBusService
-from gi.repository import GObject  # type: ignore
 from ignis.utils import Utils
-from ignis.gobject import IgnisGObject, IgnisProperty
+from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
 from .action import NotificationAction
 
 
@@ -49,7 +48,7 @@ class Notification(IgnisGObject):
 
         Utils.Timeout(timeout, self.dismiss)
 
-    @GObject.Signal
+    @IgnisSignal
     def closed(self):
         """
         - Signal
@@ -57,7 +56,7 @@ class Notification(IgnisGObject):
         Emitted when notification has been closed.
         """
 
-    @GObject.Signal
+    @IgnisSignal
     def dismissed(self):
         """
         - Signal

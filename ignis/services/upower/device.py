@@ -1,5 +1,5 @@
-from ignis.gobject import IgnisGObject, IgnisProperty
-from gi.repository import GObject, GLib  # type: ignore
+from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
+from gi.repository import GLib  # type: ignore
 from ignis.dbus import DBusProxy
 from ignis.utils import Utils
 from .constants import DEVICE_KIND, DeviceState
@@ -51,7 +51,7 @@ class UPowerDevice(IgnisGObject):
                 for i in self.__watching_props[dbus_property]:
                     self.notify(i)
 
-    @GObject.Signal
+    @IgnisSignal
     def removed(self):
         """
         - Signal

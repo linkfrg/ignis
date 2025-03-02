@@ -1,5 +1,4 @@
-from gi.repository import GObject  # type: ignore
-from ignis.gobject import IgnisGObject, IgnisProperty
+from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
 from ._imports import NM
 from .access_point import WifiAccessPoint, ActiveAccessPoint
 from .constants import STATE
@@ -33,13 +32,13 @@ class WifiDevice(IgnisGObject):
         for i in self._device.get_access_points():
             self.__add_access_point(None, i, False)
 
-    @GObject.Signal
+    @IgnisSignal
     def removed(self):
         """
         Emitted when this Wi-Fi device is removed.
         """
 
-    @GObject.Signal
+    @IgnisSignal
     def new_access_point(self, access_point: WifiAccessPoint):
         """
         Emitted when a new access point is added.

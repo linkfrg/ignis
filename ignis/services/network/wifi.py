@@ -1,5 +1,4 @@
-from gi.repository import GObject  # type: ignore
-from ignis.gobject import IgnisGObject, IgnisProperty
+from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
 from ._imports import NM
 from .wifi_device import WifiDevice
 
@@ -24,7 +23,7 @@ class Wifi(IgnisGObject):
         for device in self._client.get_devices():
             self.__add_device(None, device, False)
 
-    @GObject.Signal
+    @IgnisSignal
     def new_device(self, device: WifiDevice):
         """
         Emitted when a new Wi-FI device is added.

@@ -1,6 +1,5 @@
-from gi.repository import GObject  # type: ignore
 from ignis.base_service import BaseService
-from ignis.gobject import IgnisProperty
+from ignis.gobject import IgnisProperty, IgnisSignal
 from ._imports import GnomeBluetooth
 from .device import BluetoothDevice
 from .constants import ADAPTER_STATE
@@ -33,7 +32,7 @@ class BluetoothService(BaseService):
         for gdevice in self._client.get_devices():
             self.__add_device(None, gdevice)  # type: ignore
 
-    @GObject.Signal
+    @IgnisSignal
     def device_added(self, device: BluetoothDevice):
         """
         - Signal

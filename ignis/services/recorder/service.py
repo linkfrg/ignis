@@ -1,11 +1,11 @@
 import datetime
-from gi.repository import GObject, GLib  # type: ignore
+from gi.repository import GLib  # type: ignore
 from ignis.app import IgnisApp
 from ignis.services.audio import AudioService
 from ignis.exceptions import GstPluginNotFoundError
 from ignis.base_service import BaseService
 from ignis.options import options
-from ignis.gobject import IgnisProperty
+from ignis.gobject import IgnisProperty, IgnisSignal
 from .session import SessionManager
 from .util import gst_inspect
 from ._imports import Gst
@@ -76,7 +76,7 @@ class RecorderService(BaseService):
         if not gst_inspect("mp4mux"):
             raise GstPluginNotFoundError("MP4 muxer", "gst-plugins-good")
 
-    @GObject.Signal
+    @IgnisSignal
     def recording_started(self):
         """
         - Signal
@@ -84,7 +84,7 @@ class RecorderService(BaseService):
         Emitted when recording starts.
         """
 
-    @GObject.Signal
+    @IgnisSignal
     def recording_stopped(self):
         """
         - Signal

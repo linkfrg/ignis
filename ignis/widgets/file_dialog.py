@@ -1,9 +1,9 @@
 import os
-from gi.repository import Gtk, Gio, GObject  # type: ignore
+from gi.repository import Gtk, Gio  # type: ignore
 from collections.abc import Callable
 from ignis.widgets.file_filter import FileFilter
 from ignis.gobject import IgnisGObject
-from ignis.gobject import IgnisProperty
+from ignis.gobject import IgnisProperty, IgnisSignal
 
 
 class FileDialog(Gtk.FileDialog, IgnisGObject):
@@ -64,7 +64,7 @@ class FileDialog(Gtk.FileDialog, IgnisGObject):
             self.emit("file-set", file)
             self.notify("file")
 
-    @GObject.Signal
+    @IgnisSignal
     def file_set(self, file: Gio.File):
         """
         - Signal

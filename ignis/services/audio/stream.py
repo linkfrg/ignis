@@ -1,5 +1,4 @@
-from gi.repository import GObject  # type: ignore
-from ignis.gobject import IgnisGObject, IgnisProperty
+from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
 from ignis.connection_manager import ConnectionManager
 from typing import Literal
 from ._imports import Gvc
@@ -53,7 +52,7 @@ class Stream(IgnisGObject):
         self._conn_mgr.disconnect_all()
         self.emit("removed")
 
-    @GObject.Signal
+    @IgnisSignal
     def removed(self):
         """
         - Signal

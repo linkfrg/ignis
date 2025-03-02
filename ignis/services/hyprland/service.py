@@ -1,11 +1,10 @@
 import json
 import os
 import socket
-from gi.repository import GObject  # type: ignore
 from ignis.utils import Utils
 from ignis.exceptions import HyprlandIPCNotFoundError
 from ignis.base_service import BaseService
-from ignis.gobject import IgnisProperty
+from ignis.gobject import IgnisProperty, IgnisSignal
 from .constants import HYPR_SOCKET_DIR
 from .workspace import HyprlandWorkspace
 from .keyboard import HyprlandKeyboard
@@ -53,7 +52,7 @@ class HyprlandService(BaseService):
             self.__sync_main_keyboard()
             self.__sync_active_window()
 
-    @GObject.Signal
+    @IgnisSignal
     def workspace_added(self, workspace: HyprlandWorkspace):
         """
         - Signal

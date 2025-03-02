@@ -1,8 +1,8 @@
 import os
 import re
 import subprocess
-from gi.repository import GObject, Gio, GLib  # type: ignore
-from ignis.gobject import IgnisGObject, IgnisProperty
+from gi.repository import Gio, GLib  # type: ignore
+from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
 from .action import ApplicationAction
 
 
@@ -21,7 +21,7 @@ class Application(IgnisGObject):
         for action in app.list_actions():
             self._actions.append(ApplicationAction(app=app, action=action))
 
-    @GObject.Signal
+    @IgnisSignal
     def pinned(self):
         """
         - Signal
@@ -29,7 +29,7 @@ class Application(IgnisGObject):
         Emitted when the application has been pinned.
         """
 
-    @GObject.Signal
+    @IgnisSignal
     def unpinned(self):
         """
         - Signal

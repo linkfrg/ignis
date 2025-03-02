@@ -1,6 +1,5 @@
-from gi.repository import GObject  # type: ignore
 from ignis.base_service import BaseService
-from ignis.gobject import IgnisProperty
+from ignis.gobject import IgnisProperty, IgnisSignal
 from ._imports import Gvc
 from .stream import Stream, DefaultStream
 
@@ -53,7 +52,7 @@ class AudioService(BaseService):
         for stream in getattr(self, f"{_type}s"):
             stream.notify("is_default")
 
-    @GObject.Signal
+    @IgnisSignal
     def speaker_added(self, stream: Stream):
         """
         - Signal
@@ -64,7 +63,7 @@ class AudioService(BaseService):
             stream: The instance of the stream.
         """
 
-    @GObject.Signal
+    @IgnisSignal
     def microphone_added(self, stream: Stream):
         """
         - Signal
@@ -75,7 +74,7 @@ class AudioService(BaseService):
             stream: The instance of the stream.
         """
 
-    @GObject.Signal
+    @IgnisSignal
     def app_added(self, stream: Stream):
         """
         - Signal
@@ -86,7 +85,7 @@ class AudioService(BaseService):
             stream: The instance of the stream.
         """
 
-    @GObject.Signal
+    @IgnisSignal
     def recorder_added(self, stream: Stream):
         """
         - Signal

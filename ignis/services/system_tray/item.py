@@ -3,8 +3,8 @@ from typing import Literal
 from collections.abc import Callable
 from ignis.utils import Utils
 from ignis.dbus import DBusProxy
-from gi.repository import GLib, GObject, GdkPixbuf, Gtk, Gdk  # type: ignore
-from ignis.gobject import IgnisGObject, IgnisProperty
+from gi.repository import GLib, GdkPixbuf, Gtk, Gdk  # type: ignore
+from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
 from ignis.dbus_menu import DBusMenu
 from ignis.exceptions import DisplayNotFoundError
 from ignis.connection_manager import ConnectionManager, DBusConnectionManager
@@ -180,10 +180,10 @@ class SystemTrayItem(IgnisGObject):
 
         await try_set_icon_name()
 
-    @GObject.Signal
+    @IgnisSignal
     def ready(self): ...  # user shouldn't connect to this signal
 
-    @GObject.Signal
+    @IgnisSignal
     def removed(self):
         """
         - Signal

@@ -1,7 +1,7 @@
 import os
 import json
 from ignis.dbus import DBusService, DBusProxy
-from gi.repository import GLib, GObject, GdkPixbuf  # type: ignore
+from gi.repository import GLib, GdkPixbuf  # type: ignore
 from ignis.utils import Utils
 from loguru import logger
 from datetime import datetime
@@ -15,7 +15,7 @@ from .constants import (
 )
 from ignis.exceptions import AnotherNotificationDaemonRunningError
 from ignis.options import options
-from ignis.gobject import IgnisProperty
+from ignis.gobject import IgnisProperty, IgnisSignal
 
 
 class NotificationService(BaseService):
@@ -84,7 +84,7 @@ class NotificationService(BaseService):
 
         raise AnotherNotificationDaemonRunningError(name)
 
-    @GObject.Signal
+    @IgnisSignal
     def notified(self, notification: Notification):
         """
         - Signal
@@ -95,7 +95,7 @@ class NotificationService(BaseService):
             notification: The instance of the notification.
         """
 
-    @GObject.Signal
+    @IgnisSignal
     def new_popup(self, notification: Notification):
         """
         - Signal

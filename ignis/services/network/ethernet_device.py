@@ -1,5 +1,4 @@
-from gi.repository import GObject  # type: ignore
-from ignis.gobject import IgnisGObject, IgnisProperty
+from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
 from ._imports import NM
 from .constants import STATE
 
@@ -27,7 +26,7 @@ class EthernetDevice(IgnisGObject):
         self._device.connect("notify::active-connection", self.__update_is_connected)
         self.__update_is_connected()
 
-    @GObject.Signal
+    @IgnisSignal
     def removed(self):
         """
         Emitted when this Ethernet device is removed.

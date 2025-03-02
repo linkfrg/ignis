@@ -1,8 +1,8 @@
 import os
 import asyncio
 from ignis.dbus import DBusProxy
-from gi.repository import GObject, GLib  # type: ignore
-from ignis.gobject import IgnisGObject, IgnisProperty
+from gi.repository import GLib  # type: ignore
+from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
 from ignis.utils import Utils
 from ignis.connection_manager import ConnectionManager
 from collections.abc import Callable
@@ -194,10 +194,10 @@ class MprisPlayer(IgnisGObject):
                 await self.__update_position()
             await asyncio.sleep(1)
 
-    @GObject.Signal
+    @IgnisSignal
     def ready(self): ...  # user shouldn't connect to this signal
 
-    @GObject.Signal
+    @IgnisSignal
     def closed(self):
         """
         - Signal

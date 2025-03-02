@@ -1,7 +1,6 @@
 import sys
 import json
-from gi.repository import GObject  # type: ignore
-from ignis.gobject import IgnisGObject, Binding, IgnisProperty
+from ignis.gobject import IgnisGObject, Binding, IgnisProperty, IgnisSignal
 from typing import Any
 from collections.abc import Callable
 from collections.abc import Generator
@@ -48,7 +47,7 @@ class OptionsGroup(IgnisGObject):
                 ),
             )
 
-    @GObject.Signal
+    @IgnisSignal
     def changed(self, option_name: str):
         """
         - Signal
@@ -59,7 +58,7 @@ class OptionsGroup(IgnisGObject):
             option_name: The name of the option.
         """
 
-    @GObject.Signal
+    @IgnisSignal
     def subgroup_changed(self, subgroup_name: str, option_name: str):
         """
         - Signal

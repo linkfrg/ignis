@@ -1,6 +1,6 @@
 import os
-from gi.repository import GObject, Gio  # type: ignore
-from ignis.gobject import IgnisGObject, IgnisProperty
+from gi.repository import Gio  # type: ignore
+from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
 from collections.abc import Callable
 
 FLAGS = {
@@ -79,7 +79,7 @@ class FileMonitor(IgnisGObject):
             "changed", lambda *args: self._callback(*args) if self._callback else None
         )
 
-    @GObject.Signal
+    @IgnisSignal
     def changed(self, path: str, event_type: str):
         """
         - Signal

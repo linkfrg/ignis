@@ -1,5 +1,5 @@
-from gi.repository import GObject, GLib  # type: ignore
-from ignis.gobject import IgnisGObject, IgnisProperty
+from gi.repository import GLib  # type: ignore
+from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
 from ignis.logging import logger
 from ._imports import GnomeBluetooth
 
@@ -33,7 +33,7 @@ class BluetoothDevice(IgnisGObject):
             )
         gdevice.connect("notify::icon", lambda x, y: self.notify("icon-name"))
 
-    @GObject.Signal
+    @IgnisSignal
     def removed(self):
         """
         - Signal

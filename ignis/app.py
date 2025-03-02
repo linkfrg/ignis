@@ -6,8 +6,8 @@ from typing import Literal
 from ignis.dbus import DBusService
 from ignis.utils import Utils
 from loguru import logger
-from gi.repository import Gtk, Gdk, Gio, GObject, GLib  # type: ignore
-from ignis.gobject import IgnisGObject, IgnisProperty
+from gi.repository import Gtk, Gdk, Gio, GLib  # type: ignore
+from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
 from ignis.exceptions import (
     WindowAddedError,
     WindowNotFoundError,
@@ -121,7 +121,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
             cls._instance = cls()
         return cls._instance
 
-    @GObject.Signal
+    @IgnisSignal
     def ready(self):
         """
         - Signal

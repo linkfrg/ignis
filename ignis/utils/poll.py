@@ -1,5 +1,5 @@
-from ignis.gobject import IgnisGObject, IgnisProperty
-from gi.repository import GLib, GObject  # type: ignore
+from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
+from gi.repository import GLib  # type: ignore
 from typing import Any
 from collections.abc import Callable
 
@@ -31,7 +31,7 @@ class Poll(IgnisGObject):
 
         self.__main()
 
-    @GObject.Signal
+    @IgnisSignal
     def changed(self):
         """
         - Signal

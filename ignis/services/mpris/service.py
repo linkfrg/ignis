@@ -1,8 +1,7 @@
 from ignis.dbus import DBusProxy
-from gi.repository import GObject  # type: ignore
 from ignis.utils import Utils
 from ignis.base_service import BaseService
-from ignis.gobject import IgnisProperty
+from ignis.gobject import IgnisProperty, IgnisSignal
 from .player import MprisPlayer
 
 
@@ -64,7 +63,7 @@ class MprisService(BaseService):
             self._players.pop(name)
             self.notify("players")
 
-    @GObject.Signal
+    @IgnisSignal
     def player_added(self, player: MprisPlayer):
         """
         - Signal

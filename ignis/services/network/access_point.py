@@ -1,5 +1,5 @@
-from gi.repository import GObject, GLib  # type: ignore
-from ignis.gobject import IgnisGObject, IgnisProperty
+from gi.repository import GLib  # type: ignore
+from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
 from typing import Literal
 from ignis.app import IgnisApp
 from .util import filter_connections
@@ -69,7 +69,7 @@ class WifiAccessPoint(IgnisGObject):
 
         return NM.utils_ssid_to_utf8(data)
 
-    @GObject.Signal
+    @IgnisSignal
     def removed(self):
         """
         Emitted when this access point is removed.

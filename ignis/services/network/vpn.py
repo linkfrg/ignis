@@ -1,5 +1,4 @@
-from gi.repository import GObject  # type: ignore
-from ignis.gobject import IgnisGObject, IgnisProperty
+from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
 from ._imports import NM
 from .util import check_is_vpn
 
@@ -24,7 +23,7 @@ class VpnConnection(IgnisGObject):
         self._client.connect("notify::active-connections", self.__update_is_connected)
         self.__update_is_connected()
 
-    @GObject.Signal
+    @IgnisSignal
     def removed(self):
         """
         Emitted when this VPN connection is removed.
@@ -112,7 +111,7 @@ class Vpn(IgnisGObject):
         for a in self._client.get_active_connections():
             self.__add_active_connection(None, a, False)
 
-    @GObject.Signal
+    @IgnisSignal
     def new_connection(self, connection: VpnConnection):
         """
         Emitted when a new VPN connection is added.
@@ -121,7 +120,7 @@ class Vpn(IgnisGObject):
             connection: An instance of the VPN connection.
         """
 
-    @GObject.Signal
+    @IgnisSignal
     def new_active_connection(self, connection: VpnConnection):
         """
         Emitted when a VPN connection is activated.

@@ -1,7 +1,6 @@
 import threading
 from collections.abc import Callable
-from gi.repository import GObject  # type: ignore
-from ignis.gobject import IgnisGObject
+from ignis.gobject import IgnisGObject, IgnisSignal
 
 
 def thread(target: Callable, *args, **kwargs) -> threading.Thread:
@@ -53,7 +52,7 @@ class ThreadTask(IgnisGObject):
         result = self._target()
         self.emit("finished", result)
 
-    @GObject.Signal
+    @IgnisSignal
     def finished(self, output: object):
         """
         - Signal

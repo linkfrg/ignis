@@ -1,5 +1,4 @@
-from gi.repository import GObject  # type: ignore
-from ignis.gobject import IgnisGObject, IgnisProperty
+from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
 from .ethernet_device import EthernetDevice
 from ._imports import NM
 
@@ -22,7 +21,7 @@ class Ethernet(IgnisGObject):
         for device in self._client.get_devices():
             self.__add_device(None, device, False)
 
-    @GObject.Signal
+    @IgnisSignal
     def new_device(self, device: EthernetDevice):
         """
         Emitted when a new Ethernet device is added.
