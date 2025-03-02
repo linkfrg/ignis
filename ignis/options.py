@@ -59,7 +59,7 @@ class Options(OptionsManager):
     """
 
     def __init__(self):
-        if 'sphinx' in sys.modules:
+        if "sphinx" in sys.modules:
             return
 
         try:
