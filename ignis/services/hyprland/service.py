@@ -145,7 +145,7 @@ class HyprlandService(BaseService):
 
         if workspace_data:
             workspace = HyprlandWorkspace(self)
-            workspace._sync(workspace_data)
+            workspace.sync(workspace_data)
             self._workspaces[workspace_data["id"]] = workspace
             self.__sort_workspaces()
             self.emit("workspace-added", workspace)
@@ -170,7 +170,7 @@ class HyprlandService(BaseService):
             if workspace is None:
                 workspace = HyprlandWorkspace(self)
 
-            workspace._sync(workspace_data)
+            workspace.sync(workspace_data)
             self._workspaces[workspace_data["id"]] = workspace
 
         self.__sort_workspaces()
@@ -179,7 +179,7 @@ class HyprlandService(BaseService):
 
     def __sync_active_workspace(self) -> None:
         workspace_data = json.loads(self.send_command("j/activeworkspace"))
-        self._active_workspace._sync(workspace_data)
+        self._active_workspace.sync(workspace_data)
         self.notify("active-workspace")
 
     def __sync_main_keyboard(self) -> None:
@@ -187,16 +187,16 @@ class HyprlandService(BaseService):
 
         for kb_data in data_list:
             if kb_data["main"] is True:
-                self._main_keyboard._sync(kb_data)
+                self._main_keyboard.sync(kb_data)
 
         self.notify("main-keyboard")
 
     def __sync_active_layout(self, layout: str) -> None:
-        self._main_keyboard._sync({"active_keymap": layout})
+        self._main_keyboard.sync({"active_keymap": layout})
 
     def __sync_active_window(self) -> None:
         active_window_data = json.loads(self.send_command("j/activewindow"))
-        self.active_window._sync(active_window_data)
+        self.active_window.sync(active_window_data)
         self.notify("active-window")
 
     def send_command(self, cmd: str) -> str:

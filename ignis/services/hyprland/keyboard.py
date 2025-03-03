@@ -1,5 +1,4 @@
-from ignis.gobject import IgnisProperty
-from ._object import HyprlandObject
+from ignis.gobject import IgnisProperty, DataGObject
 
 MATCH_DICT = {
     "capsLock": "caps_lock",
@@ -7,7 +6,7 @@ MATCH_DICT = {
 }
 
 
-class HyprlandKeyboard(HyprlandObject):
+class HyprlandKeyboard(DataGObject):
     """
     A keyboard.
     """
