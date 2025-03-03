@@ -26,8 +26,6 @@ class Separator(Gtk.Separator, BaseWidget):
     @IgnisProperty
     def vertical(self) -> bool:
         """
-        - optional, read-write
-
         Whether the separator is vertical.
         """
         return self.get_orientation() == Gtk.Orientation.VERTICAL

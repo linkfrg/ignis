@@ -75,8 +75,6 @@ class SystemdService(BaseService):
     @IgnisProperty
     def bus_type(self) -> Literal["session", "system"]:
         """
-        - read-only
-
         The bus type.
         """
         return self._bus_type
@@ -84,8 +82,6 @@ class SystemdService(BaseService):
     @IgnisProperty
     def units(self) -> list[SystemdUnit]:
         """
-        - read-only
-
         A list of all systemd units on the bus.
         """
         units = []

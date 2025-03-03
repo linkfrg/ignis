@@ -81,8 +81,6 @@ class BaseWidget(Gtk.Widget, IgnisGObject):
     @IgnisProperty
     def style_priority(self) -> StylePriority:
         """
-        - read-write
-
         The style priority for this widget.
         Overrides :attr:`~ignis.app.IgnisApp.widgets_style_priority`.
 

@@ -24,8 +24,6 @@ class Binding(GObject.Object):
     @GObject.Property
     def target(self) -> GObject.Object:
         """
-        - required, read-only
-
         The target GObject.
         """
         return self._target
@@ -33,8 +31,6 @@ class Binding(GObject.Object):
     @GObject.Property
     def target_properties(self) -> list[str]:
         """
-        - required, read-only
-
         The properties on the target GObject to bind.
         """
         return self._target_properties
@@ -42,8 +38,6 @@ class Binding(GObject.Object):
     @GObject.Property
     def transform(self) -> Callable | None:
         """
-        - required, read-only
-
         The function that accepts a new property value and returns the processed value.
         """
         return self._transform
@@ -280,3 +274,12 @@ class IgnisProperty(GObject.Property):
     def __get_type_from_literal(self, tp: type) -> type | None:
         values = get_args(tp)
         return type(values[0]) if values else None
+
+
+class IgnisSignal(GObject.Signal):
+    """
+    Bases: :obj:`~gi.repository.GObject.Signal`.
+
+    The same as ``GObject.Signal``, nothing special.
+    This class is needed only for the correct determination of signals when building docs.
+    """

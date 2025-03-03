@@ -1,10 +1,10 @@
 from ignis.utils import Utils
 from ignis.dbus import DBusService, DBusProxy
-from gi.repository import Gio, GLib, GObject  # type: ignore
+from gi.repository import Gio, GLib  # type: ignore
 from ignis.base_service import BaseService
 from .item import SystemTrayItem
 from ignis.exceptions import AnotherSystemTrayRunningError
-from ignis.gobject import IgnisProperty
+from ignis.gobject import IgnisProperty, IgnisSignal
 
 
 class SystemTrayService(BaseService):
@@ -62,11 +62,9 @@ class SystemTrayService(BaseService):
         name = proxy.gproxy.get_name_owner()
         raise AnotherSystemTrayRunningError(name)
 
-    @GObject.Signal
+    @IgnisSignal
     def added(self, item: SystemTrayItem):
         """
-        - Signal
-
         Emitted when a new item is added.
 
         Args:
@@ -76,8 +74,6 @@ class SystemTrayService(BaseService):
     @IgnisProperty
     def items(self) -> list[SystemTrayItem]:
         """
-        - read-only
-
         A list of system tray items.
         """
         return list(self._items.values())

@@ -30,8 +30,6 @@ class HyprlandKeyboard(HyprlandObject):
     @IgnisProperty
     def address(self) -> str:
         """
-        - read-only
-
         The address of the keyboard.
         """
         return self._address
@@ -39,8 +37,6 @@ class HyprlandKeyboard(HyprlandObject):
     @IgnisProperty
     def name(self) -> str:
         """
-        - read-only
-
         The name of the keyboard.
         """
         return self._name
@@ -48,8 +44,6 @@ class HyprlandKeyboard(HyprlandObject):
     @IgnisProperty
     def rules(self) -> str:
         """
-        - read-only
-
         The rules of the keyboard.
         """
         return self._rules
@@ -57,8 +51,6 @@ class HyprlandKeyboard(HyprlandObject):
     @IgnisProperty
     def model(self) -> str:
         """
-        - read-only
-
         The model of the keyboard.
         """
         return self._model
@@ -66,8 +58,6 @@ class HyprlandKeyboard(HyprlandObject):
     @IgnisProperty
     def layout(self) -> str:
         """
-        - read-only
-
         The layout of the keyboard.
         """
         return self._layout
@@ -75,8 +65,6 @@ class HyprlandKeyboard(HyprlandObject):
     @IgnisProperty
     def variant(self) -> str:
         """
-        - read-only
-
         The variant of the keyboard.
         """
         return self._variant
@@ -84,8 +72,6 @@ class HyprlandKeyboard(HyprlandObject):
     @IgnisProperty
     def options(self) -> str:
         """
-        - read-only
-
         The options of the keyboard.
         """
         return self._options
@@ -93,8 +79,6 @@ class HyprlandKeyboard(HyprlandObject):
     @IgnisProperty
     def active_keymap(self) -> str:
         """
-        - read-only
-
         The currently active keymap of the keyboard.
         """
         return self._active_keymap
@@ -102,8 +86,6 @@ class HyprlandKeyboard(HyprlandObject):
     @IgnisProperty
     def caps_lock(self) -> bool:
         """
-        - read-only
-
         Whether Caps Lock is active.
         """
         return self._caps_lock
@@ -111,8 +93,6 @@ class HyprlandKeyboard(HyprlandObject):
     @IgnisProperty
     def num_lock(self) -> bool:
         """
-        - read-only
-
         Whether Num Lock is active.
         """
         return self._num_lock
@@ -120,8 +100,6 @@ class HyprlandKeyboard(HyprlandObject):
     @IgnisProperty
     def main(self) -> bool:
         """
-        - read-only
-
         Whether the keyboard is main.
         """
         return self._main

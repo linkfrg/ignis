@@ -50,8 +50,6 @@ class NiriService(BaseService):
     @IgnisProperty
     def is_available(self) -> bool:
         """
-        - read-only
-
         Whether Niri IPC is available.
         """
         if NIRI_SOCKET is not None:
@@ -62,8 +60,6 @@ class NiriService(BaseService):
     @IgnisProperty
     def workspaces(self) -> list[dict[str, Any]]:
         """
-        - read-only
-
         A list of workspaces.
         """
         return self._workspaces
@@ -71,8 +67,6 @@ class NiriService(BaseService):
     @IgnisProperty
     def active_workspaces(self) -> list[dict[str, Any]]:
         """
-        - read-only
-
         The currently active workspaces.
         """
         return self._active_workspaces
@@ -80,8 +74,6 @@ class NiriService(BaseService):
     @IgnisProperty
     def windows(self) -> list[dict[str, Any]]:
         """
-        - read-only
-
         The currently opened windows.
         """
         return self._windows
@@ -89,8 +81,6 @@ class NiriService(BaseService):
     @IgnisProperty
     def kb_layout(self) -> str:
         """
-        - read-only
-
         The currenly active keyboard layout.
         """
         return self._kb_layout
@@ -98,8 +88,6 @@ class NiriService(BaseService):
     @IgnisProperty
     def active_window(self) -> dict[str, Any]:
         """
-        - read-only
-
         The currenly focused window.
         """
         return self._active_window
@@ -107,8 +95,6 @@ class NiriService(BaseService):
     @IgnisProperty
     def active_output(self) -> dict[str, Any]:
         """
-        - read-only
-
         The currenly focused output.
         """
         return self._active_output

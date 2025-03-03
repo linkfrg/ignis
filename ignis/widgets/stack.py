@@ -53,8 +53,6 @@ class Stack(Gtk.Stack, BaseWidget):
     @IgnisProperty
     def child(self) -> list[StackPage]:
         """
-        - optional, read-write
-
         A list of pages.
         """
         return self._child

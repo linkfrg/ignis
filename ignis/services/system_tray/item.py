@@ -3,8 +3,8 @@ from typing import Literal
 from collections.abc import Callable
 from ignis.utils import Utils
 from ignis.dbus import DBusProxy
-from gi.repository import GLib, GObject, GdkPixbuf, Gtk, Gdk  # type: ignore
-from ignis.gobject import IgnisGObject, IgnisProperty
+from gi.repository import GLib, GdkPixbuf, Gtk, Gdk  # type: ignore
+from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
 from ignis.dbus_menu import DBusMenu
 from ignis.exceptions import DisplayNotFoundError
 from ignis.connection_manager import ConnectionManager, DBusConnectionManager
@@ -180,22 +180,18 @@ class SystemTrayItem(IgnisGObject):
 
         await try_set_icon_name()
 
-    @GObject.Signal
+    @IgnisSignal
     def ready(self): ...  # user shouldn't connect to this signal
 
-    @GObject.Signal
+    @IgnisSignal
     def removed(self):
         """
-        - Signal
-
         Emitted when the item is removed.
         """
 
     @IgnisProperty
     def id(self) -> str | None:
         """
-        - read-only
-
         The ID of the item.
         """
         return self._id
@@ -203,8 +199,6 @@ class SystemTrayItem(IgnisGObject):
     @IgnisProperty
     def category(self) -> str | None:
         """
-        - read-only
-
         The category of the item.
         """
         return self._category
@@ -212,8 +206,6 @@ class SystemTrayItem(IgnisGObject):
     @IgnisProperty
     def title(self) -> str | None:
         """
-        - read-only
-
         The title of the item.
         """
         return self._title
@@ -221,8 +213,6 @@ class SystemTrayItem(IgnisGObject):
     @IgnisProperty
     def status(self) -> str | None:
         """
-        - read-only
-
         The status of the item.
         """
         return self._status
@@ -230,8 +220,6 @@ class SystemTrayItem(IgnisGObject):
     @IgnisProperty
     def window_id(self) -> int:
         """
-        - read-only
-
         The window ID.
         """
         return self._window_id
@@ -239,8 +227,6 @@ class SystemTrayItem(IgnisGObject):
     @IgnisProperty
     def icon(self) -> "str | GdkPixbuf.Pixbuf | None":
         """
-        - read-only
-
         The icon name or a ``GdkPixbuf.Pixbuf``.
         """
         return self._icon
@@ -248,8 +234,6 @@ class SystemTrayItem(IgnisGObject):
     @IgnisProperty
     def item_is_menu(self) -> bool:
         """
-        - read-only
-
         Whether the item has a menu.
         """
         return self._item_is_menu
@@ -257,8 +241,6 @@ class SystemTrayItem(IgnisGObject):
     @IgnisProperty
     def menu(self) -> DBusMenu | None:
         """
-        - read-only
-
         A :class:`~ignis.dbus_menu.DBusMenu` or ``None``.
 
         .. hint::
@@ -278,8 +260,6 @@ class SystemTrayItem(IgnisGObject):
     @IgnisProperty
     def tooltip(self) -> str | None:
         """
-        - read-only
-
         A tooltip, the text should be displayed when you hover cursor over the icon.
         """
         return self._title if not self._tooltip else self._tooltip[2]
