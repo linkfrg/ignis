@@ -1,10 +1,9 @@
 import json
 from gi.repository import GObject  # type: ignore
-from ignis.gobject import IgnisProperty
-from ._object import NiriObject
+from ignis.gobject import IgnisProperty, DataGObject
 
 
-class NiriWindow(NiriObject):
+class NiriWindow(DataGObject):
     """
     A window.
     """

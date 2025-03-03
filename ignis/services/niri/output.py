@@ -1,8 +1,7 @@
-from ignis.gobject import IgnisProperty
-from ._object import NiriObject
+from ignis.gobject import IgnisProperty, DataGObject
 
 
-class NiriOutput(NiriObject):
+class NiriOutput(DataGObject):
     """
     An output.
     """

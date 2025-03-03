@@ -1,9 +1,8 @@
 import json
-from ignis.gobject import IgnisProperty
-from ._object import NiriObject
+from ignis.gobject import IgnisProperty, DataGObject
 
 
-class NiriKeyboardLayouts(NiriObject):
+class NiriKeyboardLayouts(DataGObject):
     """
     Configured keyboard layouts.
     """

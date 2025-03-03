@@ -164,11 +164,11 @@ class NiriService(BaseService):
                 self.__update_workspaces(event_data)
 
     def __update_current_layout(self, data: dict) -> None:
-        self._keyboard_layouts._sync({"current_idx": data["idx"]})
+        self._keyboard_layouts.sync({"current_idx": data["idx"]})
         self.notify("keyboard_layouts")
 
     def __update_keyboard_layouts(self, data: dict) -> None:
-        self._keyboard_layouts._sync(data["keyboard_layouts"])
+        self._keyboard_layouts.sync(data["keyboard_layouts"])
         self.notify("keyboard_layouts")
 
     def __sort_windows(self) -> None:
@@ -187,7 +187,7 @@ class NiriService(BaseService):
         if window is None:
             window = NiriWindow(self)
 
-        window._sync(window_data)
+        window.sync(window_data)
         self._windows[window_data["id"]] = window
 
         if window.is_focused:
@@ -205,7 +205,7 @@ class NiriService(BaseService):
             # If a window became focused, it implies that all other windows
             # are no longer focused. Go through existing windows and
             # update their state accordingly.
-            window._sync({"is_focused": (window.id == id)})
+            window.sync({"is_focused": (window.id == id)})
 
         if id:
             self._active_window = self._windows[id]
@@ -224,7 +224,7 @@ class NiriService(BaseService):
             if window is None:
                 window = NiriWindow(self)
 
-            window._sync(window_data)
+            window.sync(window_data)
             self._windows[window_data["id"]] = window
 
             if window.is_focused:
@@ -261,7 +261,7 @@ class NiriService(BaseService):
             if workspace is None:
                 workspace = NiriWorkspace(self)
 
-            workspace._sync(workspace_data)
+            workspace.sync(workspace_data)
             self._workspaces[workspace_data["id"]] = workspace
 
         # Drop workspaces that don't exist anymore.
@@ -293,12 +293,12 @@ class NiriService(BaseService):
                 sync_data["is_active"] = got_activated
             if focused:
                 sync_data["is_focused"] = got_activated
-            workspace._sync(sync_data)
+            workspace.sync(sync_data)
 
         self.notify("workspaces")
 
     def __update_workspace_active_window(self, data: dict) -> None:
-        self._workspaces[data["workspace_id"]]._sync(
+        self._workspaces[data["workspace_id"]].sync(
             {"active_window_id": data["active_window_id"]}
         )
 
@@ -306,7 +306,7 @@ class NiriService(BaseService):
         active_output_data = json.loads(self.send_command('"FocusedOutput"\n'))["Ok"][
             "FocusedOutput"
         ]
-        self._active_output._sync(active_output_data)
+        self._active_output.sync(active_output_data)
         self.notify("active-output")
 
     def send_command(self, cmd: str) -> str:
