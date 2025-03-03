@@ -1,6 +1,5 @@
-from ignis.gobject import IgnisProperty
+from ignis.gobject import IgnisProperty, DataGObject
 from typing import Any
-from ._object import HyprlandObject
 
 MATCH_DICT = {
     "class": "class_name",
@@ -12,7 +11,7 @@ MATCH_DICT = {
 }
 
 
-class HyprlandWindow(HyprlandObject):
+class HyprlandWindow(DataGObject):
     """
     A window.
     """
@@ -45,12 +44,12 @@ class HyprlandWindow(HyprlandObject):
         self._focus_history_id: int = -1
         self._inhibiting_idle: bool = False
 
-    def _sync(self, data: dict[str, Any]) -> None:
+    def sync(self, data: dict[str, Any]) -> None:
         workspace = data.pop("workspace", None)
         if workspace:
             data["workspace_id"] = workspace["id"]
             data["workspace_name"] = workspace["name"]
-        super()._sync(data)
+        super().sync(data)
 
     @IgnisProperty
     def address(self) -> str:

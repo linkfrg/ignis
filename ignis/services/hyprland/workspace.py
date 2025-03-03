@@ -1,6 +1,5 @@
 from gi.repository import GObject  # type: ignore
-from ignis.gobject import IgnisProperty
-from ._object import HyprlandObject
+from ignis.gobject import IgnisProperty, DataGObject
 
 MATCH_DICT = {
     "monitorID": "monitor_id",
@@ -10,7 +9,7 @@ MATCH_DICT = {
 }
 
 
-class HyprlandWorkspace(HyprlandObject):
+class HyprlandWorkspace(DataGObject):
     """
     A workspace.
     """
