@@ -519,7 +519,7 @@ class DBusProxy(IgnisGObject):
 
     def get_dbus_property(
         self, property_name: str, unpack: bool = True
-    ) -> Any | GLib.Variant:
+    ) -> "Any | GLib.Variant":
         """
         Get the value of a D-Bus property by its name.
 
@@ -565,7 +565,7 @@ class DBusProxy(IgnisGObject):
 
     async def get_dbus_property_async(
         self, property_name: str, unpack: bool = True
-    ) -> Any | GLib.Variant:
+    ) -> "Any | GLib.Variant":
         """
         Asynchronously get the value of a D-Bus property by its name.
 
