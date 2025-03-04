@@ -56,6 +56,14 @@ class Box(Gtk.Box, BaseWidget):
                 self.append(c)
 
     def append(self, child: Gtk.Widget) -> None:
+        _orig_unparent = child.unparent
+
+        def unparent_wrapper(*args, **kwargs):
+            self.remove(child)
+            _orig_unparent(*args, **kwargs)
+            child.unparent = _orig_unparent
+
+        child.unparent = unparent_wrapper
         self._child.append(child)
         super().append(child)
         self.notify("child")
