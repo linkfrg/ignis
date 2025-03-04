@@ -176,7 +176,7 @@ class MprisPlayer(IgnisGObject):
             return path
 
         contents = await Utils.read_file_async(uri=art_url, decode=False)
-        await Utils.write_file_async(path=path, contents=contents)  # type: ignore
+        await Utils.write_file_async(path=path, contents=contents)
         return path
 
     async def __update_position(self) -> None:
