@@ -1,6 +1,6 @@
 import asyncio
 from gi.repository import Gio, GLib  # type: ignore
-from typing import Any
+from typing import Any, overload
 from collections.abc import Callable
 from ignis.utils import Utils
 from ignis.gobject import IgnisGObject, IgnisProperty
@@ -507,15 +507,30 @@ class DBusProxy(IgnisGObject):
         """
         self.connection.signal_unsubscribe(id)
 
-    def get_dbus_property(self, property_name: str) -> Any:
+    @overload
+    def get_dbus_property(
+        self, property_name: str, unpack: Literal[True] = ...
+    ) -> Any: ...
+
+    @overload
+    def get_dbus_property(
+        self, property_name: str, unpack: Literal[False] = ...
+    ) -> GLib.Variant: ...
+
+    def get_dbus_property(
+        self, property_name: str, unpack: bool = True
+    ) -> Any | GLib.Variant:
         """
         Get the value of a D-Bus property by its name.
 
         Args:
             property_name: The name of the property.
+            unpack: Whether to unpack the returned :class:`GLib.Variant`.
+        Returns:
+            The value of the D-Bus property or :class:`GLib.Variant`.
         """
         try:
-            return self.connection.call_sync(
+            variant = self.connection.call_sync(
                 self.name,
                 self.object_path,
                 "org.freedesktop.DBus.Properties",
@@ -528,18 +543,37 @@ class DBusProxy(IgnisGObject):
                 Gio.DBusCallFlags.NONE,
                 -1,
                 None,
-            )[0]
+            )
+
+            if unpack:
+                return variant[0]
+            else:
+                return variant
+
         except GLib.Error:
             return None
 
-    async def get_dbus_property_async(self, property_name: str) -> Any:
+    @overload
+    async def get_dbus_property_async(
+        self, property_name: str, unpack: Literal[True] = ...
+    ) -> Any: ...
+
+    @overload
+    async def get_dbus_property_async(
+        self, property_name: str, unpack: Literal[False] = ...
+    ) -> GLib.Variant: ...
+
+    async def get_dbus_property_async(
+        self, property_name: str, unpack: bool = True
+    ) -> Any | GLib.Variant:
         """
         Asynchronously get the value of a D-Bus property by its name.
 
         Args:
             property_name: The name of the property.
+            unpack: Whether to unpack the returned :class:`GLib.Variant`.
         Returns:
-            The value of the D-Bus property.
+            The value of the D-Bus property or :class:`GLib.Variant`.
         """
 
         variant = await self.connection.call(
@@ -556,8 +590,11 @@ class DBusProxy(IgnisGObject):
             -1,
         )
 
-        # unpack in thread
-        return await asyncio.to_thread(lambda: variant[0])
+        if unpack:
+            # unpack in thread
+            return await asyncio.to_thread(lambda: variant[0])
+        else:
+            return variant
 
     def set_dbus_property(self, property_name: str, value: GLib.Variant) -> None:
         """
