@@ -12,6 +12,7 @@ class NiriKeyboardLayouts(DataGObject):
         self._service = service
         self._names: list = []
         self._current_idx: int = -1
+        self._current_name: str = ""
         self._main: bool = False
 
     @IgnisProperty
@@ -31,6 +32,15 @@ class NiriKeyboardLayouts(DataGObject):
         Index of the currently active layout in names.
         """
         return self._current_idx
+
+    @IgnisProperty
+    def current_name(self) -> str:
+        """
+        - read-only
+
+        Name of the currently active layout.
+        """
+        return self._names[self._current_idx]
 
     def switch_layout(self, layout: str) -> None:
         """

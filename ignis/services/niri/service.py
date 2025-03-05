@@ -32,7 +32,7 @@ class NiriService(BaseService):
         print([i.id for i in niri.workspaces if i.is_active and i.output == "eDP-1"])
 
         # Get the currently active keyboard layout
-        print(niri.keyboard_layouts.names[niri.keyboard_layouts.current_idx])
+        print(niri.keyboard_layouts.current_name)
 
         # Get the title of the active window
         print(niri.active_window.title)
@@ -166,10 +166,12 @@ class NiriService(BaseService):
     def __update_current_layout(self, data: dict) -> None:
         self._keyboard_layouts.sync({"current_idx": data["idx"]})
         self.notify("keyboard_layouts")
+        self._keyboard_layouts.notify("current_name")
 
     def __update_keyboard_layouts(self, data: dict) -> None:
         self._keyboard_layouts.sync(data["keyboard_layouts"])
         self.notify("keyboard_layouts")
+        self._keyboard_layouts.notify("current_name")
 
     def __sort_windows(self) -> None:
         self._windows = dict(sorted(self._windows.items()))
