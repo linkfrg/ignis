@@ -83,7 +83,7 @@ class NiriWindow(DataGObject):
         return self._is_focused
 
     @IgnisProperty
-    def is_floating(self) -> bool:
+    def is_floating(self) -> bool:  # type: ignore
         """
         - read-only
 
