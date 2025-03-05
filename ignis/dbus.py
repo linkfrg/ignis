@@ -254,13 +254,21 @@ class DBusProxy(IgnisGObject):
     The first argument always needs to be the DBus signature tuple of the method call.
     Next arguments must match the provided D-Bus signature.
     If the D-Bus method does not accept any arguments, do not pass them.
+    Add ``Async`` at the end of the method name to call it asynchronously.
 
     .. code-block:: python
 
         from ignis.dbus import DBusProxy
+
+        # sync
         proxy = DBusProxy.new(...)
         result = proxy.MyMethod("(is)", 42, "hello")
         print(result)
+
+        # async
+        async def some_func():
+            proxy = DBusProxy.new_async(...)
+            result = proxy.MyMethodAsync("(is)", 42, "hello")
 
     To get a D-Bus property:
 
@@ -461,8 +469,13 @@ class DBusProxy(IgnisGObject):
         return dbus.NameHasOwner("(s)", self.name)
 
     def __getattr__(self, name: str) -> Any:
+        async def async_method_wrapper(*args, **kwargs):
+            return await self.call_async(name.replace("Async", ""), *args, **kwargs)
+
         if name in self.methods:
             return getattr(self._gproxy, name)
+        elif name.endswith("Async") and name.replace("Async", "") in self.methods:
+            return async_method_wrapper
         elif name in self.properties:
             return self.get_dbus_property(name)
         else:
