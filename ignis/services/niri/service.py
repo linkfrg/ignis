@@ -305,7 +305,7 @@ class NiriService(BaseService):
         )
 
     def __sync_active_output(self) -> None:
-        active_output_data = json.loads(self.send_command('"FocusedOutput"\n'))["Ok"][
+        active_output_data = json.loads(self.send_command("FocusedOutput"))["Ok"][
             "FocusedOutput"
         ]
         self._active_output.sync(active_output_data)
@@ -329,13 +329,14 @@ class NiriService(BaseService):
 
         with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as sock:
             sock.connect(NIRI_SOCKET)
-            return Utils.send_socket(sock, cmd, errors="ignore")
+            return Utils.send_socket(sock, json.dumps(cmd) + "\n", errors="ignore")
 
     def switch_kb_layout(self) -> None:
         """
         Switch to the next keyboard layout.
         """
-        self.send_command('{"Action":{"SwitchLayout":{"layout":"Next"}}}\n')
+        cmd = {"Action": {"SwitchLayout": {"layout": "Next"}}}
+        self.send_command(cmd)
 
     def switch_to_workspace(self, workspace_id: int) -> None:
         """
@@ -345,7 +346,7 @@ class NiriService(BaseService):
             workspace_id: The ID of the workspace to switch to.
         """
         cmd = {"Action": {"FocusWorkspace": {"reference": {"Index": workspace_id}}}}
-        self.send_command(json.dumps(cmd) + "\n")
+        self.send_command(cmd)
 
     def get_workspace_by_id(self, workspace_id: int) -> NiriWorkspace | None:
         """

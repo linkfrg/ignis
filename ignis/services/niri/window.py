@@ -1,4 +1,3 @@
-import json
 from gi.repository import GObject  # type: ignore
 from ignis.gobject import IgnisProperty, DataGObject
 
@@ -96,25 +95,25 @@ class NiriWindow(DataGObject):
         Close this window.
         """
         cmd = {"Action": {"CloseWindow": {"id": self._id}}}
-        self._service.send_command(json.dumps(cmd) + "\n")
+        self._service.send_command(cmd)
 
     def focus(self) -> None:
         """
         Focus this window.
         """
         cmd = {"Action": {"FocusWindow": {"id": self._id}}}
-        self._service.send_command(json.dumps(cmd) + "\n")
+        self._service.send_command(cmd)
 
     def toggle_fullscreen(self) -> None:
         """
         Toggle fullscreen on this window.
         """
         cmd = {"Action": {"FullscreenWindow": {"id": self._id}}}
-        self._service.send_command(json.dumps(cmd) + "\n")
+        self._service.send_command(cmd)
 
     def toggle_floating(self) -> None:
         """
         Move the window between the floating and the tiling layout.
         """
         cmd = {"Action": {"ToggleWindowFloating": {"id": self._id}}}
-        self._service.send_command(json.dumps(cmd) + "\n")
+        self._service.send_command(cmd)

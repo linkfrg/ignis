@@ -1,4 +1,3 @@
-import json
 from ignis.gobject import IgnisProperty, DataGObject
 
 
@@ -51,4 +50,4 @@ class NiriKeyboardLayouts(DataGObject):
             or a valid id (``0``, ``1``, etc.)
         """
         cmd = {"Action": {"SwitchLayout": {"layout": layout}}}
-        self._service.send_command(json.dumps(cmd) + "\n")
+        self._service.send_command(cmd)

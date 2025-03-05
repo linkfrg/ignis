@@ -1,4 +1,3 @@
-import json
 from gi.repository import GObject  # type: ignore
 from ignis.gobject import IgnisProperty, DataGObject
 
@@ -95,4 +94,4 @@ class NiriWorkspace(DataGObject):
         Switch to this workspace.
         """
         cmd = {"Action": {"FocusWorkspace": {"reference": {"Index": self.id}}}}
-        self._service.send_command(json.dumps(cmd) + "\n")
+        self._service.send_command(cmd)
