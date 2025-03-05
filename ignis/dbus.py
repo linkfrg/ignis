@@ -507,6 +507,70 @@ class DBusProxy(IgnisGObject):
         """
         self.connection.signal_unsubscribe(id)
 
+    def __get_variant(self, signature: str, *args) -> GLib.Variant:
+        if "(" in signature:
+            return GLib.Variant(signature, args)
+        else:
+            return GLib.Variant(signature, *args)
+
+    def call(
+        self,
+        method_name: str,
+        signature: str,
+        *args,
+        flags: Gio.DBusCallFlags = Gio.DBusCallFlags.NONE,
+        timeout: int = -1,
+    ) -> Any:
+        """
+        Call a D-Bus method on ``self``.
+
+        Args:
+            method_name: The name of the method.
+            signature: The D-Bus signature.
+            *args: Arguments to pass to the D-Bus method.
+            flags: D-Bus call flags.
+            timeout: The timeout in milliseconds, or ``-1`` to use the proxy default timeout.
+        Returns:
+            The returned data from the D-Bus method.
+        """
+        variant = self._gproxy.call_sync(
+            method_name=method_name,
+            parameters=self.__get_variant(signature, *args),
+            flags=flags,
+            timeout_msec=timeout,
+            cancellable=None,
+        )
+        return variant.unpack()
+
+    async def call_async(
+        self,
+        method_name: str,
+        signature: str,
+        *args,
+        flags: Gio.DBusCallFlags = Gio.DBusCallFlags.NONE,
+        timeout: int = -1,
+    ) -> Any:
+        """
+        Asynchronously call a D-Bus method on ``self``.
+
+        Args:
+            method_name: The name of the method.
+            signature: The D-Bus signature.
+            *args: Arguments to pass to the D-Bus method.
+            flags: D-Bus call flags.
+            timeout: The timeout in milliseconds, or ``-1`` to use the proxy default timeout.
+        Returns:
+            The returned data from the D-Bus method.
+        """
+        variant = await self._gproxy.call(  # type: ignore
+            method_name=method_name,
+            parameters=self.__get_variant(signature, *args),
+            flags=flags,
+            timeout_msec=timeout,
+        )
+
+        return await asyncio.to_thread(lambda: variant.unpack())
+
     @overload
     def get_dbus_property(
         self, property_name: str, unpack: Literal[True] = ...
