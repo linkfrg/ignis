@@ -311,7 +311,7 @@ class NiriService(BaseService):
         self._active_output.sync(active_output_data)
         self.notify("active-output")
 
-    def send_command(self, cmd: str) -> str:
+    def send_command(self, cmd: dict | str) -> str:
         """
         Send a command to the Niri IPC.
 
