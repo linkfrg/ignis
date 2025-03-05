@@ -6,7 +6,7 @@ from ignis.app import IgnisApp
 from ignis.services.audio import AudioService
 from ignis.services.system_tray import SystemTrayService, SystemTrayItem
 from ignis.services.hyprland import HyprlandService, HyprlandWorkspace
-from ignis.services.niri import NiriService
+from ignis.services.niri import NiriService, NiriWorkspace
 from ignis.services.notifications import NotificationService
 from ignis.services.mpris import MprisService, MprisPlayer
 
@@ -35,13 +35,13 @@ def hyprland_workspace_button(workspace: HyprlandWorkspace) -> Widget.Button:
     return widget
 
 
-def niri_workspace_button(workspace: dict) -> Widget.Button:
+def niri_workspace_button(workspace: NiriWorkspace) -> Widget.Button:
     widget = Widget.Button(
         css_classes=["workspace"],
-        on_click=lambda x, id=workspace["idx"]: niri.switch_to_workspace(id),
-        child=Widget.Label(label=str(workspace["idx"])),
+        on_click=lambda x, id=workspace.idx: niri.switch_to_workspace(id),
+        child=Widget.Label(label=str(workspace.idx)),
     )
-    if workspace["is_active"]:
+    if workspace.is_active:
         widget.add_css_class("active")
 
     return widget
@@ -70,10 +70,8 @@ def hyprland_scroll_workspaces(direction: str) -> None:
 
 def niri_scroll_workspaces(monitor_name: str, direction: str) -> None:
     current = list(
-        filter(
-            lambda w: w["is_active"] and w["output"] == monitor_name, niri.workspaces
-        )
-    )[0]["idx"]
+        filter(lambda w: w.is_active and w.output == monitor_name, niri.workspaces)
+    )[0].idx
     if direction == "up":
         target = current + 1
         niri.switch_to_workspace(target)
@@ -115,7 +113,7 @@ def niri_workspaces(monitor_name: str) -> Widget.EventBox:
         child=niri.bind(
             "workspaces",
             transform=lambda value: [
-                workspace_button(i) for i in value if i["output"] == monitor_name
+                workspace_button(i) for i in value if i.output == monitor_name
             ],
         ),
     )
@@ -175,11 +173,8 @@ def niri_client_title(monitor_name) -> Widget.Label:
     return Widget.Label(
         ellipsize="end",
         max_width_chars=40,
-        visible=niri.bind("active_output", lambda x: x["name"] == monitor_name),
-        label=niri.bind(
-            "active_window",
-            transform=lambda value: "" if value is None else value["title"],
-        ),
+        visible=niri.bind("active_output", lambda output: output.name == monitor_name),
+        label=niri.bind("active_window", transform=lambda window: window.title),
     )
 
 
@@ -235,7 +230,7 @@ def hyprland_keyboard_layout() -> Widget.EventBox:
 def niri_keyboard_layout() -> Widget.EventBox:
     return Widget.EventBox(
         on_click=lambda self: niri.switch_kb_layout(),
-        child=[Widget.Label(label=niri.bind("kb_layout"))],
+        child=[Widget.Label(label=niri.keyboard_layouts.bind("current_name"))],
     )
 
 
