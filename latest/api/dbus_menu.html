@@ -516,15 +516,55 @@
 <h1>D-Bus menu<a class="headerlink" href="#d-bus-menu" title="Link to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="ignis.dbus_menu.DBusMenu">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.dbus_menu.</span></span><span class="sig-name descname"><span class="pre">DBusMenu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.dbus_menu.DBusMenu" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.dbus_menu.</span></span><span class="sig-name descname"><span class="pre">DBusMenu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">proxy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="dbus.html#ignis.dbus.DBusProxy" title="ignis.dbus.DBusProxy"><span class="pre">DBusProxy</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.dbus_menu.DBusMenu" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-4.0/classes/PopoverMenu.html#Gtk.PopoverMenu" title="(in Gtk 4.0 v4.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gtk.PopoverMenu</span></code></a></p>
 <p>Like DbusmenuGtk3, but for GTK4.</p>
 <p>The bus must provide the <code class="docutils literal notranslate"><span class="pre">com.canonical.dbusmenu</span></code> D-Bus interface.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.dbus_menu.DBusMenu.new">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">new</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#ignis.dbus_menu.DBusMenu" title="ignis.dbus_menu.DBusMenu"><span class="pre">DBusMenu</span></a></span></span><a class="headerlink" href="#ignis.dbus_menu.DBusMenu.new" title="Link to this definition">#</a></dt>
+<dd><p>Synchronously initialize a new instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- A bus name (well-known or unique).</p></li>
+<li><p><strong>object_path</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- An object path to the menu.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#ignis.dbus_menu.DBusMenu" title="ignis.dbus_menu.DBusMenu"><code class="xref py py-class docutils literal notranslate"><span class="pre">DBusMenu</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The newly initialized instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.dbus_menu.DBusMenu.new_async">
+<em class="property"><span class="pre">async</span><span class="w"> </span><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">new_async</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#ignis.dbus_menu.DBusMenu" title="ignis.dbus_menu.DBusMenu"><span class="pre">DBusMenu</span></a></span></span><a class="headerlink" href="#ignis.dbus_menu.DBusMenu.new_async" title="Link to this definition">#</a></dt>
+<dd><p>Asynchronously initialize a new instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- A bus name (well-known or unique).</p></li>
+<li><p><strong>object_path</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- An object path to the menu.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#ignis.dbus_menu.DBusMenu" title="ignis.dbus_menu.DBusMenu"><code class="xref py py-class docutils literal notranslate"><span class="pre">DBusMenu</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The newly initialized instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="ignis.dbus_menu.DBusMenu.name">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.dbus_menu.DBusMenu.name" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>required, read-only</p></li>
+<li><p>read-only</p></li>
 </ul>
 <p>A bus name (well-known or unique).</p>
 </dd></dl>
@@ -533,7 +573,7 @@
 <dt class="sig sig-object py" id="ignis.dbus_menu.DBusMenu.object_path">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">object_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.dbus_menu.DBusMenu.object_path" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>required, read-only</p></li>
+<li><p>read-only</p></li>
 </ul>
 <p>An object path to the menu.</p>
 </dd></dl>
@@ -542,6 +582,20 @@
 <dt class="sig sig-object py" id="ignis.dbus_menu.DBusMenu.copy">
 <span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#ignis.dbus_menu.DBusMenu" title="ignis.dbus_menu.DBusMenu"><span class="pre">DBusMenu</span></a></span></span><a class="headerlink" href="#ignis.dbus_menu.DBusMenu.copy" title="Link to this definition">#</a></dt>
 <dd><p>Create a copy of this instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A copy of this instance.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#ignis.dbus_menu.DBusMenu" title="ignis.dbus_menu.DBusMenu"><code class="xref py py-class docutils literal notranslate"><span class="pre">DBusMenu</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.dbus_menu.DBusMenu.copy_async">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">copy_async</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#ignis.dbus_menu.DBusMenu" title="ignis.dbus_menu.DBusMenu"><span class="pre">DBusMenu</span></a></span></span><a class="headerlink" href="#ignis.dbus_menu.DBusMenu.copy_async" title="Link to this definition">#</a></dt>
+<dd><p>Asynchronously create a copy of this instance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>A copy of this instance.</p>
@@ -604,9 +658,12 @@
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus_menu.DBusMenu"><code class="docutils literal notranslate"><span class="pre">DBusMenu</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus_menu.DBusMenu.new"><code class="docutils literal notranslate"><span class="pre">DBusMenu.new()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus_menu.DBusMenu.new_async"><code class="docutils literal notranslate"><span class="pre">DBusMenu.new_async()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus_menu.DBusMenu.name"><code class="docutils literal notranslate"><span class="pre">DBusMenu.name</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus_menu.DBusMenu.object_path"><code class="docutils literal notranslate"><span class="pre">DBusMenu.object_path</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus_menu.DBusMenu.copy"><code class="docutils literal notranslate"><span class="pre">DBusMenu.copy()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.dbus_menu.DBusMenu.copy_async"><code class="docutils literal notranslate"><span class="pre">DBusMenu.copy_async()</span></code></a></li>
 </ul>
 </li>
 </ul>
