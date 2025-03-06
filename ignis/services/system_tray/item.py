@@ -55,8 +55,8 @@ class SystemTrayItem(IgnisGObject):
             self._dbus_conn_mgr.subscribe(
                 self.__dbus,
                 signal_name,
-                lambda *args, signal_name=signal_name: self.__sync_property(
-                    signal_name.replace("New", "").lower()
+                lambda *args, signal_name=signal_name: asyncio.create_task(
+                    self.__sync_property(signal_name.replace("New", "").lower())
                 ),
             )
 
