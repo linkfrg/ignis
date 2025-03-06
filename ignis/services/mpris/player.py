@@ -361,10 +361,20 @@ class MprisPlayer(IgnisGObject):
 
     @position.setter
     def position(self, value: int) -> None:
-        self.__player_proxy.SetPosition(
-            "(ox)", self.track_id, value * 1_000_000, result_handler=lambda *args: None
-        )
+        self.__player_proxy.SetPosition("(ox)", self.track_id, value * 1_000_000)
         asyncio.create_task(self.__update_position())
+
+    async def set_position_async(self, value: int) -> None:
+        """
+        Asynchronously set position.
+
+        Args:
+            value: The value to set.
+        """
+        await self.__player_proxy.SetPositionAsync(
+            "(ox)", self.track_id, value * 1_000_000
+        )
+        await self.__update_position()
 
     @IgnisProperty
     def shuffle(self) -> bool:
@@ -406,37 +416,73 @@ class MprisPlayer(IgnisGObject):
         """
         Go to the next track.
         """
-        self.__player_proxy.Next(result_handler=lambda *args: None)
+        self.__player_proxy.Next()
+
+    async def next_async(self) -> None:
+        """
+        Asynchronous version of :func:`next`.
+        """
+        await self.__player_proxy.NextAsync()
 
     def previous(self) -> None:
         """
         Go to the previous track.
         """
-        self.__player_proxy.Previous(result_handler=lambda *args: None)
+        self.__player_proxy.Previous()
+
+    async def previous_async(self) -> None:
+        """
+        Asynchronous version of :func:`previous`.
+        """
+        self.__player_proxy.PreviousAsync()
 
     def pause(self) -> None:
         """
         Pause playback.
         """
-        self.__player_proxy.Pause(result_handler=lambda *args: None)
+        self.__player_proxy.Pause()
+
+    async def pause_async(self) -> None:
+        """
+        Asynchronous version of :func:`pause`.
+        """
+        await self.__player_proxy.PauseAsync()
 
     def play(self) -> None:
         """
         Start playback.
         """
-        self.__player_proxy.Play(result_handler=lambda *args: None)
+        self.__player_proxy.Play()
+
+    async def play_async(self) -> None:
+        """
+        Asynchronous version of :func:`play`.
+        """
+        await self.__player_proxy.PlayAsync()
 
     def play_pause(self) -> None:
         """
         Toggle between playing and pausing.
         """
-        self.__player_proxy.PlayPause(result_handler=lambda *args: None)
+        self.__player_proxy.PlayPause()
+
+    async def play_pause_async(self) -> None:
+        """
+        Asynchronous version of :func:`play_pause`.
+        """
+        await self.__player_proxy.PlayPauseAsync()
 
     def stop(self) -> None:
         """
         Stop playback and remove the MPRIS interface if supported by the player.
         """
-        self.__player_proxy.Stop(result_handler=lambda *args: None)
+        self.__player_proxy.Stop()
+
+    async def stop_async(self) -> None:
+        """
+        Asynchronous version of :func:`stop`.
+        """
+        await self.__player_proxy.StopAsync()
 
     def seek(self, offset: int) -> None:
         """
@@ -444,6 +490,10 @@ class MprisPlayer(IgnisGObject):
         Positive values move forward, and negative values move backward.
         The offset is in milliseconds.
         """
-        self.__player_proxy.Seek(
-            "(x)", offset * 1_000_100, result_handler=lambda *args: None
-        )
+        self.__player_proxy.Seek("(x)", offset * 1_000_100)
+
+    async def seek_async(self, offset: int) -> None:
+        """
+        Asynchronous version of :func:`seek`.
+        """
+        await self.__player_proxy.SeekAsync("(x)", offset * 1_000_100)

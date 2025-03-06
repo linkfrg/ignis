@@ -314,7 +314,17 @@ class SystemTrayItem(IgnisGObject):
             x: x coordinate.
             y: y coordinate.
         """
-        self.__dbus.Activate("(ii)", x, y, result_handler=lambda *args: None)
+        self.__dbus.Activate("(ii)", x, y)
+
+    async def activate_async(self, x: int = 0, y: int = 0) -> None:
+        """
+        Asynchronous version of :func:`activate`.
+
+        Args:
+            x: x coordinate.
+            y: y coordinate.
+        """
+        await self.__dbus.ActivateAsync("(ii)", x, y)
 
     def secondary_activate(self, x: int = 0, y: int = 0) -> None:
         """
@@ -324,7 +334,17 @@ class SystemTrayItem(IgnisGObject):
             x: x coordinate.
             y: y coordinate.
         """
-        self.__dbus.SecondaryActivate("(ii)", x, y, result_handler=lambda *args: None)
+        self.__dbus.SecondaryActivate("(ii)", x, y)
+
+    async def secondary_activate_async(self, x: int = 0, y: int = 0) -> None:
+        """
+        Asynchronous version of :func:`secondary_activate`.
+
+        Args:
+            x: x coordinate.
+            y: y coordinate.
+        """
+        await self.__dbus.SecondaryActivateAsync("(ii)", x, y)
 
     def context_menu(self, x: int = 0, y: int = 0) -> None:
         """
@@ -334,7 +354,17 @@ class SystemTrayItem(IgnisGObject):
             x: x coordinate.
             y: y coordinate.
         """
-        self.__dbus.ContextMenu("(ii)", x, y, result_handler=lambda *args: None)
+        self.__dbus.ContextMenu("(ii)", x, y)
+
+    async def context_menu_async(self, x: int = 0, y: int = 0) -> None:
+        """
+        Asynchronous version of :func:`context_menu`.
+
+        Args:
+            x: x coordinate.
+            y: y coordinate.
+        """
+        await self.__dbus.ContextMenuAsync("(ii)", x, y)
 
     def scroll(
         self,
@@ -348,6 +378,18 @@ class SystemTrayItem(IgnisGObject):
             delta: The amount of scroll.
             orientation: The type of the orientation: horizontal or vertical.
         """
-        self.__dbus.Scroll(
-            "(is)", delta, orientation, result_handler=lambda *args: None
-        )
+        self.__dbus.Scroll("(is)", delta, orientation)
+
+    async def scroll_async(
+        self,
+        delta: int = 0,
+        orientation: Literal["horizontal", "vertical"] = "horizontal",
+    ) -> None:
+        """
+        Asynchronous version of :func:`scroll`.
+
+        Args:
+            delta: The amount of scroll.
+            orientation: The type of the orientation: horizontal or vertical.
+        """
+        await self.__dbus.ScrollAsync("(is)", delta, orientation)
