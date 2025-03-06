@@ -564,6 +564,20 @@ Allows controlling device screen brightness.</p>
 Setting this property will set provided brightness on ALL backlight devices.</p>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.backlight.BacklightService.set_brightness_async">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_brightness_async</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.backlight.BacklightService.set_brightness_async" title="Link to this definition">#</a></dt>
+<dd><p>Asynchronously set brightness for all devices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) -- The value to set.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="ignis.services.backlight.BacklightService.max_brightness">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">max_brightness</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.services.backlight.BacklightService.max_brightness" title="Link to this definition">#</a></dt>
@@ -604,6 +618,20 @@ Setting this property will set provided brightness on ALL backlight devices.</p>
 <li><p>read-write</p></li>
 </ul>
 <p>The current brightness of the device.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.backlight.BacklightDevice.set_brightness_async">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_brightness_async</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.backlight.BacklightDevice.set_brightness_async" title="Link to this definition">#</a></dt>
+<dd><p>Asynchronously set brightness.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) -- The value to set.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -661,6 +689,7 @@ Setting this property will set provided brightness on ALL backlight devices.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.backlight.BacklightService.available"><code class="docutils literal notranslate"><span class="pre">BacklightService.available</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.backlight.BacklightService.devices"><code class="docutils literal notranslate"><span class="pre">BacklightService.devices</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.backlight.BacklightService.brightness"><code class="docutils literal notranslate"><span class="pre">BacklightService.brightness</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.backlight.BacklightService.set_brightness_async"><code class="docutils literal notranslate"><span class="pre">BacklightService.set_brightness_async()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.backlight.BacklightService.max_brightness"><code class="docutils literal notranslate"><span class="pre">BacklightService.max_brightness</span></code></a></li>
 </ul>
 </li>
@@ -668,6 +697,7 @@ Setting this property will set provided brightness on ALL backlight devices.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.backlight.BacklightDevice.device_name"><code class="docutils literal notranslate"><span class="pre">BacklightDevice.device_name</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.backlight.BacklightDevice.max_brightness"><code class="docutils literal notranslate"><span class="pre">BacklightDevice.max_brightness</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.backlight.BacklightDevice.brightness"><code class="docutils literal notranslate"><span class="pre">BacklightDevice.brightness</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.backlight.BacklightDevice.set_brightness_async"><code class="docutils literal notranslate"><span class="pre">BacklightDevice.set_brightness_async()</span></code></a></li>
 </ul>
 </li>
 </ul>

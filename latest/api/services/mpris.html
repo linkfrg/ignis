@@ -721,6 +721,20 @@
 <p>The current position in the track in seconds.</p>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.set_position_async">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_position_async</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.set_position_async" title="Link to this definition">#</a></dt>
+<dd><p>Asynchronously set position.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) -- The value to set.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.shuffle">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shuffle</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.shuffle" title="Link to this definition">#</a></dt>
@@ -769,9 +783,31 @@
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.next_async">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">next_async</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.next_async" title="Link to this definition">#</a></dt>
+<dd><p>Asynchronous version of <a class="reference internal" href="#ignis.services.mpris.MprisPlayer.next" title="ignis.services.mpris.MprisPlayer.next"><code class="xref py py-func docutils literal notranslate"><span class="pre">next()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.previous">
 <span class="sig-name descname"><span class="pre">previous</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.previous" title="Link to this definition">#</a></dt>
 <dd><p>Go to the previous track.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.previous_async">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">previous_async</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.previous_async" title="Link to this definition">#</a></dt>
+<dd><p>Asynchronous version of <a class="reference internal" href="#ignis.services.mpris.MprisPlayer.previous" title="ignis.services.mpris.MprisPlayer.previous"><code class="xref py py-func docutils literal notranslate"><span class="pre">previous()</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
@@ -791,9 +827,31 @@
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.pause_async">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pause_async</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.pause_async" title="Link to this definition">#</a></dt>
+<dd><p>Asynchronous version of <a class="reference internal" href="#ignis.services.mpris.MprisPlayer.pause" title="ignis.services.mpris.MprisPlayer.pause"><code class="xref py py-func docutils literal notranslate"><span class="pre">pause()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.play">
 <span class="sig-name descname"><span class="pre">play</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.play" title="Link to this definition">#</a></dt>
 <dd><p>Start playback.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.play_async">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">play_async</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.play_async" title="Link to this definition">#</a></dt>
+<dd><p>Asynchronous version of <a class="reference internal" href="#ignis.services.mpris.MprisPlayer.play" title="ignis.services.mpris.MprisPlayer.play"><code class="xref py py-func docutils literal notranslate"><span class="pre">play()</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
@@ -813,9 +871,31 @@
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.play_pause_async">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">play_pause_async</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.play_pause_async" title="Link to this definition">#</a></dt>
+<dd><p>Asynchronous version of <a class="reference internal" href="#ignis.services.mpris.MprisPlayer.play_pause" title="ignis.services.mpris.MprisPlayer.play_pause"><code class="xref py py-func docutils literal notranslate"><span class="pre">play_pause()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.stop">
 <span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.stop" title="Link to this definition">#</a></dt>
 <dd><p>Stop playback and remove the MPRIS interface if supported by the player.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.stop_async">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">stop_async</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.stop_async" title="Link to this definition">#</a></dt>
+<dd><p>Asynchronous version of <a class="reference internal" href="#ignis.services.mpris.MprisPlayer.stop" title="ignis.services.mpris.MprisPlayer.stop"><code class="xref py py-func docutils literal notranslate"><span class="pre">stop()</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
@@ -829,6 +909,17 @@
 <dd><p>Seek to a specific position in the track.
 Positive values move forward, and negative values move backward.
 The offset is in milliseconds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.seek_async">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">seek_async</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.seek_async" title="Link to this definition">#</a></dt>
+<dd><p>Asynchronous version of <a class="reference internal" href="#ignis.services.mpris.MprisPlayer.seek" title="ignis.services.mpris.MprisPlayer.seek"><code class="xref py py-func docutils literal notranslate"><span class="pre">seek()</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
@@ -911,17 +1002,25 @@ The offset is in milliseconds.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer.url"><code class="docutils literal notranslate"><span class="pre">MprisPlayer.url</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer.playback_status"><code class="docutils literal notranslate"><span class="pre">MprisPlayer.playback_status</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer.position"><code class="docutils literal notranslate"><span class="pre">MprisPlayer.position</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer.set_position_async"><code class="docutils literal notranslate"><span class="pre">MprisPlayer.set_position_async()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer.shuffle"><code class="docutils literal notranslate"><span class="pre">MprisPlayer.shuffle</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer.volume"><code class="docutils literal notranslate"><span class="pre">MprisPlayer.volume</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer.identity"><code class="docutils literal notranslate"><span class="pre">MprisPlayer.identity</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer.desktop_entry"><code class="docutils literal notranslate"><span class="pre">MprisPlayer.desktop_entry</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer.next"><code class="docutils literal notranslate"><span class="pre">MprisPlayer.next()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer.next_async"><code class="docutils literal notranslate"><span class="pre">MprisPlayer.next_async()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer.previous"><code class="docutils literal notranslate"><span class="pre">MprisPlayer.previous()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer.previous_async"><code class="docutils literal notranslate"><span class="pre">MprisPlayer.previous_async()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer.pause"><code class="docutils literal notranslate"><span class="pre">MprisPlayer.pause()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer.pause_async"><code class="docutils literal notranslate"><span class="pre">MprisPlayer.pause_async()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer.play"><code class="docutils literal notranslate"><span class="pre">MprisPlayer.play()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer.play_async"><code class="docutils literal notranslate"><span class="pre">MprisPlayer.play_async()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer.play_pause"><code class="docutils literal notranslate"><span class="pre">MprisPlayer.play_pause()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer.play_pause_async"><code class="docutils literal notranslate"><span class="pre">MprisPlayer.play_pause_async()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer.stop"><code class="docutils literal notranslate"><span class="pre">MprisPlayer.stop()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer.stop_async"><code class="docutils literal notranslate"><span class="pre">MprisPlayer.stop_async()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer.seek"><code class="docutils literal notranslate"><span class="pre">MprisPlayer.seek()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer.seek_async"><code class="docutils literal notranslate"><span class="pre">MprisPlayer.seek_async()</span></code></a></li>
 </ul>
 </li>
 </ul>
