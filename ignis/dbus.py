@@ -529,7 +529,7 @@ class DBusProxy(IgnisGObject):
     def call(
         self,
         method_name: str,
-        signature: str,
+        signature: str | None = None,
         *args,
         flags: Gio.DBusCallFlags = Gio.DBusCallFlags.NONE,
         timeout: int = -1,
@@ -548,7 +548,7 @@ class DBusProxy(IgnisGObject):
         """
         variant = self._gproxy.call_sync(
             method_name=method_name,
-            parameters=self.__get_variant(signature, *args),
+            parameters=self.__get_variant(signature, *args) if signature else None,
             flags=flags,
             timeout_msec=timeout,
             cancellable=None,
@@ -558,7 +558,7 @@ class DBusProxy(IgnisGObject):
     async def call_async(
         self,
         method_name: str,
-        signature: str,
+        signature: str | None = None,
         *args,
         flags: Gio.DBusCallFlags = Gio.DBusCallFlags.NONE,
         timeout: int = -1,
@@ -577,7 +577,7 @@ class DBusProxy(IgnisGObject):
         """
         variant = await self._gproxy.call(  # type: ignore
             method_name=method_name,
-            parameters=self.__get_variant(signature, *args),
+            parameters=self.__get_variant(signature, *args) if signature else None,
             flags=flags,
             timeout_msec=timeout,
         )
