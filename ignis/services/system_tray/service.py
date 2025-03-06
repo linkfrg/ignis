@@ -1,3 +1,4 @@
+import asyncio
 from ignis.utils import Utils
 from ignis.dbus import DBusService, DBusProxy
 from gi.repository import Gio, GLib, GObject  # type: ignore
@@ -104,13 +105,15 @@ class SystemTrayService(BaseService):
 
         invocation.return_value(None)
 
-        item = SystemTrayItem(bus_name, object_path)
-        item.connect("ready", self.__on_item_ready, bus_name, object_path)
-
-    def __on_item_ready(
-        self, item: SystemTrayItem, bus_name: str, object_path: str
-    ) -> None:
         if bus_name in self._items:
+            return
+
+        asyncio.create_task(self.__initialize_item(bus_name, object_path))
+
+    async def __initialize_item(self, bus_name: str, object_path: str) -> None:
+        item = await SystemTrayItem.new_async(bus_name, object_path)
+
+        if not item:
             return
 
         self._items[bus_name] = item

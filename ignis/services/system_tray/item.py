@@ -15,9 +15,10 @@ class SystemTrayItem(IgnisGObject):
     A system tray item.
     """
 
-    def __init__(self, name: str, object_path: str):
+    def __init__(self, proxy: DBusProxy):
         super().__init__()
 
+        self.__dbus = proxy
         self._conn_mgr = ConnectionManager()
         self._dbus_conn_mgr = DBusConnectionManager()
 
@@ -31,29 +32,9 @@ class SystemTrayItem(IgnisGObject):
         self._menu: DBusMenu | None = None
         self._tooltip: str | None = None
 
-        asyncio.create_task(self.__init_proxy(name, object_path))
-
-    async def __init_proxy(self, name: str, object_path: str) -> None:
-        self.__dbus: DBusProxy = await DBusProxy.new_async(
-            name=name,
-            object_path=object_path,
-            interface_name="org.kde.StatusNotifierItem",
-            info=Utils.load_interface_xml("org.kde.StatusNotifierItem"),
-        )
-
-        if not self.__dbus.has_owner:
-            return
-
         self._conn_mgr.connect(
             self.__dbus.gproxy, "notify::g-name-owner", lambda *_: self.__remove()
         )
-
-        menu_path: str = await self.__dbus.get_dbus_property_async("Menu")
-
-        if menu_path:
-            self._menu = await DBusMenu.new_async(
-                name=self.__dbus.name, object_path=menu_path
-            )
 
         for signal_name in [
             "NewIcon",
@@ -90,7 +71,30 @@ class SystemTrayItem(IgnisGObject):
             lambda x: asyncio.create_task(self.__sync_icon()),
         )
 
-        # sync icon
+    @classmethod
+    async def new_async(cls, name: str, object_path: str) -> "SystemTrayItem | None":
+        proxy = await DBusProxy.new_async(
+            name=name,
+            object_path=object_path,
+            interface_name="org.kde.StatusNotifierItem",
+            info=Utils.load_interface_xml("org.kde.StatusNotifierItem"),
+        )
+
+        if not proxy.has_owner:
+            return None
+
+        obj = cls(proxy)
+        await obj._initial_sync()
+        return obj
+
+    async def _initial_sync(self) -> None:
+        menu_path: str = await self.__dbus.get_dbus_property_async("Menu")
+
+        if menu_path:
+            self._menu = await DBusMenu.new_async(
+                name=self.__dbus.name, object_path=menu_path
+            )
+
         await self.__sync_icon()
 
         # sync all properties
@@ -101,8 +105,6 @@ class SystemTrayItem(IgnisGObject):
         await self.__sync_property("window_id")
         await self.__sync_property("item_is_menu")
         await self.__sync_property("tooltip")
-
-        self.emit("ready")
 
     def __remove(self) -> None:
         self._conn_mgr.disconnect_all()
@@ -181,9 +183,6 @@ class SystemTrayItem(IgnisGObject):
                 self.notify("icon")
 
         await try_set_icon_name()
-
-    @GObject.Signal
-    def ready(self): ...  # user shouldn't connect to this signal
 
     @GObject.Signal
     def removed(self):
