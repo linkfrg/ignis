@@ -360,7 +360,6 @@ class SystemTrayItem(IgnisGObject):
         """
         Asynchronous version of :func:`context_menu`.
 
-
         Args:
             x: x coordinate.
             y: y coordinate.
