@@ -51,7 +51,9 @@ class SystemTrayItem(IgnisGObject):
         menu_path: str = await self.__dbus.get_dbus_property_async("Menu")
 
         if menu_path:
-            self._menu = DBusMenu(name=self.__dbus.name, object_path=menu_path)
+            self._menu = await DBusMenu.new_async(
+                name=self.__dbus.name, object_path=menu_path
+            )
 
         for signal_name in [
             "NewIcon",
