@@ -15,9 +15,11 @@ class MprisPlayer(IgnisGObject):
     A media player object.
     """
 
-    def __init__(self, name: str):
+    def __init__(self, mpris_proxy: DBusProxy, player_proxy: DBusProxy):
         super().__init__()
 
+        self.__mpris_proxy = mpris_proxy
+        self.__player_proxy = player_proxy
         self._conn_mgr = ConnectionManager()
 
         self._can_control: bool = False
@@ -48,29 +50,7 @@ class MprisPlayer(IgnisGObject):
 
         os.makedirs(ART_URL_CACHE_DIR, exist_ok=True)
 
-        asyncio.create_task(self.__init_proxy(name))
-
-    async def __init_proxy(self, name: str) -> None:
-        self.__mpris_proxy = await DBusProxy.new_async(
-            name=name,
-            object_path="/org/mpris/MediaPlayer2",
-            interface_name="org.mpris.MediaPlayer2",
-            info=Utils.load_interface_xml("org.mpris.MediaPlayer2"),
-        )
-
-        self.__player_proxy = await DBusProxy.new_async(
-            name=self.__mpris_proxy.name,
-            object_path=self.__mpris_proxy.object_path,
-            interface_name="org.mpris.MediaPlayer2.Player",
-            info=Utils.load_interface_xml("org.mpris.MediaPlayer2.Player"),
-        )
-
         self.__mpris_proxy.watch_name(on_name_vanished=lambda *_: self.__close())
-
-        self._sync_pos_task = asyncio.create_task(self.__sync_position())
-        await self.__sync_all()
-        await self.__sync_metadata()
-        await self.__update_position()
 
         self._conn_mgr.connect(
             self.__player_proxy.gproxy,
@@ -83,7 +63,31 @@ class MprisPlayer(IgnisGObject):
             lambda *_: asyncio.create_task(self.__sync_metadata()),
         )
 
-        self.emit("ready")
+    @classmethod
+    async def new_async(cls, name: str) -> "MprisPlayer":
+        mpris_proxy = await DBusProxy.new_async(
+            name=name,
+            object_path="/org/mpris/MediaPlayer2",
+            interface_name="org.mpris.MediaPlayer2",
+            info=Utils.load_interface_xml("org.mpris.MediaPlayer2"),
+        )
+
+        player_proxy = await DBusProxy.new_async(
+            name=name,
+            object_path="/org/mpris/MediaPlayer2",
+            interface_name="org.mpris.MediaPlayer2.Player",
+            info=Utils.load_interface_xml("org.mpris.MediaPlayer2.Player"),
+        )
+
+        obj = cls(mpris_proxy=mpris_proxy, player_proxy=player_proxy)
+        await obj._initial_sync()
+        return obj
+
+    async def _initial_sync(self) -> None:
+        self._sync_pos_task = asyncio.create_task(self.__sync_position())
+        await self.__sync_all()
+        await self.__sync_metadata()
+        await self.__update_position()
 
     def __close(self) -> None:
         self.__mpris_proxy.unwatch_name()
