@@ -93,6 +93,13 @@ class BacklightService(BaseService):
         for device in self._devices:
             device.brightness = value
 
+    async def set_brightness_async(self, value: int) -> None:
+        """
+        Asynchronously set brightness for all devices.
+        """
+        for device in self._devices:
+            await device.set_brighness_async(value)
+
     @IgnisProperty
     def max_brightness(self) -> int:
         """
