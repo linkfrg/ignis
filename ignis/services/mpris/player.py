@@ -434,7 +434,7 @@ class MprisPlayer(IgnisGObject):
         """
         Asynchronous version of :func:`previous`.
         """
-        self.__player_proxy.PreviousAsync()
+        await self.__player_proxy.PreviousAsync()
 
     def pause(self) -> None:
         """
