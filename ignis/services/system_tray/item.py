@@ -18,7 +18,7 @@ class SystemTrayItem(IgnisGObject):
     def __init__(self, proxy: DBusProxy):
         super().__init__()
 
-        self.__dbus = proxy
+        self._proxy = proxy
         self._conn_mgr = ConnectionManager()
         self._dbus_conn_mgr = DBusConnectionManager()
 
@@ -33,7 +33,7 @@ class SystemTrayItem(IgnisGObject):
         self._tooltip: str | None = None
 
         self._conn_mgr.connect(
-            self.__dbus.gproxy, "notify::g-name-owner", lambda *_: self.__remove()
+            self._proxy.gproxy, "notify::g-name-owner", lambda *_: self.__remove()
         )
 
         for signal_name in [
@@ -42,7 +42,7 @@ class SystemTrayItem(IgnisGObject):
             "NewOverlayIcon",
         ]:
             self._dbus_conn_mgr.subscribe(
-                self.__dbus,
+                self._proxy,
                 signal_name,
                 lambda *_: asyncio.create_task(self.__sync_icon()),
             )
@@ -53,7 +53,7 @@ class SystemTrayItem(IgnisGObject):
             "NewStatus",
         ]:
             self._dbus_conn_mgr.subscribe(
-                self.__dbus,
+                self._proxy,
                 signal_name,
                 lambda *args, signal_name=signal_name: asyncio.create_task(
                     self.__sync_property(signal_name.replace("New", "").lower())
@@ -88,11 +88,11 @@ class SystemTrayItem(IgnisGObject):
         return obj
 
     async def _initial_sync(self) -> None:
-        menu_path: str = await self.__dbus.get_dbus_property_async("Menu")
+        menu_path: str = await self._proxy.get_dbus_property_async("Menu")
 
         if menu_path:
             self._menu = await DBusMenu.new_async(
-                name=self.__dbus.name, object_path=menu_path
+                name=self._proxy.name, object_path=menu_path
             )
 
         await self.__sync_icon()
@@ -113,7 +113,7 @@ class SystemTrayItem(IgnisGObject):
 
     async def __sync_property(self, py_name: str) -> None:
         try:
-            value = await self.__dbus.get_dbus_property_async(
+            value = await self._proxy.get_dbus_property_async(
                 Utils.snake_to_pascal(py_name)
             )
         except GLib.Error:
@@ -126,7 +126,7 @@ class SystemTrayItem(IgnisGObject):
         async def add_to_search_path(icon_name: str) -> None:
             search_path = self._icon_theme.get_search_path()
             try:
-                icon_theme_path = await self.__dbus.get_dbus_property_async("IconName")
+                icon_theme_path = await self._proxy.get_dbus_property_async("IconName")
             except GLib.Error:
                 return
             if (
@@ -143,7 +143,7 @@ class SystemTrayItem(IgnisGObject):
             add_search_path: bool = False,
         ) -> bool:
             try:
-                value = await self.__dbus.get_dbus_property_async(property_name)
+                value = await self._proxy.get_dbus_property_async(property_name)
             except GLib.Error:
                 return False
 
@@ -315,7 +315,7 @@ class SystemTrayItem(IgnisGObject):
             x: x coordinate.
             y: y coordinate.
         """
-        self.__dbus.Activate("(ii)", x, y)
+        self._proxy.Activate("(ii)", x, y)
 
     async def activate_async(self, x: int = 0, y: int = 0) -> None:
         """
@@ -325,7 +325,7 @@ class SystemTrayItem(IgnisGObject):
             x: x coordinate.
             y: y coordinate.
         """
-        await self.__dbus.ActivateAsync("(ii)", x, y)
+        await self._proxy.ActivateAsync("(ii)", x, y)
 
     def secondary_activate(self, x: int = 0, y: int = 0) -> None:
         """
@@ -335,7 +335,7 @@ class SystemTrayItem(IgnisGObject):
             x: x coordinate.
             y: y coordinate.
         """
-        self.__dbus.SecondaryActivate("(ii)", x, y)
+        self._proxy.SecondaryActivate("(ii)", x, y)
 
     async def secondary_activate_async(self, x: int = 0, y: int = 0) -> None:
         """
@@ -345,7 +345,7 @@ class SystemTrayItem(IgnisGObject):
             x: x coordinate.
             y: y coordinate.
         """
-        await self.__dbus.SecondaryActivateAsync("(ii)", x, y)
+        await self._proxy.SecondaryActivateAsync("(ii)", x, y)
 
     def context_menu(self, x: int = 0, y: int = 0) -> None:
         """
@@ -355,7 +355,7 @@ class SystemTrayItem(IgnisGObject):
             x: x coordinate.
             y: y coordinate.
         """
-        self.__dbus.ContextMenu("(ii)", x, y)
+        self._proxy.ContextMenu("(ii)", x, y)
 
     async def context_menu_async(self, x: int = 0, y: int = 0) -> None:
         """
@@ -365,7 +365,7 @@ class SystemTrayItem(IgnisGObject):
             x: x coordinate.
             y: y coordinate.
         """
-        await self.__dbus.ContextMenuAsync("(ii)", x, y)
+        await self._proxy.ContextMenuAsync("(ii)", x, y)
 
     def scroll(
         self,
@@ -379,7 +379,7 @@ class SystemTrayItem(IgnisGObject):
             delta: The amount of scroll.
             orientation: The type of the orientation: horizontal or vertical.
         """
-        self.__dbus.Scroll("(is)", delta, orientation)
+        self._proxy.Scroll("(is)", delta, orientation)
 
     async def scroll_async(
         self,
@@ -393,4 +393,4 @@ class SystemTrayItem(IgnisGObject):
             delta: The amount of scroll.
             orientation: The type of the orientation: horizontal or vertical.
         """
-        await self.__dbus.ScrollAsync("(is)", delta, orientation)
+        await self._proxy.ScrollAsync("(is)", delta, orientation)
