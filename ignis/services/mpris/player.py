@@ -365,6 +365,12 @@ class MprisPlayer(IgnisGObject):
         asyncio.create_task(self.__update_position())
 
     async def set_position_async(self, value: int) -> None:
+        """
+        Asynchronously set position.
+
+        Args:
+            value: The value to set.
+        """
         await self.__player_proxy.SetPositionAsync(
             "(ox)", self.track_id, value * 1_000_000
         )

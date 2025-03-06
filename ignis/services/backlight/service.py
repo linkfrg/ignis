@@ -96,6 +96,9 @@ class BacklightService(BaseService):
     async def set_brightness_async(self, value: int) -> None:
         """
         Asynchronously set brightness for all devices.
+
+        Args:
+            value: The value to set.
         """
         for device in self._devices:
             await device.set_brighness_async(value)

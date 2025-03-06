@@ -86,9 +86,12 @@ class BacklightDevice(IgnisGObject):
             value,
         )
 
-    async def set_brighness_async(self, value: int) -> None:
+    async def set_brightness_async(self, value: int) -> None:
         """
         Asynchronously set brightness.
+
+        Args:
+            value: The value to set.
         """
         await self.__session_proxy.SetBrightnessAsync(
             "(ssu)",
