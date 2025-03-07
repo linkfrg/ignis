@@ -1,8 +1,9 @@
 import os
-from gi.repository import Gtk, GObject, Gio  # type: ignore
+from gi.repository import Gtk, Gio, GObject  # type: ignore
 from collections.abc import Callable
 from ignis.widgets.file_filter import FileFilter
 from ignis.gobject import IgnisGObject
+from ignis.gobject import IgnisProperty
 
 
 class FileDialog(Gtk.FileDialog, IgnisGObject):
@@ -63,18 +64,18 @@ class FileDialog(Gtk.FileDialog, IgnisGObject):
             self.emit("file-set", file)
             self.notify("file")
 
-    @GObject.Signal(arg_types=(Gio.File,))
-    def file_set(self, *args):
+    @GObject.Signal
+    def file_set(self, file: Gio.File):
         """
         - Signal
 
         Emitted when a file or directory is selected.
 
         Args:
-            file (``Gio.File``): The instance of ``Gio.File`` for this file or directory.
+            file: The instance of :class:`Gio.File` for this file or directory.
         """
 
-    @GObject.Property
+    @IgnisProperty
     def file(self) -> "Gio.File | None":
         """
         - not argument, read-only
@@ -86,7 +87,7 @@ class FileDialog(Gtk.FileDialog, IgnisGObject):
         """
         return self._file
 
-    @GObject.Property
+    @IgnisProperty
     def on_file_set(self) -> Callable:
         """
         - optional, read-write
@@ -99,7 +100,7 @@ class FileDialog(Gtk.FileDialog, IgnisGObject):
     def on_file_set(self, value: Callable) -> None:
         self._on_file_set = value
 
-    @GObject.Property
+    @IgnisProperty
     def filters(self) -> list[FileFilter]:
         """
         - optional, read-write
@@ -115,7 +116,7 @@ class FileDialog(Gtk.FileDialog, IgnisGObject):
         for i in value:
             self.add_filter(i)
 
-    @GObject.Property
+    @IgnisProperty
     def initial_path(self) -> str:
         """
         - optional, read-write
@@ -133,7 +134,7 @@ class FileDialog(Gtk.FileDialog, IgnisGObject):
         elif os.path.isfile(value):
             self.set_initial_file(gfile)
 
-    @GObject.Property
+    @IgnisProperty
     def select_folder(self) -> bool:
         """
         - optional, read-write

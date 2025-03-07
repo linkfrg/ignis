@@ -1,6 +1,6 @@
 import os
 from gi.repository import GObject, Gio  # type: ignore
-from ignis.gobject import IgnisGObject
+from ignis.gobject import IgnisGObject, IgnisProperty
 from collections.abc import Callable
 
 FLAGS = {
@@ -79,16 +79,16 @@ class FileMonitor(IgnisGObject):
             "changed", lambda *args: self._callback(*args) if self._callback else None
         )
 
-    @GObject.Signal(arg_types=(str, str))
-    def changed(self, *args):
+    @GObject.Signal
+    def changed(self, path: str, event_type: str):
         """
         - Signal
 
         Emitted when the file or directory changed.
 
         Args:
-            path (``str``): The path to the changed file or directory.
-            event_type (``str``): The event type. A list of all event types described in :attr:`callback`.
+            path: The path to the changed file or directory.
+            event_type: The event type. A list of all event types described in :attr:`callback`.
         """
         pass
 
@@ -109,7 +109,7 @@ class FileMonitor(IgnisGObject):
         self._sub_monitors.append(monitor)
         self._sub_paths.append(path)
 
-    @GObject.Property
+    @IgnisProperty
     def path(self) -> str:
         """
         - required, read-only
@@ -118,7 +118,7 @@ class FileMonitor(IgnisGObject):
         """
         return self._path
 
-    @GObject.Property
+    @IgnisProperty
     def flags(self) -> str | None:
         """
         - optional, read-only
@@ -139,7 +139,7 @@ class FileMonitor(IgnisGObject):
         """
         return self._flags
 
-    @GObject.Property
+    @IgnisProperty
     def callback(self) -> Callable | None:
         """
         - optional, read-write
@@ -174,7 +174,7 @@ class FileMonitor(IgnisGObject):
     def callback(self, value: Callable) -> None:
         self._callback = value
 
-    @GObject.Property
+    @IgnisProperty
     def recursive(self) -> bool:
         """
         - optional, read-only
@@ -185,7 +185,7 @@ class FileMonitor(IgnisGObject):
         """
         return self._recursive
 
-    @GObject.Property
+    @IgnisProperty
     def prevent_gc(self) -> bool:
         """
         - optional, read-only

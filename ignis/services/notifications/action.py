@@ -1,6 +1,6 @@
 from ignis.dbus import DBusService
-from gi.repository import GLib, GObject  # type: ignore
-from ignis.gobject import IgnisGObject
+from gi.repository import GLib  # type: ignore
+from ignis.gobject import IgnisGObject, IgnisProperty
 
 
 class NotificationAction(IgnisGObject):
@@ -15,7 +15,7 @@ class NotificationAction(IgnisGObject):
         self._id = id
         self._label = label
 
-    @GObject.Property
+    @IgnisProperty
     def id(self) -> str:
         """
         - read-only
@@ -24,7 +24,7 @@ class NotificationAction(IgnisGObject):
         """
         return self._id
 
-    @GObject.Property
+    @IgnisProperty
     def label(self) -> str:
         """
         - read-only

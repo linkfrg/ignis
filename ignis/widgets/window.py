@@ -1,5 +1,5 @@
 import cairo
-from gi.repository import Gtk, GObject  # type: ignore
+from gi.repository import Gtk  # type: ignore
 from ignis.base_widget import BaseWidget
 from ignis.utils import Utils
 from gi.repository import Gtk4LayerShell as GtkLayerShell  # type: ignore
@@ -9,6 +9,7 @@ from ignis.exceptions import (
     WindowNotFoundError,
 )
 from ignis.app import IgnisApp
+from ignis.gobject import IgnisProperty
 
 app = IgnisApp.get_default()
 
@@ -128,7 +129,8 @@ class Window(Gtk.Window, BaseWidget):
         self.namespace = namespace
         self.layer = layer
         self.kb_mode = kb_mode
-        self.monitor = monitor
+        if monitor is not None:
+            self.monitor = monitor
         self.popup = popup
         self.default_width = 2
         self.default_height = 2
@@ -171,7 +173,7 @@ class Window(Gtk.Window, BaseWidget):
             if keyval == 65307:  # 65307 = ESC
                 self.visible = False
 
-    @GObject.Property
+    @IgnisProperty
     def namespace(self) -> str:
         """
         - required, read-only
@@ -188,7 +190,7 @@ class Window(Gtk.Window, BaseWidget):
         self._namespace = value
         GtkLayerShell.set_namespace(self, name_space=value)
 
-    @GObject.Property
+    @IgnisProperty
     def anchor(self) -> list[str] | None:
         """
         - optional, read-write
@@ -218,7 +220,7 @@ class Window(Gtk.Window, BaseWidget):
             for i in value:
                 GtkLayerShell.set_anchor(self, ANCHOR[i], True)
 
-    @GObject.Property
+    @IgnisProperty
     def exclusivity(self) -> str:
         """
         - optional, read-write
@@ -242,7 +244,7 @@ class Window(Gtk.Window, BaseWidget):
         else:
             GtkLayerShell.set_exclusive_zone(self, EXCLUSIVITY[value])
 
-    @GObject.Property
+    @IgnisProperty
     def layer(self) -> str:
         """
         - optional, read-write
@@ -264,7 +266,7 @@ class Window(Gtk.Window, BaseWidget):
         self._layer = value
         GtkLayerShell.set_layer(self, LAYER[value])
 
-    @GObject.Property
+    @IgnisProperty
     def kb_mode(self) -> str:
         """
         - optional, read-write
@@ -285,7 +287,7 @@ class Window(Gtk.Window, BaseWidget):
         self._kb_mode = value
         GtkLayerShell.set_keyboard_mode(self, KB_MODE[value])
 
-    @GObject.Property
+    @IgnisProperty
     def popup(self) -> bool:
         """
         - optional, read-write
@@ -300,7 +302,7 @@ class Window(Gtk.Window, BaseWidget):
     def popup(self, value: bool) -> None:
         self._popup = value
 
-    @GObject.Property
+    @IgnisProperty
     def monitor(self) -> int:
         """
         - optional, read-write
@@ -324,7 +326,7 @@ class Window(Gtk.Window, BaseWidget):
         GtkLayerShell.set_monitor(self, gdkmonitor)
         self._monitor = value
 
-    @GObject.Property
+    @IgnisProperty
     def input_width(self) -> int:
         """
         - optional, read-write
@@ -338,7 +340,7 @@ class Window(Gtk.Window, BaseWidget):
         self._input_width = value
         self.__change_input_region()
 
-    @GObject.Property
+    @IgnisProperty
     def input_height(self) -> int:
         """
         - optional, read-write
@@ -352,7 +354,7 @@ class Window(Gtk.Window, BaseWidget):
         self._input_height = value
         self.__change_input_region()
 
-    @GObject.Property
+    @IgnisProperty
     def dynamic_input_region(self) -> bool:
         """
         - optional, read-only
@@ -364,7 +366,7 @@ class Window(Gtk.Window, BaseWidget):
         """
         return self._dynamic_input_region
 
-    @GObject.Property
+    @IgnisProperty
     def margin_bottom(self) -> int:
         """
         - optional, read-write
@@ -380,7 +382,7 @@ class Window(Gtk.Window, BaseWidget):
         self._margin_bottom = value
         GtkLayerShell.set_margin(self, GtkLayerShell.Edge.BOTTOM, value)
 
-    @GObject.Property
+    @IgnisProperty
     def margin_left(self) -> int:
         """
         - optional, read-write
@@ -396,7 +398,7 @@ class Window(Gtk.Window, BaseWidget):
         self._margin_left = value
         GtkLayerShell.set_margin(self, GtkLayerShell.Edge.LEFT, value)
 
-    @GObject.Property
+    @IgnisProperty
     def margin_right(self) -> int:
         """
         - optional, read-write
@@ -412,7 +414,7 @@ class Window(Gtk.Window, BaseWidget):
         self._margin_right = value
         GtkLayerShell.set_margin(self, GtkLayerShell.Edge.RIGHT, value)
 
-    @GObject.Property
+    @IgnisProperty
     def margin_top(self) -> int:
         """
         - optional, read-write

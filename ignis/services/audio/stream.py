@@ -1,5 +1,5 @@
 from gi.repository import GObject  # type: ignore
-from ignis.gobject import IgnisGObject
+from ignis.gobject import IgnisGObject, IgnisProperty
 from ignis.connection_manager import ConnectionManager
 from typing import Literal
 from ._imports import Gvc
@@ -61,7 +61,7 @@ class Stream(IgnisGObject):
         Emitted when the stream has been removed.
         """
 
-    @GObject.Property
+    @IgnisProperty
     def stream(self) -> "Gvc.MixerStream | None":
         """
         - read-only
@@ -70,20 +70,20 @@ class Stream(IgnisGObject):
         """
         return self._stream
 
-    @GObject.Property
-    def application_id(self) -> str | None:
+    @IgnisProperty
+    def application_id(self) -> str:
         """
         - read-only
 
-        The application ID or ``None``.
+        The application ID, or ``""`` if unknown.
         """
         if not self._stream:
-            return None
+            return ""
 
         return self._stream.get_application_id()
 
-    @GObject.Property
-    def icon_name(self) -> str | None:
+    @IgnisProperty
+    def icon_name(self) -> str:
         """
         - read-only
 
@@ -95,7 +95,7 @@ class Stream(IgnisGObject):
         elif isinstance(self.stream, Gvc.MixerSource):
             template = MICROPHONE_ICON_TEMPLATE
         else:
-            return None
+            return "image-missing"
 
         if self.is_muted:
             return template.format("muted")
@@ -106,51 +106,51 @@ class Stream(IgnisGObject):
         else:
             return template.format("low")
 
-    @GObject.Property
-    def id(self) -> int | None:
+    @IgnisProperty
+    def id(self) -> int:
         """
         - read-only
 
-        The ID of the stream.
+        The ID of the stream, or ``-1`` if unknown.
         """
         if not self._stream:
-            return None
+            return -1
 
         return self._stream.get_id()
 
-    @GObject.Property
-    def name(self) -> str | None:
+    @IgnisProperty
+    def name(self) -> str:
         """
         - read-only
 
-        The name of the stream.
+        The name of the stream, or ``""`` if unknown.
         """
         if not self._stream:
-            return None
+            return ""
 
         return self._stream.get_name()
 
-    @GObject.Property
-    def description(self) -> str | None:
+    @IgnisProperty
+    def description(self) -> str:
         """
         - read-only
 
-        The description of the stream.
+        The description of the stream, or ``""`` if unknown.
         """
         if not self._stream:
-            return None
+            return ""
 
         return self._stream.get_description()
 
-    @GObject.Property
-    def is_muted(self) -> bool | None:
+    @IgnisProperty
+    def is_muted(self) -> bool:
         """
         - read-only
 
         Whether the stream is muted.
         """
         if not self._stream:
-            return None
+            return False
 
         return self._stream.get_is_muted()
 
@@ -159,15 +159,15 @@ class Stream(IgnisGObject):
         self._stream.set_is_muted(value)
         self._stream.change_is_muted(value)
 
-    @GObject.Property
-    def volume(self) -> float | None:
+    @IgnisProperty
+    def volume(self) -> float:
         """
         - read-only
 
-        The current volume of the stream.
+        The current volume of the stream, or ``-1.0`` if unknown.
         """
         if not self._stream:
-            return None
+            return -1.0
 
         return round(self._stream.get_volume() / self._control.get_vol_max_norm() * 100)
 
@@ -179,7 +179,7 @@ class Stream(IgnisGObject):
         self._stream.set_volume(value * self._control.get_vol_max_norm() / 100)
         self._stream.push_volume()
 
-    @GObject.Property
+    @IgnisProperty
     def is_default(self) -> bool:
         """
         - read-only

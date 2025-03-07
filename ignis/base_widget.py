@@ -1,7 +1,7 @@
 from gi.repository import Gtk, GObject, GLib  # type: ignore
 from typing import Any
 from collections.abc import Callable
-from ignis.gobject import IgnisGObject
+from ignis.gobject import IgnisGObject, IgnisProperty
 from ignis.exceptions import CssParsingError
 from ignis.app import IgnisApp, StylePriority, GTK_STYLE_PRIORITIES
 
@@ -54,7 +54,7 @@ class BaseWidget(Gtk.Widget, IgnisGObject):
         if setup:
             setup(self)
 
-    @GObject.property
+    @IgnisProperty
     def style(self) -> str | None:
         return self._style
 
@@ -78,7 +78,7 @@ class BaseWidget(Gtk.Widget, IgnisGObject):
         self._css_provider = css_provider
         self._style = value
 
-    @GObject.Property
+    @IgnisProperty
     def style_priority(self) -> StylePriority:
         """
         - read-write

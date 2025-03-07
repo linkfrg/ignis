@@ -65,6 +65,8 @@ General Classes
 
 .. code-block:: python
 
+    from ignis.gobject import IgnisProperty
+
     class SomeClass:
         """
         This is an example docstring for a class.
@@ -79,25 +81,25 @@ General Classes
         Emitted when the something happens.
         """
 
-    @GObject.Signal(arg_types=(int,))
-    def arg_signal(self):
+    @GObject.Signal
+    def arg_signal(self, some_arg: int):
         """
         - Signal
 
         Emitted when the something another happens.
 
         Args:
-            some_arg (``int``): Description of the argument...
+            some_arg: Description of the argument...
         """
 
-    @GObject.Property
+    @IgnisProperty
     def some_prop(self) -> int:
         """
         - optional, read-only
         """
         ...
 
-    @GObject.Property
+    @IgnisProperty
     def rw_prop(self) -> str:
         """
         - optional, read-write

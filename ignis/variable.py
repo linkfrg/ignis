@@ -1,5 +1,4 @@
-from .gobject import IgnisGObject
-from gi.repository import GObject  # type: ignore
+from .gobject import IgnisGObject, IgnisProperty
 from typing import Any
 
 
@@ -25,7 +24,7 @@ class Variable(IgnisGObject):
         self._value = value
         super().__init__()
 
-    @GObject.Property
+    @IgnisProperty
     def value(self) -> Any:
         """
         - optional, read-write

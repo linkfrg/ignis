@@ -1,5 +1,6 @@
 from gi.repository import GObject  # type: ignore
 from ignis.base_service import BaseService
+from ignis.gobject import IgnisProperty
 from ._imports import GnomeBluetooth
 from .device import BluetoothDevice
 from .constants import ADAPTER_STATE
@@ -32,18 +33,18 @@ class BluetoothService(BaseService):
         for gdevice in self._client.get_devices():
             self.__add_device(None, gdevice)  # type: ignore
 
-    @GObject.Signal(arg_types=(BluetoothDevice,))
-    def device_added(self, *args):
+    @GObject.Signal
+    def device_added(self, device: BluetoothDevice):
         """
         - Signal
 
         Emitted when a Bluetooth device has been added.
 
         Args:
-            device (:class:`~ignis.services.bluetooth.BluetoothDevice`): The instance of the Bluetooth device.
+            device: The instance of the Bluetooth device.
         """
 
-    @GObject.Property
+    @IgnisProperty
     def client(self) -> GnomeBluetooth.Client:
         """
         - read-only
@@ -52,7 +53,7 @@ class BluetoothService(BaseService):
         """
         return self._client
 
-    @GObject.Property
+    @IgnisProperty
     def devices(self) -> list[BluetoothDevice]:
         """
         - read-only
@@ -61,7 +62,7 @@ class BluetoothService(BaseService):
         """
         return list(self._devices.values())
 
-    @GObject.Property
+    @IgnisProperty
     def connected_devices(self) -> list[BluetoothDevice]:
         """
         - read-only
@@ -70,7 +71,7 @@ class BluetoothService(BaseService):
         """
         return [i for i in self._devices.values() if i.connected]
 
-    @GObject.Property
+    @IgnisProperty
     def powered(self) -> bool:
         """
         - read-write
@@ -83,7 +84,7 @@ class BluetoothService(BaseService):
     def powered(self, value: bool) -> None:
         self._client.props.default_adapter_powered = value
 
-    @GObject.Property
+    @IgnisProperty
     def state(self) -> str:
         """
         - read-only
@@ -99,7 +100,7 @@ class BluetoothService(BaseService):
         """
         return ADAPTER_STATE.get(self._client.props.default_adapter_state, "absent")
 
-    @GObject.Property
+    @IgnisProperty
     def setup_mode(self) -> bool:
         """
         - read-write

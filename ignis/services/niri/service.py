@@ -1,12 +1,12 @@
 import json
 import os
 import socket
-from gi.repository import GObject  # type: ignore
 from ignis.utils import Utils
 from typing import Any
 from ignis.exceptions import NiriIPCNotFoundError
 from ignis.base_service import BaseService
 from ignis.logging import logger
+from ignis.gobject import IgnisProperty
 from .constants import NIRI_SOCKET
 
 
@@ -33,6 +33,7 @@ class NiriService(BaseService):
 
         self._workspaces: list[dict[str, Any]] = []
         self._active_workspaces: list[dict[str, Any]] = []
+        self._windows: list[dict[str, Any]] = []
         self._kb_layout: str = ""
         self._active_window: dict[str, Any] = {}
         self._active_output: dict[str, Any] = {}
@@ -44,8 +45,9 @@ class NiriService(BaseService):
             self.__sync_workspaces()
             self.__sync_active_window()
             self.__sync_active_output()
+            self.__sync_windows()
 
-    @GObject.Property
+    @IgnisProperty
     def is_available(self) -> bool:
         """
         - read-only
@@ -57,7 +59,7 @@ class NiriService(BaseService):
         else:
             return False
 
-    @GObject.Property
+    @IgnisProperty
     def workspaces(self) -> list[dict[str, Any]]:
         """
         - read-only
@@ -66,7 +68,7 @@ class NiriService(BaseService):
         """
         return self._workspaces
 
-    @GObject.Property
+    @IgnisProperty
     def active_workspaces(self) -> list[dict[str, Any]]:
         """
         - read-only
@@ -75,7 +77,16 @@ class NiriService(BaseService):
         """
         return self._active_workspaces
 
-    @GObject.Property
+    @IgnisProperty
+    def windows(self) -> list[dict[str, Any]]:
+        """
+        - read-only
+
+        The currently opened windows.
+        """
+        return self._windows
+
+    @IgnisProperty
     def kb_layout(self) -> str:
         """
         - read-only
@@ -84,7 +95,7 @@ class NiriService(BaseService):
         """
         return self._kb_layout
 
-    @GObject.Property
+    @IgnisProperty
     def active_window(self) -> dict[str, Any]:
         """
         - read-only
@@ -93,7 +104,7 @@ class NiriService(BaseService):
         """
         return self._active_window
 
-    @GObject.Property
+    @IgnisProperty
     def active_output(self) -> dict[str, Any]:
         """
         - read-only
@@ -113,22 +124,28 @@ class NiriService(BaseService):
     def __on_event_received(self, event: str) -> None:
         try:
             eventtype = list(json.loads(event).keys())[0]
-            if eventtype.startswith("WorkspaceActivated") or eventtype.startswith(
-                "WorkspacesChanged"
-            ):
-                self.__sync_workspaces()
-            elif eventtype.startswith("KeyboardLayoutsChanged") or eventtype.startswith(
-                "KeyboardLayoutSwitched"
-            ):
-                self.__sync_kb_layout()
-
-            elif eventtype.startswith(
-                "WorkspaceActiveWindowChanged"
-            ) or eventtype.startswith("WindowFocusChanged"):
-                self.__sync_active_window()
-                self.__sync_active_output()
-            elif eventtype.startswith("WindowOpenedOrChanged"):
-                self.__sync_active_window()
+            match eventtype:
+                case "WorkspaceActivated":
+                    self.__sync_workspaces()
+                case "WorkspacesChanged":
+                    self.__sync_workspaces()
+                case "KeyboardLayoutsChanged":
+                    self.__sync_kb_layout()
+                case "KeyboardLayoutSwitched":
+                    self.__sync_kb_layout()
+                case "WorkspaceActiveWindowChanged":
+                    self.__sync_active_window()
+                    self.__sync_active_output()
+                case "WindowFocusChanged":
+                    self.__sync_active_window()
+                    self.__sync_active_output()
+                case "WindowOpenedOrChanged":
+                    self.__sync_active_window()
+                    self.__sync_windows()
+                case "WindowsChanged":
+                    self.__sync_windows()
+                case "WindowClosed":
+                    self.__sync_windows()
 
         except KeyError:
             logger.warning(f"[Niri Service] non matching event: {event}")
@@ -158,6 +175,10 @@ class NiriService(BaseService):
             "FocusedOutput"
         ]
         self.notify("active-output")
+
+    def __sync_windows(self) -> None:
+        self._windows = json.loads(self.send_command('"Windows"\n'))["Ok"]["Windows"]
+        self.notify("windows")
 
     def send_command(self, cmd: str) -> str:
         """

@@ -1,5 +1,5 @@
 from gi.repository import GObject  # type: ignore
-from ignis.gobject import IgnisGObject
+from ignis.gobject import IgnisGObject, IgnisProperty
 from .ethernet_device import EthernetDevice
 from ._imports import NM
 
@@ -22,16 +22,16 @@ class Ethernet(IgnisGObject):
         for device in self._client.get_devices():
             self.__add_device(None, device, False)
 
-    @GObject.Signal(arg_types=(EthernetDevice,))
-    def new_device(self, *args):
+    @GObject.Signal
+    def new_device(self, device: EthernetDevice):
         """
         Emitted when a new Ethernet device is added.
 
         Args:
-            device (:class:`~ignis.services.network.EthernetDevice`): An instance of the device.
+            device: An instance of the device.
         """
 
-    @GObject.Property
+    @IgnisProperty
     def devices(self) -> list[EthernetDevice]:
         """
         - read-only
@@ -40,7 +40,7 @@ class Ethernet(IgnisGObject):
         """
         return list(self._devices.values())
 
-    @GObject.Property
+    @IgnisProperty
     def is_connected(self) -> bool:
         """
         - read-only
@@ -52,7 +52,7 @@ class Ethernet(IgnisGObject):
                 return True
         return False
 
-    @GObject.Property
+    @IgnisProperty
     def icon_name(self) -> str:
         """
         - read-only

@@ -1,8 +1,8 @@
-from gi.repository import Gio, GLib, GObject  # type: ignore
+from gi.repository import Gio, GLib  # type: ignore
 from ignis.dbus import DBusProxy
 from ignis.utils import Utils
 from ignis.logging import logger
-from ignis.gobject import IgnisGObject
+from ignis.gobject import IgnisGObject, IgnisProperty
 from typing import Literal
 
 
@@ -42,7 +42,7 @@ class SystemdUnit(IgnisGObject):
         if "ActiveState" in prop_dict.keys():
             self.notify("is-active")
 
-    @GObject.Property
+    @IgnisProperty
     def name(self) -> str:
         """
         - read-only
@@ -51,7 +51,7 @@ class SystemdUnit(IgnisGObject):
         """
         return self._proxy.Id
 
-    @GObject.Property
+    @IgnisProperty
     def is_active(self) -> bool:
         """
         - read-only
@@ -72,7 +72,16 @@ class SystemdUnit(IgnisGObject):
             "(s)",
             "replace",
             flags=self._flags,
-            result_handler=self.__handle_result,
+        )
+
+    async def start_async(self) -> None:
+        """
+        Asynchronous version of :func:`start`.
+        """
+        await self._proxy.StartAsync(
+            "(s)",
+            "replace",
+            flags=self._flags,
         )
 
     def stop(self) -> None:
@@ -83,7 +92,16 @@ class SystemdUnit(IgnisGObject):
             "(s)",
             "replace",
             flags=self._flags,
-            result_handler=self.__handle_result,
+        )
+
+    async def stop_async(self) -> None:
+        """
+        Asynchronous version of :func:`stop`.
+        """
+        await self._proxy.StopAsync(
+            "(s)",
+            "replace",
+            flags=self._flags,
         )
 
     def restart(self) -> None:
@@ -94,5 +112,14 @@ class SystemdUnit(IgnisGObject):
             "(s)",
             "replace",
             flags=self._flags,
-            result_handler=self.__handle_result,
+        )
+
+    async def restart_async(self) -> None:
+        """
+        Asynchronous version of :func:`restart`.
+        """
+        await self._proxy.RestartAsync(
+            "(s)",
+            "replace",
+            flags=self._flags,
         )

@@ -1,8 +1,8 @@
 from .window import Window
 from .revealer import Revealer
-from gi.repository import GObject  # type: ignore
 from ignis.utils import Utils
 from typing import Any
+from ignis.gobject import IgnisProperty
 
 
 class RevealerWindow(Window):
@@ -60,7 +60,7 @@ class RevealerWindow(Window):
         else:
             super().set_property(prop_name, value)
 
-    @GObject.Property
+    @IgnisProperty
     def visible(self) -> bool:
         return self._revealer.reveal_child
 
@@ -68,7 +68,7 @@ class RevealerWindow(Window):
     def visible(self, value: bool) -> None:
         super().set_visible(value)
 
-    @GObject.Property
+    @IgnisProperty
     def revealer(self) -> Revealer:
         """
         - required, read-write
@@ -80,4 +80,3 @@ class RevealerWindow(Window):
     @revealer.setter
     def revealer(self, value: Revealer) -> None:
         self._revealer = value
-        self.set_child(value)

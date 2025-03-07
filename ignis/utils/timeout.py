@@ -1,5 +1,5 @@
-from gi.repository import GLib, GObject  # type: ignore
-from ignis.gobject import IgnisGObject
+from gi.repository import GLib  # type: ignore
+from ignis.gobject import IgnisGObject, IgnisProperty
 from collections.abc import Callable
 
 
@@ -23,7 +23,7 @@ class Timeout(IgnisGObject):
 
         self._id = GLib.timeout_add(ms, target, *args)
 
-    @GObject.Property
+    @IgnisProperty
     def ms(self) -> int:
         """
         - required, read-only
@@ -32,7 +32,7 @@ class Timeout(IgnisGObject):
         """
         return self._ms
 
-    @GObject.Property
+    @IgnisProperty
     def target(self) -> Callable:
         """
         - required, read-only

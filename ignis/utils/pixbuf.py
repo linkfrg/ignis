@@ -34,3 +34,20 @@ def crop_pixbuf(pixbuf: GdkPixbuf.Pixbuf, width: int, height: int) -> GdkPixbuf.
 
     cropped_image = pixbuf.new_subpixbuf(crop_x, crop_y, target_width, target_height)
     return cropped_image
+
+
+def scale_pixbuf(
+    pixbuf: GdkPixbuf.Pixbuf, width: int, height: int
+) -> "GdkPixbuf.Pixbuf | None":
+    """
+    Scale a ``GdkPixbuf.Pixbuf`` to the given width and height.
+
+    Args:
+        pixbuf: The source GdkPixbuf.Pixbuf.
+        width: The target width.
+        height: The target height.
+
+    Returns:
+        The scaled GdkPixbuf.Pixbuf or ``None``.
+    """
+    return pixbuf.scale_simple(width, height, GdkPixbuf.InterpType.BILINEAR)
