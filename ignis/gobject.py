@@ -186,100 +186,129 @@ class IgnisGObject(GObject.Object):
         return super().__getattribute__(name)
 
 
-class IgnisProperty(GObject.Property):
-    """
-    Bases: :obj:`~gi.repository.GObject.Property`.
+if "sphinx" in sys.modules:
 
-    Like ``GObject.Property``, but determines the property type automatically based on the return type of the ``getter``.
-    You can override this behaviour by explicitly passing ``type`` argument to the constructor.
-    Arguments for the constructor are the same as for ``GObject.Property``.
-    """
+    class IgnisProperty(property):
+        """
+        Bases: :obj:`~gi.repository.GObject.Property`.
 
-    def __init__(
-        self,
-        getter: Callable | None = None,
-        setter: Callable | None = None,
-        type: type | None = None,
-        default: Any = None,
-        nick: str = "",
-        blurb: str = "",
-        flags: GObject.ParamFlags = GObject.ParamFlags.READWRITE,
-        minimum: Any = None,
-        maximum: Any = None,
-    ):
-        processed_type = (
-            self.__process_getter_return_type(getter)
-            if type is None and getter
-            else type
-        )
-        processed_default = (
-            self.__process_default(processed_type)
-            if default is None and processed_type
-            else default
-        )
+        Like ``GObject.Property``, but determines the property type automatically based on the return type of the ``getter``.
+        You can override this behaviour by explicitly passing ``type`` argument to the constructor.
+        Arguments for the constructor are the same as for ``GObject.Property``.
+        """
 
-        super().__init__(
-            getter=getter,
-            setter=setter,
-            type=processed_type,  # type: ignore
-            default=processed_default,
-            nick=nick,
-            blurb=blurb,
-            flags=flags,
-            minimum=minimum,
-            maximum=maximum,
-        )
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+else:
 
-    def __process_getter_return_type(self, getter: Callable) -> type | None:
-        getter_return_type = getter.__annotations__.get("return", None)
-        type_: type | None = None
-        if getter_return_type:
-            if isinstance(getter_return_type, UnionType):
-                type_ = self.__get_type_from_union(getter_return_type)
-            elif get_origin(getter_return_type) is Literal:
-                type_ = self.__get_type_from_literal(getter_return_type)
+    class IgnisProperty(GObject.Property):
+        """
+        Bases: :obj:`~gi.repository.GObject.Property`.
+
+        Like ``GObject.Property``, but determines the property type automatically based on the return type of the ``getter``.
+        You can override this behaviour by explicitly passing ``type`` argument to the constructor.
+        Arguments for the constructor are the same as for ``GObject.Property``.
+        """
+
+        def __init__(
+            self,
+            getter: Callable | None = None,
+            setter: Callable | None = None,
+            type: type | None = None,
+            default: Any = None,
+            nick: str = "",
+            blurb: str = "",
+            flags: GObject.ParamFlags = GObject.ParamFlags.READWRITE,
+            minimum: Any = None,
+            maximum: Any = None,
+        ):
+            processed_type = (
+                self.__process_getter_return_type(getter)
+                if type is None and getter
+                else type
+            )
+            processed_default = (
+                self.__process_default(processed_type)
+                if default is None and processed_type
+                else default
+            )
+
+            super().__init__(
+                getter=getter,
+                setter=setter,
+                type=processed_type,  # type: ignore
+                default=processed_default,
+                nick=nick,
+                blurb=blurb,
+                flags=flags,
+                minimum=minimum,
+                maximum=maximum,
+            )
+
+        def __process_getter_return_type(self, getter: Callable) -> type | None:
+            getter_return_type = getter.__annotations__.get("return", None)
+            type_: type | None = None
+            if getter_return_type:
+                if isinstance(getter_return_type, UnionType):
+                    type_ = self.__get_type_from_union(getter_return_type)
+                elif get_origin(getter_return_type) is Literal:
+                    type_ = self.__get_type_from_literal(getter_return_type)
+                else:
+                    type_ = getter_return_type
             else:
-                type_ = getter_return_type
-        else:
-            return object
+                return object
 
-        try:
-            # check is valid type
-            # a little bit hacky, but why rewrite ready-made code, right?
-            self._type_from_python(type_)  # type: ignore
-            return type_
-        except TypeError:
-            return object
+            try:
+                # check is valid type
+                # a little bit hacky, but why rewrite ready-made code, right?
+                self._type_from_python(type_)  # type: ignore
+                return type_
+            except TypeError:
+                return object
 
-    def __process_default(self, tp: type) -> Any:
-        if "sphinx" in sys.modules:
-            return None
+        def __process_default(self, tp: type) -> Any:
+            if "sphinx" in sys.modules:
+                return None
 
-        if tp is bool:
-            return False
-        elif tp is float:
-            return 0.0
-        elif issubclass(tp, GObject.GFlags):
-            # gflags has  __flags_values__ attr, trust me
-            first_value = list(tp.__flags_values__.values())[0]  # type: ignore
-            return first_value
+            if tp is bool:
+                return False
+            elif tp is float:
+                return 0.0
+            elif issubclass(tp, GObject.GFlags):
+                # gflags has  __flags_values__ attr, trust me
+                first_value = list(tp.__flags_values__.values())[0]  # type: ignore
+                return first_value
 
-    def __get_type_from_union(self, tp: UnionType) -> type:
-        non_none_types = tuple(t for t in tp.__args__ if t is not type(None))
-        if len(non_none_types) == 1:
-            return non_none_types[0]
-        else:
-            return object
+        def __get_type_from_union(self, tp: UnionType) -> type:
+            non_none_types = tuple(t for t in tp.__args__ if t is not type(None))
+            if len(non_none_types) == 1:
+                return non_none_types[0]
+            else:
+                return object
 
-    def __get_type_from_literal(self, tp: type) -> type | None:
-        values = get_args(tp)
-        return type(values[0]) if values else None
+        def __get_type_from_literal(self, tp: type) -> type | None:
+            values = get_args(tp)
+            return type(values[0]) if values else None
 
 
-class IgnisSignal(GObject.Signal):
-    """
-    Bases: :obj:`~gi.repository.GObject.Signal`.
+if "sphinx" in sys.modules:
 
-    The same as ``GObject.Signal``, nothing special.
-    This class is needed only for the correct determination of signals when building docs.
-    """
+    class IgnisSignal(property):
+        """
+        Bases: :obj:`~gi.repository.GObject.Signal`.
+
+        The same as ``GObject.Signal``, nothing special.
+        This class is needed only for the correct determination of signals when building docs.
+        """
+
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+else:
+
+    class IgnisSignal(GObject.Signal):
+        """
+        Bases: :obj:`~gi.repository.GObject.Signal`.
+
+        The same as ``GObject.Signal``, nothing special.
+        This class is needed only for the correct determination of signals when building docs.
+        """

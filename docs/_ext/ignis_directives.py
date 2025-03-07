@@ -16,12 +16,6 @@ def create_prefix(name: str) -> list[nodes.Node]:
     return prefix
 
 
-class FakeGProperty(property): ...
-
-
-class FakeSignal(property): ...
-
-
 class GPropertyDocumenter(PropertyDocumenter):
     objtype = "gproperty"
     directivetype = "gproperty"
@@ -31,7 +25,10 @@ class GPropertyDocumenter(PropertyDocumenter):
     def can_document_member(
         cls, member: Any, membername: str, isattr: bool, parent: Any
     ) -> bool:
-        return isinstance(member, FakeGProperty)
+        with mock(["gi"]):
+            from ignis.gobject import IgnisProperty
+
+            return isinstance(member, IgnisProperty)
 
     def add_content(
         self,
@@ -59,7 +56,9 @@ class SignalDocumenter(AttributeDocumenter):
     def can_document_member(
         cls, member: Any, membername: str, isattr: bool, parent: Any
     ) -> bool:
-        return isinstance(member, FakeSignal)
+        with mock(["gi"]):
+            from ignis.gobject import IgnisSignal
+        return isinstance(member, IgnisSignal)
 
 
 class PropertyDirective(PyProperty):
@@ -72,17 +71,9 @@ class SignalDirective(PyProperty):
         return create_prefix("signal")
 
 
-def patch(app: Sphinx) -> None:
-    with mock(app.config.autodoc_mock_imports):
-        import ignis.gobject
-
-        ignis.gobject.IgnisProperty = FakeGProperty
-        ignis.gobject.IgnisSignal = FakeSignal
-
-
 def setup(app: Sphinx) -> ExtensionMetadata:
-    patch(app)
-    app.setup_extension("sphinx.ext.autodoc")  # Require autodoc extension
+    app.setup_extension("sphinx.ext.autodoc")
+
     app.add_autodocumenter(GPropertyDocumenter)
     app.add_autodocumenter(SignalDocumenter)
     app.add_directive_to_domain("py", "gproperty", PropertyDirective)
