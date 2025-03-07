@@ -1,5 +1,4 @@
-from ignis.gobject import IgnisProperty, IgnisSignal
-from ._object import HyprlandObject
+from ignis.gobject import IgnisProperty, IgnisSignal, DataGObject
 
 MATCH_DICT = {
     "monitorID": "monitor_id",
@@ -9,7 +8,7 @@ MATCH_DICT = {
 }
 
 
-class HyprlandWorkspace(HyprlandObject):
+class HyprlandWorkspace(DataGObject):
     """
     A workspace.
     """

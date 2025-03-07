@@ -68,7 +68,16 @@ class SystemdUnit(IgnisGObject):
             "(s)",
             "replace",
             flags=self._flags,
-            result_handler=self.__handle_result,
+        )
+
+    async def start_async(self) -> None:
+        """
+        Asynchronous version of :func:`start`.
+        """
+        await self._proxy.StartAsync(
+            "(s)",
+            "replace",
+            flags=self._flags,
         )
 
     def stop(self) -> None:
@@ -79,7 +88,16 @@ class SystemdUnit(IgnisGObject):
             "(s)",
             "replace",
             flags=self._flags,
-            result_handler=self.__handle_result,
+        )
+
+    async def stop_async(self) -> None:
+        """
+        Asynchronous version of :func:`stop`.
+        """
+        await self._proxy.StopAsync(
+            "(s)",
+            "replace",
+            flags=self._flags,
         )
 
     def restart(self) -> None:
@@ -90,5 +108,14 @@ class SystemdUnit(IgnisGObject):
             "(s)",
             "replace",
             flags=self._flags,
-            result_handler=self.__handle_result,
+        )
+
+    async def restart_async(self) -> None:
+        """
+        Asynchronous version of :func:`restart`.
+        """
+        await self._proxy.RestartAsync(
+            "(s)",
+            "replace",
+            flags=self._flags,
         )

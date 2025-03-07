@@ -78,5 +78,18 @@ class BacklightDevice(IgnisGObject):
             "backlight",
             self._device_name,
             value,
-            result_handler=lambda *args: None,
+        )
+
+    async def set_brightness_async(self, value: int) -> None:
+        """
+        Asynchronously set brightness.
+
+        Args:
+            value: The value to set.
+        """
+        await self.__session_proxy.SetBrightnessAsync(
+            "(ssu)",
+            "backlight",
+            self._device_name,
+            value,
         )
