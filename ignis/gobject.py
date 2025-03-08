@@ -280,3 +280,71 @@ class IgnisProperty(GObject.Property):
     def __get_type_from_literal(self, tp: type) -> type | None:
         values = get_args(tp)
         return type(values[0]) if values else None
+
+
+class DataGObject(IgnisGObject):
+    """
+    A GObject that can synchronize its properties with a simple Python dictionary.
+
+    Parameters:
+        data: The dictionary to synchronize with.
+        match_dict: The match dictionary between a key in the data and the property on ``self``.
+    """
+
+    def __init__(
+        self,
+        data: dict[str, Any] | None = None,
+        match_dict: dict[str, str] | None = None,
+    ):
+        super().__init__()
+
+        if data is None:
+            data = {}
+
+        if match_dict is None:
+            match_dict = {}
+
+        self._data = data
+        self._match_dict = match_dict
+
+        if data != {}:
+            self.sync(data)
+
+    @IgnisProperty
+    def data(self) -> dict[str, Any]:
+        """
+        - read-only
+
+        The latest synced data.
+        """
+        return self._data
+
+    @IgnisProperty
+    def match_dict(self) -> dict[str, str]:
+        """
+        - read-only
+
+        The match dictionary.
+        """
+        return self._match_dict
+
+    def sync(self, data: dict[str, Any]) -> None:
+        """
+        Perform the property synchronization.
+
+        Args:
+            data: The dictionary to synchronize with.
+        """
+        for key, value in data.items():
+            public_prop_name = self._match_dict.get(key, key)
+            protected_prop_name = f"_{public_prop_name}"
+
+            if not hasattr(self, protected_prop_name):
+                continue
+
+            if value != getattr(self, protected_prop_name):
+                setattr(self, protected_prop_name, value)
+                self.notify(public_prop_name)
+
+        self._data = data
+        self.notify("data")

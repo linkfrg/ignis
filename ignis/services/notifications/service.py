@@ -84,19 +84,19 @@ class NotificationService(BaseService):
 
         raise AnotherNotificationDaemonRunningError(name)
 
-    @GObject.Signal(arg_types=(Notification,))
-    def notified(self, *args):
+    @GObject.Signal
+    def notified(self, notification: Notification):
         """
         - Signal
 
         Emitted when a new notification appears.
 
         Args:
-            notification (:class:`~ignis.services.notifications.Notification`): The instance of the notification.
+            notification: The instance of the notification.
         """
 
-    @GObject.Signal(arg_types=(Notification,))
-    def new_popup(self, *args):
+    @GObject.Signal
+    def new_popup(self, notification: Notification):
         """
         - Signal
 
@@ -104,7 +104,7 @@ class NotificationService(BaseService):
         Only emitted if ``dnd`` is set to ``False``.
 
         Args:
-            notification (:class:`~ignis.services.notifications.Notification`): The instance of the notification.
+            notification: The instance of the notification.
         """
 
     @IgnisProperty

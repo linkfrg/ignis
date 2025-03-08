@@ -111,7 +111,7 @@ class Window(Gtk.Window, BaseWidget):
 
         self._anchor = None
         self._exclusivity = None
-        self._namespace = None
+        self._namespace = namespace
         self._layer = None
         self._kb_mode = None
         self._popup = None
@@ -126,7 +126,6 @@ class Window(Gtk.Window, BaseWidget):
 
         self.anchor = anchor
         self.exclusivity = exclusivity
-        self.namespace = namespace
         self.layer = layer
         self.kb_mode = kb_mode
         if monitor is not None:
@@ -138,6 +137,8 @@ class Window(Gtk.Window, BaseWidget):
         self.margin_left = margin_left
         self.margin_right = margin_right
         self.margin_top = margin_top
+
+        GtkLayerShell.set_namespace(self, name_space=namespace)
 
         app.add_window(namespace, self)
 
@@ -184,11 +185,6 @@ class Window(Gtk.Window, BaseWidget):
         It is also the name of the layer.
         """
         return self._namespace
-
-    @namespace.setter
-    def namespace(self, value: str) -> None:
-        self._namespace = value
-        GtkLayerShell.set_namespace(self, name_space=value)
 
     @IgnisProperty
     def anchor(self) -> list[str] | None:

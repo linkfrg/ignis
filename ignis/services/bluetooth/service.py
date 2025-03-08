@@ -33,15 +33,15 @@ class BluetoothService(BaseService):
         for gdevice in self._client.get_devices():
             self.__add_device(None, gdevice)  # type: ignore
 
-    @GObject.Signal(arg_types=(BluetoothDevice,))
-    def device_added(self, *args):
+    @GObject.Signal
+    def device_added(self, device: BluetoothDevice):
         """
         - Signal
 
         Emitted when a Bluetooth device has been added.
 
         Args:
-            device (:class:`~ignis.services.bluetooth.BluetoothDevice`): The instance of the Bluetooth device.
+            device: The instance of the Bluetooth device.
         """
 
     @IgnisProperty

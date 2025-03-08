@@ -53,13 +53,13 @@ class ThreadTask(IgnisGObject):
         result = self._target()
         self.emit("finished", result)
 
-    @GObject.Signal(arg_types=(object,))
-    def finished(self, *args):
+    @GObject.Signal
+    def finished(self, output: object):
         """
         - Signal
 
         Args:
-            output (``Any``): The output from the function.
+            output: The output from the function.
         """
 
     def run(self) -> None:

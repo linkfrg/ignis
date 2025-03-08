@@ -15,9 +15,11 @@ class MprisPlayer(IgnisGObject):
     A media player object.
     """
 
-    def __init__(self, name: str):
+    def __init__(self, mpris_proxy: DBusProxy, player_proxy: DBusProxy):
         super().__init__()
 
+        self.__mpris_proxy = mpris_proxy
+        self.__player_proxy = player_proxy
         self._conn_mgr = ConnectionManager()
 
         self._can_control: bool = False
@@ -48,29 +50,7 @@ class MprisPlayer(IgnisGObject):
 
         os.makedirs(ART_URL_CACHE_DIR, exist_ok=True)
 
-        asyncio.create_task(self.__init_proxy(name))
-
-    async def __init_proxy(self, name: str) -> None:
-        self.__mpris_proxy = await DBusProxy.new_async(
-            name=name,
-            object_path="/org/mpris/MediaPlayer2",
-            interface_name="org.mpris.MediaPlayer2",
-            info=Utils.load_interface_xml("org.mpris.MediaPlayer2"),
-        )
-
-        self.__player_proxy = await DBusProxy.new_async(
-            name=self.__mpris_proxy.name,
-            object_path=self.__mpris_proxy.object_path,
-            interface_name="org.mpris.MediaPlayer2.Player",
-            info=Utils.load_interface_xml("org.mpris.MediaPlayer2.Player"),
-        )
-
         self.__mpris_proxy.watch_name(on_name_vanished=lambda *_: self.__close())
-
-        self._sync_pos_task = asyncio.create_task(self.__sync_position())
-        await self.__sync_all()
-        await self.__sync_metadata()
-        await self.__update_position()
 
         self._conn_mgr.connect(
             self.__player_proxy.gproxy,
@@ -83,7 +63,31 @@ class MprisPlayer(IgnisGObject):
             lambda *_: asyncio.create_task(self.__sync_metadata()),
         )
 
-        self.emit("ready")
+    @classmethod
+    async def new_async(cls, name: str) -> "MprisPlayer":
+        mpris_proxy = await DBusProxy.new_async(
+            name=name,
+            object_path="/org/mpris/MediaPlayer2",
+            interface_name="org.mpris.MediaPlayer2",
+            info=Utils.load_interface_xml("org.mpris.MediaPlayer2"),
+        )
+
+        player_proxy = await DBusProxy.new_async(
+            name=name,
+            object_path="/org/mpris/MediaPlayer2",
+            interface_name="org.mpris.MediaPlayer2.Player",
+            info=Utils.load_interface_xml("org.mpris.MediaPlayer2.Player"),
+        )
+
+        obj = cls(mpris_proxy=mpris_proxy, player_proxy=player_proxy)
+        await obj._initial_sync()
+        return obj
+
+    async def _initial_sync(self) -> None:
+        self._sync_pos_task = asyncio.create_task(self.__sync_position())
+        await self.__sync_all()
+        await self.__sync_metadata()
+        await self.__update_position()
 
     def __close(self) -> None:
         self.__mpris_proxy.unwatch_name()
@@ -176,7 +180,7 @@ class MprisPlayer(IgnisGObject):
             return path
 
         contents = await Utils.read_file_async(uri=art_url, decode=False)
-        await Utils.write_file_async(path=path, contents=contents)  # type: ignore
+        await Utils.write_file_async(path=path, contents=contents)
         return path
 
     async def __update_position(self) -> None:
@@ -190,7 +194,8 @@ class MprisPlayer(IgnisGObject):
 
     async def __sync_position(self) -> None:
         while True:
-            await self.__update_position()
+            if self.playback_status != "Paused":
+                await self.__update_position()
             await asyncio.sleep(1)
 
     @GObject.Signal
@@ -360,9 +365,20 @@ class MprisPlayer(IgnisGObject):
 
     @position.setter
     def position(self, value: int) -> None:
-        self.__player_proxy.SetPosition(
-            "(ox)", self.track_id, value * 1_000_000, result_handler=lambda *args: None
+        self.__player_proxy.SetPosition("(ox)", self.track_id, value * 1_000_000)
+        asyncio.create_task(self.__update_position())
+
+    async def set_position_async(self, value: int) -> None:
+        """
+        Asynchronously set position.
+
+        Args:
+            value: The value to set.
+        """
+        await self.__player_proxy.SetPositionAsync(
+            "(ox)", self.track_id, value * 1_000_000
         )
+        await self.__update_position()
 
     @IgnisProperty
     def shuffle(self) -> bool:
@@ -404,37 +420,73 @@ class MprisPlayer(IgnisGObject):
         """
         Go to the next track.
         """
-        self.__player_proxy.Next(result_handler=lambda *args: None)
+        self.__player_proxy.Next()
+
+    async def next_async(self) -> None:
+        """
+        Asynchronous version of :func:`next`.
+        """
+        await self.__player_proxy.NextAsync()
 
     def previous(self) -> None:
         """
         Go to the previous track.
         """
-        self.__player_proxy.Previous(result_handler=lambda *args: None)
+        self.__player_proxy.Previous()
+
+    async def previous_async(self) -> None:
+        """
+        Asynchronous version of :func:`previous`.
+        """
+        await self.__player_proxy.PreviousAsync()
 
     def pause(self) -> None:
         """
         Pause playback.
         """
-        self.__player_proxy.Pause(result_handler=lambda *args: None)
+        self.__player_proxy.Pause()
+
+    async def pause_async(self) -> None:
+        """
+        Asynchronous version of :func:`pause`.
+        """
+        await self.__player_proxy.PauseAsync()
 
     def play(self) -> None:
         """
         Start playback.
         """
-        self.__player_proxy.Play(result_handler=lambda *args: None)
+        self.__player_proxy.Play()
+
+    async def play_async(self) -> None:
+        """
+        Asynchronous version of :func:`play`.
+        """
+        await self.__player_proxy.PlayAsync()
 
     def play_pause(self) -> None:
         """
         Toggle between playing and pausing.
         """
-        self.__player_proxy.PlayPause(result_handler=lambda *args: None)
+        self.__player_proxy.PlayPause()
+
+    async def play_pause_async(self) -> None:
+        """
+        Asynchronous version of :func:`play_pause`.
+        """
+        await self.__player_proxy.PlayPauseAsync()
 
     def stop(self) -> None:
         """
         Stop playback and remove the MPRIS interface if supported by the player.
         """
-        self.__player_proxy.Stop(result_handler=lambda *args: None)
+        self.__player_proxy.Stop()
+
+    async def stop_async(self) -> None:
+        """
+        Asynchronous version of :func:`stop`.
+        """
+        await self.__player_proxy.StopAsync()
 
     def seek(self, offset: int) -> None:
         """
@@ -442,6 +494,10 @@ class MprisPlayer(IgnisGObject):
         Positive values move forward, and negative values move backward.
         The offset is in milliseconds.
         """
-        self.__player_proxy.Seek(
-            "(x)", offset * 1_000_100, result_handler=lambda *args: None
-        )
+        self.__player_proxy.Seek("(x)", offset * 1_000_100)
+
+    async def seek_async(self, offset: int) -> None:
+        """
+        Asynchronous version of :func:`seek`.
+        """
+        await self.__player_proxy.SeekAsync("(x)", offset * 1_000_100)

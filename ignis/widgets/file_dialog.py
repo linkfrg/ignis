@@ -64,15 +64,15 @@ class FileDialog(Gtk.FileDialog, IgnisGObject):
             self.emit("file-set", file)
             self.notify("file")
 
-    @GObject.Signal(arg_types=(Gio.File,))
-    def file_set(self, *args):
+    @GObject.Signal
+    def file_set(self, file: Gio.File):
         """
         - Signal
 
         Emitted when a file or directory is selected.
 
         Args:
-            file (``Gio.File``): The instance of ``Gio.File`` for this file or directory.
+            file: The instance of :class:`Gio.File` for this file or directory.
         """
 
     @IgnisProperty

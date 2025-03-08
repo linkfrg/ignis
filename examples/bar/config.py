@@ -5,7 +5,7 @@ from ignis.utils import Utils
 from ignis.app import IgnisApp
 from ignis.services.audio import AudioService
 from ignis.services.system_tray import SystemTrayService, SystemTrayItem
-from ignis.services.hyprland import HyprlandService
+from ignis.services.hyprland import HyprlandService, HyprlandWorkspace
 from ignis.services.niri import NiriService
 from ignis.services.notifications import NotificationService
 from ignis.services.mpris import MprisService, MprisPlayer
@@ -23,13 +23,13 @@ notifications = NotificationService.get_default()
 mpris = MprisService.get_default()
 
 
-def hyprland_workspace_button(workspace: dict) -> Widget.Button:
+def hyprland_workspace_button(workspace: HyprlandWorkspace) -> Widget.Button:
     widget = Widget.Button(
         css_classes=["workspace"],
-        on_click=lambda x, id=workspace["id"]: hyprland.switch_to_workspace(id),
-        child=Widget.Label(label=str(workspace["id"])),
+        on_click=lambda x: workspace.switch_to(),
+        child=Widget.Label(label=str(workspace.id)),
     )
-    if workspace["id"] == hyprland.active_workspace["id"]:
+    if workspace.id == hyprland.active_workspace.id:
         widget.add_css_class("active")
 
     return widget
@@ -47,7 +47,7 @@ def niri_workspace_button(workspace: dict) -> Widget.Button:
     return widget
 
 
-def workspace_button(workspace: dict) -> Widget.Button:
+def workspace_button(workspace) -> Widget.Button:
     if hyprland.is_available:
         return hyprland_workspace_button(workspace)
     elif niri.is_available:
@@ -97,9 +97,11 @@ def hyprland_workspaces() -> Widget.EventBox:
         on_scroll_down=lambda x: scroll_workspaces("down"),
         css_classes=["workspaces"],
         spacing=5,
-        child=hyprland.bind(
-            "workspaces",
-            transform=lambda value: [workspace_button(i) for i in value],
+        child=hyprland.bind_many(  # bind also to active_workspace to regenerate workspaces list when active workspace changes
+            ["workspaces", "active_workspace"],
+            transform=lambda workspaces, active_workspace: [
+                workspace_button(i) for i in workspaces
+            ],
         ),
     )
 
@@ -165,13 +167,7 @@ def hyprland_client_title() -> Widget.Label:
     return Widget.Label(
         ellipsize="end",
         max_width_chars=40,
-        label=hyprland.bind(
-            "active_window",
-            transform=lambda value: value.get(
-                "title",
-                "",  # sometimes there is no title, so return empty string
-            ),
-        ),
+        label=hyprland.active_window.bind("title"),
     )
 
 
@@ -231,8 +227,8 @@ def speaker_volume() -> Widget.Box:
 
 def hyprland_keyboard_layout() -> Widget.EventBox:
     return Widget.EventBox(
-        on_click=lambda self: hyprland.switch_kb_layout(),
-        child=[Widget.Label(label=hyprland.bind("kb_layout"))],
+        on_click=lambda self: hyprland.main_keyboard.switch_layout("next"),
+        child=[Widget.Label(label=hyprland.main_keyboard.bind("active_keymap"))],
     )
 
 
