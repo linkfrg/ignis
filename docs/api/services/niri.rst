@@ -7,9 +7,6 @@ Niri
 .. autoclass:: ignis.services.niri.NiriKeyboardLayouts
     :members:
 
-.. autoclass:: ignis.services.niri.NiriOutput
-    :members:
-
 .. autoclass:: ignis.services.niri.NiriWindow
     :members:
 
