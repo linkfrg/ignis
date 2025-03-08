@@ -38,7 +38,7 @@ def hyprland_workspace_button(workspace: HyprlandWorkspace) -> Widget.Button:
 def niri_workspace_button(workspace: NiriWorkspace) -> Widget.Button:
     widget = Widget.Button(
         css_classes=["workspace"],
-        on_click=lambda x, id=workspace.idx: niri.switch_to_workspace(id),
+        on_click=lambda x: workspace.switch_to(),
         child=Widget.Label(label=str(workspace.idx)),
     )
     if workspace.is_active:
