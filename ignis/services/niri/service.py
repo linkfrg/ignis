@@ -275,7 +275,9 @@ class NiriService(BaseService):
 
         self.__sort_workspaces()
 
-        self._active_output = [w for w in self._workspaces.values() if w.is_focused][0].output
+        self._active_output = [w for w in self._workspaces.values() if w.is_focused][
+            0
+        ].output
         self.notify("active-output")
         self.notify("workspaces")
 
