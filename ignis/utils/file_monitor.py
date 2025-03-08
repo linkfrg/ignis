@@ -3,15 +3,6 @@ from gi.repository import GObject, Gio  # type: ignore
 from ignis.gobject import IgnisGObject, IgnisProperty
 from collections.abc import Callable
 
-FLAGS = {
-    None: Gio.FileMonitorFlags.NONE,
-    "none": Gio.FileMonitorFlags.NONE,
-    "watch_mounts": Gio.FileMonitorFlags.WATCH_MOUNTS,
-    "send_moved": Gio.FileMonitorFlags.SEND_MOVED,
-    "watch_hard_links": Gio.FileMonitorFlags.WATCH_HARD_LINKS,
-    "watch_moves": Gio.FileMonitorFlags.WATCH_MOVES,
-}
-
 EVENT = {
     Gio.FileMonitorEvent.CHANGED: "changed",
     Gio.FileMonitorEvent.CHANGES_DONE_HINT: "changes_done_hint",
@@ -48,13 +39,13 @@ class FileMonitor(IgnisGObject):
         self,
         path: str,
         recursive: bool = False,
-        flags: str | None = None,
+        flags: Gio.FileMonitorFlags = Gio.FileMonitorFlags.NONE,
         callback: Callable | None = None,
         prevent_gc: bool = True,
     ):
         super().__init__()
         self._file = Gio.File.new_for_path(path)
-        self._monitor = self._file.monitor(FLAGS[flags], None)
+        self._monitor = self._file.monitor(flags, None)
         self._monitor.connect("changed", self.__on_change)
 
         self._path = path
@@ -104,7 +95,7 @@ class FileMonitor(IgnisGObject):
             return
 
         sub_gfile = Gio.File.new_for_path(path)
-        monitor = sub_gfile.monitor(FLAGS[self.flags], None)
+        monitor = sub_gfile.monitor(self.flags, None)
         monitor.connect("changed", self.__on_change)
         self._sub_monitors.append(monitor)
         self._sub_paths.append(path)
@@ -119,23 +110,15 @@ class FileMonitor(IgnisGObject):
         return self._path
 
     @IgnisProperty
-    def flags(self) -> str | None:
+    def flags(self) -> Gio.FileMonitorFlags:
         """
         - optional, read-only
 
         What the monitor will watch for.
 
-        Possible values:
-
-        - none
-        - watch_mounts
-        - send_moved
-        - watch_hard_links
-        - watch_moves
-
         See :class:`Gio.FileMonitorFlags` for more info.
 
-        Default: ``None``.
+        Default: :obj:`Gio.FileMonitorFlags.NONE`.
         """
         return self._flags
 
