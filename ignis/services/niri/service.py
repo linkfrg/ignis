@@ -8,7 +8,6 @@ from ignis.base_service import BaseService
 from ignis.gobject import IgnisProperty
 from .constants import NIRI_SOCKET
 from .keyboard import NiriKeyboardLayouts
-from .output import NiriOutput
 from .window import NiriWindow
 from .workspace import NiriWorkspace
 
@@ -47,7 +46,7 @@ class NiriService(BaseService):
         self._windows: dict[int, NiriWindow] = {}
         self._active_window: NiriWindow = NiriWindow(self)
         self._workspaces: dict[int, NiriWorkspace] = {}
-        self._active_output: NiriOutput = NiriOutput()
+        self._active_output: str = ""
 
         if self.is_available:
             self.__listen_events()
@@ -58,9 +57,6 @@ class NiriService(BaseService):
             #  your state can never "desync" from niri, and you don't need to make
             #  any other IPC information requests."
             #   - https://github.com/YaLTeR/niri/wiki/IPC
-
-            # Except the state of outputs, which isn't streamed..
-            self.__sync_active_output()
 
     @GObject.Signal()
     def workspace_added(self, workspace: NiriWorkspace):
@@ -122,7 +118,7 @@ class NiriService(BaseService):
         return list(self._workspaces.values())
 
     @IgnisProperty
-    def active_output(self) -> NiriOutput:
+    def active_output(self) -> str:
         """
         - read-only
 
@@ -157,7 +153,6 @@ class NiriService(BaseService):
                 self.__update_windows(event_data)
             case "WorkspaceActivated":
                 self.__update_active_workspace(event_data)
-                self.__sync_active_output()
             case "WorkspaceActiveWindowChanged":
                 self.__update_workspace_active_window(event_data)
             case "WorkspacesChanged":
@@ -297,19 +292,16 @@ class NiriService(BaseService):
                 sync_data["is_focused"] = got_activated
             workspace.sync(sync_data)
 
+        if focused:
+            self._active_output = output
+
+        self.notify("active-output")
         self.notify("workspaces")
 
     def __update_workspace_active_window(self, data: dict) -> None:
         self._workspaces[data["workspace_id"]].sync(
             {"active_window_id": data["active_window_id"]}
         )
-
-    def __sync_active_output(self) -> None:
-        active_output_data = json.loads(self.send_command("FocusedOutput"))["Ok"][
-            "FocusedOutput"
-        ]
-        self._active_output.sync(active_output_data)
-        self.notify("active-output")
 
     def send_command(self, cmd: dict | str) -> str:
         """
