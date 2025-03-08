@@ -93,5 +93,5 @@ class NiriWorkspace(DataGObject):
         """
         Switch to this workspace.
         """
-        cmd = {"Action": {"FocusWorkspace": {"reference": {"Index": self.id}}}}
+        cmd = {"Action": {"FocusWorkspace": {"reference": {"Id": self._id}}}}
         self._service.send_command(cmd)
