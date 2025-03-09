@@ -1,5 +1,5 @@
-from gi.repository import GObject, GLib  # type: ignore
-from ignis.gobject import IgnisGObject, IgnisProperty
+from gi.repository import GLib  # type: ignore
+from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
 from ignis.logging import logger
 from ._imports import GnomeBluetooth
 
@@ -33,19 +33,15 @@ class BluetoothDevice(IgnisGObject):
             )
         gdevice.connect("notify::icon", lambda x, y: self.notify("icon-name"))
 
-    @GObject.Signal
+    @IgnisSignal
     def removed(self):
         """
-        - Signal
-
         Emitted when the device has been removed.
         """
 
     @IgnisProperty
     def gdevice(self) -> GnomeBluetooth.Device:
         """
-        - read-only
-
         The instance of ``GnomeBluetooth.Device`` for this device.
         """
         return self._gdevice
@@ -53,8 +49,6 @@ class BluetoothDevice(IgnisGObject):
     @IgnisProperty
     def address(self) -> str:
         """
-        - read-only
-
         The Bluetooth device address of the device.
         """
         return self._gdevice.props.address
@@ -62,8 +56,6 @@ class BluetoothDevice(IgnisGObject):
     @IgnisProperty
     def alias(self) -> str:
         """
-        - read-only
-
         The name alias for the device.
         """
         return self._gdevice.props.alias
@@ -71,8 +63,6 @@ class BluetoothDevice(IgnisGObject):
     @IgnisProperty
     def battery_level(self) -> int:
         """
-        - read-only
-
         The current battery level of the device (if available).
         """
         return self._gdevice.props.battery_level
@@ -80,8 +70,6 @@ class BluetoothDevice(IgnisGObject):
     @IgnisProperty
     def battery_percentage(self) -> float:
         """
-        - read-only
-
         The current battery percentage of the device (if available).
         """
         return self._gdevice.props.battery_percentage
@@ -89,8 +77,6 @@ class BluetoothDevice(IgnisGObject):
     @IgnisProperty
     def connectable(self) -> bool:
         """
-        - read-only
-
         Whether it is possible to connect to the device.
         """
         return self._gdevice.props.connectable
@@ -98,8 +84,6 @@ class BluetoothDevice(IgnisGObject):
     @IgnisProperty
     def connected(self) -> bool:
         """
-        - read-only
-
         Whether the device is currently connected.
         """
         return self._gdevice.props.connected
@@ -107,8 +91,6 @@ class BluetoothDevice(IgnisGObject):
     @IgnisProperty
     def icon_name(self) -> str:
         """
-        - read-only
-
         The current icon name of the device.
         """
         return self._gdevice.props.icon
@@ -116,8 +98,6 @@ class BluetoothDevice(IgnisGObject):
     @IgnisProperty
     def name(self) -> str:
         """
-        - read-only
-
         The complete device name. It is better to use the ``alias`` property when displaying the device name.
         """
         return self._gdevice.props.name
@@ -125,8 +105,6 @@ class BluetoothDevice(IgnisGObject):
     @IgnisProperty
     def paired(self) -> bool:
         """
-        - read-only
-
         Whether the device is paired.
         """
         return self._gdevice.props.paired
@@ -134,8 +112,6 @@ class BluetoothDevice(IgnisGObject):
     @IgnisProperty
     def trusted(self) -> bool:
         """
-        - read-only
-
         Whether the remote is seen as trusted.
         """
         return self._gdevice.props.trusted
@@ -143,8 +119,6 @@ class BluetoothDevice(IgnisGObject):
     @IgnisProperty
     def device_type(self) -> str:
         """
-        - read-only
-
         The type of the device, e.g., ``"mouse"``, ``"speakers"``.
 
         For more device types, see `GnomeBluetooth.Type <https://lazka.github.io/pgi-docs/index.html#GnomeBluetooth-3.0/flags.html#GnomeBluetooth.Type>`_.

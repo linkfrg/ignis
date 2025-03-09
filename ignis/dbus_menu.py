@@ -128,8 +128,6 @@ class DBusMenu(Gtk.PopoverMenu):
     @IgnisProperty
     def name(self) -> str:
         """
-        - read-only
-
         A bus name (well-known or unique).
         """
         return self.__proxy.name
@@ -137,8 +135,6 @@ class DBusMenu(Gtk.PopoverMenu):
     @IgnisProperty
     def object_path(self) -> str:
         """
-        - read-only
-
         An object path to the menu.
         """
         return self.__proxy.object_path

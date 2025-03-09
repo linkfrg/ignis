@@ -21,8 +21,6 @@ class NetworkService(BaseService):
     @IgnisProperty
     def wifi(self) -> Wifi:
         """
-        - read-only
-
         The Wi-Fi object.
         """
         return self._wifi
@@ -30,8 +28,6 @@ class NetworkService(BaseService):
     @IgnisProperty
     def ethernet(self) -> Ethernet:
         """
-        - read-only
-
         The Ethernet object.
         """
         return self._ethernet
@@ -39,8 +35,6 @@ class NetworkService(BaseService):
     @IgnisProperty
     def vpn(self) -> Vpn:
         """
-        - read-only
-
         The Vpn object.
         """
         return self._vpn

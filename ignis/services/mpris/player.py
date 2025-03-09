@@ -1,8 +1,8 @@
 import os
 import asyncio
 from ignis.dbus import DBusProxy
-from gi.repository import GObject, GLib  # type: ignore
-from ignis.gobject import IgnisGObject, IgnisProperty
+from gi.repository import GLib  # type: ignore
+from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
 from ignis.utils import Utils
 from ignis.connection_manager import ConnectionManager
 from collections.abc import Callable
@@ -198,22 +198,18 @@ class MprisPlayer(IgnisGObject):
                 await self.__update_position()
             await asyncio.sleep(1)
 
-    @GObject.Signal
+    @IgnisSignal
     def ready(self): ...  # user shouldn't connect to this signal
 
-    @GObject.Signal
+    @IgnisSignal
     def closed(self):
         """
-        - Signal
-
         Emitted when a player has been closed or removed.
         """
 
     @IgnisProperty
     def can_control(self) -> bool:
         """
-        - read-only
-
         Whether the player can be controlled.
         """
         return self._can_control
@@ -221,8 +217,6 @@ class MprisPlayer(IgnisGObject):
     @IgnisProperty
     def can_go_next(self) -> bool:
         """
-        - read-only
-
         Whether the player can go to the next track.
         """
         return self._can_go_next
@@ -230,8 +224,6 @@ class MprisPlayer(IgnisGObject):
     @IgnisProperty
     def can_go_previous(self) -> bool:
         """
-        - read-only
-
         Whether the player can go to the previous track.
         """
         return self._can_go_previous
@@ -239,8 +231,6 @@ class MprisPlayer(IgnisGObject):
     @IgnisProperty
     def can_pause(self) -> bool:
         """
-        - read-only
-
         Whether the player can pause.
         """
         return self._can_pause
@@ -248,8 +238,6 @@ class MprisPlayer(IgnisGObject):
     @IgnisProperty
     def can_play(self) -> bool:
         """
-        - read-only
-
         Whether the player can play.
         """
         return self._can_play
@@ -257,8 +245,6 @@ class MprisPlayer(IgnisGObject):
     @IgnisProperty
     def can_seek(self) -> bool:
         """
-        - read-only
-
         Whether the player can seek (change position on track in seconds).
         """
         return self._can_seek
@@ -266,8 +252,6 @@ class MprisPlayer(IgnisGObject):
     @IgnisProperty
     def loop_status(self) -> str | None:
         """
-        - read-only
-
         The current loop status.
         """
         return self._loop_status
@@ -275,8 +259,6 @@ class MprisPlayer(IgnisGObject):
     @IgnisProperty
     def metadata(self) -> dict:
         """
-        - read-only
-
         A dictionary containing metadata.
         """
         return self._metadata
@@ -284,8 +266,6 @@ class MprisPlayer(IgnisGObject):
     @IgnisProperty
     def track_id(self) -> str | None:
         """
-        - read-only
-
         The ID of the current track.
         """
         return self._track_id
@@ -293,8 +273,6 @@ class MprisPlayer(IgnisGObject):
     @IgnisProperty
     def length(self) -> int:
         """
-        - read-only
-
         The length of the current track,
         ``-1`` if not supported by the player.
         """
@@ -303,8 +281,6 @@ class MprisPlayer(IgnisGObject):
     @IgnisProperty
     def art_url(self) -> str | None:
         """
-        - read-only
-
         The path to the cached art image of the track.
         """
         return self._art_url
@@ -312,8 +288,6 @@ class MprisPlayer(IgnisGObject):
     @IgnisProperty
     def album(self) -> str | None:
         """
-        - read-only
-
         The current album name.
         """
         return self._album
@@ -321,8 +295,6 @@ class MprisPlayer(IgnisGObject):
     @IgnisProperty
     def artist(self) -> str | None:
         """
-        - read-only
-
         The current artist name.
         """
         return self._artist
@@ -330,8 +302,6 @@ class MprisPlayer(IgnisGObject):
     @IgnisProperty
     def title(self) -> str | None:
         """
-        - read-only
-
         The current title of the track.
         """
         return self._title
@@ -339,8 +309,6 @@ class MprisPlayer(IgnisGObject):
     @IgnisProperty
     def url(self) -> str | None:
         """
-        - read-only
-
         The URL address of the track.
         """
         return self._url
@@ -348,8 +316,6 @@ class MprisPlayer(IgnisGObject):
     @IgnisProperty
     def playback_status(self) -> str | None:
         """
-        - read-only
-
         The current playback status. Can be "Playing" or "Paused".
         """
         return self._playback_status
@@ -357,8 +323,6 @@ class MprisPlayer(IgnisGObject):
     @IgnisProperty
     def position(self) -> int:
         """
-        - read-write
-
         The current position in the track in seconds.
         """
         return self._position
@@ -383,8 +347,6 @@ class MprisPlayer(IgnisGObject):
     @IgnisProperty
     def shuffle(self) -> bool:
         """
-        - read-only
-
         The shuffle status.
         """
         return self._shuffle
@@ -392,8 +354,6 @@ class MprisPlayer(IgnisGObject):
     @IgnisProperty
     def volume(self) -> float:
         """
-        - read-only
-
         The volume of the player.
         """
         return self._volume
@@ -401,8 +361,6 @@ class MprisPlayer(IgnisGObject):
     @IgnisProperty
     def identity(self) -> str | None:
         """
-        - read-only
-
         The name of the player (e.g. "Spotify", "firefox").
         """
         return self._identity
@@ -410,8 +368,6 @@ class MprisPlayer(IgnisGObject):
     @IgnisProperty
     def desktop_entry(self) -> str | None:
         """
-        - read-only
-
         The .desktop file of the player.
         """
         return self._desktop_entry

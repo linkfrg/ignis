@@ -1,6 +1,5 @@
-from gi.repository import GObject  # type: ignore
 from ignis.base_service import BaseService
-from ignis.gobject import IgnisProperty
+from ignis.gobject import IgnisProperty, IgnisSignal
 from ._imports import GnomeBluetooth
 from .device import BluetoothDevice
 from .constants import ADAPTER_STATE
@@ -33,11 +32,9 @@ class BluetoothService(BaseService):
         for gdevice in self._client.get_devices():
             self.__add_device(None, gdevice)  # type: ignore
 
-    @GObject.Signal
+    @IgnisSignal
     def device_added(self, device: BluetoothDevice):
         """
-        - Signal
-
         Emitted when a Bluetooth device has been added.
 
         Args:
@@ -47,8 +44,6 @@ class BluetoothService(BaseService):
     @IgnisProperty
     def client(self) -> GnomeBluetooth.Client:
         """
-        - read-only
-
         An instance of ``GnomeBluetooth.Client``.
         """
         return self._client
@@ -56,8 +51,6 @@ class BluetoothService(BaseService):
     @IgnisProperty
     def devices(self) -> list[BluetoothDevice]:
         """
-        - read-only
-
         A list of all Bluetooth devices.
         """
         return list(self._devices.values())
@@ -65,8 +58,6 @@ class BluetoothService(BaseService):
     @IgnisProperty
     def connected_devices(self) -> list[BluetoothDevice]:
         """
-        - read-only
-
         A list of currently connected Bluetooth devices.
         """
         return [i for i in self._devices.values() if i.connected]
@@ -74,8 +65,6 @@ class BluetoothService(BaseService):
     @IgnisProperty
     def powered(self) -> bool:
         """
-        - read-write
-
         Whether the default Bluetooth adapter is powered.
         """
         return self._client.props.default_adapter_powered
@@ -87,8 +76,6 @@ class BluetoothService(BaseService):
     @IgnisProperty
     def state(self) -> str:
         """
-        - read-only
-
         The current state of the default Bluetooth adapter.
 
         Adapter state:
@@ -103,8 +90,6 @@ class BluetoothService(BaseService):
     @IgnisProperty
     def setup_mode(self) -> bool:
         """
-        - read-write
-
         Whether the default Bluetooth adapter is in setup mode (discoverable, and discovering).
 
         Set to ``True`` to start scanning devices.

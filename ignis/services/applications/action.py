@@ -18,8 +18,6 @@ class ApplicationAction(IgnisGObject):
     @IgnisProperty
     def action(self) -> str:
         """
-        - read-only
-
         The ID of the action.
         """
         return self._action
@@ -27,8 +25,6 @@ class ApplicationAction(IgnisGObject):
     @IgnisProperty
     def name(self) -> str:
         """
-        - read-only
-
         The human-readable name of the action.
         """
         return self._name

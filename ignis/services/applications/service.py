@@ -37,8 +37,6 @@ class ApplicationsService(BaseService):
     @IgnisProperty
     def apps(self) -> list[Application]:
         """
-        - read-only
-
         A list of all installed applications.
         """
         return sorted(self._apps.values(), key=lambda x: x.name)
@@ -46,8 +44,6 @@ class ApplicationsService(BaseService):
     @IgnisProperty
     def pinned(self) -> list[Application]:
         """
-        - read-only
-
         A list of all pinned applications.
         """
         return list(self._pinned.values())

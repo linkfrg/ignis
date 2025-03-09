@@ -33,8 +33,6 @@ class Switch(Gtk.Switch, BaseWidget):
     @IgnisProperty
     def on_change(self) -> Callable | None:
         """
-        - optional, read-write
-
         The function to call when the position of the switch changes (e.g., when the user toggles the switch).
         """
         return self._on_change
