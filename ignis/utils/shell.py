@@ -1,5 +1,5 @@
+import asyncio
 import subprocess
-from gi.repository import Gio  # type: ignore
 
 
 def exec_sh(command: str, **kwargs) -> subprocess.CompletedProcess:
@@ -22,21 +22,10 @@ class AsyncCompletedProcess:
     Completed process object for :func:`~ignis.utils.Utils.exec_sh_async`.
     """
 
-    def __init__(self, process: Gio.Subprocess) -> None:
-        self._returncode: int = -1
-        self._stdout: str | None = None
-        self._stderr: str | None = None
-
-        data = process.communicate(None, None)
-        if data[0]:
-            self._returncode = process.get_exit_status()
-            stdout_bytes = data[1].get_data()
-            stderr_bytes = data[2].get_data()
-
-            if stdout_bytes:
-                self._stdout = stdout_bytes.decode()
-            if stderr_bytes:
-                self._stderr = stderr_bytes.decode()
+    def __init__(self, stdout: str, stderr: str, returncode: int) -> None:
+        self._returncode: int = returncode
+        self._stdout: str = stdout
+        self._stderr: str = stderr
 
     @property
     def returncode(self) -> int:
@@ -46,14 +35,14 @@ class AsyncCompletedProcess:
         return self._returncode
 
     @property
-    def stdout(self) -> str | None:
+    def stdout(self) -> str:
         """
         The output of the process.
         """
         return self._stdout
 
     @property
-    def stderr(self) -> str | None:
+    def stderr(self) -> str:
         """
         The stderr (errors) of the process.
         """
@@ -72,10 +61,12 @@ async def exec_sh_async(command: str) -> AsyncCompletedProcess:
         The instance of ``Gio.Subprocess``.
     """
 
-    process = Gio.Subprocess.new(
-        ["bash", "-c", command],
-        Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE,
+    process = await asyncio.create_subprocess_shell(
+        command, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
     )
+    stdout, stderr = await process.communicate()
+    returncode = process.returncode
 
-    await process.wait_check_async()  # type: ignore
-    return AsyncCompletedProcess(process)
+    return AsyncCompletedProcess(
+        stdout.decode(), stderr.decode(), returncode if returncode is not None else -1
+    )
