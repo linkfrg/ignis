@@ -1,11 +1,11 @@
-import sys
 from ignis import CACHE_DIR
 from gi.repository import GLib  # type: ignore
 from ignis.options_manager import OptionsManager, OptionsGroup
+from ignis import is_sphinx_build
 
 
 def get_recorder_default_file_location() -> str | None:
-    if "sphinx" not in sys.modules:
+    if not is_sphinx_build:
         return GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_VIDEOS)
     else:
         return "XDG Videos directory"
@@ -59,7 +59,7 @@ class Options(OptionsManager):
     """
 
     def __init__(self):
-        if "sphinx" in sys.modules:
+        if is_sphinx_build:
             return
 
         try:

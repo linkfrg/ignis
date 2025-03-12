@@ -1,8 +1,8 @@
-import sys
 from types import UnionType
 from gi.repository import GObject, GLib  # type: ignore
 from typing import Any, Literal, get_args, get_origin
 from collections.abc import Callable
+from ignis import is_sphinx_build
 
 
 class Binding(GObject.Object):
@@ -258,7 +258,7 @@ class IgnisProperty(GObject.Property):
             return object
 
     def __process_default(self, tp: type) -> Any:
-        if "sphinx" in sys.modules:
+        if is_sphinx_build:
             return None
 
         if tp is bool:

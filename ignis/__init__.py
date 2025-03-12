@@ -10,7 +10,9 @@ __version__ = "0.4.dev0"
 __lib_dir__ = None
 CACHE_DIR = None
 
-if "sphinx" not in sys.modules:
+is_sphinx_build: bool = "sphinx" in sys.modules
+
+if not is_sphinx_build:
     policy = GLibEventLoopPolicy()
     asyncio.set_event_loop_policy(policy)
 

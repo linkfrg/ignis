@@ -1,10 +1,10 @@
-import sys
 import json
 from gi.repository import GObject  # type: ignore
 from ignis.gobject import IgnisGObject, Binding, IgnisProperty
 from typing import Any
 from collections.abc import Callable
 from collections.abc import Generator
+from ignis import is_sphinx_build
 
 
 class Option(IgnisGObject):
@@ -192,7 +192,7 @@ class OptionsManager(OptionsGroup):
         super().__init__()
         self._file = file
 
-        if "sphinx" not in sys.modules and self._file is not None:
+        if not is_sphinx_build and self._file is not None:
             self.connect("changed", self.__autosave)
             self.connect("subgroup-changed", self.__autosave)
 
