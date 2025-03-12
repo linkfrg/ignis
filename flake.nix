@@ -17,7 +17,7 @@
       version = import ./nix/version.nix { inherit self; };
     in
     {
-      overlays.default = import ./nix/overlay.nix { inherit version; };
+      overlays.default = import ./nix/overlay.nix { inherit self; inherit version; };
 
       packages = forAllSystems (system:
         let

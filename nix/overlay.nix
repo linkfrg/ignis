@@ -1,3 +1,3 @@
-{ version }: final: prev: {
-  ignis = prev.callPackage ./ignis.nix { inherit version; };
+{ self, version }: final: prev: {
+  ignis = prev.callPackage ./ignis.nix { inherit self; inherit version; };
 }
