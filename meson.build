@@ -42,7 +42,14 @@ install_subdir(
 )
 
 config = configuration_data()
-config.set('COMMIT', run_command('git', 'rev-parse', 'HEAD', check: false).stdout().strip())
+
+if get_option('COMMITHASH') != ''
+    commit_hash = get_option('COMMITHASH')
+else
+    commit_hash = run_command('git', 'rev-parse', 'HEAD', check: false).stdout().strip()
+endif
+
+config.set('COMMIT', commit_hash)
 config.set('BRANCH', run_command('git', 'branch', '--show-current', check: false).stdout().strip())
 config.set('COMMIT_MSG', run_command('git', 'log', '-1', '--pretty=%B', check: false).stdout().strip().replace('\\', '\\\\').replace('"', '\\"'))
 

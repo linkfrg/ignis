@@ -1,4 +1,4 @@
-{ fetchFromGitHub, pkgs, version ? "git", ... }:
+{ self, fetchFromGitHub, pkgs, version ? "git", ... }:
 let
   inherit (pkgs.lib) concatStringsSep;
 
@@ -49,7 +49,7 @@ pkgs.stdenv.mkDerivation {
 
   buildPhase = ''
     cd ..
-    meson setup build --prefix=$out
+    meson setup build --prefix=$out -DCOMMITHASH=${self.rev or "dirty"}
     ninja -C build
   '';
 
