@@ -1,6 +1,7 @@
 import json
 from gi.repository import GObject  # type: ignore
 from ignis.gobject import IgnisGObject, Binding, IgnisProperty
+from ignis.utils import Utils
 from typing import Any
 from collections.abc import Callable
 from collections.abc import Generator
@@ -108,6 +109,17 @@ class OptionsGroup(IgnisGObject):
 
         return data
 
+    def _compare(self, data: dict[str, Any]) -> Generator[str | dict, None, None]:
+        for key, value in data.items():
+            attr = getattr(self, key)
+            if isinstance(attr, OptionsGroup):
+                compared = list(attr._compare(value))
+                if compared != []:
+                    yield {key: compared}
+            else:
+                if attr != value:
+                    yield key
+
     def apply_from_dict(self, data: dict[str, Any]) -> None:
         """
         Apply values to options from a dictionary.
@@ -158,9 +170,11 @@ class OptionsManager(OptionsGroup):
 
     This is the top-level class in the option structure.
     It provides support for loading and saving options to a file.
+    Has support for hot-reloading when the file is modified externally.
 
     Args:
         file: The path to the file used for saving and loading options. Cannot be changed after initialization.
+        hot_reload: Whether to enable hot-reloading.
 
     The standard option structure must follow this format:
 
@@ -188,7 +202,7 @@ class OptionsManager(OptionsGroup):
 
     """
 
-    def __init__(self, file: str | None = None):
+    def __init__(self, file: str | None = None, hot_reload: bool = True):
         super().__init__()
         self._file = file
 
@@ -197,6 +211,31 @@ class OptionsManager(OptionsGroup):
             self.connect("subgroup-changed", self.__autosave)
 
             self.load_from_file(self._file)
+
+            if hot_reload:
+                Utils.FileMonitor(path=self._file, callback=self.__reload)
+
+    def __reload(self, x, path: str, event_type: str) -> None:
+        if not self._file:
+            return
+
+        if event_type != "changes_done_hint":
+            return
+
+        with open(self._file) as fp:
+            data = json.load(fp)
+
+        for item in self._compare(data):
+            if isinstance(item, str):
+                setattr(self, item, data[item])
+
+            if isinstance(item, dict):
+                for group_name, changed_options in item.items():
+                    group_instance = getattr(self, group_name)
+                    for option_name in changed_options:
+                        setattr(
+                            group_instance, option_name, data[group_name][option_name]
+                        )
 
     def __autosave(self, *args) -> None:
         self.save_to_file(self._file)  # type: ignore
