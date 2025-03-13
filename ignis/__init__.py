@@ -45,10 +45,22 @@ gi.require_version("Gtk4LayerShell", "1.0")
 gi.require_version("GdkPixbuf", "2.0")
 gi.require_version("GIRepository", "2.0")
 
-try:
-    from gi.repository import GIRepository  # type: ignore
+from gi.repository import GIRepository  # type: ignore  # noqa: E402
 
-    current_dir = os.path.dirname(os.path.abspath(__file__))
+
+def prepend_to_repo(path: str) -> None:
+    try:
+        GIRepository.Repository.prepend_library_path(path)
+        GIRepository.Repository.prepend_search_path(path)
+    except TypeError:
+        pass
+
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+if not is_editable_install:
+    prepend_to_repo(current_dir)
+else:
     build_libdir = os.path.join(
         os.path.abspath(os.path.join(current_dir, "..")),
         "build",
@@ -56,10 +68,4 @@ try:
         "subprojects",
         "gvc",
     )
-
-    for directory in current_dir, build_libdir:
-        GIRepository.Repository.prepend_library_path(directory)
-        GIRepository.Repository.prepend_search_path(directory)
-
-except TypeError:
-    pass
+    prepend_to_repo(build_libdir)
