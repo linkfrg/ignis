@@ -1,9 +1,11 @@
 import gi
 import os
 import sys
+import json
 import asyncio
 from ctypes import CDLL
 from gi.events import GLibEventLoopPolicy  # type: ignore
+from importlib.metadata import Distribution, PackageNotFoundError
 from gi.repository import GLib  # type: ignore
 
 __version__ = "0.4.dev0"
@@ -11,6 +13,17 @@ __lib_dir__ = None
 CACHE_DIR = None
 
 is_sphinx_build: bool = "sphinx" in sys.modules
+is_editable_install: bool = False
+
+try:
+    direct_url = Distribution.from_name("ignis").read_text("direct_url.json")
+    if direct_url:
+        is_editable_install = (
+            json.loads(direct_url).get("dir_info", {}).get("editable", False)
+        )
+
+except PackageNotFoundError:
+    pass
 
 if not is_sphinx_build:
     policy = GLibEventLoopPolicy()
