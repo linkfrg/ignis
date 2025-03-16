@@ -109,16 +109,14 @@ class OptionsGroup(IgnisGObject):
 
         return data
 
-    def _compare(self, data: dict[str, Any]) -> Generator[str | dict, None, None]:
+    def _reload(self, data: dict[str, Any]) -> None:
         for key, value in data.items():
             attr = getattr(self, key)
             if isinstance(attr, OptionsGroup):
-                compared = list(attr._compare(value))
-                if compared != []:
-                    yield {key: compared}
+                attr._reload(data[key])
             else:
                 if attr != value:
-                    yield key
+                    setattr(self, key, value)
 
     def apply_from_dict(self, data: dict[str, Any]) -> None:
         """
@@ -213,9 +211,9 @@ class OptionsManager(OptionsGroup):
             self.load_from_file(self._file)
 
             if hot_reload:
-                Utils.FileMonitor(path=self._file, callback=self.__reload)
+                Utils.FileMonitor(path=self._file, callback=self.__hot_reload)
 
-    def __reload(self, x, path: str, event_type: str) -> None:
+    def __hot_reload(self, x, path: str, event_type: str) -> None:
         if not self._file:
             return
 
@@ -225,17 +223,7 @@ class OptionsManager(OptionsGroup):
         with open(self._file) as fp:
             data = json.load(fp)
 
-        for item in self._compare(data):
-            if isinstance(item, str):
-                setattr(self, item, data[item])
-
-            if isinstance(item, dict):
-                for group_name, changed_options in item.items():
-                    group_instance = getattr(self, group_name)
-                    for option_name in changed_options:
-                        setattr(
-                            group_instance, option_name, data[group_name][option_name]
-                        )
+        self._reload(data)
 
     def __autosave(self, *args) -> None:
         self.save_to_file(self._file)  # type: ignore
