@@ -2,7 +2,7 @@ from types import UnionType
 from gi.repository import GObject, GLib  # type: ignore
 from typing import Any, Literal, get_args, get_origin
 from collections.abc import Callable
-from ignis import is_sphinx_build
+from ignis import is_sphinx_build, is_girepository_2_0
 
 
 class Binding(GObject.Object):
@@ -266,9 +266,10 @@ class IgnisProperty(GObject.Property):
         elif tp is float:
             return 0.0
         elif issubclass(tp, GObject.GFlags):
-            # gflags has  __flags_values__ attr, trust me
-            first_value = list(tp.__flags_values__.values())[0]  # type: ignore
-            return first_value
+            if is_girepository_2_0:
+                return next(iter(tp))
+            else:
+                return list(tp.__flags_values__.values())[0]  # type: ignore
 
     def __get_type_from_union(self, tp: UnionType) -> type:
         non_none_types = tuple(t for t in tp.__args__ if t is not type(None))
