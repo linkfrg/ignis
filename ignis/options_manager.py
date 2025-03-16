@@ -109,17 +109,6 @@ class OptionsGroup(IgnisGObject):
 
         return data
 
-    def _reload(self, data: dict[str, Any]) -> None:
-        for key, value in data.items():
-            if not hasattr(self, key):
-                continue
-            attr = getattr(self, key)
-            if isinstance(attr, OptionsGroup):
-                attr._reload(data[key])
-            else:
-                if attr != value:
-                    setattr(self, key, value)
-
     def apply_from_dict(self, data: dict[str, Any]) -> None:
         """
         Apply values to options from a dictionary.
@@ -130,10 +119,12 @@ class OptionsGroup(IgnisGObject):
         for key, value in data.items():
             if not hasattr(self, key):
                 continue
-            if isinstance(value, dict) and isinstance(getattr(self, key), OptionsGroup):
-                getattr(self, key).apply_from_dict(value)
+            attr = getattr(self, key)
+            if isinstance(attr, OptionsGroup):
+                attr.apply_from_dict(data[key])
             else:
-                self.__setattr__(key, value, False)
+                if attr != value:
+                    self.__setattr__(key, value)
 
     def __yield_subgroups(
         self,
@@ -225,7 +216,7 @@ class OptionsManager(OptionsGroup):
         with open(self._file) as fp:
             data = json.load(fp)
 
-        self._reload(data)
+        self.apply_from_dict(data)
 
     def __autosave(self, *args) -> None:
         self.save_to_file(self._file)  # type: ignore
