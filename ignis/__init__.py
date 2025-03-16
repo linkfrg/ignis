@@ -14,7 +14,12 @@ CACHE_DIR = None
 
 is_sphinx_build: bool = "sphinx" in sys.modules
 is_editable_install: bool = False
-is_girepository_2_0: bool = gi.version_info >= (3, 51, 0)  # type: ignore
+is_girepository_2_0: bool
+
+if not is_sphinx_build:
+    is_girepository_2_0 = gi.version_info >= (3, 51, 0)  # type: ignore
+else:
+    is_girepository_2_0 = False
 
 try:
     direct_url = Distribution.from_name("ignis").read_text("direct_url.json")
