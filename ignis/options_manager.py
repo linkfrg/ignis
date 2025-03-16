@@ -111,6 +111,8 @@ class OptionsGroup(IgnisGObject):
 
     def _reload(self, data: dict[str, Any]) -> None:
         for key, value in data.items():
+            if not hasattr(self, key):
+                continue
             attr = getattr(self, key)
             if isinstance(attr, OptionsGroup):
                 attr._reload(data[key])
