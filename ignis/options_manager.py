@@ -235,7 +235,7 @@ class OptionsManager(OptionsGroup):
         with open(self._file) as fp:
             data = json.load(fp)
 
-        self.apply_from_dict(data)
+        self.apply_from_dict(data, autosave=False)
 
     def __autosave(self, *args) -> None:
         self.save_to_file(self._file)  # type: ignore
