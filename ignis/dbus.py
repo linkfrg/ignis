@@ -14,6 +14,13 @@ class DBusService(IgnisGObject):
     """
     A class that helps create a D-Bus service.
 
+    Args:
+        name: The well-known name to own.
+        object_path: An object path.
+        info: An instance of :class:`Gio.DBusInterfaceInfo`. You can get it from XML using :func:`~ignis.utils.Utils.load_interface_xml`.
+        on_name_acquired: The function to call when ``name`` is acquired.
+        on_name_lost: The function to call when ``name`` is lost.
+
     .. code-block:: python
 
         from gi.repository import Gio, GLib
@@ -62,7 +69,7 @@ class DBusService(IgnisGObject):
     @IgnisProperty
     def name(self) -> str:
         """
-        - required, read-only
+        - read-only
 
         The well-known name to own.
         """
@@ -71,7 +78,7 @@ class DBusService(IgnisGObject):
     @IgnisProperty
     def object_path(self) -> str:
         """
-        - required, read-only
+        - read-only
 
         An object path.
         """
@@ -80,7 +87,7 @@ class DBusService(IgnisGObject):
     @IgnisProperty
     def info(self) -> Gio.DBusInterfaceInfo:
         """
-        - required, read-only
+        - read-only
 
         An instance of :class:`Gio.DBusInterfaceInfo`
 
@@ -91,7 +98,7 @@ class DBusService(IgnisGObject):
     @IgnisProperty
     def on_name_acquired(self) -> Callable:
         """
-        - optional, read-write
+        - read-write
 
         The function to call when ``name`` is acquired.
         """
@@ -104,7 +111,7 @@ class DBusService(IgnisGObject):
     @IgnisProperty
     def on_name_lost(self) -> Callable:
         """
-        - optional, read-write
+        - read-write
 
         The function to call when ``name`` is lost.
         """
@@ -117,7 +124,7 @@ class DBusService(IgnisGObject):
     @IgnisProperty
     def connection(self) -> Gio.DBusConnection:
         """
-        - not argument, read-only
+        - read-only
 
         The instance of :class:`Gio.DBusConnection` for this service.
         """
@@ -126,7 +133,7 @@ class DBusService(IgnisGObject):
     @IgnisProperty
     def methods(self) -> dict[str, Callable]:
         """
-        - not argument, read-only
+        - read-only
 
         The dictionary of registred DBus methods. See :func:`~ignis.dbus.DBusService.register_dbus_method`.
         """
@@ -135,7 +142,7 @@ class DBusService(IgnisGObject):
     @IgnisProperty
     def properties(self) -> dict[str, Callable]:
         """
-        - not argument, read-only
+        - read-only
 
         The dictionary of registred DBus properties. See :func:`~ignis.dbus.DBusService.register_dbus_property`.
         """

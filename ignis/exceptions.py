@@ -4,6 +4,9 @@ from gi.repository import Gtk, GLib  # type: ignore
 class WindowNotFoundError(Exception):
     """
     Raised when a window is not found.
+
+    Args:
+        window_name: The name of the window.
     """
 
     def __init__(self, window_name: str, *args) -> None:
@@ -13,7 +16,7 @@ class WindowNotFoundError(Exception):
     @property
     def window_name(self) -> str:
         """
-        - required, read-only
+        - read-only
 
         The name of the window.
         """
@@ -23,6 +26,9 @@ class WindowNotFoundError(Exception):
 class WindowAddedError(Exception):
     """
     Raised when a window is already added to the application.
+
+    Args:
+        window_name: The name of the window.
     """
 
     def __init__(self, window_name: str, *args) -> None:
@@ -32,7 +38,7 @@ class WindowAddedError(Exception):
     @property
     def window_name(self) -> str:
         """
-        - required, read-only
+        - read-only
 
         The name of the window.
         """
