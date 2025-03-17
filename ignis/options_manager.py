@@ -208,8 +208,13 @@ class OptionsManager(OptionsGroup):
         Args:
             file: The path to the file where options will be saved.
         """
+        with open(file) as fp:
+            current_file_data = json.load(fp)
+
         with open(file, "w") as fp:
-            json.dump(self.to_dict(), fp, indent=4)
+            data_on_self = self.to_dict()
+            data_on_self.update(current_file_data)
+            json.dump(data_on_self, fp, indent=4)
 
     def load_from_file(self, file: str) -> None:
         """
