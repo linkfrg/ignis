@@ -119,10 +119,14 @@ class OptionsGroup(IgnisGObject):
         for key, value in data.items():
             if not hasattr(self, key):
                 continue
-            if isinstance(value, dict) and isinstance(getattr(self, key), OptionsGroup):
-                getattr(self, key).apply_from_dict(value, emit=emit)
+
+            attr = getattr(self, key)
+
+            if isinstance(attr, OptionsGroup):
+                attr.apply_from_dict(value, emit)
             else:
-                self.__setattr__(key, value, emit)
+                if attr != value:
+                    self.__setattr__(key, value, emit)
 
     def __yield_subgroups(
         self,
