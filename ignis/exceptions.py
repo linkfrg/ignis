@@ -39,25 +39,6 @@ class WindowAddedError(Exception):
         return self._window_name
 
 
-class ServiceNotFoundError(Exception):
-    """
-    Raised when a service with the given name is not found.
-    """
-
-    def __init__(self, service_name: str, *args: object) -> None:
-        self._service_name = service_name
-        super().__init__(f'No such service "{service_name}"', *args)
-
-    @property
-    def service_name(self) -> str:
-        """
-        - required, read-only
-
-        The name of the service.
-        """
-        return self._service_name
-
-
 class GvcNotFoundError(Exception):
     """
     Raised when Gvc is not found.
