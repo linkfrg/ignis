@@ -197,7 +197,7 @@ class OptionsManager(OptionsGroup):
             self.connect("changed", self.__autosave)
             self.connect("subgroup-changed", self.__autosave)
 
-            self.load_from_file(self._file)
+            self.load_from_file(self._file, emit=False)
 
     def __autosave(self, *args) -> None:
         self.save_to_file(self._file)  # type: ignore
