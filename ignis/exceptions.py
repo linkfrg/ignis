@@ -39,25 +39,6 @@ class WindowAddedError(Exception):
         return self._window_name
 
 
-class ServiceNotFoundError(Exception):
-    """
-    Raised when a service with the given name is not found.
-    """
-
-    def __init__(self, service_name: str, *args: object) -> None:
-        self._service_name = service_name
-        super().__init__(f'No such service "{service_name}"', *args)
-
-    @property
-    def service_name(self) -> str:
-        """
-        - required, read-only
-
-        The name of the service.
-        """
-        return self._service_name
-
-
 class GvcNotFoundError(Exception):
     """
     Raised when Gvc is not found.
@@ -104,82 +85,6 @@ class NetworkManagerNotFoundError(Exception):
             "NetworkManager not found! To use the network service, install NetworkManager",
             *args,
         )
-
-
-class OptionNotFoundError(Exception):
-    """
-    Raised when an option is not found.
-    """
-
-    def __init__(self, option_name: str, *args) -> None:
-        self._option_name = option_name
-        super().__init__(f'No such option: "{option_name}"', *args)
-
-    @property
-    def option_name(self) -> str:
-        """
-        - required, read-only
-
-        The name of the option.
-        """
-        return self._option_name
-
-
-class OptionExistsError(Exception):
-    """
-    Raised when an option already exists.
-    """
-
-    def __init__(self, option_name: str, *args) -> None:
-        self._option_name = option_name
-        super().__init__(f'Option already exists: "{option_name}"', *args)
-
-    @property
-    def option_name(self) -> str:
-        """
-        - required, read-only
-
-        The name of the option.
-        """
-        return self._option_name
-
-
-class OptionsGroupNotFoundError(Exception):
-    """
-    Raised when an options group is not found.
-    """
-
-    def __init__(self, options_group: str, *args) -> None:
-        self._options_group = options_group
-        super().__init__(f'No such options group: "{options_group}"', *args)
-
-    @property
-    def options_group(self) -> str:
-        """
-        - required, read-only
-
-        The name of the options group.
-        """
-        return self._options_group
-
-
-class OptionsGroupExistsError(Exception):
-    """
-    Raised when an options group exists.
-    """
-
-    def __init__(self, options_group: str, *args) -> None:
-        self._options_group = options_group
-        super().__init__(f'Options groups already exists: "{options_group}"', *args)
-
-    @property
-    def options_group(self) -> str:
-        """
-        - required, read-only
-
-        The name of the options group.
-        """
-        return self._options_group
 
 
 class GstNotFoundError(Exception):
