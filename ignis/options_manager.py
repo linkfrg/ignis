@@ -108,20 +108,21 @@ class OptionsGroup(IgnisGObject):
 
         return data
 
-    def apply_from_dict(self, data: dict[str, Any]) -> None:
+    def apply_from_dict(self, data: dict[str, Any], emit: bool = True) -> None:
         """
         Apply values to options from a dictionary.
 
         Args:
             data: A dictionary containing the values to apply.
+            emit: Whether to emit the :attr:`changed `and :attr:`subgroup_changed` signals for options in `data` that differ from those on `self`.
         """
         for key, value in data.items():
             if not hasattr(self, key):
                 continue
             if isinstance(value, dict) and isinstance(getattr(self, key), OptionsGroup):
-                getattr(self, key).apply_from_dict(value)
+                getattr(self, key).apply_from_dict(value, emit=emit)
             else:
-                self.__setattr__(key, value, False)
+                self.__setattr__(key, value, emit)
 
     def __yield_subgroups(
         self,
@@ -211,13 +212,14 @@ class OptionsManager(OptionsGroup):
         with open(file, "w") as fp:
             json.dump(self.to_dict(), fp, indent=4)
 
-    def load_from_file(self, file: str) -> None:
+    def load_from_file(self, file: str, emit: bool = True) -> None:
         """
         Manually load options from the specified file.
 
         Args:
             file: The path to the file from which options will be loaded.
+            emit: Whether to emit the :attr:`changed `and :attr:`subgroup_changed` signals for options in `file` that differ from those on `self`.
         """
         with open(file) as fp:
             data = json.load(fp)
-            self.apply_from_dict(data)
+            self.apply_from_dict(data=data, emit=emit)
