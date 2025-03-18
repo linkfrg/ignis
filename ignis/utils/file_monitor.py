@@ -124,8 +124,6 @@ class FileMonitor(IgnisGObject):
         What the monitor will watch for.
 
         See :class:`Gio.FileMonitorFlags` for more info.
-
-        Default: :obj:`Gio.FileMonitorFlags.NONE`.
         """
         return self._flags
 
@@ -138,8 +136,6 @@ class FileMonitor(IgnisGObject):
         It should take two arguments:
         1. The path to the changed file or directory
         2. The event type.
-
-        Default: ``None``.
 
         Event types:
 
