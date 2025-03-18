@@ -9,6 +9,9 @@ class Separator(Gtk.Separator, BaseWidget):
 
     A separator widget.
 
+    Args:
+        **kwargs: Properties to set.
+
     .. code-block:: python
 
         Widget.Separator(

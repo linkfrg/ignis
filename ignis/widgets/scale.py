@@ -19,6 +19,9 @@ class Scale(Gtk.Scale, BaseWidget):
         - top
         - bottom
 
+    Args:
+        **kwargs: Properties to set.
+
     .. code-block:: python
 
         Widget.Scale(

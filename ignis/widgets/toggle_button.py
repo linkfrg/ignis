@@ -10,6 +10,9 @@ class ToggleButton(Gtk.ToggleButton, BaseWidget):
 
     A toggle button widget.
 
+    Args:
+        **kwargs: Properties to set.
+
     .. code-block:: python
 
         Widget.ToggleButton(

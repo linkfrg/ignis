@@ -17,6 +17,9 @@ class Arrow(Icon):
     An arrow icon that can rotate (with animation!).
     Useful for dropdown lists.
 
+    Args:
+        **kwargs: Properties to set.
+
     .. hint::
         If you are looking for a button with an arrow that rotates on click,
         see :class:`~ignis.widgets.Widget.ArrowButton`.

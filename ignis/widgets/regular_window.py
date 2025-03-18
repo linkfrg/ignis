@@ -15,6 +15,7 @@ class RegularWindow(Gtk.Window, BaseWidget):
 
     Args:
         namespace: The name of the window, used for accessing it from the CLI and :class:`~ignis.app.IgnisApp`. It must be unique.
+        **kwargs: Other properties to set.
 
     .. code-block:: python
 

@@ -127,6 +127,7 @@ Widgets
 
 - Use the same patterns as described above for general classes.
 - Specify the base widget using the ``:class:`` directive.
+- If the widget can set properties using ``**kwargs``, you should mention it.
 
 .. code-block:: python
 
@@ -136,6 +137,9 @@ Widgets
 
         The description of the widget.
 
+        Args:
+            **kwargs: Properties to set.
+
         .. code-block:: python
 
             Widget.WIDGET_NAME(
@@ -143,7 +147,8 @@ Widgets
                 prop2=12
             )
         """
-        ... # rest of stuff goes here
+        def __init__(self, **kwargs):
+            ...
 
 Building documentation
 -------------------------

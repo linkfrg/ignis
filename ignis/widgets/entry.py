@@ -10,6 +10,9 @@ class Entry(Gtk.Entry, BaseWidget):  # type: ignore
 
     An input field. To make it work, set the ``kb_mode`` property of the window to ``on_demand`` or ``exclusive``.
 
+    Args:
+        **kwargs: Properties to set.
+
     .. code-block:: python
 
         Widget.Entry(

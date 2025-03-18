@@ -16,6 +16,9 @@ class FileDialog(Gtk.FileDialog, IgnisGObject):
 
     A window that allows the user to select a file.
 
+    Args:
+        **kwargs: Properties to set.
+
     .. code-block :: python
 
         Widget.FileDialog(

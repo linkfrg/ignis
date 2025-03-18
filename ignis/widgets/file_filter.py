@@ -17,6 +17,7 @@ class FileFilter(Gtk.FileFilter, IgnisGObject):
 
     Args:
         mime_types: A list of MIME types.
+        **kwargs: Other properties to set.
 
     .. code-block :: python
 
