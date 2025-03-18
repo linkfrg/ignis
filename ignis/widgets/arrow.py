@@ -75,7 +75,7 @@ class Arrow(Icon):
     @IgnisProperty
     def rotated(self) -> bool:
         """
-        - optional, read-write
+        - read-write
 
         Whether the arrow is rotated.
 
@@ -103,7 +103,7 @@ class Arrow(Icon):
     @IgnisProperty
     def degree(self) -> int:
         """
-        - optional, read-write
+        - read-write
 
         The target rotation degree.
         Must be > 0.
@@ -120,7 +120,7 @@ class Arrow(Icon):
     @IgnisProperty
     def time(self) -> int:
         """
-        - optional, read-write
+        - read-write
 
         Rotation time in milliseconds.
 
@@ -136,7 +136,7 @@ class Arrow(Icon):
     @IgnisProperty
     def direction(self) -> str:
         """
-        - optional, read-write
+        - read-write
 
         The direction of the arrow.
         Do not use this property if using custom icon name.
@@ -159,7 +159,7 @@ class Arrow(Icon):
     @IgnisProperty
     def counterclockwise(self) -> bool:
         """
-        - optional, read-write
+        - read-write
 
         Whether to rotate counterclockwise.
 

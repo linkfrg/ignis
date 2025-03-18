@@ -33,7 +33,7 @@ class Overlay(Gtk.Overlay, BaseWidget):
     @IgnisProperty
     def overlays(self) -> list[Gtk.Widget]:
         """
-        - optional, read-write
+        - read-write
 
         A list of overlay widgets.
         """

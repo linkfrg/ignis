@@ -54,7 +54,7 @@ class Picture(Gtk.Picture, BaseWidget):
     @IgnisProperty
     def image(self) -> "str | GdkPixbuf.Pixbuf | None":
         """
-        - optional, read-write
+        - read-write
 
         The icon name, path to an image or ``GdkPixbuf.Pixbuf``.
         """
@@ -68,7 +68,7 @@ class Picture(Gtk.Picture, BaseWidget):
     @IgnisProperty
     def width(self) -> int:
         """
-        - optional, read-write
+        - read-write
 
         Width of the image.
         """
@@ -83,7 +83,7 @@ class Picture(Gtk.Picture, BaseWidget):
     @IgnisProperty
     def height(self) -> int:
         """
-        - optional, read-write
+        - read-write
 
         Height of the image.
         """

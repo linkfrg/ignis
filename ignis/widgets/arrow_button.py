@@ -9,6 +9,9 @@ class ArrowButton(Button):
 
     A simple button with an arrow. On click, it will toggle (rotate) the arrow.
 
+    Args:
+        arrow: An instance of an arrow.
+
     .. code-block:: python
 
         Widget.ArrowButton(
@@ -29,7 +32,7 @@ class ArrowButton(Button):
     @IgnisProperty
     def arrow(self) -> Arrow:
         """
-        - required, read-only
+        - read-only
 
         An instance of an arrow.
         """

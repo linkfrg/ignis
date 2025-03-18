@@ -48,6 +48,10 @@ class Window(Gtk.Window, BaseWidget):
 
     The top-level widget that contains everything.
 
+    Args:
+        namespace: The name of the window, used to access it from the CLI and :class:`~ignis.app.IgnisApp`. It must be unique. It is also the name of the layer.
+        dynamic_input_region: Whether to dynamically update an input region depending on the :attr:`child` size. See :attr:`dynamic_input_region` for more info.
+
     .. warning::
         Applying CSS styles directly to ``Widget.Window`` can cause various graphical glitches/bugs.
         It's highly recommended to set some container (for example, ``Widget.Box``) or widget as a child and apply styles to it.
@@ -177,7 +181,7 @@ class Window(Gtk.Window, BaseWidget):
     @IgnisProperty
     def namespace(self) -> str:
         """
-        - required, read-only
+        - read-only
 
         The name of the window, used to access it from the CLI and :class:`~ignis.app.IgnisApp`.
 
@@ -189,7 +193,7 @@ class Window(Gtk.Window, BaseWidget):
     @IgnisProperty
     def anchor(self) -> list[str] | None:
         """
-        - optional, read-write
+        - read-write
 
         A list of anchors.
         If the list is empty, the window will be centered on the screen.
@@ -219,7 +223,7 @@ class Window(Gtk.Window, BaseWidget):
     @IgnisProperty
     def exclusivity(self) -> str:
         """
-        - optional, read-write
+        - read-write
 
         Defines how the compositor should avoid occluding a window area with other surfaces/layers.
 
@@ -243,7 +247,7 @@ class Window(Gtk.Window, BaseWidget):
     @IgnisProperty
     def layer(self) -> str:
         """
-        - optional, read-write
+        - read-write
 
         The layer of the surface.
 
@@ -265,7 +269,7 @@ class Window(Gtk.Window, BaseWidget):
     @IgnisProperty
     def kb_mode(self) -> str:
         """
-        - optional, read-write
+        - read-write
 
         Whether the window should receive keyboard events from the compositor.
 
@@ -286,7 +290,7 @@ class Window(Gtk.Window, BaseWidget):
     @IgnisProperty
     def popup(self) -> bool:
         """
-        - optional, read-write
+        - read-write
 
         Whether the window should close on ESC.
 
@@ -301,7 +305,7 @@ class Window(Gtk.Window, BaseWidget):
     @IgnisProperty
     def monitor(self) -> int:
         """
-        - optional, read-write
+        - read-write
 
         The monitor number on which to display the window.
 
@@ -325,7 +329,7 @@ class Window(Gtk.Window, BaseWidget):
     @IgnisProperty
     def input_width(self) -> int:
         """
-        - optional, read-write
+        - read-write
 
         The width at which the window can receive keyboard and mouse input. Must be > 0.
         """
@@ -339,7 +343,7 @@ class Window(Gtk.Window, BaseWidget):
     @IgnisProperty
     def input_height(self) -> int:
         """
-        - optional, read-write
+        - read-write
 
         The height at which the window can receive keyboard and mouse input. Must be > 0.
         """
@@ -353,7 +357,7 @@ class Window(Gtk.Window, BaseWidget):
     @IgnisProperty
     def dynamic_input_region(self) -> bool:
         """
-        - optional, read-only
+        - read-only
 
         Whether to dynamically update an input region depending on the :attr:`child` size.
 
@@ -365,7 +369,7 @@ class Window(Gtk.Window, BaseWidget):
     @IgnisProperty
     def margin_bottom(self) -> int:
         """
-        - optional, read-write
+        - read-write
 
         The bottom margin.
 
@@ -381,7 +385,7 @@ class Window(Gtk.Window, BaseWidget):
     @IgnisProperty
     def margin_left(self) -> int:
         """
-        - optional, read-write
+        - read-write
 
         The left margin.
 
@@ -397,7 +401,7 @@ class Window(Gtk.Window, BaseWidget):
     @IgnisProperty
     def margin_right(self) -> int:
         """
-        - optional, read-write
+        - read-write
 
         The right margin.
 
@@ -413,7 +417,7 @@ class Window(Gtk.Window, BaseWidget):
     @IgnisProperty
     def margin_top(self) -> int:
         """
-        - optional, read-write
+        - read-write
 
         The top margin.
 

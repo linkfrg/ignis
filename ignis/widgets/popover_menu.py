@@ -73,7 +73,7 @@ class PopoverMenu(Gtk.PopoverMenu, BaseWidget):
     @IgnisProperty
     def items(self) -> list[MenuItem]:
         """
-        - optional, read-write
+        - read-write
 
         A list of :class:`~ignis.widgets.Widget.MenuItem`.
         """

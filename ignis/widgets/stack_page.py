@@ -9,6 +9,10 @@ class StackPage(IgnisGObject):
 
     Intented to use with :class:`~ignis.widgets.Widget.Stack`.
 
+    Args:
+        title: The title. It will be used by :class:`~ignis.widgets.Widget.StackSwitcher` to display :attr:`child` in a tab bar.
+        child: The child widget.
+
     .. warning::
         It is not a widget.
     """
@@ -21,7 +25,7 @@ class StackPage(IgnisGObject):
     @IgnisProperty
     def title(self) -> str:
         """
-        - required, read-only
+        - read-only
 
         The title.
         It will be used by :class:`~ignis.widgets.Widget.StackSwitcher` to display :attr:`child` in a tab bar.
@@ -31,7 +35,7 @@ class StackPage(IgnisGObject):
     @IgnisProperty
     def child(self) -> Gtk.Widget:
         """
-        - required, read-only
+        - read-only
 
         The child widget.
         """

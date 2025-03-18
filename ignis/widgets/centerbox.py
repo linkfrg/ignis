@@ -29,7 +29,7 @@ class CenterBox(Gtk.CenterBox, BaseWidget):
     @IgnisProperty
     def vertical(self) -> bool:
         """
-        - optional, read-write
+        - read-write
 
         Whether the box arranges children vertically.
 

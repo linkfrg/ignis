@@ -39,7 +39,7 @@ class Grid(Gtk.Grid, BaseWidget):
     @IgnisProperty
     def column_num(self) -> int:
         """
-        - optional, read-write
+        - read-write
 
         The number of columns.
         """
@@ -53,7 +53,7 @@ class Grid(Gtk.Grid, BaseWidget):
     @IgnisProperty
     def row_num(self) -> int:
         """
-        - optional, read-write
+        - read-write
 
         The number of rows. This will not take effect if ``column_num`` is specified.
         """
@@ -67,7 +67,7 @@ class Grid(Gtk.Grid, BaseWidget):
     @IgnisProperty
     def child(self) -> list[Gtk.Widget]:
         """
-        - optional, read-write
+        - read-write
 
         A list of child widgets.
         """

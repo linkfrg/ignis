@@ -34,7 +34,7 @@ class Icon(Gtk.Image, BaseWidget):
     @IgnisProperty
     def image(self) -> "str | GdkPixbuf.Pixbuf | None":
         """
-        - optional, read-write
+        - read-write
 
         The icon name, path to the file, or a ``GdkPixbuf.Pixbuf``.
         """

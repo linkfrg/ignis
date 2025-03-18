@@ -68,7 +68,7 @@ class Scale(Gtk.Scale, BaseWidget):
     @IgnisProperty
     def value(self) -> float:
         """
-        - optional, read-write
+        - read-write
 
         The current value.
         """
@@ -85,7 +85,7 @@ class Scale(Gtk.Scale, BaseWidget):
     @IgnisProperty
     def min(self) -> float:
         """
-        - optional, read-write
+        - read-write
 
         Minimum value.
         """
@@ -98,7 +98,7 @@ class Scale(Gtk.Scale, BaseWidget):
     @IgnisProperty
     def max(self) -> float:
         """
-        - optional, read-write
+        - read-write
 
         Maximum value.
         """
@@ -111,7 +111,7 @@ class Scale(Gtk.Scale, BaseWidget):
     @IgnisProperty
     def on_change(self) -> Callable:
         """
-        - optional, read-write
+        - read-write
 
         The function to call when the value changes.
         """
@@ -124,7 +124,7 @@ class Scale(Gtk.Scale, BaseWidget):
     @IgnisProperty
     def step(self) -> float:
         """
-        - optional, read-write
+        - read-write
 
         Step increment.
         """
@@ -137,7 +137,7 @@ class Scale(Gtk.Scale, BaseWidget):
     @IgnisProperty
     def vertical(self) -> bool:
         """
-        - optional, read-write
+        - read-write
 
         Whether the scale is vertical.
         """

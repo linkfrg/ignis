@@ -7,6 +7,10 @@ class Timeout(IgnisGObject):
     """
     Calls a function after a specified time interval.
 
+    Args:
+        ms: Time in milliseconds.
+        target: The function to call.
+
     Example usage:
 
     .. code-block:: python
@@ -26,7 +30,7 @@ class Timeout(IgnisGObject):
     @IgnisProperty
     def ms(self) -> int:
         """
-        - required, read-only
+        - read-only
 
         Time in milliseconds.
         """
@@ -35,7 +39,7 @@ class Timeout(IgnisGObject):
     @IgnisProperty
     def target(self) -> Callable:
         """
-        - required, read-only
+        - read-only
 
         The function to call.
         """

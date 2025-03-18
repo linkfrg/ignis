@@ -39,7 +39,7 @@ class SpinButton(Gtk.SpinButton, BaseWidget):  # type: ignore
     @IgnisProperty
     def value(self) -> float:
         """
-        - optional, read-write
+        - read-write
 
         The current value.
         """
@@ -52,7 +52,7 @@ class SpinButton(Gtk.SpinButton, BaseWidget):  # type: ignore
     @IgnisProperty
     def min(self) -> float:
         """
-        - optional, read-write
+        - read-write
 
         Minimum value.
         """
@@ -65,7 +65,7 @@ class SpinButton(Gtk.SpinButton, BaseWidget):  # type: ignore
     @IgnisProperty
     def max(self) -> float:
         """
-        - optional, read-write
+        - read-write
 
         Maximum value.
         """
@@ -78,7 +78,7 @@ class SpinButton(Gtk.SpinButton, BaseWidget):  # type: ignore
     @IgnisProperty
     def step(self) -> float:
         """
-        - optional, read-write
+        - read-write
 
         Step increment.
         """
@@ -91,7 +91,7 @@ class SpinButton(Gtk.SpinButton, BaseWidget):  # type: ignore
     @IgnisProperty
     def on_change(self) -> Callable | None:
         """
-        - optional, read-write
+        - read-write
 
         The function to call when the value changes.
         """
