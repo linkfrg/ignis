@@ -1,6 +1,7 @@
 import json
 from gi.repository import GObject  # type: ignore
 from ignis.gobject import IgnisGObject, Binding, IgnisProperty
+from ignis.utils import Utils
 from typing import Any
 from collections.abc import Callable
 from collections.abc import Generator
@@ -180,9 +181,11 @@ class OptionsManager(OptionsGroup):
 
     This is the top-level class in the option structure.
     It provides support for loading and saving options to a file.
+    Has support for hot-reloading when the file is modified externally.
 
     Args:
         file: The path to the file used for saving and loading options. Cannot be changed after initialization.
+        hot_reload: Whether to enable hot-reloading.
 
     The standard option structure must follow this format:
 
@@ -210,7 +213,7 @@ class OptionsManager(OptionsGroup):
 
     """
 
-    def __init__(self, file: str | None = None):
+    def __init__(self, file: str | None = None, hot_reload: bool = True):
         super().__init__()
         self._file = file
 
@@ -218,6 +221,21 @@ class OptionsManager(OptionsGroup):
             self.connect("autosave", self.__autosave)
 
             self.load_from_file(self._file, emit=False)
+
+            if hot_reload:
+                Utils.FileMonitor(path=self._file, callback=self.__hot_reload)
+
+    def __hot_reload(self, x, path: str, event_type: str) -> None:
+        if not self._file:
+            return
+
+        if event_type != "changes_done_hint":
+            return
+
+        with open(self._file) as fp:
+            data = json.load(fp)
+
+        self.apply_from_dict(data, autosave=False)
 
     def __autosave(self, *args) -> None:
         self.save_to_file(self._file)  # type: ignore
