@@ -46,8 +46,7 @@ class NiriKeyboardLayouts(DataGObject):
         Switch the keyboard layout.
 
         Args:
-            layout: The layout to switch to. Must be either: ``Next``, ``Prev``
-            or a valid id (``0``, ``1``, etc.)
+            layout: The layout to switch to (``Next``, ``Prev`` or a valid id)
         """
         cmd = {"Action": {"SwitchLayout": {"layout": layout}}}
         self._service.send_command(cmd)
