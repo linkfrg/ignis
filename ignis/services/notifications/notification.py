@@ -16,7 +16,7 @@ class Notification(IgnisGObject):
         dbus: DBusService,
         id: int,
         app_name: str,
-        icon: str,
+        icon: str | None,
         summary: str,
         body: str,
         actions: list[str],
@@ -84,7 +84,7 @@ class Notification(IgnisGObject):
         return self._app_name
 
     @IgnisProperty
-    def icon(self) -> str:
+    def icon(self) -> str | None:
         """
         - read-only
 
