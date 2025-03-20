@@ -528,6 +528,16 @@ It doesn't support common widget properties and cannot be added as a child to a 
 </div>
 <p>A class that represent a menu item.
 Intended for use in <a class="reference internal" href="PopoverMenu.html#ignis.widgets.Widget.PopoverMenu" title="ignis.widgets.Widget.PopoverMenu"><code class="xref py py-class docutils literal notranslate"><span class="pre">PopoverMenu</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>label</strong> -- The label of item.</p></li>
+<li><p><strong>enabled</strong> (default: <code class="docutils literal notranslate"><span class="pre">True</span></code>) -- Whether the item is enabled. If <code class="docutils literal notranslate"><span class="pre">False</span></code>, the item cannot be selected.</p></li>
+<li><p><strong>on_activate</strong> (default: <code class="docutils literal notranslate"><span class="pre">None</span></code>) -- The function to call when the user clicks on the item.</p></li>
+<li><p><strong>submenu</strong> (default: <code class="docutils literal notranslate"><span class="pre">None</span></code>) -- The <a class="reference internal" href="PopoverMenu.html#ignis.widgets.Widget.PopoverMenu" title="ignis.widgets.Widget.PopoverMenu"><code class="xref py py-class docutils literal notranslate"><span class="pre">PopoverMenu</span></code></a> that will appear when activated.</p></li>
+</ul>
+</dd>
+</dl>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Widget</span><span class="o">.</span><span class="n">MenuItem</span><span class="p">(</span>
     <span class="n">label</span><span class="o">=</span><span class="s2">&quot;item 1&quot;</span><span class="p">,</span>
     <span class="n">enabled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -540,7 +550,7 @@ Intended for use in <a class="reference internal" href="PopoverMenu.html#ignis.w
 <dt class="sig sig-object py" id="ignis.widgets.Widget.MenuItem.label">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">label</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.MenuItem.label" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>required, read-only</p></li>
+<li><p>read-only</p></li>
 </ul>
 <p>The label of item.</p>
 </dd></dl>
@@ -549,7 +559,7 @@ Intended for use in <a class="reference internal" href="PopoverMenu.html#ignis.w
 <dt class="sig sig-object py" id="ignis.widgets.Widget.MenuItem.uniq_name">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">uniq_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.MenuItem.uniq_name" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>not argument, read-only</p></li>
+<li><p>read-only</p></li>
 </ul>
 <p>The unique name of the <code class="docutils literal notranslate"><span class="pre">Gio.Action</span></code>.</p>
 </dd></dl>
@@ -558,7 +568,7 @@ Intended for use in <a class="reference internal" href="PopoverMenu.html#ignis.w
 <dt class="sig sig-object py" id="ignis.widgets.Widget.MenuItem.enabled">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enabled</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.MenuItem.enabled" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>optional, read-write</p></li>
+<li><p>read-write</p></li>
 </ul>
 <p>Whether the item is enabled. If <code class="docutils literal notranslate"><span class="pre">False</span></code>, the item cannot be selected.</p>
 </dd></dl>
@@ -567,7 +577,7 @@ Intended for use in <a class="reference internal" href="PopoverMenu.html#ignis.w
 <dt class="sig sig-object py" id="ignis.widgets.Widget.MenuItem.on_activate">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">on_activate</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.MenuItem.on_activate" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>optional, read-write</p></li>
+<li><p>read-write</p></li>
 </ul>
 <p>The function to call when the user clicks on the item.</p>
 </dd></dl>
@@ -576,7 +586,7 @@ Intended for use in <a class="reference internal" href="PopoverMenu.html#ignis.w
 <dt class="sig sig-object py" id="ignis.widgets.Widget.MenuItem.submenu">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">submenu</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-4.0/classes/PopoverMenu.html#Gtk.PopoverMenu" title="(in Gtk 4.0 v4.0)"><span class="pre">Gtk.PopoverMenu</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.MenuItem.submenu" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>optional, read-only</p></li>
+<li><p>read-only</p></li>
 </ul>
 <p>The <a class="reference internal" href="PopoverMenu.html#ignis.widgets.Widget.PopoverMenu" title="ignis.widgets.Widget.PopoverMenu"><code class="xref py py-class docutils literal notranslate"><span class="pre">PopoverMenu</span></code></a> that will appear when activated.</p>
 </dd></dl>

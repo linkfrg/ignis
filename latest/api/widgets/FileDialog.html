@@ -527,6 +527,11 @@
 It doesn't support common widget properties and cannot be added as a child to a container.</p>
 </div>
 <p>A window that allows the user to select a file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> -- Properties to set.</p>
+</dd>
+</dl>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Widget</span><span class="o">.</span><span class="n">FileDialog</span><span class="p">(</span>
     <span class="n">initial_path</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/.config&quot;</span><span class="p">),</span>
     <span class="n">on_file_set</span><span class="o">=</span><span class="k">lambda</span> <span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">get_path</span><span class="p">()),</span>
@@ -570,7 +575,7 @@ It doesn't support common widget properties and cannot be added as a child to a 
 <dt class="sig sig-object py" id="ignis.widgets.Widget.FileDialog.file">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">file</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/classes/File.html#Gio.File" title="(in Gio 2.0 v2.0)"><span class="pre">Gio.File</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.FileDialog.file" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>not argument, read-only</p></li>
+<li><p>read-only</p></li>
 </ul>
 <p>The selected <code class="docutils literal notranslate"><span class="pre">Gio.File</span></code>.</p>
 <div class="admonition hint">
@@ -583,7 +588,7 @@ It doesn't support common widget properties and cannot be added as a child to a 
 <dt class="sig sig-object py" id="ignis.widgets.Widget.FileDialog.on_file_set">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">on_file_set</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.FileDialog.on_file_set" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>optional, read-write</p></li>
+<li><p>read-write</p></li>
 </ul>
 <p>A function to call when user selects a file.</p>
 </dd></dl>
@@ -592,7 +597,7 @@ It doesn't support common widget properties and cannot be added as a child to a 
 <dt class="sig sig-object py" id="ignis.widgets.Widget.FileDialog.filters">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">filters</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="FileFilter.html#ignis.widgets.Widget.FileFilter" title="ignis.widgets.file_filter.FileFilter"><span class="pre">FileFilter</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.widgets.Widget.FileDialog.filters" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>optional, read-write</p></li>
+<li><p>read-write</p></li>
 </ul>
 <p>A list of file filters.</p>
 </dd></dl>
@@ -601,7 +606,7 @@ It doesn't support common widget properties and cannot be added as a child to a 
 <dt class="sig sig-object py" id="ignis.widgets.Widget.FileDialog.initial_path">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">initial_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.FileDialog.initial_path" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>optional, read-write</p></li>
+<li><p>read-write</p></li>
 </ul>
 <p>The path to the folder or file that will be selected by default.</p>
 </dd></dl>
@@ -610,7 +615,7 @@ It doesn't support common widget properties and cannot be added as a child to a 
 <dt class="sig sig-object py" id="ignis.widgets.Widget.FileDialog.select_folder">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">select_folder</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.FileDialog.select_folder" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>optional, read-write</p></li>
+<li><p>read-write</p></li>
 </ul>
 <p>Whether the dialog should allow selecting folders instead of files.</p>
 </dd></dl>

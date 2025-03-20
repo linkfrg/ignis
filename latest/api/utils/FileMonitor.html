@@ -521,6 +521,17 @@
 <dt class="sig sig-object py" id="ignis.utils.Utils.FileMonitor">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.utils.Utils.</span></span><span class="sig-name descname"><span class="pre">FileMonitor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.Gio.FileMonitorFlags</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">gi.repository.Gio.FileMonitorFlags.NONE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prevent_gc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.utils.Utils.FileMonitor" title="Link to this definition">#</a></dt>
 <dd><p>Monitor changes of the file or directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The path to the file or directory to be monitored.</p></li>
+<li><p><strong>recursive</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">False</span></code>) -- Whether monitoring is recursive (monitor all subdirectories and files).</p></li>
+<li><p><strong>flags</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileMonitorFlags</span></code></span>, default: <code class="docutils literal notranslate"><span class="pre">gi.repository.Gio.FileMonitorFlags.NONE</span></code>) -- What the monitor will watch for. See <a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/flags.html#Gio.FileMonitorFlags" title="(in Gio 2.0 v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gio.FileMonitorFlags</span></code></a> for more info.</p></li>
+<li><p><strong>callback</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">None</span></code>) -- A function to call when the file or directory changes. See <a class="reference internal" href="#ignis.utils.Utils.FileMonitor.callback" title="ignis.utils.Utils.FileMonitor.callback"><code class="xref py py-attr docutils literal notranslate"><span class="pre">callback</span></code></a> for more info.</p></li>
+<li><p><strong>prevent_gc</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">True</span></code>) -- Whether to prevent the garbage collector from collecting this file monitor.</p></li>
+</ul>
+</dd>
+</dl>
 <p>Example usage:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Utils</span><span class="o">.</span><span class="n">FileMonitor</span><span class="p">(</span>
     <span class="n">path</span><span class="o">=</span><span class="s2">&quot;path/to/something&quot;</span><span class="p">,</span>
@@ -550,7 +561,7 @@
 <dt class="sig sig-object py" id="ignis.utils.Utils.FileMonitor.path">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.utils.Utils.FileMonitor.path" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>required, read-only</p></li>
+<li><p>read-only</p></li>
 </ul>
 <p>The path to the file or directory to be monitored.</p>
 </dd></dl>
@@ -559,24 +570,22 @@
 <dt class="sig sig-object py" id="ignis.utils.Utils.FileMonitor.flags">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">flags</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">gi.repository.Gio.FileMonitorFlags</span></em><a class="headerlink" href="#ignis.utils.Utils.FileMonitor.flags" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>optional, read-only</p></li>
+<li><p>read-only</p></li>
 </ul>
 <p>What the monitor will watch for.</p>
 <p>See <a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/flags.html#Gio.FileMonitorFlags" title="(in Gio 2.0 v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gio.FileMonitorFlags</span></code></a> for more info.</p>
-<p>Default: <a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/flags.html#Gio.FileMonitorFlags.NONE" title="(in Gio 2.0 v2.0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Gio.FileMonitorFlags.NONE</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ignis.utils.Utils.FileMonitor.callback">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">callback</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.utils.Utils.FileMonitor.callback" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>optional, read-write</p></li>
+<li><p>read-write</p></li>
 </ul>
 <p>A function to call when the file or directory changes.
 It should take two arguments:
 1. The path to the changed file or directory
 2. The event type.</p>
-<p>Default: <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 <p>Event types:</p>
 <ul class="simple">
 <li><p>changed</p></li>
@@ -598,20 +607,18 @@ It should take two arguments:
 <dt class="sig sig-object py" id="ignis.utils.Utils.FileMonitor.recursive">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">recursive</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.utils.Utils.FileMonitor.recursive" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>optional, read-only</p></li>
+<li><p>read-only</p></li>
 </ul>
 <p>Whether monitoring is recursive (monitor all subdirectories and files).</p>
-<p>Default: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ignis.utils.Utils.FileMonitor.prevent_gc">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">prevent_gc</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.utils.Utils.FileMonitor.prevent_gc" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>optional, read-only</p></li>
+<li><p>read-only</p></li>
 </ul>
 <p>Whether to prevent the garbage collector from collecting this file monitor.</p>
-<p>Default: <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
 </dd></dl>
 
 <dl class="py method">

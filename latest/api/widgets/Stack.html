@@ -524,6 +524,11 @@
 <p>Stack is a container which only shows one of its children at a time.</p>
 <p>It does not provide a means for users to change the visible child.
 Instead, a separate widget such as <a class="reference internal" href="#ignis.widgets.Widget.StackSwitcher" title="ignis.widgets.Widget.StackSwitcher"><code class="xref py py-class docutils literal notranslate"><span class="pre">StackSwitcher</span></code></a> can be used with Stack to provide this functionality.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> -- Properties to set.</p>
+</dd>
+</dl>
 <dl class="simple">
 <dt>Overrided properties:</dt><dd><ul class="simple">
 <li><p>transition_type: The type of animation used to transition between pages. Available values: <a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-4.0/enums.html#Gtk.StackTransitionType" title="(in Gtk 4.0 v4.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gtk.StackTransitionType</span></code></a>.</p></li>
@@ -557,7 +562,7 @@ Instead, a separate widget such as <a class="reference internal" href="#ignis.wi
 <dt class="sig sig-object py" id="ignis.widgets.Widget.Stack.child">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">child</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ignis.widgets.Widget.StackPage" title="ignis.widgets.stack_page.StackPage"><span class="pre">StackPage</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.widgets.Widget.Stack.child" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>optional, read-write</p></li>
+<li><p>read-write</p></li>
 </ul>
 <p>A list of pages.</p>
 </dd></dl>
@@ -569,6 +574,14 @@ Instead, a separate widget such as <a class="reference internal" href="#ignis.wi
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.widgets.Widget.</span></span><span class="sig-name descname"><span class="pre">StackPage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">child</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.Gtk.Widget</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.widgets.Widget.StackPage" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../gobject.html#ignis.gobject.IgnisGObject" title="ignis.gobject.IgnisGObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">IgnisGObject</span></code></a></p>
 <p>Intented to use with <a class="reference internal" href="#ignis.widgets.Widget.Stack" title="ignis.widgets.Widget.Stack"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stack</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>title</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The title. It will be used by <a class="reference internal" href="#ignis.widgets.Widget.StackSwitcher" title="ignis.widgets.Widget.StackSwitcher"><code class="xref py py-class docutils literal notranslate"><span class="pre">StackSwitcher</span></code></a> to display <a class="reference internal" href="#ignis.widgets.Widget.StackPage.child" title="ignis.widgets.Widget.StackPage.child"><code class="xref py py-attr docutils literal notranslate"><span class="pre">child</span></code></a> in a tab bar.</p></li>
+<li><p><strong>child</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Widget</span></code></span>) -- The child widget.</p></li>
+</ul>
+</dd>
+</dl>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>It is not a widget.</p>
@@ -577,7 +590,7 @@ Instead, a separate widget such as <a class="reference internal" href="#ignis.wi
 <dt class="sig sig-object py" id="ignis.widgets.Widget.StackPage.title">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.StackPage.title" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>required, read-only</p></li>
+<li><p>read-only</p></li>
 </ul>
 <p>The title.
 It will be used by <a class="reference internal" href="#ignis.widgets.Widget.StackSwitcher" title="ignis.widgets.Widget.StackSwitcher"><code class="xref py py-class docutils literal notranslate"><span class="pre">StackSwitcher</span></code></a> to display <a class="reference internal" href="#ignis.widgets.Widget.StackPage.child" title="ignis.widgets.Widget.StackPage.child"><code class="xref py py-attr docutils literal notranslate"><span class="pre">child</span></code></a> in a tab bar.</p>
@@ -587,7 +600,7 @@ It will be used by <a class="reference internal" href="#ignis.widgets.Widget.Sta
 <dt class="sig sig-object py" id="ignis.widgets.Widget.StackPage.child">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">child</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">gi.repository.Gtk.Widget</span></em><a class="headerlink" href="#ignis.widgets.Widget.StackPage.child" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>required, read-only</p></li>
+<li><p>read-only</p></li>
 </ul>
 <p>The child widget.</p>
 </dd></dl>
@@ -599,6 +612,11 @@ It will be used by <a class="reference internal" href="#ignis.widgets.Widget.Sta
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.widgets.Widget.</span></span><span class="sig-name descname"><span class="pre">StackSwitcher</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.widgets.Widget.StackSwitcher" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-4.0/classes/StackSwitcher.html#Gtk.StackSwitcher" title="(in Gtk 4.0 v4.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gtk.StackSwitcher</span></code></a></p>
 <p>The StackSwitcher shows a row of buttons to switch between <a class="reference internal" href="#ignis.widgets.Widget.Stack" title="ignis.widgets.Widget.Stack"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stack</span></code></a> pages.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> -- Properties to set.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>

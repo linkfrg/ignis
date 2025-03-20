@@ -519,6 +519,17 @@
 <dt class="sig sig-object py" id="ignis.dbus.DBusService">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.dbus.</span></span><span class="sig-name descname"><span class="pre">DBusService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.Gio.DBusInterfaceInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">on_name_acquired</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">on_name_lost</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.dbus.DBusService" title="Link to this definition">#</a></dt>
 <dd><p>A class that helps create a D-Bus service.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The well-known name to own.</p></li>
+<li><p><strong>object_path</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- An object path.</p></li>
+<li><p><strong>info</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">DBusInterfaceInfo</span></code></span>) -- An instance of <a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/classes/DBusInterfaceInfo.html#Gio.DBusInterfaceInfo" title="(in Gio 2.0 v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gio.DBusInterfaceInfo</span></code></a>. You can get it from XML using <a class="reference internal" href="utils/misc.html#ignis.utils.Utils.load_interface_xml" title="ignis.utils.Utils.load_interface_xml"><code class="xref py py-func docutils literal notranslate"><span class="pre">load_interface_xml()</span></code></a>.</p></li>
+<li><p><strong>on_name_acquired</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">None</span></code>) -- The function to call when <code class="docutils literal notranslate"><span class="pre">name</span></code> is acquired.</p></li>
+<li><p><strong>on_name_lost</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">None</span></code>) -- The function to call when <code class="docutils literal notranslate"><span class="pre">name</span></code> is lost.</p></li>
+</ul>
+</dd>
+</dl>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">gi.repository</span><span class="w"> </span><span class="kn">import</span> <span class="n">Gio</span><span class="p">,</span> <span class="n">GLib</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">ignis.dbus</span><span class="w"> </span><span class="kn">import</span> <span class="n">DBusService</span>
 
@@ -538,7 +549,7 @@
 <dt class="sig sig-object py" id="ignis.dbus.DBusService.name">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.dbus.DBusService.name" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>required, read-only</p></li>
+<li><p>read-only</p></li>
 </ul>
 <p>The well-known name to own.</p>
 </dd></dl>
@@ -547,7 +558,7 @@
 <dt class="sig sig-object py" id="ignis.dbus.DBusService.object_path">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">object_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.dbus.DBusService.object_path" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>required, read-only</p></li>
+<li><p>read-only</p></li>
 </ul>
 <p>An object path.</p>
 </dd></dl>
@@ -556,7 +567,7 @@
 <dt class="sig sig-object py" id="ignis.dbus.DBusService.info">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">info</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">gi.repository.Gio.DBusInterfaceInfo</span></em><a class="headerlink" href="#ignis.dbus.DBusService.info" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>required, read-only</p></li>
+<li><p>read-only</p></li>
 </ul>
 <p>An instance of <a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/classes/DBusInterfaceInfo.html#Gio.DBusInterfaceInfo" title="(in Gio 2.0 v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gio.DBusInterfaceInfo</span></code></a></p>
 <p>You can get it from XML using <a class="reference internal" href="utils/misc.html#ignis.utils.Utils.load_interface_xml" title="ignis.utils.Utils.load_interface_xml"><code class="xref py py-func docutils literal notranslate"><span class="pre">load_interface_xml()</span></code></a>.</p>
@@ -566,7 +577,7 @@
 <dt class="sig sig-object py" id="ignis.dbus.DBusService.on_name_acquired">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">on_name_acquired</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></em><a class="headerlink" href="#ignis.dbus.DBusService.on_name_acquired" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>optional, read-write</p></li>
+<li><p>read-write</p></li>
 </ul>
 <p>The function to call when <code class="docutils literal notranslate"><span class="pre">name</span></code> is acquired.</p>
 </dd></dl>
@@ -575,7 +586,7 @@
 <dt class="sig sig-object py" id="ignis.dbus.DBusService.on_name_lost">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">on_name_lost</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></em><a class="headerlink" href="#ignis.dbus.DBusService.on_name_lost" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>optional, read-write</p></li>
+<li><p>read-write</p></li>
 </ul>
 <p>The function to call when <code class="docutils literal notranslate"><span class="pre">name</span></code> is lost.</p>
 </dd></dl>
@@ -584,7 +595,7 @@
 <dt class="sig sig-object py" id="ignis.dbus.DBusService.connection">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">connection</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">gi.repository.Gio.DBusConnection</span></em><a class="headerlink" href="#ignis.dbus.DBusService.connection" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>not argument, read-only</p></li>
+<li><p>read-only</p></li>
 </ul>
 <p>The instance of <a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/classes/DBusConnection.html#Gio.DBusConnection" title="(in Gio 2.0 v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gio.DBusConnection</span></code></a> for this service.</p>
 </dd></dl>
@@ -593,7 +604,7 @@
 <dt class="sig sig-object py" id="ignis.dbus.DBusService.methods">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">methods</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.dbus.DBusService.methods" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>not argument, read-only</p></li>
+<li><p>read-only</p></li>
 </ul>
 <p>The dictionary of registred DBus methods. See <a class="reference internal" href="#ignis.dbus.DBusService.register_dbus_method" title="ignis.dbus.DBusService.register_dbus_method"><code class="xref py py-func docutils literal notranslate"><span class="pre">register_dbus_method()</span></code></a>.</p>
 </dd></dl>
@@ -602,7 +613,7 @@
 <dt class="sig sig-object py" id="ignis.dbus.DBusService.properties">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">properties</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.dbus.DBusService.properties" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>not argument, read-only</p></li>
+<li><p>read-only</p></li>
 </ul>
 <p>The dictionary of registred DBus properties. See <a class="reference internal" href="#ignis.dbus.DBusService.register_dbus_property" title="ignis.dbus.DBusService.register_dbus_property"><code class="xref py py-func docutils literal notranslate"><span class="pre">register_dbus_property()</span></code></a>.</p>
 </dd></dl>

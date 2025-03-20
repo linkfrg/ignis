@@ -523,6 +523,11 @@
 <dd><p>Bases: <a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-4.0/classes/Overlay.html#Gtk.Overlay" title="(in Gtk 4.0 v4.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gtk.Overlay</span></code></a></p>
 <p>A container that places its children on top of each other.
 The <code class="docutils literal notranslate"><span class="pre">child</span></code> property is the main child, on which other widgets defined in <code class="docutils literal notranslate"><span class="pre">overlays</span></code> will be placed on top.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> -- Properties to set.</p>
+</dd>
+</dl>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Widget</span><span class="o">.</span><span class="n">Overlay</span><span class="p">(</span>
     <span class="n">child</span><span class="o">=</span><span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;This is the main child&quot;</span><span class="p">),</span>
     <span class="n">overlays</span><span class="o">=</span><span class="p">[</span>
@@ -537,7 +542,7 @@ The <code class="docutils literal notranslate"><span class="pre">child</span></c
 <dt class="sig sig-object py" id="ignis.widgets.Widget.Overlay.overlays">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">overlays</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><span class="pre">gi.repository.Gtk.Widget</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.widgets.Widget.Overlay.overlays" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>optional, read-write</p></li>
+<li><p>read-write</p></li>
 </ul>
 <p>A list of overlay widgets.</p>
 </dd></dl>

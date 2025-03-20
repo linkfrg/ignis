@@ -529,6 +529,14 @@ It doesn't support common widget properties and cannot be added as a child to a 
 <p>A file filter.
 Intended for use in <a class="reference internal" href="FileDialog.html#ignis.widgets.Widget.FileDialog" title="ignis.widgets.Widget.FileDialog"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileDialog</span></code></a>.
 Uses MIME types, <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types">here</a> is a list of common MIME types.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mime_types</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span>) -- A list of MIME types.</p></li>
+<li><p><strong>**kwargs</strong> -- Properties to set.</p></li>
+</ul>
+</dd>
+</dl>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Widget</span><span class="o">.</span><span class="n">FileFilter</span><span class="p">(</span>
     <span class="n">mime_types</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;image/jpeg&quot;</span><span class="p">,</span> <span class="s2">&quot;image/png&quot;</span><span class="p">],</span>
     <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -540,7 +548,7 @@ Uses MIME types, <a class="reference external" href="https://developer.mozilla.o
 <dt class="sig sig-object py" id="ignis.widgets.Widget.FileFilter.mime_types">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mime_types</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.widgets.Widget.FileFilter.mime_types" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>required, read-only</p></li>
+<li><p>read-only</p></li>
 </ul>
 <p>A list of MIME types.</p>
 </dd></dl>
@@ -549,7 +557,7 @@ Uses MIME types, <a class="reference external" href="https://developer.mozilla.o
 <dt class="sig sig-object py" id="ignis.widgets.Widget.FileFilter.default">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">default</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.FileFilter.default" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>optional, read-write</p></li>
+<li><p>read-write</p></li>
 </ul>
 <p>Whether the filter will be selected by default.</p>
 </dd></dl>

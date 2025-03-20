@@ -522,6 +522,15 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.utils.Utils.</span></span><span class="sig-name descname"><span class="pre">Poll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.utils.Utils.Poll" title="Link to this definition">#</a></dt>
 <dd><p>Calls a callback every n milliseconds specified by the timeout.</p>
 <p>You can pass arguments to the constructor, and they will be passed to the callback.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>timeout</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) -- The timeout interval in milliseconds.</p></li>
+<li><p><strong>callback</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a></span>) -- The function to call when the timeout is reached. The <code class="docutils literal notranslate"><span class="pre">self</span></code> will passed as an argument.</p></li>
+<li><p><strong>*args</strong> -- Arguments to pass to <cite>callback</cite>.</p></li>
+</ul>
+</dd>
+</dl>
 <p>Example usage:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ignis.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">Utils</span>
 
@@ -542,7 +551,7 @@
 <dt class="sig sig-object py" id="ignis.utils.Utils.Poll.timeout">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">timeout</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.utils.Utils.Poll.timeout" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>required, read-write</p></li>
+<li><p>read-write</p></li>
 </ul>
 <p>The timeout interval in milliseconds.</p>
 </dd></dl>
@@ -551,7 +560,7 @@
 <dt class="sig sig-object py" id="ignis.utils.Utils.Poll.callback">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">callback</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></em><a class="headerlink" href="#ignis.utils.Utils.Poll.callback" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>required, read-write</p></li>
+<li><p>read-write</p></li>
 </ul>
 <p>The function to call when the timeout is reached. The <code class="docutils literal notranslate"><span class="pre">self</span></code> will passed as an argument.</p>
 </dd></dl>
@@ -560,7 +569,7 @@
 <dt class="sig sig-object py" id="ignis.utils.Utils.Poll.output">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">output</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a></em><a class="headerlink" href="#ignis.utils.Utils.Poll.output" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>not argument, read-only</p></li>
+<li><p>read-only</p></li>
 </ul>
 <p>The output of the callback.</p>
 <div class="admonition hint">

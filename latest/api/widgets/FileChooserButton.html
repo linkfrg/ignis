@@ -522,6 +522,15 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.widgets.Widget.</span></span><span class="sig-name descname"><span class="pre">FileChooserButton</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dialog</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="FileDialog.html#ignis.widgets.Widget.FileDialog" title="ignis.widgets.file_dialog.FileDialog"><span class="pre">FileDialog</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="Label.html#ignis.widgets.Widget.Label" title="ignis.widgets.label.Label"><span class="pre">Label</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.widgets.Widget.FileChooserButton" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-4.0/classes/Button.html#Gtk.Button" title="(in Gtk 4.0 v4.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gtk.Button</span></code></a></p>
 <p>A button that allows the user to select a file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dialog</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="FileDialog.html#ignis.widgets.Widget.FileDialog" title="ignis.widgets.file_dialog.FileDialog"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileDialog</span></code></a></span>) -- An instance of <a class="reference internal" href="FileDialog.html#ignis.widgets.Widget.FileDialog" title="ignis.widgets.Widget.FileDialog"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileDialog</span></code></a>.</p></li>
+<li><p><strong>label</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="Label.html#ignis.widgets.Widget.Label" title="ignis.widgets.label.Label"><code class="xref py py-class docutils literal notranslate"><span class="pre">Label</span></code></a></span>) -- An instance of <a class="reference internal" href="Label.html#ignis.widgets.Widget.Label" title="ignis.widgets.Widget.Label"><code class="xref py py-class docutils literal notranslate"><span class="pre">Label</span></code></a>.</p></li>
+<li><p><strong>**kwargs</strong> -- Properties to set.</p></li>
+</ul>
+</dd>
+</dl>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Widget</span><span class="o">.</span><span class="n">FileChooserButton</span><span class="p">(</span>
     <span class="n">dialog</span><span class="o">=</span><span class="n">Widget</span><span class="o">.</span><span class="n">FileDialog</span><span class="p">(</span>
         <span class="n">initial_path</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/.wallpaper&quot;</span><span class="p">),</span>
@@ -541,7 +550,7 @@
 <dt class="sig sig-object py" id="ignis.widgets.Widget.FileChooserButton.dialog">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dialog</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="FileDialog.html#ignis.widgets.Widget.FileDialog" title="ignis.widgets.file_dialog.FileDialog"><span class="pre">FileDialog</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.FileChooserButton.dialog" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>required, read-only</p></li>
+<li><p>read-only</p></li>
 </ul>
 <p>An instance of <a class="reference internal" href="FileDialog.html#ignis.widgets.Widget.FileDialog" title="ignis.widgets.Widget.FileDialog"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileDialog</span></code></a>.</p>
 </dd></dl>
@@ -550,7 +559,7 @@
 <dt class="sig sig-object py" id="ignis.widgets.Widget.FileChooserButton.label">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">label</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="Label.html#ignis.widgets.Widget.Label" title="ignis.widgets.label.Label"><span class="pre">Label</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.FileChooserButton.label" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
-<li><p>required, read-only</p></li>
+<li><p>read-only</p></li>
 </ul>
 <p>An instance of <a class="reference internal" href="Label.html#ignis.widgets.Widget.Label" title="ignis.widgets.Widget.Label"><code class="xref py py-class docutils literal notranslate"><span class="pre">Label</span></code></a>.</p>
 </dd></dl>
