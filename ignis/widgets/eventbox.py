@@ -12,7 +12,7 @@ class EventBox(Box):
 
     Args:
         scroll_flags: Flags affecting the :class:`Gtk.EventControllerScroll` behavior.
-        **kwargs: Other properties to set.
+        **kwargs: Properties to set.
 
     .. code-block:: python
 

@@ -19,7 +19,7 @@ class FileChooserButton(Gtk.Button, BaseWidget):
     Args:
         dialog: An instance of :class:`~ignis.widgets.Widget.FileDialog`.
         label: An instance of :class:`~ignis.widgets.Widget.Label`.
-        **kwargs: Other properties to set.
+        **kwargs: Properties to set.
 
     .. code-block :: python
 

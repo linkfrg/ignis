@@ -11,7 +11,7 @@ class ArrowButton(Button):
 
     Args:
         arrow: An instance of an arrow.
-        **kwargs: Other properties to set.
+        **kwargs: Properties to set.
 
     .. code-block:: python
 

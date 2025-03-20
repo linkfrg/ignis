@@ -13,7 +13,7 @@ class RevealerWindow(Window):
 
     Args:
         revealer: An instance of :class:`~ignis.widgets.Widget.Revealer`.
-        **kwargs: Other properties to set.
+        **kwargs: Properties to set.
 
     .. warning::
         Do not set ``Widget.Revealer`` as a direct child,

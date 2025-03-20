@@ -51,7 +51,7 @@ class Window(Gtk.Window, BaseWidget):
     Args:
         namespace: The name of the window, used to access it from the CLI and :class:`~ignis.app.IgnisApp`. It must be unique. It is also the name of the layer.
         dynamic_input_region: Whether to dynamically update an input region depending on the :attr:`child` size. See :attr:`dynamic_input_region` for more info.
-        **kwargs: Other properties to set.
+        **kwargs: Properties to set.
 
     .. warning::
         Applying CSS styles directly to ``Widget.Window`` can cause various graphical glitches/bugs.
