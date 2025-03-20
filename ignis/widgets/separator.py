@@ -9,6 +9,9 @@ class Separator(Gtk.Separator, BaseWidget):
 
     A separator widget.
 
+    Args:
+        **kwargs: Properties to set.
+
     .. code-block:: python
 
         Widget.Separator(
@@ -26,7 +29,7 @@ class Separator(Gtk.Separator, BaseWidget):
     @IgnisProperty
     def vertical(self) -> bool:
         """
-        - optional, read-write
+        - read-write
 
         Whether the separator is vertical.
         """

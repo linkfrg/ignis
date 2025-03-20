@@ -15,6 +15,9 @@ class PopoverMenu(Gtk.PopoverMenu, BaseWidget):
     .. note::
         The Popover Menu points to the widget to which it was added.
 
+    Args:
+        **kwargs: Properties to set.
+
     .. code-block:: python
 
         Widget.PopoverMenu(
@@ -73,7 +76,7 @@ class PopoverMenu(Gtk.PopoverMenu, BaseWidget):
     @IgnisProperty
     def items(self) -> list[MenuItem]:
         """
-        - optional, read-write
+        - read-write
 
         A list of :class:`~ignis.widgets.Widget.MenuItem`.
         """

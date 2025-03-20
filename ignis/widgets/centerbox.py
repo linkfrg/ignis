@@ -9,6 +9,9 @@ class CenterBox(Gtk.CenterBox, BaseWidget):
 
     A box widget that contains three widgets, which are placed at the start, center, and end of the container.
 
+    Args:
+        **kwargs: Properties to set.
+
     .. code-block:: python
 
         Widget.CenterBox(
@@ -29,7 +32,7 @@ class CenterBox(Gtk.CenterBox, BaseWidget):
     @IgnisProperty
     def vertical(self) -> bool:
         """
-        - optional, read-write
+        - read-write
 
         Whether the box arranges children vertically.
 

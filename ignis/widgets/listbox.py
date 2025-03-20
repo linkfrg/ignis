@@ -10,6 +10,9 @@ class ListBox(Gtk.ListBox, BaseWidget):
 
     A vertical list that allows selecting rows. Well suited, for example, for a navigation bar.
 
+    Args:
+        **kwargs: Properties to set.
+
     .. code-block:: python
 
         Widget.ListBox(
@@ -42,7 +45,7 @@ class ListBox(Gtk.ListBox, BaseWidget):
     @IgnisProperty
     def rows(self) -> list[ListBoxRow]:
         """
-        - optional, read-write
+        - read-write
 
         A list of rows.
         """

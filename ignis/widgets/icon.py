@@ -13,6 +13,9 @@ class Icon(Gtk.Image, BaseWidget):
 
     If you want to display an image at its native aspect ratio, see :class:`~ignis.widgets.picture.Picture`.
 
+    Args:
+        **kwargs: Properties to set.
+
     .. code-block:: python
 
         Widget.Icon(
@@ -34,7 +37,7 @@ class Icon(Gtk.Image, BaseWidget):
     @IgnisProperty
     def image(self) -> "str | GdkPixbuf.Pixbuf | None":
         """
-        - optional, read-write
+        - read-write
 
         The icon name, path to the file, or a ``GdkPixbuf.Pixbuf``.
         """

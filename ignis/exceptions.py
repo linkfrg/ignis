@@ -4,6 +4,9 @@ from gi.repository import Gtk, GLib  # type: ignore
 class WindowNotFoundError(Exception):
     """
     Raised when a window is not found.
+
+    Args:
+        window_name: The name of the window.
     """
 
     def __init__(self, window_name: str, *args) -> None:
@@ -13,7 +16,7 @@ class WindowNotFoundError(Exception):
     @property
     def window_name(self) -> str:
         """
-        - required, read-only
+        - read-only
 
         The name of the window.
         """
@@ -23,6 +26,9 @@ class WindowNotFoundError(Exception):
 class WindowAddedError(Exception):
     """
     Raised when a window is already added to the application.
+
+    Args:
+        window_name: The name of the window.
     """
 
     def __init__(self, window_name: str, *args) -> None:
@@ -32,7 +38,7 @@ class WindowAddedError(Exception):
     @property
     def window_name(self) -> str:
         """
-        - required, read-only
+        - read-only
 
         The name of the window.
         """
@@ -101,6 +107,10 @@ class GstNotFoundError(Exception):
 class GstPluginNotFoundError(Exception):
     """
     Raised when a GStreamer plugin is not found.
+
+    Args:
+        plugin_name: The name of the plugin.
+        plugin_package: The package name of the plugin.
     """
 
     def __init__(self, plugin_name: str, plugin_package: str, *args) -> None:
@@ -114,7 +124,7 @@ class GstPluginNotFoundError(Exception):
     @property
     def plugin_name(self) -> str:
         """
-        - required, read-only
+        - read-only
 
         The name of the plugin.
         """
@@ -123,7 +133,7 @@ class GstPluginNotFoundError(Exception):
     @property
     def plugin_package(self) -> str:
         """
-        - required, read-only
+        - read-only
 
         The package name of the plugin.
         """
@@ -133,6 +143,9 @@ class GstPluginNotFoundError(Exception):
 class SassCompilationError(Exception):
     """
     Raised when the Sass compilation fails.
+
+    Args:
+        stderr: The stderr output from the Sass compiler.
     """
 
     def __init__(self, stderr: str, *args: object) -> None:
@@ -142,7 +155,7 @@ class SassCompilationError(Exception):
     @property
     def stderr(self) -> str:
         """
-        - required, read-only
+        - read-only
 
         The stderr output from the Sass compiler.
         """
@@ -164,6 +177,9 @@ class SassNotFoundError(Exception):
 class MonitorNotFoundError(Exception):
     """
     Raised when a monitor with the given ID is not found.
+
+    Args:
+        monitor_id: The ID of the monitor.
     """
 
     def __init__(self, monitor_id: int, *args: object) -> None:
@@ -173,7 +189,7 @@ class MonitorNotFoundError(Exception):
     @property
     def monitor_id(self) -> int:
         """
-        - required, read-only
+        - read-only
 
         The ID of the monitor.
         """
@@ -204,6 +220,9 @@ class IgnisNotRunningError(Exception):
 class DBusMethodNotFoundError(Exception):
     """
     Raised when a D-Bus method is not found or not registered.
+
+    Args:
+        method_name: The name of the D-Bus method.
     """
 
     def __init__(self, method_name: str, *args: object) -> None:
@@ -215,7 +234,7 @@ class DBusMethodNotFoundError(Exception):
     @property
     def method_name(self) -> str:
         """
-        - required, read-only
+        - read-only
 
         The name of the D-Bus method.
         """
@@ -225,6 +244,9 @@ class DBusMethodNotFoundError(Exception):
 class DBusPropertyNotFoundError(Exception):
     """
     Raised when a D-Bus property is not found or not registered.
+
+    Args:
+        property_name: The name of the D-Bus property.
     """
 
     def __init__(self, property_name: str, *args: object) -> None:
@@ -236,7 +258,7 @@ class DBusPropertyNotFoundError(Exception):
     @property
     def property_name(self) -> str:
         """
-        - required, read-only
+        - read-only
 
         The name of the D-Bus property.
         """
@@ -257,6 +279,9 @@ class DisplayNotFoundError(Exception):
 class StylePathNotFoundError(Exception):
     """
     Raised when the style path is not found / not applied to the application.
+
+    Args:
+        style_path: Path to the .css/.scss/.sass file.
     """
 
     def __init__(self, style_path: str, *args: object) -> None:
@@ -266,7 +291,7 @@ class StylePathNotFoundError(Exception):
     @property
     def style_path(self) -> str:
         """
-        - required, read-only
+        - read-only
 
         Path to the .css/.scss/.sass file.
         """
@@ -276,6 +301,9 @@ class StylePathNotFoundError(Exception):
 class StylePathAppliedError(Exception):
     """
     Raised when the style path is already applied to the application.
+
+    Args:
+        style_path: Path to the .css/.scss/.sass file.
     """
 
     def __init__(self, style_path: str, *args: object) -> None:
@@ -285,7 +313,7 @@ class StylePathAppliedError(Exception):
     @property
     def style_path(self) -> str:
         """
-        - required, read-only
+        - read-only
 
         Path to the .css/.scss/.sass file.
         """
@@ -306,6 +334,10 @@ class Gtk4LayerShellNotFoundError(Exception):
 class CssParsingError(Exception):
     """
     Raised when a CSS parsing error occurs.
+
+    Args:
+        section: The section the error happened in.
+        gerror: The parsing error.
     """
 
     def __init__(
@@ -318,7 +350,7 @@ class CssParsingError(Exception):
     @property
     def section(self) -> Gtk.CssSection:
         """
-        - required, read-only
+        - read-only
 
         The section the error happened in.
         """
@@ -327,7 +359,7 @@ class CssParsingError(Exception):
     @property
     def gerror(self) -> GLib.Error:
         """
-        - required, read-only
+        - read-only
 
         The parsing error.
         """
@@ -337,6 +369,9 @@ class CssParsingError(Exception):
 class AnotherNotificationDaemonRunningError(Exception):
     """
     Raised when another notification daemon is running.
+
+    Args:
+        name: The name of the currenly running notification daemon.
     """
 
     def __init__(self, name: str, *args: object) -> None:
@@ -348,7 +383,7 @@ class AnotherNotificationDaemonRunningError(Exception):
     @property
     def name(self) -> str:
         """
-        - required, read-only
+        - read-only
 
         The name of the currenly running notification daemon.
         """
@@ -358,6 +393,9 @@ class AnotherNotificationDaemonRunningError(Exception):
 class AnotherSystemTrayRunningError(Exception):
     """
     Raised when another system tray is running.
+
+    Args:
+        name: The name of the currenly running notification daemon.
     """
 
     def __init__(self, name: str, *args: object) -> None:
@@ -367,7 +405,7 @@ class AnotherSystemTrayRunningError(Exception):
     @property
     def name(self) -> str:
         """
-        - required, read-only
+        - read-only
 
         The name of the currenly running system tray.
         """

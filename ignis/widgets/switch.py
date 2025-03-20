@@ -11,6 +11,9 @@ class Switch(Gtk.Switch, BaseWidget):
 
     A switch widget.
 
+    Args:
+        **kwargs: Properties to set.
+
     .. code-block:: python
 
         Widget.Switch(
@@ -33,7 +36,7 @@ class Switch(Gtk.Switch, BaseWidget):
     @IgnisProperty
     def on_change(self) -> Callable | None:
         """
-        - optional, read-write
+        - read-write
 
         The function to call when the position of the switch changes (e.g., when the user toggles the switch).
         """

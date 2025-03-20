@@ -23,6 +23,9 @@ class Revealer(Gtk.Revealer, BaseWidget):
         - swing_up: Floop in from the bottom
         - swing_down: Floop in from the top
 
+    Args:
+        **kwargs: Properties to set.
+
     .. code-block:: python
 
         Widget.Revealer(

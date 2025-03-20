@@ -8,6 +8,11 @@ from ignis import is_sphinx_build, is_girepository_2_0
 class Binding(GObject.Object):
     """
     An object that describe binding.
+
+    Args:
+        target: The target GObject.
+        target_properties: The properties on the target GObject to bind.
+        transform: The function that accepts a new property value and returns the processed value.
     """
 
     def __init__(
@@ -24,7 +29,7 @@ class Binding(GObject.Object):
     @GObject.Property
     def target(self) -> GObject.Object:
         """
-        - required, read-only
+        - read-only
 
         The target GObject.
         """
@@ -33,7 +38,7 @@ class Binding(GObject.Object):
     @GObject.Property
     def target_properties(self) -> list[str]:
         """
-        - required, read-only
+        - read-only
 
         The properties on the target GObject to bind.
         """
@@ -42,7 +47,7 @@ class Binding(GObject.Object):
     @GObject.Property
     def transform(self) -> Callable | None:
         """
-        - required, read-only
+        - read-only
 
         The function that accepts a new property value and returns the processed value.
         """

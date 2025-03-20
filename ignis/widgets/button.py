@@ -10,6 +10,9 @@ class Button(Gtk.Button, BaseWidget):
 
     A button.
 
+    Args:
+        **kwargs: Properties to set.
+
     .. code-block:: python
 
         Widget.Button(
@@ -49,7 +52,7 @@ class Button(Gtk.Button, BaseWidget):
     @IgnisProperty
     def on_click(self) -> Callable:
         """
-        - optional, read-write
+        - read-write
 
         The function to call on left click.
         """
@@ -62,7 +65,7 @@ class Button(Gtk.Button, BaseWidget):
     @IgnisProperty
     def on_right_click(self) -> Callable:
         """
-        - optional, read-write
+        - read-write
 
         The function to call on right click.
         """
@@ -79,7 +82,7 @@ class Button(Gtk.Button, BaseWidget):
     @IgnisProperty
     def on_middle_click(self) -> Callable:
         """
-        - optional, read-write
+        - read-write
 
         The function to call on middle click.
         """

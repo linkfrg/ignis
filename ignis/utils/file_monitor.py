@@ -24,6 +24,13 @@ class FileMonitor(IgnisGObject):
     """
     Monitor changes of the file or directory.
 
+    Args:
+        path: The path to the file or directory to be monitored.
+        recursive: Whether monitoring is recursive (monitor all subdirectories and files).
+        flags: What the monitor will watch for. See :class:`Gio.FileMonitorFlags` for more info.
+        callback: A function to call when the file or directory changes. See :attr:`callback` for more info.
+        prevent_gc: Whether to prevent the garbage collector from collecting this file monitor.
+
     Example usage:
 
     .. code-block::
@@ -103,7 +110,7 @@ class FileMonitor(IgnisGObject):
     @IgnisProperty
     def path(self) -> str:
         """
-        - required, read-only
+        - read-only
 
         The path to the file or directory to be monitored.
         """
@@ -112,27 +119,23 @@ class FileMonitor(IgnisGObject):
     @IgnisProperty
     def flags(self) -> Gio.FileMonitorFlags:
         """
-        - optional, read-only
+        - read-only
 
         What the monitor will watch for.
 
         See :class:`Gio.FileMonitorFlags` for more info.
-
-        Default: :obj:`Gio.FileMonitorFlags.NONE`.
         """
         return self._flags
 
     @IgnisProperty
     def callback(self) -> Callable | None:
         """
-        - optional, read-write
+        - read-write
 
         A function to call when the file or directory changes.
         It should take two arguments:
         1. The path to the changed file or directory
         2. The event type.
-
-        Default: ``None``.
 
         Event types:
 
@@ -160,22 +163,18 @@ class FileMonitor(IgnisGObject):
     @IgnisProperty
     def recursive(self) -> bool:
         """
-        - optional, read-only
+        - read-only
 
         Whether monitoring is recursive (monitor all subdirectories and files).
-
-        Default: ``False``.
         """
         return self._recursive
 
     @IgnisProperty
     def prevent_gc(self) -> bool:
         """
-        - optional, read-only
+        - read-only
 
         Whether to prevent the garbage collector from collecting this file monitor.
-
-        Default: ``True``.
         """
         return self._prevent_gc
 
