@@ -199,9 +199,6 @@ class EventBox(Box):
         - read-only
 
         Flags affecting the :class:`Gtk.EventControllerScroll` behavior.
-
-        .. warning::
-            Can only be set during initialization.
         """
         return self._scroll_flags
 
