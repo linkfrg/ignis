@@ -228,21 +228,24 @@ class NiriService(BaseService):
                 self._active_window = window
 
         # Drop windows that don't exist anymore.
-        for id_, win in list(self._windows.items()):
-            still_exists = False
-            for window_data in windows:
-                if window_data["id"] == id_:
-                    still_exists = True
-                    break
-
-            if not still_exists:
-                self._windows.pop(id_)
-                win.emit("destroyed")
+        self.__cleanup_niri_obj(self._windows, windows)
 
         self.__sort_windows()
 
         self.notify("active-window")
         self.notify("windows")
+
+    def __cleanup_niri_obj(self, niri_obj: dict, fresh_data: list) -> None:
+        for id_, item in niri_obj.copy().items():
+            still_exists = False
+            for fresh_item in fresh_data:
+                if fresh_item["id"] == id_:
+                    still_exists = True
+                    break
+
+            if not still_exists:
+                niri_obj.pop(id_)
+                item.emit("destroyed")
 
     def __sort_workspaces(self) -> None:
         self._workspaces = dict(
@@ -262,16 +265,7 @@ class NiriService(BaseService):
             self._workspaces[workspace_data["id"]] = workspace
 
         # Drop workspaces that don't exist anymore.
-        for id_, ws in list(self._workspaces.items()):
-            still_exists = False
-            for workspace_data in workspaces:
-                if workspace_data["id"] == id_:
-                    still_exists = True
-                    break
-
-            if not still_exists:
-                self._workspaces.pop(ws.id)
-                ws.emit("destroyed")
+        self.__cleanup_niri_obj(self._workspaces, workspaces)
 
         self.__sort_workspaces()
 
