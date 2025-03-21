@@ -11,6 +11,10 @@ class RevealerWindow(Window):
 
     A window with animation.
 
+    Args:
+        revealer: An instance of :class:`~ignis.widgets.Widget.Revealer`.
+        **kwargs: Properties to set.
+
     .. warning::
         Do not set ``Widget.Revealer`` as a direct child,
         as this can lead to various graphical bugs.
@@ -71,8 +75,6 @@ class RevealerWindow(Window):
     @IgnisProperty
     def revealer(self) -> Revealer:
         """
-        - required, read-write
-
         An instance of :class:`~ignis.widgets.Widget.Revealer`.
         """
         return self._revealer

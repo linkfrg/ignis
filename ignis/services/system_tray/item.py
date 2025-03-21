@@ -3,8 +3,8 @@ from typing import Literal
 from collections.abc import Callable
 from ignis.utils import Utils
 from ignis.dbus import DBusProxy
-from gi.repository import GLib, GObject, GdkPixbuf, Gtk, Gdk  # type: ignore
-from ignis.gobject import IgnisGObject, IgnisProperty
+from gi.repository import GLib, GdkPixbuf, Gtk, Gdk  # type: ignore
+from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
 from ignis.dbus_menu import DBusMenu
 from ignis.exceptions import DisplayNotFoundError
 from ignis.connection_manager import ConnectionManager, DBusConnectionManager
@@ -15,9 +15,10 @@ class SystemTrayItem(IgnisGObject):
     A system tray item.
     """
 
-    def __init__(self, name: str, object_path: str):
+    def __init__(self, proxy: DBusProxy):
         super().__init__()
 
+        self._proxy = proxy
         self._conn_mgr = ConnectionManager()
         self._dbus_conn_mgr = DBusConnectionManager()
 
@@ -31,27 +32,9 @@ class SystemTrayItem(IgnisGObject):
         self._menu: DBusMenu | None = None
         self._tooltip: str | None = None
 
-        asyncio.create_task(self.__init_proxy(name, object_path))
-
-    async def __init_proxy(self, name: str, object_path: str) -> None:
-        self.__dbus: DBusProxy = await DBusProxy.new_async(
-            name=name,
-            object_path=object_path,
-            interface_name="org.kde.StatusNotifierItem",
-            info=Utils.load_interface_xml("org.kde.StatusNotifierItem"),
-        )
-
-        if not self.__dbus.has_owner:
-            return
-
         self._conn_mgr.connect(
-            self.__dbus.gproxy, "notify::g-name-owner", lambda *_: self.__remove()
+            self._proxy.gproxy, "notify::g-name-owner", lambda *_: self.__remove()
         )
-
-        menu_path: str = await self.__dbus.get_dbus_property_async("Menu")
-
-        if menu_path:
-            self._menu = DBusMenu(name=self.__dbus.name, object_path=menu_path)
 
         for signal_name in [
             "NewIcon",
@@ -59,7 +42,7 @@ class SystemTrayItem(IgnisGObject):
             "NewOverlayIcon",
         ]:
             self._dbus_conn_mgr.subscribe(
-                self.__dbus,
+                self._proxy,
                 signal_name,
                 lambda *_: asyncio.create_task(self.__sync_icon()),
             )
@@ -70,10 +53,10 @@ class SystemTrayItem(IgnisGObject):
             "NewStatus",
         ]:
             self._dbus_conn_mgr.subscribe(
-                self.__dbus,
+                self._proxy,
                 signal_name,
-                lambda *args, signal_name=signal_name: self.__sync_property(
-                    signal_name.replace("New", "").lower()
+                lambda *args, signal_name=signal_name: asyncio.create_task(
+                    self.__sync_property(signal_name.replace("New", "").lower())
                 ),
             )
 
@@ -88,7 +71,30 @@ class SystemTrayItem(IgnisGObject):
             lambda x: asyncio.create_task(self.__sync_icon()),
         )
 
-        # sync icon
+    @classmethod
+    async def new_async(cls, name: str, object_path: str) -> "SystemTrayItem | None":
+        proxy = await DBusProxy.new_async(
+            name=name,
+            object_path=object_path,
+            interface_name="org.kde.StatusNotifierItem",
+            info=Utils.load_interface_xml("org.kde.StatusNotifierItem"),
+        )
+
+        if not proxy.has_owner:
+            return None
+
+        obj = cls(proxy)
+        await obj._initial_sync()
+        return obj
+
+    async def _initial_sync(self) -> None:
+        menu_path: str = await self._proxy.get_dbus_property_async("Menu")
+
+        if menu_path:
+            self._menu = await DBusMenu.new_async(
+                name=self._proxy.name, object_path=menu_path
+            )
+
         await self.__sync_icon()
 
         # sync all properties
@@ -100,8 +106,6 @@ class SystemTrayItem(IgnisGObject):
         await self.__sync_property("item_is_menu")
         await self.__sync_property("tooltip")
 
-        self.emit("ready")
-
     def __remove(self) -> None:
         self._conn_mgr.disconnect_all()
         self._dbus_conn_mgr.unsubscribe_all()
@@ -109,7 +113,7 @@ class SystemTrayItem(IgnisGObject):
 
     async def __sync_property(self, py_name: str) -> None:
         try:
-            value = await self.__dbus.get_dbus_property_async(
+            value = await self._proxy.get_dbus_property_async(
                 Utils.snake_to_pascal(py_name)
             )
         except GLib.Error:
@@ -122,7 +126,7 @@ class SystemTrayItem(IgnisGObject):
         async def add_to_search_path(icon_name: str) -> None:
             search_path = self._icon_theme.get_search_path()
             try:
-                icon_theme_path = await self.__dbus.get_dbus_property_async("IconName")
+                icon_theme_path = await self._proxy.get_dbus_property_async("IconName")
             except GLib.Error:
                 return
             if (
@@ -139,7 +143,7 @@ class SystemTrayItem(IgnisGObject):
             add_search_path: bool = False,
         ) -> bool:
             try:
-                value = await self.__dbus.get_dbus_property_async(property_name)
+                value = await self._proxy.get_dbus_property_async(property_name)
             except GLib.Error:
                 return False
 
@@ -180,22 +184,15 @@ class SystemTrayItem(IgnisGObject):
 
         await try_set_icon_name()
 
-    @GObject.Signal
-    def ready(self): ...  # user shouldn't connect to this signal
-
-    @GObject.Signal
+    @IgnisSignal
     def removed(self):
         """
-        - Signal
-
         Emitted when the item is removed.
         """
 
     @IgnisProperty
     def id(self) -> str | None:
         """
-        - read-only
-
         The ID of the item.
         """
         return self._id
@@ -203,8 +200,6 @@ class SystemTrayItem(IgnisGObject):
     @IgnisProperty
     def category(self) -> str | None:
         """
-        - read-only
-
         The category of the item.
         """
         return self._category
@@ -212,8 +207,6 @@ class SystemTrayItem(IgnisGObject):
     @IgnisProperty
     def title(self) -> str | None:
         """
-        - read-only
-
         The title of the item.
         """
         return self._title
@@ -221,8 +214,6 @@ class SystemTrayItem(IgnisGObject):
     @IgnisProperty
     def status(self) -> str | None:
         """
-        - read-only
-
         The status of the item.
         """
         return self._status
@@ -230,8 +221,6 @@ class SystemTrayItem(IgnisGObject):
     @IgnisProperty
     def window_id(self) -> int:
         """
-        - read-only
-
         The window ID.
         """
         return self._window_id
@@ -239,8 +228,6 @@ class SystemTrayItem(IgnisGObject):
     @IgnisProperty
     def icon(self) -> "str | GdkPixbuf.Pixbuf | None":
         """
-        - read-only
-
         The icon name or a ``GdkPixbuf.Pixbuf``.
         """
         return self._icon
@@ -248,8 +235,6 @@ class SystemTrayItem(IgnisGObject):
     @IgnisProperty
     def item_is_menu(self) -> bool:
         """
-        - read-only
-
         Whether the item has a menu.
         """
         return self._item_is_menu
@@ -257,8 +242,6 @@ class SystemTrayItem(IgnisGObject):
     @IgnisProperty
     def menu(self) -> DBusMenu | None:
         """
-        - read-only
-
         A :class:`~ignis.dbus_menu.DBusMenu` or ``None``.
 
         .. hint::
@@ -278,8 +261,6 @@ class SystemTrayItem(IgnisGObject):
     @IgnisProperty
     def tooltip(self) -> str | None:
         """
-        - read-only
-
         A tooltip, the text should be displayed when you hover cursor over the icon.
         """
         return self._title if not self._tooltip else self._tooltip[2]
@@ -314,7 +295,17 @@ class SystemTrayItem(IgnisGObject):
             x: x coordinate.
             y: y coordinate.
         """
-        self.__dbus.Activate("(ii)", x, y, result_handler=lambda *args: None)
+        self._proxy.Activate("(ii)", x, y)
+
+    async def activate_async(self, x: int = 0, y: int = 0) -> None:
+        """
+        Asynchronous version of :func:`activate`.
+
+        Args:
+            x: x coordinate.
+            y: y coordinate.
+        """
+        await self._proxy.ActivateAsync("(ii)", x, y)
 
     def secondary_activate(self, x: int = 0, y: int = 0) -> None:
         """
@@ -324,7 +315,17 @@ class SystemTrayItem(IgnisGObject):
             x: x coordinate.
             y: y coordinate.
         """
-        self.__dbus.SecondaryActivate("(ii)", x, y, result_handler=lambda *args: None)
+        self._proxy.SecondaryActivate("(ii)", x, y)
+
+    async def secondary_activate_async(self, x: int = 0, y: int = 0) -> None:
+        """
+        Asynchronous version of :func:`secondary_activate`.
+
+        Args:
+            x: x coordinate.
+            y: y coordinate.
+        """
+        await self._proxy.SecondaryActivateAsync("(ii)", x, y)
 
     def context_menu(self, x: int = 0, y: int = 0) -> None:
         """
@@ -334,7 +335,17 @@ class SystemTrayItem(IgnisGObject):
             x: x coordinate.
             y: y coordinate.
         """
-        self.__dbus.ContextMenu("(ii)", x, y, result_handler=lambda *args: None)
+        self._proxy.ContextMenu("(ii)", x, y)
+
+    async def context_menu_async(self, x: int = 0, y: int = 0) -> None:
+        """
+        Asynchronous version of :func:`context_menu`.
+
+        Args:
+            x: x coordinate.
+            y: y coordinate.
+        """
+        await self._proxy.ContextMenuAsync("(ii)", x, y)
 
     def scroll(
         self,
@@ -348,6 +359,18 @@ class SystemTrayItem(IgnisGObject):
             delta: The amount of scroll.
             orientation: The type of the orientation: horizontal or vertical.
         """
-        self.__dbus.Scroll(
-            "(is)", delta, orientation, result_handler=lambda *args: None
-        )
+        self._proxy.Scroll("(is)", delta, orientation)
+
+    async def scroll_async(
+        self,
+        delta: int = 0,
+        orientation: Literal["horizontal", "vertical"] = "horizontal",
+    ) -> None:
+        """
+        Asynchronous version of :func:`scroll`.
+
+        Args:
+            delta: The amount of scroll.
+            orientation: The type of the orientation: horizontal or vertical.
+        """
+        await self._proxy.ScrollAsync("(is)", delta, orientation)

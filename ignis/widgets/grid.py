@@ -9,6 +9,9 @@ class Grid(Gtk.Grid, BaseWidget):
 
     A container that arranges its child widgets in rows and columns.
 
+    Args:
+        **kwargs: Properties to set.
+
     .. code-block:: python
 
         Widget.Grid(
@@ -39,8 +42,6 @@ class Grid(Gtk.Grid, BaseWidget):
     @IgnisProperty
     def column_num(self) -> int:
         """
-        - optional, read-write
-
         The number of columns.
         """
         return self._column_num
@@ -53,8 +54,6 @@ class Grid(Gtk.Grid, BaseWidget):
     @IgnisProperty
     def row_num(self) -> int:
         """
-        - optional, read-write
-
         The number of rows. This will not take effect if ``column_num`` is specified.
         """
         return self._row_num
@@ -67,8 +66,6 @@ class Grid(Gtk.Grid, BaseWidget):
     @IgnisProperty
     def child(self) -> list[Gtk.Widget]:
         """
-        - optional, read-write
-
         A list of child widgets.
         """
         return self._child

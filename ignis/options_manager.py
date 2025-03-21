@@ -1,10 +1,10 @@
-import sys
 import json
-from gi.repository import GObject  # type: ignore
-from ignis.gobject import IgnisGObject, Binding, IgnisProperty
+from ignis.gobject import IgnisGObject, Binding, IgnisProperty, IgnisSignal
+from ignis.utils import Utils
 from typing import Any
 from collections.abc import Callable
 from collections.abc import Generator
+from ignis import is_sphinx_build
 
 
 class Option(IgnisGObject):
@@ -47,28 +47,33 @@ class OptionsGroup(IgnisGObject):
                     "subgroup-changed", subgroup_name, option_name
                 ),
             )
+            subgroup.connect("autosave", lambda *_: self.emit("autosave"))
 
-    @GObject.Signal
+    @IgnisSignal
     def changed(self, option_name: str):
         """
-        - Signal
-
         Emitted when an option of this group has changed
 
         Args:
             option_name: The name of the option.
         """
 
-    @GObject.Signal
+    @IgnisSignal
     def subgroup_changed(self, subgroup_name: str, option_name: str):
         """
-        - Signal
-
         Emitted when an option of a subgroup has changed
 
         Args:
             subgroup_name: The name of the subgroup.
             option_name: The name of the option.
+        """
+
+    @IgnisSignal
+    def autosave(self):
+        """
+        - Signal
+
+        Emitted when changes to this group or its child subgroups are going to be saved to the file.
         """
 
     def bind(self, property_name: str, transform: Callable | None = None) -> Binding:
@@ -108,20 +113,28 @@ class OptionsGroup(IgnisGObject):
 
         return data
 
-    def apply_from_dict(self, data: dict[str, Any]) -> None:
+    def apply_from_dict(
+        self, data: dict[str, Any], emit: bool = True, autosave: bool = True
+    ) -> None:
         """
         Apply values to options from a dictionary.
 
         Args:
             data: A dictionary containing the values to apply.
+            emit: Whether to emit the :attr:`changed `and :attr:`subgroup_changed` signals for options in `data` that differ from those on `self`.
+            autosave: Whether to automatically save changes to the file.
         """
         for key, value in data.items():
             if not hasattr(self, key):
                 continue
-            if isinstance(value, dict) and isinstance(getattr(self, key), OptionsGroup):
-                getattr(self, key).apply_from_dict(value)
+
+            attr = getattr(self, key)
+
+            if isinstance(attr, OptionsGroup):
+                attr.apply_from_dict(value, emit, autosave)
             else:
-                self.__setattr__(key, value, False)
+                if attr != value:
+                    self.__setattr__(key, value, emit, autosave)
 
     def __yield_subgroups(
         self,
@@ -132,11 +145,16 @@ class OptionsGroup(IgnisGObject):
             if isinstance(value, OptionsGroup):
                 yield key, value
 
-    def __setattr__(self, name: str, value: Any, emit: bool = True) -> None:
+    def __setattr__(
+        self, name: str, value: Any, emit: bool = True, autosave: bool = True
+    ) -> None:
         if not name.startswith("_"):
             self._modified_options[name] = value
             if emit:
                 self.emit("changed", name)
+            if autosave:
+                self.emit("autosave")
+
         return super().__setattr__(name, value)
 
     def __getattribute__(self, name: str) -> Any:
@@ -158,9 +176,11 @@ class OptionsManager(OptionsGroup):
 
     This is the top-level class in the option structure.
     It provides support for loading and saving options to a file.
+    Has support for hot-reloading when the file is modified externally.
 
     Args:
         file: The path to the file used for saving and loading options. Cannot be changed after initialization.
+        hot_reload: Whether to enable hot-reloading.
 
     The standard option structure must follow this format:
 
@@ -188,15 +208,29 @@ class OptionsManager(OptionsGroup):
 
     """
 
-    def __init__(self, file: str | None = None):
+    def __init__(self, file: str | None = None, hot_reload: bool = True):
         super().__init__()
         self._file = file
 
-        if "sphinx" not in sys.modules and self._file is not None:
-            self.connect("changed", self.__autosave)
-            self.connect("subgroup-changed", self.__autosave)
+        if not is_sphinx_build and self._file is not None:
+            self.connect("autosave", self.__autosave)
 
-            self.load_from_file(self._file)
+            self.load_from_file(self._file, emit=False)
+
+            if hot_reload:
+                Utils.FileMonitor(path=self._file, callback=self.__hot_reload)
+
+    def __hot_reload(self, x, path: str, event_type: str) -> None:
+        if not self._file:
+            return
+
+        if event_type != "changes_done_hint":
+            return
+
+        with open(self._file) as fp:
+            data = json.load(fp)
+
+        self.apply_from_dict(data, autosave=False)
 
     def __autosave(self, *args) -> None:
         self.save_to_file(self._file)  # type: ignore
@@ -211,13 +245,14 @@ class OptionsManager(OptionsGroup):
         with open(file, "w") as fp:
             json.dump(self.to_dict(), fp, indent=4)
 
-    def load_from_file(self, file: str) -> None:
+    def load_from_file(self, file: str, emit: bool = True) -> None:
         """
         Manually load options from the specified file.
 
         Args:
             file: The path to the file from which options will be loaded.
+            emit: Whether to emit the :attr:`changed `and :attr:`subgroup_changed` signals for options in `file` that differ from those on `self`.
         """
         with open(file) as fp:
             data = json.load(fp)
-            self.apply_from_dict(data)
+            self.apply_from_dict(data=data, emit=emit, autosave=False)

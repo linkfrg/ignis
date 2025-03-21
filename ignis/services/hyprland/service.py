@@ -1,11 +1,10 @@
 import json
 import os
 import socket
-from gi.repository import GObject  # type: ignore
 from ignis.utils import Utils
 from ignis.exceptions import HyprlandIPCNotFoundError
 from ignis.base_service import BaseService
-from ignis.gobject import IgnisProperty
+from ignis.gobject import IgnisProperty, IgnisSignal
 from .constants import HYPR_SOCKET_DIR
 from .workspace import HyprlandWorkspace
 from .keyboard import HyprlandKeyboard
@@ -53,11 +52,9 @@ class HyprlandService(BaseService):
             self.__sync_main_keyboard()
             self.__sync_active_window()
 
-    @GObject.Signal
+    @IgnisSignal
     def workspace_added(self, workspace: HyprlandWorkspace):
         """
-        - Signal
-
         Emitted when a new workspace has been added.
 
         Args:
@@ -67,8 +64,6 @@ class HyprlandService(BaseService):
     @IgnisProperty
     def is_available(self) -> bool:
         """
-        - read-only
-
         Whether Hyprland IPC is available.
         """
         return os.path.exists(HYPR_SOCKET_DIR)
@@ -76,8 +71,6 @@ class HyprlandService(BaseService):
     @IgnisProperty
     def workspaces(self) -> list[HyprlandWorkspace]:
         """
-        - read-only
-
         A list of workspaces.
         """
         return list(self._workspaces.values())
@@ -85,8 +78,6 @@ class HyprlandService(BaseService):
     @IgnisProperty
     def active_workspace(self) -> HyprlandWorkspace:
         """
-        - read-only
-
         The currently active workspace.
         """
         return self._active_workspace
@@ -94,8 +85,6 @@ class HyprlandService(BaseService):
     @IgnisProperty
     def main_keyboard(self) -> HyprlandKeyboard:
         """
-        - read-only
-
         The main keyboard.
         """
         return self._main_keyboard
@@ -103,8 +92,6 @@ class HyprlandService(BaseService):
     @IgnisProperty
     def active_window(self) -> HyprlandWindow:
         """
-        - read-only
-
         The currenly focused window.
         """
         return self._active_window
@@ -122,10 +109,10 @@ class HyprlandService(BaseService):
         event_value = event_data[1]
 
         match event_type:
-            case "destroyworkspace":
-                self.__destroy_workspace(int(event_value))
-            case "createworkspace":
-                self.__create_workspace(int(event_value))
+            case "destroyworkspacev2":
+                self.__destroy_workspace(int(event_value.split(",")[0]))
+            case "createworkspacev2":
+                self.__create_workspace(int(event_value.split(",")[0]))
             case "workspace":
                 self.__sync_active_workspace()
             case "focusedmon":
@@ -134,6 +121,8 @@ class HyprlandService(BaseService):
                 self.__sync_active_layout(event_value.split(",")[1])
             case "activewindow":
                 self.__sync_active_window()
+            case "renameworkspace":
+                self.__sync_workspaces()
 
     def __create_workspace(self, id_: int) -> None:
         for i in json.loads(self.send_command("j/workspaces")):

@@ -22,6 +22,9 @@ class Picture(Gtk.Picture, BaseWidget):
 
         For more info, see :class:`Gtk.ContentFit`.
 
+    Args:
+        **kwargs: Properties to set.
+
     .. code-block:: python
 
         Widget.Picture(
@@ -54,8 +57,6 @@ class Picture(Gtk.Picture, BaseWidget):
     @IgnisProperty
     def image(self) -> "str | GdkPixbuf.Pixbuf | None":
         """
-        - optional, read-write
-
         The icon name, path to an image or ``GdkPixbuf.Pixbuf``.
         """
         return self._image
@@ -68,8 +69,6 @@ class Picture(Gtk.Picture, BaseWidget):
     @IgnisProperty
     def width(self) -> int:
         """
-        - optional, read-write
-
         Width of the image.
         """
         return self._width
@@ -83,8 +82,6 @@ class Picture(Gtk.Picture, BaseWidget):
     @IgnisProperty
     def height(self) -> int:
         """
-        - optional, read-write
-
         Height of the image.
         """
         return self._height

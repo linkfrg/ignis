@@ -10,6 +10,9 @@ class SpinButton(Gtk.SpinButton, BaseWidget):  # type: ignore
 
     A widget that allows the user to increment or decrement the displayed value within a specified range.
 
+    Args:
+        **kwargs: Properties to set.
+
     .. code-block:: python
 
         Widget.SpinButton(
@@ -39,8 +42,6 @@ class SpinButton(Gtk.SpinButton, BaseWidget):  # type: ignore
     @IgnisProperty
     def value(self) -> float:
         """
-        - optional, read-write
-
         The current value.
         """
         return super().get_value()
@@ -52,8 +53,6 @@ class SpinButton(Gtk.SpinButton, BaseWidget):  # type: ignore
     @IgnisProperty
     def min(self) -> float:
         """
-        - optional, read-write
-
         Minimum value.
         """
         return self.adjustment.props.lower
@@ -65,8 +64,6 @@ class SpinButton(Gtk.SpinButton, BaseWidget):  # type: ignore
     @IgnisProperty
     def max(self) -> float:
         """
-        - optional, read-write
-
         Maximum value.
         """
         return self.adjustment.props.upper
@@ -78,8 +75,6 @@ class SpinButton(Gtk.SpinButton, BaseWidget):  # type: ignore
     @IgnisProperty
     def step(self) -> float:
         """
-        - optional, read-write
-
         Step increment.
         """
         return self.adjustment.props.step_increment
@@ -91,8 +86,6 @@ class SpinButton(Gtk.SpinButton, BaseWidget):  # type: ignore
     @IgnisProperty
     def on_change(self) -> Callable | None:
         """
-        - optional, read-write
-
         The function to call when the value changes.
         """
         return self._on_change

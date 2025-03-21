@@ -1,4 +1,5 @@
 from gi.repository import Gio  # type: ignore
+from typing import overload, Literal
 
 
 def _get_gfile(
@@ -32,6 +33,24 @@ def _get_contents(
         TypeError(f"{func_name} requires either contents or a string to be provided")
 
     return contents  # type: ignore
+
+
+@overload
+def read_file(
+    path: str | None = None,
+    uri: str | None = None,
+    gfile: "Gio.File | None" = None,
+    decode: Literal[True] = ...,
+) -> str: ...
+
+
+@overload
+def read_file(
+    path: str | None = None,
+    uri: str | None = None,
+    gfile: "Gio.File | None" = None,
+    decode: Literal[False] = ...,
+) -> bytes: ...
 
 
 def read_file(
@@ -76,6 +95,24 @@ def read_file(
         return contents.decode()
     else:
         return contents
+
+
+@overload
+async def read_file_async(
+    path: str | None = None,
+    uri: str | None = None,
+    gfile: "Gio.File | None" = None,
+    decode: Literal[True] = ...,
+) -> str: ...
+
+
+@overload
+async def read_file_async(
+    path: str | None = None,
+    uri: str | None = None,
+    gfile: "Gio.File | None" = None,
+    decode: Literal[False] = ...,
+) -> bytes: ...
 
 
 async def read_file_async(

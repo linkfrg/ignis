@@ -10,6 +10,9 @@ class ToggleButton(Gtk.ToggleButton, BaseWidget):
 
     A toggle button widget.
 
+    Args:
+        **kwargs: Properties to set.
+
     .. code-block:: python
 
         Widget.ToggleButton(
@@ -33,8 +36,6 @@ class ToggleButton(Gtk.ToggleButton, BaseWidget):
     @IgnisProperty
     def on_toggled(self) -> Callable | None:
         """
-        - optional, read-write
-
         The function to call when the button is toggled by the user.
         """
         return self._on_toggled

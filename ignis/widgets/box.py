@@ -9,6 +9,9 @@ class Box(Gtk.Box, BaseWidget):
 
     The main layout widget.
 
+    Args:
+        **kwargs: Properties to set.
+
     .. hint::
         You can use generators to set children.
 
@@ -39,8 +42,6 @@ class Box(Gtk.Box, BaseWidget):
     @IgnisProperty
     def child(self) -> list[Gtk.Widget]:
         """
-        - optional, read-write
-
         A list of child widgets.
         """
         return self._child
@@ -56,6 +57,14 @@ class Box(Gtk.Box, BaseWidget):
                 self.append(c)
 
     def append(self, child: Gtk.Widget) -> None:
+        _orig_unparent = child.unparent
+
+        def unparent_wrapper(*args, **kwargs):
+            self.remove(child)
+            _orig_unparent(*args, **kwargs)
+            child.unparent = _orig_unparent
+
+        child.unparent = unparent_wrapper
         self._child.append(child)
         super().append(child)
         self.notify("child")
@@ -73,8 +82,6 @@ class Box(Gtk.Box, BaseWidget):
     @IgnisProperty
     def vertical(self) -> bool:
         """
-        - optional, read-write
-
         Whether the box arranges children vertically.
 
         Default: ``False``.

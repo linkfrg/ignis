@@ -15,6 +15,10 @@ class FileFilter(Gtk.FileFilter, IgnisGObject):
     Intended for use in :class:`~ignis.widgets.Widget.FileDialog`.
     Uses MIME types, `here <https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types>`_ is a list of common MIME types.
 
+    Args:
+        mime_types: A list of MIME types.
+        **kwargs: Properties to set.
+
     .. code-block :: python
 
         Widget.FileFilter(
@@ -38,8 +42,6 @@ class FileFilter(Gtk.FileFilter, IgnisGObject):
     @IgnisProperty
     def mime_types(self) -> list[str]:
         """
-        - required, read-only
-
         A list of MIME types.
         """
         return self._mime_types
@@ -47,8 +49,6 @@ class FileFilter(Gtk.FileFilter, IgnisGObject):
     @IgnisProperty
     def default(self) -> bool:
         """
-        - optional, read-write
-
         Whether the filter will be selected by default.
         """
         return self._default

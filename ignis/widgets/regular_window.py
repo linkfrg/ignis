@@ -13,6 +13,10 @@ class RegularWindow(Gtk.Window, BaseWidget):
 
     A standart application window.
 
+    Args:
+        namespace: The name of the window, used for accessing it from the CLI and :class:`~ignis.app.IgnisApp`. It must be unique.
+        **kwargs: Properties to set.
+
     .. code-block:: python
 
         Widget.RegularWindow(
@@ -39,8 +43,6 @@ class RegularWindow(Gtk.Window, BaseWidget):
     @IgnisProperty
     def namespace(self) -> str:
         """
-        - required, read-only
-
         The name of the window, used for accessing it from the CLI and :class:`~ignis.app.IgnisApp`.
         It must be unique.
         """

@@ -1,9 +1,8 @@
 from ignis.base_service import BaseService
-from gi.repository import GObject  # type: ignore
 from ignis.dbus import DBusProxy
 from ignis.utils import Utils
 from ignis.exceptions import UPowerNotRunningError
-from ignis.gobject import IgnisProperty
+from ignis.gobject import IgnisProperty, IgnisSignal
 from .device import UPowerDevice
 
 
@@ -49,22 +48,18 @@ class UPowerService(BaseService):
     def __get_device_object_path(self, args) -> str:
         return args[-1].unpack()[0]  # -1 element is the device object path (Variant)
 
-    @GObject.Signal
+    @IgnisSignal
     def device_added(self, device: UPowerDevice):
         """
-        - Signal
-
         Emitted when a power device has been added.
 
         Args:
             device: The instance of the UPower device.
         """
 
-    @GObject.Signal
+    @IgnisSignal
     def battery_added(self, battery: UPowerDevice):
         """
-        - Signal
-
         Emitted when a battery has been added.
 
         Args:
@@ -74,8 +69,6 @@ class UPowerService(BaseService):
     @IgnisProperty
     def devices(self) -> list[UPowerDevice]:
         """
-        - read-only
-
         A list of all power devices.
         """
         return list(self._devices.values())
@@ -83,8 +76,6 @@ class UPowerService(BaseService):
     @IgnisProperty
     def batteries(self) -> list[UPowerDevice]:
         """
-        - read-only
-
         A list of batteries.
         """
         return list(self._batteries.values())
@@ -92,8 +83,6 @@ class UPowerService(BaseService):
     @IgnisProperty
     def display_device(self) -> UPowerDevice:
         """
-        - read-only
-
         The currently active device intended for display.
         """
         return self._display_device

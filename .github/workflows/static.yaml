@@ -1,5 +1,12 @@
 on: 
   push:
+    branches:
+      - main
+    paths:
+      - "ignis/**"
+      - "examples/**"
+      - ".github/workflows/static.yaml"
+  pull_request:
     paths:
       - "ignis/**"
       - "examples/**"

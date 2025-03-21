@@ -10,6 +10,9 @@ class Overlay(Gtk.Overlay, BaseWidget):
     A container that places its children on top of each other.
     The ``child`` property is the main child, on which other widgets defined in ``overlays`` will be placed on top.
 
+    Args:
+        **kwargs: Properties to set.
+
     .. code-block:: python
 
         Widget.Overlay(
@@ -33,8 +36,6 @@ class Overlay(Gtk.Overlay, BaseWidget):
     @IgnisProperty
     def overlays(self) -> list[Gtk.Widget]:
         """
-        - optional, read-write
-
         A list of overlay widgets.
         """
         return self._overlays

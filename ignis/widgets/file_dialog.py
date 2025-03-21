@@ -1,9 +1,9 @@
 import os
-from gi.repository import Gtk, Gio, GObject  # type: ignore
+from gi.repository import Gtk, Gio  # type: ignore
 from collections.abc import Callable
 from ignis.widgets.file_filter import FileFilter
 from ignis.gobject import IgnisGObject
-from ignis.gobject import IgnisProperty
+from ignis.gobject import IgnisProperty, IgnisSignal
 
 
 class FileDialog(Gtk.FileDialog, IgnisGObject):
@@ -15,6 +15,9 @@ class FileDialog(Gtk.FileDialog, IgnisGObject):
         It doesn't support common widget properties and cannot be added as a child to a container.
 
     A window that allows the user to select a file.
+
+    Args:
+        **kwargs: Properties to set.
 
     .. code-block :: python
 
@@ -64,11 +67,9 @@ class FileDialog(Gtk.FileDialog, IgnisGObject):
             self.emit("file-set", file)
             self.notify("file")
 
-    @GObject.Signal
+    @IgnisSignal
     def file_set(self, file: Gio.File):
         """
-        - Signal
-
         Emitted when a file or directory is selected.
 
         Args:
@@ -78,8 +79,6 @@ class FileDialog(Gtk.FileDialog, IgnisGObject):
     @IgnisProperty
     def file(self) -> "Gio.File | None":
         """
-        - not argument, read-only
-
         The selected ``Gio.File``.
 
         .. hint::
@@ -90,8 +89,6 @@ class FileDialog(Gtk.FileDialog, IgnisGObject):
     @IgnisProperty
     def on_file_set(self) -> Callable:
         """
-        - optional, read-write
-
         A function to call when user selects a file.
         """
         return self._on_file_set
@@ -103,8 +100,6 @@ class FileDialog(Gtk.FileDialog, IgnisGObject):
     @IgnisProperty
     def filters(self) -> list[FileFilter]:
         """
-        - optional, read-write
-
         A list of file filters.
         """
         return self._filters
@@ -119,8 +114,6 @@ class FileDialog(Gtk.FileDialog, IgnisGObject):
     @IgnisProperty
     def initial_path(self) -> str:
         """
-        - optional, read-write
-
         The path to the folder or file that will be selected by default.
         """
         return self._initial_path
@@ -137,8 +130,6 @@ class FileDialog(Gtk.FileDialog, IgnisGObject):
     @IgnisProperty
     def select_folder(self) -> bool:
         """
-        - optional, read-write
-
         Whether the dialog should allow selecting folders instead of files.
         """
         return self._select_folder

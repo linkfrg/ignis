@@ -8,6 +8,9 @@ class HeaderBar(Gtk.HeaderBar, BaseWidget):
 
     A custom title bar with decorations like a close button and title.
 
+    Args:
+        **kwargs: Properties to set.
+
     .. code-block:: python
 
         Widget.HeaderBar(

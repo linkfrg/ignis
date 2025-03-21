@@ -13,6 +13,9 @@ class Stack(Gtk.Stack, BaseWidget):
     It does not provide a means for users to change the visible child.
     Instead, a separate widget such as :class:`~ignis.widgets.Widget.StackSwitcher` can be used with Stack to provide this functionality.
 
+    Args:
+        **kwargs: Properties to set.
+
     Overrided properties:
         - transition_type: The type of animation used to transition between pages. Available values: :class:`Gtk.StackTransitionType`.
 
@@ -53,8 +56,6 @@ class Stack(Gtk.Stack, BaseWidget):
     @IgnisProperty
     def child(self) -> list[StackPage]:
         """
-        - optional, read-write
-
         A list of pages.
         """
         return self._child

@@ -10,6 +10,9 @@ class DropDown(Gtk.DropDown, BaseWidget):
 
     A widget that allows the user to choose an item from a list of options.
 
+    Args:
+        **kwargs: Properties to set.
+
     .. code-block:: python
 
         Widget.DropDown(
@@ -32,8 +35,6 @@ class DropDown(Gtk.DropDown, BaseWidget):
     @IgnisProperty
     def items(self) -> list[str]:
         """
-        - optional, read-write
-
         A list of strings that can be selected in the popover.
         """
         return self._items
@@ -50,8 +51,6 @@ class DropDown(Gtk.DropDown, BaseWidget):
     @IgnisProperty
     def on_selected(self) -> Callable | None:
         """
-        - optional, read-write
-
         The function to call when the user selects an item from the list.
         """
         return self._on_selected
@@ -67,8 +66,6 @@ class DropDown(Gtk.DropDown, BaseWidget):
     @IgnisProperty
     def selected(self) -> str:
         """
-        - not argument, read-only
-
         The selected string. It is a shortcut for ``self.selected_item.props.string``.
         """
         return self.selected_item.props.string

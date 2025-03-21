@@ -1,5 +1,5 @@
-from ignis.gobject import IgnisGObject, IgnisProperty
-from gi.repository import GLib, GObject  # type: ignore
+from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
+from gi.repository import GLib  # type: ignore
 from typing import Any
 from collections.abc import Callable
 
@@ -9,6 +9,11 @@ class Poll(IgnisGObject):
     Calls a callback every n milliseconds specified by the timeout.
 
     You can pass arguments to the constructor, and they will be passed to the callback.
+
+    Args:
+        timeout: The timeout interval in milliseconds.
+        callback: The function to call when the timeout is reached. The ``self`` will passed as an argument.
+        *args: Arguments to pass to `callback`.
 
     Example usage:
 
@@ -31,19 +36,15 @@ class Poll(IgnisGObject):
 
         self.__main()
 
-    @GObject.Signal
+    @IgnisSignal
     def changed(self):
         """
-        - Signal
-
         Emitted at each iteration.
         """
 
     @IgnisProperty
     def timeout(self) -> int:
         """
-        - required, read-write
-
         The timeout interval in milliseconds.
         """
         return self._timeout
@@ -55,8 +56,6 @@ class Poll(IgnisGObject):
     @IgnisProperty
     def callback(self) -> Callable:
         """
-        - required, read-write
-
         The function to call when the timeout is reached. The ``self`` will passed as an argument.
         """
         return self._callback
@@ -68,8 +67,6 @@ class Poll(IgnisGObject):
     @IgnisProperty
     def output(self) -> Any:
         """
-        - not argument, read-only
-
         The output of the callback.
 
         .. hint::

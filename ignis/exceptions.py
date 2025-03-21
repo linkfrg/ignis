@@ -4,6 +4,9 @@ from gi.repository import Gtk, GLib  # type: ignore
 class WindowNotFoundError(Exception):
     """
     Raised when a window is not found.
+
+    Args:
+        window_name: The name of the window.
     """
 
     def __init__(self, window_name: str, *args) -> None:
@@ -13,8 +16,6 @@ class WindowNotFoundError(Exception):
     @property
     def window_name(self) -> str:
         """
-        - required, read-only
-
         The name of the window.
         """
         return self._window_name
@@ -23,6 +24,9 @@ class WindowNotFoundError(Exception):
 class WindowAddedError(Exception):
     """
     Raised when a window is already added to the application.
+
+    Args:
+        window_name: The name of the window.
     """
 
     def __init__(self, window_name: str, *args) -> None:
@@ -32,30 +36,9 @@ class WindowAddedError(Exception):
     @property
     def window_name(self) -> str:
         """
-        - required, read-only
-
         The name of the window.
         """
         return self._window_name
-
-
-class ServiceNotFoundError(Exception):
-    """
-    Raised when a service with the given name is not found.
-    """
-
-    def __init__(self, service_name: str, *args: object) -> None:
-        self._service_name = service_name
-        super().__init__(f'No such service "{service_name}"', *args)
-
-    @property
-    def service_name(self) -> str:
-        """
-        - required, read-only
-
-        The name of the service.
-        """
-        return self._service_name
 
 
 class GvcNotFoundError(Exception):
@@ -106,82 +89,6 @@ class NetworkManagerNotFoundError(Exception):
         )
 
 
-class OptionNotFoundError(Exception):
-    """
-    Raised when an option is not found.
-    """
-
-    def __init__(self, option_name: str, *args) -> None:
-        self._option_name = option_name
-        super().__init__(f'No such option: "{option_name}"', *args)
-
-    @property
-    def option_name(self) -> str:
-        """
-        - required, read-only
-
-        The name of the option.
-        """
-        return self._option_name
-
-
-class OptionExistsError(Exception):
-    """
-    Raised when an option already exists.
-    """
-
-    def __init__(self, option_name: str, *args) -> None:
-        self._option_name = option_name
-        super().__init__(f'Option already exists: "{option_name}"', *args)
-
-    @property
-    def option_name(self) -> str:
-        """
-        - required, read-only
-
-        The name of the option.
-        """
-        return self._option_name
-
-
-class OptionsGroupNotFoundError(Exception):
-    """
-    Raised when an options group is not found.
-    """
-
-    def __init__(self, options_group: str, *args) -> None:
-        self._options_group = options_group
-        super().__init__(f'No such options group: "{options_group}"', *args)
-
-    @property
-    def options_group(self) -> str:
-        """
-        - required, read-only
-
-        The name of the options group.
-        """
-        return self._options_group
-
-
-class OptionsGroupExistsError(Exception):
-    """
-    Raised when an options group exists.
-    """
-
-    def __init__(self, options_group: str, *args) -> None:
-        self._options_group = options_group
-        super().__init__(f'Options groups already exists: "{options_group}"', *args)
-
-    @property
-    def options_group(self) -> str:
-        """
-        - required, read-only
-
-        The name of the options group.
-        """
-        return self._options_group
-
-
 class GstNotFoundError(Exception):
     """
     Raised when GStreamer is not found.
@@ -196,6 +103,10 @@ class GstNotFoundError(Exception):
 class GstPluginNotFoundError(Exception):
     """
     Raised when a GStreamer plugin is not found.
+
+    Args:
+        plugin_name: The name of the plugin.
+        plugin_package: The package name of the plugin.
     """
 
     def __init__(self, plugin_name: str, plugin_package: str, *args) -> None:
@@ -209,8 +120,6 @@ class GstPluginNotFoundError(Exception):
     @property
     def plugin_name(self) -> str:
         """
-        - required, read-only
-
         The name of the plugin.
         """
         return self._plugin_name
@@ -218,8 +127,6 @@ class GstPluginNotFoundError(Exception):
     @property
     def plugin_package(self) -> str:
         """
-        - required, read-only
-
         The package name of the plugin.
         """
         return self._plugin_package
@@ -228,6 +135,9 @@ class GstPluginNotFoundError(Exception):
 class SassCompilationError(Exception):
     """
     Raised when the Sass compilation fails.
+
+    Args:
+        stderr: The stderr output from the Sass compiler.
     """
 
     def __init__(self, stderr: str, *args: object) -> None:
@@ -237,8 +147,6 @@ class SassCompilationError(Exception):
     @property
     def stderr(self) -> str:
         """
-        - required, read-only
-
         The stderr output from the Sass compiler.
         """
         return self._stderr
@@ -259,6 +167,9 @@ class SassNotFoundError(Exception):
 class MonitorNotFoundError(Exception):
     """
     Raised when a monitor with the given ID is not found.
+
+    Args:
+        monitor_id: The ID of the monitor.
     """
 
     def __init__(self, monitor_id: int, *args: object) -> None:
@@ -268,8 +179,6 @@ class MonitorNotFoundError(Exception):
     @property
     def monitor_id(self) -> int:
         """
-        - required, read-only
-
         The ID of the monitor.
         """
         return self._monitor_id
@@ -299,6 +208,9 @@ class IgnisNotRunningError(Exception):
 class DBusMethodNotFoundError(Exception):
     """
     Raised when a D-Bus method is not found or not registered.
+
+    Args:
+        method_name: The name of the D-Bus method.
     """
 
     def __init__(self, method_name: str, *args: object) -> None:
@@ -310,8 +222,6 @@ class DBusMethodNotFoundError(Exception):
     @property
     def method_name(self) -> str:
         """
-        - required, read-only
-
         The name of the D-Bus method.
         """
         return self._method_name
@@ -320,6 +230,9 @@ class DBusMethodNotFoundError(Exception):
 class DBusPropertyNotFoundError(Exception):
     """
     Raised when a D-Bus property is not found or not registered.
+
+    Args:
+        property_name: The name of the D-Bus property.
     """
 
     def __init__(self, property_name: str, *args: object) -> None:
@@ -331,8 +244,6 @@ class DBusPropertyNotFoundError(Exception):
     @property
     def property_name(self) -> str:
         """
-        - required, read-only
-
         The name of the D-Bus property.
         """
         return self._property_name
@@ -352,6 +263,9 @@ class DisplayNotFoundError(Exception):
 class StylePathNotFoundError(Exception):
     """
     Raised when the style path is not found / not applied to the application.
+
+    Args:
+        style_path: Path to the .css/.scss/.sass file.
     """
 
     def __init__(self, style_path: str, *args: object) -> None:
@@ -361,8 +275,6 @@ class StylePathNotFoundError(Exception):
     @property
     def style_path(self) -> str:
         """
-        - required, read-only
-
         Path to the .css/.scss/.sass file.
         """
         return self._style_path
@@ -371,6 +283,9 @@ class StylePathNotFoundError(Exception):
 class StylePathAppliedError(Exception):
     """
     Raised when the style path is already applied to the application.
+
+    Args:
+        style_path: Path to the .css/.scss/.sass file.
     """
 
     def __init__(self, style_path: str, *args: object) -> None:
@@ -380,8 +295,6 @@ class StylePathAppliedError(Exception):
     @property
     def style_path(self) -> str:
         """
-        - required, read-only
-
         Path to the .css/.scss/.sass file.
         """
         return self._style_path
@@ -401,6 +314,10 @@ class Gtk4LayerShellNotFoundError(Exception):
 class CssParsingError(Exception):
     """
     Raised when a CSS parsing error occurs.
+
+    Args:
+        section: The section the error happened in.
+        gerror: The parsing error.
     """
 
     def __init__(
@@ -413,8 +330,6 @@ class CssParsingError(Exception):
     @property
     def section(self) -> Gtk.CssSection:
         """
-        - required, read-only
-
         The section the error happened in.
         """
         return self._section
@@ -422,8 +337,6 @@ class CssParsingError(Exception):
     @property
     def gerror(self) -> GLib.Error:
         """
-        - required, read-only
-
         The parsing error.
         """
         return self._gerror
@@ -432,6 +345,9 @@ class CssParsingError(Exception):
 class AnotherNotificationDaemonRunningError(Exception):
     """
     Raised when another notification daemon is running.
+
+    Args:
+        name: The name of the currenly running notification daemon.
     """
 
     def __init__(self, name: str, *args: object) -> None:
@@ -443,8 +359,6 @@ class AnotherNotificationDaemonRunningError(Exception):
     @property
     def name(self) -> str:
         """
-        - required, read-only
-
         The name of the currenly running notification daemon.
         """
         return self._name
@@ -453,6 +367,9 @@ class AnotherNotificationDaemonRunningError(Exception):
 class AnotherSystemTrayRunningError(Exception):
     """
     Raised when another system tray is running.
+
+    Args:
+        name: The name of the currenly running notification daemon.
     """
 
     def __init__(self, name: str, *args: object) -> None:
@@ -462,8 +379,6 @@ class AnotherSystemTrayRunningError(Exception):
     @property
     def name(self) -> str:
         """
-        - required, read-only
-
         The name of the currenly running system tray.
         """
         return self._name

@@ -1,7 +1,7 @@
 import os
 import json
 from ignis.dbus import DBusService, DBusProxy
-from gi.repository import GLib, GObject, GdkPixbuf  # type: ignore
+from gi.repository import GLib, GdkPixbuf  # type: ignore
 from ignis.utils import Utils
 from loguru import logger
 from datetime import datetime
@@ -15,7 +15,7 @@ from .constants import (
 )
 from ignis.exceptions import AnotherNotificationDaemonRunningError
 from ignis.options import options
-from ignis.gobject import IgnisProperty
+from ignis.gobject import IgnisProperty, IgnisSignal
 
 
 class NotificationService(BaseService):
@@ -84,22 +84,18 @@ class NotificationService(BaseService):
 
         raise AnotherNotificationDaemonRunningError(name)
 
-    @GObject.Signal
+    @IgnisSignal
     def notified(self, notification: Notification):
         """
-        - Signal
-
         Emitted when a new notification appears.
 
         Args:
             notification: The instance of the notification.
         """
 
-    @GObject.Signal
+    @IgnisSignal
     def new_popup(self, notification: Notification):
         """
-        - Signal
-
         Emitted when a new popup notification appears.
         Only emitted if ``dnd`` is set to ``False``.
 
@@ -110,8 +106,6 @@ class NotificationService(BaseService):
     @IgnisProperty
     def notifications(self) -> list[Notification]:
         """
-        - read-only
-
         A list of all notifications.
         """
         return list(self._notifications.values())
@@ -119,8 +113,6 @@ class NotificationService(BaseService):
     @IgnisProperty
     def popups(self) -> list[Notification]:
         """
-        - read-only
-
         A list of currently active popup notifications.
         """
         return list(self._popups.values())
@@ -203,14 +195,18 @@ class NotificationService(BaseService):
         hints: dict,
         timeout: int,
     ) -> None:
-        icon = None
-
-        if isinstance(app_icon, str):
-            icon = app_icon
-
+        # Follow freedesktop specification
+        # https://specifications.freedesktop.org/notification-spec/latest/icons-and-images.html
         if "image-data" in hints:
-            icon = f"{NOTIFICATIONS_IMAGE_DATA}/{_id}"
-            self.__save_pixbuf(hints["image-data"], icon)
+            icon = self.__save_pixbuf(hints["image-data"], _id)
+        elif "image-path" in hints:
+            icon = hints["image-path"]
+        elif app_icon != "":
+            icon = app_icon
+        elif "icon_data" in hints:
+            icon = self.__save_pixbuf(hints["image-data"], _id)
+        else:
+            icon = None
 
         notification = Notification(
             dbus=self.__dbus,
@@ -240,7 +236,9 @@ class NotificationService(BaseService):
         self.emit("notified", notification)
         self.notify("notifications")
 
-    def __save_pixbuf(self, px_args: list, save_path: str) -> None:
+    def __save_pixbuf(self, px_args: list, notification_id: int) -> str:
+        save_path = f"{NOTIFICATIONS_IMAGE_DATA}/{notification_id}"
+
         GdkPixbuf.Pixbuf.new_from_bytes(
             width=px_args[0],
             height=px_args[1],
@@ -250,6 +248,8 @@ class NotificationService(BaseService):
             rowstride=px_args[2],
             bits_per_sample=px_args[4],
         ).savev(save_path, "png")
+
+        return save_path
 
     def clear_all(self) -> None:
         """

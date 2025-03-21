@@ -11,3 +11,10 @@ option(
     value: true,
     description: 'Check required dependencies.',
 )
+
+option(
+    'COMMITHASH',
+    type: 'string',
+    value: '',
+    description: 'NOT PUBLIC OPTION: custom commit hash to configure ignis/__commit__.py.in'
+)
