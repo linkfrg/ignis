@@ -25,8 +25,6 @@ class StackPage(IgnisGObject):
     @IgnisProperty
     def title(self) -> str:
         """
-        - read-only
-
         The title.
         It will be used by :class:`~ignis.widgets.Widget.StackSwitcher` to display :attr:`child` in a tab bar.
         """
@@ -35,8 +33,6 @@ class StackPage(IgnisGObject):
     @IgnisProperty
     def child(self) -> Gtk.Widget:
         """
-        - read-only
-
         The child widget.
         """
         return self._child

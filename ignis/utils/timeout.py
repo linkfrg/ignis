@@ -30,8 +30,6 @@ class Timeout(IgnisGObject):
     @IgnisProperty
     def ms(self) -> int:
         """
-        - read-only
-
         Time in milliseconds.
         """
         return self._ms
@@ -39,8 +37,6 @@ class Timeout(IgnisGObject):
     @IgnisProperty
     def target(self) -> Callable:
         """
-        - read-only
-
         The function to call.
         """
         return self._target

@@ -54,8 +54,6 @@ class HyprlandWindow(DataGObject):
     @IgnisProperty
     def address(self) -> str:
         """
-        - read-only
-
         The address of the window.
         """
         return self._address
@@ -63,8 +61,6 @@ class HyprlandWindow(DataGObject):
     @IgnisProperty
     def mapped(self) -> bool:
         """
-        - read-only
-
         Whether the window is mapped.
         """
         return self._mapped
@@ -72,8 +68,6 @@ class HyprlandWindow(DataGObject):
     @IgnisProperty
     def hidden(self) -> bool:
         """
-        - read-only
-
         Whether the window is hidden.
         """
         return self._hidden
@@ -81,8 +75,6 @@ class HyprlandWindow(DataGObject):
     @IgnisProperty
     def at(self) -> tuple[int, int]:
         """
-        - read-only
-
         The coordinates of the window (e.g., ``(1280, 920)``).
         """
         return self._at
@@ -90,8 +82,6 @@ class HyprlandWindow(DataGObject):
     @IgnisProperty
     def size(self) -> tuple[int, int]:
         """
-        - read-only
-
         The size of the window (e.g., ``(1280, 920)``).
         """
         return self._size
@@ -99,8 +89,6 @@ class HyprlandWindow(DataGObject):
     @IgnisProperty
     def workspace_id(self) -> int:
         """
-        - read-only
-
         The ID of the workspace where the window is placed.
         """
         return self._workspace_id
@@ -108,8 +96,6 @@ class HyprlandWindow(DataGObject):
     @IgnisProperty
     def workspace_name(self) -> str:
         """
-        - read-only
-
         The name of the workspace where the window is placed.
         """
         return self._workspace_name
@@ -117,8 +103,6 @@ class HyprlandWindow(DataGObject):
     @IgnisProperty
     def floating(self) -> bool:
         """
-        - read-only
-
         Whether the window is floating.
         """
         return self._floating
@@ -126,8 +110,6 @@ class HyprlandWindow(DataGObject):
     @IgnisProperty
     def pseudo(self) -> bool:
         """
-        - read-only
-
         Whether the window is pseudo.
         """
         return self._pseudo
@@ -135,8 +117,6 @@ class HyprlandWindow(DataGObject):
     @IgnisProperty
     def monitor(self) -> int:
         """
-        - read-only
-
         The ID of the monitor where the window is placed.
         """
         return self._monitor
@@ -144,8 +124,6 @@ class HyprlandWindow(DataGObject):
     @IgnisProperty
     def class_name(self) -> str:
         """
-        - read-only
-
         The class name of the window.
         """
         return self._class_name
@@ -153,8 +131,6 @@ class HyprlandWindow(DataGObject):
     @IgnisProperty
     def title(self) -> str:
         """
-        - read-only
-
         The title of the window.
         """
         return self._title
@@ -162,8 +138,6 @@ class HyprlandWindow(DataGObject):
     @IgnisProperty
     def initial_class(self) -> str:
         """
-        - read-only
-
         The initial class name of the window.
         """
         return self._initial_class
@@ -171,8 +145,6 @@ class HyprlandWindow(DataGObject):
     @IgnisProperty
     def initial_title(self) -> str:
         """
-        - read-only
-
         The initial title of the window.
         """
         return self._initial_title
@@ -180,8 +152,6 @@ class HyprlandWindow(DataGObject):
     @IgnisProperty
     def pid(self) -> int:
         """
-        - read-only
-
         The PID of the window.
         """
         return self._pid
@@ -189,8 +159,6 @@ class HyprlandWindow(DataGObject):
     @IgnisProperty
     def xwayland(self) -> bool:
         """
-        - read-only
-
         Whether the window is running through Xwayland.
         """
         return self._xwayland
@@ -198,8 +166,6 @@ class HyprlandWindow(DataGObject):
     @IgnisProperty
     def pinned(self) -> bool:
         """
-        - read-only
-
         Whether the window is pinned.
         """
         return self._pinned
@@ -207,8 +173,6 @@ class HyprlandWindow(DataGObject):
     @IgnisProperty
     def fullscreen(self) -> int:
         """
-        - read-only
-
         The fullscreen mode.
         """
         return self._fullscreen
@@ -216,8 +180,6 @@ class HyprlandWindow(DataGObject):
     @IgnisProperty
     def fullscreen_client(self) -> int:
         """
-        - read-only
-
         Fullscreen client.
         """
         return self._fullscreen_client
@@ -225,8 +187,6 @@ class HyprlandWindow(DataGObject):
     @IgnisProperty
     def grouped(self) -> list:
         """
-        - read-only
-
         Grouped.
         """
         return self._grouped
@@ -234,8 +194,6 @@ class HyprlandWindow(DataGObject):
     @IgnisProperty
     def tags(self) -> list:
         """
-        - read-only
-
         Tags.
         """
         return self._tags
@@ -243,8 +201,6 @@ class HyprlandWindow(DataGObject):
     @IgnisProperty
     def swallowing(self) -> str:
         """
-        - read-only
-
         Swallowing.
         """
         return self._swallowing
@@ -252,8 +208,6 @@ class HyprlandWindow(DataGObject):
     @IgnisProperty
     def focus_history_id(self) -> int:
         """
-        - read-only
-
         The focus history ID.
         """
         return self._focus_history_id
@@ -261,8 +215,6 @@ class HyprlandWindow(DataGObject):
     @IgnisProperty
     def inhibiting_idle(self) -> bool:
         """
-        - read-only
-
         The inhibiting idle status.
         """
         return self._inhibiting_idle

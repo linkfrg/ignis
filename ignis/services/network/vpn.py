@@ -1,5 +1,4 @@
-from gi.repository import GObject  # type: ignore
-from ignis.gobject import IgnisGObject, IgnisProperty
+from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
 from ._imports import NM
 from .util import check_is_vpn
 
@@ -24,7 +23,7 @@ class VpnConnection(IgnisGObject):
         self._client.connect("notify::active-connections", self.__update_is_connected)
         self.__update_is_connected()
 
-    @GObject.Signal
+    @IgnisSignal
     def removed(self):
         """
         Emitted when this VPN connection is removed.
@@ -33,8 +32,6 @@ class VpnConnection(IgnisGObject):
     @IgnisProperty
     def is_connected(self) -> bool:
         """
-        - read-only
-
         Whether the device is connected to the network.
         """
         return self._is_connected
@@ -42,8 +39,6 @@ class VpnConnection(IgnisGObject):
     @IgnisProperty
     def name(self) -> str | None:
         """
-        - read-only
-
         The id (name) of the vpn connection or ``None`` if unknown.
         """
         return self._connection.get_id()
@@ -112,7 +107,7 @@ class Vpn(IgnisGObject):
         for a in self._client.get_active_connections():
             self.__add_active_connection(None, a, False)
 
-    @GObject.Signal
+    @IgnisSignal
     def new_connection(self, connection: VpnConnection):
         """
         Emitted when a new VPN connection is added.
@@ -121,7 +116,7 @@ class Vpn(IgnisGObject):
             connection: An instance of the VPN connection.
         """
 
-    @GObject.Signal
+    @IgnisSignal
     def new_active_connection(self, connection: VpnConnection):
         """
         Emitted when a VPN connection is activated.
@@ -133,8 +128,6 @@ class Vpn(IgnisGObject):
     @IgnisProperty
     def connections(self) -> list[VpnConnection]:
         """
-        - read-only
-
         A list of all VPN connections.
         """
         return list(self._connections.values())
@@ -142,8 +135,6 @@ class Vpn(IgnisGObject):
     @IgnisProperty
     def active_connections(self) -> list[VpnConnection]:
         """
-        - read-only
-
         A list of active VPN connections.
         """
         return list(self._active_connections.values())
@@ -151,8 +142,6 @@ class Vpn(IgnisGObject):
     @IgnisProperty
     def active_vpn_id(self) -> str | None:
         """
-        - read-only
-
         The id (name) of the first active vpn connection.
         """
         if not self.is_connected:
@@ -163,8 +152,6 @@ class Vpn(IgnisGObject):
     @IgnisProperty
     def is_connected(self) -> bool:
         """
-        - read-only
-
         Whether at least one VPN connection is active.
         """
         return len(self._active_connections) != 0
@@ -172,8 +159,6 @@ class Vpn(IgnisGObject):
     @IgnisProperty
     def icon_name(self) -> str:
         """
-        - read-only
-
         The general icon name for all vpn connections, depends on ``is_connected`` property.
         """
         if self.is_connected:

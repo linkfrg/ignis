@@ -1,5 +1,4 @@
-from gi.repository import GObject  # type: ignore
-from ignis.gobject import IgnisGObject, IgnisProperty
+from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
 from ._imports import NM
 from .wifi_device import WifiDevice
 
@@ -24,7 +23,7 @@ class Wifi(IgnisGObject):
         for device in self._client.get_devices():
             self.__add_device(None, device, False)
 
-    @GObject.Signal
+    @IgnisSignal
     def new_device(self, device: WifiDevice):
         """
         Emitted when a new Wi-FI device is added.
@@ -36,8 +35,6 @@ class Wifi(IgnisGObject):
     @IgnisProperty
     def devices(self) -> list[WifiDevice]:
         """
-        - read-only
-
         A list of Wi-Fi devices.
         """
         return list(self._devices.values())
@@ -45,8 +42,6 @@ class Wifi(IgnisGObject):
     @IgnisProperty
     def is_connected(self) -> bool:
         """
-        - read-only
-
         Whether at least one Wi-Fi device is connected to the network.
         """
         for i in self.devices:
@@ -57,8 +52,6 @@ class Wifi(IgnisGObject):
     @IgnisProperty
     def icon_name(self) -> str:
         """
-        - read-only
-
         The icon name of the first device in the list.
         """
         result = None
@@ -74,8 +67,6 @@ class Wifi(IgnisGObject):
     @IgnisProperty
     def enabled(self) -> bool:
         """
-        - read-write
-
         Whether Wi-Fi is enabled.
         """
         return self._client.wireless_get_enabled()

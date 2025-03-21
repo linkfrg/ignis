@@ -1,5 +1,4 @@
-from gi.repository import GObject  # type: ignore
-from ignis.gobject import IgnisGObject, IgnisProperty
+from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
 from .ethernet_device import EthernetDevice
 from ._imports import NM
 
@@ -22,7 +21,7 @@ class Ethernet(IgnisGObject):
         for device in self._client.get_devices():
             self.__add_device(None, device, False)
 
-    @GObject.Signal
+    @IgnisSignal
     def new_device(self, device: EthernetDevice):
         """
         Emitted when a new Ethernet device is added.
@@ -34,8 +33,6 @@ class Ethernet(IgnisGObject):
     @IgnisProperty
     def devices(self) -> list[EthernetDevice]:
         """
-        - read-only
-
         A list of Ethernet devices.
         """
         return list(self._devices.values())
@@ -43,8 +40,6 @@ class Ethernet(IgnisGObject):
     @IgnisProperty
     def is_connected(self) -> bool:
         """
-        - read-only
-
         Whether at least one Ethernet device is connected to the network.
         """
         for i in self.devices:
@@ -55,8 +50,6 @@ class Ethernet(IgnisGObject):
     @IgnisProperty
     def icon_name(self) -> str:
         """
-        - read-only
-
         The general icon name for all devices, depends on ``is_connected`` property.
         """
         if self.is_connected:

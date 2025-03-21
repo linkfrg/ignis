@@ -60,8 +60,6 @@ class BacklightService(BaseService):
     @IgnisProperty
     def available(self) -> bool:
         """
-        - read-only
-
         Whether there are controllable backlight devices.
         """
         return len(self._devices) > 0
@@ -69,8 +67,6 @@ class BacklightService(BaseService):
     @IgnisProperty
     def devices(self) -> list[BacklightDevice]:
         """
-        - read-only
-
         A list of all backlight devices.
         """
         return self._devices
@@ -78,8 +74,6 @@ class BacklightService(BaseService):
     @IgnisProperty
     def brightness(self) -> int:
         """
-        - read-write
-
         The current brightness of the first backlight device in the list, ``-1`` if there are no backlight devices.
         Setting this property will set provided brightness on ALL backlight devices.
         """
@@ -106,8 +100,6 @@ class BacklightService(BaseService):
     @IgnisProperty
     def max_brightness(self) -> int:
         """
-        - read-only
-
         The maximum brightness allowed by the first backlight device in the list, ``-1`` if there are no backlight devices.
         """
         if len(self._devices) > 0:

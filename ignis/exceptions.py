@@ -16,8 +16,6 @@ class WindowNotFoundError(Exception):
     @property
     def window_name(self) -> str:
         """
-        - read-only
-
         The name of the window.
         """
         return self._window_name
@@ -38,8 +36,6 @@ class WindowAddedError(Exception):
     @property
     def window_name(self) -> str:
         """
-        - read-only
-
         The name of the window.
         """
         return self._window_name
@@ -124,8 +120,6 @@ class GstPluginNotFoundError(Exception):
     @property
     def plugin_name(self) -> str:
         """
-        - read-only
-
         The name of the plugin.
         """
         return self._plugin_name
@@ -133,8 +127,6 @@ class GstPluginNotFoundError(Exception):
     @property
     def plugin_package(self) -> str:
         """
-        - read-only
-
         The package name of the plugin.
         """
         return self._plugin_package
@@ -155,8 +147,6 @@ class SassCompilationError(Exception):
     @property
     def stderr(self) -> str:
         """
-        - read-only
-
         The stderr output from the Sass compiler.
         """
         return self._stderr
@@ -189,8 +179,6 @@ class MonitorNotFoundError(Exception):
     @property
     def monitor_id(self) -> int:
         """
-        - read-only
-
         The ID of the monitor.
         """
         return self._monitor_id
@@ -234,8 +222,6 @@ class DBusMethodNotFoundError(Exception):
     @property
     def method_name(self) -> str:
         """
-        - read-only
-
         The name of the D-Bus method.
         """
         return self._method_name
@@ -258,8 +244,6 @@ class DBusPropertyNotFoundError(Exception):
     @property
     def property_name(self) -> str:
         """
-        - read-only
-
         The name of the D-Bus property.
         """
         return self._property_name
@@ -291,8 +275,6 @@ class StylePathNotFoundError(Exception):
     @property
     def style_path(self) -> str:
         """
-        - read-only
-
         Path to the .css/.scss/.sass file.
         """
         return self._style_path
@@ -313,8 +295,6 @@ class StylePathAppliedError(Exception):
     @property
     def style_path(self) -> str:
         """
-        - read-only
-
         Path to the .css/.scss/.sass file.
         """
         return self._style_path
@@ -350,8 +330,6 @@ class CssParsingError(Exception):
     @property
     def section(self) -> Gtk.CssSection:
         """
-        - read-only
-
         The section the error happened in.
         """
         return self._section
@@ -359,8 +337,6 @@ class CssParsingError(Exception):
     @property
     def gerror(self) -> GLib.Error:
         """
-        - read-only
-
         The parsing error.
         """
         return self._gerror
@@ -383,8 +359,6 @@ class AnotherNotificationDaemonRunningError(Exception):
     @property
     def name(self) -> str:
         """
-        - read-only
-
         The name of the currenly running notification daemon.
         """
         return self._name
@@ -405,8 +379,6 @@ class AnotherSystemTrayRunningError(Exception):
     @property
     def name(self) -> str:
         """
-        - read-only
-
         The name of the currenly running system tray.
         """
         return self._name

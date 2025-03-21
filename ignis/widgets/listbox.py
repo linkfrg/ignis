@@ -45,8 +45,6 @@ class ListBox(Gtk.ListBox, BaseWidget):
     @IgnisProperty
     def rows(self) -> list[ListBoxRow]:
         """
-        - read-write
-
         A list of rows.
         """
         return self._rows

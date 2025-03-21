@@ -30,8 +30,6 @@ class Variable(IgnisGObject):
     @IgnisProperty
     def value(self) -> Any:
         """
-        - read-write
-
         A value.
         """
         return self._value

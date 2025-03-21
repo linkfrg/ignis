@@ -75,8 +75,6 @@ class RevealerWindow(Window):
     @IgnisProperty
     def revealer(self) -> Revealer:
         """
-        - read-write
-
         An instance of :class:`~ignis.widgets.Widget.Revealer`.
         """
         return self._revealer

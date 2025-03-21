@@ -42,8 +42,6 @@ class Box(Gtk.Box, BaseWidget):
     @IgnisProperty
     def child(self) -> list[Gtk.Widget]:
         """
-        - read-write
-
         A list of child widgets.
         """
         return self._child
@@ -84,8 +82,6 @@ class Box(Gtk.Box, BaseWidget):
     @IgnisProperty
     def vertical(self) -> bool:
         """
-        - read-write
-
         Whether the box arranges children vertically.
 
         Default: ``False``.

@@ -69,8 +69,6 @@ class DBusService(IgnisGObject):
     @IgnisProperty
     def name(self) -> str:
         """
-        - read-only
-
         The well-known name to own.
         """
         return self._name
@@ -78,8 +76,6 @@ class DBusService(IgnisGObject):
     @IgnisProperty
     def object_path(self) -> str:
         """
-        - read-only
-
         An object path.
         """
         return self._object_path
@@ -87,8 +83,6 @@ class DBusService(IgnisGObject):
     @IgnisProperty
     def info(self) -> Gio.DBusInterfaceInfo:
         """
-        - read-only
-
         An instance of :class:`Gio.DBusInterfaceInfo`
 
         You can get it from XML using :func:`~ignis.utils.Utils.load_interface_xml`.
@@ -98,8 +92,6 @@ class DBusService(IgnisGObject):
     @IgnisProperty
     def on_name_acquired(self) -> Callable:
         """
-        - read-write
-
         The function to call when ``name`` is acquired.
         """
         return self._on_name_acquired
@@ -111,8 +103,6 @@ class DBusService(IgnisGObject):
     @IgnisProperty
     def on_name_lost(self) -> Callable:
         """
-        - read-write
-
         The function to call when ``name`` is lost.
         """
         return self._on_name_lost
@@ -124,8 +114,6 @@ class DBusService(IgnisGObject):
     @IgnisProperty
     def connection(self) -> Gio.DBusConnection:
         """
-        - read-only
-
         The instance of :class:`Gio.DBusConnection` for this service.
         """
         return self._connection
@@ -133,8 +121,6 @@ class DBusService(IgnisGObject):
     @IgnisProperty
     def methods(self) -> dict[str, Callable]:
         """
-        - read-only
-
         The dictionary of registred DBus methods. See :func:`~ignis.dbus.DBusService.register_dbus_method`.
         """
         return self._methods
@@ -142,8 +128,6 @@ class DBusService(IgnisGObject):
     @IgnisProperty
     def properties(self) -> dict[str, Callable]:
         """
-        - read-only
-
         The dictionary of registred DBus properties. See :func:`~ignis.dbus.DBusService.register_dbus_property`.
         """
         return self._properties
@@ -379,8 +363,6 @@ class DBusProxy(IgnisGObject):
     @IgnisProperty
     def name(self) -> str:
         """
-        - read-only
-
         A bus name (well-known or unique).
         """
         return self._gproxy.props.g_name
@@ -388,8 +370,6 @@ class DBusProxy(IgnisGObject):
     @IgnisProperty
     def object_path(self) -> str:
         """
-        - read-only
-
         An object path.
         """
         return self._gproxy.props.g_object_path
@@ -397,8 +377,6 @@ class DBusProxy(IgnisGObject):
     @IgnisProperty
     def interface_name(self) -> str:
         """
-        - read-only
-
         A D-Bus interface name.
         """
         return self._gproxy.props.g_interface_name
@@ -406,8 +384,6 @@ class DBusProxy(IgnisGObject):
     @IgnisProperty
     def info(self) -> Gio.DBusInterfaceInfo:
         """
-        - read-only
-
         A :class:`Gio.DBusInterfaceInfo` instance.
 
         You can get it from XML using :class:`~ignis.utils.Utils.load_interface_xml`.
@@ -417,8 +393,6 @@ class DBusProxy(IgnisGObject):
     @IgnisProperty
     def bus_type(self) -> Literal["session", "system"]:
         """
-        - read-only
-
         The type of the bus.
         """
         return self._bus_type
@@ -426,8 +400,6 @@ class DBusProxy(IgnisGObject):
     @IgnisProperty
     def gproxy(self) -> Gio.DBusProxy:
         """
-        - read-only
-
         The :class:`Gio.DBusProxy` instance.
         """
         return self._gproxy
@@ -435,8 +407,6 @@ class DBusProxy(IgnisGObject):
     @IgnisProperty
     def connection(self) -> Gio.DBusConnection:
         """
-        - read-only
-
         The instance of :class:`Gio.DBusConnection` for this proxy.
         """
         return self._gproxy.get_connection()
@@ -444,8 +414,6 @@ class DBusProxy(IgnisGObject):
     @IgnisProperty
     def methods(self) -> list[str]:
         """
-        - read-only
-
         A list of methods exposed by D-Bus service.
         """
         return self._methods
@@ -453,8 +421,6 @@ class DBusProxy(IgnisGObject):
     @IgnisProperty
     def properties(self) -> list[str]:
         """
-        - read-only
-
         A list of properties exposed by D-Bus service.
         """
         return self._properties
@@ -462,8 +428,6 @@ class DBusProxy(IgnisGObject):
     @IgnisProperty
     def has_owner(self) -> bool:
         """
-        - read-only
-
         Whether the ``name`` has an owner.
         """
         dbus = DBusProxy.new(

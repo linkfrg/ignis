@@ -1,6 +1,5 @@
 import json
-from gi.repository import GObject  # type: ignore
-from ignis.gobject import IgnisGObject, Binding, IgnisProperty
+from ignis.gobject import IgnisGObject, Binding, IgnisProperty, IgnisSignal
 from ignis.utils import Utils
 from typing import Any
 from collections.abc import Callable
@@ -50,22 +49,18 @@ class OptionsGroup(IgnisGObject):
             )
             subgroup.connect("autosave", lambda *_: self.emit("autosave"))
 
-    @GObject.Signal
+    @IgnisSignal
     def changed(self, option_name: str):
         """
-        - Signal
-
         Emitted when an option of this group has changed
 
         Args:
             option_name: The name of the option.
         """
 
-    @GObject.Signal
+    @IgnisSignal
     def subgroup_changed(self, subgroup_name: str, option_name: str):
         """
-        - Signal
-
         Emitted when an option of a subgroup has changed
 
         Args:
@@ -73,7 +68,7 @@ class OptionsGroup(IgnisGObject):
             option_name: The name of the option.
         """
 
-    @GObject.Signal
+    @IgnisSignal
     def autosave(self):
         """
         - Signal

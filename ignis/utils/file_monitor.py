@@ -1,6 +1,6 @@
 import os
-from gi.repository import GObject, Gio  # type: ignore
-from ignis.gobject import IgnisGObject, IgnisProperty
+from gi.repository import Gio  # type: ignore
+from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
 from collections.abc import Callable
 
 EVENT = {
@@ -77,11 +77,9 @@ class FileMonitor(IgnisGObject):
             "changed", lambda *args: self._callback(*args) if self._callback else None
         )
 
-    @GObject.Signal
+    @IgnisSignal
     def changed(self, path: str, event_type: str):
         """
-        - Signal
-
         Emitted when the file or directory changed.
 
         Args:
@@ -110,8 +108,6 @@ class FileMonitor(IgnisGObject):
     @IgnisProperty
     def path(self) -> str:
         """
-        - read-only
-
         The path to the file or directory to be monitored.
         """
         return self._path
@@ -119,8 +115,6 @@ class FileMonitor(IgnisGObject):
     @IgnisProperty
     def flags(self) -> Gio.FileMonitorFlags:
         """
-        - read-only
-
         What the monitor will watch for.
 
         See :class:`Gio.FileMonitorFlags` for more info.
@@ -130,8 +124,6 @@ class FileMonitor(IgnisGObject):
     @IgnisProperty
     def callback(self) -> Callable | None:
         """
-        - read-write
-
         A function to call when the file or directory changes.
         It should take two arguments:
         1. The path to the changed file or directory
@@ -163,8 +155,6 @@ class FileMonitor(IgnisGObject):
     @IgnisProperty
     def recursive(self) -> bool:
         """
-        - read-only
-
         Whether monitoring is recursive (monitor all subdirectories and files).
         """
         return self._recursive
@@ -172,8 +162,6 @@ class FileMonitor(IgnisGObject):
     @IgnisProperty
     def prevent_gc(self) -> bool:
         """
-        - read-only
-
         Whether to prevent the garbage collector from collecting this file monitor.
         """
         return self._prevent_gc

@@ -116,8 +116,6 @@ class EventBox(Box):
     @IgnisProperty
     def on_click(self) -> Callable:
         """
-        - read-write
-
         The function to call on left click.
         """
         return self._on_click
@@ -132,8 +130,6 @@ class EventBox(Box):
     @IgnisProperty
     def on_right_click(self) -> Callable:
         """
-        - read-write
-
         The function to call on right click.
         """
         return self._on_right_click
@@ -150,8 +146,6 @@ class EventBox(Box):
     @IgnisProperty
     def on_middle_click(self) -> Callable:
         """
-        - read-write
-
         The function to call on middle click.
         """
         return self._on_middle_click
@@ -168,8 +162,6 @@ class EventBox(Box):
     @IgnisProperty
     def on_hover(self) -> Callable:
         """
-        - read-write
-
         The function to call on hover.
         """
         return self._on_hover
@@ -182,8 +174,6 @@ class EventBox(Box):
     @IgnisProperty
     def on_hover_lost(self) -> Callable:
         """
-        - read-write
-
         The function to call on hover lost.
         """
         return self._on_hover_lost
@@ -196,8 +186,6 @@ class EventBox(Box):
     @IgnisProperty
     def scroll_flags(self) -> Gtk.EventControllerScrollFlags:
         """
-        - read-only
-
         Flags affecting the :class:`Gtk.EventControllerScroll` behavior.
         """
         return self._scroll_flags
@@ -205,8 +193,6 @@ class EventBox(Box):
     @IgnisProperty
     def on_scroll_up(self) -> Callable:
         """
-        - read-write
-
         The function to call on scroll up.
         """
         return self._on_scroll_up
@@ -219,8 +205,6 @@ class EventBox(Box):
     @IgnisProperty
     def on_scroll_down(self) -> Callable:
         """
-        - read-write
-
         The function to call on scroll down.
         """
         return self._on_scroll_down
@@ -233,8 +217,6 @@ class EventBox(Box):
     @IgnisProperty
     def on_scroll_right(self) -> Callable:
         """
-        - read-write
-
         The function to call on scroll right.
         """
         return self._on_scroll_right
@@ -247,8 +229,6 @@ class EventBox(Box):
     @IgnisProperty
     def on_scroll_left(self) -> Callable:
         """
-        - read-write
-
         The function to call on scroll left.
         """
         return self._on_scroll_left

@@ -35,8 +35,6 @@ class DropDown(Gtk.DropDown, BaseWidget):
     @IgnisProperty
     def items(self) -> list[str]:
         """
-        - read-write
-
         A list of strings that can be selected in the popover.
         """
         return self._items
@@ -53,8 +51,6 @@ class DropDown(Gtk.DropDown, BaseWidget):
     @IgnisProperty
     def on_selected(self) -> Callable | None:
         """
-        - read-write
-
         The function to call when the user selects an item from the list.
         """
         return self._on_selected
@@ -70,8 +66,6 @@ class DropDown(Gtk.DropDown, BaseWidget):
     @IgnisProperty
     def selected(self) -> str:
         """
-        - read-only
-
         The selected string. It is a shortcut for ``self.selected_item.props.string``.
         """
         return self.selected_item.props.string

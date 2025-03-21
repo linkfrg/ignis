@@ -33,8 +33,6 @@ class ArrowButton(Button):
     @IgnisProperty
     def arrow(self) -> Arrow:
         """
-        - read-only
-
         An instance of an arrow.
         """
         return self._arrow

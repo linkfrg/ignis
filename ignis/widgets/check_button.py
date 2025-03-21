@@ -50,8 +50,6 @@ class CheckButton(Gtk.CheckButton, BaseWidget):
     @IgnisProperty
     def on_toggled(self) -> Callable | None:
         """
-        - read-write
-
         The function to call when button is toggled (checked/unchecked).
         """
         return self._on_toggled

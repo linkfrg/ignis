@@ -1,5 +1,4 @@
-from gi.repository import GObject  # type: ignore
-from ignis.gobject import IgnisGObject, IgnisProperty
+from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
 from ._imports import NM
 from .access_point import WifiAccessPoint, ActiveAccessPoint
 from .constants import STATE
@@ -33,13 +32,13 @@ class WifiDevice(IgnisGObject):
         for i in self._device.get_access_points():
             self.__add_access_point(None, i, False)
 
-    @GObject.Signal
+    @IgnisSignal
     def removed(self):
         """
         Emitted when this Wi-Fi device is removed.
         """
 
-    @GObject.Signal
+    @IgnisSignal
     def new_access_point(self, access_point: WifiAccessPoint):
         """
         Emitted when a new access point is added.
@@ -51,8 +50,6 @@ class WifiDevice(IgnisGObject):
     @IgnisProperty
     def access_points(self) -> list[WifiAccessPoint]:
         """
-        - read-only
-
         A list of access points (Wi-FI networks).
         """
         return list(self._access_points.values())
@@ -60,8 +57,6 @@ class WifiDevice(IgnisGObject):
     @IgnisProperty
     def ap(self) -> WifiAccessPoint:
         """
-        - read-only
-
         The currently active access point.
         """
         return self._ap
@@ -69,8 +64,6 @@ class WifiDevice(IgnisGObject):
     @IgnisProperty
     def state(self) -> str | None:
         """
-        - read-only
-
         The current state of the device or ``None`` if unknown.
         """
         return STATE.get(self._device.get_state(), None)
@@ -78,8 +71,6 @@ class WifiDevice(IgnisGObject):
     @IgnisProperty
     def is_connected(self) -> bool:
         """
-        - read-only
-
         Whether the device is connected to a Wi-Fi network.
         """
         return bool(self._device.get_active_connection())

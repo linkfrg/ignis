@@ -1,5 +1,4 @@
-from gi.repository import GObject  # type: ignore
-from ignis.gobject import IgnisProperty, DataGObject
+from ignis.gobject import IgnisProperty, IgnisSignal, DataGObject
 
 MATCH_DICT = {
     "monitorID": "monitor_id",
@@ -26,19 +25,15 @@ class HyprlandWorkspace(DataGObject):
         self._last_window: str = ""
         self._last_window_title: str = ""
 
-    @GObject.Signal
+    @IgnisSignal
     def destroyed(self):
         """
-        - Signal
-
         Emitted when the workspace has been destroyed.
         """
 
     @IgnisProperty
     def id(self) -> int:
         """
-        - read-only
-
         The ID of the workspace.
         """
         return self._id
@@ -46,8 +41,6 @@ class HyprlandWorkspace(DataGObject):
     @IgnisProperty
     def name(self) -> str:
         """
-        - read-only
-
         The name of the workspace.
         """
         return self._name
@@ -55,8 +48,6 @@ class HyprlandWorkspace(DataGObject):
     @IgnisProperty
     def monitor(self) -> str:
         """
-        - read-only
-
         The monitor on which the workspace is placed.
         """
         return self._monitor
@@ -64,8 +55,6 @@ class HyprlandWorkspace(DataGObject):
     @IgnisProperty
     def monitor_id(self) -> int:
         """
-        - read-only
-
         The ID of the monitor on which the workspace is placed.
         """
         return self._monitor_id
@@ -73,8 +62,6 @@ class HyprlandWorkspace(DataGObject):
     @IgnisProperty
     def windows(self) -> int:
         """
-        - read-only
-
         The amount of windows on the workspace.
         """
         return self._windows
@@ -82,8 +69,6 @@ class HyprlandWorkspace(DataGObject):
     @IgnisProperty
     def has_fullscreen(self) -> bool:
         """
-        - read-only
-
         Whether the workspace has a fullscreen window.
         """
         return self._has_fullscreen
@@ -91,8 +76,6 @@ class HyprlandWorkspace(DataGObject):
     @IgnisProperty
     def last_window(self) -> str:
         """
-        - read-only
-
         The latest window.
         """
         return self._last_window
@@ -100,8 +83,6 @@ class HyprlandWorkspace(DataGObject):
     @IgnisProperty
     def last_window_title(self) -> str:
         """
-        - read-only
-
         The latest window title.
         """
         return self._last_window_title
