@@ -198,6 +198,29 @@ class NiriService(BaseService):
         self.notify("active-window")
         self.notify("windows")
 
+    def __update_niri_obj(
+        self, niri_obj: dict, fresh_data: list, obj_type=NiriWindow | NiriWorkspace
+    ) -> None:
+        for fresh_item in fresh_data:
+            obj = niri_obj.get(fresh_item["id"], None)
+            if obj is None:
+                obj = obj_type(self)
+
+            obj.sync(fresh_item)
+            niri_obj[fresh_item["id"]] = obj
+
+    def __cleanup_niri_obj(self, niri_obj: dict, fresh_data: list) -> None:
+        for id_, item in niri_obj.copy().items():
+            still_exists = False
+            for fresh_item in fresh_data:
+                if fresh_item["id"] == id_:
+                    still_exists = True
+                    break
+
+            if not still_exists:
+                niri_obj.pop(id_)
+                item.emit("destroyed")
+
     def __update_windows(self, data: dict) -> None:
         windows = data["windows"]
         # WindowsChanged means a full replacement of window configuration.
@@ -215,29 +238,6 @@ class NiriService(BaseService):
 
         self.notify("active-window")
         self.notify("windows")
-
-    def __cleanup_niri_obj(self, niri_obj: dict, fresh_data: list) -> None:
-        for id_, item in niri_obj.copy().items():
-            still_exists = False
-            for fresh_item in fresh_data:
-                if fresh_item["id"] == id_:
-                    still_exists = True
-                    break
-
-            if not still_exists:
-                niri_obj.pop(id_)
-                item.emit("destroyed")
-
-    def __update_niri_obj(
-        self, niri_obj: dict, fresh_data: list, obj_type=NiriWindow | NiriWorkspace
-    ) -> None:
-        for fresh_item in fresh_data:
-            obj = niri_obj.get(fresh_item["id"], None)
-            if obj is None:
-                obj = obj_type(self)
-
-            obj.sync(fresh_item)
-            niri_obj[fresh_item["id"]] = obj
 
     def __sort_workspaces(self) -> None:
         self._workspaces = dict(
