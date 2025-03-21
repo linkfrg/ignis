@@ -21,16 +21,12 @@ class NiriWorkspace(DataGObject):
     @GObject.Signal
     def destroyed(self):
         """
-        - Signal
-
         Emitted when the workspace has been destroyed.
         """
 
     @IgnisProperty
     def id(self) -> int:
         """
-        - read-only
-
         The unique ID of the workspace.
         """
         return self._id
@@ -38,8 +34,6 @@ class NiriWorkspace(DataGObject):
     @IgnisProperty
     def idx(self) -> int:
         """
-        - read-only
-
         The index of the workspace on its monitor.
         """
         return self._idx
@@ -47,8 +41,6 @@ class NiriWorkspace(DataGObject):
     @IgnisProperty
     def name(self) -> str:
         """
-        - read-only
-
         The name of the workspace.
         """
         return self._name
@@ -56,8 +48,6 @@ class NiriWorkspace(DataGObject):
     @IgnisProperty
     def output(self) -> str:
         """
-        - read-only
-
         The name of the output on which the workspace is placed.
         """
         return self._output
@@ -65,8 +55,6 @@ class NiriWorkspace(DataGObject):
     @IgnisProperty
     def is_active(self) -> bool:
         """
-        - read-only
-
         Whether the workspace is currently active on its output.
         """
         return self._is_active
@@ -74,8 +62,6 @@ class NiriWorkspace(DataGObject):
     @IgnisProperty
     def is_focused(self) -> bool:
         """
-        - read-only
-
         Whether the workspace is currently focused.
         """
         return self._is_focused
@@ -83,8 +69,6 @@ class NiriWorkspace(DataGObject):
     @IgnisProperty
     def active_window_id(self) -> int:
         """
-        - read-only
-
         The ID of the active window on this workspace.
         """
         return self._active_window_id

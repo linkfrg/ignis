@@ -61,8 +61,6 @@ class NiriService(BaseService):
     @GObject.Signal()
     def workspace_added(self, workspace: NiriWorkspace):
         """
-        - Signal
-
         Emitted when a new workspace has been added.
 
         Args:
@@ -72,8 +70,6 @@ class NiriService(BaseService):
     @IgnisProperty
     def is_available(self) -> bool:
         """
-        - read-only
-
         Whether Niri IPC is available.
         """
         if NIRI_SOCKET is not None:
@@ -84,8 +80,6 @@ class NiriService(BaseService):
     @IgnisProperty
     def keyboard_layouts(self) -> NiriKeyboardLayouts:
         """
-        - read-only
-
         The currenly configured keyboard layouts.
         """
         return self._keyboard_layouts
@@ -93,8 +87,6 @@ class NiriService(BaseService):
     @IgnisProperty
     def windows(self) -> list[NiriWindow]:
         """
-        - read-only
-
         A list of windows.
         """
         return list(self._windows.values())
@@ -102,8 +94,6 @@ class NiriService(BaseService):
     @IgnisProperty
     def active_window(self) -> NiriWindow:
         """
-        - read-only
-
         The currenly focused window.
         """
         return self._active_window
@@ -111,8 +101,6 @@ class NiriService(BaseService):
     @IgnisProperty
     def workspaces(self) -> list[NiriWorkspace]:
         """
-        - read-only
-
         A list of workspaces.
         """
         return list(self._workspaces.values())
@@ -120,8 +108,6 @@ class NiriService(BaseService):
     @IgnisProperty
     def active_output(self) -> str:
         """
-        - read-only
-
         The currenly focused output.
         """
         return self._active_output

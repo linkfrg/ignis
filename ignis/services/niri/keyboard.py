@@ -16,8 +16,6 @@ class NiriKeyboardLayouts(DataGObject):
     @IgnisProperty
     def names(self) -> list:
         """
-        - read-only
-
         XKB names of the configured layouts.
         """
         return self._names
@@ -25,8 +23,6 @@ class NiriKeyboardLayouts(DataGObject):
     @IgnisProperty
     def current_idx(self) -> int:
         """
-        - read-only
-
         Index of the currently active layout in names.
         """
         return self._current_idx
@@ -34,8 +30,6 @@ class NiriKeyboardLayouts(DataGObject):
     @IgnisProperty
     def current_name(self) -> str:
         """
-        - read-only
-
         Name of the currently active layout.
         """
         return self._names[self._current_idx]

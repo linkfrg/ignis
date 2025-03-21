@@ -22,16 +22,12 @@ class NiriWindow(DataGObject):
     @GObject.Signal
     def destroyed(self):
         """
-        - Signal
-
         Emitted when the window has been destroyed.
         """
 
     @IgnisProperty
     def id(self) -> int:
         """
-        - read-only
-
         The unique ID of the window.
         """
         return self._id
@@ -39,8 +35,6 @@ class NiriWindow(DataGObject):
     @IgnisProperty
     def title(self) -> str:
         """
-        - read-only
-
         The title of the window.
         """
         return self._title
@@ -48,8 +42,6 @@ class NiriWindow(DataGObject):
     @IgnisProperty
     def app_id(self) -> str:
         """
-        - read-only
-
         Application ID of the window.
         """
         return self._app_id
@@ -57,8 +49,6 @@ class NiriWindow(DataGObject):
     @IgnisProperty
     def pid(self) -> int:
         """
-        - read-only
-
         The PID of the window.
         """
         return self._pid
@@ -66,8 +56,6 @@ class NiriWindow(DataGObject):
     @IgnisProperty
     def workspace_id(self) -> int:
         """
-        - read-only
-
         The ID of the workspace where the window is placed.
         """
         return self._workspace_id
@@ -75,8 +63,6 @@ class NiriWindow(DataGObject):
     @IgnisProperty
     def is_focused(self) -> bool:
         """
-        - read-only
-
         Whether the window is focused.
         """
         return self._is_focused
@@ -84,8 +70,6 @@ class NiriWindow(DataGObject):
     @IgnisProperty
     def is_floating(self) -> bool:  # type: ignore
         """
-        - read-only
-
         Whether the window is floating.
         """
         return self._is_floating
