@@ -10,6 +10,9 @@ class Button(Gtk.Button, BaseWidget):
 
     A button.
 
+    Args:
+        **kwargs: Properties to set.
+
     .. code-block:: python
 
         Widget.Button(

@@ -13,6 +13,9 @@ class Icon(Gtk.Image, BaseWidget):
 
     If you want to display an image at its native aspect ratio, see :class:`~ignis.widgets.picture.Picture`.
 
+    Args:
+        **kwargs: Properties to set.
+
     .. code-block:: python
 
         Widget.Icon(

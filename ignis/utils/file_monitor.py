@@ -3,15 +3,6 @@ from gi.repository import Gio  # type: ignore
 from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
 from collections.abc import Callable
 
-FLAGS = {
-    None: Gio.FileMonitorFlags.NONE,
-    "none": Gio.FileMonitorFlags.NONE,
-    "watch_mounts": Gio.FileMonitorFlags.WATCH_MOUNTS,
-    "send_moved": Gio.FileMonitorFlags.SEND_MOVED,
-    "watch_hard_links": Gio.FileMonitorFlags.WATCH_HARD_LINKS,
-    "watch_moves": Gio.FileMonitorFlags.WATCH_MOVES,
-}
-
 EVENT = {
     Gio.FileMonitorEvent.CHANGED: "changed",
     Gio.FileMonitorEvent.CHANGES_DONE_HINT: "changes_done_hint",
@@ -33,6 +24,13 @@ class FileMonitor(IgnisGObject):
     """
     Monitor changes of the file or directory.
 
+    Args:
+        path: The path to the file or directory to be monitored.
+        recursive: Whether monitoring is recursive (monitor all subdirectories and files).
+        flags: What the monitor will watch for. See :class:`Gio.FileMonitorFlags` for more info.
+        callback: A function to call when the file or directory changes. See :attr:`callback` for more info.
+        prevent_gc: Whether to prevent the garbage collector from collecting this file monitor.
+
     Example usage:
 
     .. code-block::
@@ -48,13 +46,13 @@ class FileMonitor(IgnisGObject):
         self,
         path: str,
         recursive: bool = False,
-        flags: str | None = None,
+        flags: Gio.FileMonitorFlags = Gio.FileMonitorFlags.NONE,
         callback: Callable | None = None,
         prevent_gc: bool = True,
     ):
         super().__init__()
         self._file = Gio.File.new_for_path(path)
-        self._monitor = self._file.monitor(FLAGS[flags], None)
+        self._monitor = self._file.monitor(flags, None)
         self._monitor.connect("changed", self.__on_change)
 
         self._path = path
@@ -102,7 +100,7 @@ class FileMonitor(IgnisGObject):
             return
 
         sub_gfile = Gio.File.new_for_path(path)
-        monitor = sub_gfile.monitor(FLAGS[self.flags], None)
+        monitor = sub_gfile.monitor(self.flags, None)
         monitor.connect("changed", self.__on_change)
         self._sub_monitors.append(monitor)
         self._sub_paths.append(path)
@@ -115,21 +113,11 @@ class FileMonitor(IgnisGObject):
         return self._path
 
     @IgnisProperty
-    def flags(self) -> str | None:
+    def flags(self) -> Gio.FileMonitorFlags:
         """
         What the monitor will watch for.
 
-        Possible values:
-
-        - none
-        - watch_mounts
-        - send_moved
-        - watch_hard_links
-        - watch_moves
-
         See :class:`Gio.FileMonitorFlags` for more info.
-
-        Default: ``None``.
         """
         return self._flags
 
@@ -140,8 +128,6 @@ class FileMonitor(IgnisGObject):
         It should take two arguments:
         1. The path to the changed file or directory
         2. The event type.
-
-        Default: ``None``.
 
         Event types:
 
@@ -170,8 +156,6 @@ class FileMonitor(IgnisGObject):
     def recursive(self) -> bool:
         """
         Whether monitoring is recursive (monitor all subdirectories and files).
-
-        Default: ``False``.
         """
         return self._recursive
 
@@ -179,8 +163,6 @@ class FileMonitor(IgnisGObject):
     def prevent_gc(self) -> bool:
         """
         Whether to prevent the garbage collector from collecting this file monitor.
-
-        Default: ``True``.
         """
         return self._prevent_gc
 

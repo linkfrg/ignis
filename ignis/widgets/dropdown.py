@@ -10,6 +10,9 @@ class DropDown(Gtk.DropDown, BaseWidget):
 
     A widget that allows the user to choose an item from a list of options.
 
+    Args:
+        **kwargs: Properties to set.
+
     .. code-block:: python
 
         Widget.DropDown(

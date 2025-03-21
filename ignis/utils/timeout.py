@@ -7,6 +7,10 @@ class Timeout(IgnisGObject):
     """
     Calls a function after a specified time interval.
 
+    Args:
+        ms: Time in milliseconds.
+        target: The function to call.
+
     Example usage:
 
     .. code-block:: python

@@ -9,6 +9,10 @@ class ArrowButton(Button):
 
     A simple button with an arrow. On click, it will toggle (rotate) the arrow.
 
+    Args:
+        arrow: An instance of an arrow.
+        **kwargs: Properties to set.
+
     .. code-block:: python
 
         Widget.ArrowButton(

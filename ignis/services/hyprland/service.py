@@ -109,10 +109,10 @@ class HyprlandService(BaseService):
         event_value = event_data[1]
 
         match event_type:
-            case "destroyworkspace":
-                self.__destroy_workspace(int(event_value))
-            case "createworkspace":
-                self.__create_workspace(int(event_value))
+            case "destroyworkspacev2":
+                self.__destroy_workspace(int(event_value.split(",")[0]))
+            case "createworkspacev2":
+                self.__create_workspace(int(event_value.split(",")[0]))
             case "workspace":
                 self.__sync_active_workspace()
             case "focusedmon":
@@ -121,6 +121,8 @@ class HyprlandService(BaseService):
                 self.__sync_active_layout(event_value.split(",")[1])
             case "activewindow":
                 self.__sync_active_window()
+            case "renameworkspace":
+                self.__sync_workspaces()
 
     def __create_workspace(self, id_: int) -> None:
         for i in json.loads(self.send_command("j/workspaces")):

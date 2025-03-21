@@ -187,11 +187,9 @@ class FetchService(BaseService):
                     break
         return cpu_name
 
-    @IgnisProperty
-    def cpu_temp(self) -> float:
-        """
-        Current CPU temperature.
-        """
+    # Get CPU temperature from x86_pkg_temp driver used by various Intel CPUs
+    # Returns None if not found
+    def __get_x86_pkg_temp(self) -> float | None:
         for thermal_zone in glob.glob("/sys/class/thermal/thermal_zone*"):
             type_path = os.path.join(thermal_zone, "type")
             temp_path = os.path.join(thermal_zone, "temp")
@@ -204,7 +202,44 @@ class FetchService(BaseService):
                         return int(temp_file.read().strip()) / 1000.0
             except FileNotFoundError:
                 continue
-        return -1.0
+        return None
+
+    # Get CPU temperature from k10temp driver used by various AMD CPUs
+    # Returns None if not found
+    def __get_k10temp(self) -> float | None:
+        for hwmon in glob.glob("/sys/class/hwmon/*"):
+            name_path = os.path.join(hwmon, "name")
+            try:
+                with open(name_path) as name_file:
+                    name = name_file.read().strip()
+
+                if name == "k10temp":
+                    for temp_label_path, temp_input_path in zip(
+                        glob.glob(os.path.join(hwmon, "temp*_label")),
+                        glob.glob(os.path.join(hwmon, "temp*_input")),
+                        strict=True,
+                    ):
+                        try:
+                            with open(temp_label_path) as temp_label_file:
+                                temp_label = temp_label_file.read().strip()
+
+                            if temp_label == "Tctl":
+                                with open(temp_input_path) as temp_input_file:
+                                    return int(temp_input_file.read().strip()) / 1000.0
+                        except FileNotFoundError:
+                            continue
+            except FileNotFoundError:
+                continue
+        return None
+
+    @IgnisProperty
+    def cpu_temp(self) -> float:
+        """
+        - read-only
+
+        Current CPU temperature.
+        """
+        return self.__get_x86_pkg_temp() or self.__get_k10temp() or -1.0
 
     @IgnisProperty
     def mem_info(self) -> dict[str, int]:

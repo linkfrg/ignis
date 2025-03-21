@@ -14,6 +14,13 @@ class DBusService(IgnisGObject):
     """
     A class that helps create a D-Bus service.
 
+    Args:
+        name: The well-known name to own.
+        object_path: An object path.
+        info: An instance of :class:`Gio.DBusInterfaceInfo`. You can get it from XML using :func:`~ignis.utils.Utils.load_interface_xml`.
+        on_name_acquired: The function to call when ``name`` is acquired.
+        on_name_lost: The function to call when ``name`` is lost.
+
     .. code-block:: python
 
         from gi.repository import Gio, GLib

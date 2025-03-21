@@ -9,6 +9,9 @@ class Box(Gtk.Box, BaseWidget):
 
     The main layout widget.
 
+    Args:
+        **kwargs: Properties to set.
+
     .. hint::
         You can use generators to set children.
 

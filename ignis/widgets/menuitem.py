@@ -18,6 +18,12 @@ class MenuItem(IgnisGObject):
     A class that represent a menu item.
     Intended for use in :class:`~ignis.widgets.Widget.PopoverMenu`.
 
+    Args:
+        label: The label of item.
+        enabled: Whether the item is enabled. If ``False``, the item cannot be selected.
+        on_activate: The function to call when the user clicks on the item.
+        submenu: The :class:`~ignis.widgets.Widget.PopoverMenu` that will appear when activated.
+
     .. code-block :: python
 
         Widget.MenuItem(

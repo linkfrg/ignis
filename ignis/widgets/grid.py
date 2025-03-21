@@ -9,6 +9,9 @@ class Grid(Gtk.Grid, BaseWidget):
 
     A container that arranges its child widgets in rows and columns.
 
+    Args:
+        **kwargs: Properties to set.
+
     .. code-block:: python
 
         Widget.Grid(

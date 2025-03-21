@@ -48,6 +48,11 @@ class Window(Gtk.Window, BaseWidget):
 
     The top-level widget that contains everything.
 
+    Args:
+        namespace: The name of the window, used to access it from the CLI and :class:`~ignis.app.IgnisApp`. It must be unique. It is also the name of the layer.
+        dynamic_input_region: Whether to dynamically update an input region depending on the :attr:`child` size. See :attr:`dynamic_input_region` for more info.
+        **kwargs: Properties to set.
+
     .. warning::
         Applying CSS styles directly to ``Widget.Window`` can cause various graphical glitches/bugs.
         It's highly recommended to set some container (for example, ``Widget.Box``) or widget as a child and apply styles to it.
@@ -111,7 +116,7 @@ class Window(Gtk.Window, BaseWidget):
 
         self._anchor = None
         self._exclusivity = None
-        self._namespace = None
+        self._namespace = namespace
         self._layer = None
         self._kb_mode = None
         self._popup = None
@@ -126,7 +131,6 @@ class Window(Gtk.Window, BaseWidget):
 
         self.anchor = anchor
         self.exclusivity = exclusivity
-        self.namespace = namespace
         self.layer = layer
         self.kb_mode = kb_mode
         if monitor is not None:
@@ -138,6 +142,8 @@ class Window(Gtk.Window, BaseWidget):
         self.margin_left = margin_left
         self.margin_right = margin_right
         self.margin_top = margin_top
+
+        GtkLayerShell.set_namespace(self, name_space=namespace)
 
         app.add_window(namespace, self)
 
@@ -182,11 +188,6 @@ class Window(Gtk.Window, BaseWidget):
         It is also the name of the layer.
         """
         return self._namespace
-
-    @namespace.setter
-    def namespace(self, value: str) -> None:
-        self._namespace = value
-        GtkLayerShell.set_namespace(self, name_space=value)
 
     @IgnisProperty
     def anchor(self) -> list[str] | None:

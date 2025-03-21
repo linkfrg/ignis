@@ -1,11 +1,13 @@
 import os
 import click
+import subprocess
 import collections
 from ignis.client import IgnisClient
 from ignis.utils import Utils
 from ignis.exceptions import WindowNotFoundError
 from typing import Any
 from gi.repository import GLib  # type: ignore
+from ignis import is_editable_install
 
 DEFAULT_CONFIG_PATH = f"{GLib.get_user_config_dir()}/ignis/config.py"
 
@@ -19,10 +21,39 @@ class OrderedGroup(click.Group):
         return self.commands
 
 
+def _run_git_cmd(args: str) -> str | None:
+    try:
+        repo_dir = os.path.abspath(os.path.join(__file__, "../.."))
+        commit_hash = subprocess.run(
+            f"git -C {repo_dir} {args}",
+            shell=True,
+            text=True,
+            capture_output=True,
+        ).stdout.strip()
+
+        return commit_hash
+    except subprocess.CalledProcessError:
+        return None
+
+
 def get_version_message() -> str:
-    return f"""Ignis {Utils.get_ignis_version()}
+    if not is_editable_install:
+        return f"""Ignis {Utils.get_ignis_version()}
 Branch: {Utils.get_ignis_branch()}
 Commit: {Utils.get_ignis_commit()} ({Utils.get_ignis_commit_msg()})"""
+    else:
+        commit = _run_git_cmd("rev-parse HEAD")
+        branch = _run_git_cmd("branch --show-current")
+        commit_msg = _run_git_cmd("log -1 --pretty=%B")
+        return f"""Ignis {Utils.get_ignis_version()}
+Editable install
+Branch: {branch}
+Commit: {commit} ({commit_msg})
+
+Version at the moment of the installation:
+Branch: {Utils.get_ignis_branch()}
+Commit: {Utils.get_ignis_commit()} ({Utils.get_ignis_commit_msg()})
+"""
 
 
 def get_systeminfo() -> str:

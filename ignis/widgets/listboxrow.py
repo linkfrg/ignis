@@ -10,6 +10,9 @@ class ListBoxRow(Gtk.ListBoxRow, BaseWidget):
 
     A row for :class:`~ignis.widgets.listbox.ListBox`.
 
+    Args:
+        **kwargs: Properties to set.
+
     .. code-block:: python
 
         Widget.ListBoxRow(

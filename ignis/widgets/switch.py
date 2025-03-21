@@ -11,6 +11,9 @@ class Switch(Gtk.Switch, BaseWidget):
 
     A switch widget.
 
+    Args:
+        **kwargs: Properties to set.
+
     .. code-block:: python
 
         Widget.Switch(

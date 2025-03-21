@@ -10,6 +10,11 @@ class Poll(IgnisGObject):
 
     You can pass arguments to the constructor, and they will be passed to the callback.
 
+    Args:
+        timeout: The timeout interval in milliseconds.
+        callback: The function to call when the timeout is reached. The ``self`` will passed as an argument.
+        *args: Arguments to pass to `callback`.
+
     Example usage:
 
     .. code-block:: python

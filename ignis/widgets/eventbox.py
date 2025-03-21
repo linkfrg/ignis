@@ -10,6 +10,10 @@ class EventBox(Box):
 
     The same :class:`~ignis.widgets.box.Box`, but it can receive events.
 
+    Args:
+        scroll_flags: Flags affecting the :class:`Gtk.EventControllerScroll` behavior.
+        **kwargs: Properties to set.
+
     .. code-block:: python
 
         Widget.EventBox(
@@ -183,11 +187,6 @@ class EventBox(Box):
     def scroll_flags(self) -> Gtk.EventControllerScrollFlags:
         """
         Flags affecting the :class:`Gtk.EventControllerScroll` behavior.
-
-        .. warning::
-            Can only be set during initialization.
-
-        Default: :obj:`Gtk.EventControllerScrollFlags.BOTH_AXES`.
         """
         return self._scroll_flags
 

@@ -10,6 +10,9 @@ class Overlay(Gtk.Overlay, BaseWidget):
     A container that places its children on top of each other.
     The ``child`` property is the main child, on which other widgets defined in ``overlays`` will be placed on top.
 
+    Args:
+        **kwargs: Properties to set.
+
     .. code-block:: python
 
         Widget.Overlay(

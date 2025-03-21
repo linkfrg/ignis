@@ -10,6 +10,9 @@ class SpinButton(Gtk.SpinButton, BaseWidget):  # type: ignore
 
     A widget that allows the user to increment or decrement the displayed value within a specified range.
 
+    Args:
+        **kwargs: Properties to set.
+
     .. code-block:: python
 
         Widget.SpinButton(

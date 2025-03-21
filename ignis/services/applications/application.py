@@ -1,5 +1,6 @@
 import os
 import re
+import asyncio
 import subprocess
 from gi.repository import Gio, GLib  # type: ignore
 from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
@@ -181,14 +182,15 @@ class Application(IgnisGObject):
         else:
             cmd = exec_string
 
-        subprocess.Popen(
-            cmd,
-            shell=True,
-            start_new_session=True,
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-            cwd=GLib.get_home_dir(),
-            env=custom_env,
+        asyncio.create_task(
+            asyncio.create_subprocess_shell(
+                cmd,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                cwd=GLib.get_home_dir(),
+                env=custom_env,
+                preexec_fn=os.setsid,  # create new session
+            )
         )
 
     def launch_uwsm(self) -> None:

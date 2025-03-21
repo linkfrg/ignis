@@ -1,13 +1,18 @@
-import sys
 from types import UnionType
 from gi.repository import GObject, GLib  # type: ignore
 from typing import Any, Literal, get_args, get_origin
 from collections.abc import Callable
+from ignis import is_sphinx_build, is_girepository_2_0
 
 
 class Binding(GObject.Object):
     """
     An object that describe binding.
+
+    Args:
+        target: The target GObject.
+        target_properties: The properties on the target GObject to bind.
+        transform: The function that accepts a new property value and returns the processed value.
     """
 
     def __init__(
@@ -186,7 +191,7 @@ class IgnisGObject(GObject.Object):
         return super().__getattribute__(name)
 
 
-if "sphinx" in sys.modules:
+if is_sphinx_build:
 
     class IgnisProperty(property):
         """
@@ -267,7 +272,7 @@ else:
                 return object
 
         def __process_default(self, tp: type) -> Any:
-            if "sphinx" in sys.modules:
+            if is_sphinx_build:
                 return None
 
             if tp is bool:
@@ -275,9 +280,10 @@ else:
             elif tp is float:
                 return 0.0
             elif issubclass(tp, GObject.GFlags):
-                # gflags has  __flags_values__ attr, trust me
-                first_value = list(tp.__flags_values__.values())[0]  # type: ignore
-                return first_value
+                if is_girepository_2_0:
+                    return next(iter(tp))
+                else:
+                    return list(tp.__flags_values__.values())[0]  # type: ignore
 
         def __get_type_from_union(self, tp: UnionType) -> type:
             non_none_types = tuple(t for t in tp.__args__ if t is not type(None))
@@ -291,7 +297,7 @@ else:
             return type(values[0]) if values else None
 
 
-if "sphinx" in sys.modules:
+if is_sphinx_build:
 
     class IgnisSignal(property):
         """

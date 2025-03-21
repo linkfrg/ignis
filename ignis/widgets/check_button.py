@@ -10,6 +10,9 @@ class CheckButton(Gtk.CheckButton, BaseWidget):
 
     A check button. If ``group`` is set, the check button behaves as a radio button.
 
+    Args:
+        **kwargs: Properties to set.
+
     Simple checkbutton:
 
     .. code-block:: python

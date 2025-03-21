@@ -22,6 +22,9 @@ class Picture(Gtk.Picture, BaseWidget):
 
         For more info, see :class:`Gtk.ContentFit`.
 
+    Args:
+        **kwargs: Properties to set.
+
     .. code-block:: python
 
         Widget.Picture(

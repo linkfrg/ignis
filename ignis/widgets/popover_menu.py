@@ -12,6 +12,12 @@ class PopoverMenu(Gtk.PopoverMenu, BaseWidget):
     It must be added as a child to a container.
     To display it, call the ``popup()`` method.
 
+    .. note::
+        The Popover Menu points to the widget to which it was added.
+
+    Args:
+        **kwargs: Properties to set.
+
     .. code-block:: python
 
         Widget.PopoverMenu(

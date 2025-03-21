@@ -7,7 +7,6 @@
 
 A widget framework for building desktop shells, written and configurable in Python.
 
-- Configurable in Python
 - Easy to use
 - GTK4-based
 - Batteries Included (a lot of built-in Services and Utilities!)
