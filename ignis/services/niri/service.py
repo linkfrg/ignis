@@ -79,7 +79,7 @@ class NiriService(BaseService):
 
     @IgnisProperty
     def keyboard_layouts(self) -> NiriKeyboardLayouts:
-        """#177
+        """
         The currenly configured keyboard layouts.
         """
         return self._keyboard_layouts
