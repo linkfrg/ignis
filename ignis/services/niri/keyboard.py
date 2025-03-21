@@ -11,7 +11,6 @@ class NiriKeyboardLayouts(DataGObject):
         self._service = service
         self._names: list = []
         self._current_idx: int = -1
-        self._current_name: str = ""
         self._main: bool = False
 
     @IgnisProperty
