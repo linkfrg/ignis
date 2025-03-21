@@ -235,8 +235,6 @@ class FetchService(BaseService):
     @IgnisProperty
     def cpu_temp(self) -> float:
         """
-        - read-only
-
         Current CPU temperature.
         """
         return self.__get_x86_pkg_temp() or self.__get_k10temp() or -1.0

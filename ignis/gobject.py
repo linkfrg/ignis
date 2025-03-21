@@ -355,8 +355,6 @@ class DataGObject(IgnisGObject):
     @IgnisProperty
     def data(self) -> dict[str, Any]:
         """
-        - read-only
-
         The latest synced data.
         """
         return self._data
@@ -364,8 +362,6 @@ class DataGObject(IgnisGObject):
     @IgnisProperty
     def match_dict(self) -> dict[str, str]:
         """
-        - read-only
-
         The match dictionary.
         """
         return self._match_dict
