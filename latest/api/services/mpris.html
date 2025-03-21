@@ -529,13 +529,10 @@
 <span class="n">mpris</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;player_added&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">player</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">player</span><span class="o">.</span><span class="n">desktop_entry</span><span class="p">,</span> <span class="n">player</span><span class="o">.</span><span class="n">title</span><span class="p">))</span>
 </pre></div>
 </div>
-<dl class="py method">
+<dl class="py signal">
 <dt class="sig sig-object py" id="ignis.services.mpris.MprisService.player_added">
-<span class="sig-name descname"><span class="pre">player_added</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">player</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ignis.services.mpris.MprisPlayer" title="ignis.services.mpris.player.MprisPlayer"><span class="pre">MprisPlayer</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.mpris.MprisService.player_added" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>Signal</p></li>
-</ul>
-<p>Emitted when a player has been added.</p>
+<em class="property"><span class="pre">signal</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">player_added</span></span><a class="headerlink" href="#ignis.services.mpris.MprisService.player_added" title="Link to this definition">#</a></dt>
+<dd><p>Emitted when a player has been added.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>player</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#ignis.services.mpris.MprisPlayer" title="ignis.services.mpris.player.MprisPlayer"><code class="xref py py-class docutils literal notranslate"><span class="pre">MprisPlayer</span></code></a></span>) -- The instance of the player.</p>
@@ -543,9 +540,9 @@
 </dl>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.mpris.MprisService.players">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">players</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ignis.services.mpris.MprisPlayer" title="ignis.services.mpris.player.MprisPlayer"><span class="pre">MprisPlayer</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.mpris.MprisService.players" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">players</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ignis.services.mpris.MprisPlayer" title="ignis.services.mpris.player.MprisPlayer"><span class="pre">MprisPlayer</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.mpris.MprisService.players" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
@@ -558,99 +555,96 @@
 <dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.mpris.</span></span><span class="sig-name descname"><span class="pre">MprisPlayer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mpris_proxy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../dbus.html#ignis.dbus.DBusProxy" title="ignis.dbus.DBusProxy"><span class="pre">DBusProxy</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">player_proxy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../dbus.html#ignis.dbus.DBusProxy" title="ignis.dbus.DBusProxy"><span class="pre">DBusProxy</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.mpris.MprisPlayer" title="Link to this definition">#</a></dt>
 <dd><p>A media player object.</p>
-<dl class="py method">
+<dl class="py signal">
 <dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.closed">
-<span class="sig-name descname"><span class="pre">closed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.closed" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>Signal</p></li>
-</ul>
-<p>Emitted when a player has been closed or removed.</p>
+<em class="property"><span class="pre">signal</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">closed</span></span><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.closed" title="Link to this definition">#</a></dt>
+<dd><p>Emitted when a player has been closed or removed.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.can_control">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">can_control</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.can_control" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">can_control</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.can_control" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>Whether the player can be controlled.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.can_go_next">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">can_go_next</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.can_go_next" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">can_go_next</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.can_go_next" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>Whether the player can go to the next track.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.can_go_previous">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">can_go_previous</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.can_go_previous" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">can_go_previous</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.can_go_previous" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>Whether the player can go to the previous track.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.can_pause">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">can_pause</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.can_pause" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">can_pause</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.can_pause" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>Whether the player can pause.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.can_play">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">can_play</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.can_play" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">can_play</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.can_play" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>Whether the player can play.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.can_seek">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">can_seek</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.can_seek" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">can_seek</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.can_seek" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>Whether the player can seek (change position on track in seconds).</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.loop_status">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">loop_status</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.loop_status" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">loop_status</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.loop_status" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>The current loop status.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.metadata">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">metadata</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.metadata" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">metadata</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.metadata" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>A dictionary containing metadata.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.track_id">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">track_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.track_id" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">track_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.track_id" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>The ID of the current track.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.length">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">length</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.length" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">length</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.length" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
@@ -658,63 +652,63 @@
 <code class="docutils literal notranslate"><span class="pre">-1</span></code> if not supported by the player.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.art_url">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">art_url</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.art_url" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">art_url</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.art_url" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>The path to the cached art image of the track.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.album">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">album</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.album" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">album</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.album" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>The current album name.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.artist">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">artist</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.artist" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">artist</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.artist" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>The current artist name.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.title">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.title" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.title" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>The current title of the track.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.url">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">url</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.url" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">url</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.url" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>The URL address of the track.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.playback_status">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">playback_status</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.playback_status" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">playback_status</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.playback_status" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>The current playback status. Can be &quot;Playing&quot; or &quot;Paused&quot;.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.position">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">position</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.position" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">position</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.position" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-write</p></li>
 </ul>
@@ -735,36 +729,36 @@
 </dl>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.shuffle">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shuffle</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.shuffle" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shuffle</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.shuffle" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>The shuffle status.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.volume">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">volume</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.volume" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">volume</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.volume" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>The volume of the player.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.identity">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">identity</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.identity" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">identity</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.identity" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>The name of the player (e.g. &quot;Spotify&quot;, &quot;firefox&quot;).</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.mpris.MprisPlayer.desktop_entry">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">desktop_entry</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.desktop_entry" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">desktop_entry</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.mpris.MprisPlayer.desktop_entry" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
@@ -979,12 +973,12 @@ The offset is in milliseconds.</p>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisService"><code class="docutils literal notranslate"><span class="pre">MprisService</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisService.player_added"><code class="docutils literal notranslate"><span class="pre">MprisService.player_added()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisService.player_added"><code class="docutils literal notranslate"><span class="pre">MprisService.player_added</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisService.players"><code class="docutils literal notranslate"><span class="pre">MprisService.players</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer"><code class="docutils literal notranslate"><span class="pre">MprisPlayer</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer.closed"><code class="docutils literal notranslate"><span class="pre">MprisPlayer.closed()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer.closed"><code class="docutils literal notranslate"><span class="pre">MprisPlayer.closed</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer.can_control"><code class="docutils literal notranslate"><span class="pre">MprisPlayer.can_control</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer.can_go_next"><code class="docutils literal notranslate"><span class="pre">MprisPlayer.can_go_next</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.mpris.MprisPlayer.can_go_previous"><code class="docutils literal notranslate"><span class="pre">MprisPlayer.can_go_previous</span></code></a></li>

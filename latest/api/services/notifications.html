@@ -536,13 +536,10 @@ Allow receiving notifications and perform actions on them.</p>
 <span class="n">notifications</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;notified&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">notification</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">notification</span><span class="o">.</span><span class="n">app_name</span><span class="p">,</span> <span class="n">notification</span><span class="o">.</span><span class="n">summary</span><span class="p">))</span>
 </pre></div>
 </div>
-<dl class="py method">
+<dl class="py signal">
 <dt class="sig sig-object py" id="ignis.services.notifications.NotificationService.notified">
-<span class="sig-name descname"><span class="pre">notified</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">notification</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ignis.services.notifications.Notification" title="ignis.services.notifications.notification.Notification"><span class="pre">Notification</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.notifications.NotificationService.notified" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>Signal</p></li>
-</ul>
-<p>Emitted when a new notification appears.</p>
+<em class="property"><span class="pre">signal</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">notified</span></span><a class="headerlink" href="#ignis.services.notifications.NotificationService.notified" title="Link to this definition">#</a></dt>
+<dd><p>Emitted when a new notification appears.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>notification</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#ignis.services.notifications.Notification" title="ignis.services.notifications.notification.Notification"><code class="xref py py-class docutils literal notranslate"><span class="pre">Notification</span></code></a></span>) -- The instance of the notification.</p>
@@ -550,13 +547,10 @@ Allow receiving notifications and perform actions on them.</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
+<dl class="py signal">
 <dt class="sig sig-object py" id="ignis.services.notifications.NotificationService.new_popup">
-<span class="sig-name descname"><span class="pre">new_popup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">notification</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ignis.services.notifications.Notification" title="ignis.services.notifications.notification.Notification"><span class="pre">Notification</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.notifications.NotificationService.new_popup" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>Signal</p></li>
-</ul>
-<p>Emitted when a new popup notification appears.
+<em class="property"><span class="pre">signal</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">new_popup</span></span><a class="headerlink" href="#ignis.services.notifications.NotificationService.new_popup" title="Link to this definition">#</a></dt>
+<dd><p>Emitted when a new popup notification appears.
 Only emitted if <code class="docutils literal notranslate"><span class="pre">dnd</span></code> is set to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -565,18 +559,18 @@ Only emitted if <code class="docutils literal notranslate"><span class="pre">dnd
 </dl>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.notifications.NotificationService.notifications">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">notifications</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ignis.services.notifications.Notification" title="ignis.services.notifications.notification.Notification"><span class="pre">Notification</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.notifications.NotificationService.notifications" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">notifications</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ignis.services.notifications.Notification" title="ignis.services.notifications.notification.Notification"><span class="pre">Notification</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.notifications.NotificationService.notifications" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>A list of all notifications.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.notifications.NotificationService.popups">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">popups</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ignis.services.notifications.Notification" title="ignis.services.notifications.notification.Notification"><span class="pre">Notification</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.notifications.NotificationService.popups" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">popups</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ignis.services.notifications.Notification" title="ignis.services.notifications.notification.Notification"><span class="pre">Notification</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.notifications.NotificationService.popups" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
@@ -618,81 +612,75 @@ Only emitted if <code class="docutils literal notranslate"><span class="pre">dnd
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.notifications.</span></span><span class="sig-name descname"><span class="pre">Notification</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dbus</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../dbus.html#ignis.dbus.DBusService" title="ignis.dbus.DBusService"><span class="pre">DBusService</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">icon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">summary</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">actions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">urgency</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">popup</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.notifications.Notification" title="Link to this definition">#</a></dt>
 <dd><p>A notification object.
 Contains data about the notification and allows performing actions.</p>
-<dl class="py method">
+<dl class="py signal">
 <dt class="sig sig-object py" id="ignis.services.notifications.Notification.closed">
-<span class="sig-name descname"><span class="pre">closed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.notifications.Notification.closed" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>Signal</p></li>
-</ul>
-<p>Emitted when notification has been closed.</p>
+<em class="property"><span class="pre">signal</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">closed</span></span><a class="headerlink" href="#ignis.services.notifications.Notification.closed" title="Link to this definition">#</a></dt>
+<dd><p>Emitted when notification has been closed.</p>
 </dd></dl>
 
-<dl class="py method">
+<dl class="py signal">
 <dt class="sig sig-object py" id="ignis.services.notifications.Notification.dismissed">
-<span class="sig-name descname"><span class="pre">dismissed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.notifications.Notification.dismissed" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>Signal</p></li>
-</ul>
-<p>Emitted when notification has been dismissed.</p>
+<em class="property"><span class="pre">signal</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dismissed</span></span><a class="headerlink" href="#ignis.services.notifications.Notification.dismissed" title="Link to this definition">#</a></dt>
+<dd><p>Emitted when notification has been dismissed.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.notifications.Notification.id">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.services.notifications.Notification.id" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.services.notifications.Notification.id" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>The ID of the notification.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.notifications.Notification.app_name">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">app_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.notifications.Notification.app_name" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">app_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.notifications.Notification.app_name" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>The name of the application that sent the notification.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.notifications.Notification.icon">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">icon</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.notifications.Notification.icon" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">icon</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.notifications.Notification.icon" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>The icon name, path to image or <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.notifications.Notification.summary">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">summary</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.notifications.Notification.summary" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">summary</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.notifications.Notification.summary" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>The summary text of the notification, usually the title.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.notifications.Notification.body">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">body</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.notifications.Notification.body" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">body</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.notifications.Notification.body" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>The body text of the notification, usually containing additional information.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.notifications.Notification.actions">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">actions</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ignis.services.notifications.NotificationAction" title="ignis.services.notifications.action.NotificationAction"><span class="pre">NotificationAction</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.notifications.Notification.actions" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">actions</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ignis.services.notifications.NotificationAction" title="ignis.services.notifications.action.NotificationAction"><span class="pre">NotificationAction</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.notifications.Notification.actions" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>A list of actions associated with the notification.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.notifications.Notification.timeout">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">timeout</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.services.notifications.Notification.timeout" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">timeout</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.services.notifications.Notification.timeout" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
@@ -700,18 +688,18 @@ Contains data about the notification and allows performing actions.</p>
 Usually equal to the <code class="docutils literal notranslate"><span class="pre">popup_timeout</span></code> property of the <code class="xref py py-class docutils literal notranslate"><span class="pre">NotificationService</span></code> unless the notification specifies otherwise.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.notifications.Notification.time">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">time</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></em><a class="headerlink" href="#ignis.services.notifications.Notification.time" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">time</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><span class="pre">float</span></a></em><a class="headerlink" href="#ignis.services.notifications.Notification.time" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>Time in POSIX format when the notification was sent.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.notifications.Notification.urgency">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">urgency</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.services.notifications.Notification.urgency" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">urgency</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.services.notifications.Notification.urgency" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
@@ -727,18 +715,18 @@ Usually equal to the <code class="docutils literal notranslate"><span class="pre
 </dl>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.notifications.Notification.popup">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">popup</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.notifications.Notification.popup" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">popup</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.notifications.Notification.popup" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>Whether the notification is a popup.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.notifications.Notification.json">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">json</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a></em><a class="headerlink" href="#ignis.services.notifications.Notification.json" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">json</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a></em><a class="headerlink" href="#ignis.services.notifications.Notification.json" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
@@ -774,18 +762,18 @@ This will remove it from notifications history.</p>
 <dt class="sig sig-object py" id="ignis.services.notifications.NotificationAction">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.notifications.</span></span><span class="sig-name descname"><span class="pre">NotificationAction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dbus</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../dbus.html#ignis.dbus.DBusService" title="ignis.dbus.DBusService"><span class="pre">DBusService</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">notification</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.notifications.NotificationAction" title="Link to this definition">#</a></dt>
 <dd><p>A simple object that contains data about a notification action.</p>
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.notifications.NotificationAction.id">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.notifications.NotificationAction.id" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.notifications.NotificationAction.id" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>The ID of the action.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.notifications.NotificationAction.label">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">label</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.notifications.NotificationAction.label" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">label</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.notifications.NotificationAction.label" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
@@ -855,8 +843,8 @@ This will remove it from notifications history.</p>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.NotificationService"><code class="docutils literal notranslate"><span class="pre">NotificationService</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.NotificationService.notified"><code class="docutils literal notranslate"><span class="pre">NotificationService.notified()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.NotificationService.new_popup"><code class="docutils literal notranslate"><span class="pre">NotificationService.new_popup()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.NotificationService.notified"><code class="docutils literal notranslate"><span class="pre">NotificationService.notified</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.NotificationService.new_popup"><code class="docutils literal notranslate"><span class="pre">NotificationService.new_popup</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.NotificationService.notifications"><code class="docutils literal notranslate"><span class="pre">NotificationService.notifications</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.NotificationService.popups"><code class="docutils literal notranslate"><span class="pre">NotificationService.popups</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.NotificationService.get_notification"><code class="docutils literal notranslate"><span class="pre">NotificationService.get_notification()</span></code></a></li>
@@ -864,8 +852,8 @@ This will remove it from notifications history.</p>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.Notification"><code class="docutils literal notranslate"><span class="pre">Notification</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.Notification.closed"><code class="docutils literal notranslate"><span class="pre">Notification.closed()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.Notification.dismissed"><code class="docutils literal notranslate"><span class="pre">Notification.dismissed()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.Notification.closed"><code class="docutils literal notranslate"><span class="pre">Notification.closed</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.Notification.dismissed"><code class="docutils literal notranslate"><span class="pre">Notification.dismissed</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.Notification.id"><code class="docutils literal notranslate"><span class="pre">Notification.id</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.Notification.app_name"><code class="docutils literal notranslate"><span class="pre">Notification.app_name</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.notifications.Notification.icon"><code class="docutils literal notranslate"><span class="pre">Notification.icon</span></code></a></li>

@@ -588,13 +588,10 @@ Has support for hot-reloading when the file is modified externally.</p>
 <dt class="sig sig-object py" id="ignis.options.OptionsGroup">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.options.</span></span><span class="sig-name descname"><span class="pre">OptionsGroup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.options.OptionsGroup" title="Link to this definition">#</a></dt>
 <dd><p>An options group.</p>
-<dl class="py method">
+<dl class="py signal">
 <dt class="sig sig-object py" id="ignis.options.OptionsGroup.changed">
-<span class="sig-name descname"><span class="pre">changed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">option_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.options.OptionsGroup.changed" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>Signal</p></li>
-</ul>
-<p>Emitted when an option of this group has changed</p>
+<em class="property"><span class="pre">signal</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">changed</span></span><a class="headerlink" href="#ignis.options.OptionsGroup.changed" title="Link to this definition">#</a></dt>
+<dd><p>Emitted when an option of this group has changed</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>option_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The name of the option.</p>
@@ -602,13 +599,10 @@ Has support for hot-reloading when the file is modified externally.</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
+<dl class="py signal">
 <dt class="sig sig-object py" id="ignis.options.OptionsGroup.subgroup_changed">
-<span class="sig-name descname"><span class="pre">subgroup_changed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subgroup_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">option_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.options.OptionsGroup.subgroup_changed" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>Signal</p></li>
-</ul>
-<p>Emitted when an option of a subgroup has changed</p>
+<em class="property"><span class="pre">signal</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">subgroup_changed</span></span><a class="headerlink" href="#ignis.options.OptionsGroup.subgroup_changed" title="Link to this definition">#</a></dt>
+<dd><p>Emitted when an option of a subgroup has changed</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -619,9 +613,9 @@ Has support for hot-reloading when the file is modified externally.</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
+<dl class="py signal">
 <dt class="sig sig-object py" id="ignis.options.OptionsGroup.autosave">
-<span class="sig-name descname"><span class="pre">autosave</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ignis.options.OptionsGroup.autosave" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">signal</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">autosave</span></span><a class="headerlink" href="#ignis.options.OptionsGroup.autosave" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>Signal</p></li>
 </ul>
@@ -733,9 +727,9 @@ Has support for hot-reloading when the file is modified externally.</p>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.options.OptionsGroup"><code class="docutils literal notranslate"><span class="pre">OptionsGroup</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.options.OptionsGroup.changed"><code class="docutils literal notranslate"><span class="pre">OptionsGroup.changed()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.options.OptionsGroup.subgroup_changed"><code class="docutils literal notranslate"><span class="pre">OptionsGroup.subgroup_changed()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.options.OptionsGroup.autosave"><code class="docutils literal notranslate"><span class="pre">OptionsGroup.autosave()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.options.OptionsGroup.changed"><code class="docutils literal notranslate"><span class="pre">OptionsGroup.changed</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.options.OptionsGroup.subgroup_changed"><code class="docutils literal notranslate"><span class="pre">OptionsGroup.subgroup_changed</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.options.OptionsGroup.autosave"><code class="docutils literal notranslate"><span class="pre">OptionsGroup.autosave</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.options.OptionsGroup.connect_option"><code class="docutils literal notranslate"><span class="pre">OptionsGroup.connect_option()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.options.OptionsGroup.to_dict"><code class="docutils literal notranslate"><span class="pre">OptionsGroup.to_dict()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.options.OptionsGroup.apply_from_dict"><code class="docutils literal notranslate"><span class="pre">OptionsGroup.apply_from_dict()</span></code></a></li>

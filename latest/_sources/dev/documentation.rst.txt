@@ -47,9 +47,7 @@ General Classes
 
 - Signals:
 
-    If a class has custom signals, add docstrings to the functions decorated with ``@GObject.Signal`` respectively.
-
-    At the top of the docstring indicate that it's signal: ``- Signal``.
+    If a class has custom signals, add docstrings to the functions decorated with ``@IgnisSignal`` respectively.
 
     Also, if the signal have custom arguments, define them in the ``Args`` section.
 
@@ -57,13 +55,11 @@ General Classes
 
     If a class has custom properties, add docstrings to the functions decorated with ``@GObject.Object`` or ``@property`` respectively.
 
-    At the top of the docstring indicate ``read-only`` / ``read-write``.
-
 - If possible, please provide a code example.
 
 .. code-block:: python
 
-    from ignis.gobject import IgnisProperty
+    from ignis.gobject import IgnisProperty, IgnisSignal
 
     class SomeClass:
         """
@@ -71,19 +67,15 @@ General Classes
         Further info goes here...
         """
 
-    @GObject.Signal
+    @IgnisSignal
     def some_signal(self):
         """
-        - Signal
-
         Emitted when the something happens.
         """
 
-    @GObject.Signal
+    @IgnisSignal
     def arg_signal(self, some_arg: int):
         """
-        - Signal
-
         Emitted when the something another happens.
 
         Args:
@@ -93,14 +85,14 @@ General Classes
     @IgnisProperty
     def some_prop(self) -> int:
         """
-        - read-only
+        The description of some_prop.
         """
         ...
 
     @IgnisProperty
     def rw_prop(self) -> str:
         """
-        - read-write
+        The description of rw_prop.
         """
         ...
 

@@ -479,20 +479,18 @@ Type hints will be added automatically.</p>
 <li><p>For classes that the user can initialize manually, explicitly define the constructor arguments in the <cite>Args</cite> section.</p></li>
 <li><p>Signals:</p>
 <blockquote>
-<div><p>If a class has custom signals, add docstrings to the functions decorated with <code class="docutils literal notranslate"><span class="pre">&#64;GObject.Signal</span></code> respectively.</p>
-<p>At the top of the docstring indicate that it's signal: <code class="docutils literal notranslate"><span class="pre">-</span> <span class="pre">Signal</span></code>.</p>
+<div><p>If a class has custom signals, add docstrings to the functions decorated with <code class="docutils literal notranslate"><span class="pre">&#64;IgnisSignal</span></code> respectively.</p>
 <p>Also, if the signal have custom arguments, define them in the <code class="docutils literal notranslate"><span class="pre">Args</span></code> section.</p>
 </div></blockquote>
 </li>
 <li><p>Properties:</p>
 <blockquote>
 <div><p>If a class has custom properties, add docstrings to the functions decorated with <code class="docutils literal notranslate"><span class="pre">&#64;GObject.Object</span></code> or <code class="docutils literal notranslate"><span class="pre">&#64;property</span></code> respectively.</p>
-<p>At the top of the docstring indicate <code class="docutils literal notranslate"><span class="pre">read-only</span></code> / <code class="docutils literal notranslate"><span class="pre">read-write</span></code>.</p>
 </div></blockquote>
 </li>
 <li><p>If possible, please provide a code example.</p></li>
 </ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ignis.gobject</span><span class="w"> </span><span class="kn">import</span> <span class="n">IgnisProperty</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ignis.gobject</span><span class="w"> </span><span class="kn">import</span> <span class="n">IgnisProperty</span><span class="p">,</span> <span class="n">IgnisSignal</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">SomeClass</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -500,19 +498,15 @@ Type hints will be added automatically.</p>
 <span class="sd">    Further info goes here...</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<span class="nd">@GObject</span><span class="o">.</span><span class="n">Signal</span>
+<span class="nd">@IgnisSignal</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">some_signal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    - Signal</span>
-
 <span class="sd">    Emitted when the something happens.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<span class="nd">@GObject</span><span class="o">.</span><span class="n">Signal</span>
+<span class="nd">@IgnisSignal</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">arg_signal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">some_arg</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    - Signal</span>
-
 <span class="sd">    Emitted when the something another happens.</span>
 
 <span class="sd">    Args:</span>
@@ -522,14 +516,14 @@ Type hints will be added automatically.</p>
 <span class="nd">@IgnisProperty</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">some_prop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    - read-only</span>
+<span class="sd">    The description of some_prop.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="o">...</span>
 
 <span class="nd">@IgnisProperty</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">rw_prop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    - read-write</span>
+<span class="sd">    The description of rw_prop.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="o">...</span>
 
