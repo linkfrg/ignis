@@ -216,16 +216,11 @@ class NiriService(BaseService):
         windows = data["windows"]
         # WindowsChanged means a full replacement of window configuration.
         # Update every window accordingly.
+        self.__update_niri_obj(self._windows, windows, NiriWindow)
+
         for window_data in windows:
-            window = self._windows.get(window_data["id"], None)
-            if window is None:
-                window = NiriWindow(self)
-
-            window.sync(window_data)
-            self._windows[window_data["id"]] = window
-
-            if window.is_focused:
-                self._active_window = window
+            if window_data["is_focused"]:
+                self._active_window.sync(window_data)
 
         # Drop windows that don't exist anymore.
         self.__cleanup_niri_obj(self._windows, windows)
@@ -247,6 +242,17 @@ class NiriService(BaseService):
                 niri_obj.pop(id_)
                 item.emit("destroyed")
 
+    def __update_niri_obj(
+        self, niri_obj: dict, fresh_data: list, obj_type=NiriWindow | NiriWorkspace
+    ) -> None:
+        for fresh_item in fresh_data:
+            obj = niri_obj.get(fresh_item["id"], None)
+            if obj is None:
+                obj = obj_type(self)
+
+            obj.sync(fresh_item)
+            niri_obj[fresh_item["id"]] = obj
+
     def __sort_workspaces(self) -> None:
         self._workspaces = dict(
             sorted(self._workspaces.items(), key=lambda w: w[1].idx)
@@ -256,13 +262,7 @@ class NiriService(BaseService):
         workspaces = data["workspaces"]
         # WorkspacesChanged means a full replacement of workspace configuration.
         # Update every workspace accordingly.
-        for workspace_data in workspaces:
-            workspace = self._workspaces.get(workspace_data["id"], None)
-            if workspace is None:
-                workspace = NiriWorkspace(self)
-
-            workspace.sync(workspace_data)
-            self._workspaces[workspace_data["id"]] = workspace
+        self.__update_niri_obj(self._workspaces, workspaces, NiriWorkspace)
 
         # Drop workspaces that don't exist anymore.
         self.__cleanup_niri_obj(self._workspaces, workspaces)
