@@ -331,6 +331,10 @@ class DataGObject(IgnisGObject):
     Parameters:
         data: The dictionary to synchronize with.
         match_dict: The match dictionary between a key in the data and the property on ``self``.
+
+    You have to define attributes from data in ``init``.
+    The actual attributes from data must be protected (prefixed with _).
+    All other attributes must be private (prefixed with __).
     """
 
     def __init__(
