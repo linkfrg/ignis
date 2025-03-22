@@ -182,15 +182,15 @@ class NiriService(BaseService):
 
     def __update_window_focus(self, data: dict) -> None:
         # Id of the newly focused window, or None if no window is now focused.
-        id = data["id"]
-        for _id, window in self._windows.items():
+        focused_id = data["id"]
+        for window in self._windows.values():
             # If a window became focused, it implies that all other windows
             # are no longer focused. Go through existing windows and
             # update their state accordingly.
-            window.sync({"is_focused": (window.id == id)})
+            window.sync({"is_focused": (window.id == focused_id)})
 
-        if id:
-            self._active_window.sync(self._windows[id].data)
+        if focused_id:
+            self._active_window.sync(self._windows[focused_id].data)
         else:
             window_skeleton = NiriWindow(self)
             self._active_window.sync(window_skeleton.data)
