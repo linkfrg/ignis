@@ -550,6 +550,17 @@
 </dl>
 </dd></dl>
 
+<dl class="py signal">
+<dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService.window_added">
+<em class="property"><span class="pre">signal</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">window_added</span></span><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.window_added" title="Link to this definition">#</a></dt>
+<dd><p>Emitted when a new window has been added.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>window</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#ignis.services.hyprland.HyprlandWindow" title="ignis.services.hyprland.window.HyprlandWindow"><code class="xref py py-class docutils literal notranslate"><span class="pre">HyprlandWindow</span></code></a></span>) -- The instance of the window.</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService.is_available">
 <em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_available</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.is_available" title="Link to this definition">#</a></dt>
@@ -584,6 +595,15 @@
 <li><p>read-only</p></li>
 </ul>
 <p>The main keyboard.</p>
+</dd></dl>
+
+<dl class="py gproperty">
+<dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService.windows">
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">windows</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ignis.services.hyprland.HyprlandWindow" title="ignis.services.hyprland.window.HyprlandWindow"><span class="pre">HyprlandWindow</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.windows" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>A list of windows.</p>
 </dd></dl>
 
 <dl class="py gproperty">
@@ -644,6 +664,23 @@ If you want to receive the response in JSON format, use this syntax: <code class
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The workspace instance, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if the workspace with the given ID doesn't exist.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandService.get_window_by_address">
+<span class="sig-name descname"><span class="pre">get_window_by_address</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#ignis.services.hyprland.HyprlandWindow" title="ignis.services.hyprland.window.HyprlandWindow"><span class="pre">HyprlandWindow</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.hyprland.HyprlandService.get_window_by_address" title="Link to this definition">#</a></dt>
+<dd><p>Get a window by its address.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>address</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The address of the window.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#ignis.services.hyprland.HyprlandWindow" title="ignis.services.hyprland.window.HyprlandWindow"><code class="xref py py-class docutils literal notranslate"><span class="pre">HyprlandWindow</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The window instance, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if the window with the given address doesn't exist.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -761,6 +798,12 @@ If you want to receive the response in JSON format, use this syntax: <code class
 <dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py signal">
+<dt class="sig sig-object py" id="ignis.services.hyprland.HyprlandWindow.closed">
+<em class="property"><span class="pre">signal</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">closed</span></span><a class="headerlink" href="#ignis.services.hyprland.HyprlandWindow.closed" title="Link to this definition">#</a></dt>
+<dd><p>Emitted when the window has been closed.</p>
 </dd></dl>
 
 <dl class="py gproperty">
@@ -1151,14 +1194,17 @@ If you want to receive the response in JSON format, use this syntax: <code class
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService"><code class="docutils literal notranslate"><span class="pre">HyprlandService</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.workspace_added"><code class="docutils literal notranslate"><span class="pre">HyprlandService.workspace_added</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.window_added"><code class="docutils literal notranslate"><span class="pre">HyprlandService.window_added</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.is_available"><code class="docutils literal notranslate"><span class="pre">HyprlandService.is_available</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.workspaces"><code class="docutils literal notranslate"><span class="pre">HyprlandService.workspaces</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.active_workspace"><code class="docutils literal notranslate"><span class="pre">HyprlandService.active_workspace</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.main_keyboard"><code class="docutils literal notranslate"><span class="pre">HyprlandService.main_keyboard</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.windows"><code class="docutils literal notranslate"><span class="pre">HyprlandService.windows</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.active_window"><code class="docutils literal notranslate"><span class="pre">HyprlandService.active_window</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.send_command"><code class="docutils literal notranslate"><span class="pre">HyprlandService.send_command()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.switch_to_workspace"><code class="docutils literal notranslate"><span class="pre">HyprlandService.switch_to_workspace()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.get_workspace_by_id"><code class="docutils literal notranslate"><span class="pre">HyprlandService.get_workspace_by_id()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandService.get_window_by_address"><code class="docutils literal notranslate"><span class="pre">HyprlandService.get_window_by_address()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandWorkspace"><code class="docutils literal notranslate"><span class="pre">HyprlandWorkspace</span></code></a><ul class="nav section-nav flex-column">
@@ -1176,6 +1222,7 @@ If you want to receive the response in JSON format, use this syntax: <code class
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandWindow"><code class="docutils literal notranslate"><span class="pre">HyprlandWindow</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandWindow.sync"><code class="docutils literal notranslate"><span class="pre">HyprlandWindow.sync()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandWindow.closed"><code class="docutils literal notranslate"><span class="pre">HyprlandWindow.closed</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandWindow.address"><code class="docutils literal notranslate"><span class="pre">HyprlandWindow.address</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandWindow.mapped"><code class="docutils literal notranslate"><span class="pre">HyprlandWindow.mapped</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.hyprland.HyprlandWindow.hidden"><code class="docutils literal notranslate"><span class="pre">HyprlandWindow.hidden</span></code></a></li>
