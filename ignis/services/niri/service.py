@@ -262,21 +262,25 @@ class NiriService(BaseService):
         self.notify("workspaces")
 
     def __update_active_workspace(self, data: dict) -> None:
-        id, focused = data["id"], data["focused"]
-        output = self._workspaces[id].output
-        for _id, workspace in self._workspaces.items():
-            sync_data = {}
+        active_ws_id = data["id"]
+        is_focused = data["focused"]
+        output = self._workspaces[active_ws_id].output
+
+        for workspace in self._workspaces.values():
+            data = {}
             # If a workspace became active, it implies that all other workspaces
             # on the same monitor became inactive. Go through existing workspaces
             # and update their state accordingly.
-            got_activated = workspace.id == id
-            if workspace.output == output:
-                sync_data["is_active"] = got_activated
-            if focused:
-                sync_data["is_focused"] = got_activated
-            workspace.sync(sync_data)
+            got_activated = workspace.id == active_ws_id
 
-        if focused:
+            if workspace.output == output:
+                data["is_active"] = got_activated
+            if is_focused:
+                data["is_focused"] = got_activated
+
+            workspace.sync(data)
+
+        if is_focused:
             self._active_output = output
 
         self.notify("active-output")
