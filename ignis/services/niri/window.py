@@ -1,5 +1,4 @@
-from gi.repository import GObject  # type: ignore
-from ignis.gobject import IgnisProperty, DataGObject
+from ignis.gobject import IgnisProperty, IgnisSignal, DataGObject
 
 
 class NiriWindow(DataGObject):
@@ -19,7 +18,7 @@ class NiriWindow(DataGObject):
         self._is_focused: bool = False
         self._is_floating: bool = False
 
-    @GObject.Signal
+    @IgnisSignal
     def destroyed(self):
         """
         Emitted when the window has been destroyed.

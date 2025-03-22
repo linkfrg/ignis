@@ -1,5 +1,4 @@
-from gi.repository import GObject  # type: ignore
-from ignis.gobject import IgnisProperty, DataGObject
+from ignis.gobject import IgnisProperty, IgnisSignal, DataGObject
 
 
 class NiriWorkspace(DataGObject):
@@ -18,7 +17,7 @@ class NiriWorkspace(DataGObject):
         self._is_focused: bool = False
         self._active_window_id: int = -1
 
-    @GObject.Signal
+    @IgnisSignal
     def destroyed(self):
         """
         Emitted when the workspace has been destroyed.

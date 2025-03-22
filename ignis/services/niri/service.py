@@ -1,11 +1,10 @@
 import json
 import os
 import socket
-from gi.repository import GObject  # type: ignore
 from ignis.utils import Utils
 from ignis.exceptions import NiriIPCNotFoundError
 from ignis.base_service import BaseService
-from ignis.gobject import IgnisProperty
+from ignis.gobject import IgnisProperty, IgnisSignal
 from .constants import NIRI_SOCKET
 from .keyboard import NiriKeyboardLayouts
 from .window import NiriWindow
@@ -58,7 +57,7 @@ class NiriService(BaseService):
             #  any other IPC information requests."
             #   - https://github.com/YaLTeR/niri/wiki/IPC
 
-    @GObject.Signal()
+    @IgnisSignal
     def workspace_added(self, workspace: NiriWorkspace):
         """
         Emitted when a new workspace has been added.
