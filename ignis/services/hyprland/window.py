@@ -45,6 +45,9 @@ class HyprlandWindow(DataGObject):
         self._inhibiting_idle: bool = False
 
     def sync(self, data: dict[str, Any]) -> None:
+        """
+        :meta private:
+        """
         workspace = data.pop("workspace", None)
         if workspace:
             data["workspace_id"] = workspace["id"]
