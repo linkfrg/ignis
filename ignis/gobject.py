@@ -319,10 +319,6 @@ else:
         This class is needed only for the correct determination of signals when building docs.
         """
 
-    def __get_type_from_literal(self, tp: type) -> type | None:
-        values = get_args(tp)
-        return type(values[0]) if values else None
-
 
 class DataGObject(IgnisGObject):
     """
