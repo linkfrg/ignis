@@ -199,7 +199,7 @@ class NiriService(BaseService):
         self.notify("windows")
 
     def __update_niri_obj(
-        self, niri_obj: dict, fresh_data: list, obj_type=NiriWindow | NiriWorkspace
+        self, niri_obj: dict, fresh_data: list, obj_type: NiriWindow | NiriWorkspace
     ) -> None:
         for fresh_item in fresh_data:
             obj = niri_obj.get(fresh_item["id"], None)
