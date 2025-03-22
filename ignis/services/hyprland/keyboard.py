@@ -13,7 +13,7 @@ class HyprlandKeyboard(DataGObject):
 
     def __init__(self, service):
         super().__init__(match_dict=MATCH_DICT)
-        self._service = service
+        self.__service = service
         self._address: str = ""
         self._name: str = ""
         self._rules: str = ""
@@ -110,4 +110,4 @@ class HyprlandKeyboard(DataGObject):
         Args:
             layout: The layout to switch to. For example: ``next``, ``prev``, ``0``, ``1``, etc.
         """
-        self._service.send_command(f"switchxkblayout {self.name} {layout}")
+        self.__service.send_command(f"switchxkblayout {self.name} {layout}")

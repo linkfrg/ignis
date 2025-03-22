@@ -319,10 +319,6 @@ else:
         This class is needed only for the correct determination of signals when building docs.
         """
 
-    def __get_type_from_literal(self, tp: type) -> type | None:
-        values = get_args(tp)
-        return type(values[0]) if values else None
-
 
 class DataGObject(IgnisGObject):
     """
@@ -331,6 +327,10 @@ class DataGObject(IgnisGObject):
     Parameters:
         data: The dictionary to synchronize with.
         match_dict: The match dictionary between a key in the data and the property on ``self``.
+
+    You have to define attributes from data in ``init``.
+    The actual attributes from data must be protected (prefixed with _).
+    All other attributes must be private (prefixed with __).
     """
 
     def __init__(
@@ -346,8 +346,8 @@ class DataGObject(IgnisGObject):
         if match_dict is None:
             match_dict = {}
 
-        self._data = data
-        self._match_dict = match_dict
+        self.__latest_synced_data = data
+        self.__match_dict = match_dict
 
         if data != {}:
             self.sync(data)
@@ -355,16 +355,28 @@ class DataGObject(IgnisGObject):
     @IgnisProperty
     def data(self) -> dict[str, Any]:
         """
+        The current data collected from protected class attributes.
+        """
+        class_names = {cls.__name__ for cls in self.__class__.mro()}
+        return {
+            key.replace("_", "", 1): value
+            for key, value in self.__dict__.items()
+            if not any(key.startswith(f"_{name}__") for name in class_names)
+        }
+
+    @IgnisProperty
+    def latest_synced_data(self) -> dict[str, Any]:
+        """
         The latest synced data.
         """
-        return self._data
+        return self.__latest_synced_data
 
     @IgnisProperty
     def match_dict(self) -> dict[str, str]:
         """
         The match dictionary.
         """
-        return self._match_dict
+        return self.__match_dict
 
     def sync(self, data: dict[str, Any]) -> None:
         """
@@ -374,7 +386,7 @@ class DataGObject(IgnisGObject):
             data: The dictionary to synchronize with.
         """
         for key, value in data.items():
-            public_prop_name = self._match_dict.get(key, key)
+            public_prop_name = self.__match_dict.get(key, key)
             protected_prop_name = f"_{public_prop_name}"
 
             if not hasattr(self, protected_prop_name):
@@ -384,5 +396,5 @@ class DataGObject(IgnisGObject):
                 setattr(self, protected_prop_name, value)
                 self.notify(public_prop_name)
 
-        self._data = data
+        self.__latest_synced_data = data
         self.notify("data")

@@ -1,4 +1,4 @@
-from ignis.gobject import IgnisProperty, DataGObject
+from ignis.gobject import IgnisProperty, DataGObject, IgnisSignal
 from typing import Any
 
 MATCH_DICT = {
@@ -45,11 +45,20 @@ class HyprlandWindow(DataGObject):
         self._inhibiting_idle: bool = False
 
     def sync(self, data: dict[str, Any]) -> None:
+        """
+        :meta private:
+        """
         workspace = data.pop("workspace", None)
         if workspace:
             data["workspace_id"] = workspace["id"]
             data["workspace_name"] = workspace["name"]
         super().sync(data)
+
+    @IgnisSignal
+    def closed(self):
+        """
+        Emitted when the window has been closed.
+        """
 
     @IgnisProperty
     def address(self) -> str:
