@@ -8,7 +8,7 @@ class NiriWorkspace(DataGObject):
 
     def __init__(self, service):
         super().__init__()
-        self._service = service
+        self.__service = service
         self._id: int = -1
         self._idx: int = -1
         self._name: str = ""
@@ -77,4 +77,4 @@ class NiriWorkspace(DataGObject):
         Switch to this workspace.
         """
         cmd = {"Action": {"FocusWorkspace": {"reference": {"Id": self._id}}}}
-        self._service.send_command(cmd)
+        self.__service.send_command(cmd)

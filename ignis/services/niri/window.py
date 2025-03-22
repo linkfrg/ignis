@@ -9,7 +9,7 @@ class NiriWindow(DataGObject):
     def __init__(self, service):
         super().__init__()
 
-        self._service = service
+        self.__service = service
         self._id: int = -1
         self._title: str = ""
         self._app_id: str = ""
@@ -78,25 +78,25 @@ class NiriWindow(DataGObject):
         Close this window.
         """
         cmd = {"Action": {"CloseWindow": {"id": self._id}}}
-        self._service.send_command(cmd)
+        self.__service.send_command(cmd)
 
     def focus(self) -> None:
         """
         Focus this window.
         """
         cmd = {"Action": {"FocusWindow": {"id": self._id}}}
-        self._service.send_command(cmd)
+        self.__service.send_command(cmd)
 
     def toggle_fullscreen(self) -> None:
         """
         Toggle fullscreen on this window.
         """
         cmd = {"Action": {"FullscreenWindow": {"id": self._id}}}
-        self._service.send_command(cmd)
+        self.__service.send_command(cmd)
 
     def toggle_floating(self) -> None:
         """
         Move the window between the floating and the tiling layout.
         """
         cmd = {"Action": {"ToggleWindowFloating": {"id": self._id}}}
-        self._service.send_command(cmd)
+        self.__service.send_command(cmd)

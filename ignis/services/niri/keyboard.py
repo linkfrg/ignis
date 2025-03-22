@@ -8,7 +8,7 @@ class NiriKeyboardLayouts(DataGObject):
 
     def __init__(self, service):
         super().__init__()
-        self._service = service
+        self.__service = service
         self._names: list = []
         self._current_idx: int = -1
         self._main: bool = False
@@ -42,4 +42,4 @@ class NiriKeyboardLayouts(DataGObject):
             layout: The layout to switch to (``Next``, ``Prev`` or a valid id)
         """
         cmd = {"Action": {"SwitchLayout": {"layout": layout}}}
-        self._service.send_command(cmd)
+        self.__service.send_command(cmd)
