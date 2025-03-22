@@ -174,7 +174,7 @@ class NiriService(BaseService):
         self._windows[window_data["id"]] = window
 
         if window.is_focused:
-            self._active_window = window
+            self._active_window.sync(window_data)
 
         self.__sort_windows()
 
