@@ -1,4 +1,4 @@
-from ignis.gobject import IgnisProperty, DataGObject
+from ignis.gobject import IgnisProperty, DataGObject, IgnisSignal
 from typing import Any
 
 MATCH_DICT = {
@@ -50,6 +50,12 @@ class HyprlandWindow(DataGObject):
             data["workspace_id"] = workspace["id"]
             data["workspace_name"] = workspace["name"]
         super().sync(data)
+
+    @IgnisSignal
+    def closed(self):
+        """
+        Emitted when the window has been closed.
+        """
 
     @IgnisProperty
     def address(self) -> str:

@@ -1,6 +1,7 @@
 import json
 import os
 import socket
+from typing import Any
 from ignis.utils import Utils
 from ignis.exceptions import HyprlandIPCNotFoundError
 from ignis.base_service import BaseService
@@ -42,6 +43,7 @@ class HyprlandService(BaseService):
         self._workspaces: dict[int, HyprlandWorkspace] = {}
         self._active_workspace: HyprlandWorkspace = HyprlandWorkspace(self)
         self._main_keyboard: HyprlandKeyboard = HyprlandKeyboard(self)
+        self._windows: dict[str, HyprlandWindow] = {}
         self._active_window: HyprlandWindow = HyprlandWindow()
 
         if self.is_available:
@@ -51,6 +53,7 @@ class HyprlandService(BaseService):
             self.__sync_active_workspace()
             self.__sync_main_keyboard()
             self.__sync_active_window()
+            self.__sync_windows()
 
     @IgnisSignal
     def workspace_added(self, workspace: HyprlandWorkspace):
@@ -59,6 +62,15 @@ class HyprlandService(BaseService):
 
         Args:
             workspace: The instance of the workspace.
+        """
+
+    @IgnisSignal
+    def window_added(self, window: HyprlandWindow):
+        """
+        Emitted when a new window has been added.
+
+        Args:
+            window: The instance of the window.
         """
 
     @IgnisProperty
@@ -90,6 +102,13 @@ class HyprlandService(BaseService):
         return self._main_keyboard
 
     @IgnisProperty
+    def windows(self) -> list[HyprlandWindow]:
+        """
+        A list of windows.
+        """
+        return list(self._windows.values())
+
+    @IgnisProperty
     def active_window(self) -> HyprlandWindow:
         """
         The currenly focused window.
@@ -107,22 +126,37 @@ class HyprlandService(BaseService):
         event_data = event.split(">>")
         event_type = event_data[0]
         event_value = event_data[1]
+        value_list = event_value.split(",")
 
         match event_type:
             case "destroyworkspacev2":
-                self.__destroy_workspace(int(event_value.split(",")[0]))
+                self.__destroy_workspace(int(value_list[0]))
             case "createworkspacev2":
-                self.__create_workspace(int(event_value.split(",")[0]))
+                self.__create_workspace(int(value_list[0]))
             case "workspace":
                 self.__sync_active_workspace()
             case "focusedmon":
                 self.__sync_active_workspace()
             case "activelayout":
-                self.__sync_active_layout(event_value.split(",")[1])
+                self.__sync_active_layout(value_list[1])
             case "activewindow":
                 self.__sync_active_window()
             case "renameworkspace":
                 self.__sync_workspaces()
+            case "openwindow":
+                self.__open_window(value_list[0])
+            case "closewindow":
+                self.__close_window(value_list[0])
+            case "movewindowv2":
+                self.__move_window(value_list[0], int(value_list[1]), value_list[0])
+            case "changefloatingmode":
+                self.__change_window_floating_mode(value_list[0], int(value_list[1]))
+            case "windowtitlev2":
+                # window title can contain comma (,)
+                value_list = event_value.split(",", 1)
+                self.__change_window_title(*value_list)
+            case "pin":
+                self.__change_window_pin_state(value_list[0], int(value_list[1]))
 
     def __create_workspace(self, id_: int) -> None:
         for i in json.loads(self.send_command("j/workspaces")):
@@ -188,6 +222,65 @@ class HyprlandService(BaseService):
         self.active_window.sync(active_window_data)
         self.notify("active-window")
 
+    def __sync_windows(self) -> None:
+        data = json.loads(self.send_command("j/clients"))
+        for window_data in data:
+            address = window_data["address"].replace("0x", "")
+            window = self._windows.get(address, None)
+            if window is None:
+                window = HyprlandWindow()
+
+            window.sync(window_data)
+
+            self._windows[address] = window
+
+        self.notify("windows")
+
+    def __get_window_data(self, address: str) -> dict:
+        for window in json.loads(self.send_command("j/clients")):
+            if window["address"].replace("0x", "") == address:
+                return window
+
+        return {}
+
+    def __sync_window_data(self, address: str, data: dict[str, Any]) -> None:
+        window = self._windows.get(address, None)
+        if window:
+            window.sync(data)
+
+    def __open_window(self, address: str) -> None:
+        window_data = self.__get_window_data(address)
+        window = HyprlandWindow()
+        window.sync(window_data)
+        self._windows[address] = window
+        self.emit("window-added", window)
+        self.notify("windows")
+
+    def __close_window(self, address: str) -> None:
+        window = self._windows.pop(address, None)
+        if window:
+            window.emit("closed")
+            self.notify("windows")
+
+    def __move_window(
+        self, address: str, workspace_id: int, workspace_name: str
+    ) -> None:
+        self.__sync_window_data(
+            address=address,
+            data={"workspace": {"id": workspace_id, "name": workspace_name}},
+        )
+
+    def __change_window_floating_mode(self, address: str, floating: int) -> None:
+        self.__sync_window_data(address=address, data={"floating": bool(floating)})
+
+    def __change_window_title(self, address: str, title: str) -> None:
+        self.__sync_window_data(address=address, data={"title": title})
+
+    def __change_window_pin_state(self, address: str, pin_state: int) -> None:
+        self.__sync_window_data(
+            address=address, data={"title": {"pinned": bool(pin_state)}}
+        )
+
     def send_command(self, cmd: str) -> str:
         """
         Send a command to the Hyprland IPC.
@@ -229,3 +322,14 @@ class HyprlandService(BaseService):
             The workspace instance, or ``None`` if the workspace with the given ID doesn't exist.
         """
         return self._workspaces.get(workspace_id, None)
+
+    def get_window_by_address(self, address: str) -> HyprlandWindow | None:
+        """
+        Get a window by its address.
+
+        Args:
+            address: The address of the window.
+        Returns:
+            The window instance, or ``None`` if the window with the given address doesn't exist.
+        """
+        return self._windows.get(address, None)
