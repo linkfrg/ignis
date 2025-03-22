@@ -15,7 +15,7 @@ class HyprlandWorkspace(DataGObject):
 
     def __init__(self, service):
         super().__init__(match_dict=MATCH_DICT)
-        self._service = service
+        self.__service = service
         self._id: int = -1
         self._name: str = ""
         self._monitor: str = ""
@@ -91,4 +91,4 @@ class HyprlandWorkspace(DataGObject):
         """
         Switch to this workspace.
         """
-        self._service.send_command(f"dispatch workspace {self.id}")
+        self.__service.send_command(f"dispatch workspace {self.id}")
