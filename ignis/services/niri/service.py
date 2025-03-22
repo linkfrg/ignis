@@ -34,8 +34,6 @@ class NiriService(BaseService):
 
         # Get the title of the active window
         print(niri.active_window.title)
-
-        niri.connect("notify::kb-layout", lambda x, y: print(niri.kb_layout))
     """
 
     def __init__(self):
