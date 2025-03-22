@@ -59,3 +59,33 @@ Use :class:`Gtk.EventControllerKey`:
     key_controller.connect("key-pressed", handle_key_press)
 
 Replace ``WIDGET`` with the widget on which you want to listen for key events.
+
+Display applications icons on Hyprland workspaces buttons
+=========================================================
+
+.. code-block:: python
+
+    # The code from the example bar
+
+    def hyprland_workspace_button(workspace: HyprlandWorkspace) -> Widget.Button:
+        widget = Widget.Button(
+            css_classes=["workspace"],
+            on_click=lambda x: workspace.switch_to(),
+            child=Widget.Box(
+                child=hyprland.bind(
+                    "windows",
+                    lambda _: [
+                        # find the icon of the app by its class name
+                        Widget.Icon(icon_name=Utils.get_app_icon_name(window.class_name))
+                        # get all windows on the current workspace
+                        for window in hyprland.get_windows_on_workspace(
+                            workspace_id=workspace.id
+                        )
+                    ],
+                )
+            ),
+        )
+        if workspace.id == hyprland.active_workspace.id:
+            widget.add_css_class("active")
+
+        return widget
