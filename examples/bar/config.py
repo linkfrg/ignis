@@ -174,7 +174,7 @@ def niri_client_title(monitor_name) -> Widget.Label:
         ellipsize="end",
         max_width_chars=40,
         visible=niri.bind("active_output", lambda output: output == monitor_name),
-        label=niri.bind("active_window", transform=lambda window: window.title),
+        label=niri.active_window.bind("title"),
     )
 
 
