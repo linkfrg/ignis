@@ -331,3 +331,19 @@ class HyprlandService(BaseService):
             The window instance, or ``None`` if the window with the given address doesn't exist.
         """
         return self._windows.get(address, None)
+
+    def get_windows_on_workspace(self, workspace_id: int) -> list[HyprlandWindow]:
+        """
+        Get a list of windows on a workspace by its ID.
+
+        Args:
+            workspace_id: The ID of the workspace.
+
+        Returns:
+            A list of windows on the workspace.
+        """
+        return [
+            window
+            for window in self._windows.values()
+            if window.workspace_id == workspace_id
+        ]
