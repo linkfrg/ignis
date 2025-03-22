@@ -152,6 +152,8 @@ class HyprlandService(BaseService):
             case "changefloatingmode":
                 self.__change_window_floating_mode(value_list[0], int(value_list[1]))
             case "windowtitlev2":
+                # window title can contain comma (,)
+                value_list = event_value.split(",", 1)
                 self.__change_window_title(*value_list)
             case "pin":
                 self.__change_window_pin_state(value_list[0], int(value_list[1]))
