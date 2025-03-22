@@ -49,11 +49,11 @@ class HyprlandService(BaseService):
         if self.is_available:
             self.__listen_events()
 
-            self.__sync_workspaces()
+            self.__initial_sync_workspaces()
             self.__sync_active_workspace()
             self.__sync_main_keyboard()
             self.__sync_active_window()
-            self.__sync_windows()
+            self.__initial_sync_windows()
 
     @IgnisSignal
     def workspace_added(self, workspace: HyprlandWorkspace):
@@ -142,7 +142,7 @@ class HyprlandService(BaseService):
             case "activewindow":
                 self.__sync_active_window()
             case "renameworkspace":
-                self.__sync_workspaces()
+                self.__rename_workspace(int(value_list[0]), value_list[1])
             case "openwindow":
                 self.__open_window(value_list[0])
             case "closewindow":
@@ -157,6 +157,17 @@ class HyprlandService(BaseService):
                 self.__change_window_title(*value_list)
             case "pin":
                 self.__change_window_pin_state(value_list[0], int(value_list[1]))
+
+    def __initial_sync_workspaces(self) -> None:
+        workspaces = json.loads(self.send_command("j/workspaces"))
+
+        for workspace_data in workspaces:
+            workspace = HyprlandWorkspace(self)
+            workspace.sync(workspace_data)
+            self._workspaces[workspace_data["id"]] = workspace
+
+        self.__sort_workspaces()
+        self.notify("workspaces")
 
     def __create_workspace(self, id_: int) -> None:
         for i in json.loads(self.send_command("j/workspaces")):
@@ -181,24 +192,13 @@ class HyprlandService(BaseService):
             self.__sort_workspaces()
             self.notify("workspaces")
 
+    def __rename_workspace(self, workspace_id: int, new_name: str) -> None:
+        workspace = self._workspaces.get(workspace_id, None)
+        if workspace:
+            workspace.sync({"name": new_name})
+
     def __sort_workspaces(self) -> None:
         self._workspaces = dict(sorted(self._workspaces.items()))
-
-    def __sync_workspaces(self) -> None:
-        workspaces = sorted(
-            json.loads(self.send_command("j/workspaces")), key=lambda x: x["id"]
-        )
-        for workspace_data in workspaces:
-            workspace = self._workspaces.get(workspace_data["id"], None)
-            if workspace is None:
-                workspace = HyprlandWorkspace(self)
-
-            workspace.sync(workspace_data)
-            self._workspaces[workspace_data["id"]] = workspace
-
-        self.__sort_workspaces()
-
-        self.notify("workspaces")
 
     def __sync_active_workspace(self) -> None:
         workspace_data = json.loads(self.send_command("j/activeworkspace"))
@@ -222,16 +222,14 @@ class HyprlandService(BaseService):
         self.active_window.sync(active_window_data)
         self.notify("active-window")
 
-    def __sync_windows(self) -> None:
+    def __initial_sync_windows(self) -> None:
         data = json.loads(self.send_command("j/clients"))
+
         for window_data in data:
             address = window_data["address"].replace("0x", "")
-            window = self._windows.get(address, None)
-            if window is None:
-                window = HyprlandWindow()
 
+            window = HyprlandWindow()
             window.sync(window_data)
-
             self._windows[address] = window
 
         self.notify("windows")
