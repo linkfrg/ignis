@@ -190,9 +190,10 @@ class NiriService(BaseService):
             window.sync({"is_focused": (window.id == id)})
 
         if id:
-            self._active_window = self._windows[id]
+            self._active_window.sync(self._windows[id].data)
         else:
-            self._active_window = NiriWindow(self)
+            window_skeleton = NiriWindow(self)
+            self._active_window.sync(window_skeleton.data)
 
         self.notify("active-window")
         self.notify("windows")
