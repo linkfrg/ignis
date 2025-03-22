@@ -1,12 +1,11 @@
-import os
 import shutil
 import subprocess
+import tempfile
 from typing import Literal
 from ignis.exceptions import SassCompilationError, SassNotFoundError
 
-TEMP_DIR = "/tmp/ignis"
+TEMP_DIR = tempfile.mkdtemp(prefix="ignis-")
 COMPILED_CSS = f"{TEMP_DIR}/compiled.css"
-os.makedirs(TEMP_DIR, exist_ok=True)
 
 # resolve Sass compiler paths and pick a default one
 # "sass" (dart-sass) is the default,
