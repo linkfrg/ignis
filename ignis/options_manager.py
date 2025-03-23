@@ -1,13 +1,15 @@
 import json
 from ignis.gobject import IgnisGObject, Binding, IgnisProperty, IgnisSignal
 from ignis.utils import Utils
-from typing import Any
+from typing import Any, TypeVar
 from collections.abc import Callable
 from collections.abc import Generator
 from ignis import is_sphinx_build
 
+T = TypeVar("T")
 
-class TrackedList(list):
+
+class TrackedList(list[T]):
     """
     Bases: :class:`list`.
 
@@ -19,7 +21,7 @@ class TrackedList(list):
         from ignis.options_manager import OptionsGroup, TrackedList
 
         class SomeGroup(OptionsGroup):
-            some_list: list = TrackedList()
+            some_list: TrackedList = TrackedList()
 
         group = SomeGroup()
         group.connect_option("some_list", lambda: print(f"changed!: {group.some_list}"))
@@ -186,8 +188,6 @@ class OptionsGroup(IgnisGObject):
     @IgnisSignal
     def autosave(self):
         """
-        - Signal
-
         Emitted when changes to this group or its child subgroups are going to be saved to the file.
         """
 
@@ -321,7 +321,7 @@ class OptionsManager(OptionsGroup):
                 example_option: str | None = get_something...()
                 test: str = "%Y-%m-%d_%H-%M-%S.mp4"
                 # using TrackedList instead of usual python list is encouraged
-                some_list: list = TrackedList()
+                some_list: TrackedList[int] = TrackedList()
 
 
             subgroup1 = Subgroup1()
