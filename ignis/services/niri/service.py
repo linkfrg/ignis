@@ -120,14 +120,15 @@ class NiriService(BaseService):
             sock.connect(str(NIRI_SOCKET))
             sock.send(b'"EventStream"\n')
             for event in Utils.listen_socket(sock, errors="ignore"):
-                self.__on_event_received(event)
-                if break_on and break_on == list(json.loads(event).keys())[0]:
+                json_data = json.loads(event)
+                event_type = list(json_data.keys())[0]
+                event_data = list(json_data.values())[0]
+
+                self.__on_event_received(event_type, event_data)
+                if break_on and break_on == event_type:
                     return
 
-    def __on_event_received(self, event: str) -> None:
-        json_data = json.loads(event)
-        event_type = list(json_data.keys())[0]
-        event_data = list(json_data.values())[0]
+    def __on_event_received(self, event_type: dict, event_data: dict) -> None:
         match event_type:
             case "KeyboardLayoutSwitched":
                 self.__update_current_layout(event_data)
