@@ -17,8 +17,14 @@ class ListBox(Gtk.ListBox, BaseWidget):
 
         Widget.ListBox(
             rows=[
-                Widget.ListBoxRow(label="row 1", on_activate=lambda x: print("selected row 1")),
-                Widget.ListBoxRow(label="row 2", on_activate=lambda x: print("selected row 2"))
+                Widget.ListBoxRow(
+                    child=Widget.Label(label="row 1"),
+                    on_activate=lambda x: print("selected row 1"),
+                ),
+                Widget.ListBoxRow(
+                    child=Widget.Label(label="row 2"),
+                    on_activate=lambda x: print("selected row 2"),
+                ),
             ]
         )
     """
