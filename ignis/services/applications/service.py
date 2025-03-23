@@ -27,10 +27,13 @@ class ApplicationsService(BaseService):
     def __init__(self):
         super().__init__()
         self._apps: dict[str, Application] = {}
-        self._pinned: dict[str, Application] = {}
 
         self._monitor = Gio.AppInfoMonitor.get()
         self._monitor.connect("changed", lambda x: self.__sync())
+
+        options.applications.connect_option(
+            "pinned_apps", lambda: self.notify("pinned")
+        )
 
         self.__sync()
 
@@ -46,16 +49,15 @@ class ApplicationsService(BaseService):
         """
         A list of all pinned applications.
         """
-        return list(self._pinned.values())
-
-    def __connect_entry(self, entry: Application) -> None:
-        entry.connect("pinned", lambda x: self.__pin_entry(x))
-        entry.connect("unpinned", lambda x: self.__unpin_entry(x))
+        return [
+            self._apps.get(name)  # type: ignore
+            for name in options.applications.pinned_apps
+            if name in self._apps
+        ]
 
     def __sync(self) -> None:
         self._apps = {}
-        self._pinned = {}
-        self.__read_pinned_apps()
+
         for app in Gio.AppInfo.get_all():
             if isinstance(app, Gio.DesktopAppInfo):
                 self.__add_app(app)
@@ -67,39 +69,9 @@ class ApplicationsService(BaseService):
         if app.get_nodisplay():
             return
 
-        if app.get_id() in self._pinned:
-            entry = Application(app=app, is_pinned=True)
-        else:
-            entry = Application(app=app, is_pinned=False)
+        obj = Application(app=app)
 
-        self.__connect_entry(entry)
-        self._apps[entry.id] = entry
-
-    def __read_pinned_apps(self) -> None:
-        for pinned in options.applications.pinned_apps:
-            try:
-                app = Gio.DesktopAppInfo.new(desktop_id=pinned)
-            except TypeError:
-                continue
-            if not app:
-                return
-
-            entry = Application(app=app, is_pinned=True)
-            self.__connect_entry(entry)
-            self._pinned[entry.id] = entry
-
-    def __sync_pinned(self) -> None:
-        pinned_ids = [p.id for p in self.pinned]
-        options.applications.pinned_apps = pinned_ids
-        self.notify("pinned")
-
-    def __pin_entry(self, entry: Application) -> None:
-        self._pinned[entry.id] = entry
-        self.__sync_pinned()
-
-    def __unpin_entry(self, entry: Application) -> None:
-        self._pinned.pop(entry.id)
-        self.__sync_pinned()
+        self._apps[obj.id] = obj
 
     @classmethod
     def search(
