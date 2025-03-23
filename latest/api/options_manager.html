@@ -544,7 +544,7 @@ Has support for hot-reloading when the file is modified externally.</p>
         <span class="n">example_option</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">get_something</span><span class="o">...</span><span class="p">()</span>
         <span class="n">test</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">_%H-%M-%S.mp4&quot;</span>
         <span class="c1"># using TrackedList instead of usual python list is encouraged</span>
-        <span class="n">some_list</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="n">TrackedList</span><span class="p">()</span>
+        <span class="n">some_list</span><span class="p">:</span> <span class="n">TrackedList</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">TrackedList</span><span class="p">()</span>
 
 
     <span class="n">subgroup1</span> <span class="o">=</span> <span class="n">Subgroup1</span><span class="p">()</span>
@@ -681,7 +681,7 @@ for the <a class="reference internal" href="#ignis.options.OptionsGroup" title="
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ignis.options_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">OptionsGroup</span><span class="p">,</span> <span class="n">TrackedList</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">SomeGroup</span><span class="p">(</span><span class="n">OptionsGroup</span><span class="p">):</span>
-    <span class="n">some_list</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="n">TrackedList</span><span class="p">()</span>
+    <span class="n">some_list</span><span class="p">:</span> <span class="n">TrackedList</span> <span class="o">=</span> <span class="n">TrackedList</span><span class="p">()</span>
 
 <span class="n">group</span> <span class="o">=</span> <span class="n">SomeGroup</span><span class="p">()</span>
 <span class="n">group</span><span class="o">.</span><span class="n">connect_option</span><span class="p">(</span><span class="s2">&quot;some_list&quot;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;changed!: </span><span class="si">{</span><span class="n">group</span><span class="o">.</span><span class="n">some_list</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
