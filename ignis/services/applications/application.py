@@ -4,6 +4,7 @@ import asyncio
 import subprocess
 from gi.repository import Gio, GLib  # type: ignore
 from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
+from ignis.options import options
 from .action import ApplicationAction
 
 
@@ -12,11 +13,10 @@ class Application(IgnisGObject):
     An application object.
     """
 
-    def __init__(self, app: Gio.DesktopAppInfo, is_pinned: bool):
+    def __init__(self, app: Gio.DesktopAppInfo):
         super().__init__()
 
         self._app = app
-        self._is_pinned = is_pinned
         self._actions: list[ApplicationAction] = []
 
         for action in app.list_actions():
@@ -113,17 +113,19 @@ class Application(IgnisGObject):
         """
         Whether the application is pinned.
         """
-        return self._is_pinned
+        return self.id in options.applications.pinned_apps
 
     @is_pinned.setter
     def is_pinned(self, value: bool) -> None:
-        if value == self._is_pinned:
+        if value == self.is_pinned:
             return
 
-        self._is_pinned = value
+        opt = options.applications.pinned_apps
         if value:
+            opt.append(self.id)
             self.emit("pinned")
         else:
+            opt.remove(self.id)
             self.emit("unpinned")
 
     @IgnisProperty

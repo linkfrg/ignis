@@ -1,6 +1,6 @@
 from ignis import CACHE_DIR
 from gi.repository import GLib  # type: ignore
-from ignis.options_manager import OptionsManager, OptionsGroup
+from ignis.options_manager import OptionsManager, OptionsGroup, TrackedList
 from ignis import is_sphinx_build
 
 
@@ -35,6 +35,10 @@ class Options(OptionsManager):
         * and etc.
 
     You can use classes (not instances of them) to obtain default values of options.
+
+    .. hint::
+        If the option is of type :class:`~ignis.options_manager.TrackedList`, it means that it is regular Python list.
+        But you can call ``.append()``, ``.remove()``, ``.insert()``, etc., and the changes will be applied!
 
     Example usage:
 
@@ -106,9 +110,7 @@ class Options(OptionsManager):
         """
 
         #: A list of the pinned applications desktop files, e.g. ``"firefox.desktop"``, ``"code.desktop"``.
-        #:
-        #: You shouldn't modify this option, use Application Service methods instead.
-        pinned_apps: list[str] = []
+        pinned_apps: TrackedList[str] = TrackedList()
 
     class Wallpaper(OptionsGroup):
         """
