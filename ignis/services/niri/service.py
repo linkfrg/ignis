@@ -46,8 +46,14 @@ class NiriService(BaseService):
         self._active_output: str = ""
 
         if self.is_available:
-            self.__listen_events()
-            # No need to send any commands after event stream initialization:
+            # Launch an unthreaded event stream to ensure all variables get initialized
+            # before returning from __init__ . KeyboardLayoutsChanged is always the last
+            # event to be sent during initialization of the Niri event stream, so once
+            # it is received, we are ready to launch a threaded (non blocking) version.
+            self.__listen_events(break_on="KeyboardLayoutsChanged")
+
+            Utils.thread(self.__listen_events)
+            # No need to send any other commands after event stream initialization:
             #
             #  "The event stream IPC is designed to give you the complete current
             #  state up-front, then follow up with updates to that state. This way,
@@ -109,12 +115,13 @@ class NiriService(BaseService):
         """
         return self._active_output
 
-    @Utils.run_in_thread
-    def __listen_events(self) -> None:
+    def __listen_events(self, break_on: str = "") -> None:
         with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as sock:
             sock.connect(str(NIRI_SOCKET))
             sock.send(b'"EventStream"\n')
             for event in Utils.listen_socket(sock, errors="ignore"):
+                if break_on and break_on == list(json.loads(event).keys())[0]:
+                    return
                 self.__on_event_received(event)
 
     def __on_event_received(self, event: str) -> None:
