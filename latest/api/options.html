@@ -539,6 +539,11 @@ use an initialized instance that starts with a lowercase letter.</p>
 </dd>
 </dl>
 <p>You can use classes (not instances of them) to obtain default values of options.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If the option is of type <a class="reference internal" href="options_manager.html#ignis.options_manager.TrackedList" title="ignis.options_manager.TrackedList"><code class="xref py py-class docutils literal notranslate"><span class="pre">TrackedList</span></code></a>, it means that it is regular Python list.
+But you can call <code class="docutils literal notranslate"><span class="pre">.append()</span></code>, <code class="docutils literal notranslate"><span class="pre">.remove()</span></code>, <code class="docutils literal notranslate"><span class="pre">.insert()</span></code>, etc., and the changes will be applied!</p>
+</div>
 <p>Example usage:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ignis.options</span><span class="w"> </span><span class="kn">import</span> <span class="n">options</span>
 
@@ -615,9 +620,8 @@ and all new <a class="reference internal" href="services/notifications.html#igni
 <dd><p>Options for the <a class="reference internal" href="services/applications.html#ignis.services.applications.ApplicationsService" title="ignis.services.applications.ApplicationsService"><code class="xref py py-class docutils literal notranslate"><span class="pre">ApplicationsService</span></code></a>.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ignis.options.Options.Applications.pinned_apps">
-<span class="sig-name descname"><span class="pre">pinned_apps</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><span class="pre">]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#ignis.options.Options.Applications.pinned_apps" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">pinned_apps</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="options_manager.html#ignis.options_manager.TrackedList" title="ignis.options_manager.TrackedList"><code class="xref py py-class docutils literal notranslate"><span class="pre">TrackedList</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><span class="pre">]</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#ignis.options.Options.Applications.pinned_apps" title="Link to this definition">#</a></dt>
 <dd><p>A list of the pinned applications desktop files, e.g. <code class="docutils literal notranslate"><span class="pre">&quot;firefox.desktop&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;code.desktop&quot;</span></code>.</p>
-<p>You shouldn't modify this option, use Application Service methods instead.</p>
 </dd></dl>
 
 </dd></dl>
