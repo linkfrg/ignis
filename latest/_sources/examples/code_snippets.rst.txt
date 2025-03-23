@@ -61,7 +61,7 @@ Use :class:`Gtk.EventControllerKey`:
 Replace ``WIDGET`` with the widget on which you want to listen for key events.
 
 Display applications icons on Hyprland workspaces buttons
-=========================================================
+---------------------------------------------------------
 
 .. code-block:: python
 
