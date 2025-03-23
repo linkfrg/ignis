@@ -186,8 +186,6 @@ class OptionsGroup(IgnisGObject):
     @IgnisSignal
     def autosave(self):
         """
-        - Signal
-
         Emitted when changes to this group or its child subgroups are going to be saved to the file.
         """
 
