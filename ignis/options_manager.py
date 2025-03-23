@@ -7,6 +7,109 @@ from collections.abc import Generator
 from ignis import is_sphinx_build
 
 
+class TrackedList(list):
+    """
+    Bases: :class:`list`.
+
+    The same as a usual Python list, but it can emit ``changed`` signal
+    for the :class:`OptionsGroup` attribute in which it is stored when the list's elements change.
+
+    .. code-block:: python
+
+        from ignis.options_manager import OptionsGroup, TrackedList
+
+        class SomeGroup(OptionsGroup):
+            some_list: list = TrackedList()
+
+        group = SomeGroup()
+        group.connect_option("some_list", lambda: print(f"changed!: {group.some_list}"))
+        group.some_list.append(123)
+    """
+
+    def __init__(
+        self, owner: "OptionsGroup | None" = None, name: str | None = None, *args
+    ):
+        super().__init__(*args)
+        self._owner = owner
+        self._name = name
+
+    @property
+    def owner(self) -> "OptionsGroup | None":
+        return self._owner
+
+    @property
+    def name(self) -> str | None:
+        return self._name
+
+    def __notify(self) -> None:
+        if self._owner and self._name:
+            obj = self._owner._instance
+            if obj:
+                obj.emit("changed", self._name)
+                obj.emit("autosave")
+
+    def __set_name__(self, owner, name):
+        self._owner = owner
+        self._name = name
+
+    def append(self, item):
+        """
+        :meta private:
+        """
+        super().append(item)
+        self.__notify()
+
+    def extend(self, iterable):
+        """
+        :meta private:
+        """
+        super().extend(iterable)
+        self.__notify()
+
+    def insert(self, index, item):
+        """
+        :meta private:
+        """
+        super().insert(index, item)
+        self.__notify()
+
+    def remove(self, item):
+        """
+        :meta private:
+        """
+        super().remove(item)
+        self.__notify()
+
+    def pop(self, index=-1):
+        """
+        :meta private:
+        """
+        item = super().pop(index)
+        self.__notify()
+        return item
+
+    def clear(self):
+        """
+        :meta private:
+        """
+        super().clear()
+        self.__notify()
+
+    def __setitem__(self, index, value):
+        """
+        :meta private:
+        """
+        super().__setitem__(index, value)
+        self.__notify()
+
+    def __delitem__(self, index):
+        """
+        :meta private:
+        """
+        super().__delitem__(index)
+        self.__notify()
+
+
 class Option(IgnisGObject):
     """
     :meta private:
@@ -34,7 +137,19 @@ class Option(IgnisGObject):
 class OptionsGroup(IgnisGObject):
     """
     An options group.
+    Implements the Singleton pattern.
     """
+
+    # Singleton is required for TrackedList.__notify()
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if is_sphinx_build:
+            return
+
+        if cls._instance is None:
+            cls._instance = super().__new__(cls, *args, **kwargs)
+        return cls._instance
 
     def __init__(self):
         super().__init__()
@@ -134,6 +249,10 @@ class OptionsGroup(IgnisGObject):
                 attr.apply_from_dict(value, emit, autosave)
             else:
                 if attr != value:
+                    if isinstance(attr, TrackedList) and isinstance(value, list):
+                        # replace TrackedList with new TrackedList with the same owner and name, but with new value
+                        # so it will not be overwritten by usual python list
+                        value = TrackedList(attr.owner, attr.name, value)
                     self.__setattr__(key, value, emit, autosave)
 
     def __yield_subgroups(
@@ -143,7 +262,9 @@ class OptionsGroup(IgnisGObject):
             if key.startswith("__"):
                 continue
             if isinstance(value, OptionsGroup):
-                yield key, value
+                # _instance contain self, and it can cause recursion
+                if value != self:
+                    yield key, value
 
     def __setattr__(
         self, name: str, value: Any, emit: bool = True, autosave: bool = True
@@ -186,7 +307,7 @@ class OptionsManager(OptionsGroup):
 
     .. code-block:: python
 
-        from ignis.options_manager import OptionsManager, OptionsGroup
+        from ignis.options_manager import OptionsManager, OptionsGroup, TrackedList
 
         class SomeOptions(OptionsManager):
             def __init__(self):
@@ -199,6 +320,8 @@ class OptionsManager(OptionsGroup):
             class SomeSubgroup(OptionsGroup):
                 example_option: str | None = get_something...()
                 test: str = "%Y-%m-%d_%H-%M-%S.mp4"
+                # using TrackedList instead of usual python list is encouraged
+                some_list: list = TrackedList()
 
 
             subgroup1 = Subgroup1()
