@@ -21,7 +21,7 @@ class TrackedList(list[T]):
         from ignis.options_manager import OptionsGroup, TrackedList
 
         class SomeGroup(OptionsGroup):
-            some_list: list = TrackedList()
+            some_list: TrackedList = TrackedList()
 
         group = SomeGroup()
         group.connect_option("some_list", lambda: print(f"changed!: {group.some_list}"))
@@ -321,7 +321,7 @@ class OptionsManager(OptionsGroup):
                 example_option: str | None = get_something...()
                 test: str = "%Y-%m-%d_%H-%M-%S.mp4"
                 # using TrackedList instead of usual python list is encouraged
-                some_list: list = TrackedList()
+                some_list: TrackedList[int] = TrackedList()
 
 
             subgroup1 = Subgroup1()
