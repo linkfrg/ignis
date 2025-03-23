@@ -120,9 +120,9 @@ class NiriService(BaseService):
             sock.connect(str(NIRI_SOCKET))
             sock.send(b'"EventStream"\n')
             for event in Utils.listen_socket(sock, errors="ignore"):
+                self.__on_event_received(event)
                 if break_on and break_on == list(json.loads(event).keys())[0]:
                     return
-                self.__on_event_received(event)
 
     def __on_event_received(self, event: str) -> None:
         json_data = json.loads(event)
