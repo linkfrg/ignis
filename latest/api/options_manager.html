@@ -530,7 +530,7 @@ Has support for hot-reloading when the file is modified externally.</p>
 </dd>
 </dl>
 <p>The standard option structure must follow this format:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ignis.options_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">OptionsManager</span><span class="p">,</span> <span class="n">OptionsGroup</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ignis.options_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">OptionsManager</span><span class="p">,</span> <span class="n">OptionsGroup</span><span class="p">,</span> <span class="n">TrackedList</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">SomeOptions</span><span class="p">(</span><span class="n">OptionsManager</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -543,6 +543,8 @@ Has support for hot-reloading when the file is modified externally.</p>
     <span class="k">class</span><span class="w"> </span><span class="nc">SomeSubgroup</span><span class="p">(</span><span class="n">OptionsGroup</span><span class="p">):</span>
         <span class="n">example_option</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">get_something</span><span class="o">...</span><span class="p">()</span>
         <span class="n">test</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">_%H-%M-%S.mp4&quot;</span>
+        <span class="c1"># using TrackedList instead of usual python list is encouraged</span>
+        <span class="n">some_list</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="n">TrackedList</span><span class="p">()</span>
 
 
     <span class="n">subgroup1</span> <span class="o">=</span> <span class="n">Subgroup1</span><span class="p">()</span>
@@ -586,8 +588,9 @@ Has support for hot-reloading when the file is modified externally.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ignis.options.OptionsGroup">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.options.</span></span><span class="sig-name descname"><span class="pre">OptionsGroup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.options.OptionsGroup" title="Link to this definition">#</a></dt>
-<dd><p>An options group.</p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.options.</span></span><span class="sig-name descname"><span class="pre">OptionsGroup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.options.OptionsGroup" title="Link to this definition">#</a></dt>
+<dd><p>An options group.
+Implements the Singleton pattern.</p>
 <dl class="py signal">
 <dt class="sig sig-object py" id="ignis.options.OptionsGroup.changed">
 <em class="property"><span class="pre">signal</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">changed</span></span><a class="headerlink" href="#ignis.options.OptionsGroup.changed" title="Link to this definition">#</a></dt>
@@ -672,6 +675,24 @@ Has support for hot-reloading when the file is modified externally.</p>
 
 </dd></dl>
 
+<dl class="py class">
+<dt class="sig sig-object py" id="ignis.options_manager.TrackedList">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.options_manager.</span></span><span class="sig-name descname"><span class="pre">TrackedList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">owner</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ignis.options.OptionsGroup" title="ignis.options_manager.OptionsGroup"><span class="pre">OptionsGroup</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.options_manager.TrackedList" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>.</p>
+<p>The same as a usual Python list, but it can emit <code class="docutils literal notranslate"><span class="pre">changed</span></code> signal
+for the <a class="reference internal" href="#ignis.options.OptionsGroup" title="ignis.options_manager.OptionsGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">OptionsGroup</span></code></a> attribute in which it is stored when the list's elements change.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ignis.options_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">OptionsGroup</span><span class="p">,</span> <span class="n">TrackedList</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SomeGroup</span><span class="p">(</span><span class="n">OptionsGroup</span><span class="p">):</span>
+    <span class="n">some_list</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="n">TrackedList</span><span class="p">()</span>
+
+<span class="n">group</span> <span class="o">=</span> <span class="n">SomeGroup</span><span class="p">()</span>
+<span class="n">group</span><span class="o">.</span><span class="n">connect_option</span><span class="p">(</span><span class="s2">&quot;some_list&quot;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;changed!: </span><span class="si">{</span><span class="n">group</span><span class="o">.</span><span class="n">some_list</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
+<span class="n">group</span><span class="o">.</span><span class="n">some_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </section>
 
 
@@ -735,6 +756,7 @@ Has support for hot-reloading when the file is modified externally.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.options.OptionsGroup.apply_from_dict"><code class="docutils literal notranslate"><span class="pre">OptionsGroup.apply_from_dict()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.options_manager.TrackedList"><code class="docutils literal notranslate"><span class="pre">TrackedList</span></code></a></li>
 </ul>
   </nav></div>
 
