@@ -1,13 +1,15 @@
 import json
 from ignis.gobject import IgnisGObject, Binding, IgnisProperty, IgnisSignal
 from ignis.utils import Utils
-from typing import Any
+from typing import Any, TypeVar
 from collections.abc import Callable
 from collections.abc import Generator
 from ignis import is_sphinx_build
 
+T = TypeVar("T")
 
-class TrackedList(list):
+
+class TrackedList(list[T]):
     """
     Bases: :class:`list`.
 
