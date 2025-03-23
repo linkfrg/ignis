@@ -11,7 +11,7 @@ class TrackedList(list):
     """
     Bases: :class:`list`.
 
-    The same as a usual Python list, but it can emit `changed` signal
+    The same as a usual Python list, but it can emit ``changed`` signal
     for the :class:`OptionsGroup` attribute in which it is stored when the list's elements change.
 
     .. code-block:: python
@@ -53,35 +53,59 @@ class TrackedList(list):
         self._name = name
 
     def append(self, item):
+        """
+        :meta private:
+        """
         super().append(item)
         self.__notify()
 
     def extend(self, iterable):
+        """
+        :meta private:
+        """
         super().extend(iterable)
         self.__notify()
 
     def insert(self, index, item):
+        """
+        :meta private:
+        """
         super().insert(index, item)
         self.__notify()
 
     def remove(self, item):
+        """
+        :meta private:
+        """
         super().remove(item)
         self.__notify()
 
     def pop(self, index=-1):
+        """
+        :meta private:
+        """
         item = super().pop(index)
         self.__notify()
         return item
 
     def clear(self):
+        """
+        :meta private:
+        """
         super().clear()
         self.__notify()
 
     def __setitem__(self, index, value):
+        """
+        :meta private:
+        """
         super().__setitem__(index, value)
         self.__notify()
 
     def __delitem__(self, index):
+        """
+        :meta private:
+        """
         super().__delitem__(index)
         self.__notify()
 
