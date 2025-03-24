@@ -18,7 +18,7 @@ from .window import HyprlandWindow
 class _HyprlandObjDesc:
     cmd: str
     cr_func: Callable
-    id_key: Callable
+    get_key_func: Callable
     added_signal: str
     destroy_signal: str
     prop_name: str
@@ -66,7 +66,7 @@ class HyprlandService(BaseService):
             "workspace": _HyprlandObjDesc(
                 cmd="j/workspaces",
                 cr_func=lambda: HyprlandWorkspace(self),
-                id_key=lambda data: data["id"],
+                get_key_func=lambda data: data["id"],
                 added_signal="workspace-added",
                 destroy_signal="destroyed",
                 prop_name="workspaces",
@@ -75,7 +75,7 @@ class HyprlandService(BaseService):
             "window": _HyprlandObjDesc(
                 cmd="j/clients",
                 cr_func=lambda: HyprlandWindow(),
-                id_key=lambda data: data["address"].replace("0x", ""),
+                get_key_func=lambda data: data["address"].replace("0x", ""),
                 added_signal="window-added",
                 destroy_signal="closed",
                 prop_name="windows",
@@ -205,41 +205,41 @@ class HyprlandService(BaseService):
         for data in data_list:
             obj = obj_desc.cr_func()
             obj.sync(data)
-            self.__get_self_dict(obj_desc)[obj_desc.id_key(data)] = obj
+            self.__get_self_dict(obj_desc)[obj_desc.get_key_func(data)] = obj
 
         if obj_desc.sort_func:
             obj_desc.sort_func()
 
         self.notify(obj_desc.prop_name)
 
-    def __get_obj_data(self, type_: _SupportedTypes, value: Any) -> dict:
+    def __get_obj_data(self, type_: _SupportedTypes, key: Any) -> dict:
         obj_desc = self._OBJ_TYPES[type_]
 
         for data in json.loads(self.send_command(obj_desc.cmd)):
-            if obj_desc.id_key(data) == value:
+            if obj_desc.get_key_func(data) == key:
                 return data
 
         return {}
 
-    def __add_obj(self, type_: _SupportedTypes, value: Any) -> None:
+    def __add_obj(self, type_: _SupportedTypes, key: Any) -> None:
         obj_desc = self._OBJ_TYPES[type_]
 
-        data = self.__get_obj_data(type_=type_, value=value)
+        data = self.__get_obj_data(type_=type_, key=key)
 
         obj = obj_desc.cr_func()
         obj.sync(data)
 
-        self.__get_self_dict(obj_desc)[obj_desc.id_key(data)] = obj
+        self.__get_self_dict(obj_desc)[obj_desc.get_key_func(data)] = obj
         if obj_desc.sort_func:
             obj_desc.sort_func()
 
         self.emit(obj_desc.added_signal, obj)
         self.notify(obj_desc.prop_name)
 
-    def __remove_obj(self, type_: _SupportedTypes, keyword: Any) -> None:
+    def __remove_obj(self, type_: _SupportedTypes, key: Any) -> None:
         obj_desc = self._OBJ_TYPES[type_]
 
-        obj = self.__get_self_dict(obj_desc).pop(keyword, None)
+        obj = self.__get_self_dict(obj_desc).pop(key, None)
         if obj:
             obj.emit(obj_desc.destroy_signal)
 
@@ -258,10 +258,10 @@ class HyprlandService(BaseService):
             obj.sync(data)
 
     def __create_workspace(self, id_: int) -> None:
-        self.__add_obj(type_="workspace", value=id_)
+        self.__add_obj(type_="workspace", key=id_)
 
     def __destroy_workspace(self, id_: int) -> None:
-        self.__remove_obj(type_="workspace", keyword=id_)
+        self.__remove_obj(type_="workspace", key=id_)
 
     def __rename_workspace(self, workspace_id: int, new_name: str) -> None:
         self.__sync_obj_data("workspace", workspace_id, {"name": new_name})
@@ -292,10 +292,10 @@ class HyprlandService(BaseService):
         self.notify("active-window")
 
     def __open_window(self, address: str) -> None:
-        self.__add_obj(type_="window", value=address)
+        self.__add_obj(type_="window", key=address)
 
     def __close_window(self, address: str) -> None:
-        self.__remove_obj(type_="window", keyword=address)
+        self.__remove_obj(type_="window", key=address)
 
     def __move_window(
         self, address: str, workspace_id: int, workspace_name: str
