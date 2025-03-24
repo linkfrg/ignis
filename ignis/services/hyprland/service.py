@@ -1,15 +1,31 @@
 import json
 import os
 import socket
-from typing import Any
+from typing import Any, Literal
 from ignis.utils import Utils
 from ignis.exceptions import HyprlandIPCNotFoundError
 from ignis.base_service import BaseService
 from ignis.gobject import IgnisProperty, IgnisSignal
+from collections.abc import Callable
+from dataclasses import dataclass
 from .constants import HYPR_SOCKET_DIR
 from .workspace import HyprlandWorkspace
 from .keyboard import HyprlandKeyboard
 from .window import HyprlandWindow
+
+
+@dataclass
+class _HyprlandObjDesc:
+    cmd: str
+    cr_func: Callable
+    id_key: Callable
+    added_signal: str
+    destroy_signal: str
+    prop_name: str
+    sort_func: Callable | None = None
+
+
+_SupportedTypes = Literal["workspace", "window"]
 
 
 class HyprlandService(BaseService):
@@ -46,14 +62,34 @@ class HyprlandService(BaseService):
         self._windows: dict[str, HyprlandWindow] = {}
         self._active_window: HyprlandWindow = HyprlandWindow()
 
+        self._OBJ_TYPES: dict[str, _HyprlandObjDesc] = {
+            "workspace": _HyprlandObjDesc(
+                cmd="j/workspaces",
+                cr_func=lambda: HyprlandWorkspace(self),
+                id_key=lambda data: data["id"],
+                added_signal="workspace-added",
+                destroy_signal="destroyed",
+                prop_name="workspaces",
+                sort_func=self.__sort_workspaces,
+            ),
+            "window": _HyprlandObjDesc(
+                cmd="j/clients",
+                cr_func=lambda: HyprlandWindow(),
+                id_key=lambda data: data["address"].replace("0x", ""),
+                added_signal="window-added",
+                destroy_signal="closed",
+                prop_name="windows",
+            ),
+        }
+
         if self.is_available:
             self.__listen_events()
 
-            self.__initial_sync_workspaces()
+            self.__initial_sync_obj_list(type_="workspace")
             self.__sync_active_workspace()
             self.__sync_main_keyboard()
             self.__sync_active_window()
-            self.__initial_sync_windows()
+            self.__initial_sync_obj_list(type_="window")
 
     @IgnisSignal
     def workspace_added(self, workspace: HyprlandWorkspace):
@@ -158,44 +194,77 @@ class HyprlandService(BaseService):
             case "pin":
                 self.__change_window_pin_state(value_list[0], int(value_list[1]))
 
-    def __initial_sync_workspaces(self) -> None:
-        workspaces = json.loads(self.send_command("j/workspaces"))
+    def __get_self_dict(self, obj_desc: _HyprlandObjDesc) -> dict:
+        return getattr(self, f"_{obj_desc.prop_name}")
 
-        for workspace_data in workspaces:
-            workspace = HyprlandWorkspace(self)
-            workspace.sync(workspace_data)
-            self._workspaces[workspace_data["id"]] = workspace
+    def __initial_sync_obj_list(self, type_: _SupportedTypes) -> None:
+        obj_desc = self._OBJ_TYPES[type_]
 
-        self.__sort_workspaces()
-        self.notify("workspaces")
+        data_list = json.loads(self.send_command(obj_desc.cmd))
+
+        for data in data_list:
+            obj = obj_desc.cr_func()
+            obj.sync(data)
+            self.__get_self_dict(obj_desc)[obj_desc.id_key(data)] = obj
+
+        if obj_desc.sort_func:
+            obj_desc.sort_func()
+
+        self.notify(obj_desc.prop_name)
+
+    def __get_obj_data(self, type_: _SupportedTypes, value: Any) -> dict:
+        obj_desc = self._OBJ_TYPES[type_]
+
+        for data in json.loads(self.send_command(obj_desc.cmd)):
+            if obj_desc.id_key(data) == value:
+                return data
+
+        return {}
+
+    def __add_obj(self, type_: _SupportedTypes, value: Any) -> None:
+        obj_desc = self._OBJ_TYPES[type_]
+
+        data = self.__get_obj_data(type_=type_, value=value)
+
+        obj = obj_desc.cr_func()
+        obj.sync(data)
+
+        self.__get_self_dict(obj_desc)[obj_desc.id_key(data)] = obj
+        if obj_desc.sort_func:
+            obj_desc.sort_func()
+
+        self.emit(obj_desc.added_signal, obj)
+        self.notify(obj_desc.prop_name)
+
+    def __remove_obj(self, type_: _SupportedTypes, keyword: Any) -> None:
+        obj_desc = self._OBJ_TYPES[type_]
+
+        obj = self.__get_self_dict(obj_desc).pop(keyword, None)
+        if obj:
+            obj.emit(obj_desc.destroy_signal)
+
+            if obj_desc.sort_func:
+                obj_desc.sort_func()
+
+            self.notify(obj_desc.prop_name)
+
+    def __sync_obj_data(
+        self, type_: _SupportedTypes, key: Any, data: dict[str, Any]
+    ) -> None:
+        obj_desc = self._OBJ_TYPES[type_]
+
+        obj = self.__get_self_dict(obj_desc).get(key, None)
+        if obj:
+            obj.sync(data)
 
     def __create_workspace(self, id_: int) -> None:
-        for i in json.loads(self.send_command("j/workspaces")):
-            if id_ == i["id"]:
-                workspace_data = i
-                break
-        else:
-            workspace_data = None
-
-        if workspace_data:
-            workspace = HyprlandWorkspace(self)
-            workspace.sync(workspace_data)
-            self._workspaces[workspace_data["id"]] = workspace
-            self.__sort_workspaces()
-            self.emit("workspace-added", workspace)
-            self.notify("workspaces")
+        self.__add_obj(type_="workspace", value=id_)
 
     def __destroy_workspace(self, id_: int) -> None:
-        workspace = self._workspaces.pop(int(id_), None)
-        if workspace:
-            workspace.emit("destroyed")
-            self.__sort_workspaces()
-            self.notify("workspaces")
+        self.__remove_obj(type_="workspace", keyword=id_)
 
     def __rename_workspace(self, workspace_id: int, new_name: str) -> None:
-        workspace = self._workspaces.get(workspace_id, None)
-        if workspace:
-            workspace.sync({"name": new_name})
+        self.__sync_obj_data("workspace", workspace_id, {"name": new_name})
 
     def __sort_workspaces(self) -> None:
         self._workspaces = dict(sorted(self._workspaces.items()))
@@ -222,61 +291,34 @@ class HyprlandService(BaseService):
         self.active_window.sync(active_window_data)
         self.notify("active-window")
 
-    def __initial_sync_windows(self) -> None:
-        data = json.loads(self.send_command("j/clients"))
-
-        for window_data in data:
-            address = window_data["address"].replace("0x", "")
-
-            window = HyprlandWindow()
-            window.sync(window_data)
-            self._windows[address] = window
-
-        self.notify("windows")
-
-    def __get_window_data(self, address: str) -> dict:
-        for window in json.loads(self.send_command("j/clients")):
-            if window["address"].replace("0x", "") == address:
-                return window
-
-        return {}
-
-    def __sync_window_data(self, address: str, data: dict[str, Any]) -> None:
-        window = self._windows.get(address, None)
-        if window:
-            window.sync(data)
-
     def __open_window(self, address: str) -> None:
-        window_data = self.__get_window_data(address)
-        window = HyprlandWindow()
-        window.sync(window_data)
-        self._windows[address] = window
-        self.emit("window-added", window)
-        self.notify("windows")
+        self.__add_obj(type_="window", value=address)
 
     def __close_window(self, address: str) -> None:
-        window = self._windows.pop(address, None)
-        if window:
-            window.emit("closed")
-            self.notify("windows")
+        self.__remove_obj(type_="window", keyword=address)
 
     def __move_window(
         self, address: str, workspace_id: int, workspace_name: str
     ) -> None:
-        self.__sync_window_data(
-            address=address,
+        self.__sync_obj_data(
+            type_="window",
+            key=address,
             data={"workspace": {"id": workspace_id, "name": workspace_name}},
         )
 
     def __change_window_floating_mode(self, address: str, floating: int) -> None:
-        self.__sync_window_data(address=address, data={"floating": bool(floating)})
+        self.__sync_obj_data(
+            type_="window", key=address, data={"floating": bool(floating)}
+        )
 
     def __change_window_title(self, address: str, title: str) -> None:
-        self.__sync_window_data(address=address, data={"title": title})
+        self.__sync_obj_data(type_="window", key=address, data={"title": title})
 
     def __change_window_pin_state(self, address: str, pin_state: int) -> None:
-        self.__sync_window_data(
-            address=address, data={"title": {"pinned": bool(pin_state)}}
+        self.__sync_obj_data(
+            type_="window",
+            key=address,
+            data={"title": {"pinned": bool(pin_state)}},
         )
 
     def send_command(self, cmd: str) -> str:
