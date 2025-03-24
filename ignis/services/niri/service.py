@@ -5,10 +5,13 @@ from ignis.utils import Utils
 from ignis.exceptions import NiriIPCNotFoundError
 from ignis.base_service import BaseService
 from ignis.gobject import IgnisProperty, IgnisSignal
+from ignis.app import IgnisApp
 from .constants import NIRI_SOCKET
 from .keyboard import NiriKeyboardLayouts
 from .window import NiriWindow
 from .workspace import NiriWorkspace
+
+app = IgnisApp.get_default()
 
 
 class NiriService(BaseService):
@@ -46,20 +49,7 @@ class NiriService(BaseService):
         self._active_output: str = ""
 
         if self.is_available:
-            # Launch an unthreaded event stream to ensure all variables get initialized
-            # before returning from __init__ . KeyboardLayoutsChanged is always the last
-            # event to be sent during initialization of the Niri event stream, so once
-            # it is received, we are ready to launch a threaded (non blocking) version.
-            self.__listen_events(break_on="KeyboardLayoutsChanged")
-
-            Utils.thread(self.__listen_events)
-            # No need to send any other commands after event stream initialization:
-            #
-            #  "The event stream IPC is designed to give you the complete current
-            #  state up-front, then follow up with updates to that state. This way,
-            #  your state can never "desync" from niri, and you don't need to make
-            #  any other IPC information requests."
-            #   - https://github.com/YaLTeR/niri/wiki/IPC
+            self.__start_event_stream()
 
     @IgnisSignal
     def workspace_added(self, workspace: NiriWorkspace):
@@ -115,18 +105,39 @@ class NiriService(BaseService):
         """
         return self._active_output
 
-    def __listen_events(self, break_on: str = "") -> None:
-        with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as sock:
-            sock.connect(str(NIRI_SOCKET))
-            sock.send(b'"EventStream"\n')
-            for event in Utils.listen_socket(sock, errors="ignore"):
-                json_data = json.loads(event)
-                event_type = list(json_data.keys())[0]
-                event_data = list(json_data.values())[0]
+    def __start_event_stream(self) -> None:
+        # Initialize socket connection
+        sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+        sock.connect(str(NIRI_SOCKET))
+        sock.send(b'"EventStream"\n')
 
-                self.__on_event_received(event_type, event_data)
-                if break_on and break_on == event_type:
-                    return
+        # Close socket gracefully on app quit
+        app.connect("shutdown", lambda *_: sock.close())
+
+        # Launch an unthreaded event stream to ensure all variables get initialized
+        # before returning from __init__ . KeyboardLayoutsChanged is always the last
+        # event to be sent during initialization of the Niri event stream, so once
+        # it is received, we are ready to launch a threaded (non blocking) version.
+        self.__listen_events(sock=sock, break_on="KeyboardLayoutsChanged")
+
+        Utils.thread(lambda: self.__listen_events(sock=sock))
+        # No need to send any other commands after event stream initialization:
+        #
+        #  "The event stream IPC is designed to give you the complete current
+        #  state up-front, then follow up with updates to that state. This way,
+        #  your state can never "desync" from niri, and you don't need to make
+        #  any other IPC information requests."
+        #   - https://github.com/YaLTeR/niri/wiki/IPC
+
+    def __listen_events(self, sock: socket.socket, break_on: str = "") -> None:
+        for event in Utils.listen_socket(sock, errors="ignore"):
+            json_data = json.loads(event)
+            event_type = list(json_data.keys())[0]
+            event_data = list(json_data.values())[0]
+
+            self.__on_event_received(event_type, event_data)
+            if break_on and break_on == event_type:
+                return
 
     def __on_event_received(self, event_type: dict, event_data: dict) -> None:
         match event_type:
