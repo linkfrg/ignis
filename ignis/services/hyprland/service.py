@@ -12,6 +12,7 @@ from .constants import HYPR_SOCKET_DIR
 from .workspace import HyprlandWorkspace
 from .keyboard import HyprlandKeyboard
 from .window import HyprlandWindow
+from .monitor import HyprlandMonitor
 
 
 @dataclass
@@ -25,7 +26,7 @@ class _HyprlandObjDesc:
     sort_func: Callable | None = None
 
 
-_SupportedTypes = Literal["workspace", "window"]
+_SupportedTypes = Literal["workspace", "window", "monitor"]
 
 
 class HyprlandService(BaseService):
@@ -61,6 +62,7 @@ class HyprlandService(BaseService):
         self._main_keyboard: HyprlandKeyboard = HyprlandKeyboard(self)
         self._windows: dict[str, HyprlandWindow] = {}
         self._active_window: HyprlandWindow = HyprlandWindow()
+        self._monitors: dict[str, HyprlandMonitor] = {}
 
         self._OBJ_TYPES: dict[str, _HyprlandObjDesc] = {
             "workspace": _HyprlandObjDesc(
@@ -80,6 +82,14 @@ class HyprlandService(BaseService):
                 destroy_signal="closed",
                 prop_name="windows",
             ),
+            "monitor": _HyprlandObjDesc(
+                cmd="j/monitors",
+                cr_func=lambda: HyprlandMonitor(),
+                get_key_func=lambda data: data["name"],
+                added_signal="monitor-added",
+                destroy_signal="removed",
+                prop_name="monitors",
+            ),
         }
 
         if self.is_available:
@@ -90,6 +100,7 @@ class HyprlandService(BaseService):
             self.__sync_main_keyboard()
             self.__sync_active_window()
             self.__initial_sync_obj_list(type_="window")
+            self.__initial_sync_obj_list(type_="monitor")
 
     @IgnisSignal
     def workspace_added(self, workspace: HyprlandWorkspace):
@@ -107,6 +118,15 @@ class HyprlandService(BaseService):
 
         Args:
             window: The instance of the window.
+        """
+
+    @IgnisSignal
+    def monitor_added(self, monitor: HyprlandMonitor):
+        """
+        Emitted when a new monitor has been added.
+
+        Args:
+            monitor: The instance of the monitor.
         """
 
     @IgnisProperty
@@ -151,6 +171,13 @@ class HyprlandService(BaseService):
         """
         return self._active_window
 
+    @IgnisProperty
+    def monitors(self) -> list[HyprlandMonitor]:
+        """
+        A list of monitors.
+        """
+        return list(self._monitors.values())
+
     @Utils.run_in_thread
     def __listen_events(self) -> None:
         with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as sock:
@@ -193,6 +220,16 @@ class HyprlandService(BaseService):
                 self.__change_window_title(*value_list)
             case "pin":
                 self.__change_window_pin_state(value_list[0], int(value_list[1]))
+            case "monitoradded":
+                self.__add_monitor(value_list[0])
+            case "monitorremoved":
+                self.__remove_monitor(value_list[0])
+            case "focusedmonv2":
+                self.__change_focused_monitor(value_list[0], int(value_list[1]))
+            case "activespecialv2":
+                self.__change_special_ws_on_monitor(
+                    int(value_list[0]), value_list[1], value_list[2]
+                )
 
     def __get_self_dict(self, obj_desc: _HyprlandObjDesc) -> dict:
         return getattr(self, f"_{obj_desc.prop_name}")
@@ -321,6 +358,30 @@ class HyprlandService(BaseService):
             data={"title": {"pinned": bool(pin_state)}},
         )
 
+    def __add_monitor(self, monitor_name: str) -> None:
+        self.__add_obj(type_="monitor", key=monitor_name)
+
+    def __remove_monitor(self, monitor_name: str) -> None:
+        self.__remove_obj(type_="monitor", key=monitor_name)
+
+    def __change_focused_monitor(self, monitor_name: str, workspace_id: int) -> None:
+        ws = self.get_workspace_by_id(workspace_id)
+        name = ws.name if ws else ""
+        self.__sync_obj_data(
+            type_="monitor",
+            key=monitor_name,
+            data={"active_workspace": {"id": workspace_id, "name": name}},
+        )
+
+    def __change_special_ws_on_monitor(
+        self, workspace_id: int, workspace_name: str, monitor_name: str
+    ) -> None:
+        self.__sync_obj_data(
+            type_="monitor",
+            key=monitor_name,
+            data={"special_workspace": {"id": workspace_id, "name": workspace_name}},
+        )
+
     def send_command(self, cmd: str) -> str:
         """
         Send a command to the Hyprland IPC.
@@ -373,6 +434,17 @@ class HyprlandService(BaseService):
             The window instance, or ``None`` if the window with the given address doesn't exist.
         """
         return self._windows.get(address, None)
+
+    def get_monitor_name(self, name: str) -> HyprlandMonitor | None:
+        """
+        Get a monitor by its name.
+
+        Args:
+            name: The name of the monitor.
+        Returns:
+            The monitor instance, or ``None`` if the monitor with the given name doesn't exist.
+        """
+        return self._monitors.get(name, None)
 
     def get_windows_on_workspace(self, workspace_id: int) -> list[HyprlandWindow]:
         """
