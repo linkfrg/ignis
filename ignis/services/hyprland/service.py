@@ -288,6 +288,9 @@ class HyprlandService(BaseService):
 
     def __sync_active_window(self) -> None:
         active_window_data = json.loads(self.send_command("j/activewindow"))
+        if active_window_data == {}:
+            active_window_data = HyprlandWindow().data
+
         self.active_window.sync(active_window_data)
         self.notify("active-window")
 
