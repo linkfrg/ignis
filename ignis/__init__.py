@@ -8,7 +8,7 @@ from gi.events import GLibEventLoopPolicy  # type: ignore
 from importlib.metadata import Distribution, PackageNotFoundError
 from gi.repository import GLib  # type: ignore
 
-__version__ = "0.4.dev0"
+__version__ = "0.5"
 __lib_dir__ = None
 CACHE_DIR = None
 
