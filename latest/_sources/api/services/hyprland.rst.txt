@@ -12,3 +12,6 @@ Hyprland
 
 .. autoclass:: ignis.services.hyprland.HyprlandKeyboard
     :members:
+
+.. autoclass:: ignis.services.hyprland.HyprlandMonitor
+    :members:
