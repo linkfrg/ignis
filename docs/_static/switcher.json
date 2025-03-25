@@ -4,10 +4,15 @@
       "url": "https://linkfrg.github.io/ignis/latest/"
     },
     {
-      "name": "v0.4 (stable)",
-      "version": "v0.4",
+      "name": "v0.5 (stable)",
+      "version": "v0.5",
       "url": "https://linkfrg.github.io/ignis/stable/",
       "preferred": true
+    },
+    {
+      "name": "v0.4",
+      "version": "v0.4",
+      "url": "https://linkfrg.github.io/ignis/v0.4/"
     },
     {
       "version": "v0.3",
