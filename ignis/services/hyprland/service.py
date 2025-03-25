@@ -370,7 +370,7 @@ class HyprlandService(BaseService):
         self.__sync_obj_data(
             type_="monitor",
             key=monitor_name,
-            data={"active_workspace": {"id": workspace_id, "name": name}},
+            data={"activeWorkspace": {"id": workspace_id, "name": name}},
         )
 
     def __change_special_ws_on_monitor(
@@ -379,7 +379,7 @@ class HyprlandService(BaseService):
         self.__sync_obj_data(
             type_="monitor",
             key=monitor_name,
-            data={"special_workspace": {"id": workspace_id, "name": workspace_name}},
+            data={"specialWorkspace": {"id": workspace_id, "name": workspace_name}},
         )
 
     def send_command(self, cmd: str) -> str:
