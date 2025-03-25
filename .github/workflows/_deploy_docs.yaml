@@ -21,7 +21,7 @@ jobs:
       - name: Download Documentation Artifact
         uses: actions/download-artifact@v4
         with:
-          name: documentation-latest
+          name: documentation-${{ inputs.DOC_TAG }}
           path: docs/_build/html
 
       - name: Deploy to GitHub Pages
