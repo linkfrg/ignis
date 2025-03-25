@@ -77,7 +77,7 @@ class HyprlandService(BaseService):
             "window": _HyprlandObjDesc(
                 cmd="j/clients",
                 cr_func=lambda: HyprlandWindow(),
-                get_key_func=lambda data: data["address"].replace("0x", ""),
+                get_key_func=lambda data: data["address"],
                 added_signal="window-added",
                 destroy_signal="closed",
                 prop_name="windows",
@@ -186,6 +186,9 @@ class HyprlandService(BaseService):
                 self.__on_event_received(event)
 
     def __on_event_received(self, event: str) -> None:
+        def get_full_w_addr(addr: str) -> str:
+            return "0x" + addr
+
         event_data = event.split(">>")
         event_type = event_data[0]
         event_value = event_data[1]
@@ -207,19 +210,27 @@ class HyprlandService(BaseService):
             case "renameworkspace":
                 self.__rename_workspace(int(value_list[0]), value_list[1])
             case "openwindow":
-                self.__open_window(value_list[0])
+                self.__open_window(get_full_w_addr(value_list[0]))
             case "closewindow":
-                self.__close_window(value_list[0])
+                self.__close_window(get_full_w_addr(value_list[0]))
             case "movewindowv2":
-                self.__move_window(value_list[0], int(value_list[1]), value_list[0])
+                self.__move_window(
+                    get_full_w_addr(value_list[0]), int(value_list[1]), value_list[0]
+                )
             case "changefloatingmode":
-                self.__change_window_floating_mode(value_list[0], int(value_list[1]))
+                self.__change_window_floating_mode(
+                    get_full_w_addr(value_list[0]), int(value_list[1])
+                )
             case "windowtitlev2":
                 # window title can contain comma (,)
                 value_list = event_value.split(",", 1)
-                self.__change_window_title(*value_list)
+                self.__change_window_title(
+                    get_full_w_addr(value_list[0]), value_list[1]
+                )
             case "pin":
-                self.__change_window_pin_state(value_list[0], int(value_list[1]))
+                self.__change_window_pin_state(
+                    get_full_w_addr(value_list[0]), int(value_list[1])
+                )
             case "monitoradded":
                 self.__add_monitor(value_list[0])
             case "monitorremoved":
@@ -325,6 +336,9 @@ class HyprlandService(BaseService):
 
     def __sync_active_window(self) -> None:
         active_window_data = json.loads(self.send_command("j/activewindow"))
+        if active_window_data == {}:
+            active_window_data = HyprlandWindow().data
+
         self.active_window.sync(active_window_data)
         self.notify("active-window")
 
