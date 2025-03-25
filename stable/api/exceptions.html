@@ -41,7 +41,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=6cc4e9c0"></script>
+    <script src="../_static/documentation_options.js?v=c8bc6dd9"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -51,14 +51,14 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://linkfrg.github.io/ignis/latest/_static/switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'v0.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'v0.5';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="D-Bus" href="dbus.html" />
-    <link rel="prev" title="Client" href="client.html" />
+    <link rel="prev" title="Options Manager" href="options_manager.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -371,11 +371,14 @@
 <li class="toctree-l1"><a class="reference internal" href="gobject.html">GObject</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variable.html">Variable</a></li>
 <li class="toctree-l1"><a class="reference internal" href="client.html">Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="options.html">Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="options_manager.html">Options Manager</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Exceptions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dbus.html">D-Bus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dbus_menu.html">D-Bus menu</a></li>
 <li class="toctree-l1"><a class="reference internal" href="base_widget.html">BaseWidget</a></li>
 <li class="toctree-l1"><a class="reference internal" href="base_service.html">BaseService</a></li>
+<li class="toctree-l1"><a class="reference internal" href="connection_manager.html">Connection Manager</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="widgets/index.html">Widgets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="widgets/Arrow.html">Arrow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="widgets/ArrowButton.html">ArrowButton</a></li>
@@ -407,6 +410,7 @@
 <li class="toctree-l2"><a class="reference internal" href="widgets/Scroll.html">Scroll</a></li>
 <li class="toctree-l2"><a class="reference internal" href="widgets/Separator.html">Separator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="widgets/SpinButton.html">SpinButton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="widgets/Stack.html">Stack</a></li>
 <li class="toctree-l2"><a class="reference internal" href="widgets/Switch.html">Switch</a></li>
 <li class="toctree-l2"><a class="reference internal" href="widgets/ToggleButton.html">ToggleButton</a></li>
 <li class="toctree-l2"><a class="reference internal" href="widgets/Window.html">Window</a></li>
@@ -423,7 +427,6 @@
 <li class="toctree-l2"><a class="reference internal" href="services/network.html">Network</a></li>
 <li class="toctree-l2"><a class="reference internal" href="services/niri.html">Niri</a></li>
 <li class="toctree-l2"><a class="reference internal" href="services/notifications.html">Notifications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="services/options.html">Options</a></li>
 <li class="toctree-l2"><a class="reference internal" href="services/recorder.html">Recorder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="services/system_tray.html">System Tray</a></li>
 <li class="toctree-l2"><a class="reference internal" href="services/systemd.html">Systemd</a></li>
@@ -434,29 +437,19 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="utils/index.html">Utils</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="utils/FileMonitor.html">FileMonitor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils/Poll.html">Poll</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/ThreadTask.html">ThreadTask</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils/Timeout.html">Timeout</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/crop_pixbuf.html">crop_pixbuf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils/debounce.html">Debounce</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/download_image.html">download_image</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/exec_sh.html">exec_sh</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/exec_sh_async.html">exec_sh_async</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_current_dir.html">get_current_dir</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_file_icon_name.html">get_file_icon_name</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_ignis_branch.html">get_ignis_branch</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_ignis_commit.html">get_ignis_commit</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_ignis_commit_msg.html">get_ignis_commit_msg</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_ignis_version.html">get_ignis_version</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_monitor.html">get_monitor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_n_monitors.html">get_n_monitors</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_paintable.html">get_paintable</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/listen_socket.html">listen_socket</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/load_interface_xml.html">load_interface_xml</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/run_in_thread.html">run_in_thread</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/sass_compile.html">sass_compile</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/scale_pixbuf.html">scale_pixbuf</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/send_socket.html">send_socket</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/thread.html">thread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/file.html">File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/icon.html">Icon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/misc.html">Misc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/monitor.html">Monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/pixbuf.html">Pixbuf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/sass.html">Sass</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/sh.html">Shell Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/socket.html">Socket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/str_cases.html">String Cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/thread.html">Thread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/version.html">Version</a></li>
 </ul>
 </details></li>
 </ul>
@@ -530,13 +523,15 @@
 <dt class="sig sig-object py" id="ignis.exceptions.WindowNotFoundError">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.exceptions.</span></span><span class="sig-name descname"><span class="pre">WindowNotFoundError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.exceptions.WindowNotFoundError" title="Link to this definition">#</a></dt>
 <dd><p>Raised when a window is not found.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>window_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The name of the window.</p>
+</dd>
+</dl>
 <dl class="py property">
 <dt class="sig sig-object py" id="ignis.exceptions.WindowNotFoundError.window_name">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">window_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.exceptions.WindowNotFoundError.window_name" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>required, read-only</p></li>
-</ul>
-<p>The name of the window.</p>
+<dd><p>The name of the window.</p>
 </dd></dl>
 
 </dd></dl>
@@ -545,28 +540,15 @@
 <dt class="sig sig-object py" id="ignis.exceptions.WindowAddedError">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.exceptions.</span></span><span class="sig-name descname"><span class="pre">WindowAddedError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.exceptions.WindowAddedError" title="Link to this definition">#</a></dt>
 <dd><p>Raised when a window is already added to the application.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>window_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The name of the window.</p>
+</dd>
+</dl>
 <dl class="py property">
 <dt class="sig sig-object py" id="ignis.exceptions.WindowAddedError.window_name">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">window_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.exceptions.WindowAddedError.window_name" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>required, read-only</p></li>
-</ul>
-<p>The name of the window.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="ignis.exceptions.ServiceNotFoundError">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.exceptions.</span></span><span class="sig-name descname"><span class="pre">ServiceNotFoundError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">service_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><span class="pre">object</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.exceptions.ServiceNotFoundError" title="Link to this definition">#</a></dt>
-<dd><p>Raised when a service with the given name is not found.</p>
-<dl class="py property">
-<dt class="sig sig-object py" id="ignis.exceptions.ServiceNotFoundError.service_name">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">service_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.exceptions.ServiceNotFoundError.service_name" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>required, read-only</p></li>
-</ul>
-<p>The name of the service.</p>
+<dd><p>The name of the window.</p>
 </dd></dl>
 
 </dd></dl>
@@ -596,66 +578,6 @@
 </dd></dl>
 
 <dl class="py exception">
-<dt class="sig sig-object py" id="ignis.exceptions.OptionNotFoundError">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.exceptions.</span></span><span class="sig-name descname"><span class="pre">OptionNotFoundError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">option_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.exceptions.OptionNotFoundError" title="Link to this definition">#</a></dt>
-<dd><p>Raised when an option is not found.</p>
-<dl class="py property">
-<dt class="sig sig-object py" id="ignis.exceptions.OptionNotFoundError.option_name">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">option_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.exceptions.OptionNotFoundError.option_name" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>required, read-only</p></li>
-</ul>
-<p>The name of the option.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="ignis.exceptions.OptionExistsError">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.exceptions.</span></span><span class="sig-name descname"><span class="pre">OptionExistsError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">option_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.exceptions.OptionExistsError" title="Link to this definition">#</a></dt>
-<dd><p>Raised when an option already exists.</p>
-<dl class="py property">
-<dt class="sig sig-object py" id="ignis.exceptions.OptionExistsError.option_name">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">option_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.exceptions.OptionExistsError.option_name" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>required, read-only</p></li>
-</ul>
-<p>The name of the option.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="ignis.exceptions.OptionsGroupNotFoundError">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.exceptions.</span></span><span class="sig-name descname"><span class="pre">OptionsGroupNotFoundError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">options_group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.exceptions.OptionsGroupNotFoundError" title="Link to this definition">#</a></dt>
-<dd><p>Raised when an options group is not found.</p>
-<dl class="py property">
-<dt class="sig sig-object py" id="ignis.exceptions.OptionsGroupNotFoundError.options_group">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">options_group</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.exceptions.OptionsGroupNotFoundError.options_group" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>required, read-only</p></li>
-</ul>
-<p>The name of the options group.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="ignis.exceptions.OptionsGroupExistsError">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.exceptions.</span></span><span class="sig-name descname"><span class="pre">OptionsGroupExistsError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">options_group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.exceptions.OptionsGroupExistsError" title="Link to this definition">#</a></dt>
-<dd><p>Raised when an options group exists.</p>
-<dl class="py property">
-<dt class="sig sig-object py" id="ignis.exceptions.OptionsGroupExistsError.options_group">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">options_group</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.exceptions.OptionsGroupExistsError.options_group" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>required, read-only</p></li>
-</ul>
-<p>The name of the options group.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py exception">
 <dt class="sig sig-object py" id="ignis.exceptions.GstNotFoundError">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.exceptions.</span></span><span class="sig-name descname"><span class="pre">GstNotFoundError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><span class="pre">object</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.exceptions.GstNotFoundError" title="Link to this definition">#</a></dt>
 <dd><p>Raised when GStreamer is not found.</p>
@@ -665,22 +587,24 @@
 <dt class="sig sig-object py" id="ignis.exceptions.GstPluginNotFoundError">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.exceptions.</span></span><span class="sig-name descname"><span class="pre">GstPluginNotFoundError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plugin_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">plugin_package</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.exceptions.GstPluginNotFoundError" title="Link to this definition">#</a></dt>
 <dd><p>Raised when a GStreamer plugin is not found.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>plugin_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The name of the plugin.</p></li>
+<li><p><strong>plugin_package</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The package name of the plugin.</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py property">
 <dt class="sig sig-object py" id="ignis.exceptions.GstPluginNotFoundError.plugin_name">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">plugin_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.exceptions.GstPluginNotFoundError.plugin_name" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>required, read-only</p></li>
-</ul>
-<p>The name of the plugin.</p>
+<dd><p>The name of the plugin.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ignis.exceptions.GstPluginNotFoundError.plugin_package">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">plugin_package</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.exceptions.GstPluginNotFoundError.plugin_package" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>required, read-only</p></li>
-</ul>
-<p>The package name of the plugin.</p>
+<dd><p>The package name of the plugin.</p>
 </dd></dl>
 
 </dd></dl>
@@ -688,35 +612,39 @@
 <dl class="py exception">
 <dt class="sig sig-object py" id="ignis.exceptions.SassCompilationError">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.exceptions.</span></span><span class="sig-name descname"><span class="pre">SassCompilationError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stderr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><span class="pre">object</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.exceptions.SassCompilationError" title="Link to this definition">#</a></dt>
-<dd><p>Raised when Dart Sass compilation fails.</p>
+<dd><p>Raised when the Sass compilation fails.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>stderr</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The stderr output from the Sass compiler.</p>
+</dd>
+</dl>
 <dl class="py property">
 <dt class="sig sig-object py" id="ignis.exceptions.SassCompilationError.stderr">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">stderr</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.exceptions.SassCompilationError.stderr" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>required, read-only</p></li>
-</ul>
-<p>The stderr output from Dart Sass.</p>
+<dd><p>The stderr output from the Sass compiler.</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py exception">
-<dt class="sig sig-object py" id="ignis.exceptions.DartSassNotFoundError">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.exceptions.</span></span><span class="sig-name descname"><span class="pre">DartSassNotFoundError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><span class="pre">object</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.exceptions.DartSassNotFoundError" title="Link to this definition">#</a></dt>
-<dd><p>Raised when Dart Sass is not found.</p>
+<dt class="sig sig-object py" id="ignis.exceptions.SassNotFoundError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.exceptions.</span></span><span class="sig-name descname"><span class="pre">SassNotFoundError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><span class="pre">object</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.exceptions.SassNotFoundError" title="Link to this definition">#</a></dt>
+<dd><p>Raised when a compatible Sass compiler is not found.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="ignis.exceptions.MonitorNotFoundError">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.exceptions.</span></span><span class="sig-name descname"><span class="pre">MonitorNotFoundError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">monitor_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><span class="pre">object</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.exceptions.MonitorNotFoundError" title="Link to this definition">#</a></dt>
 <dd><p>Raised when a monitor with the given ID is not found.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>monitor_id</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) -- The ID of the monitor.</p>
+</dd>
+</dl>
 <dl class="py property">
 <dt class="sig sig-object py" id="ignis.exceptions.MonitorNotFoundError.monitor_id">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">monitor_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.exceptions.MonitorNotFoundError.monitor_id" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>required, read-only</p></li>
-</ul>
-<p>The ID of the monitor.</p>
+<dd><p>The ID of the monitor.</p>
 </dd></dl>
 
 </dd></dl>
@@ -737,13 +665,15 @@
 <dt class="sig sig-object py" id="ignis.exceptions.DBusMethodNotFoundError">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.exceptions.</span></span><span class="sig-name descname"><span class="pre">DBusMethodNotFoundError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><span class="pre">object</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.exceptions.DBusMethodNotFoundError" title="Link to this definition">#</a></dt>
 <dd><p>Raised when a D-Bus method is not found or not registered.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>method_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The name of the D-Bus method.</p>
+</dd>
+</dl>
 <dl class="py property">
 <dt class="sig sig-object py" id="ignis.exceptions.DBusMethodNotFoundError.method_name">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">method_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.exceptions.DBusMethodNotFoundError.method_name" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>required, read-only</p></li>
-</ul>
-<p>The name of the D-Bus method.</p>
+<dd><p>The name of the D-Bus method.</p>
 </dd></dl>
 
 </dd></dl>
@@ -752,13 +682,15 @@
 <dt class="sig sig-object py" id="ignis.exceptions.DBusPropertyNotFoundError">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.exceptions.</span></span><span class="sig-name descname"><span class="pre">DBusPropertyNotFoundError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">property_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><span class="pre">object</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.exceptions.DBusPropertyNotFoundError" title="Link to this definition">#</a></dt>
 <dd><p>Raised when a D-Bus property is not found or not registered.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>property_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The name of the D-Bus property.</p>
+</dd>
+</dl>
 <dl class="py property">
 <dt class="sig sig-object py" id="ignis.exceptions.DBusPropertyNotFoundError.property_name">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">property_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.exceptions.DBusPropertyNotFoundError.property_name" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>required, read-only</p></li>
-</ul>
-<p>The name of the D-Bus property.</p>
+<dd><p>The name of the D-Bus property.</p>
 </dd></dl>
 
 </dd></dl>
@@ -773,13 +705,15 @@
 <dt class="sig sig-object py" id="ignis.exceptions.StylePathNotFoundError">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.exceptions.</span></span><span class="sig-name descname"><span class="pre">StylePathNotFoundError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">style_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><span class="pre">object</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.exceptions.StylePathNotFoundError" title="Link to this definition">#</a></dt>
 <dd><p>Raised when the style path is not found / not applied to the application.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>style_path</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- Path to the .css/.scss/.sass file.</p>
+</dd>
+</dl>
 <dl class="py property">
 <dt class="sig sig-object py" id="ignis.exceptions.StylePathNotFoundError.style_path">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">style_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.exceptions.StylePathNotFoundError.style_path" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>required, read-only</p></li>
-</ul>
-<p>Path to the .css/.scss/.sass file.</p>
+<dd><p>Path to the .css/.scss/.sass file.</p>
 </dd></dl>
 
 </dd></dl>
@@ -788,13 +722,15 @@
 <dt class="sig sig-object py" id="ignis.exceptions.StylePathAppliedError">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.exceptions.</span></span><span class="sig-name descname"><span class="pre">StylePathAppliedError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">style_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><span class="pre">object</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.exceptions.StylePathAppliedError" title="Link to this definition">#</a></dt>
 <dd><p>Raised when the style path is already applied to the application.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>style_path</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- Path to the .css/.scss/.sass file.</p>
+</dd>
+</dl>
 <dl class="py property">
 <dt class="sig sig-object py" id="ignis.exceptions.StylePathAppliedError.style_path">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">style_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.exceptions.StylePathAppliedError.style_path" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>required, read-only</p></li>
-</ul>
-<p>Path to the .css/.scss/.sass file.</p>
+<dd><p>Path to the .css/.scss/.sass file.</p>
 </dd></dl>
 
 </dd></dl>
@@ -807,24 +743,26 @@
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="ignis.exceptions.CssParsingError">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.exceptions.</span></span><span class="sig-name descname"><span class="pre">CssParsingError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.Gtk.CssSection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gerror</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.GLib.GError</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><span class="pre">object</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.exceptions.CssParsingError" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.exceptions.</span></span><span class="sig-name descname"><span class="pre">CssParsingError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.Gtk.CssSection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gerror</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.GLib.Error</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><span class="pre">object</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.exceptions.CssParsingError" title="Link to this definition">#</a></dt>
 <dd><p>Raised when a CSS parsing error occurs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>section</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">CssSection</span></code></span>) -- The section the error happened in.</p></li>
+<li><p><strong>gerror</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Error</span></code></span>) -- The parsing error.</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py property">
 <dt class="sig sig-object py" id="ignis.exceptions.CssParsingError.section">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">section</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">gi.repository.Gtk.CssSection</span></em><a class="headerlink" href="#ignis.exceptions.CssParsingError.section" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>required, read-only</p></li>
-</ul>
-<p>The section the error happened in.</p>
+<dd><p>The section the error happened in.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="ignis.exceptions.CssParsingError.gerror">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gerror</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">gi.repository.GLib.GError</span></em><a class="headerlink" href="#ignis.exceptions.CssParsingError.gerror" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>required, read-only</p></li>
-</ul>
-<p>The parsing error.</p>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gerror</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">gi.repository.GLib.Error</span></em><a class="headerlink" href="#ignis.exceptions.CssParsingError.gerror" title="Link to this definition">#</a></dt>
+<dd><p>The parsing error.</p>
 </dd></dl>
 
 </dd></dl>
@@ -833,13 +771,15 @@
 <dt class="sig sig-object py" id="ignis.exceptions.AnotherNotificationDaemonRunningError">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.exceptions.</span></span><span class="sig-name descname"><span class="pre">AnotherNotificationDaemonRunningError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><span class="pre">object</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.exceptions.AnotherNotificationDaemonRunningError" title="Link to this definition">#</a></dt>
 <dd><p>Raised when another notification daemon is running.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The name of the currenly running notification daemon.</p>
+</dd>
+</dl>
 <dl class="py property">
 <dt class="sig sig-object py" id="ignis.exceptions.AnotherNotificationDaemonRunningError.name">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.exceptions.AnotherNotificationDaemonRunningError.name" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>required, read-only</p></li>
-</ul>
-<p>The name of the currenly running notification daemon.</p>
+<dd><p>The name of the currenly running notification daemon.</p>
 </dd></dl>
 
 </dd></dl>
@@ -848,13 +788,15 @@
 <dt class="sig sig-object py" id="ignis.exceptions.AnotherSystemTrayRunningError">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.exceptions.</span></span><span class="sig-name descname"><span class="pre">AnotherSystemTrayRunningError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><span class="pre">object</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.exceptions.AnotherSystemTrayRunningError" title="Link to this definition">#</a></dt>
 <dd><p>Raised when another system tray is running.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The name of the currenly running notification daemon.</p>
+</dd>
+</dl>
 <dl class="py property">
 <dt class="sig sig-object py" id="ignis.exceptions.AnotherSystemTrayRunningError.name">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.exceptions.AnotherSystemTrayRunningError.name" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>required, read-only</p></li>
-</ul>
-<p>The name of the currenly running system tray.</p>
+<dd><p>The name of the currenly running system tray.</p>
 </dd></dl>
 
 </dd></dl>
@@ -884,12 +826,12 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="client.html"
+       href="options_manager.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Client</p>
+        <p class="prev-next-title">Options Manager</p>
       </div>
     </a>
     <a class="right-next"
@@ -928,30 +870,10 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.WindowAddedError.window_name"><code class="docutils literal notranslate"><span class="pre">WindowAddedError.window_name</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.ServiceNotFoundError"><code class="docutils literal notranslate"><span class="pre">ServiceNotFoundError</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.ServiceNotFoundError.service_name"><code class="docutils literal notranslate"><span class="pre">ServiceNotFoundError.service_name</span></code></a></li>
-</ul>
-</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.GvcNotFoundError"><code class="docutils literal notranslate"><span class="pre">GvcNotFoundError</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.HyprlandIPCNotFoundError"><code class="docutils literal notranslate"><span class="pre">HyprlandIPCNotFoundError</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.NiriIPCNotFoundError"><code class="docutils literal notranslate"><span class="pre">NiriIPCNotFoundError</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.NetworkManagerNotFoundError"><code class="docutils literal notranslate"><span class="pre">NetworkManagerNotFoundError</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.OptionNotFoundError"><code class="docutils literal notranslate"><span class="pre">OptionNotFoundError</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.OptionNotFoundError.option_name"><code class="docutils literal notranslate"><span class="pre">OptionNotFoundError.option_name</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.OptionExistsError"><code class="docutils literal notranslate"><span class="pre">OptionExistsError</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.OptionExistsError.option_name"><code class="docutils literal notranslate"><span class="pre">OptionExistsError.option_name</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.OptionsGroupNotFoundError"><code class="docutils literal notranslate"><span class="pre">OptionsGroupNotFoundError</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.OptionsGroupNotFoundError.options_group"><code class="docutils literal notranslate"><span class="pre">OptionsGroupNotFoundError.options_group</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.OptionsGroupExistsError"><code class="docutils literal notranslate"><span class="pre">OptionsGroupExistsError</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.OptionsGroupExistsError.options_group"><code class="docutils literal notranslate"><span class="pre">OptionsGroupExistsError.options_group</span></code></a></li>
-</ul>
-</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.GstNotFoundError"><code class="docutils literal notranslate"><span class="pre">GstNotFoundError</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.GstPluginNotFoundError"><code class="docutils literal notranslate"><span class="pre">GstPluginNotFoundError</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.GstPluginNotFoundError.plugin_name"><code class="docutils literal notranslate"><span class="pre">GstPluginNotFoundError.plugin_name</span></code></a></li>
@@ -962,7 +884,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.SassCompilationError.stderr"><code class="docutils literal notranslate"><span class="pre">SassCompilationError.stderr</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.DartSassNotFoundError"><code class="docutils literal notranslate"><span class="pre">DartSassNotFoundError</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.SassNotFoundError"><code class="docutils literal notranslate"><span class="pre">SassNotFoundError</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.MonitorNotFoundError"><code class="docutils literal notranslate"><span class="pre">MonitorNotFoundError</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.MonitorNotFoundError.monitor_id"><code class="docutils literal notranslate"><span class="pre">MonitorNotFoundError.monitor_id</span></code></a></li>
 </ul>
@@ -1064,7 +986,7 @@
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.0.
     <br/>
   </p>
 </div>

@@ -67,6 +67,13 @@ To install the latest (Git) version of Ignis:
 
     pip install git+https://github.com/linkfrg/ignis.git
 
+To install a specific version (e.g., ``v0.5``):
+
+.. code-block:: bash
+
+    # replace "TAG" with the desired Git tag
+    pip install git+https://github.com/linkfrg/ignis.git@TAG
+
 .. seealso::
 
     For advanced usage, you can `set up a development environment <../dev/env.html>`_ and install Ignis in editable mode.
@@ -82,18 +89,17 @@ Building from source
 - gtk4 
 - gtk4-layer-shell
 - glib-mkenums (glib2-devel)
-- pygobject
+- pygobject >= 3.50.0
 - pycairo
 - python-click
 - python-loguru
-- python-requests
 - libpulse (if using PipeWire, install ``pipewire-pulse``)
 
 .. code-block:: bash
     
     git clone https://github.com/linkfrg/ignis.git
     cd ignis
-    meson setup build --prefix=/usr --libdir "lib/ignis"
+    meson setup build --prefix=/usr
     meson compile -C build
     meson install -C build
 

@@ -41,7 +41,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=6cc4e9c0"></script>
+    <script src="../_static/documentation_options.js?v=c8bc6dd9"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -51,7 +51,7 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://linkfrg.github.io/ignis/latest/_static/switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'v0.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'v0.5';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
@@ -371,11 +371,14 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">GObject</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variable.html">Variable</a></li>
 <li class="toctree-l1"><a class="reference internal" href="client.html">Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="options.html">Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="options_manager.html">Options Manager</a></li>
 <li class="toctree-l1"><a class="reference internal" href="exceptions.html">Exceptions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dbus.html">D-Bus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dbus_menu.html">D-Bus menu</a></li>
 <li class="toctree-l1"><a class="reference internal" href="base_widget.html">BaseWidget</a></li>
 <li class="toctree-l1"><a class="reference internal" href="base_service.html">BaseService</a></li>
+<li class="toctree-l1"><a class="reference internal" href="connection_manager.html">Connection Manager</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="widgets/index.html">Widgets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="widgets/Arrow.html">Arrow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="widgets/ArrowButton.html">ArrowButton</a></li>
@@ -407,6 +410,7 @@
 <li class="toctree-l2"><a class="reference internal" href="widgets/Scroll.html">Scroll</a></li>
 <li class="toctree-l2"><a class="reference internal" href="widgets/Separator.html">Separator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="widgets/SpinButton.html">SpinButton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="widgets/Stack.html">Stack</a></li>
 <li class="toctree-l2"><a class="reference internal" href="widgets/Switch.html">Switch</a></li>
 <li class="toctree-l2"><a class="reference internal" href="widgets/ToggleButton.html">ToggleButton</a></li>
 <li class="toctree-l2"><a class="reference internal" href="widgets/Window.html">Window</a></li>
@@ -423,7 +427,6 @@
 <li class="toctree-l2"><a class="reference internal" href="services/network.html">Network</a></li>
 <li class="toctree-l2"><a class="reference internal" href="services/niri.html">Niri</a></li>
 <li class="toctree-l2"><a class="reference internal" href="services/notifications.html">Notifications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="services/options.html">Options</a></li>
 <li class="toctree-l2"><a class="reference internal" href="services/recorder.html">Recorder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="services/system_tray.html">System Tray</a></li>
 <li class="toctree-l2"><a class="reference internal" href="services/systemd.html">Systemd</a></li>
@@ -434,29 +437,19 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="utils/index.html">Utils</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="utils/FileMonitor.html">FileMonitor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils/Poll.html">Poll</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/ThreadTask.html">ThreadTask</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils/Timeout.html">Timeout</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/crop_pixbuf.html">crop_pixbuf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils/debounce.html">Debounce</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/download_image.html">download_image</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/exec_sh.html">exec_sh</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/exec_sh_async.html">exec_sh_async</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_current_dir.html">get_current_dir</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_file_icon_name.html">get_file_icon_name</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_ignis_branch.html">get_ignis_branch</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_ignis_commit.html">get_ignis_commit</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_ignis_commit_msg.html">get_ignis_commit_msg</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_ignis_version.html">get_ignis_version</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_monitor.html">get_monitor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_n_monitors.html">get_n_monitors</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_paintable.html">get_paintable</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/listen_socket.html">listen_socket</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/load_interface_xml.html">load_interface_xml</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/run_in_thread.html">run_in_thread</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/sass_compile.html">sass_compile</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/scale_pixbuf.html">scale_pixbuf</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/send_socket.html">send_socket</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/thread.html">thread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/file.html">File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/icon.html">Icon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/misc.html">Misc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/monitor.html">Monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/pixbuf.html">Pixbuf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/sass.html">Sass</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/sh.html">Shell Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/socket.html">Socket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/str_cases.html">String Cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/thread.html">Thread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/version.html">Version</a></li>
 </ul>
 </details></li>
 </ul>
@@ -559,15 +552,15 @@ You can pass unlimited number of property names as arguments.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.gobject.IgnisGObject.bind_property2">
-<span class="sig-name descname"><span class="pre">bind_property2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_property</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.GObject.Object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_property</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.gobject.IgnisGObject.bind_property2" title="Link to this definition">#</a></dt>
-<dd><p>Bind <code class="docutils literal notranslate"><span class="pre">source_property</span></code> on <code class="docutils literal notranslate"><span class="pre">self</span></code> with <code class="docutils literal notranslate"><span class="pre">target_property</span></code> on <code class="docutils literal notranslate"><span class="pre">target</span></code>.</p>
+<span class="sig-name descname"><span class="pre">bind_property2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_property</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.GObject.Object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_properties</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.gobject.IgnisGObject.bind_property2" title="Link to this definition">#</a></dt>
+<dd><p>Bind <code class="docutils literal notranslate"><span class="pre">source_property</span></code> on <code class="docutils literal notranslate"><span class="pre">self</span></code> with <code class="docutils literal notranslate"><span class="pre">target_properties</span></code> on <code class="docutils literal notranslate"><span class="pre">target</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>source_property</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The property on <code class="docutils literal notranslate"><span class="pre">self</span></code> to bind.</p></li>
 <li><p><strong>target</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Object</span></code></span>) -- the target <code class="docutils literal notranslate"><span class="pre">GObject.Object</span></code>.</p></li>
-<li><p><strong>target_property</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- the property on <code class="docutils literal notranslate"><span class="pre">target</span></code> to bind.</p></li>
-<li><p><strong>transform</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">None</span></code>) -- The function that accepts a new property value and returns the processed value.</p></li>
+<li><p><strong>target_properties</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span>) -- the properties on <code class="docutils literal notranslate"><span class="pre">target</span></code> to bind.</p></li>
+<li><p><strong>transform</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">None</span></code>) -- The function that accepts a new property value and returns the processed value.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -578,13 +571,33 @@ You can pass unlimited number of property names as arguments.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.gobject.IgnisGObject.bind">
-<span class="sig-name descname"><span class="pre">bind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">property_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#ignis.gobject.Binding" title="ignis.gobject.Binding"><span class="pre">Binding</span></a></span></span><a class="headerlink" href="#ignis.gobject.IgnisGObject.bind" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">bind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">property_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#ignis.gobject.Binding" title="ignis.gobject.Binding"><span class="pre">Binding</span></a></span></span><a class="headerlink" href="#ignis.gobject.IgnisGObject.bind" title="Link to this definition">#</a></dt>
 <dd><p>Creates <code class="docutils literal notranslate"><span class="pre">Binding</span></code> from property name on <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>property_name</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- Property name of <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p></li>
-<li><p><strong>transform</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">None</span></code>) -- The function that accepts a new property value and returns the processed value.</p></li>
+<li><p><strong>transform</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">None</span></code>) -- The function that accepts a new property value and returns the processed value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#ignis.gobject.Binding" title="ignis.gobject.Binding"><code class="xref py py-class docutils literal notranslate"><span class="pre">Binding</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#ignis.gobject.Binding" title="ignis.gobject.Binding"><code class="xref py py-class docutils literal notranslate"><span class="pre">Binding</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.gobject.IgnisGObject.bind_many">
+<span class="sig-name descname"><span class="pre">bind_many</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">property_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#ignis.gobject.Binding" title="ignis.gobject.Binding"><span class="pre">Binding</span></a></span></span><a class="headerlink" href="#ignis.gobject.IgnisGObject.bind_many" title="Link to this definition">#</a></dt>
+<dd><p>Creates <code class="docutils literal notranslate"><span class="pre">Binding</span></code> from property names on <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>property_names</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span>) -- List of property names of <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p></li>
+<li><p><strong>transform</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a></span>) -- The function that accepts a new property values and returns the processed value. The values will be passed according to the order in <code class="docutils literal notranslate"><span class="pre">property_names</span></code>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -600,33 +613,123 @@ You can pass unlimited number of property names as arguments.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ignis.gobject.Binding">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.gobject.</span></span><span class="sig-name descname"><span class="pre">Binding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.GObject.Object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_property</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.gobject.Binding" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.gobject.</span></span><span class="sig-name descname"><span class="pre">Binding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.GObject.Object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_properties</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.gobject.Binding" title="Link to this definition">#</a></dt>
 <dd><p>An object that describe binding.</p>
-<dl class="py property">
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Object</span></code></span>) -- The target GObject.</p></li>
+<li><p><strong>target_properties</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span>) -- The properties on the target GObject to bind.</p></li>
+<li><p><strong>transform</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">None</span></code>) -- The function that accepts a new property value and returns the processed value.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
 <dt class="sig sig-object py" id="ignis.gobject.Binding.target">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">target</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">gi.repository.GObject.Object</span></em><a class="headerlink" href="#ignis.gobject.Binding.target" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>required, read-only</p></li>
-</ul>
-<p>The target GObject.</p>
+<span class="sig-name descname"><span class="pre">target</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">gi.repository.GObject.Object</span></span></span><a class="headerlink" href="#ignis.gobject.Binding.target" title="Link to this definition">#</a></dt>
+<dd><p>The target GObject.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Object</span></code></span></p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="py property">
-<dt class="sig sig-object py" id="ignis.gobject.Binding.target_property">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">target_property</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.gobject.Binding.target_property" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>required, read-only</p></li>
-</ul>
-<p>The property on the target GObject.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.gobject.Binding.target_properties">
+<span class="sig-name descname"><span class="pre">target_properties</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#ignis.gobject.Binding.target_properties" title="Link to this definition">#</a></dt>
+<dd><p>The properties on the target GObject to bind.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span></p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py method">
 <dt class="sig sig-object py" id="ignis.gobject.Binding.transform">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">transform</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.gobject.Binding.transform" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>required, read-only</p></li>
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.gobject.Binding.transform" title="Link to this definition">#</a></dt>
+<dd><p>The function that accepts a new property value and returns the processed value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Callable</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ignis.gobject.IgnisProperty">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.gobject.</span></span><span class="sig-name descname"><span class="pre">IgnisProperty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.gobject.IgnisProperty" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://pygobject.gnome.org/guide/api/properties.html#gi.repository.GObject.Property" title="(in PyGObject)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Property</span></code></a>.</p>
+<p>Like <code class="docutils literal notranslate"><span class="pre">GObject.Property</span></code>, but determines the property type automatically based on the return type of the <code class="docutils literal notranslate"><span class="pre">getter</span></code>.
+You can override this behaviour by explicitly passing <code class="docutils literal notranslate"><span class="pre">type</span></code> argument to the constructor.
+Arguments for the constructor are the same as for <code class="docutils literal notranslate"><span class="pre">GObject.Property</span></code>.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ignis.gobject.IgnisSignal">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.gobject.</span></span><span class="sig-name descname"><span class="pre">IgnisSignal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.gobject.IgnisSignal" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://pygobject.gnome.org/guide/api/signals.html#gi.repository.GObject.Signal" title="(in PyGObject)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Signal</span></code></a>.</p>
+<p>The same as <code class="docutils literal notranslate"><span class="pre">GObject.Signal</span></code>, nothing special.
+This class is needed only for the correct determination of signals when building docs.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ignis.gobject.DataGObject">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.gobject.</span></span><span class="sig-name descname"><span class="pre">DataGObject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">match_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.gobject.DataGObject" title="Link to this definition">#</a></dt>
+<dd><p>A GObject that can synchronize its properties with a simple Python dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>] | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">None</span></code>) -- The dictionary to synchronize with.</p></li>
+<li><p><strong>match_dict</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>] | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">None</span></code>) -- The match dictionary between a key in the data and the property on <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p></li>
 </ul>
-<p>The function that accepts a new property value and returns the processed value.</p>
+</dd>
+</dl>
+<p>You have to define attributes from data in <code class="docutils literal notranslate"><span class="pre">init</span></code>.
+The actual attributes from data must be protected (prefixed with _).
+All other attributes must be private (prefixed with __).</p>
+<dl class="py gproperty">
+<dt class="sig sig-object py" id="ignis.gobject.DataGObject.data">
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.gobject.DataGObject.data" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The current data collected from protected class attributes.</p>
+</dd></dl>
+
+<dl class="py gproperty">
+<dt class="sig sig-object py" id="ignis.gobject.DataGObject.latest_synced_data">
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">latest_synced_data</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.gobject.DataGObject.latest_synced_data" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The latest synced data.</p>
+</dd></dl>
+
+<dl class="py gproperty">
+<dt class="sig sig-object py" id="ignis.gobject.DataGObject.match_dict">
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">match_dict</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.gobject.DataGObject.match_dict" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>The match dictionary.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.gobject.DataGObject.sync">
+<span class="sig-name descname"><span class="pre">sync</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.gobject.DataGObject.sync" title="Link to this definition">#</a></dt>
+<dd><p>Perform the property synchronization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]</span>) -- The dictionary to synchronize with.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -685,12 +788,22 @@ You can pass unlimited number of property names as arguments.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.gobject.IgnisGObject.notify_list"><code class="docutils literal notranslate"><span class="pre">IgnisGObject.notify_list()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.gobject.IgnisGObject.bind_property2"><code class="docutils literal notranslate"><span class="pre">IgnisGObject.bind_property2()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.gobject.IgnisGObject.bind"><code class="docutils literal notranslate"><span class="pre">IgnisGObject.bind()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.gobject.IgnisGObject.bind_many"><code class="docutils literal notranslate"><span class="pre">IgnisGObject.bind_many()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.gobject.Binding"><code class="docutils literal notranslate"><span class="pre">Binding</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.gobject.Binding.target"><code class="docutils literal notranslate"><span class="pre">Binding.target</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.gobject.Binding.target_property"><code class="docutils literal notranslate"><span class="pre">Binding.target_property</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.gobject.Binding.transform"><code class="docutils literal notranslate"><span class="pre">Binding.transform</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.gobject.Binding.target"><code class="docutils literal notranslate"><span class="pre">Binding.target()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.gobject.Binding.target_properties"><code class="docutils literal notranslate"><span class="pre">Binding.target_properties()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.gobject.Binding.transform"><code class="docutils literal notranslate"><span class="pre">Binding.transform()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.gobject.IgnisProperty"><code class="docutils literal notranslate"><span class="pre">IgnisProperty</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.gobject.IgnisSignal"><code class="docutils literal notranslate"><span class="pre">IgnisSignal</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.gobject.DataGObject"><code class="docutils literal notranslate"><span class="pre">DataGObject</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.gobject.DataGObject.data"><code class="docutils literal notranslate"><span class="pre">DataGObject.data</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.gobject.DataGObject.latest_synced_data"><code class="docutils literal notranslate"><span class="pre">DataGObject.latest_synced_data</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.gobject.DataGObject.match_dict"><code class="docutils literal notranslate"><span class="pre">DataGObject.match_dict</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.gobject.DataGObject.sync"><code class="docutils literal notranslate"><span class="pre">DataGObject.sync()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -755,7 +868,7 @@ You can pass unlimited number of property names as arguments.</p>
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.0.
     <br/>
   </p>
 </div>

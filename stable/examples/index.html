@@ -41,7 +41,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=6cc4e9c0"></script>
+    <script src="../_static/documentation_options.js?v=c8bc6dd9"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -51,12 +51,13 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://linkfrg.github.io/ignis/latest/_static/switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'v0.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'v0.5';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Configurations" href="configurations.html" />
     <link rel="prev" title="Code Style Guidelines" href="../dev/code_style.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -365,7 +366,11 @@
 <nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"></div>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="configurations.html">Configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code_snippets.html">Code Snippets</a></li>
+</ul>
+</div>
 </nav></div>
     </div>
   
@@ -423,14 +428,12 @@
                   
   <section id="examples">
 <h1>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h1>
-<section id="id1">
-<h2><a class="reference external" href="https://github.com/linkfrg/ignis/tree/main/examples/bar">A simple bar</a><a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
-<img alt="https://github.com/linkfrg/ignis/blob/main/examples/bar/simple-bar.png?raw=true" src="https://github.com/linkfrg/ignis/blob/main/examples/bar/simple-bar.png?raw=true" />
-</section>
-<section id="id2">
-<h2><a class="reference external" href="https://github.com/linkfrg/dotfiles/">My own configuration</a><a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
-<img alt="https://github.com/linkfrg/dotfiles/blob/main/assets/1.png?raw=true" src="https://github.com/linkfrg/dotfiles/blob/main/assets/1.png?raw=true" />
-</section>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="configurations.html">Configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code_snippets.html">Code Snippets</a></li>
+</ul>
+</div>
 </section>
 
 
@@ -452,6 +455,15 @@
         <p class="prev-next-title">Code Style Guidelines</p>
       </div>
     </a>
+    <a class="right-next"
+       href="configurations.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Configurations</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -462,19 +474,6 @@
                 <dialog id="pst-secondary-sidebar-modal"></dialog>
                 <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
-  </div>
-  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">A simple bar</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">My own configuration</a></li>
-</ul>
-  </nav></div>
 
   <div class="sidebar-secondary-item">
 
@@ -535,7 +534,7 @@
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.0.
     <br/>
   </p>
 </div>

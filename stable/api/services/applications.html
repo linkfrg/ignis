@@ -41,7 +41,7 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../_static/documentation_options.js?v=6cc4e9c0"></script>
+    <script src="../../_static/documentation_options.js?v=c8bc6dd9"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -51,7 +51,7 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://linkfrg.github.io/ignis/latest/_static/switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'v0.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'v0.5';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
@@ -371,11 +371,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../gobject.html">GObject</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../variable.html">Variable</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../client.html">Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../options.html">Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../options_manager.html">Options Manager</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../exceptions.html">Exceptions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dbus.html">D-Bus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dbus_menu.html">D-Bus menu</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../base_widget.html">BaseWidget</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../base_service.html">BaseService</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../connection_manager.html">Connection Manager</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../widgets/index.html">Widgets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../widgets/Arrow.html">Arrow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../widgets/ArrowButton.html">ArrowButton</a></li>
@@ -407,6 +410,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../widgets/Scroll.html">Scroll</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../widgets/Separator.html">Separator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../widgets/SpinButton.html">SpinButton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../widgets/Stack.html">Stack</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../widgets/Switch.html">Switch</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../widgets/ToggleButton.html">ToggleButton</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../widgets/Window.html">Window</a></li>
@@ -423,7 +427,6 @@
 <li class="toctree-l2"><a class="reference internal" href="network.html">Network</a></li>
 <li class="toctree-l2"><a class="reference internal" href="niri.html">Niri</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notifications.html">Notifications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="options.html">Options</a></li>
 <li class="toctree-l2"><a class="reference internal" href="recorder.html">Recorder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="system_tray.html">System Tray</a></li>
 <li class="toctree-l2"><a class="reference internal" href="systemd.html">Systemd</a></li>
@@ -434,29 +437,19 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../utils/index.html">Utils</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../utils/FileMonitor.html">FileMonitor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../utils/Poll.html">Poll</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../utils/ThreadTask.html">ThreadTask</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../utils/Timeout.html">Timeout</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../utils/crop_pixbuf.html">crop_pixbuf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../utils/debounce.html">Debounce</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../utils/download_image.html">download_image</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../utils/exec_sh.html">exec_sh</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../utils/exec_sh_async.html">exec_sh_async</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../utils/get_current_dir.html">get_current_dir</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../utils/get_file_icon_name.html">get_file_icon_name</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../utils/get_ignis_branch.html">get_ignis_branch</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../utils/get_ignis_commit.html">get_ignis_commit</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../utils/get_ignis_commit_msg.html">get_ignis_commit_msg</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../utils/get_ignis_version.html">get_ignis_version</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../utils/get_monitor.html">get_monitor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../utils/get_n_monitors.html">get_n_monitors</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../utils/get_paintable.html">get_paintable</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../utils/listen_socket.html">listen_socket</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../utils/load_interface_xml.html">load_interface_xml</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../utils/run_in_thread.html">run_in_thread</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../utils/sass_compile.html">sass_compile</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../utils/scale_pixbuf.html">scale_pixbuf</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../utils/send_socket.html">send_socket</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../utils/thread.html">thread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/file.html">File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/icon.html">Icon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/misc.html">Misc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/monitor.html">Monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/pixbuf.html">Pixbuf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/sass.html">Sass</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/sh.html">Shell Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/socket.html">Socket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/str_cases.html">String Cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/thread.html">Thread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/version.html">Version</a></li>
 </ul>
 </details></li>
 </ul>
@@ -529,6 +522,7 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.applications.</span></span><span class="sig-name descname"><span class="pre">ApplicationsService</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.applications.ApplicationsService" title="Link to this definition">#</a></dt>
 <dd><p>Provides a list of applications installed on the system.
 It also allows &quot;pinning&quot; of apps and retrieving a list of pinned applications.</p>
+<p>There are options available for this service: <a class="reference internal" href="../options.html#ignis.options.Options.Applications" title="ignis.options.Options.Applications"><code class="xref py py-class docutils literal notranslate"><span class="pre">Applications</span></code></a>.</p>
 <p>Example usage:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ignis.services.applications</span><span class="w"> </span><span class="kn">import</span> <span class="n">ApplicationsService</span>
 
@@ -537,18 +531,18 @@ It also allows &quot;pinning&quot; of apps and retrieving a list of pinned appli
     <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 </pre></div>
 </div>
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.applications.ApplicationsService.apps">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">apps</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ignis.services.applications.Application" title="ignis.services.applications.application.Application"><span class="pre">Application</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.applications.ApplicationsService.apps" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">apps</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ignis.services.applications.Application" title="ignis.services.applications.application.Application"><span class="pre">Application</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.applications.ApplicationsService.apps" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>A list of all installed applications.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.applications.ApplicationsService.pinned">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pinned</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ignis.services.applications.Application" title="ignis.services.applications.application.Application"><span class="pre">Application</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.applications.ApplicationsService.pinned" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pinned</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ignis.services.applications.Application" title="ignis.services.applications.application.Application"><span class="pre">Application</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.applications.ApplicationsService.pinned" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
@@ -579,123 +573,126 @@ It also allows &quot;pinning&quot; of apps and retrieving a list of pinned appli
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ignis.services.applications.Application">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.applications.</span></span><span class="sig-name descname"><span class="pre">Application</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.Gio.DesktopAppInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_pinned</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.applications.Application" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.applications.</span></span><span class="sig-name descname"><span class="pre">Application</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.Gio.DesktopAppInfo</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.applications.Application" title="Link to this definition">#</a></dt>
 <dd><p>An application object.</p>
-<dl class="py method">
+<dl class="py signal">
 <dt class="sig sig-object py" id="ignis.services.applications.Application.pinned">
-<span class="sig-name descname"><span class="pre">pinned</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.applications.Application.pinned" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>Signal</p></li>
-</ul>
-<p>Emitted when the application has been pinned.</p>
+<em class="property"><span class="pre">signal</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pinned</span></span><a class="headerlink" href="#ignis.services.applications.Application.pinned" title="Link to this definition">#</a></dt>
+<dd><p>Emitted when the application has been pinned.</p>
 </dd></dl>
 
-<dl class="py method">
+<dl class="py signal">
 <dt class="sig sig-object py" id="ignis.services.applications.Application.unpinned">
-<span class="sig-name descname"><span class="pre">unpinned</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.applications.Application.unpinned" title="Link to this definition">#</a></dt>
-<dd><ul class="simple">
-<li><p>Signal</p></li>
-</ul>
-<p>Emitted when the application has been unpinned.</p>
+<em class="property"><span class="pre">signal</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">unpinned</span></span><a class="headerlink" href="#ignis.services.applications.Application.unpinned" title="Link to this definition">#</a></dt>
+<dd><p>Emitted when the application has been unpinned.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.applications.Application.app">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">app</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">gi.repository.Gio.DesktopAppInfo</span></em><a class="headerlink" href="#ignis.services.applications.Application.app" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">app</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">gi.repository.Gio.DesktopAppInfo</span></em><a class="headerlink" href="#ignis.services.applications.Application.app" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>An instance of <a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/classes/DesktopAppInfo.html#Gio.DesktopAppInfo" title="(in Gio 2.0 v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gio.DesktopAppInfo</span></code></a>.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.applications.Application.id">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.applications.Application.id" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.applications.Application.id" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>The ID of the application.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.applications.Application.name">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.applications.Application.name" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.applications.Application.name" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>The name of the application.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.applications.Application.description">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.applications.Application.description" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.applications.Application.description" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>The description of the application.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.applications.Application.icon">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">icon</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.applications.Application.icon" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">icon</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.applications.Application.icon" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>The icon of the application. If the app has no icon, &quot;image-missing&quot; will be returned.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.applications.Application.keywords">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">keywords</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.applications.Application.keywords" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">keywords</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.applications.Application.keywords" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>Keywords of the application. Ususally, these are words that describe the application.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.applications.Application.desktop_file">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">desktop_file</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.applications.Application.desktop_file" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">desktop_file</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.applications.Application.desktop_file" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>The full path to the <code class="docutils literal notranslate"><span class="pre">.desktop</span></code> file of the application.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.applications.Application.executable">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">executable</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.applications.Application.executable" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">executable</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.applications.Application.executable" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>The executable of the application.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.applications.Application.exec_string">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">exec_string</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.applications.Application.exec_string" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">exec_string</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.services.applications.Application.exec_string" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>The string that contains the executable with command line arguments, used to launch the application.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.applications.Application.actions">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">actions</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ignis.services.applications.ApplicationAction" title="ignis.services.applications.action.ApplicationAction"><span class="pre">ApplicationAction</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.applications.Application.actions" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">actions</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ignis.services.applications.ApplicationAction" title="ignis.services.applications.action.ApplicationAction"><span class="pre">ApplicationAction</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.services.applications.Application.actions" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>A list of actions.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.applications.Application.is_pinned">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_pinned</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.applications.Application.is_pinned" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_pinned</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.applications.Application.is_pinned" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-write</p></li>
 </ul>
 <p>Whether the application is pinned.</p>
+</dd></dl>
+
+<dl class="py gproperty">
+<dt class="sig sig-object py" id="ignis.services.applications.Application.is_terminal">
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_terminal</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.services.applications.Application.is_terminal" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-only</p></li>
+</ul>
+<p>Whether the application has to be launched in a terminal.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -722,8 +719,30 @@ It also allows &quot;pinning&quot; of apps and retrieving a list of pinned appli
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.services.applications.Application.launch">
-<span class="sig-name descname"><span class="pre">launch</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.applications.Application.launch" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">launch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">terminal_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.applications.Application.launch" title="Link to this definition">#</a></dt>
 <dd><p>Launch the application.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>command_format</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">None</span></code>) -- A format string for the command to launch. <code class="docutils literal notranslate"><span class="pre">%command%</span></code> will be replaced with the actual command. Shell syntax is supported.</p></li>
+<li><p><strong>terminal_format</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> | <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">None</span></code>) -- A format string for the command to launch if the application has to be run in a terminal. <code class="docutils literal notranslate"><span class="pre">%command%</span></code> will be replaced with the actual command. Shell syntax is supported.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+</dd>
+</dl>
+<p>To launch terminal applications, pass the <code class="docutils literal notranslate"><span class="pre">terminal_format</span></code> argument:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># kitty for example, format may differ for other terminals</span>
+<span class="n">APPLICATION</span><span class="o">.</span><span class="n">launch</span><span class="p">(</span><span class="n">terminal_format</span><span class="o">=</span><span class="s2">&quot;kitty </span><span class="si">%c</span><span class="s2">ommand%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ignis.services.applications.Application.launch_uwsm">
+<span class="sig-name descname"><span class="pre">launch_uwsm</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.services.applications.Application.launch_uwsm" title="Link to this definition">#</a></dt>
+<dd><p>Launch the application using UWSM (Universal Wayland Session Manager).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
@@ -737,18 +756,18 @@ It also allows &quot;pinning&quot; of apps and retrieving a list of pinned appli
 <dt class="sig sig-object py" id="ignis.services.applications.ApplicationAction">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.services.applications.</span></span><span class="sig-name descname"><span class="pre">ApplicationAction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.Gio.DesktopAppInfo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.services.applications.ApplicationAction" title="Link to this definition">#</a></dt>
 <dd><p>Application action.</p>
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.applications.ApplicationAction.action">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">action</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.applications.ApplicationAction.action" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">action</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.applications.ApplicationAction.action" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>The ID of the action.</p>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py gproperty">
 <dt class="sig sig-object py" id="ignis.services.applications.ApplicationAction.name">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.applications.ApplicationAction.name" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.services.applications.ApplicationAction.name" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
@@ -824,8 +843,8 @@ It also allows &quot;pinning&quot; of apps and retrieving a list of pinned appli
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.applications.Application"><code class="docutils literal notranslate"><span class="pre">Application</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.applications.Application.pinned"><code class="docutils literal notranslate"><span class="pre">Application.pinned()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.applications.Application.unpinned"><code class="docutils literal notranslate"><span class="pre">Application.unpinned()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.applications.Application.pinned"><code class="docutils literal notranslate"><span class="pre">Application.pinned</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.applications.Application.unpinned"><code class="docutils literal notranslate"><span class="pre">Application.unpinned</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.applications.Application.app"><code class="docutils literal notranslate"><span class="pre">Application.app</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.applications.Application.id"><code class="docutils literal notranslate"><span class="pre">Application.id</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.applications.Application.name"><code class="docutils literal notranslate"><span class="pre">Application.name</span></code></a></li>
@@ -837,9 +856,11 @@ It also allows &quot;pinning&quot; of apps and retrieving a list of pinned appli
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.applications.Application.exec_string"><code class="docutils literal notranslate"><span class="pre">Application.exec_string</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.applications.Application.actions"><code class="docutils literal notranslate"><span class="pre">Application.actions</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.applications.Application.is_pinned"><code class="docutils literal notranslate"><span class="pre">Application.is_pinned</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.applications.Application.is_terminal"><code class="docutils literal notranslate"><span class="pre">Application.is_terminal</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.applications.Application.pin"><code class="docutils literal notranslate"><span class="pre">Application.pin()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.applications.Application.unpin"><code class="docutils literal notranslate"><span class="pre">Application.unpin()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.applications.Application.launch"><code class="docutils literal notranslate"><span class="pre">Application.launch()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.applications.Application.launch_uwsm"><code class="docutils literal notranslate"><span class="pre">Application.launch_uwsm()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.services.applications.ApplicationAction"><code class="docutils literal notranslate"><span class="pre">ApplicationAction</span></code></a><ul class="nav section-nav flex-column">
@@ -910,7 +931,7 @@ It also allows &quot;pinning&quot; of apps and retrieving a list of pinned appli
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.0.
     <br/>
   </p>
 </div>

@@ -90,6 +90,20 @@ Try changing the speaker volume using a tool like ``pavucontrol``.
 
 When the property changes, the transform function (if provided) will be called with the new value, and it should return the processed result.
 
+Multiple Binding
+-----------------
+
+You can bind multiple properties at the same time with ``bind_many()``.
+
+.. code-block:: python
+
+    Widget.Scale(
+        value=audio.speaker.bind_many(
+            ["volume", "is_muted"],
+            lambda volume, is_muted: 0 if is_muted else volume,
+        ),
+    )
+
 ``notify`` signal
 ------------------
 The ``notify`` is a special signal that emits when a property changes.

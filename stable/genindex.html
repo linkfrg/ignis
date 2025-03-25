@@ -40,7 +40,7 @@
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="_static/documentation_options.js?v=6cc4e9c0"></script>
+    <script src="_static/documentation_options.js?v=c8bc6dd9"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
@@ -50,7 +50,7 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://linkfrg.github.io/ignis/latest/_static/switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'v0.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'v0.5';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
@@ -411,6 +411,8 @@
  | <a href="#U"><strong>U</strong></a>
  | <a href="#V"><strong>V</strong></a>
  | <a href="#W"><strong>W</strong></a>
+ | <a href="#X"><strong>X</strong></a>
+ | <a href="#Y"><strong>Y</strong></a>
  
 </div>
 <h2 id="A">A</h2>
@@ -428,9 +430,13 @@
       </ul></li>
       <li><a href="api/services/system_tray.html#ignis.services.system_tray.SystemTrayItem.activate">activate() (ignis.services.system_tray.SystemTrayItem method)</a>
 </li>
+      <li><a href="api/services/system_tray.html#ignis.services.system_tray.SystemTrayItem.activate_async">activate_async() (ignis.services.system_tray.SystemTrayItem method)</a>
+</li>
       <li><a href="api/services/recorder.html#ignis.services.recorder.RecorderService.active">active (ignis.services.recorder.RecorderService property)</a>
 </li>
       <li><a href="api/services/network.html#ignis.services.network.Vpn.active_connections">active_connections (ignis.services.network.Vpn property)</a>
+</li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandKeyboard.active_keymap">active_keymap (ignis.services.hyprland.HyprlandKeyboard property)</a>
 </li>
       <li><a href="api/services/niri.html#ignis.services.niri.NiriService.active_output">active_output (ignis.services.niri.NiriService property)</a>
 </li>
@@ -442,9 +448,15 @@
         <li><a href="api/services/niri.html#ignis.services.niri.NiriService.active_window">(ignis.services.niri.NiriService property)</a>
 </li>
       </ul></li>
+      <li><a href="api/services/niri.html#ignis.services.niri.NiriWorkspace.active_window_id">active_window_id (ignis.services.niri.NiriWorkspace property)</a>
+</li>
       <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandService.active_workspace">active_workspace (ignis.services.hyprland.HyprlandService property)</a>
 </li>
-      <li><a href="api/services/niri.html#ignis.services.niri.NiriService.active_workspaces">active_workspaces (ignis.services.niri.NiriService property)</a>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandMonitor.active_workspace_id">active_workspace_id (ignis.services.hyprland.HyprlandMonitor property)</a>
+</li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandMonitor.active_workspace_name">active_workspace_name (ignis.services.hyprland.HyprlandMonitor property)</a>
+</li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandMonitor.actively_tearing">actively_tearing (ignis.services.hyprland.HyprlandMonitor property)</a>
 </li>
       <li><a href="api/widgets/FileDialog.html#ignis.widgets.Widget.FileDialog.add_filter">add_filter() (ignis.widgets.Widget.FileDialog method)</a>
 </li>
@@ -452,27 +464,35 @@
 </li>
       <li><a href="api/app.html#ignis.app.IgnisApp.add_window">add_window() (ignis.app.IgnisApp method)</a>
 </li>
-      <li><a href="api/services/system_tray.html#ignis.services.system_tray.SystemTrayService.added">added() (ignis.services.system_tray.SystemTrayService method)</a>
+      <li><a href="api/services/system_tray.html#ignis.services.system_tray.SystemTrayService.added">added (ignis.services.system_tray.SystemTrayService property)</a>
 </li>
       <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothDevice.address">address (ignis.services.bluetooth.BluetoothDevice property)</a>
+
+      <ul>
+        <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandKeyboard.address">(ignis.services.hyprland.HyprlandKeyboard property)</a>
 </li>
+        <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWindow.address">(ignis.services.hyprland.HyprlandWindow property)</a>
+</li>
+      </ul></li>
       <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.album">album (ignis.services.mpris.MprisPlayer property)</a>
 </li>
       <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothDevice.alias">alias (ignis.services.bluetooth.BluetoothDevice property)</a>
 </li>
       <li><a href="api/widgets/Window.html#ignis.widgets.Widget.Window.anchor">anchor (ignis.widgets.Widget.Window property)</a>
 </li>
-      <li><a href="api/exceptions.html#ignis.exceptions.AnotherNotificationDaemonRunningError">AnotherNotificationDaemonRunningError</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/exceptions.html#ignis.exceptions.AnotherNotificationDaemonRunningError">AnotherNotificationDaemonRunningError</a>
+</li>
       <li><a href="api/exceptions.html#ignis.exceptions.AnotherSystemTrayRunningError">AnotherSystemTrayRunningError</a>
 </li>
       <li><a href="api/services/network.html#ignis.services.network.WifiDevice.ap">ap (ignis.services.network.WifiDevice property)</a>
 </li>
       <li><a href="api/services/applications.html#ignis.services.applications.Application.app">app (ignis.services.applications.Application property)</a>
 </li>
-      <li><a href="api/services/audio.html#ignis.services.audio.AudioService.app_added">app_added() (ignis.services.audio.AudioService method)</a>
+      <li><a href="api/services/audio.html#ignis.services.audio.AudioService.app_added">app_added (ignis.services.audio.AudioService property)</a>
+</li>
+      <li><a href="api/services/niri.html#ignis.services.niri.NiriWindow.app_id">app_id (ignis.services.niri.NiriWindow property)</a>
 </li>
       <li><a href="api/services/notifications.html#ignis.services.notifications.Notification.app_name">app_name (ignis.services.notifications.Notification property)</a>
 </li>
@@ -485,6 +505,8 @@
       <li><a href="api/services/applications.html#ignis.services.applications.ApplicationsService">ApplicationsService (class in ignis.services.applications)</a>
 </li>
       <li><a href="api/app.html#ignis.app.IgnisApp.apply_css">apply_css() (ignis.app.IgnisApp method)</a>
+</li>
+      <li><a href="api/options_manager.html#ignis.options_manager.OptionsGroup.apply_from_dict">apply_from_dict() (ignis.options_manager.OptionsGroup method)</a>
 </li>
       <li><a href="api/services/applications.html#ignis.services.applications.ApplicationsService.apps">apps (ignis.services.applications.ApplicationsService property)</a>
 
@@ -502,7 +524,9 @@
 </li>
       <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.artist">artist (ignis.services.mpris.MprisPlayer property)</a>
 </li>
-      <li><a href="api/utils/exec_sh_async.html#ignis.utils.exec_sh.AsyncCompletedProcess">AsyncCompletedProcess (class in ignis.utils.exec_sh)</a>
+      <li><a href="api/utils/sh.html#ignis.utils.Utils.AsyncCompletedProcess">AsyncCompletedProcess (class in ignis.utils.Utils)</a>
+</li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWindow.at">at (ignis.services.hyprland.HyprlandWindow property)</a>
 </li>
       <li><a href="api/services/audio.html#ignis.services.audio.AudioService">AudioService (class in ignis.services.audio)</a>
 </li>
@@ -510,12 +534,16 @@
 </li>
       <li><a href="api/app.html#ignis.app.IgnisApp.autoreload_css">autoreload_css (ignis.app.IgnisApp property)</a>
 </li>
+      <li><a href="api/options_manager.html#ignis.options_manager.OptionsGroup.autosave">autosave (ignis.options_manager.OptionsGroup property)</a>
+</li>
       <li><a href="api/services/backlight.html#ignis.services.backlight.BacklightService.available">available (ignis.services.backlight.BacklightService property)</a>
 
       <ul>
         <li><a href="api/services/upower.html#ignis.services.upower.UPowerDevice.available">(ignis.services.upower.UPowerDevice property)</a>
 </li>
       </ul></li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandMonitor.available_modes">available_modes (ignis.services.hyprland.HyprlandMonitor property)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -534,7 +562,7 @@
 </li>
       <li><a href="api/services/upower.html#ignis.services.upower.UPowerService.batteries">batteries (ignis.services.upower.UPowerService property)</a>
 </li>
-      <li><a href="api/services/upower.html#ignis.services.upower.UPowerService.battery_added">battery_added() (ignis.services.upower.UPowerService method)</a>
+      <li><a href="api/services/upower.html#ignis.services.upower.UPowerService.battery_added">battery_added (ignis.services.upower.UPowerService property)</a>
 </li>
       <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothDevice.battery_level">battery_level (ignis.services.bluetooth.BluetoothDevice property)</a>
 </li>
@@ -542,13 +570,15 @@
 </li>
       <li><a href="api/gobject.html#ignis.gobject.IgnisGObject.bind">bind() (ignis.gobject.IgnisGObject method)</a>
 </li>
+      <li><a href="api/gobject.html#ignis.gobject.IgnisGObject.bind_many">bind_many() (ignis.gobject.IgnisGObject method)</a>
+</li>
       <li><a href="api/gobject.html#ignis.gobject.IgnisGObject.bind_property2">bind_property2() (ignis.gobject.IgnisGObject method)</a>
 </li>
       <li><a href="api/gobject.html#ignis.gobject.Binding">Binding (class in ignis.gobject)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/services/recorder.html#ignis.services.recorder.RecorderService.bitrate">bitrate (ignis.services.recorder.RecorderService property)</a>
+      <li><a href="api/options.html#ignis.options.Options.Recorder.bitrate">bitrate (ignis.options.Options.Recorder attribute)</a>
 </li>
       <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothDevice">BluetoothDevice (class in ignis.services.bluetooth)</a>
 </li>
@@ -586,10 +616,14 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/widgets/Calendar.html#ignis.widgets.Widget.Calendar">Calendar (class in ignis.widgets.Widget)</a>
 </li>
-      <li><a href="api/utils/FileMonitor.html#ignis.utils.FileMonitor.callback">callback (ignis.utils.FileMonitor property)</a>
+      <li><a href="api/dbus.html#ignis.dbus.DBusProxy.call">call() (ignis.dbus.DBusProxy method)</a>
+</li>
+      <li><a href="api/dbus.html#ignis.dbus.DBusProxy.call_async">call_async() (ignis.dbus.DBusProxy method)</a>
+</li>
+      <li><a href="api/utils/FileMonitor.html#ignis.utils.Utils.FileMonitor.callback">callback (ignis.utils.Utils.FileMonitor property)</a>
 
       <ul>
-        <li><a href="api/utils/Poll.html#ignis.utils.Poll.callback">(ignis.utils.Poll property)</a>
+        <li><a href="api/utils/Poll.html#ignis.utils.Utils.Poll.callback">(ignis.utils.Utils.Poll property)</a>
 </li>
       </ul></li>
       <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.can_control">can_control (ignis.services.mpris.MprisPlayer property)</a>
@@ -604,26 +638,28 @@
 </li>
       <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.can_seek">can_seek (ignis.services.mpris.MprisPlayer property)</a>
 </li>
-      <li><a href="api/utils/FileMonitor.html#ignis.utils.FileMonitor.cancel">cancel() (ignis.utils.FileMonitor method)</a>
+      <li><a href="api/utils/FileMonitor.html#ignis.utils.Utils.FileMonitor.cancel">cancel() (ignis.utils.Utils.FileMonitor method)</a>
 
       <ul>
-        <li><a href="api/utils/Poll.html#ignis.utils.Poll.cancel">(ignis.utils.Poll method)</a>
+        <li><a href="api/utils/Poll.html#ignis.utils.Utils.Poll.cancel">(ignis.utils.Utils.Poll method)</a>
 </li>
-        <li><a href="api/utils/Timeout.html#ignis.utils.Timeout.cancel">(ignis.utils.Timeout method)</a>
+        <li><a href="api/utils/Timeout.html#ignis.utils.Utils.Timeout.cancel">(ignis.utils.Utils.Timeout method)</a>
 </li>
       </ul></li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandKeyboard.caps_lock">caps_lock (ignis.services.hyprland.HyprlandKeyboard property)</a>
+</li>
       <li><a href="api/services/network.html#ignis.services.network.EthernetDevice.carrier">carrier (ignis.services.network.EthernetDevice property)</a>
 </li>
       <li><a href="api/services/system_tray.html#ignis.services.system_tray.SystemTrayItem.category">category (ignis.services.system_tray.SystemTrayItem property)</a>
 </li>
       <li><a href="api/widgets/CenterBox.html#ignis.widgets.Widget.CenterBox">CenterBox (class in ignis.widgets.Widget)</a>
 </li>
-      <li><a href="api/services/options.html#ignis.services.options.OptionsGroup.changed">changed() (ignis.services.options.OptionsGroup method)</a>
+      <li><a href="api/options_manager.html#ignis.options_manager.OptionsGroup.changed">changed (ignis.options_manager.OptionsGroup property)</a>
 
       <ul>
-        <li><a href="api/utils/FileMonitor.html#ignis.utils.FileMonitor.changed">(ignis.utils.FileMonitor method)</a>
+        <li><a href="api/utils/FileMonitor.html#ignis.utils.Utils.FileMonitor.changed">(ignis.utils.Utils.FileMonitor property)</a>
 </li>
-        <li><a href="api/utils/Poll.html#ignis.utils.Poll.changed">(ignis.utils.Poll method)</a>
+        <li><a href="api/utils/Poll.html#ignis.utils.Utils.Poll.changed">(ignis.utils.Utils.Poll property)</a>
 </li>
       </ul></li>
       <li><a href="api/services/upower.html#ignis.services.upower.UPowerDevice.charge_cycles">charge_cycles (ignis.services.upower.UPowerDevice property)</a>
@@ -639,13 +675,25 @@
       <ul>
         <li><a href="api/widgets/Grid.html#ignis.widgets.Widget.Grid.child">(ignis.widgets.Widget.Grid property)</a>
 </li>
+        <li><a href="api/widgets/Stack.html#ignis.widgets.Widget.Stack.child">(ignis.widgets.Widget.Stack property)</a>
+</li>
+        <li><a href="api/widgets/Stack.html#ignis.widgets.Widget.StackPage.child">(ignis.widgets.Widget.StackPage property)</a>
+</li>
       </ul></li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWindow.class_name">class_name (ignis.services.hyprland.HyprlandWindow property)</a>
+</li>
       <li><a href="api/services/notifications.html#ignis.services.notifications.NotificationService.clear_all">clear_all() (ignis.services.notifications.NotificationService method)</a>
+</li>
+      <li><a href="api/services/network.html#ignis.services.network.WifiAccessPoint.clear_secrets">clear_secrets() (ignis.services.network.WifiAccessPoint method)</a>
 </li>
       <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothService.client">client (ignis.services.bluetooth.BluetoothService property)</a>
 </li>
-      <li><a href="api/services/notifications.html#ignis.services.notifications.Notification.close">close() (ignis.services.notifications.Notification method)</a>
+      <li><a href="api/services/niri.html#ignis.services.niri.NiriWindow.close">close() (ignis.services.niri.NiriWindow method)</a>
+
+      <ul>
+        <li><a href="api/services/notifications.html#ignis.services.notifications.Notification.close">(ignis.services.notifications.Notification method)</a>
 </li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/app.html#ignis.app.IgnisApp.close_window">close_window() (ignis.app.IgnisApp method)</a>
@@ -654,13 +702,21 @@
         <li><a href="api/client.html#ignis.client.IgnisClient.close_window">(ignis.client.IgnisClient method)</a>
 </li>
       </ul></li>
-      <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.closed">closed() (ignis.services.mpris.MprisPlayer method)</a>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWindow.closed">closed (ignis.services.hyprland.HyprlandWindow property)</a>
 
       <ul>
-        <li><a href="api/services/notifications.html#ignis.services.notifications.Notification.closed">(ignis.services.notifications.Notification method)</a>
+        <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.closed">(ignis.services.mpris.MprisPlayer property)</a>
+</li>
+        <li><a href="api/services/notifications.html#ignis.services.notifications.Notification.closed">(ignis.services.notifications.Notification property)</a>
 </li>
       </ul></li>
       <li><a href="api/widgets/Grid.html#ignis.widgets.Widget.Grid.column_num">column_num (ignis.widgets.Widget.Grid property)</a>
+</li>
+      <li><a href="api/services/network.html#ignis.services.network.WifiAccessPoint.commit_changes_async">commit_changes_async() (ignis.services.network.WifiAccessPoint method)</a>
+</li>
+      <li><a href="api/connection_manager.html#ignis.connection_manager.ConnectionManager.connect">connect() (ignis.connection_manager.ConnectionManager method)</a>
+</li>
+      <li><a href="api/options_manager.html#ignis.options_manager.OptionsGroup.connect_option">connect_option() (ignis.options_manager.OptionsGroup method)</a>
 </li>
       <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothDevice.connect_to">connect_to() (ignis.services.bluetooth.BluetoothDevice method)</a>
 
@@ -686,9 +742,13 @@
         <li><a href="api/dbus.html#ignis.dbus.DBusService.connection">(ignis.dbus.DBusService property)</a>
 </li>
       </ul></li>
+      <li><a href="api/connection_manager.html#ignis.connection_manager.ConnectionManager">ConnectionManager (class in ignis.connection_manager)</a>
+</li>
       <li><a href="api/services/network.html#ignis.services.network.Vpn.connections">connections (ignis.services.network.Vpn property)</a>
 </li>
       <li><a href="api/services/system_tray.html#ignis.services.system_tray.SystemTrayItem.context_menu">context_menu() (ignis.services.system_tray.SystemTrayItem method)</a>
+</li>
+      <li><a href="api/services/system_tray.html#ignis.services.system_tray.SystemTrayItem.context_menu_async">context_menu_async() (ignis.services.system_tray.SystemTrayItem method)</a>
 </li>
       <li><a href="api/services/recorder.html#ignis.services.recorder.RecorderService.continue_recording">continue_recording() (ignis.services.recorder.RecorderService method)</a>
 </li>
@@ -696,21 +756,25 @@
 </li>
       <li><a href="api/dbus_menu.html#ignis.dbus_menu.DBusMenu.copy">copy() (ignis.dbus_menu.DBusMenu method)</a>
 </li>
+      <li><a href="api/dbus_menu.html#ignis.dbus_menu.DBusMenu.copy_async">copy_async() (ignis.dbus_menu.DBusMenu method)</a>
+</li>
       <li><a href="api/widgets/Arrow.html#ignis.widgets.Widget.Arrow.counterclockwise">counterclockwise (ignis.widgets.Widget.Arrow property)</a>
 </li>
       <li><a href="api/services/fetch.html#ignis.services.fetch.FetchService.cpu">cpu (ignis.services.fetch.FetchService property)</a>
 </li>
       <li><a href="api/services/fetch.html#ignis.services.fetch.FetchService.cpu_temp">cpu_temp (ignis.services.fetch.FetchService property)</a>
 </li>
-      <li><a href="api/services/options.html#ignis.services.options.OptionsService.create_group">create_group() (ignis.services.options.OptionsService method)</a>
-</li>
-      <li><a href="api/services/options.html#ignis.services.options.OptionsGroup.create_option">create_option() (ignis.services.options.OptionsGroup method)</a>
-</li>
-      <li><a href="api/utils/crop_pixbuf.html#ignis.utils.Utils.crop_pixbuf">crop_pixbuf() (in module ignis.utils.Utils)</a>
+      <li><a href="api/utils/pixbuf.html#ignis.utils.Utils.crop_pixbuf">crop_pixbuf() (in module ignis.utils.Utils)</a>
 </li>
       <li><a href="api/exceptions.html#ignis.exceptions.CssParsingError">CssParsingError</a>
 </li>
       <li><a href="api/services/fetch.html#ignis.services.fetch.FetchService.current_desktop">current_desktop (ignis.services.fetch.FetchService property)</a>
+</li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandMonitor.current_format">current_format (ignis.services.hyprland.HyprlandMonitor property)</a>
+</li>
+      <li><a href="api/services/niri.html#ignis.services.niri.NiriKeyboardLayouts.current_idx">current_idx (ignis.services.niri.NiriKeyboardLayouts property)</a>
+</li>
+      <li><a href="api/services/niri.html#ignis.services.niri.NiriKeyboardLayouts.current_name">current_name (ignis.services.niri.NiriKeyboardLayouts property)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -718,14 +782,12 @@
 <h2 id="D">D</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/exceptions.html#ignis.exceptions.DartSassNotFoundError">DartSassNotFoundError</a>
+      <li><a href="api/gobject.html#ignis.gobject.DataGObject.data">data (ignis.gobject.DataGObject property)</a>
 </li>
-      <li><a href="api/services/options.html#ignis.services.options.OptionsGroup.data">data (ignis.services.options.OptionsGroup property)</a>
-
-      <ul>
-        <li><a href="api/services/options.html#ignis.services.options.OptionsService.data">(ignis.services.options.OptionsService property)</a>
+      <li><a href="api/gobject.html#ignis.gobject.DataGObject">DataGObject (class in ignis.gobject)</a>
 </li>
-      </ul></li>
+      <li><a href="api/connection_manager.html#ignis.connection_manager.DBusConnectionManager">DBusConnectionManager (class in ignis.connection_manager)</a>
+</li>
       <li><a href="api/dbus_menu.html#ignis.dbus_menu.DBusMenu">DBusMenu (class in ignis.dbus_menu)</a>
 </li>
       <li><a href="api/exceptions.html#ignis.exceptions.DBusMethodNotFoundError">DBusMethodNotFoundError</a>
@@ -742,9 +804,9 @@
 </li>
       <li><a href="api/widgets/FileFilter.html#ignis.widgets.Widget.FileFilter.default">default (ignis.widgets.Widget.FileFilter property)</a>
 </li>
-      <li><a href="api/services/recorder.html#ignis.services.recorder.RecorderService.default_file_location">default_file_location (ignis.services.recorder.RecorderService property)</a>
+      <li><a href="api/options.html#ignis.options.Options.Recorder.default_file_location">default_file_location (ignis.options.Options.Recorder attribute)</a>
 </li>
-      <li><a href="api/services/recorder.html#ignis.services.recorder.RecorderService.default_filename">default_filename (ignis.services.recorder.RecorderService property)</a>
+      <li><a href="api/options.html#ignis.options.Options.Recorder.default_filename">default_filename (ignis.options.Options.Recorder attribute)</a>
 </li>
       <li><a href="api/widgets/Arrow.html#ignis.widgets.Widget.Arrow.degree">degree (ignis.widgets.Widget.Arrow property)</a>
 </li>
@@ -753,21 +815,31 @@
       <ul>
         <li><a href="api/services/audio.html#ignis.services.audio.Stream.description">(ignis.services.audio.Stream property)</a>
 </li>
+        <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandMonitor.description">(ignis.services.hyprland.HyprlandMonitor property)</a>
+</li>
       </ul></li>
       <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.desktop_entry">desktop_entry (ignis.services.mpris.MprisPlayer property)</a>
 </li>
       <li><a href="api/services/applications.html#ignis.services.applications.Application.desktop_file">desktop_file (ignis.services.applications.Application property)</a>
 </li>
-      <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothService.device_added">device_added() (ignis.services.bluetooth.BluetoothService method)</a>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWorkspace.destroyed">destroyed (ignis.services.hyprland.HyprlandWorkspace property)</a>
 
       <ul>
-        <li><a href="api/services/upower.html#ignis.services.upower.UPowerService.device_added">(ignis.services.upower.UPowerService method)</a>
+        <li><a href="api/services/niri.html#ignis.services.niri.NiriWindow.destroyed">(ignis.services.niri.NiriWindow property)</a>
+</li>
+        <li><a href="api/services/niri.html#ignis.services.niri.NiriWorkspace.destroyed">(ignis.services.niri.NiriWorkspace property)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothService.device_added">device_added (ignis.services.bluetooth.BluetoothService property)</a>
+
+      <ul>
+        <li><a href="api/services/upower.html#ignis.services.upower.UPowerService.device_added">(ignis.services.upower.UPowerService property)</a>
+</li>
+      </ul></li>
       <li><a href="api/services/backlight.html#ignis.services.backlight.BacklightDevice.device_name">device_name (ignis.services.backlight.BacklightDevice property)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothDevice.device_type">device_type (ignis.services.bluetooth.BluetoothDevice property)</a>
 </li>
       <li><a href="api/services/backlight.html#ignis.services.backlight.BacklightService.devices">devices (ignis.services.backlight.BacklightService property)</a>
@@ -784,7 +856,15 @@
       </ul></li>
       <li><a href="api/widgets/FileChooserButton.html#ignis.widgets.Widget.FileChooserButton.dialog">dialog (ignis.widgets.Widget.FileChooserButton property)</a>
 </li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandMonitor.direct_scanout_to">direct_scanout_to (ignis.services.hyprland.HyprlandMonitor property)</a>
+</li>
       <li><a href="api/widgets/Arrow.html#ignis.widgets.Widget.Arrow.direction">direction (ignis.widgets.Widget.Arrow property)</a>
+</li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandMonitor.disabled">disabled (ignis.services.hyprland.HyprlandMonitor property)</a>
+</li>
+      <li><a href="api/connection_manager.html#ignis.connection_manager.ConnectionManager.disconnect">disconnect() (ignis.connection_manager.ConnectionManager method)</a>
+</li>
+      <li><a href="api/connection_manager.html#ignis.connection_manager.ConnectionManager.disconnect_all">disconnect_all() (ignis.connection_manager.ConnectionManager method)</a>
 </li>
       <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothDevice.disconnect_from">disconnect_from() (ignis.services.bluetooth.BluetoothDevice method)</a>
 
@@ -793,20 +873,26 @@
 </li>
         <li><a href="api/services/network.html#ignis.services.network.VpnConnection.disconnect_from">(ignis.services.network.VpnConnection method)</a>
 </li>
+        <li><a href="api/services/network.html#ignis.services.network.WifiAccessPoint.disconnect_from">(ignis.services.network.WifiAccessPoint method)</a>
+</li>
       </ul></li>
+      <li><a href="api/connection_manager.html#ignis.connection_manager.ConnectionManager.disconnect_gobject">disconnect_gobject() (ignis.connection_manager.ConnectionManager method)</a>
+</li>
       <li><a href="api/services/notifications.html#ignis.services.notifications.Notification.dismiss">dismiss() (ignis.services.notifications.Notification method)</a>
 </li>
-      <li><a href="api/services/notifications.html#ignis.services.notifications.Notification.dismissed">dismissed() (ignis.services.notifications.Notification method)</a>
+      <li><a href="api/services/notifications.html#ignis.services.notifications.Notification.dismissed">dismissed (ignis.services.notifications.Notification property)</a>
 </li>
       <li><a href="api/services/upower.html#ignis.services.upower.UPowerService.display_device">display_device (ignis.services.upower.UPowerService property)</a>
 </li>
       <li><a href="api/exceptions.html#ignis.exceptions.DisplayNotFoundError">DisplayNotFoundError</a>
 </li>
-      <li><a href="api/services/notifications.html#ignis.services.notifications.NotificationService.dnd">dnd (ignis.services.notifications.NotificationService property)</a>
+      <li><a href="api/options.html#ignis.options.Options.Notifications.dnd">dnd (ignis.options.Options.Notifications attribute)</a>
 </li>
-      <li><a href="api/utils/download_image.html#ignis.utils.Utils.download_image">download_image() (in module ignis.utils.Utils)</a>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandMonitor.dpms_status">dpms_status (ignis.services.hyprland.HyprlandMonitor property)</a>
 </li>
       <li><a href="api/widgets/DropDown.html#ignis.widgets.Widget.DropDown">DropDown (class in ignis.widgets.Widget)</a>
+</li>
+      <li><a href="api/widgets/Window.html#ignis.widgets.Widget.Window.dynamic_input_region">dynamic_input_region (ignis.widgets.Widget.Window property)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -844,9 +930,9 @@
 </li>
       <li><a href="api/widgets/Window.html#ignis.widgets.Widget.Window.exclusivity">exclusivity (ignis.widgets.Widget.Window property)</a>
 </li>
-      <li><a href="api/utils/exec_sh.html#ignis.utils.Utils.exec_sh">exec_sh() (in module ignis.utils.Utils)</a>
+      <li><a href="api/utils/sh.html#ignis.utils.Utils.exec_sh">exec_sh() (in module ignis.utils.Utils)</a>
 </li>
-      <li><a href="api/utils/exec_sh_async.html#ignis.utils.Utils.exec_sh_async">exec_sh_async() (in module ignis.utils.Utils)</a>
+      <li><a href="api/utils/sh.html#ignis.utils.Utils.exec_sh_async">exec_sh_async() (in module ignis.utils.Utils)</a>
 </li>
       <li><a href="api/services/applications.html#ignis.services.applications.Application.exec_string">exec_string (ignis.services.applications.Application property)</a>
 </li>
@@ -862,25 +948,39 @@
 </li>
       <li><a href="api/widgets/FileDialog.html#ignis.widgets.Widget.FileDialog.file">file (ignis.widgets.Widget.FileDialog property)</a>
 </li>
-      <li><a href="api/widgets/FileDialog.html#ignis.widgets.Widget.FileDialog.file_set">file_set() (ignis.widgets.Widget.FileDialog method)</a>
+      <li><a href="api/widgets/FileDialog.html#ignis.widgets.Widget.FileDialog.file_set">file_set (ignis.widgets.Widget.FileDialog property)</a>
 </li>
       <li><a href="api/widgets/FileChooserButton.html#ignis.widgets.Widget.FileChooserButton">FileChooserButton (class in ignis.widgets.Widget)</a>
 </li>
       <li><a href="api/widgets/FileDialog.html#ignis.widgets.Widget.FileDialog">FileDialog (class in ignis.widgets.Widget)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/widgets/FileFilter.html#ignis.widgets.Widget.FileFilter">FileFilter (class in ignis.widgets.Widget)</a>
 </li>
-      <li><a href="api/utils/FileMonitor.html#ignis.utils.FileMonitor">FileMonitor (class in ignis.utils)</a>
+      <li><a href="api/utils/FileMonitor.html#ignis.utils.Utils.FileMonitor">FileMonitor (class in ignis.utils.Utils)</a>
 </li>
       <li><a href="api/widgets/FileDialog.html#ignis.widgets.Widget.FileDialog.filters">filters (ignis.widgets.Widget.FileDialog property)</a>
 </li>
-      <li><a href="api/utils/ThreadTask.html#ignis.utils.ThreadTask.finished">finished() (ignis.utils.ThreadTask method)</a>
+      <li><a href="api/utils/thread.html#ignis.utils.Utils.ThreadTask.finished">finished (ignis.utils.Utils.ThreadTask property)</a>
 </li>
-      <li><a href="api/utils/FileMonitor.html#ignis.utils.FileMonitor.flags">flags (ignis.utils.FileMonitor property)</a>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/utils/FileMonitor.html#ignis.utils.Utils.FileMonitor.flags">flags (ignis.utils.Utils.FileMonitor property)</a>
+</li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWindow.floating">floating (ignis.services.hyprland.HyprlandWindow property)</a>
+</li>
+      <li><a href="api/services/niri.html#ignis.services.niri.NiriWindow.focus">focus() (ignis.services.niri.NiriWindow method)</a>
+</li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWindow.focus_history_id">focus_history_id (ignis.services.hyprland.HyprlandWindow property)</a>
+</li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandMonitor.focused">focused (ignis.services.hyprland.HyprlandMonitor property)</a>
+</li>
+      <li><a href="api/services/network.html#ignis.services.network.WifiAccessPoint.forget">forget() (ignis.services.network.WifiAccessPoint method)</a>
 </li>
       <li><a href="api/services/network.html#ignis.services.network.WifiAccessPoint.frequency">frequency (ignis.services.network.WifiAccessPoint property)</a>
+</li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWindow.fullscreen">fullscreen (ignis.services.hyprland.HyprlandWindow property)</a>
+</li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWindow.fullscreen_client">fullscreen_client (ignis.services.hyprland.HyprlandWindow property)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -892,7 +992,13 @@
 </li>
       <li><a href="api/exceptions.html#ignis.exceptions.CssParsingError.gerror">gerror (ignis.exceptions.CssParsingError property)</a>
 </li>
-      <li><a href="api/utils/get_current_dir.html#ignis.utils.Utils.get_current_dir">get_current_dir() (in module ignis.utils.Utils)</a>
+      <li><a href="api/utils/icon.html#ignis.utils.Utils.get_app_icon_name">get_app_icon_name() (in module ignis.utils.Utils)</a>
+</li>
+      <li><a href="api/utils/misc.html#ignis.utils.Utils.get_current_dir">get_current_dir() (in module ignis.utils.Utils)</a>
+</li>
+      <li><a href="api/dbus.html#ignis.dbus.DBusProxy.get_dbus_property">get_dbus_property() (ignis.dbus.DBusProxy method)</a>
+</li>
+      <li><a href="api/dbus.html#ignis.dbus.DBusProxy.get_dbus_property_async">get_dbus_property_async() (ignis.dbus.DBusProxy method)</a>
 </li>
       <li><a href="api/app.html#ignis.app.IgnisApp.get_default">get_default() (ignis.app.IgnisApp class method)</a>
 
@@ -902,39 +1008,51 @@
         <li><a href="api/services/systemd.html#ignis.services.systemd.SystemdService.get_default">(ignis.services.systemd.SystemdService class method)</a>
 </li>
       </ul></li>
-      <li><a href="api/utils/get_file_icon_name.html#ignis.utils.Utils.get_file_icon_name">get_file_icon_name() (in module ignis.utils.Utils)</a>
+      <li><a href="api/utils/icon.html#ignis.utils.Utils.get_file_icon_name">get_file_icon_name() (in module ignis.utils.Utils)</a>
 </li>
-      <li><a href="api/services/options.html#ignis.services.options.OptionsService.get_group">get_group() (ignis.services.options.OptionsService method)</a>
+      <li><a href="api/utils/version.html#ignis.utils.Utils.get_ignis_branch">get_ignis_branch() (in module ignis.utils.Utils)</a>
 </li>
-      <li><a href="api/utils/get_ignis_branch.html#ignis.utils.Utils.get_ignis_branch">get_ignis_branch() (in module ignis.utils.Utils)</a>
+      <li><a href="api/utils/version.html#ignis.utils.Utils.get_ignis_commit">get_ignis_commit() (in module ignis.utils.Utils)</a>
 </li>
-      <li><a href="api/utils/get_ignis_commit.html#ignis.utils.Utils.get_ignis_commit">get_ignis_commit() (in module ignis.utils.Utils)</a>
+      <li><a href="api/utils/version.html#ignis.utils.Utils.get_ignis_commit_msg">get_ignis_commit_msg() (in module ignis.utils.Utils)</a>
 </li>
-      <li><a href="api/utils/get_ignis_commit_msg.html#ignis.utils.Utils.get_ignis_commit_msg">get_ignis_commit_msg() (in module ignis.utils.Utils)</a>
+      <li><a href="api/utils/version.html#ignis.utils.Utils.get_ignis_version">get_ignis_version() (in module ignis.utils.Utils)</a>
 </li>
-      <li><a href="api/utils/get_ignis_version.html#ignis.utils.Utils.get_ignis_version">get_ignis_version() (in module ignis.utils.Utils)</a>
+      <li><a href="api/utils/monitor.html#ignis.utils.Utils.get_monitor">get_monitor() (in module ignis.utils.Utils)</a>
 </li>
-      <li><a href="api/utils/get_monitor.html#ignis.utils.Utils.get_monitor">get_monitor() (in module ignis.utils.Utils)</a>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandService.get_monitor_name">get_monitor_name() (ignis.services.hyprland.HyprlandService method)</a>
+</li>
+      <li><a href="api/utils/monitor.html#ignis.utils.Utils.get_monitors">get_monitors() (in module ignis.utils.Utils)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/utils/get_n_monitors.html#ignis.utils.Utils.get_n_monitors">get_n_monitors() (in module ignis.utils.Utils)</a>
+      <li><a href="api/utils/monitor.html#ignis.utils.Utils.get_n_monitors">get_n_monitors() (in module ignis.utils.Utils)</a>
 </li>
       <li><a href="api/services/notifications.html#ignis.services.notifications.NotificationService.get_notification">get_notification() (ignis.services.notifications.NotificationService method)</a>
 </li>
-      <li><a href="api/services/options.html#ignis.services.options.OptionsGroup.get_option">get_option() (ignis.services.options.OptionsGroup method)</a>
-</li>
-      <li><a href="api/utils/get_paintable.html#ignis.utils.Utils.get_paintable">get_paintable() (in module ignis.utils.Utils)</a>
+      <li><a href="api/utils/icon.html#ignis.utils.Utils.get_paintable">get_paintable() (in module ignis.utils.Utils)</a>
 </li>
       <li><a href="api/services/systemd.html#ignis.services.systemd.SystemdService.get_unit">get_unit() (ignis.services.systemd.SystemdService method)</a>
 </li>
       <li><a href="api/app.html#ignis.app.IgnisApp.get_window">get_window() (ignis.app.IgnisApp method)</a>
 </li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandService.get_window_by_address">get_window_by_address() (ignis.services.hyprland.HyprlandService method)</a>
+</li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandService.get_windows_on_workspace">get_windows_on_workspace() (ignis.services.hyprland.HyprlandService method)</a>
+</li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandService.get_workspace_by_id">get_workspace_by_id() (ignis.services.hyprland.HyprlandService method)</a>
+
+      <ul>
+        <li><a href="api/services/niri.html#ignis.services.niri.NiriService.get_workspace_by_id">(ignis.services.niri.NiriService method)</a>
+</li>
+      </ul></li>
       <li><a href="api/exceptions.html#ignis.exceptions.GnomeBluetoothNotFoundError">GnomeBluetoothNotFoundError</a>
+</li>
+      <li><a href="api/dbus.html#ignis.dbus.DBusProxy.gproxy">gproxy (ignis.dbus.DBusProxy property)</a>
 </li>
       <li><a href="api/widgets/Grid.html#ignis.widgets.Widget.Grid">Grid (class in ignis.widgets.Widget)</a>
 </li>
-      <li><a href="api/services/options.html#ignis.services.options.OptionsService.groups">groups (ignis.services.options.OptionsService property)</a>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWindow.grouped">grouped (ignis.services.hyprland.HyprlandWindow property)</a>
 </li>
       <li><a href="api/exceptions.html#ignis.exceptions.GstNotFoundError">GstNotFoundError</a>
 </li>
@@ -952,6 +1070,8 @@
 <h2 id="H">H</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWorkspace.has_fullscreen">has_fullscreen (ignis.services.hyprland.HyprlandWorkspace property)</a>
+</li>
       <li><a href="api/client.html#ignis.client.IgnisClient.has_owner">has_owner (ignis.client.IgnisClient property)</a>
 
       <ul>
@@ -960,15 +1080,29 @@
       </ul></li>
       <li><a href="api/widgets/HeaderBar.html#ignis.widgets.Widget.HeaderBar">HeaderBar (class in ignis.widgets.Widget)</a>
 </li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandMonitor.height">height (ignis.services.hyprland.HyprlandMonitor property)</a>
+
+      <ul>
+        <li><a href="api/widgets/Picture.html#ignis.widgets.Widget.Picture.height">(ignis.widgets.Widget.Picture property)</a>
+</li>
+      </ul></li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWindow.hidden">hidden (ignis.services.hyprland.HyprlandWindow property)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/widgets/Picture.html#ignis.widgets.Widget.Picture.height">height (ignis.widgets.Widget.Picture property)</a>
-</li>
       <li><a href="api/services/fetch.html#ignis.services.fetch.FetchService.hostname">hostname (ignis.services.fetch.FetchService property)</a>
 </li>
       <li><a href="api/exceptions.html#ignis.exceptions.HyprlandIPCNotFoundError">HyprlandIPCNotFoundError</a>
 </li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandKeyboard">HyprlandKeyboard (class in ignis.services.hyprland)</a>
+</li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandMonitor">HyprlandMonitor (class in ignis.services.hyprland)</a>
+</li>
       <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandService">HyprlandService (class in ignis.services.hyprland)</a>
+</li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWindow">HyprlandWindow (class in ignis.services.hyprland)</a>
+</li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWorkspace">HyprlandWorkspace (class in ignis.services.hyprland)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -1009,6 +1143,14 @@
       <ul>
         <li><a href="api/services/audio.html#ignis.services.audio.Stream.id">(ignis.services.audio.Stream property)</a>
 </li>
+        <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandMonitor.id">(ignis.services.hyprland.HyprlandMonitor property)</a>
+</li>
+        <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWorkspace.id">(ignis.services.hyprland.HyprlandWorkspace property)</a>
+</li>
+        <li><a href="api/services/niri.html#ignis.services.niri.NiriWindow.id">(ignis.services.niri.NiriWindow property)</a>
+</li>
+        <li><a href="api/services/niri.html#ignis.services.niri.NiriWorkspace.id">(ignis.services.niri.NiriWorkspace property)</a>
+</li>
         <li><a href="api/services/notifications.html#ignis.services.notifications.Notification.id">(ignis.services.notifications.Notification property)</a>
 </li>
         <li><a href="api/services/notifications.html#ignis.services.notifications.NotificationAction.id">(ignis.services.notifications.NotificationAction property)</a>
@@ -1017,6 +1159,14 @@
 </li>
       </ul></li>
       <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.identity">identity (ignis.services.mpris.MprisPlayer property)</a>
+</li>
+      <li><a href="api/connection_manager.html#ignis.connection_manager.ConnectionManager.ids">ids (ignis.connection_manager.ConnectionManager property)</a>
+
+      <ul>
+        <li><a href="api/connection_manager.html#ignis.connection_manager.DBusConnectionManager.ids">(ignis.connection_manager.DBusConnectionManager property)</a>
+</li>
+      </ul></li>
+      <li><a href="api/services/niri.html#ignis.services.niri.NiriWorkspace.idx">idx (ignis.services.niri.NiriWorkspace property)</a>
 </li>
       <li>
     ignis.exceptions
@@ -1033,21 +1183,31 @@
 </li>
       <li><a href="api/exceptions.html#ignis.exceptions.IgnisNotRunningError">IgnisNotRunningError</a>
 </li>
+      <li><a href="api/gobject.html#ignis.gobject.IgnisProperty">IgnisProperty (class in ignis.gobject)</a>
+</li>
+      <li><a href="api/gobject.html#ignis.gobject.IgnisSignal">IgnisSignal (class in ignis.gobject)</a>
+</li>
       <li><a href="api/widgets/Icon.html#ignis.widgets.Widget.Icon.image">image (ignis.widgets.Widget.Icon property)</a>
 
       <ul>
         <li><a href="api/widgets/Picture.html#ignis.widgets.Widget.Picture.image">(ignis.widgets.Widget.Picture property)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/dbus.html#ignis.dbus.DBusProxy.info">info (ignis.dbus.DBusProxy property)</a>
 
       <ul>
         <li><a href="api/dbus.html#ignis.dbus.DBusService.info">(ignis.dbus.DBusService property)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWindow.inhibiting_idle">inhibiting_idle (ignis.services.hyprland.HyprlandWindow property)</a>
+</li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWindow.initial_class">initial_class (ignis.services.hyprland.HyprlandWindow property)</a>
+</li>
       <li><a href="api/widgets/FileDialog.html#ignis.widgets.Widget.FileDialog.initial_path">initial_path (ignis.widgets.Widget.FileDialog property)</a>
+</li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWindow.initial_title">initial_title (ignis.services.hyprland.HyprlandWindow property)</a>
 </li>
       <li><a href="api/widgets/Window.html#ignis.widgets.Widget.Window.input_height">input_height (ignis.widgets.Widget.Window property)</a>
 </li>
@@ -1063,8 +1223,12 @@
 </li>
       <li><a href="api/services/notifications.html#ignis.services.notifications.NotificationAction.invoke">invoke() (ignis.services.notifications.NotificationAction method)</a>
 </li>
-      <li><a href="api/services/systemd.html#ignis.services.systemd.SystemdUnit.is_active">is_active (ignis.services.systemd.SystemdUnit property)</a>
+      <li><a href="api/services/niri.html#ignis.services.niri.NiriWorkspace.is_active">is_active (ignis.services.niri.NiriWorkspace property)</a>
+
+      <ul>
+        <li><a href="api/services/systemd.html#ignis.services.systemd.SystemdUnit.is_active">(ignis.services.systemd.SystemdUnit property)</a>
 </li>
+      </ul></li>
       <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandService.is_available">is_available (ignis.services.hyprland.HyprlandService property)</a>
 
       <ul>
@@ -1089,6 +1253,14 @@
       </ul></li>
       <li><a href="api/services/audio.html#ignis.services.audio.Stream.is_default">is_default (ignis.services.audio.Stream property)</a>
 </li>
+      <li><a href="api/services/niri.html#ignis.services.niri.NiriWindow.is_floating">is_floating (ignis.services.niri.NiriWindow property)</a>
+</li>
+      <li><a href="api/services/niri.html#ignis.services.niri.NiriWindow.is_focused">is_focused (ignis.services.niri.NiriWindow property)</a>
+
+      <ul>
+        <li><a href="api/services/niri.html#ignis.services.niri.NiriWorkspace.is_focused">(ignis.services.niri.NiriWorkspace property)</a>
+</li>
+      </ul></li>
       <li><a href="api/services/audio.html#ignis.services.audio.Stream.is_muted">is_muted (ignis.services.audio.Stream property)</a>
 </li>
       <li><a href="api/services/recorder.html#ignis.services.recorder.RecorderService.is_paused">is_paused (ignis.services.recorder.RecorderService property)</a>
@@ -1096,6 +1268,8 @@
       <li><a href="api/services/applications.html#ignis.services.applications.Application.is_pinned">is_pinned (ignis.services.applications.Application property)</a>
 </li>
       <li><a href="api/app.html#ignis.app.IgnisApp.is_ready">is_ready (ignis.app.IgnisApp property)</a>
+</li>
+      <li><a href="api/services/applications.html#ignis.services.applications.Application.is_terminal">is_terminal (ignis.services.applications.Application property)</a>
 </li>
       <li><a href="api/services/system_tray.html#ignis.services.system_tray.SystemTrayItem.item_is_menu">item_is_menu (ignis.services.system_tray.SystemTrayItem property)</a>
 </li>
@@ -1121,17 +1295,13 @@
 <h2 id="K">K</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandService.kb_layout">kb_layout (ignis.services.hyprland.HyprlandService property)</a>
-
-      <ul>
-        <li><a href="api/services/niri.html#ignis.services.niri.NiriService.kb_layout">(ignis.services.niri.NiriService property)</a>
-</li>
-      </ul></li>
       <li><a href="api/widgets/Window.html#ignis.widgets.Widget.Window.kb_mode">kb_mode (ignis.widgets.Widget.Window property)</a>
+</li>
+      <li><a href="api/services/fetch.html#ignis.services.fetch.FetchService.kernel">kernel (ignis.services.fetch.FetchService property)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/services/fetch.html#ignis.services.fetch.FetchService.kernel">kernel (ignis.services.fetch.FetchService property)</a>
+      <li><a href="api/services/niri.html#ignis.services.niri.NiriService.keyboard_layouts">keyboard_layouts (ignis.services.niri.NiriService property)</a>
 </li>
       <li><a href="api/services/applications.html#ignis.services.applications.Application.keywords">keywords (ignis.services.applications.Application property)</a>
 </li>
@@ -1155,17 +1325,27 @@
       </ul></li>
       <li><a href="api/services/network.html#ignis.services.network.WifiAccessPoint.last_seen">last_seen (ignis.services.network.WifiAccessPoint property)</a>
 </li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWorkspace.last_window">last_window (ignis.services.hyprland.HyprlandWorkspace property)</a>
+</li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWorkspace.last_window_title">last_window_title (ignis.services.hyprland.HyprlandWorkspace property)</a>
+</li>
+      <li><a href="api/gobject.html#ignis.gobject.DataGObject.latest_synced_data">latest_synced_data (ignis.gobject.DataGObject property)</a>
+</li>
       <li><a href="api/services/applications.html#ignis.services.applications.Application.launch">launch() (ignis.services.applications.Application method)</a>
 
       <ul>
         <li><a href="api/services/applications.html#ignis.services.applications.ApplicationAction.launch">(ignis.services.applications.ApplicationAction method)</a>
 </li>
       </ul></li>
-      <li><a href="api/widgets/Window.html#ignis.widgets.Widget.Window.layer">layer (ignis.widgets.Widget.Window property)</a>
+      <li><a href="api/services/applications.html#ignis.services.applications.Application.launch_uwsm">launch_uwsm() (ignis.services.applications.Application method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/widgets/Window.html#ignis.widgets.Widget.Window.layer">layer (ignis.widgets.Widget.Window property)</a>
+</li>
       <li><a href="api/exceptions.html#ignis.exceptions.LayerShellNotSupportedError">LayerShellNotSupportedError</a>
+</li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandKeyboard.layout">layout (ignis.services.hyprland.HyprlandKeyboard property)</a>
 </li>
       <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.length">length (ignis.services.mpris.MprisPlayer property)</a>
 </li>
@@ -1175,9 +1355,11 @@
 </li>
       <li><a href="api/widgets/ListBoxRow.html#ignis.widgets.Widget.ListBoxRow">ListBoxRow (class in ignis.widgets.Widget)</a>
 </li>
-      <li><a href="api/utils/listen_socket.html#ignis.utils.Utils.listen_socket">listen_socket() (in module ignis.utils.Utils)</a>
+      <li><a href="api/utils/socket.html#ignis.utils.Utils.listen_socket">listen_socket() (in module ignis.utils.Utils)</a>
 </li>
-      <li><a href="api/utils/load_interface_xml.html#ignis.utils.Utils.load_interface_xml">load_interface_xml() (in module ignis.utils.Utils)</a>
+      <li><a href="api/options_manager.html#ignis.options_manager.OptionsManager.load_from_file">load_from_file() (ignis.options_manager.OptionsManager method)</a>
+</li>
+      <li><a href="api/utils/misc.html#ignis.utils.Utils.load_interface_xml">load_interface_xml() (in module ignis.utils.Utils)</a>
 </li>
       <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.loop_status">loop_status (ignis.services.mpris.MprisPlayer property)</a>
 </li>
@@ -1187,6 +1369,14 @@
 <h2 id="M">M</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandKeyboard.main">main (ignis.services.hyprland.HyprlandKeyboard property)</a>
+</li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandService.main_keyboard">main_keyboard (ignis.services.hyprland.HyprlandService property)</a>
+</li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandMonitor.make">make (ignis.services.hyprland.HyprlandMonitor property)</a>
+</li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWindow.mapped">mapped (ignis.services.hyprland.HyprlandWindow property)</a>
+</li>
       <li><a href="api/widgets/Window.html#ignis.widgets.Widget.Window.margin_bottom">margin_bottom (ignis.widgets.Widget.Window property)</a>
 </li>
       <li><a href="api/widgets/Window.html#ignis.widgets.Widget.Window.margin_left">margin_left (ignis.widgets.Widget.Window property)</a>
@@ -1194,6 +1384,8 @@
       <li><a href="api/widgets/Window.html#ignis.widgets.Widget.Window.margin_right">margin_right (ignis.widgets.Widget.Window property)</a>
 </li>
       <li><a href="api/widgets/Window.html#ignis.widgets.Widget.Window.margin_top">margin_top (ignis.widgets.Widget.Window property)</a>
+</li>
+      <li><a href="api/gobject.html#ignis.gobject.DataGObject.match_dict">match_dict (ignis.gobject.DataGObject property)</a>
 </li>
       <li><a href="api/widgets/Scale.html#ignis.widgets.Widget.Scale.max">max (ignis.widgets.Widget.Scale property)</a>
 
@@ -1209,7 +1401,7 @@
         <li><a href="api/services/backlight.html#ignis.services.backlight.BacklightService.max_brightness">(ignis.services.backlight.BacklightService property)</a>
 </li>
       </ul></li>
-      <li><a href="api/services/notifications.html#ignis.services.notifications.NotificationService.max_popups_count">max_popups_count (ignis.services.notifications.NotificationService property)</a>
+      <li><a href="api/options.html#ignis.options.Options.Notifications.max_popups_count">max_popups_count (ignis.options.Options.Notifications attribute)</a>
 </li>
       <li><a href="api/services/fetch.html#ignis.services.fetch.FetchService.mem_available">mem_available (ignis.services.fetch.FetchService property)</a>
 </li>
@@ -1225,8 +1417,6 @@
 </li>
       <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.metadata">metadata (ignis.services.mpris.MprisPlayer property)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/exceptions.html#ignis.exceptions.DBusMethodNotFoundError.method_name">method_name (ignis.exceptions.DBusMethodNotFoundError property)</a>
 </li>
       <li><a href="api/dbus.html#ignis.dbus.DBusProxy.methods">methods (ignis.dbus.DBusProxy property)</a>
@@ -1235,9 +1425,11 @@
         <li><a href="api/dbus.html#ignis.dbus.DBusService.methods">(ignis.dbus.DBusService property)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/services/audio.html#ignis.services.audio.AudioService.microphone">microphone (ignis.services.audio.AudioService property)</a>
 </li>
-      <li><a href="api/services/audio.html#ignis.services.audio.AudioService.microphone_added">microphone_added() (ignis.services.audio.AudioService method)</a>
+      <li><a href="api/services/audio.html#ignis.services.audio.AudioService.microphone_added">microphone_added (ignis.services.audio.AudioService property)</a>
 </li>
       <li><a href="api/services/audio.html#ignis.services.audio.AudioService.microphones">microphones (ignis.services.audio.AudioService property)</a>
 </li>
@@ -1249,8 +1441,16 @@
         <li><a href="api/widgets/SpinButton.html#ignis.widgets.Widget.SpinButton.min">(ignis.widgets.Widget.SpinButton property)</a>
 </li>
       </ul></li>
-      <li><a href="api/services/upower.html#ignis.services.upower.UPowerDevice.model">model (ignis.services.upower.UPowerDevice property)</a>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandMonitor.mirror_of">mirror_of (ignis.services.hyprland.HyprlandMonitor property)</a>
 </li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandKeyboard.model">model (ignis.services.hyprland.HyprlandKeyboard property)</a>
+
+      <ul>
+        <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandMonitor.model">(ignis.services.hyprland.HyprlandMonitor property)</a>
+</li>
+        <li><a href="api/services/upower.html#ignis.services.upower.UPowerDevice.model">(ignis.services.upower.UPowerDevice property)</a>
+</li>
+      </ul></li>
       <li>
     module
 
@@ -1258,17 +1458,31 @@
         <li><a href="api/exceptions.html#module-ignis.exceptions">ignis.exceptions</a>
 </li>
       </ul></li>
-      <li><a href="api/widgets/Window.html#ignis.widgets.Widget.Window.monitor">monitor (ignis.widgets.Widget.Window property)</a>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWindow.monitor">monitor (ignis.services.hyprland.HyprlandWindow property)</a>
+
+      <ul>
+        <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWorkspace.monitor">(ignis.services.hyprland.HyprlandWorkspace property)</a>
+</li>
+        <li><a href="api/widgets/Window.html#ignis.widgets.Widget.Window.monitor">(ignis.widgets.Widget.Window property)</a>
+</li>
+      </ul></li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandService.monitor_added">monitor_added (ignis.services.hyprland.HyprlandService property)</a>
 </li>
       <li><a href="api/exceptions.html#ignis.exceptions.MonitorNotFoundError.monitor_id">monitor_id (ignis.exceptions.MonitorNotFoundError property)</a>
+
+      <ul>
+        <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWorkspace.monitor_id">(ignis.services.hyprland.HyprlandWorkspace property)</a>
 </li>
+      </ul></li>
       <li><a href="api/exceptions.html#ignis.exceptions.MonitorNotFoundError">MonitorNotFoundError</a>
+</li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandService.monitors">monitors (ignis.services.hyprland.HyprlandService property)</a>
 </li>
       <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer">MprisPlayer (class in ignis.services.mpris)</a>
 </li>
       <li><a href="api/services/mpris.html#ignis.services.mpris.MprisService">MprisService (class in ignis.services.mpris)</a>
 </li>
-      <li><a href="api/utils/Timeout.html#ignis.utils.Timeout.ms">ms (ignis.utils.Timeout property)</a>
+      <li><a href="api/utils/Timeout.html#ignis.utils.Utils.Timeout.ms">ms (ignis.utils.Utils.Timeout property)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -1295,17 +1509,23 @@
 </li>
         <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothDevice.name">(ignis.services.bluetooth.BluetoothDevice property)</a>
 </li>
+        <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandKeyboard.name">(ignis.services.hyprland.HyprlandKeyboard property)</a>
+</li>
+        <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandMonitor.name">(ignis.services.hyprland.HyprlandMonitor property)</a>
+</li>
+        <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWorkspace.name">(ignis.services.hyprland.HyprlandWorkspace property)</a>
+</li>
         <li><a href="api/services/network.html#ignis.services.network.EthernetDevice.name">(ignis.services.network.EthernetDevice property)</a>
 </li>
         <li><a href="api/services/network.html#ignis.services.network.VpnConnection.name">(ignis.services.network.VpnConnection property)</a>
 </li>
-        <li><a href="api/services/options.html#ignis.services.options.Option.name">(ignis.services.options.Option property)</a>
-</li>
-        <li><a href="api/services/options.html#ignis.services.options.OptionsGroup.name">(ignis.services.options.OptionsGroup property)</a>
+        <li><a href="api/services/niri.html#ignis.services.niri.NiriWorkspace.name">(ignis.services.niri.NiriWorkspace property)</a>
 </li>
         <li><a href="api/services/systemd.html#ignis.services.systemd.SystemdUnit.name">(ignis.services.systemd.SystemdUnit property)</a>
 </li>
       </ul></li>
+      <li><a href="api/services/niri.html#ignis.services.niri.NiriKeyboardLayouts.names">names (ignis.services.niri.NiriKeyboardLayouts property)</a>
+</li>
       <li><a href="api/widgets/RegularWindow.html#ignis.widgets.Widget.RegularWindow.namespace">namespace (ignis.widgets.Widget.RegularWindow property)</a>
 
       <ul>
@@ -1314,31 +1534,51 @@
       </ul></li>
       <li><a href="api/services/upower.html#ignis.services.upower.UPowerDevice.native_path">native_path (ignis.services.upower.UPowerDevice property)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/exceptions.html#ignis.exceptions.NetworkManagerNotFoundError">NetworkManagerNotFoundError</a>
 </li>
       <li><a href="api/services/network.html#ignis.services.network.NetworkService">NetworkService (class in ignis.services.network)</a>
 </li>
-      <li><a href="api/services/network.html#ignis.services.network.WifiDevice.new_access_point">new_access_point() (ignis.services.network.WifiDevice method)</a>
-</li>
-      <li><a href="api/services/network.html#ignis.services.network.Vpn.new_active_connection">new_active_connection() (ignis.services.network.Vpn method)</a>
-</li>
-      <li><a href="api/services/network.html#ignis.services.network.Vpn.new_connection">new_connection() (ignis.services.network.Vpn method)</a>
-</li>
-      <li><a href="api/services/network.html#ignis.services.network.Ethernet.new_device">new_device() (ignis.services.network.Ethernet method)</a>
+      <li><a href="api/dbus.html#ignis.dbus.DBusProxy.new">new() (ignis.dbus.DBusProxy class method)</a>
 
       <ul>
-        <li><a href="api/services/network.html#ignis.services.network.Wifi.new_device">(ignis.services.network.Wifi method)</a>
+        <li><a href="api/dbus_menu.html#ignis.dbus_menu.DBusMenu.new">(ignis.dbus_menu.DBusMenu class method)</a>
 </li>
       </ul></li>
-      <li><a href="api/services/notifications.html#ignis.services.notifications.NotificationService.new_popup">new_popup() (ignis.services.notifications.NotificationService method)</a>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/services/network.html#ignis.services.network.WifiDevice.new_access_point">new_access_point (ignis.services.network.WifiDevice property)</a>
+</li>
+      <li><a href="api/services/network.html#ignis.services.network.Vpn.new_active_connection">new_active_connection (ignis.services.network.Vpn property)</a>
+</li>
+      <li><a href="api/dbus.html#ignis.dbus.DBusProxy.new_async">new_async() (ignis.dbus.DBusProxy class method)</a>
+
+      <ul>
+        <li><a href="api/dbus_menu.html#ignis.dbus_menu.DBusMenu.new_async">(ignis.dbus_menu.DBusMenu class method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/services/network.html#ignis.services.network.Vpn.new_connection">new_connection (ignis.services.network.Vpn property)</a>
+</li>
+      <li><a href="api/services/network.html#ignis.services.network.Ethernet.new_device">new_device (ignis.services.network.Ethernet property)</a>
+
+      <ul>
+        <li><a href="api/services/network.html#ignis.services.network.Wifi.new_device">(ignis.services.network.Wifi property)</a>
+</li>
+      </ul></li>
+      <li><a href="api/services/notifications.html#ignis.services.notifications.NotificationService.new_popup">new_popup (ignis.services.notifications.NotificationService property)</a>
 </li>
       <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.next">next() (ignis.services.mpris.MprisPlayer method)</a>
 </li>
+      <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.next_async">next_async() (ignis.services.mpris.MprisPlayer method)</a>
+</li>
       <li><a href="api/exceptions.html#ignis.exceptions.NiriIPCNotFoundError">NiriIPCNotFoundError</a>
 </li>
+      <li><a href="api/services/niri.html#ignis.services.niri.NiriKeyboardLayouts">NiriKeyboardLayouts (class in ignis.services.niri)</a>
+</li>
       <li><a href="api/services/niri.html#ignis.services.niri.NiriService">NiriService (class in ignis.services.niri)</a>
+</li>
+      <li><a href="api/services/niri.html#ignis.services.niri.NiriWindow">NiriWindow (class in ignis.services.niri)</a>
+</li>
+      <li><a href="api/services/niri.html#ignis.services.niri.NiriWorkspace">NiriWorkspace (class in ignis.services.niri)</a>
 </li>
       <li><a href="api/services/notifications.html#ignis.services.notifications.Notification">Notification (class in ignis.services.notifications)</a>
 </li>
@@ -1348,11 +1588,13 @@
 </li>
       <li><a href="api/services/notifications.html#ignis.services.notifications.NotificationService">NotificationService (class in ignis.services.notifications)</a>
 </li>
-      <li><a href="api/services/notifications.html#ignis.services.notifications.NotificationService.notified">notified() (ignis.services.notifications.NotificationService method)</a>
+      <li><a href="api/services/notifications.html#ignis.services.notifications.NotificationService.notified">notified (ignis.services.notifications.NotificationService property)</a>
 </li>
       <li><a href="api/gobject.html#ignis.gobject.IgnisGObject.notify_all">notify_all() (ignis.gobject.IgnisGObject method)</a>
 </li>
       <li><a href="api/gobject.html#ignis.gobject.IgnisGObject.notify_list">notify_list() (ignis.gobject.IgnisGObject method)</a>
+</li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandKeyboard.num_lock">num_lock (ignis.services.hyprland.HyprlandKeyboard property)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -1432,41 +1674,31 @@
         <li><a href="api/widgets/ToggleButton.html#ignis.widgets.Widget.ToggleButton.on_toggled">(ignis.widgets.Widget.ToggleButton property)</a>
 </li>
       </ul></li>
-      <li><a href="api/widgets/FileDialog.html#ignis.widgets.Widget.FileDialog.open_dialog">open_dialog() (ignis.widgets.Widget.FileDialog method)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/widgets/FileDialog.html#ignis.widgets.Widget.FileDialog.open_dialog">open_dialog() (ignis.widgets.Widget.FileDialog method)</a>
+</li>
       <li><a href="api/app.html#ignis.app.IgnisApp.open_window">open_window() (ignis.app.IgnisApp method)</a>
 
       <ul>
         <li><a href="api/client.html#ignis.client.IgnisClient.open_window">(ignis.client.IgnisClient method)</a>
 </li>
       </ul></li>
-      <li><a href="api/services/options.html#ignis.services.options.Option">Option (class in ignis.services.options)</a>
+      <li><a href="api/options.html#ignis.options.Options">Options (class in ignis.options)</a>
 </li>
-      <li><a href="api/exceptions.html#ignis.exceptions.OptionExistsError.option_name">option_name (ignis.exceptions.OptionExistsError property)</a>
-
-      <ul>
-        <li><a href="api/exceptions.html#ignis.exceptions.OptionNotFoundError.option_name">(ignis.exceptions.OptionNotFoundError property)</a>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandKeyboard.options">options (ignis.services.hyprland.HyprlandKeyboard property)</a>
 </li>
-      </ul></li>
-      <li><a href="api/exceptions.html#ignis.exceptions.OptionExistsError">OptionExistsError</a>
+      <li><a href="api/options.html#ignis.options.Options.Applications">Options.Applications (class in ignis.options)</a>
 </li>
-      <li><a href="api/exceptions.html#ignis.exceptions.OptionNotFoundError">OptionNotFoundError</a>
+      <li><a href="api/options.html#ignis.options.Options.Notifications">Options.Notifications (class in ignis.options)</a>
 </li>
-      <li><a href="api/exceptions.html#ignis.exceptions.OptionsGroupExistsError.options_group">options_group (ignis.exceptions.OptionsGroupExistsError property)</a>
-
-      <ul>
-        <li><a href="api/exceptions.html#ignis.exceptions.OptionsGroupNotFoundError.options_group">(ignis.exceptions.OptionsGroupNotFoundError property)</a>
+      <li><a href="api/options.html#ignis.options.Options.Recorder">Options.Recorder (class in ignis.options)</a>
 </li>
-      </ul></li>
-      <li><a href="api/services/options.html#ignis.services.options.OptionsGroup">OptionsGroup (class in ignis.services.options)</a>
+      <li><a href="api/options.html#ignis.options.Options.Wallpaper">Options.Wallpaper (class in ignis.options)</a>
 </li>
-      <li><a href="api/exceptions.html#ignis.exceptions.OptionsGroupExistsError">OptionsGroupExistsError</a>
+      <li><a href="api/options_manager.html#ignis.options_manager.OptionsGroup">OptionsGroup (class in ignis.options_manager)</a>
 </li>
-      <li><a href="api/exceptions.html#ignis.exceptions.OptionsGroupNotFoundError">OptionsGroupNotFoundError</a>
-</li>
-      <li><a href="api/services/options.html#ignis.services.options.OptionsService">OptionsService (class in ignis.services.options)</a>
+      <li><a href="api/options_manager.html#ignis.options_manager.OptionsManager">OptionsManager (class in ignis.options_manager)</a>
 </li>
       <li><a href="api/services/fetch.html#ignis.services.fetch.FetchService.os_ansi_color">os_ansi_color (ignis.services.fetch.FetchService property)</a>
 </li>
@@ -1494,8 +1726,12 @@
 </li>
       <li><a href="api/services/fetch.html#ignis.services.fetch.FetchService.os_support_url">os_support_url (ignis.services.fetch.FetchService property)</a>
 </li>
-      <li><a href="api/utils/Poll.html#ignis.utils.Poll.output">output (ignis.utils.Poll property)</a>
+      <li><a href="api/services/niri.html#ignis.services.niri.NiriWorkspace.output">output (ignis.services.niri.NiriWorkspace property)</a>
+
+      <ul>
+        <li><a href="api/utils/Poll.html#ignis.utils.Utils.Poll.output">(ignis.utils.Utils.Poll property)</a>
 </li>
+      </ul></li>
       <li><a href="api/widgets/Overlay.html#ignis.widgets.Widget.Overlay">Overlay (class in ignis.widgets.Widget)</a>
 </li>
       <li><a href="api/widgets/Overlay.html#ignis.widgets.Widget.Overlay.overlays">overlays (ignis.widgets.Widget.Overlay property)</a>
@@ -1510,9 +1746,13 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothDevice.paired">paired (ignis.services.bluetooth.BluetoothDevice property)</a>
 </li>
-      <li><a href="api/utils/FileMonitor.html#ignis.utils.FileMonitor.path">path (ignis.utils.FileMonitor property)</a>
+      <li><a href="api/utils/str_cases.html#ignis.utils.Utils.pascal_to_snake">pascal_to_snake() (in module ignis.utils.Utils)</a>
+</li>
+      <li><a href="api/utils/FileMonitor.html#ignis.utils.Utils.FileMonitor.path">path (ignis.utils.Utils.FileMonitor property)</a>
 </li>
       <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.pause">pause() (ignis.services.mpris.MprisPlayer method)</a>
+</li>
+      <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.pause_async">pause_async() (ignis.services.mpris.MprisPlayer method)</a>
 </li>
       <li><a href="api/services/recorder.html#ignis.services.recorder.RecorderService.pause_recording">pause_recording() (ignis.services.recorder.RecorderService method)</a>
 </li>
@@ -1522,31 +1762,47 @@
 </li>
       <li><a href="api/widgets/Picture.html#ignis.widgets.Widget.Picture">Picture (class in ignis.widgets.Widget)</a>
 </li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWindow.pid">pid (ignis.services.hyprland.HyprlandWindow property)</a>
+
+      <ul>
+        <li><a href="api/services/niri.html#ignis.services.niri.NiriWindow.pid">(ignis.services.niri.NiriWindow property)</a>
+</li>
+      </ul></li>
       <li><a href="api/services/applications.html#ignis.services.applications.Application.pin">pin() (ignis.services.applications.Application method)</a>
 </li>
-      <li><a href="api/services/applications.html#ignis.services.applications.ApplicationsService.pinned">pinned (ignis.services.applications.ApplicationsService property)</a>
+      <li><a href="api/services/applications.html#ignis.services.applications.Application.pinned">pinned (ignis.services.applications.Application property)</a>
+
+      <ul>
+        <li><a href="api/services/applications.html#ignis.services.applications.ApplicationsService.pinned">(ignis.services.applications.ApplicationsService property)</a>
 </li>
-      <li><a href="api/services/applications.html#ignis.services.applications.Application.pinned">pinned() (ignis.services.applications.Application method)</a>
+        <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWindow.pinned">(ignis.services.hyprland.HyprlandWindow property)</a>
+</li>
+      </ul></li>
+      <li><a href="api/options.html#ignis.options.Options.Applications.pinned_apps">pinned_apps (ignis.options.Options.Applications attribute)</a>
 </li>
       <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.play">play() (ignis.services.mpris.MprisPlayer method)</a>
 </li>
+      <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.play_async">play_async() (ignis.services.mpris.MprisPlayer method)</a>
+</li>
       <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.play_pause">play_pause() (ignis.services.mpris.MprisPlayer method)</a>
+</li>
+      <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.play_pause_async">play_pause_async() (ignis.services.mpris.MprisPlayer method)</a>
 </li>
       <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.playback_status">playback_status (ignis.services.mpris.MprisPlayer property)</a>
 </li>
-      <li><a href="api/services/mpris.html#ignis.services.mpris.MprisService.player_added">player_added() (ignis.services.mpris.MprisService method)</a>
+      <li><a href="api/services/mpris.html#ignis.services.mpris.MprisService.player_added">player_added (ignis.services.mpris.MprisService property)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/services/mpris.html#ignis.services.mpris.MprisService.players">players (ignis.services.mpris.MprisService property)</a>
 </li>
       <li><a href="api/exceptions.html#ignis.exceptions.GstPluginNotFoundError.plugin_name">plugin_name (ignis.exceptions.GstPluginNotFoundError property)</a>
 </li>
       <li><a href="api/exceptions.html#ignis.exceptions.GstPluginNotFoundError.plugin_package">plugin_package (ignis.exceptions.GstPluginNotFoundError property)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/services/network.html#ignis.services.network.WifiAccessPoint.point">point (ignis.services.network.WifiAccessPoint property)</a>
 </li>
-      <li><a href="api/utils/Poll.html#ignis.utils.Poll">Poll (class in ignis.utils)</a>
+      <li><a href="api/utils/Poll.html#ignis.utils.Utils.Poll">Poll (class in ignis.utils.Utils)</a>
 </li>
       <li><a href="api/widgets/PopoverMenu.html#ignis.widgets.Widget.PopoverMenu">PopoverMenu (class in ignis.widgets.Widget)</a>
 </li>
@@ -1556,7 +1812,7 @@
         <li><a href="api/widgets/Window.html#ignis.widgets.Widget.Window.popup">(ignis.widgets.Widget.Window property)</a>
 </li>
       </ul></li>
-      <li><a href="api/services/notifications.html#ignis.services.notifications.NotificationService.popup_timeout">popup_timeout (ignis.services.notifications.NotificationService property)</a>
+      <li><a href="api/options.html#ignis.options.Options.Notifications.popup_timeout">popup_timeout (ignis.options.Options.Notifications attribute)</a>
 </li>
       <li><a href="api/services/notifications.html#ignis.services.notifications.NotificationService.popups">popups (ignis.services.notifications.NotificationService property)</a>
 </li>
@@ -1566,9 +1822,11 @@
 </li>
       <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothService.powered">powered (ignis.services.bluetooth.BluetoothService property)</a>
 </li>
-      <li><a href="api/utils/FileMonitor.html#ignis.utils.FileMonitor.prevent_gc">prevent_gc (ignis.utils.FileMonitor property)</a>
+      <li><a href="api/utils/FileMonitor.html#ignis.utils.Utils.FileMonitor.prevent_gc">prevent_gc (ignis.utils.Utils.FileMonitor property)</a>
 </li>
       <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.previous">previous() (ignis.services.mpris.MprisPlayer method)</a>
+</li>
+      <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.previous_async">previous_async() (ignis.services.mpris.MprisPlayer method)</a>
 </li>
       <li><a href="api/dbus.html#ignis.dbus.DBusProxy.properties">properties (ignis.dbus.DBusProxy property)</a>
 
@@ -1578,12 +1836,12 @@
       </ul></li>
       <li><a href="api/exceptions.html#ignis.exceptions.DBusPropertyNotFoundError.property_name">property_name (ignis.exceptions.DBusPropertyNotFoundError property)</a>
 </li>
-      <li><a href="api/dbus.html#ignis.dbus.DBusProxy.proxy">proxy (ignis.dbus.DBusProxy property)</a>
-
-      <ul>
-        <li><a href="api/services/upower.html#ignis.services.upower.UPowerDevice.proxy">(ignis.services.upower.UPowerDevice property)</a>
+      <li><a href="api/services/upower.html#ignis.services.upower.UPowerDevice.proxy">proxy (ignis.services.upower.UPowerDevice property)</a>
 </li>
-      </ul></li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWindow.pseudo">pseudo (ignis.services.hyprland.HyprlandWindow property)</a>
+</li>
+      <li><a href="api/services/network.html#ignis.services.network.WifiAccessPoint.psk">psk (ignis.services.network.WifiAccessPoint property)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -1602,19 +1860,25 @@
 <h2 id="R">R</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/app.html#ignis.app.IgnisApp.ready">ready() (ignis.app.IgnisApp method)</a>
+      <li><a href="api/utils/file.html#ignis.utils.Utils.read_file">read_file() (in module ignis.utils.Utils)</a>
 </li>
-      <li><a href="api/services/audio.html#ignis.services.audio.AudioService.recorder_added">recorder_added() (ignis.services.audio.AudioService method)</a>
+      <li><a href="api/utils/file.html#ignis.utils.Utils.read_file_async">read_file_async() (in module ignis.utils.Utils)</a>
+</li>
+      <li><a href="api/app.html#ignis.app.IgnisApp.ready">ready (ignis.app.IgnisApp property)</a>
+</li>
+      <li><a href="api/services/audio.html#ignis.services.audio.AudioService.recorder_added">recorder_added (ignis.services.audio.AudioService property)</a>
 </li>
       <li><a href="api/services/audio.html#ignis.services.audio.AudioService.recorders">recorders (ignis.services.audio.AudioService property)</a>
 </li>
       <li><a href="api/services/recorder.html#ignis.services.recorder.RecorderService">RecorderService (class in ignis.services.recorder)</a>
 </li>
-      <li><a href="api/services/recorder.html#ignis.services.recorder.RecorderService.recording_started">recording_started() (ignis.services.recorder.RecorderService method)</a>
+      <li><a href="api/services/recorder.html#ignis.services.recorder.RecorderService.recording_started">recording_started (ignis.services.recorder.RecorderService property)</a>
 </li>
-      <li><a href="api/services/recorder.html#ignis.services.recorder.RecorderService.recording_stopped">recording_stopped() (ignis.services.recorder.RecorderService method)</a>
+      <li><a href="api/services/recorder.html#ignis.services.recorder.RecorderService.recording_stopped">recording_stopped (ignis.services.recorder.RecorderService property)</a>
 </li>
-      <li><a href="api/utils/FileMonitor.html#ignis.utils.FileMonitor.recursive">recursive (ignis.utils.FileMonitor property)</a>
+      <li><a href="api/utils/FileMonitor.html#ignis.utils.Utils.FileMonitor.recursive">recursive (ignis.utils.Utils.FileMonitor property)</a>
+</li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandMonitor.refresh_rate">refresh_rate (ignis.services.hyprland.HyprlandMonitor property)</a>
 </li>
       <li><a href="api/dbus.html#ignis.dbus.DBusService.register_dbus_method">register_dbus_method() (ignis.dbus.DBusService method)</a>
 </li>
@@ -1630,45 +1894,43 @@
       </ul></li>
       <li><a href="api/app.html#ignis.app.IgnisApp.reload_css">reload_css() (ignis.app.IgnisApp method)</a>
 </li>
-      <li><a href="api/services/options.html#ignis.services.options.Option.remove">remove() (ignis.services.options.Option method)</a>
-
-      <ul>
-        <li><a href="api/services/options.html#ignis.services.options.OptionsGroup.remove">(ignis.services.options.OptionsGroup method)</a>
+      <li><a href="api/app.html#ignis.app.IgnisApp.reload_on_monitors_change">reload_on_monitors_change (ignis.app.IgnisApp property)</a>
 </li>
-      </ul></li>
       <li><a href="api/app.html#ignis.app.IgnisApp.remove_css">remove_css() (ignis.app.IgnisApp method)</a>
 </li>
       <li><a href="api/app.html#ignis.app.IgnisApp.remove_window">remove_window() (ignis.app.IgnisApp method)</a>
 </li>
-      <li><a href="api/services/audio.html#ignis.services.audio.Stream.removed">removed() (ignis.services.audio.Stream method)</a>
+      <li><a href="api/services/audio.html#ignis.services.audio.Stream.removed">removed (ignis.services.audio.Stream property)</a>
 
       <ul>
-        <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothDevice.removed">(ignis.services.bluetooth.BluetoothDevice method)</a>
+        <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothDevice.removed">(ignis.services.bluetooth.BluetoothDevice property)</a>
 </li>
-        <li><a href="api/services/network.html#ignis.services.network.EthernetDevice.removed">(ignis.services.network.EthernetDevice method)</a>
+        <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandMonitor.removed">(ignis.services.hyprland.HyprlandMonitor property)</a>
 </li>
-        <li><a href="api/services/network.html#ignis.services.network.VpnConnection.removed">(ignis.services.network.VpnConnection method)</a>
+        <li><a href="api/services/network.html#ignis.services.network.EthernetDevice.removed">(ignis.services.network.EthernetDevice property)</a>
 </li>
-        <li><a href="api/services/network.html#ignis.services.network.WifiAccessPoint.removed">(ignis.services.network.WifiAccessPoint method)</a>
+        <li><a href="api/services/network.html#ignis.services.network.VpnConnection.removed">(ignis.services.network.VpnConnection property)</a>
 </li>
-        <li><a href="api/services/network.html#ignis.services.network.WifiDevice.removed">(ignis.services.network.WifiDevice method)</a>
+        <li><a href="api/services/network.html#ignis.services.network.WifiAccessPoint.removed">(ignis.services.network.WifiAccessPoint property)</a>
 </li>
-        <li><a href="api/services/options.html#ignis.services.options.Option.removed">(ignis.services.options.Option method)</a>
+        <li><a href="api/services/network.html#ignis.services.network.WifiDevice.removed">(ignis.services.network.WifiDevice property)</a>
 </li>
-        <li><a href="api/services/options.html#ignis.services.options.OptionsGroup.removed">(ignis.services.options.OptionsGroup method)</a>
+        <li><a href="api/services/system_tray.html#ignis.services.system_tray.SystemTrayItem.removed">(ignis.services.system_tray.SystemTrayItem property)</a>
 </li>
-        <li><a href="api/services/system_tray.html#ignis.services.system_tray.SystemTrayItem.removed">(ignis.services.system_tray.SystemTrayItem method)</a>
-</li>
-        <li><a href="api/services/upower.html#ignis.services.upower.UPowerDevice.removed">(ignis.services.upower.UPowerDevice method)</a>
+        <li><a href="api/services/upower.html#ignis.services.upower.UPowerDevice.removed">(ignis.services.upower.UPowerDevice property)</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandMonitor.reserved">reserved (ignis.services.hyprland.HyprlandMonitor property)</a>
+</li>
       <li><a href="api/app.html#ignis.app.IgnisApp.reset_css">reset_css() (ignis.app.IgnisApp method)</a>
 </li>
       <li><a href="api/services/systemd.html#ignis.services.systemd.SystemdUnit.restart">restart() (ignis.services.systemd.SystemdUnit method)</a>
 </li>
-      <li><a href="api/utils/exec_sh_async.html#ignis.utils.exec_sh.AsyncCompletedProcess.returncode">returncode (ignis.utils.exec_sh.AsyncCompletedProcess property)</a>
+      <li><a href="api/services/systemd.html#ignis.services.systemd.SystemdUnit.restart_async">restart_async() (ignis.services.systemd.SystemdUnit method)</a>
+</li>
+      <li><a href="api/utils/sh.html#ignis.utils.Utils.AsyncCompletedProcess.returncode">returncode (ignis.utils.Utils.AsyncCompletedProcess property)</a>
 </li>
       <li><a href="api/widgets/Revealer.html#ignis.widgets.Widget.Revealer">Revealer (class in ignis.widgets.Widget)</a>
 </li>
@@ -1682,11 +1944,13 @@
 </li>
       <li><a href="api/widgets/ListBox.html#ignis.widgets.Widget.ListBox.rows">rows (ignis.widgets.Widget.ListBox property)</a>
 </li>
-      <li><a href="api/utils/ThreadTask.html#ignis.utils.ThreadTask.run">run() (ignis.utils.ThreadTask method)</a>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandKeyboard.rules">rules (ignis.services.hyprland.HyprlandKeyboard property)</a>
+</li>
+      <li><a href="api/utils/thread.html#ignis.utils.Utils.ThreadTask.run">run() (ignis.utils.Utils.ThreadTask method)</a>
 </li>
       <li><a href="api/client.html#ignis.client.IgnisClient.run_file">run_file() (ignis.client.IgnisClient method)</a>
 </li>
-      <li><a href="api/utils/run_in_thread.html#ignis.utils.Utils.run_in_thread">run_in_thread() (in module ignis.utils.Utils)</a>
+      <li><a href="api/utils/thread.html#ignis.utils.Utils.run_in_thread">run_in_thread() (in module ignis.utils.Utils)</a>
 </li>
       <li><a href="api/client.html#ignis.client.IgnisClient.run_python">run_python() (ignis.client.IgnisClient method)</a>
 </li>
@@ -1696,13 +1960,19 @@
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/utils/sass_compile.html#ignis.utils.Utils.sass_compile">sass_compile() (in module ignis.utils.Utils)</a>
+      <li><a href="api/utils/sass.html#ignis.utils.Utils.sass_compile">sass_compile() (in module ignis.utils.Utils)</a>
 </li>
       <li><a href="api/exceptions.html#ignis.exceptions.SassCompilationError">SassCompilationError</a>
 </li>
+      <li><a href="api/exceptions.html#ignis.exceptions.SassNotFoundError">SassNotFoundError</a>
+</li>
+      <li><a href="api/options_manager.html#ignis.options_manager.OptionsManager.save_to_file">save_to_file() (ignis.options_manager.OptionsManager method)</a>
+</li>
       <li><a href="api/widgets/Scale.html#ignis.widgets.Widget.Scale">Scale (class in ignis.widgets.Widget)</a>
 </li>
-      <li><a href="api/utils/scale_pixbuf.html#ignis.utils.Utils.scale_pixbuf">scale_pixbuf() (in module ignis.utils.Utils)</a>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandMonitor.scale">scale (ignis.services.hyprland.HyprlandMonitor property)</a>
+</li>
+      <li><a href="api/utils/pixbuf.html#ignis.utils.Utils.scale_pixbuf">scale_pixbuf() (in module ignis.utils.Utils)</a>
 </li>
       <li><a href="api/services/network.html#ignis.services.network.WifiDevice.scan">scan() (ignis.services.network.WifiDevice method)</a>
 </li>
@@ -1710,15 +1980,23 @@
 </li>
       <li><a href="api/services/system_tray.html#ignis.services.system_tray.SystemTrayItem.scroll">scroll() (ignis.services.system_tray.SystemTrayItem method)</a>
 </li>
+      <li><a href="api/services/system_tray.html#ignis.services.system_tray.SystemTrayItem.scroll_async">scroll_async() (ignis.services.system_tray.SystemTrayItem method)</a>
+</li>
+      <li><a href="api/widgets/EventBox.html#ignis.widgets.Widget.EventBox.scroll_flags">scroll_flags (ignis.widgets.Widget.EventBox property)</a>
+</li>
       <li><a href="api/services/applications.html#ignis.services.applications.ApplicationsService.search">search() (ignis.services.applications.ApplicationsService class method)</a>
 </li>
       <li><a href="api/services/system_tray.html#ignis.services.system_tray.SystemTrayItem.secondary_activate">secondary_activate() (ignis.services.system_tray.SystemTrayItem method)</a>
+</li>
+      <li><a href="api/services/system_tray.html#ignis.services.system_tray.SystemTrayItem.secondary_activate_async">secondary_activate_async() (ignis.services.system_tray.SystemTrayItem method)</a>
 </li>
       <li><a href="api/exceptions.html#ignis.exceptions.CssParsingError.section">section (ignis.exceptions.CssParsingError property)</a>
 </li>
       <li><a href="api/services/network.html#ignis.services.network.WifiAccessPoint.security">security (ignis.services.network.WifiAccessPoint property)</a>
 </li>
       <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.seek">seek() (ignis.services.mpris.MprisPlayer method)</a>
+</li>
+      <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.seek_async">seek_async() (ignis.services.mpris.MprisPlayer method)</a>
 </li>
       <li><a href="api/widgets/FileDialog.html#ignis.widgets.Widget.FileDialog.select_folder">select_folder (ignis.widgets.Widget.FileDialog property)</a>
 </li>
@@ -1734,17 +2012,29 @@
         <li><a href="api/services/niri.html#ignis.services.niri.NiriService.send_command">(ignis.services.niri.NiriService method)</a>
 </li>
       </ul></li>
-      <li><a href="api/utils/send_socket.html#ignis.utils.Utils.send_socket">send_socket() (in module ignis.utils.Utils)</a>
+      <li><a href="api/utils/socket.html#ignis.utils.Utils.send_socket">send_socket() (in module ignis.utils.Utils)</a>
 </li>
       <li><a href="api/widgets/Separator.html#ignis.widgets.Widget.Separator">Separator (class in ignis.widgets.Widget)</a>
 </li>
-      <li><a href="api/services/upower.html#ignis.services.upower.UPowerDevice.serial">serial (ignis.services.upower.UPowerDevice property)</a>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandMonitor.serial">serial (ignis.services.hyprland.HyprlandMonitor property)</a>
+
+      <ul>
+        <li><a href="api/services/upower.html#ignis.services.upower.UPowerDevice.serial">(ignis.services.upower.UPowerDevice property)</a>
 </li>
-      <li><a href="api/exceptions.html#ignis.exceptions.ServiceNotFoundError.service_name">service_name (ignis.exceptions.ServiceNotFoundError property)</a>
-</li>
-      <li><a href="api/exceptions.html#ignis.exceptions.ServiceNotFoundError">ServiceNotFoundError</a>
-</li>
+      </ul></li>
       <li><a href="api/services/fetch.html#ignis.services.fetch.FetchService.session_type">session_type (ignis.services.fetch.FetchService property)</a>
+</li>
+      <li><a href="api/services/backlight.html#ignis.services.backlight.BacklightDevice.set_brightness_async">set_brightness_async() (ignis.services.backlight.BacklightDevice method)</a>
+
+      <ul>
+        <li><a href="api/services/backlight.html#ignis.services.backlight.BacklightService.set_brightness_async">(ignis.services.backlight.BacklightService method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/dbus.html#ignis.dbus.DBusProxy.set_dbus_property">set_dbus_property() (ignis.dbus.DBusProxy method)</a>
+</li>
+      <li><a href="api/dbus.html#ignis.dbus.DBusProxy.set_dbus_property_async">set_dbus_property_async() (ignis.dbus.DBusProxy method)</a>
+</li>
+      <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.set_position_async">set_position_async() (ignis.services.mpris.MprisPlayer method)</a>
 </li>
       <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothService.setup_mode">setup_mode (ignis.services.bluetooth.BluetoothService property)</a>
 </li>
@@ -1754,21 +2044,39 @@
 </li>
       <li><a href="api/dbus.html#ignis.dbus.DBusProxy.signal_unsubscribe">signal_unsubscribe() (ignis.dbus.DBusProxy method)</a>
 </li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWindow.size">size (ignis.services.hyprland.HyprlandWindow property)</a>
+</li>
+      <li><a href="api/utils/str_cases.html#ignis.utils.Utils.snake_to_pascal">snake_to_pascal() (in module ignis.utils.Utils)</a>
+</li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandMonitor.solitary">solitary (ignis.services.hyprland.HyprlandMonitor property)</a>
+</li>
       <li><a href="api/services/audio.html#ignis.services.audio.AudioService.speaker">speaker (ignis.services.audio.AudioService property)</a>
 </li>
-      <li><a href="api/services/audio.html#ignis.services.audio.AudioService.speaker_added">speaker_added() (ignis.services.audio.AudioService method)</a>
+      <li><a href="api/services/audio.html#ignis.services.audio.AudioService.speaker_added">speaker_added (ignis.services.audio.AudioService property)</a>
 </li>
       <li><a href="api/services/audio.html#ignis.services.audio.AudioService.speakers">speakers (ignis.services.audio.AudioService property)</a>
+</li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandMonitor.special_workspace_id">special_workspace_id (ignis.services.hyprland.HyprlandMonitor property)</a>
+</li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandMonitor.special_workspace_name">special_workspace_name (ignis.services.hyprland.HyprlandMonitor property)</a>
 </li>
       <li><a href="api/services/network.html#ignis.services.network.EthernetDevice.speed">speed (ignis.services.network.EthernetDevice property)</a>
 </li>
       <li><a href="api/widgets/SpinButton.html#ignis.widgets.Widget.SpinButton">SpinButton (class in ignis.widgets.Widget)</a>
 </li>
-      <li><a href="api/services/network.html#ignis.services.network.WifiAccessPoint.ssid">ssid (ignis.services.network.WifiAccessPoint property)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/services/network.html#ignis.services.network.WifiAccessPoint.ssid">ssid (ignis.services.network.WifiAccessPoint property)</a>
+</li>
+      <li><a href="api/widgets/Stack.html#ignis.widgets.Widget.Stack">Stack (class in ignis.widgets.Widget)</a>
+</li>
+      <li><a href="api/widgets/Stack.html#ignis.widgets.Widget.StackPage">StackPage (class in ignis.widgets.Widget)</a>
+</li>
+      <li><a href="api/widgets/Stack.html#ignis.widgets.Widget.StackSwitcher">StackSwitcher (class in ignis.widgets.Widget)</a>
+</li>
       <li><a href="api/services/systemd.html#ignis.services.systemd.SystemdUnit.start">start() (ignis.services.systemd.SystemdUnit method)</a>
+</li>
+      <li><a href="api/services/systemd.html#ignis.services.systemd.SystemdUnit.start_async">start_async() (ignis.services.systemd.SystemdUnit method)</a>
 </li>
       <li><a href="api/services/recorder.html#ignis.services.recorder.RecorderService.start_recording">start_recording() (ignis.services.recorder.RecorderService method)</a>
 </li>
@@ -1785,10 +2093,10 @@
       <li><a href="api/exceptions.html#ignis.exceptions.SassCompilationError.stderr">stderr (ignis.exceptions.SassCompilationError property)</a>
 
       <ul>
-        <li><a href="api/utils/exec_sh_async.html#ignis.utils.exec_sh.AsyncCompletedProcess.stderr">(ignis.utils.exec_sh.AsyncCompletedProcess property)</a>
+        <li><a href="api/utils/sh.html#ignis.utils.Utils.AsyncCompletedProcess.stderr">(ignis.utils.Utils.AsyncCompletedProcess property)</a>
 </li>
       </ul></li>
-      <li><a href="api/utils/exec_sh_async.html#ignis.utils.exec_sh.AsyncCompletedProcess.stdout">stdout (ignis.utils.exec_sh.AsyncCompletedProcess property)</a>
+      <li><a href="api/utils/sh.html#ignis.utils.Utils.AsyncCompletedProcess.stdout">stdout (ignis.utils.Utils.AsyncCompletedProcess property)</a>
 </li>
       <li><a href="api/widgets/Scale.html#ignis.widgets.Widget.Scale.step">step (ignis.widgets.Widget.Scale property)</a>
 
@@ -1800,6 +2108,12 @@
 
       <ul>
         <li><a href="api/services/systemd.html#ignis.services.systemd.SystemdUnit.stop">(ignis.services.systemd.SystemdUnit method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.stop_async">stop_async() (ignis.services.mpris.MprisPlayer method)</a>
+
+      <ul>
+        <li><a href="api/services/systemd.html#ignis.services.systemd.SystemdUnit.stop_async">(ignis.services.systemd.SystemdUnit method)</a>
 </li>
       </ul></li>
       <li><a href="api/services/recorder.html#ignis.services.recorder.RecorderService.stop_recording">stop_recording() (ignis.services.recorder.RecorderService method)</a>
@@ -1818,20 +2132,36 @@
         <li><a href="api/exceptions.html#ignis.exceptions.StylePathNotFoundError.style_path">(ignis.exceptions.StylePathNotFoundError property)</a>
 </li>
       </ul></li>
+      <li><a href="api/base_widget.html#ignis.base_widget.BaseWidget.style_priority">style_priority (ignis.base_widget.BaseWidget property)</a>
+</li>
       <li><a href="api/exceptions.html#ignis.exceptions.StylePathAppliedError">StylePathAppliedError</a>
 </li>
       <li><a href="api/exceptions.html#ignis.exceptions.StylePathNotFoundError">StylePathNotFoundError</a>
 </li>
+      <li><a href="api/options_manager.html#ignis.options_manager.OptionsGroup.subgroup_changed">subgroup_changed (ignis.options_manager.OptionsGroup property)</a>
+</li>
       <li><a href="api/widgets/MenuItem.html#ignis.widgets.Widget.MenuItem.submenu">submenu (ignis.widgets.Widget.MenuItem property)</a>
+</li>
+      <li><a href="api/connection_manager.html#ignis.connection_manager.DBusConnectionManager.subscribe">subscribe() (ignis.connection_manager.DBusConnectionManager method)</a>
 </li>
       <li><a href="api/services/notifications.html#ignis.services.notifications.Notification.summary">summary (ignis.services.notifications.Notification property)</a>
 </li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWindow.swallowing">swallowing (ignis.services.hyprland.HyprlandWindow property)</a>
+</li>
       <li><a href="api/widgets/Switch.html#ignis.widgets.Widget.Switch">Switch (class in ignis.widgets.Widget)</a>
 </li>
-      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandService.switch_kb_layout">switch_kb_layout() (ignis.services.hyprland.HyprlandService method)</a>
+      <li><a href="api/services/niri.html#ignis.services.niri.NiriService.switch_kb_layout">switch_kb_layout() (ignis.services.niri.NiriService method)</a>
+</li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandKeyboard.switch_layout">switch_layout() (ignis.services.hyprland.HyprlandKeyboard method)</a>
 
       <ul>
-        <li><a href="api/services/niri.html#ignis.services.niri.NiriService.switch_kb_layout">(ignis.services.niri.NiriService method)</a>
+        <li><a href="api/services/niri.html#ignis.services.niri.NiriKeyboardLayouts.switch_layout">(ignis.services.niri.NiriKeyboardLayouts method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWorkspace.switch_to">switch_to() (ignis.services.hyprland.HyprlandWorkspace method)</a>
+
+      <ul>
+        <li><a href="api/services/niri.html#ignis.services.niri.NiriWorkspace.switch_to">(ignis.services.niri.NiriWorkspace method)</a>
 </li>
       </ul></li>
       <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandService.switch_to_workspace">switch_to_workspace() (ignis.services.hyprland.HyprlandService method)</a>
@@ -1840,6 +2170,8 @@
         <li><a href="api/services/niri.html#ignis.services.niri.NiriService.switch_to_workspace">(ignis.services.niri.NiriService method)</a>
 </li>
       </ul></li>
+      <li><a href="api/gobject.html#ignis.gobject.DataGObject.sync">sync() (ignis.gobject.DataGObject method)</a>
+</li>
       <li><a href="api/services/systemd.html#ignis.services.systemd.SystemdService">SystemdService (class in ignis.services.systemd)</a>
 </li>
       <li><a href="api/services/systemd.html#ignis.services.systemd.SystemdUnit">SystemdUnit (class in ignis.services.systemd)</a>
@@ -1854,13 +2186,13 @@
 <h2 id="T">T</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/gobject.html#ignis.gobject.Binding.target">target (ignis.gobject.Binding property)</a>
-
-      <ul>
-        <li><a href="api/utils/Timeout.html#ignis.utils.Timeout.target">(ignis.utils.Timeout property)</a>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWindow.tags">tags (ignis.services.hyprland.HyprlandWindow property)</a>
 </li>
-      </ul></li>
-      <li><a href="api/gobject.html#ignis.gobject.Binding.target_property">target_property (ignis.gobject.Binding property)</a>
+      <li><a href="api/utils/Timeout.html#ignis.utils.Utils.Timeout.target">target (ignis.utils.Utils.Timeout property)</a>
+</li>
+      <li><a href="api/gobject.html#ignis.gobject.Binding.target">target() (ignis.gobject.Binding method)</a>
+</li>
+      <li><a href="api/gobject.html#ignis.gobject.Binding.target_properties">target_properties() (ignis.gobject.Binding method)</a>
 </li>
       <li><a href="api/services/upower.html#ignis.services.upower.UPowerDevice.technology">technology (ignis.services.upower.UPowerDevice property)</a>
 </li>
@@ -1868,7 +2200,7 @@
 </li>
       <li><a href="api/utils/thread.html#ignis.utils.Utils.thread">thread() (in module ignis.utils.Utils)</a>
 </li>
-      <li><a href="api/utils/ThreadTask.html#ignis.utils.ThreadTask">ThreadTask (class in ignis.utils)</a>
+      <li><a href="api/utils/thread.html#ignis.utils.Utils.ThreadTask">ThreadTask (class in ignis.utils.Utils)</a>
 </li>
       <li><a href="api/services/notifications.html#ignis.services.notifications.Notification.time">time (ignis.services.notifications.Notification property)</a>
 
@@ -1878,22 +2210,30 @@
       </ul></li>
       <li><a href="api/services/upower.html#ignis.services.upower.UPowerDevice.time_remaining">time_remaining (ignis.services.upower.UPowerDevice property)</a>
 </li>
-      <li><a href="api/utils/Timeout.html#ignis.utils.Timeout">Timeout (class in ignis.utils)</a>
+      <li><a href="api/utils/Timeout.html#ignis.utils.Utils.Timeout">Timeout (class in ignis.utils.Utils)</a>
 </li>
       <li><a href="api/services/notifications.html#ignis.services.notifications.Notification.timeout">timeout (ignis.services.notifications.Notification property)</a>
 
       <ul>
-        <li><a href="api/utils/Poll.html#ignis.utils.Poll.timeout">(ignis.utils.Poll property)</a>
+        <li><a href="api/utils/Poll.html#ignis.utils.Utils.Poll.timeout">(ignis.utils.Utils.Poll property)</a>
+</li>
+      </ul></li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWindow.title">title (ignis.services.hyprland.HyprlandWindow property)</a>
+
+      <ul>
+        <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.title">(ignis.services.mpris.MprisPlayer property)</a>
+</li>
+        <li><a href="api/services/niri.html#ignis.services.niri.NiriWindow.title">(ignis.services.niri.NiriWindow property)</a>
+</li>
+        <li><a href="api/services/system_tray.html#ignis.services.system_tray.SystemTrayItem.title">(ignis.services.system_tray.SystemTrayItem property)</a>
+</li>
+        <li><a href="api/widgets/Stack.html#ignis.widgets.Widget.StackPage.title">(ignis.widgets.Widget.StackPage property)</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.title">title (ignis.services.mpris.MprisPlayer property)</a>
-
-      <ul>
-        <li><a href="api/services/system_tray.html#ignis.services.system_tray.SystemTrayItem.title">(ignis.services.system_tray.SystemTrayItem property)</a>
+      <li><a href="api/options_manager.html#ignis.options_manager.OptionsGroup.to_dict">to_dict() (ignis.options_manager.OptionsGroup method)</a>
 </li>
-      </ul></li>
       <li><a href="api/widgets/Arrow.html#ignis.widgets.Widget.Arrow.toggle">toggle() (ignis.widgets.Widget.Arrow method)</a>
 
       <ul>
@@ -1901,6 +2241,10 @@
 </li>
       </ul></li>
       <li><a href="api/services/network.html#ignis.services.network.VpnConnection.toggle_connection">toggle_connection() (ignis.services.network.VpnConnection method)</a>
+</li>
+      <li><a href="api/services/niri.html#ignis.services.niri.NiriWindow.toggle_floating">toggle_floating() (ignis.services.niri.NiriWindow method)</a>
+</li>
+      <li><a href="api/services/niri.html#ignis.services.niri.NiriWindow.toggle_fullscreen">toggle_fullscreen() (ignis.services.niri.NiriWindow method)</a>
 </li>
       <li><a href="api/app.html#ignis.app.IgnisApp.toggle_window">toggle_window() (ignis.app.IgnisApp method)</a>
 
@@ -1914,7 +2258,11 @@
 </li>
       <li><a href="api/services/mpris.html#ignis.services.mpris.MprisPlayer.track_id">track_id (ignis.services.mpris.MprisPlayer property)</a>
 </li>
-      <li><a href="api/gobject.html#ignis.gobject.Binding.transform">transform (ignis.gobject.Binding property)</a>
+      <li><a href="api/options_manager.html#ignis.options_manager.TrackedList">TrackedList (class in ignis.options_manager)</a>
+</li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandMonitor.transform">transform (ignis.services.hyprland.HyprlandMonitor property)</a>
+</li>
+      <li><a href="api/gobject.html#ignis.gobject.Binding.transform">transform() (ignis.gobject.Binding method)</a>
 </li>
       <li><a href="api/services/bluetooth.html#ignis.services.bluetooth.BluetoothDevice.trusted">trusted (ignis.services.bluetooth.BluetoothDevice property)</a>
 </li>
@@ -1932,12 +2280,18 @@
 </li>
       <li><a href="api/services/applications.html#ignis.services.applications.Application.unpin">unpin() (ignis.services.applications.Application method)</a>
 </li>
-      <li><a href="api/services/applications.html#ignis.services.applications.Application.unpinned">unpinned() (ignis.services.applications.Application method)</a>
+      <li><a href="api/services/applications.html#ignis.services.applications.Application.unpinned">unpinned (ignis.services.applications.Application property)</a>
 </li>
-      <li><a href="api/dbus.html#ignis.dbus.DBusProxy.unwatch_name">unwatch_name() (ignis.dbus.DBusProxy method)</a>
+      <li><a href="api/connection_manager.html#ignis.connection_manager.DBusConnectionManager.unsubscribe">unsubscribe() (ignis.connection_manager.DBusConnectionManager method)</a>
+</li>
+      <li><a href="api/connection_manager.html#ignis.connection_manager.DBusConnectionManager.unsubscribe_all">unsubscribe_all() (ignis.connection_manager.DBusConnectionManager method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/connection_manager.html#ignis.connection_manager.DBusConnectionManager.unsubscribe_proxy">unsubscribe_proxy() (ignis.connection_manager.DBusConnectionManager method)</a>
+</li>
+      <li><a href="api/dbus.html#ignis.dbus.DBusProxy.unwatch_name">unwatch_name() (ignis.dbus.DBusProxy method)</a>
+</li>
       <li><a href="api/services/upower.html#ignis.services.upower.UPowerDevice">UPowerDevice (class in ignis.services.upower)</a>
 </li>
       <li><a href="api/exceptions.html#ignis.exceptions.UPowerNotRunningError">UPowerNotRunningError</a>
@@ -1956,7 +2310,7 @@
 <h2 id="V">V</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/services/options.html#ignis.services.options.Option.value">value (ignis.services.options.Option property)</a>
+      <li><a href="api/variable.html#ignis.variable.Variable.value">value (ignis.variable.Variable property)</a>
 
       <ul>
         <li><a href="api/widgets/Scale.html#ignis.widgets.Widget.Scale.value">(ignis.widgets.Widget.Scale property)</a>
@@ -1965,6 +2319,8 @@
 </li>
       </ul></li>
       <li><a href="api/variable.html#ignis.variable.Variable">Variable (class in ignis.variable)</a>
+</li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandKeyboard.variant">variant (ignis.services.hyprland.HyprlandKeyboard property)</a>
 </li>
       <li><a href="api/services/upower.html#ignis.services.upower.UPowerDevice.vendor">vendor (ignis.services.upower.UPowerDevice property)</a>
 </li>
@@ -1994,20 +2350,28 @@
 </li>
       <li><a href="api/services/network.html#ignis.services.network.VpnConnection">VpnConnection (class in ignis.services.network)</a>
 </li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandMonitor.vrr">vrr (ignis.services.hyprland.HyprlandMonitor property)</a>
+</li>
   </ul></td>
 </tr></table>
 
 <h2 id="W">W</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/services/wallpaper.html#ignis.services.wallpaper.WallpaperService.wallpaper">wallpaper (ignis.services.wallpaper.WallpaperService property)</a>
+      <li><a href="api/options.html#ignis.options.Options.Wallpaper.wallpaper_path">wallpaper_path (ignis.options.Options.Wallpaper attribute)</a>
 </li>
       <li><a href="api/services/wallpaper.html#ignis.services.wallpaper.WallpaperService">WallpaperService (class in ignis.services.wallpaper)</a>
 </li>
       <li><a href="api/dbus.html#ignis.dbus.DBusProxy.watch_name">watch_name() (ignis.dbus.DBusProxy method)</a>
 </li>
-      <li><a href="api/widgets/Picture.html#ignis.widgets.Widget.Picture.width">width (ignis.widgets.Widget.Picture property)</a>
+      <li><a href="api/app.html#ignis.app.IgnisApp.widgets_style_priority">widgets_style_priority (ignis.app.IgnisApp property)</a>
 </li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandMonitor.width">width (ignis.services.hyprland.HyprlandMonitor property)</a>
+
+      <ul>
+        <li><a href="api/widgets/Picture.html#ignis.widgets.Widget.Picture.width">(ignis.widgets.Widget.Picture property)</a>
+</li>
+      </ul></li>
       <li><a href="api/services/network.html#ignis.services.network.Wifi">Wifi (class in ignis.services.network)</a>
 </li>
       <li><a href="api/services/network.html#ignis.services.network.NetworkService.wifi">wifi (ignis.services.network.NetworkService property)</a>
@@ -2016,9 +2380,9 @@
 </li>
       <li><a href="api/services/network.html#ignis.services.network.WifiDevice">WifiDevice (class in ignis.services.network)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/widgets/Window.html#ignis.widgets.Widget.Window">Window (class in ignis.widgets.Widget)</a>
+</li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandService.window_added">window_added (ignis.services.hyprland.HyprlandService property)</a>
 </li>
       <li><a href="api/services/system_tray.html#ignis.services.system_tray.SystemTrayItem.window_id">window_id (ignis.services.system_tray.SystemTrayItem property)</a>
 </li>
@@ -2028,11 +2392,35 @@
         <li><a href="api/exceptions.html#ignis.exceptions.WindowNotFoundError.window_name">(ignis.exceptions.WindowNotFoundError property)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/exceptions.html#ignis.exceptions.WindowAddedError">WindowAddedError</a>
 </li>
       <li><a href="api/exceptions.html#ignis.exceptions.WindowNotFoundError">WindowNotFoundError</a>
 </li>
       <li><a href="api/app.html#ignis.app.IgnisApp.windows">windows (ignis.app.IgnisApp property)</a>
+
+      <ul>
+        <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandService.windows">(ignis.services.hyprland.HyprlandService property)</a>
+</li>
+        <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWorkspace.windows">(ignis.services.hyprland.HyprlandWorkspace property)</a>
+</li>
+        <li><a href="api/services/niri.html#ignis.services.niri.NiriService.windows">(ignis.services.niri.NiriService property)</a>
+</li>
+      </ul></li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandService.workspace_added">workspace_added (ignis.services.hyprland.HyprlandService property)</a>
+
+      <ul>
+        <li><a href="api/services/niri.html#ignis.services.niri.NiriService.workspace_added">(ignis.services.niri.NiriService property)</a>
+</li>
+      </ul></li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWindow.workspace_id">workspace_id (ignis.services.hyprland.HyprlandWindow property)</a>
+
+      <ul>
+        <li><a href="api/services/niri.html#ignis.services.niri.NiriWindow.workspace_id">(ignis.services.niri.NiriWindow property)</a>
+</li>
+      </ul></li>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWindow.workspace_name">workspace_name (ignis.services.hyprland.HyprlandWindow property)</a>
 </li>
       <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandService.workspaces">workspaces (ignis.services.hyprland.HyprlandService property)</a>
 
@@ -2040,6 +2428,30 @@
         <li><a href="api/services/niri.html#ignis.services.niri.NiriService.workspaces">(ignis.services.niri.NiriService property)</a>
 </li>
       </ul></li>
+      <li><a href="api/utils/file.html#ignis.utils.Utils.write_file">write_file() (in module ignis.utils.Utils)</a>
+</li>
+      <li><a href="api/utils/file.html#ignis.utils.Utils.write_file_async">write_file_async() (in module ignis.utils.Utils)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="X">X</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandMonitor.x">x (ignis.services.hyprland.HyprlandMonitor property)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandWindow.xwayland">xwayland (ignis.services.hyprland.HyprlandWindow property)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="Y">Y</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/services/hyprland.html#ignis.services.hyprland.HyprlandMonitor.y">y (ignis.services.hyprland.HyprlandMonitor property)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -2093,7 +2505,7 @@
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.0.
     <br/>
   </p>
 </div>

@@ -41,7 +41,7 @@
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../_static/documentation_options.js?v=6cc4e9c0"></script>
+    <script src="../_static/documentation_options.js?v=c8bc6dd9"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -51,7 +51,7 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://linkfrg.github.io/ignis/latest/_static/switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'v0.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'v0.5';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
@@ -371,11 +371,14 @@
 <li class="toctree-l1"><a class="reference internal" href="gobject.html">GObject</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variable.html">Variable</a></li>
 <li class="toctree-l1"><a class="reference internal" href="client.html">Client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="options.html">Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="options_manager.html">Options Manager</a></li>
 <li class="toctree-l1"><a class="reference internal" href="exceptions.html">Exceptions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dbus.html">D-Bus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dbus_menu.html">D-Bus menu</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">BaseWidget</a></li>
 <li class="toctree-l1"><a class="reference internal" href="base_service.html">BaseService</a></li>
+<li class="toctree-l1"><a class="reference internal" href="connection_manager.html">Connection Manager</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="widgets/index.html">Widgets</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="widgets/Arrow.html">Arrow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="widgets/ArrowButton.html">ArrowButton</a></li>
@@ -407,6 +410,7 @@
 <li class="toctree-l2"><a class="reference internal" href="widgets/Scroll.html">Scroll</a></li>
 <li class="toctree-l2"><a class="reference internal" href="widgets/Separator.html">Separator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="widgets/SpinButton.html">SpinButton</a></li>
+<li class="toctree-l2"><a class="reference internal" href="widgets/Stack.html">Stack</a></li>
 <li class="toctree-l2"><a class="reference internal" href="widgets/Switch.html">Switch</a></li>
 <li class="toctree-l2"><a class="reference internal" href="widgets/ToggleButton.html">ToggleButton</a></li>
 <li class="toctree-l2"><a class="reference internal" href="widgets/Window.html">Window</a></li>
@@ -423,7 +427,6 @@
 <li class="toctree-l2"><a class="reference internal" href="services/network.html">Network</a></li>
 <li class="toctree-l2"><a class="reference internal" href="services/niri.html">Niri</a></li>
 <li class="toctree-l2"><a class="reference internal" href="services/notifications.html">Notifications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="services/options.html">Options</a></li>
 <li class="toctree-l2"><a class="reference internal" href="services/recorder.html">Recorder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="services/system_tray.html">System Tray</a></li>
 <li class="toctree-l2"><a class="reference internal" href="services/systemd.html">Systemd</a></li>
@@ -434,29 +437,19 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="utils/index.html">Utils</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="utils/FileMonitor.html">FileMonitor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils/Poll.html">Poll</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/ThreadTask.html">ThreadTask</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils/Timeout.html">Timeout</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/crop_pixbuf.html">crop_pixbuf</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils/debounce.html">Debounce</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/download_image.html">download_image</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/exec_sh.html">exec_sh</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/exec_sh_async.html">exec_sh_async</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_current_dir.html">get_current_dir</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_file_icon_name.html">get_file_icon_name</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_ignis_branch.html">get_ignis_branch</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_ignis_commit.html">get_ignis_commit</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_ignis_commit_msg.html">get_ignis_commit_msg</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_ignis_version.html">get_ignis_version</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_monitor.html">get_monitor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_n_monitors.html">get_n_monitors</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/get_paintable.html">get_paintable</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/listen_socket.html">listen_socket</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/load_interface_xml.html">load_interface_xml</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/run_in_thread.html">run_in_thread</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/sass_compile.html">sass_compile</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/scale_pixbuf.html">scale_pixbuf</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/send_socket.html">send_socket</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils/thread.html">thread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/file.html">File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/icon.html">Icon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/misc.html">Misc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/monitor.html">Monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/pixbuf.html">Pixbuf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/sass.html">Sass</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/sh.html">Shell Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/socket.html">Socket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/str_cases.html">String Cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/thread.html">Thread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils/version.html">Version</a></li>
 </ul>
 </details></li>
 </ul>
@@ -523,10 +516,33 @@
 <h1>BaseWidget<a class="headerlink" href="#basewidget" title="Link to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="ignis.base_widget.BaseWidget">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.base_widget.</span></span><span class="sig-name descname"><span class="pre">BaseWidget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">setup</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vexpand</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hexpand</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">visible</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.base_widget.BaseWidget" title="Link to this definition">#</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.base_widget.</span></span><span class="sig-name descname"><span class="pre">BaseWidget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">setup</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style_priority</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.13)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'application'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'fallback'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'settings'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'theme'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'user'</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vexpand</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hexpand</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">visible</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.base_widget.BaseWidget" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="gobject.html#ignis.gobject.IgnisGObject" title="ignis.gobject.IgnisGObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">IgnisGObject</span></code></a>.</p>
 <p>The base class for all widgets.
 Provides <code class="docutils literal notranslate"><span class="pre">style</span></code> property and allows overriding enums.</p>
+<dl class="py gproperty">
+<dt class="sig sig-object py" id="ignis.base_widget.BaseWidget.style_priority">
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">style_priority</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.13)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'application'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'fallback'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'settings'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'theme'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'user'</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.base_widget.BaseWidget.style_priority" title="Link to this definition">#</a></dt>
+<dd><ul class="simple">
+<li><p>read-write</p></li>
+</ul>
+<p>The style priority for this widget.
+Overrides <a class="reference internal" href="app.html#ignis.app.IgnisApp.widgets_style_priority" title="ignis.app.IgnisApp.widgets_style_priority"><code class="xref py py-attr docutils literal notranslate"><span class="pre">widgets_style_priority</span></code></a>.</p>
+<p>More info about style priorities: <a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-4.0/constants.html#Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION" title="(in Gtk 4.0 v4.0)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION</span></code></a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Changing this property won't affect an already applied style!</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">some_widget</span> <span class="o">=</span> <span class="n">WIDGET_NAME</span><span class="p">(</span>
+    <span class="n">style</span><span class="o">=</span><span class="s2">&quot;some style&quot;</span><span class="p">,</span>
+    <span class="n">style_priority</span><span class="o">=</span><span class="s2">&quot;user&quot;</span>
+<span class="p">)</span>
+<span class="n">some_widget</span><span class="o">.</span><span class="n">style_priority</span> <span class="o">=</span> <span class="s2">&quot;application&quot;</span>  <span class="c1"># nothing change for current style</span>
+<span class="n">some_widget</span><span class="o">.</span><span class="n">style</span> <span class="o">=</span> <span class="s2">&quot;new style&quot;</span>  <span class="c1"># this style will have &quot;application&quot; priority</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="ignis.base_widget.BaseWidget.override_enum">
 <span class="sig-name descname"><span class="pre">override_enum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">property_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">enum</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.base_widget.BaseWidget.override_enum" title="Link to this definition">#</a></dt>
@@ -596,6 +612,7 @@ Provides <code class="docutils literal notranslate"><span class="pre">style</spa
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.base_widget.BaseWidget"><code class="docutils literal notranslate"><span class="pre">BaseWidget</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.base_widget.BaseWidget.style_priority"><code class="docutils literal notranslate"><span class="pre">BaseWidget.style_priority</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.base_widget.BaseWidget.override_enum"><code class="docutils literal notranslate"><span class="pre">BaseWidget.override_enum()</span></code></a></li>
 </ul>
 </li>
@@ -661,7 +678,7 @@ Provides <code class="docutils literal notranslate"><span class="pre">style</spa
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.0.
     <br/>
   </p>
 </div>
