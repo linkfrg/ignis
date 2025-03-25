@@ -46,9 +46,8 @@ class TrackedList(list[T]):
     def __notify(self) -> None:
         if self._owner and self._name:
             obj = self._owner._instance
-            if obj:
-                obj.emit("changed", self._name)
-                obj.emit("autosave")
+            new_list: TrackedList = TrackedList(self._owner, self._name, self)
+            setattr(obj, self._name, new_list)
 
     def __set_name__(self, owner, name):
         self._owner = owner
