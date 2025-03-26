@@ -448,7 +448,7 @@ class HyprlandService(BaseService):
         """
         return self._windows.get(address, None)
 
-    def get_monitor_name(self, name: str) -> HyprlandMonitor | None:
+    def get_monitor_by_name(self, name: str) -> HyprlandMonitor | None:
         """
         Get a monitor by its name.
 
