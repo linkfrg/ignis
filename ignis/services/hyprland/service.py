@@ -189,9 +189,8 @@ class HyprlandService(BaseService):
         def get_full_w_addr(addr: str) -> str:
             return "0x" + addr
 
-        event_data = event.split(">>")
-        event_type = event_data[0]
-        event_value = event_data[1]
+        event_data = event.split(">>", 1)
+        event_type, event_value = event_data
         value_list = event_value.split(",")
 
         match event_type:
