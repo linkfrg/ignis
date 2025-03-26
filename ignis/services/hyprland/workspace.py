@@ -5,6 +5,7 @@ MATCH_DICT = {
     "hasfullscreen": "has_fullscreen",
     "lastwindow": "last_window",
     "lastwindowtitle": "last_window_title",
+    "ispersistent": "is_persistent",
 }
 
 
@@ -24,6 +25,7 @@ class HyprlandWorkspace(DataGObject):
         self._has_fullscreen: bool = False
         self._last_window: str = ""
         self._last_window_title: str = ""
+        self._is_persistent: bool = False
 
     @IgnisSignal
     def destroyed(self):
@@ -86,6 +88,13 @@ class HyprlandWorkspace(DataGObject):
         The latest window title.
         """
         return self._last_window_title
+
+    @IgnisProperty
+    def is_persistent(self) -> bool:
+        """
+        Whether the workspace is persistent.
+        """
+        return self._is_persistent
 
     def switch_to(self) -> None:
         """
