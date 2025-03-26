@@ -237,9 +237,12 @@ class HyprlandService(BaseService):
             case "focusedmonv2":
                 self.__change_focused_monitor(value_list[0], int(value_list[1]))
             case "activespecialv2":
-                self.__change_special_ws_on_monitor(
-                    int(value_list[0]), value_list[1], value_list[2]
-                )
+                if value_list[0] == "":
+                    ws_id = 0
+                else:
+                    ws_id = int(value_list[0])
+
+                self.__change_special_ws_on_monitor(ws_id, value_list[1], value_list[2])
 
     def __get_self_dict(self, obj_desc: _HyprlandObjDesc) -> dict:
         return getattr(self, f"_{obj_desc.prop_name}")
