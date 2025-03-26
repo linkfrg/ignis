@@ -29,6 +29,7 @@ class SystemTrayService(BaseService):
     def __init__(self):
         super().__init__()
         self._items: dict[str, SystemTrayItem] = {}
+        self._init_item_tasks: list[str] = []
 
         self.__dbus: DBusService = DBusService(
             name="org.kde.StatusNotifierWatcher",
@@ -104,7 +105,12 @@ class SystemTrayService(BaseService):
         if bus_name in self._items:
             return
 
+        if bus_name in self._init_item_tasks:
+            return
+
         asyncio.create_task(self.__initialize_item(bus_name, object_path))
+
+        self._init_item_tasks.append(bus_name)
 
     async def __initialize_item(self, bus_name: str, object_path: str) -> None:
         item = await SystemTrayItem.new_async(bus_name, object_path)
@@ -120,6 +126,11 @@ class SystemTrayService(BaseService):
             "StatusNotifierItemRegistered",
             GLib.Variant("(s)", (bus_name + object_path,)),
         )
+
+        try:
+            self._init_item_tasks.remove(bus_name)
+        except ValueError:
+            pass
 
     def __remove_item(self, x, bus_name: str) -> None:
         self._items.pop(bus_name)
