@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>API reference &#8212; Ignis documentation</title>
+    <title>Toplevel package &#8212; Ignis documentation</title>
   
   
   
@@ -47,7 +47,7 @@
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'api/index';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/toplevel';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://linkfrg.github.io/ignis/latest/_static/switcher.json';
@@ -57,8 +57,8 @@
         </script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Toplevel package" href="toplevel.html" />
-    <link rel="prev" title="FAQ" href="../user/faq.html" />
+    <link rel="next" title="Application" href="app.html" />
+    <link rel="prev" title="API reference" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -165,7 +165,7 @@
 
 
 <li class="nav-item current active">
-  <a class="nav-link nav-internal" href="#">
+  <a class="nav-link nav-internal" href="index.html">
     API reference
   </a>
 </li>
@@ -304,7 +304,7 @@
 
 
 <li class="nav-item current active">
-  <a class="nav-link nav-internal" href="#">
+  <a class="nav-link nav-internal" href="index.html">
     API reference
   </a>
 </li>
@@ -366,8 +366,8 @@
 <nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="toplevel.html">Toplevel package</a></li>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Toplevel package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="app.html">Application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gobject.html">GObject</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variable.html">Variable</a></li>
@@ -493,7 +493,10 @@
         <i class="fa-solid fa-home"></i>
       </a>
     </li>
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">API reference</span></li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">API reference</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Toplevel package</span></li>
   </ul>
 </nav>
 </div>
@@ -510,29 +513,40 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="api-reference">
-<h1>API reference<a class="headerlink" href="#api-reference" title="Link to this heading">#</a></h1>
-<p>This reference manual details functions, modules, and objects included in Ignis, describing what they are and what they do.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="toplevel.html">Toplevel package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="app.html">Application</a></li>
-<li class="toctree-l1"><a class="reference internal" href="gobject.html">GObject</a></li>
-<li class="toctree-l1"><a class="reference internal" href="variable.html">Variable</a></li>
-<li class="toctree-l1"><a class="reference internal" href="client.html">Client</a></li>
-<li class="toctree-l1"><a class="reference internal" href="options.html">Options</a></li>
-<li class="toctree-l1"><a class="reference internal" href="options_manager.html">Options Manager</a></li>
-<li class="toctree-l1"><a class="reference internal" href="exceptions.html">Exceptions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dbus.html">D-Bus</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dbus_menu.html">D-Bus menu</a></li>
-<li class="toctree-l1"><a class="reference internal" href="base_widget.html">BaseWidget</a></li>
-<li class="toctree-l1"><a class="reference internal" href="base_service.html">BaseService</a></li>
-<li class="toctree-l1"><a class="reference internal" href="connection_manager.html">Connection Manager</a></li>
-<li class="toctree-l1"><a class="reference internal" href="widgets/index.html">Widgets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="services/index.html">Services</a></li>
-<li class="toctree-l1"><a class="reference internal" href="utils/index.html">Utils</a></li>
-</ul>
-</div>
+  <section id="toplevel-package">
+<h1>Toplevel package<a class="headerlink" href="#toplevel-package" title="Link to this heading">#</a></h1>
+<p>This is the documentation for the toplevel <code class="docutils literal notranslate"><span class="pre">ignis</span></code> package.</p>
+<dl class="py data" id="module-ignis">
+<dt class="sig sig-object py" id="ignis.is_sphinx_build">
+<span class="sig-prename descclassname"><span class="pre">ignis.</span></span><span class="sig-name descname"><span class="pre">is_sphinx_build</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#ignis.is_sphinx_build" title="Link to this definition">#</a></dt>
+<dd><p>Whether Ignis is imported during the Sphinx documentation build.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="ignis.is_editable_install">
+<span class="sig-prename descclassname"><span class="pre">ignis.</span></span><span class="sig-name descname"><span class="pre">is_editable_install</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#ignis.is_editable_install" title="Link to this definition">#</a></dt>
+<dd><p>Whether Ignis is installed in editable mode.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="ignis.TEMP_DIR">
+<span class="sig-prename descclassname"><span class="pre">ignis.</span></span><span class="sig-name descname"><span class="pre">TEMP_DIR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/tmp/ignis-u616oj1z'</span></em><a class="headerlink" href="#ignis.TEMP_DIR" title="Link to this definition">#</a></dt>
+<dd><p>The random temporary directory for this Ignis instance.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="ignis.CACHE_DIR">
+<span class="sig-prename descclassname"><span class="pre">ignis.</span></span><span class="sig-name descname"><span class="pre">CACHE_DIR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/tmp/ignis-u616oj1z'</span></em><a class="headerlink" href="#ignis.CACHE_DIR" title="Link to this definition">#</a></dt>
+<dd><p>The cache directory. Equals <code class="docutils literal notranslate"><span class="pre">$XDG_CACHE_HOME/ignis</span></code> by default, or <a class="reference internal" href="#ignis.TEMP_DIR" title="ignis.TEMP_DIR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TEMP_DIR</span></code></a> during the Sphinx doc build.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="ignis.is_girepository_2_0">
+<span class="sig-prename descclassname"><span class="pre">ignis.</span></span><span class="sig-name descname"><span class="pre">is_girepository_2_0</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#ignis.is_girepository_2_0" title="Link to this definition">#</a></dt>
+<dd><p>Whether libgirepository-2.0 is being used (<code class="docutils literal notranslate"><span class="pre">True</span></code> for PyGObject 3.51.0 and higher).
+Always equals <code class="docutils literal notranslate"><span class="pre">False</span></code> during the Sphinx doc build.</p>
+</dd></dl>
+
 </section>
 
 
@@ -546,20 +560,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../user/faq.html"
+       href="index.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">FAQ</p>
+        <p class="prev-next-title">API reference</p>
       </div>
     </a>
     <a class="right-next"
-       href="toplevel.html"
+       href="app.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Toplevel package</p>
+        <p class="prev-next-title">Application</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -575,10 +589,26 @@
 
 
   <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.is_sphinx_build"><code class="docutils literal notranslate"><span class="pre">is_sphinx_build</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.is_editable_install"><code class="docutils literal notranslate"><span class="pre">is_editable_install</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.TEMP_DIR"><code class="docutils literal notranslate"><span class="pre">TEMP_DIR</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.CACHE_DIR"><code class="docutils literal notranslate"><span class="pre">CACHE_DIR</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.is_girepository_2_0"><code class="docutils literal notranslate"><span class="pre">is_girepository_2_0</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
 
   
   <div class="tocsection editthispage">
-    <a href="https://github.com/linkfrg/ignis/edit/main/docs/api/index.rst">
+    <a href="https://github.com/linkfrg/ignis/edit/main/docs/api/toplevel.rst">
       <i class="fa-solid fa-pencil"></i>
       
       
@@ -594,7 +624,7 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/api/index.rst.txt"
+      <li><a href="../_sources/api/toplevel.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div></div>

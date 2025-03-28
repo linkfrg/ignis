@@ -6,6 +6,7 @@ This reference manual details functions, modules, and objects included in Ignis,
 .. toctree::
    :maxdepth: 1
 
+   toplevel
    app
    gobject
    variable
