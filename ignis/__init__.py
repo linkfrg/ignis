@@ -37,6 +37,9 @@ TEMP_DIR = tempfile.mkdtemp(prefix="ignis-")
 #: The cache directory. Equals ``$XDG_CACHE_HOME/ignis`` by default, or :obj:`TEMP_DIR` during the Sphinx doc build.
 CACHE_DIR = f"{GLib.get_user_cache_dir()}/ignis" if not is_sphinx_build else TEMP_DIR
 
+#: The data directory. Equals ``$XDG_DATA_HOME/ignis`` by default, or :obj:`TEMP_DIR` during the Sphinx doc build.
+DATA_DIR = f"{GLib.get_user_data_dir()}/ignis" if not is_sphinx_build else TEMP_DIR
+
 #: Whether libgirepository-2.0 is being used (``True`` for PyGObject 3.51.0 and higher).
 #: Always equals ``False`` during the Sphinx doc build.
 is_girepository_2_0: bool = (
@@ -73,6 +76,7 @@ def _init_asyncio() -> None:
 
 def _makedirs() -> None:
     os.makedirs(CACHE_DIR, exist_ok=True)
+    os.makedirs(DATA_DIR, exist_ok=True)
 
 
 def _load_gtk_layer_shell() -> None:

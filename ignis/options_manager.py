@@ -302,6 +302,9 @@ class OptionsManager(OptionsGroup):
         file: The path to the file used for saving and loading options. Cannot be changed after initialization.
         hot_reload: Whether to enable hot-reloading.
 
+    .. hint::
+        The recommended directory for storing the options file is :obj:`ignis.DATA_DIR`.
+
     The standard option structure must follow this format:
 
     .. code-block:: python
