@@ -34,7 +34,7 @@ def deprecated_func(message: str):
 
 def deprecated_class(message: str):
     """
-    A decorator to mark a function as deprecated.
+    A decorator to mark a class as deprecated.
 
     Args:
         message: The message to log. ``{name}`` will be replaced with the class name.
