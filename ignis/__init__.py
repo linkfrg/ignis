@@ -22,13 +22,23 @@ def _get_is_editable_install() -> bool:
     return False
 
 
+#: The Ignis version.
 __version__ = "0.5.dev0"
+
+#: Whether Ignis is imported during the Sphinx documentation build.
 is_sphinx_build: bool = "sphinx" in sys.modules
+
+#: Whether Ignis is installed in editable mode.
 is_editable_install: bool = _get_is_editable_install()
 
+#: The random temporary directory for this Ignis instance.
 TEMP_DIR = tempfile.mkdtemp(prefix="ignis-")
+
+#: The cache directory. Equals ``$XDG_CACHE_HOME/ignis`` by default, or :obj:`TEMP_DIR` during the Sphinx doc build.
 CACHE_DIR = f"{GLib.get_user_cache_dir()}/ignis" if not is_sphinx_build else TEMP_DIR
 
+#: Whether libgirepository-2.0 is being used (``True`` for PyGObject 3.51.0 and higher).
+#: Always equals ``False`` during the Sphinx doc build.
 is_girepository_2_0: bool = (
     gi.version_info >= (3, 51, 0) if not is_sphinx_build else False  # type: ignore
 )
