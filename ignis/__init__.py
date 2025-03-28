@@ -3,55 +3,38 @@ import os
 import sys
 import json
 import asyncio
+import tempfile
 from ctypes import CDLL
 from gi.events import GLibEventLoopPolicy  # type: ignore
 from importlib.metadata import Distribution, PackageNotFoundError
 from gi.repository import GLib  # type: ignore
 
-__version__ = "0.5.dev0"
-__lib_dir__ = None
-CACHE_DIR = None
 
-is_sphinx_build: bool = "sphinx" in sys.modules
-is_editable_install: bool = False
-is_girepository_2_0: bool
-
-if not is_sphinx_build:
-    is_girepository_2_0 = gi.version_info >= (3, 51, 0)  # type: ignore
-else:
-    is_girepository_2_0 = False
-
-try:
-    direct_url = Distribution.from_name("ignis").read_text("direct_url.json")
-    if direct_url:
-        is_editable_install = (
-            json.loads(direct_url).get("dir_info", {}).get("editable", False)
-        )
-
-except PackageNotFoundError:
-    pass
-
-if not is_sphinx_build:
-    policy = GLibEventLoopPolicy()
-    asyncio.set_event_loop_policy(policy)
-
-    CACHE_DIR = f"{GLib.get_user_cache_dir()}/ignis"
-    os.makedirs(CACHE_DIR, exist_ok=True)
-
+def _get_is_editable_install() -> bool:
     try:
-        CDLL("libgtk4-layer-shell.so")
-    except OSError:
-        from ignis.exceptions import Gtk4LayerShellNotFoundError
+        direct_url = Distribution.from_name("ignis").read_text("direct_url.json")
+        if direct_url:
+            return json.loads(direct_url).get("dir_info", {}).get("editable", False)
 
-        raise Gtk4LayerShellNotFoundError() from None
+    except PackageNotFoundError:
+        pass
 
-gi.require_version("Gtk", "4.0")
-gi.require_version("Gdk", "4.0")
-gi.require_version("Gtk4LayerShell", "1.0")
-gi.require_version("GdkPixbuf", "2.0")
+    return False
 
 
-def prepend_to_repo(path: str) -> None:
+__version__ = "0.5.dev0"
+is_sphinx_build: bool = "sphinx" in sys.modules
+is_editable_install: bool = _get_is_editable_install()
+
+TEMP_DIR = tempfile.mkdtemp(prefix="ignis-")
+CACHE_DIR = f"{GLib.get_user_cache_dir()}/ignis" if not is_sphinx_build else TEMP_DIR
+
+is_girepository_2_0: bool = (
+    gi.version_info >= (3, 51, 0) if not is_sphinx_build else False  # type: ignore
+)
+
+
+def _prepend_to_repo(path: str) -> None:
     if is_girepository_2_0:
         # Hacky? yes
         # But getting GIRepository from gi.repository and using its prepend methods results in no effect
@@ -73,16 +56,54 @@ def prepend_to_repo(path: str) -> None:
     repo.prepend_search_path(path)
 
 
-current_dir = os.path.dirname(os.path.abspath(__file__))
+def _init_asyncio() -> None:
+    policy = GLibEventLoopPolicy()
+    asyncio.set_event_loop_policy(policy)
 
-if not is_editable_install:
-    prepend_to_repo(current_dir)
-else:
-    build_libdir = os.path.join(
-        os.path.abspath(os.path.join(current_dir, "..")),
-        "build",
-        f"cp{sys.version_info.major}{sys.version_info.minor}",
-        "subprojects",
-        "gvc",
-    )
-    prepend_to_repo(build_libdir)
+
+def _makedirs() -> None:
+    os.makedirs(CACHE_DIR, exist_ok=True)
+
+
+def _load_gtk_layer_shell() -> None:
+    try:
+        CDLL("libgtk4-layer-shell.so")
+    except OSError:
+        from ignis.exceptions import Gtk4LayerShellNotFoundError
+
+        raise Gtk4LayerShellNotFoundError() from None
+
+
+def _require_versions() -> None:
+    gi.require_version("Gtk", "4.0")
+    gi.require_version("Gdk", "4.0")
+    gi.require_version("Gtk4LayerShell", "1.0")
+    gi.require_version("GdkPixbuf", "2.0")
+
+
+def _prepend_gvc() -> None:
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+
+    if not is_editable_install:
+        _prepend_to_repo(current_dir)
+    else:
+        build_libdir = os.path.join(
+            os.path.abspath(os.path.join(current_dir, "..")),
+            "build",
+            f"cp{sys.version_info.major}{sys.version_info.minor}",
+            "subprojects",
+            "gvc",
+        )
+        _prepend_to_repo(build_libdir)
+
+
+def _init() -> None:
+    _init_asyncio()
+    _makedirs()
+    _load_gtk_layer_shell()
+    _require_versions()
+    _prepend_gvc()
+
+
+if not is_sphinx_build:
+    _init()

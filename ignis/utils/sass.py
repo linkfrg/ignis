@@ -1,10 +1,9 @@
 import shutil
 import subprocess
-import tempfile
 from typing import Literal
 from ignis.exceptions import SassCompilationError, SassNotFoundError
+from ignis import TEMP_DIR
 
-TEMP_DIR = tempfile.mkdtemp(prefix="ignis-")
 COMPILED_CSS = f"{TEMP_DIR}/compiled.css"
 
 # resolve Sass compiler paths and pick a default one
