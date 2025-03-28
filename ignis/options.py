@@ -62,7 +62,7 @@ class Options(OptionsManager):
         If the option is of type :class:`~ignis.options_manager.TrackedList`, it means that it is regular Python list.
         But you can call ``.append()``, ``.remove()``, ``.insert()``, etc., and the changes will be applied!
 
-    The options file is stored in :obj:`ignis.DATA_DIR`/options.json (``$XDG_DATA_HOME/ignis/options.json``)
+    The options file is located at :obj:`ignis.DATA_DIR`/options.json (``$XDG_DATA_HOME/ignis/options.json``).
 
     Example usage:
 
