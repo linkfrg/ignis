@@ -204,7 +204,7 @@ class NotificationService(BaseService):
         elif app_icon != "":
             icon = app_icon
         elif "icon_data" in hints:
-            icon = self.__save_pixbuf(hints["image-data"], _id)
+            icon = self.__save_pixbuf(hints["icon_data"], _id)
         else:
             icon = None
 
