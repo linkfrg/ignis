@@ -21,11 +21,13 @@ def _migrate_old_options_file() -> None:
     logger.warning(
         f"Migrating options to the new file: {OLD_OPTIONS_FILE} -> {OPTIONS_FILE}"
     )
+
     with open(OLD_OPTIONS_FILE) as f:
         data = f.read()
 
     with open(OPTIONS_FILE, "w") as f:
         f.write(data)
+
     logger.success(
         f"Done. Consider using new options file instead: $XDG_DATA_HOME/ignis/options.json ({OPTIONS_FILE}). The old one is deprecated. See the Breaking Changes Tracker for more info."
     )
