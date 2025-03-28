@@ -18,6 +18,7 @@ This reference manual details functions, modules, and objects included in Ignis,
    dbus_menu
    base_widget
    base_service
+   deprecation
    connection_manager
    widgets/index
    services/index
