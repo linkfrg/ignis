@@ -1,7 +1,10 @@
+import os
+import shutil
 from ignis.utils import Utils
 from ignis.base_service import BaseService
 from ignis.options import options
 from .window import WallpaperLayerWindow
+from .constants import CACHE_WALLPAPER_PATH
 
 
 class WallpaperService(BaseService):
@@ -34,13 +37,19 @@ class WallpaperService(BaseService):
         self.__sync()
 
     def __update_wallpaper(self) -> None:
+        try:
+            if options.wallpaper.wallpaper_path is not None:
+                shutil.copy(options.wallpaper.wallpaper_path, CACHE_WALLPAPER_PATH)
+        except shutil.SameFileError:
+            return
+
         self.__sync()
 
     def __sync(self) -> None:
         for i in self._windows:
             i.unrealize()
 
-        if not options.wallpaper.wallpaper_path:
+        if not os.path.isfile(CACHE_WALLPAPER_PATH):
             return
 
         self._windows = []
@@ -52,7 +61,7 @@ class WallpaperService(BaseService):
 
             geometry = gdkmonitor.get_geometry()
             window = WallpaperLayerWindow(
-                wallpaper_path=options.wallpaper.wallpaper_path,
+                wallpaper_path=CACHE_WALLPAPER_PATH,
                 gdkmonitor=gdkmonitor,
                 width=geometry.width,
                 height=geometry.height,
