@@ -1,7 +1,12 @@
-from ignis import CACHE_DIR
+import os
+from ignis import DATA_DIR, CACHE_DIR, is_sphinx_build
 from gi.repository import GLib  # type: ignore
 from ignis.options_manager import OptionsManager, OptionsGroup, TrackedList
-from ignis import is_sphinx_build
+from loguru import logger
+
+
+OPTIONS_FILE = f"{DATA_DIR}/options.json"
+OLD_OPTIONS_FILE = f"{CACHE_DIR}/ignis_options.json"
 
 
 def get_recorder_default_file_location() -> str | None:
@@ -9,6 +14,23 @@ def get_recorder_default_file_location() -> str | None:
         return GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_VIDEOS)
     else:
         return "XDG Videos directory"
+
+
+# FIXME: remove after v0.6 release
+def _migrate_old_options_file() -> None:
+    logger.warning(
+        f"Migrating options to the new file: {OLD_OPTIONS_FILE} -> {OPTIONS_FILE}"
+    )
+
+    with open(OLD_OPTIONS_FILE) as f:
+        data = f.read()
+
+    with open(OPTIONS_FILE, "w") as f:
+        f.write(data)
+
+    logger.success(
+        f"Done. Consider using new options file instead: $XDG_DATA_HOME/ignis/options.json ({OPTIONS_FILE}). The old one is deprecated. See the Breaking Changes Tracker for more info."
+    )
 
 
 class Options(OptionsManager):
@@ -40,6 +62,8 @@ class Options(OptionsManager):
         If the option is of type :class:`~ignis.options_manager.TrackedList`, it means that it is regular Python list.
         But you can call ``.append()``, ``.remove()``, ``.insert()``, etc., and the changes will be applied!
 
+    The options file is located at :obj:`ignis.DATA_DIR`/options.json (``$XDG_DATA_HOME/ignis/options.json``).
+
     Example usage:
 
     .. code-block::
@@ -66,8 +90,11 @@ class Options(OptionsManager):
         if is_sphinx_build:
             return
 
+        if not os.path.exists(OPTIONS_FILE) and os.path.exists(OLD_OPTIONS_FILE):
+            _migrate_old_options_file()
+
         try:
-            super().__init__(file=f"{CACHE_DIR}/ignis_options.json")
+            super().__init__(file=OPTIONS_FILE)
         except FileNotFoundError:
             pass
 
