@@ -69,3 +69,5 @@ def configure_logger(debug: bool) -> None:
     loop.set_exception_handler(async_exception_handler)
 
     GLib.log_set_writer_func(g_log_writer)
+
+    logger.level("DEPRECATED", no=25, color="<yellow>")
