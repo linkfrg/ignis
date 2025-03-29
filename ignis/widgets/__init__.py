@@ -1,4 +1,5 @@
 from typing import TypeAlias
+from ignis.deprecation import deprecated_class
 from .window import Window
 from .label import Label
 from .button import Button
@@ -37,6 +38,9 @@ from .stack_switcher import StackSwitcher
 from .stack_page import StackPage
 
 
+@deprecated_class(
+    "`Widget` class is deprecated, use `from ignis import widgets` instead."
+)
 class Widget:
     Window: TypeAlias = Window
     Label: TypeAlias = Label
