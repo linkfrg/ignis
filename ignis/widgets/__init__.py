@@ -1,4 +1,5 @@
 from typing import TypeAlias
+from ignis.deprecation import deprecated_class
 from .window import Window
 from .label import Label
 from .button import Button
@@ -37,6 +38,9 @@ from .stack_switcher import StackSwitcher
 from .stack_page import StackPage
 
 
+@deprecated_class(
+    "`Widget` class is deprecated, use `from ignis import widgets` instead."
+)
 class Widget:
     Window: TypeAlias = Window
     Label: TypeAlias = Label
@@ -74,3 +78,44 @@ class Widget:
     Stack: TypeAlias = Stack
     StackSwitcher: TypeAlias = StackSwitcher
     StackPage = StackPage
+
+
+__all__ = [
+    "Arrow",
+    "ArrowButton",
+    "Box",
+    "Button",
+    "Calendar",
+    "CenterBox",
+    "CheckButton",
+    "DropDown",
+    "Entry",
+    "EventBox",
+    "FileChooserButton",
+    "FileDialog",
+    "FileFilter",
+    "Grid",
+    "HeaderBar",
+    "Icon",
+    "Label",
+    "ListBox",
+    "ListBoxRow",
+    "MenuItem",
+    "Overlay",
+    "Picture",
+    "PopoverMenu",
+    "RegularWindow",
+    "Revealer",
+    "RevealerWindow",
+    "Scale",
+    "Scroll",
+    "Separator",
+    "SpinButton",
+    "Stack",
+    "StackPage",
+    "StackSwitcher",
+    "Switch",
+    "ToggleButton",
+    "Widget",
+    "Window",
+]
