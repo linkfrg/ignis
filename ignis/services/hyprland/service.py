@@ -277,6 +277,9 @@ class HyprlandService(BaseService):
 
         data = self.__get_obj_data(type_=type_, key=key)
 
+        if data == {}:
+            return
+
         obj = obj_desc.cr_func()
         obj.sync(data)
 
