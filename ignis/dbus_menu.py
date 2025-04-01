@@ -39,10 +39,19 @@ class MenuItem(GObject.Object):
         self.__proxy = proxy
         self._uniq_name = hex(id(self))
         self._item_id = item_id
-        action = Gio.SimpleAction.new(self._uniq_name, None)
-        action.set_enabled(enabled)
-        action.connect("activate", lambda *_: asyncio.create_task(self.__on_activate()))
-        app.add_action(action)
+
+        self._action = Gio.SimpleAction.new(self._uniq_name, None)
+        self._action.set_enabled(enabled)
+        self._activate_id = self._action.connect(
+            "activate", lambda *_: asyncio.create_task(self.__on_activate())
+        )
+
+        app.add_action(self._action)
+
+    def destroy(self) -> None:
+        app.remove_action(self._uniq_name)
+        self._action.disconnect(self._activate_id)
+        self._action = None  # type: ignore
 
     @IgnisProperty
     def uniq_name(self) -> str:
@@ -72,6 +81,7 @@ class DBusMenu(Gtk.PopoverMenu):
 
         self.__proxy = proxy
         self._menu_id: int = 0
+        self._items: list[MenuItem] = []
 
         self.__proxy.signal_subscribe(
             "LayoutUpdated", lambda *args: asyncio.create_task(self.__sync())
@@ -140,6 +150,11 @@ class DBusMenu(Gtk.PopoverMenu):
         return self.__proxy.object_path
 
     def _update_menu(self, layout: list) -> None:
+        for item in self._items:
+            item.destroy()
+
+        self._items = []
+
         self._menu_id = layout[1][0]
 
         items = layout[1][2]
@@ -177,13 +192,16 @@ class DBusMenu(Gtk.PopoverMenu):
                 continue
 
             if visible:
-                item = MenuItem(proxy=self.__proxy, item_id=item_id, enabled=enabled)
-
                 if child != []:
                     submenu = self.__parse(items=child)
                     current_section.append_submenu(label, submenu)
                 else:
+                    item = MenuItem(
+                        proxy=self.__proxy, item_id=item_id, enabled=enabled
+                    )
                     current_section.append(label, f"app.{item.uniq_name}")
+
+                    self._items.append(item)
 
         menu = Gio.Menu()
         for i in sections:
