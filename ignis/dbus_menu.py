@@ -82,6 +82,7 @@ class DBusMenu(Gtk.PopoverMenu):
         self.__proxy = proxy
         self._menu_id: int = 0
         self._items: list[MenuItem] = []
+        self._gmenu: Gio.Menu | None = None
 
         self.__proxy.signal_subscribe(
             "LayoutUpdated", lambda *args: asyncio.create_task(self.__sync())
@@ -155,11 +156,14 @@ class DBusMenu(Gtk.PopoverMenu):
 
         self._items = []
 
+        if self._gmenu:
+            self._gmenu.remove_all()
+
         self._menu_id = layout[1][0]
 
         items = layout[1][2]
-        menu = self.__parse(items=items)
-        self.set_menu_model(menu)
+        self._gmenu = self.__parse(items=items)
+        self.set_menu_model(self._gmenu)
 
     async def __sync(self) -> None:
         try:
