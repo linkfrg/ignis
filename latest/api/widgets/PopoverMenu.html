@@ -381,6 +381,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../base_service.html">BaseService</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deprecation.html">Deprecation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../connection_manager.html">Connection Manager</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../menu_model.html">Menu Model</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Widgets</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Arrow.html">Arrow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ArrowButton.html">ArrowButton</a></li>
@@ -401,7 +402,6 @@
 <li class="toctree-l2"><a class="reference internal" href="Label.html">Label</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ListBox.html">ListBox</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ListBoxRow.html">ListBoxRow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="MenuItem.html">MenuItem</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Overlay.html">Overlay</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Picture.html">Picture</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">PopoverMenu</a></li>
@@ -523,7 +523,7 @@
 <dt class="sig sig-object py" id="ignis.widgets.Widget.PopoverMenu">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.widgets.Widget.</span></span><span class="sig-name descname"><span class="pre">PopoverMenu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.widgets.Widget.PopoverMenu" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-4.0/classes/PopoverMenu.html#Gtk.PopoverMenu" title="(in Gtk 4.0 v4.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gtk.PopoverMenu</span></code></a></p>
-<p>A dropdown menu consisting of a list of <a class="reference internal" href="MenuItem.html#ignis.widgets.Widget.MenuItem" title="ignis.widgets.Widget.MenuItem"><code class="xref py py-class docutils literal notranslate"><span class="pre">MenuItem</span></code></a>.
+<p>A dropdown menu.
 It must be added as a child to a container.
 To display it, call the <code class="docutils literal notranslate"><span class="pre">popup()</span></code> method.</p>
 <div class="admonition note">
@@ -535,33 +535,42 @@ To display it, call the <code class="docutils literal notranslate"><span class="
 <dd class="field-odd"><p><strong>**kwargs</strong> -- Properties to set.</p>
 </dd>
 </dl>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Widget</span><span class="o">.</span><span class="n">PopoverMenu</span><span class="p">(</span>
-    <span class="n">items</span><span class="o">=</span><span class="p">[</span>
-        <span class="n">Widget</span><span class="o">.</span><span class="n">MenuItem</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ignis.menu_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">IgnisMenuModel</span><span class="p">,</span> <span class="n">IgnisMenuItem</span><span class="p">,</span> <span class="n">IgnisMenuSeparator</span>
+
+<span class="n">Widget</span><span class="o">.</span><span class="n">PopoverMenu</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">IgnisMenuModel</span><span class="p">(</span>
+        <span class="n">IgnisMenuItem</span><span class="p">(</span>
             <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Just item&quot;</span><span class="p">,</span>
             <span class="n">on_activate</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;item activated!&quot;</span><span class="p">),</span>
         <span class="p">),</span>
-        <span class="n">Widget</span><span class="o">.</span><span class="n">MenuItem</span><span class="p">(</span>
+        <span class="n">IgnisMenuItem</span><span class="p">(</span>
             <span class="n">label</span><span class="o">=</span><span class="s2">&quot;This is disabled item&quot;</span><span class="p">,</span>
             <span class="n">enabled</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-            <span class="n">on_activate</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;you will not see this message in terminal hehehehehe&quot;</span><span class="p">),</span>
+            <span class="n">on_activate</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span>
+                <span class="s2">&quot;you will not see this message in terminal hehehehehe&quot;</span>
+            <span class="p">),</span>
         <span class="p">),</span>
-        <span class="n">Widget</span><span class="o">.</span><span class="n">MenuItem</span><span class="p">(</span>
-            <span class="n">label</span><span class="o">=</span><span class="s2">&quot;This has submenu!&quot;</span><span class="p">,</span>
-            <span class="n">on_activate</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;anyway activate callback working&quot;</span><span class="p">),</span>
-            <span class="n">submenu</span><span class="o">=</span><span class="n">Widget</span><span class="o">.</span><span class="n">PopoverMenu</span><span class="p">(</span><span class="n">items</span><span class="o">=</span><span class="p">[</span><span class="n">Widget</span><span class="o">.</span><span class="n">MenuItem</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)])</span>
+        <span class="n">IgnisMenuModel</span><span class="p">(</span>
+            <span class="o">*</span><span class="p">(</span>  <span class="c1"># unpacking because items must be passed as *args</span>
+                <span class="n">IgnisMenuItem</span><span class="p">(</span>
+                    <span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">),</span>
+                    <span class="n">on_activate</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Clicked on item </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">!&quot;</span><span class="p">),</span>
+                <span class="p">)</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+            <span class="p">),</span>
+            <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Submenu&quot;</span><span class="p">,</span>  <span class="c1"># pass label as keyword argument</span>
         <span class="p">),</span>
-    <span class="p">]</span>
+    <span class="p">),</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <dl class="py gproperty">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.PopoverMenu.items">
-<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">items</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="MenuItem.html#ignis.widgets.Widget.MenuItem" title="ignis.widgets.menuitem.MenuItem"><span class="pre">MenuItem</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.widgets.Widget.PopoverMenu.items" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.Widget.PopoverMenu.model">
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">model</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../menu_model.html#ignis.menu_model.IgnisMenuModel" title="ignis.menu_model.IgnisMenuModel"><span class="pre">IgnisMenuModel</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.PopoverMenu.model" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-write</p></li>
 </ul>
-<p>A list of <a class="reference internal" href="MenuItem.html#ignis.widgets.Widget.MenuItem" title="ignis.widgets.Widget.MenuItem"><code class="xref py py-class docutils literal notranslate"><span class="pre">MenuItem</span></code></a>.</p>
+<p>A menu model.</p>
 </dd></dl>
 
 </dd></dl>
@@ -616,7 +625,7 @@ To display it, call the <code class="docutils literal notranslate"><span class="
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.PopoverMenu"><code class="docutils literal notranslate"><span class="pre">PopoverMenu</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.PopoverMenu.items"><code class="docutils literal notranslate"><span class="pre">PopoverMenu.items</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.PopoverMenu.model"><code class="docutils literal notranslate"><span class="pre">PopoverMenu.model</span></code></a></li>
 </ul>
 </li>
 </ul>
