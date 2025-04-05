@@ -20,6 +20,7 @@ This reference manual details functions, modules, and objects included in Ignis,
    base_service
    deprecation
    connection_manager
+   menu_model
    widgets/index
    services/index
    utils/index

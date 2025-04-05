@@ -1,5 +1,6 @@
 import datetime
 import asyncio
+from ignis.menu_model import IgnisMenuModel, IgnisMenuItem, IgnisMenuSeparator
 from ignis.widgets import Widget
 from ignis.utils import Utils
 from ignis.app import IgnisApp
@@ -300,36 +301,36 @@ def logout() -> None:
 
 def power_menu() -> Widget.Button:
     menu = Widget.PopoverMenu(
-        items=[
-            Widget.MenuItem(
+        model=IgnisMenuModel(
+            IgnisMenuItem(
                 label="Lock",
                 on_activate=lambda x: create_exec_task("swaylock"),
             ),
-            Widget.Separator(),
-            Widget.MenuItem(
+            IgnisMenuSeparator(),
+            IgnisMenuItem(
                 label="Suspend",
                 on_activate=lambda x: create_exec_task("systemctl suspend"),
             ),
-            Widget.MenuItem(
+            IgnisMenuItem(
                 label="Hibernate",
                 on_activate=lambda x: create_exec_task("systemctl hibernate"),
             ),
-            Widget.Separator(),
-            Widget.MenuItem(
+            IgnisMenuSeparator(),
+            IgnisMenuItem(
                 label="Reboot",
                 on_activate=lambda x: create_exec_task("systemctl reboot"),
             ),
-            Widget.MenuItem(
+            IgnisMenuItem(
                 label="Shutdown",
                 on_activate=lambda x: create_exec_task("systemctl poweroff"),
             ),
-            Widget.Separator(),
-            Widget.MenuItem(
+            IgnisMenuSeparator(),
+            IgnisMenuItem(
                 label="Logout",
                 enabled=hyprland.is_available or niri.is_available,
                 on_activate=lambda x: logout(),
             ),
-        ]
+        ),
     )
     return Widget.Button(
         child=Widget.Box(
