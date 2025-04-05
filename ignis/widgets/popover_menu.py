@@ -8,7 +8,7 @@ class PopoverMenu(Gtk.PopoverMenu, BaseWidget):
     """
     Bases: :class:`Gtk.PopoverMenu`
 
-    A dropdown menu consisting of a list of :class:`~ignis.widgets.Widget.MenuItem`.
+    A dropdown menu.
     It must be added as a child to a container.
     To display it, call the ``popup()`` method.
 
