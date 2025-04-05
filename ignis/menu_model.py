@@ -159,7 +159,7 @@ class IgnisMenuModel(IgnisGObject):
         self._gmenu = self.generate_gmenu(value)
 
     @IgnisProperty
-    def gmenu(self) -> Gio.Menu | None:
+    def gmenu(self) -> "Gio.Menu | None":
         """
         A `Gio.Menu` built from the contents of :attr:`items`, or ``None``.
         """
