@@ -89,11 +89,11 @@ class IgnisMenuSeparator:
 
 class IgnisMenuModel(IgnisGObject):
     """
-    A helper class that provides a convenient way to build :class:`Gio.Menu`.
+    A helper class that provides a convenient way to construct a :class:`Gio.Menu`.
 
     Args:
         *args: Items to add.
-        label: The label of the submenu. Works only if this model passed as an item of the parent model. Must be passed only as a **keyword** argument.
+        label: The label of the submenu. Only works if this model passed as an item of the parent model. Must be provided only as a **keyword** argument.
 
     .. code-block:: python
 
@@ -161,14 +161,14 @@ class IgnisMenuModel(IgnisGObject):
     @IgnisProperty
     def gmenu(self) -> "Gio.Menu | None":
         """
-        A `Gio.Menu` built from the contents of :attr:`items`, or ``None``.
+        The `Gio.Menu` built from the contents of :attr:`items`, or ``None`` if no items are present.
         """
         return self._gmenu
 
     @IgnisProperty
     def label(self) -> str | None:
         """
-        The label of the submenu. Works only if this model passed as an item of the parent model.
+        The label of the submenu. Only Works if this model passed as an item of the parent model.
         """
         return self._label
 

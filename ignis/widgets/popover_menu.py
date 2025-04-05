@@ -60,7 +60,7 @@ class PopoverMenu(Gtk.PopoverMenu, BaseWidget):
     @IgnisProperty
     def model(self) -> IgnisMenuModel | None:
         """
-        A list of :class:`~ignis.widgets.Widget.MenuItem`.
+        A menu model.
         """
         return self._items
 
