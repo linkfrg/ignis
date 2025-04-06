@@ -125,13 +125,6 @@ class IgnisMenuModel(IgnisGObject):
 
         # Access built Gio.Menu
         print(model.gmenu)
-
-        # Generate Gio.Menu using classmethod
-        IgnisMenuModel.generate_gmenu(
-            items=[
-                ...
-            ]
-        )
     """
 
     def __init__(
@@ -156,7 +149,7 @@ class IgnisMenuModel(IgnisGObject):
     @items.setter
     def items(self, value: ItemsType) -> None:
         self._items = value
-        self._gmenu = self.generate_gmenu(value)
+        self.__generate_gmenu(value)
 
     @IgnisProperty
     def gmenu(self) -> "Gio.Menu | None":
@@ -172,17 +165,7 @@ class IgnisMenuModel(IgnisGObject):
         """
         return self._label
 
-    @classmethod
-    def generate_gmenu(cls, items: ItemsType) -> Gio.Menu:
-        """
-        Generate :class:`Gio.Menu` from the given ``items``.
-
-        Args:
-            items: A list of items.
-
-        Returns:
-            Generated :class:`Gio.Menu`.
-        """
+    def __generate_gmenu(self, items: ItemsType) -> None:
         root_menu = Gio.Menu()
         current_section = Gio.Menu()
         root_menu.append_section(None, current_section)
@@ -198,4 +181,5 @@ class IgnisMenuModel(IgnisGObject):
                 current_section = Gio.Menu()
                 root_menu.append_section(None, current_section)
 
-        return root_menu
+        self._gmenu = root_menu
+        self.notify("gmenu")

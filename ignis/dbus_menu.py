@@ -77,6 +77,7 @@ class DBusMenu(Gtk.PopoverMenu):
 
         self.__proxy = proxy
         self._menu_id: int = 0
+        self._model: IgnisMenuModel = IgnisMenuModel()
 
         self.__proxy.signal_subscribe(
             "LayoutUpdated", lambda *args: asyncio.create_task(self.__sync())
@@ -149,8 +150,9 @@ class DBusMenu(Gtk.PopoverMenu):
 
         items = layout[1][2]
         contents = self.__parse(items=items)
-        gmenu = IgnisMenuModel.generate_gmenu(items=contents)
-        self.set_menu_model(gmenu)
+
+        self._model.items = contents
+        self.set_menu_model(self._model.gmenu)
 
     async def __sync(self) -> None:
         try:
