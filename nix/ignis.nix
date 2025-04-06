@@ -1,6 +1,45 @@
-{ self, fetchFromGitHub, pkgs, version ? "git", ... }:
+{
+  lib,
+  dart-sass,
+  fetchFromGitHub,
+  git,
+  glib,
+  gnome-bluetooth,
+  gst_all_1,
+  gtk4,
+  gtk4-layer-shell,
+  gobject-introspection,
+  libpulseaudio,
+  librsvg,
+  makeWrapper,
+  meson,
+  networkmanager,
+  ninja,
+  pipewire,
+  pkg-config,
+  python3,
+  stdenv,
+  rev ? "dirty",
+  version ? "git",
+  ...
+}:
+
 let
-  inherit (pkgs.lib) concatStringsSep;
+  inherit (builtins) concatStringsSep;
+
+  python = python3.withPackages (
+    ps: with ps; [
+      certifi
+      charset-normalizer
+      click
+      idna
+      loguru
+      markupsafe
+      pycairo
+      pygobject3
+      urllib3
+    ]
+  );
 
   gvc = fetchFromGitHub {
     owner = "linkfrg";
@@ -9,7 +48,7 @@ let
     hash = "sha256-ikF9EzFlsRH8i4+SVUHETF4Jk1ob2JX1RLsuMdzrQOQ=";
   };
 in
-pkgs.stdenv.mkDerivation {
+stdenv.mkDerivation {
   inherit version;
 
   pname = "ignis";
@@ -17,81 +56,99 @@ pkgs.stdenv.mkDerivation {
   src = ./..;
 
   nativeBuildInputs = [
-    pkgs.pkg-config
-    pkgs.meson
-    pkgs.ninja
-    pkgs.git
-    pkgs.makeWrapper
+    git
+    makeWrapper
+    meson
+    ninja
+    pkg-config
+    python
   ];
 
-  buildInputs = [
-    pkgs.glib
-    pkgs.gtk4
-    pkgs.gtk4-layer-shell
-    pkgs.libpulseaudio
-    pkgs.python312Packages.pygobject3
-    pkgs.python312Packages.pycairo
-    pkgs.python312Packages.click
-    pkgs.python312Packages.charset-normalizer
-    pkgs.gst_all_1.gstreamer
-    pkgs.gst_all_1.gst-plugins-base
-    pkgs.gst_all_1.gst-plugins-good
-    pkgs.gst_all_1.gst-plugins-bad
-    pkgs.gst_all_1.gst-plugins-ugly
-    pkgs.pipewire
-    pkgs.dart-sass
-  ];
+  buildInputs =
+    [
+      dart-sass
+      glib
+      gtk4
+      gtk4-layer-shell
+      libpulseaudio
+      pipewire
+    ]
+    ++ (with gst_all_1; [
+      gstreamer
+      gst-plugins-base
+      gst-plugins-good
+      gst-plugins-bad
+      gst-plugins-ugly
+    ])
+    ++ (with python.pkgs; [
+      charset-normalizer
+      click
+      pycairo
+      pygobject3
+    ]);
 
   patchPhase = ''
     mkdir -p ./subprojects/gvc
     cp -r ${gvc}/* ./subprojects/gvc
+
+    substituteInPlace bin/ignis \
+      --replace '/usr/bin/env python3' ${python.interpreter}
   '';
 
   buildPhase = ''
+    runHook preBuild
+
     cd ..
-    meson setup build --prefix=$out -DCOMMITHASH=${self.rev or "dirty"}
+    meson setup build --prefix="$out" -DCOMMITHASH="${rev}"
     ninja -C build
+
+    runHook postBuild
   '';
 
   installPhase = ''
+    runHook preInstall
+
     ninja -C build install
     wrapProgram $out/bin/ignis \
-      --prefix-each PATH ":" "${pkgs.gst_all_1.gstreamer}/bin ${pkgs.dart-sass}/bin" \
-      --set PYTHONPATH "${concatStringsSep ":" (map (pkg: "${pkg}/lib/python3.12/site-packages") [
-        pkgs.python312Packages.markupsafe
-        pkgs.python312Packages.pygobject3
-        pkgs.python312Packages.pycairo
-        pkgs.python312Packages.loguru
-        pkgs.python312Packages.certifi
-        pkgs.python312Packages.idna
-        pkgs.python312Packages.urllib3
-        pkgs.python312Packages.click
-        pkgs.python312Packages.charset-normalizer
-      ])}:$out/lib/python3.12/site-packages:$PYTHONPATH" \
-      --set GI_TYPELIB_PATH "$out/lib:${concatStringsSep ":" (map (pkg: "${pkg}/lib/girepository-1.0") [
-        pkgs.glib
-        pkgs.gobject-introspection
-        pkgs.networkmanager
-        pkgs.gst_all_1.gstreamer
-        pkgs.gnome-bluetooth
-      ])}:$GI_TYPELIB_PATH" \
-      --set LD_LIBRARY_PATH "$out/lib:${pkgs.gtk4-layer-shell}/lib:${pkgs.glib}/lib:$LD_LIBRARY_PATH" \
-      --set GST_PLUGIN_PATH "${concatStringsSep ":" (map (pkg: "${pkg}/lib/gstreamer-1.0") [
-        pkgs.gst_all_1.gst-plugins-base
-        pkgs.gst_all_1.gst-plugins-good
-        pkgs.gst_all_1.gst-plugins-bad
-        pkgs.gst_all_1.gst-plugins-ugly
-        pkgs.pipewire
-      ])}:$GST_PLUGIN_PATH" \
-      --set GDK_PIXBUF_MODULE_FILE "$(echo ${pkgs.librsvg.out}/lib/gdk-pixbuf-2.0/*/loaders.cache)"
+      --prefix-each PATH ":" "${gst_all_1.gstreamer}/bin ${dart-sass}/bin" \
+      --prefix-each PYTHONPATH : "$out/${python.sitePackages} ${python}/${python.sitePackages}" \
+      --set GI_TYPELIB_PATH "$out/lib:${
+        concatStringsSep ":" (
+          map (pkg: "${pkg}/lib/girepository-1.0") [
+            glib
+            gobject-introspection
+            networkmanager
+            gst_all_1.gstreamer
+            gnome-bluetooth
+          ]
+        )
+      }:$GI_TYPELIB_PATH" \
+      --set LD_LIBRARY_PATH "$out/lib:${gtk4-layer-shell}/lib:${glib}/lib:$LD_LIBRARY_PATH" \
+      --set GST_PLUGIN_PATH "${
+        concatStringsSep ":" (
+          map (pkg: "${pkg}/lib/gstreamer-1.0") [
+            gst_all_1.gst-plugins-base
+            gst_all_1.gst-plugins-good
+            gst_all_1.gst-plugins-bad
+            gst_all_1.gst-plugins-ugly
+            pipewire
+          ]
+        )
+      }:$GST_PLUGIN_PATH" \
+      --set GDK_PIXBUF_MODULE_FILE "$(echo ${librsvg.out}/lib/gdk-pixbuf-2.0/*/loaders.cache)"
+
+    runHook postInstall
   '';
 
-  meta = with pkgs.lib; {
+  meta = {
     description = "A widget framework for building desktop shells, written and configurable in Python";
     homepage = "https://github.com/linkfrg/ignis";
     changelog = "https://github.com/linkfrg/ignis/releases/tag/v${version}";
-    license = licenses.gpl3;
-    maintainers = with maintainers; [ frdiener somokill ];
+    license = lib.licenses.gpl3;
+    maintainers = [
+      lib.maintainers.frdiener
+      lib.maintainers.somokill
+    ];
     mainProgram = "ignis";
   };
 }

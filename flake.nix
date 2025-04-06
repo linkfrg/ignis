@@ -1,11 +1,10 @@
 {
-  description = "Flake for build ignis";
+  description = "A widget framework for building desktop shells, written and configurable in Python";
 
-  inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-  };
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-  outputs = { self, nixpkgs }:
+  outputs =
+    { self, nixpkgs }:
     let
       supportedSystems = [
         "aarch64-linux"
@@ -17,9 +16,15 @@
       version = import ./nix/version.nix { inherit self; };
     in
     {
-      overlays.default = import ./nix/overlay.nix { inherit self; inherit version; };
+      overlays.default = final: prev: {
+        ignis = prev.callPackage ./nix/ignis.nix {
+          inherit version;
+          rev = self.rev or "dirty";
+        };
+      };
 
-      packages = forAllSystems (system:
+      packages = forAllSystems (
+        system:
         let
           pkgs = import nixpkgs {
             inherit system;
