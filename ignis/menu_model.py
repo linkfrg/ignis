@@ -137,7 +137,7 @@ class IgnisMenuModel(IgnisGObject):
         self._items: ItemsType = []
 
         self._label = label
-        self.items = args
+        self.items = list(args)
 
     @IgnisProperty
     def items(self) -> ItemsType:
