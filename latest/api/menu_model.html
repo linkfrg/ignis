@@ -556,13 +556,6 @@
 
 <span class="c1"># Access built Gio.Menu</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">gmenu</span><span class="p">)</span>
-
-<span class="c1"># Generate Gio.Menu using classmethod</span>
-<span class="n">IgnisMenuModel</span><span class="o">.</span><span class="n">generate_gmenu</span><span class="p">(</span>
-    <span class="n">items</span><span class="o">=</span><span class="p">[</span>
-        <span class="o">...</span>
-    <span class="p">]</span>
-<span class="p">)</span>
 </pre></div>
 </div>
 <dl class="py gproperty">
@@ -590,23 +583,6 @@
 <li><p>read-only</p></li>
 </ul>
 <p>The label of the submenu. Only Works if this model passed as an item of the parent model.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="ignis.menu_model.IgnisMenuModel.generate_gmenu">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">generate_gmenu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">items</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ignis.menu_model.IgnisMenuItem" title="ignis.menu_model.IgnisMenuItem"><span class="pre">IgnisMenuItem</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#ignis.menu_model.IgnisMenuModel" title="ignis.menu_model.IgnisMenuModel"><span class="pre">IgnisMenuModel</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#ignis.menu_model.IgnisMenuSeparator" title="ignis.menu_model.IgnisMenuSeparator"><span class="pre">IgnisMenuSeparator</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">gi.repository.Gio.Menu</span></span></span><a class="headerlink" href="#ignis.menu_model.IgnisMenuModel.generate_gmenu" title="Link to this definition">#</a></dt>
-<dd><p>Generate <a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/classes/Menu.html#Gio.Menu" title="(in Gio 2.0 v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gio.Menu</span></code></a> from the given <code class="docutils literal notranslate"><span class="pre">items</span></code>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>items</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>[<a class="reference internal" href="#ignis.menu_model.IgnisMenuItem" title="ignis.menu_model.IgnisMenuItem"><code class="xref py py-class docutils literal notranslate"><span class="pre">IgnisMenuItem</span></code></a> | <a class="reference internal" href="#ignis.menu_model.IgnisMenuModel" title="ignis.menu_model.IgnisMenuModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">IgnisMenuModel</span></code></a> | <a class="reference internal" href="#ignis.menu_model.IgnisMenuSeparator" title="ignis.menu_model.IgnisMenuSeparator"><code class="xref py py-class docutils literal notranslate"><span class="pre">IgnisMenuSeparator</span></code></a>]</span>) -- A list of items.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Menu</span></code></span></p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Generated <a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/classes/Menu.html#Gio.Menu" title="(in Gio 2.0 v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gio.Menu</span></code></a>.</p>
-</dd>
-</dl>
 </dd></dl>
 
 </dd></dl>
@@ -730,7 +706,6 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.menu_model.IgnisMenuModel.items"><code class="docutils literal notranslate"><span class="pre">IgnisMenuModel.items</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.menu_model.IgnisMenuModel.gmenu"><code class="docutils literal notranslate"><span class="pre">IgnisMenuModel.gmenu</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.menu_model.IgnisMenuModel.label"><code class="docutils literal notranslate"><span class="pre">IgnisMenuModel.label</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.menu_model.IgnisMenuModel.generate_gmenu"><code class="docutils literal notranslate"><span class="pre">IgnisMenuModel.generate_gmenu()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.menu_model.IgnisMenuItem"><code class="docutils literal notranslate"><span class="pre">IgnisMenuItem</span></code></a><ul class="nav section-nav flex-column">
