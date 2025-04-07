@@ -62,9 +62,9 @@ class PopoverMenu(Gtk.PopoverMenu, BaseWidget):
         """
         A menu model.
         """
-        return self._items
+        return self._model
 
     @model.setter
     def model(self, value: IgnisMenuModel) -> None:
-        self._model = IgnisMenuModel
+        self._model = value
         self.set_menu_model(value.gmenu)
