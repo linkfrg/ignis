@@ -213,6 +213,9 @@ class IgnisMenuModel(IgnisGObject):
             if isinstance(item, IgnisMenuItem):
                 item._destroy()
 
+            elif isinstance(item, IgnisMenuModel):
+                item.clean_gmenu(notify=notify)
+
         self._items.clear()
 
         for menu_item in self._links:
