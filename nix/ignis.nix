@@ -1,45 +1,94 @@
-{ self, fetchFromGitHub, pkgs, version ? "git", ... }:
-let
-  inherit (pkgs.lib) concatStringsSep;
+{ self
+, lib
+, wrapGAppsHook4
+, pkg-config
+, meson
+, ninja
+, git
+, glib
+, gtk4
+, gtk4-layer-shell
+, gobject-introspection
+, librsvg
+, dart-sass
+, libpulseaudio
+, pipewire
+, networkmanager
+, gnome-bluetooth
+, python312Packages
+, gst_all_1
+, gvc
+, extraPackages ? []
+, version ? "git"
+}:
+  let
+    inherit (lib)
+      licenses
+      platforms
+      maintainers
+    ;
+    inherit (python312Packages)
+      buildPythonPackage
+      pygobject3
+      pycairo
+      click
+      charset-normalizer
+      markupsafe
+      loguru
+      certifi
+      idna
+      urllib3
+    ;
+    inherit (gst_all_1)
+      gstreamer
+      gst-plugins-base
+      gst-plugins-good
+      gst-plugins-bad
+      gst-plugins-ugly
+    ;
+  in buildPythonPackage {
 
-  gvc = fetchFromGitHub {
-    owner = "linkfrg";
-    repo = "libgnome-volume-control-wheel";
-    rev = "2d1cb33dacdae43127bb843a48b159ea7b8925d0";
-    hash = "sha256-ikF9EzFlsRH8i4+SVUHETF4Jk1ob2JX1RLsuMdzrQOQ=";
-  };
-in
-pkgs.stdenv.mkDerivation {
   inherit version;
-
   pname = "ignis";
+  src = "${self}";
 
-  src = ./..;
+  format = "other";
 
   nativeBuildInputs = [
-    pkgs.pkg-config
-    pkgs.meson
-    pkgs.ninja
-    pkgs.git
-    pkgs.makeWrapper
+    pkg-config
+    meson
+    ninja
+    git
+    gobject-introspection
+    wrapGAppsHook4
   ];
 
-  buildInputs = [
-    pkgs.glib
-    pkgs.gtk4
-    pkgs.gtk4-layer-shell
-    pkgs.libpulseaudio
-    pkgs.python312Packages.pygobject3
-    pkgs.python312Packages.pycairo
-    pkgs.python312Packages.click
-    pkgs.python312Packages.charset-normalizer
-    pkgs.gst_all_1.gstreamer
-    pkgs.gst_all_1.gst-plugins-base
-    pkgs.gst_all_1.gst-plugins-good
-    pkgs.gst_all_1.gst-plugins-bad
-    pkgs.gst_all_1.gst-plugins-ugly
-    pkgs.pipewire
-    pkgs.dart-sass
+  dependencies = extraPackages ++ [
+    glib
+    gtk4
+    gtk4-layer-shell
+    gobject-introspection
+    dart-sass
+    gstreamer
+    gst-plugins-base
+    gst-plugins-good
+    gst-plugins-bad
+    gst-plugins-ugly
+    librsvg
+    libpulseaudio
+    pipewire
+    networkmanager
+    gnome-bluetooth
+
+    pygobject3
+    pycairo
+    click
+    charset-normalizer
+    markupsafe
+    loguru
+    certifi
+    idna
+    urllib3
   ];
 
   patchPhase = ''
@@ -55,43 +104,27 @@ pkgs.stdenv.mkDerivation {
 
   installPhase = ''
     ninja -C build install
-    wrapProgram $out/bin/ignis \
-      --prefix-each PATH ":" "${pkgs.gst_all_1.gstreamer}/bin ${pkgs.dart-sass}/bin" \
-      --set PYTHONPATH "${concatStringsSep ":" (map (pkg: "${pkg}/lib/python3.12/site-packages") [
-        pkgs.python312Packages.markupsafe
-        pkgs.python312Packages.pygobject3
-        pkgs.python312Packages.pycairo
-        pkgs.python312Packages.loguru
-        pkgs.python312Packages.certifi
-        pkgs.python312Packages.idna
-        pkgs.python312Packages.urllib3
-        pkgs.python312Packages.click
-        pkgs.python312Packages.charset-normalizer
-      ])}:$out/lib/python3.12/site-packages:$PYTHONPATH" \
-      --set GI_TYPELIB_PATH "$out/lib:${concatStringsSep ":" (map (pkg: "${pkg}/lib/girepository-1.0") [
-        pkgs.glib
-        pkgs.gobject-introspection
-        pkgs.networkmanager
-        pkgs.gst_all_1.gstreamer
-        pkgs.gnome-bluetooth
-      ])}:$GI_TYPELIB_PATH" \
-      --set LD_LIBRARY_PATH "$out/lib:${pkgs.gtk4-layer-shell}/lib:${pkgs.glib}/lib:$LD_LIBRARY_PATH" \
-      --set GST_PLUGIN_PATH "${concatStringsSep ":" (map (pkg: "${pkg}/lib/gstreamer-1.0") [
-        pkgs.gst_all_1.gst-plugins-base
-        pkgs.gst_all_1.gst-plugins-good
-        pkgs.gst_all_1.gst-plugins-bad
-        pkgs.gst_all_1.gst-plugins-ugly
-        pkgs.pipewire
-      ])}:$GST_PLUGIN_PATH" \
-      --set GDK_PIXBUF_MODULE_FILE "$(echo ${pkgs.librsvg.out}/lib/gdk-pixbuf-2.0/*/loaders.cache)"
   '';
 
-  meta = with pkgs.lib; {
-    description = "A widget framework for building desktop shells, written and configurable in Python";
+  #? avoid double wrapping. we manually pass args to wrapper
+  dontWrapGApps = true;
+  preFixup = ''
+    makeWrapperArgs+=(
+      "''${gappsWrapperArgs[@]}"
+      --set LD_LIBRARY_PATH "$out/lib:${gtk4-layer-shell}/lib:$LD_LIBRARY_PATH"
+    )
+  '';
+
+  meta = {
+    description = ''
+      A widget framework for building desktop shells,
+      written and configurable in Python.
+    '';
     homepage = "https://github.com/linkfrg/ignis";
-    changelog = "https://github.com/linkfrg/ignis/releases/tag/v${version}";
+    changelog = "https://github.com/linkfrg/ignis/releases";
     license = licenses.gpl3;
-    maintainers = with maintainers; [ frdiener somokill ];
+    platforms = platforms.linux;
+    maintainers = with maintainers; [ frdiener somokill MOIS3Y ];
     mainProgram = "ignis";
   };
 }
