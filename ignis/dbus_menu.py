@@ -49,10 +49,6 @@ class DBusMenuItem(IgnisMenuItem):
             on_activate=lambda *_: asyncio.create_task(self.__on_activate()),
         )
 
-    @IgnisProperty
-    def uniq_name(self) -> str:
-        return self._uniq_name
-
     async def __on_activate(self) -> None:
         await self.__proxy.EventAsync(
             "(isvu)",
