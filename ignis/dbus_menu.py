@@ -1,4 +1,5 @@
 import asyncio
+import weakref
 from gi.repository import Gtk, GLib  # type: ignore
 from ignis.dbus import DBusProxy
 from ignis.utils import Utils
@@ -43,10 +44,14 @@ class DBusMenuItem(IgnisMenuItem):
         self.__proxy = proxy
         self._item_id = item_id
 
+        weak_self = weakref.ref(self)
+
         super().__init__(
             label=label,
             enabled=enabled,
-            on_activate=lambda *_: asyncio.create_task(self.__on_activate()),
+            on_activate=lambda *_: asyncio.create_task(weak_self().__on_activate())  # type: ignore
+            if weak_self()
+            else None,
         )
 
     async def __on_activate(self) -> None:
@@ -73,7 +78,7 @@ class DBusMenu(Gtk.PopoverMenu):
 
         self.__proxy = proxy
         self._menu_id: int = 0
-        self._model: IgnisMenuModel = IgnisMenuModel()
+        self._model: IgnisMenuModel | None = None
 
         self.__proxy.signal_subscribe(
             "LayoutUpdated", lambda *args: asyncio.create_task(self.__sync())
@@ -142,12 +147,16 @@ class DBusMenu(Gtk.PopoverMenu):
         return self.__proxy.object_path
 
     def _update_menu(self, layout: list) -> None:
+        if self._model:
+            self._model.clean_gmenu()
+            self._model = None
+
         self._menu_id = layout[1][0]
 
         items = layout[1][2]
         contents = self.__parse(items=items)
 
-        self._model.items = contents
+        self._model = IgnisMenuModel(*contents)
         self.set_menu_model(self._model.gmenu)
 
     async def __sync(self) -> None:
