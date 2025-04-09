@@ -44,9 +44,15 @@ class ListBox(Gtk.ListBox, BaseWidget):
             if row.on_activate:
                 row.on_activate(row)
 
-    def select_row(self, row: ListBoxRow) -> None:  # type: ignore
-        super().select_row(row)
-        self.__on_row_activated(None, row)
+    def activate_row(self, row: ListBoxRow) -> None:
+        """
+        Manually trigger the activation of the row.
+
+        Args:
+            row: The row to activate.
+        """
+        self.select_row(row)
+        self.emit("row-activated", row)
 
     @IgnisProperty
     def rows(self) -> list[Gtk.Widget]:
