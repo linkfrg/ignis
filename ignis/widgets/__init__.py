@@ -20,7 +20,6 @@ from .file_chooser_button import FileChooserButton
 from .file_filter import FileFilter
 from .file_dialog import FileDialog
 from .grid import Grid
-from .menuitem import MenuItem
 from .popover_menu import PopoverMenu
 from .eventbox import EventBox
 from .headerbar import HeaderBar
@@ -61,7 +60,6 @@ class Widget:
     FileFilter: TypeAlias = FileFilter
     Grid: TypeAlias = Grid
     PopoverMenu: TypeAlias = PopoverMenu
-    MenuItem: TypeAlias = MenuItem
     EventBox: TypeAlias = EventBox
     FileDialog: TypeAlias = FileDialog
     HeaderBar: TypeAlias = HeaderBar

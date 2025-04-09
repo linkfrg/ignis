@@ -200,6 +200,7 @@ class HyprlandService(BaseService):
                 self.__create_workspace(int(value_list[0]))
             case "workspace":
                 self.__sync_active_workspace()
+                self.__sync_monitor_active_ws()
             case "focusedmon":
                 self.__sync_active_workspace()
             case "activelayout":
@@ -275,6 +276,9 @@ class HyprlandService(BaseService):
         obj_desc = self._OBJ_TYPES[type_]
 
         data = self.__get_obj_data(type_=type_, key=key)
+
+        if data == {}:
+            return
 
         obj = obj_desc.cr_func()
         obj.sync(data)
@@ -379,6 +383,18 @@ class HyprlandService(BaseService):
 
     def __remove_monitor(self, monitor_name: str) -> None:
         self.__remove_obj(type_="monitor", key=monitor_name)
+
+    def __sync_monitor_active_ws(self) -> None:
+        self.__sync_obj_data(
+            type_="monitor",
+            key=self.active_workspace.monitor,
+            data={
+                "activeWorkspace": {
+                    "id": self.active_workspace.id,
+                    "name": self.active_workspace.name,
+                }
+            },
+        )
 
     def __change_focused_monitor(self, monitor_name: str, workspace_id: int) -> None:
         ws = self.get_workspace_by_id(workspace_id)
