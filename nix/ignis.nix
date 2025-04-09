@@ -145,10 +145,6 @@ stdenv.mkDerivation {
     homepage = "https://github.com/linkfrg/ignis";
     changelog = "https://github.com/linkfrg/ignis/releases/tag/v${version}";
     license = lib.licenses.gpl3;
-    maintainers = [
-      lib.maintainers.frdiener
-      lib.maintainers.somokill
-    ];
     mainProgram = "ignis";
   };
 }
