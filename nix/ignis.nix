@@ -29,15 +29,10 @@ let
 
   python = python3.withPackages (
     ps: with ps; [
-      certifi
-      charset-normalizer
       click
-      idna
       loguru
-      markupsafe
       pycairo
       pygobject3
-      urllib3
     ]
   );
 
@@ -81,7 +76,6 @@ stdenv.mkDerivation {
       gst-plugins-ugly
     ])
     ++ (with python.pkgs; [
-      charset-normalizer
       click
       pycairo
       pygobject3
