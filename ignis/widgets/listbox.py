@@ -34,7 +34,7 @@ class ListBox(Gtk.ListBox, BaseWidget):
 
     def __init__(self, **kwargs):
         Gtk.ListBox.__init__(self)
-        self._rows: list[ListBoxRow] = []
+        self._rows: list[Gtk.Widget] = []
         BaseWidget.__init__(self, **kwargs)
 
         self.connect("row_activated", self.__on_row_activated)
@@ -49,14 +49,14 @@ class ListBox(Gtk.ListBox, BaseWidget):
         self.__on_row_activated(None, row)
 
     @IgnisProperty
-    def rows(self) -> list[ListBoxRow]:
+    def rows(self) -> list[Gtk.Widget]:
         """
         A list of rows.
         """
         return self._rows
 
     @rows.setter
-    def rows(self, value: list[ListBoxRow]) -> None:
+    def rows(self, value: list[Gtk.Widget]) -> None:
         for i in self._rows:
             self.remove(i)
 
