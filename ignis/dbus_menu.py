@@ -1,4 +1,5 @@
 import asyncio
+import weakref
 from gi.repository import Gtk, GLib  # type: ignore
 from ignis.dbus import DBusProxy
 from ignis.utils import Utils
@@ -43,10 +44,14 @@ class DBusMenuItem(IgnisMenuItem):
         self.__proxy = proxy
         self._item_id = item_id
 
+        weak_self = weakref.ref(self)
+
         super().__init__(
             label=label,
             enabled=enabled,
-            on_activate=lambda *_: asyncio.create_task(self.__on_activate()),
+            on_activate=lambda *_: asyncio.create_task(weak_self().__on_activate())  # type: ignore
+            if weak_self()
+            else None,
         )
 
     @IgnisProperty
