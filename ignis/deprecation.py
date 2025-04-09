@@ -4,6 +4,9 @@ from loguru import logger
 from collections.abc import Callable
 
 
+logger.level("DEPRECATED", no=25)
+
+
 def deprecation_warning(message: str) -> None:
     """
     Log a warning about the deprecation of a feature or function.

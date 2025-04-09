@@ -70,4 +70,4 @@ def configure_logger(debug: bool) -> None:
 
     GLib.log_set_writer_func(g_log_writer)
 
-    logger.level("DEPRECATED", no=25, color="<yellow>")
+    logger.level("DEPRECATED", color="<yellow>")
