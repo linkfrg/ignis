@@ -82,7 +82,7 @@ class DBusMenu(Gtk.PopoverMenu):
 
         self.__proxy = proxy
         self._menu_id: int = 0
-        self._model: IgnisMenuModel = IgnisMenuModel()
+        self._model: IgnisMenuModel | None = None
 
         self.__proxy.signal_subscribe(
             "LayoutUpdated", lambda *args: asyncio.create_task(self.__sync())
@@ -151,12 +151,16 @@ class DBusMenu(Gtk.PopoverMenu):
         return self.__proxy.object_path
 
     def _update_menu(self, layout: list) -> None:
+        if self._model:
+            self._model.clean_gmenu()
+            self._model = None
+
         self._menu_id = layout[1][0]
 
         items = layout[1][2]
         contents = self.__parse(items=items)
 
-        self._model.items = contents
+        self._model = IgnisMenuModel(*contents)
         self.set_menu_model(self._model.gmenu)
 
     async def __sync(self) -> None:

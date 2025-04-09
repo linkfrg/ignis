@@ -154,7 +154,6 @@ class IgnisMenuModel(IgnisGObject):
 
     @items.setter
     def items(self, value: ItemsType) -> None:
-        self.clean_gmenu(notify=False)
         self._items = value
         self.__generate_gmenu(value)
 
