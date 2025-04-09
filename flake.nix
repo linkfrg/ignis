@@ -1,11 +1,20 @@
 {
-  description = "Flake for build ignis";
+  description = ''
+    Flake for build ignis.
+    ignis is a widget framework for building desktop shells,
+    written and configurable in Python. 
+  '';
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    gvc = {
+      url = "github:linkfrg/libgnome-volume-control-wheel";
+      flake = false; 
+    };
   };
 
-  outputs = { self, nixpkgs }:
+  outputs = { self, nixpkgs, gvc }:
     let
       supportedSystems = [
         "aarch64-linux"
@@ -17,7 +26,7 @@
       version = import ./nix/version.nix { inherit self; };
     in
     {
-      overlays.default = import ./nix/overlay.nix { inherit self; inherit version; };
+      overlays.default = import ./nix/overlay.nix { inherit self gvc version; };
 
       packages = forAllSystems (system:
         let
