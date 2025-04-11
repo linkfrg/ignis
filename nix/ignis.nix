@@ -1,4 +1,11 @@
-{ self, fetchFromGitHub, pkgs, version ? "git", ... }:
+{
+  rev ? "dirty",
+  fetchFromGitHub,
+  pkgs,
+  version ? "git",
+  extraPythonPackages ? [ ],
+  ...
+}:
 let
   inherit (pkgs.lib) concatStringsSep;
 
@@ -49,7 +56,7 @@ pkgs.stdenv.mkDerivation {
 
   buildPhase = ''
     cd ..
-    meson setup build --prefix=$out -DCOMMITHASH=${self.rev or "dirty"}
+    meson setup build --prefix=$out -DCOMMITHASH=${rev}
     ninja -C build
   '';
 
@@ -57,32 +64,46 @@ pkgs.stdenv.mkDerivation {
     ninja -C build install
     wrapProgram $out/bin/ignis \
       --prefix-each PATH ":" "${pkgs.gst_all_1.gstreamer}/bin ${pkgs.dart-sass}/bin" \
-      --set PYTHONPATH "${concatStringsSep ":" (map (pkg: "${pkg}/lib/python3.12/site-packages") [
-        pkgs.python312Packages.markupsafe
-        pkgs.python312Packages.pygobject3
-        pkgs.python312Packages.pycairo
-        pkgs.python312Packages.loguru
-        pkgs.python312Packages.certifi
-        pkgs.python312Packages.idna
-        pkgs.python312Packages.urllib3
-        pkgs.python312Packages.click
-        pkgs.python312Packages.charset-normalizer
-      ])}:$out/lib/python3.12/site-packages:$PYTHONPATH" \
-      --set GI_TYPELIB_PATH "$out/lib:${concatStringsSep ":" (map (pkg: "${pkg}/lib/girepository-1.0") [
-        pkgs.glib
-        pkgs.gobject-introspection
-        pkgs.networkmanager
-        pkgs.gst_all_1.gstreamer
-        pkgs.gnome-bluetooth
-      ])}:$GI_TYPELIB_PATH" \
+      --set PYTHONPATH "${
+        concatStringsSep ":" (
+          map (pkg: "${pkg}/lib/python3.12/site-packages") [
+            pkgs.python312Packages.markupsafe
+            pkgs.python312Packages.pygobject3
+            pkgs.python312Packages.pycairo
+            pkgs.python312Packages.loguru
+            pkgs.python312Packages.certifi
+            pkgs.python312Packages.idna
+            pkgs.python312Packages.urllib3
+            pkgs.python312Packages.click
+            pkgs.python312Packages.charset-normalizer
+          ]
+        )
+      }:${
+        concatStringsSep ":" (map (pkg: "${pkg}/lib/python3.12/site-packages") extraPythonPackages)
+      }:$out/lib/python3.12/site-packages:$PYTHONPATH" \
+      --set GI_TYPELIB_PATH "$out/lib:${
+        concatStringsSep ":" (
+          map (pkg: "${pkg}/lib/girepository-1.0") [
+            pkgs.glib
+            pkgs.gobject-introspection
+            pkgs.networkmanager
+            pkgs.gst_all_1.gstreamer
+            pkgs.gnome-bluetooth
+          ]
+        )
+      }:$GI_TYPELIB_PATH" \
       --set LD_LIBRARY_PATH "$out/lib:${pkgs.gtk4-layer-shell}/lib:${pkgs.glib}/lib:$LD_LIBRARY_PATH" \
-      --set GST_PLUGIN_PATH "${concatStringsSep ":" (map (pkg: "${pkg}/lib/gstreamer-1.0") [
-        pkgs.gst_all_1.gst-plugins-base
-        pkgs.gst_all_1.gst-plugins-good
-        pkgs.gst_all_1.gst-plugins-bad
-        pkgs.gst_all_1.gst-plugins-ugly
-        pkgs.pipewire
-      ])}:$GST_PLUGIN_PATH" \
+      --set GST_PLUGIN_PATH "${
+        concatStringsSep ":" (
+          map (pkg: "${pkg}/lib/gstreamer-1.0") [
+            pkgs.gst_all_1.gst-plugins-base
+            pkgs.gst_all_1.gst-plugins-good
+            pkgs.gst_all_1.gst-plugins-bad
+            pkgs.gst_all_1.gst-plugins-ugly
+            pkgs.pipewire
+          ]
+        )
+      }:$GST_PLUGIN_PATH" \
       --set GDK_PIXBUF_MODULE_FILE "$(echo ${pkgs.librsvg.out}/lib/gdk-pixbuf-2.0/*/loaders.cache)"
   '';
 
@@ -91,7 +112,10 @@ pkgs.stdenv.mkDerivation {
     homepage = "https://github.com/linkfrg/ignis";
     changelog = "https://github.com/linkfrg/ignis/releases/tag/v${version}";
     license = licenses.gpl3;
-    maintainers = with maintainers; [ frdiener somokill ];
+    maintainers = with maintainers; [
+      frdiener
+      somokill
+    ];
     mainProgram = "ignis";
   };
 }

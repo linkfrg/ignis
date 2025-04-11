@@ -34,5 +34,7 @@
           default = self.packages.${system}.ignis;
         }
       );
+      
+      nixosModules.ignis = import ./nix/nixosModule.nix;
     };
 }
