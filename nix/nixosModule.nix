@@ -25,7 +25,7 @@ in
   config = mkIf cfg.enable {
     nixpkgs.overlays = [
       (prev: final: {
-        ignis = final.callPackage ./ignis.nix { inherit self; inherit version; extraPythonPackages = cfg.extraPythonPackages; };
+        ignis = final.callPackage ./ignis.nix { extraPythonPackages = cfg.extraPythonPackages; };
       })
     ];
 
