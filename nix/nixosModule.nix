@@ -2,7 +2,7 @@
   self,
   version,
   ...
-}
+}:
 {
   lib,
   pkgs,
