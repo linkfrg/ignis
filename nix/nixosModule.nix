@@ -1,4 +1,9 @@
 {
+  self,
+  version,
+  ...
+}
+{
   lib,
   pkgs,
   config,
@@ -25,7 +30,7 @@ in
   config = mkIf cfg.enable {
     nixpkgs.overlays = [
       (prev: final: {
-        ignis = final.callPackage ./ignis.nix { extraPythonPackages = cfg.extraPythonPackages; };
+        ignis = final.callPackage ./ignis.nix { inherit self version; extraPythonPackages = cfg.extraPythonPackages; };
       })
     ];
 

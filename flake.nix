@@ -35,6 +35,6 @@
         }
       );
       
-      nixosModules.ignis = import ./nix/nixosModule.nix;
+      nixosModules.ignis = import ./nix/nixosModule.nix {self = self; version = version; };
     };
 }
