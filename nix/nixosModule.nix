@@ -16,6 +16,7 @@ in
 {
   options.programs.ignis = {
     enable = mkEnableOption "Enable the Ignis widget framework.";
+    enableUpowerService = mkEnableOption "Enable the Upower service, to get battery status of devices and bluetooth devices.";
     extraPythonPackages = lib.mkOption {
       type = types.listOf types.package;
       default = [ ];
@@ -30,11 +31,16 @@ in
   config = mkIf cfg.enable {
     nixpkgs.overlays = [
       (prev: final: {
-        ignis = final.callPackage ./ignis.nix { inherit self version; extraPythonPackages = cfg.extraPythonPackages; };
+        ignis = final.callPackage ./ignis.nix {
+          inherit self version;
+          extraPythonPackages = cfg.extraPythonPackages;
+        };
       })
     ];
 
     environment.systemPackages = [ pkgs.ignis ];
-    services.upower.enable = true;
+    services = mkIf cfg.enableUpowerService {
+      upower.enable = true;
+    };
   };
 }
