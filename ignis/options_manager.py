@@ -221,9 +221,26 @@ class OptionsGroup(IgnisGObject):
         """
         Returns a dictionary representation of all options and subgroups.
         """
-        data = self._modified_options.copy()
+        data = {}
+
+        for key in self.__class__.__dict__.keys():
+            if not key.startswith("_"):
+                value = getattr(self, key)
+                if not isinstance(value, type) and not callable(value):
+                    data[key] = value
+
         for name, manager in self.__yield_subgroups():
             data[name] = manager.to_dict()
+
+        return data
+
+    def get_modified_options(self) -> dict[str, Any]:
+        """
+        Get a dictionary representation of modified options and subgroups.
+        """
+        data = self._modified_options.copy()
+        for name, manager in self.__yield_subgroups():
+            data[name] = manager.get_modified_options()
 
         return data
 
@@ -368,7 +385,7 @@ class OptionsManager(OptionsGroup):
             file: The path to the file where options will be saved.
         """
         with open(file, "w") as fp:
-            json.dump(self.to_dict(), fp, indent=4)
+            json.dump(self.get_modified_options(), fp, indent=4)
 
     def load_from_file(self, file: str, emit: bool = True) -> None:
         """
