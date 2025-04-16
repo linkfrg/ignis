@@ -208,6 +208,9 @@ class IgnisMenuModel(IgnisGObject):
         self.notify("gmenu")
 
     def clean_gmenu(self) -> None:
+        """
+        Clean :attr:`gmenu`. This will gracefully destroy it avoiding a memory leak.
+        """
         for item in self._items:
             if isinstance(item, IgnisMenuItem):
                 item._destroy()
