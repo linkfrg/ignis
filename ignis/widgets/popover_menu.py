@@ -66,5 +66,13 @@ class PopoverMenu(Gtk.PopoverMenu, BaseWidget):
 
     @model.setter
     def model(self, value: IgnisMenuModel) -> None:
+        if self._model:
+            self._model.clean_gmenu()
+
         self._model = value
         self.set_menu_model(value.gmenu)
+
+    def __del__(self) -> None:
+        if self._model:
+            self._model.clean_gmenu()
+            self._model = None

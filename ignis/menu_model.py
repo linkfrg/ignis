@@ -31,11 +31,11 @@ class IgnisMenuItem(IgnisGObject):
         self._on_activate = on_activate
         self._uniq_name = hex(id(self))
 
-        action = Gio.SimpleAction.new(self._uniq_name, None)
-        action.set_enabled(enabled)
-        action.connect("activate", self.__on_activate)
+        self._action = Gio.SimpleAction.new(self._uniq_name, None)
+        self._action.set_enabled(enabled)
+        self._activate_id = self._action.connect("activate", self.__on_activate)
 
-        app.add_action(action)
+        app.add_action(self._action)
 
     @IgnisProperty
     def label(self) -> str:
@@ -79,6 +79,11 @@ class IgnisMenuItem(IgnisGObject):
     def __on_activate(self, *args) -> None:
         if self.on_activate:
             self.on_activate(self)
+
+    def _destroy(self) -> None:
+        app.remove_action(self._uniq_name)
+        self._action.disconnect(self._activate_id)
+        self._action = None  # type: ignore
 
 
 class IgnisMenuSeparator:
@@ -135,6 +140,7 @@ class IgnisMenuModel(IgnisGObject):
         super().__init__()
         self._gmenu: Gio.Menu | None = None
         self._items: ItemsType = []
+        self._links: list[Gio.MenuItem] = []
 
         self._label = label
         self.items = list(args)
@@ -165,21 +171,68 @@ class IgnisMenuModel(IgnisGObject):
         """
         return self._label
 
+    def __add_section(self, root_menu: Gio.Menu) -> Gio.Menu:
+        current_section = Gio.Menu()
+        gitem = Gio.MenuItem.new_section(None, current_section)
+        root_menu.append_item(gitem)
+        self._links.append(gitem)
+
+        return current_section
+
+    def __add_item(self, current_section: Gio.Menu, item: IgnisMenuItem) -> None:
+        gitem = Gio.MenuItem.new(item.label, item.action_name)
+        current_section.append_item(gitem)
+
+    def __add_submenu(
+        self, current_section: Gio.Menu, submenu: "IgnisMenuModel"
+    ) -> None:
+        gitem = Gio.MenuItem.new_submenu(submenu.label, submenu.gmenu)
+        current_section.append_item(gitem)
+        self._links.append(gitem)
+
     def __generate_gmenu(self, items: ItemsType) -> None:
         root_menu = Gio.Menu()
-        current_section = Gio.Menu()
-        root_menu.append_section(None, current_section)
+        current_section = self.__add_section(root_menu)
 
         for item in items:
             if isinstance(item, IgnisMenuItem):
-                current_section.append(item.label, item.action_name)
+                self.__add_item(current_section, item)
 
             elif isinstance(item, IgnisMenuModel):
-                current_section.append_submenu(item.label, item.gmenu)
+                self.__add_submenu(current_section, item)
 
             elif isinstance(item, IgnisMenuSeparator):
-                current_section = Gio.Menu()
-                root_menu.append_section(None, current_section)
+                current_section = self.__add_section(root_menu)
 
         self._gmenu = root_menu
+        self.notify("gmenu")
+
+    def clean_gmenu(self) -> None:
+        """
+        Clean :attr:`gmenu`. This will gracefully destroy it, avoiding a memory leak.
+        """
+        for item in self._items:
+            if isinstance(item, IgnisMenuItem):
+                item._destroy()
+
+            elif isinstance(item, IgnisMenuModel):
+                item.clean_gmenu()
+
+        self._items.clear()
+
+        for menu_item in self._links:
+            for link in (Gio.MENU_LINK_SECTION, Gio.MENU_LINK_SUBMENU):
+                menu: Gio.Menu | None = menu_item.get_link(link)  # type: ignore
+                if menu:
+                    menu_item.set_link(link)  # remove Gio.Memu links from Gio.MenuItem
+                    menu.remove_all()  # remove menu items from linked Gio.Menu
+
+        self._links.clear()
+
+        if self._gmenu:
+            self._gmenu.remove_all()
+
+        self._gmenu = None
+
+        self.notify("items")
         self.notify("gmenu")
