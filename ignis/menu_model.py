@@ -207,13 +207,13 @@ class IgnisMenuModel(IgnisGObject):
         self._gmenu = root_menu
         self.notify("gmenu")
 
-    def clean_gmenu(self, notify: bool = True) -> None:
+    def clean_gmenu(self) -> None:
         for item in self._items:
             if isinstance(item, IgnisMenuItem):
                 item._destroy()
 
             elif isinstance(item, IgnisMenuModel):
-                item.clean_gmenu(notify=notify)
+                item.clean_gmenu()
 
         self._items.clear()
 
@@ -231,6 +231,5 @@ class IgnisMenuModel(IgnisGObject):
 
         self._gmenu = None
 
-        if notify:
-            self.notify("items")
-            self.notify("gmenu")
+        self.notify("items")
+        self.notify("gmenu")
