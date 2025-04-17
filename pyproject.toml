@@ -31,7 +31,6 @@ disable_error_code = [
     "no-redef",      # allow variable redefinition (needed for GObject.Property decorator)
     "method-assign", # also needed for GObject.Property
 ]
-mypy_path = ["stubs"]
 check_untyped_defs = true
 
 [[tool.mypy.overrides]]
