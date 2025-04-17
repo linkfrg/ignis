@@ -1,4 +1,4 @@
-{ self, fetchFromGitHub, pkgs, version ? "git", ... }:
+{ self, fetchFromGitHub, pkgs, version ? "git", extraPythonPackages ? [ ], ... }:
 let
   inherit (pkgs.lib) concatStringsSep;
 
@@ -67,7 +67,7 @@ pkgs.stdenv.mkDerivation {
         pkgs.python312Packages.urllib3
         pkgs.python312Packages.click
         pkgs.python312Packages.charset-normalizer
-      ])}:$out/lib/python3.12/site-packages:$PYTHONPATH" \
+      ])}:${concatStringsSep ":" (map (pkg: "${pkg}/lib/python3.12/site-packages") extraPythonPackages)}:$out/lib/python3.12/site-packages:$PYTHONPATH" \
       --set GI_TYPELIB_PATH "$out/lib:${concatStringsSep ":" (map (pkg: "${pkg}/lib/girepository-1.0") [
         pkgs.glib
         pkgs.gobject-introspection
