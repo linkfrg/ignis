@@ -14,3 +14,4 @@ subprojects/gvc
 .idea/*
 docs/tmp
 .artifacts
+result
