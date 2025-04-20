@@ -21,4 +21,5 @@ Get started
    options
    expanding_functionality
    troubleshooting
+   nix
    faq
