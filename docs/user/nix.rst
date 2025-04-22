@@ -175,19 +175,3 @@ It can be useful if the LSP server of your favorite text editor can't find Ignis
     it won't find extra dependencies
 
 
-Tips and tricks
----------------
-
-Some services such as ``upower``, ``hyprland``
-expect that they are already present in the system.
-You need to take care of their launch yourself.
-
-For example, to use ``upower`` add the following to your configuration
-
-**configuration.nix**
-
-.. code-block:: nix
-
-    services.upower.enable = true;
-
-
