@@ -5,8 +5,6 @@ Nix
 Installation
 ------------
 
-To install it you must have flake enabled and your NixOS configuration must be managed with flakes.
-See  `Flakes <https://nixos.wiki/wiki/Flakes>`_ for instructions on how to install and enable them on NixOS.
 
 .. warning::
     This will install the latest (git) version of Ignis.
