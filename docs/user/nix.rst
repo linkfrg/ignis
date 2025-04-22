@@ -1,14 +1,6 @@
 Nix
 ============
 
-Introduction
-------------
-The manual describes the installation of Ignis on NixOS,
-but it is also applicable for installation on any other Linux distro
-with ``Nix`` package manager.
-You only need to adapt the ``flake.nix``.
-
-Supported systems: ``["x86_64-linux" "aarch64-linux"]``
 
 Installation
 ------------
