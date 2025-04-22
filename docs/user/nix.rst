@@ -78,8 +78,7 @@ Overriding
 
 Sometimes you may need to add extra dependencies.
 
-Use a function ``<pkg>.override`` for this.
-You can read more about this function `here <https://ryantm.github.io/nixpkgs/using/overrides/>`_.
+Use the ``<pkg>.override`` function for this.
 
 For example, in the ``~/.config/ignis/config.py`` you use the following python packages
 
