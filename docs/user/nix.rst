@@ -31,40 +31,10 @@ Add Ignis to your flake's inputs:
       };
     }
 
-Output data can be added in different ways.
-In the example below, the home manager is installed as a NixOS module
-
+outputs can be added in different ways.
 Don't forget to pass ``inputs``
 to ``extraSpecialArgs`` for Home Manager
 or ``specialArgs`` for NixOS host configuration
-
-.. code-block:: nix
-
-    {
-      outputs = { self, nixpkgs, home-manager, ... }@inputs: let
-        system = "x86_64-linux";
-        lib = nixpkgs.lib;
-        extraSpecialArgs = { inherit system inputs; };  # <- passing inputs to the attribute set for home-manager
-        specialArgs = { inherit system inputs; };       # <- passing inputs to the attribute set for NixOS
-      in {
-        nixosConfigurations = {
-          dummy-hostname = lib.nixosSystem {
-            modules = [
-              inherit specialArgs;  # <- this will make inputs available anywhere in the NixOS configuration
-              ./path/to/configuration.nix
-              home-manager.nixosModules.home-manager {
-                home-manager = {
-                  inherit extraSpecialArgs;  # <- this will make inputs available anywhere in the HM configuration
-                  useGlobalPkgs = true;
-                  useUserPackages = true;
-                  users.yourUserName = import ./path/to/home.nix;
-                };
-              }
-            ];
-          };
-        };
-      };
-    }
 
 Then add the following to ``environment.systemPackages`` or ``home.packages``:
 
@@ -140,11 +110,14 @@ If you are using home-manager
     }
 
 
-.. hint::
-    You can even add Ignis with extra dependencies to your system ``Python``
+Tips
+--------
 
-It can be useful if the LSP server of your favorite text editor can't find Ignis modules
+Adding Ignis to system Python
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+You can make Ignis accessible for the system python interpreter.
+This is especially useful if the LSP server of your text editor is not able to find Ignis.
 
 **home.nix**
 
@@ -172,6 +145,51 @@ It can be useful if the LSP server of your favorite text editor can't find Ignis
     Please remember you need to choose one of the described methods.
     If you add Ignis as a package don't add it to the system ``Python``.
     You may face the fact that when Ignis is launched,
-    it won't find extra dependencies
+    it won't find extra dependencies.
 
+
+The basic Flake example
+^^^^^^^^^^^^^^^^^^^^^^^
+
+**flake.nix**
+
+.. code-block:: nix
+
+    {
+      inputs = {
+        nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+        home-manager = {
+          url = "github:nix-community/home-manager";
+          inputs.nixpkgs.follows = "nixpkgs";
+        };
+        ignis = {
+          url = "github:linkfrg/ignis";
+          inputs.nixpkgs.follows = "nixpkgs";
+        };
+      };
+
+      outputs = { self, nixpkgs, home-manager, ... }@inputs: let
+        system = "x86_64-linux";
+        lib = nixpkgs.lib;
+        extraSpecialArgs = { inherit system inputs; };  # <- passing inputs to the attribute set for home-manager
+        specialArgs = { inherit system inputs; };       # <- passing inputs to the attribute set for NixOS
+      in {
+        nixosConfigurations = {
+          dummy-hostname = lib.nixosSystem {
+            modules = [
+              inherit specialArgs;  # <- this will make inputs available anywhere in the NixOS configuration
+              ./path/to/configuration.nix
+              home-manager.nixosModules.home-manager {
+                home-manager = {
+                  inherit extraSpecialArgs;  # <- this will make inputs available anywhere in the HM configuration
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  users.yourUserName = import ./path/to/home.nix;
+                };
+              }
+            ];
+          };
+        };
+      };
+    }
 
