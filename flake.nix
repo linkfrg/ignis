@@ -1,9 +1,5 @@
 {
-  description = ''
-    Flake for build ignis.
-    ignis is a widget framework for building desktop shells,
-    written and configurable in Python. 
-  '';
+  description = "A widget framework for building desktop shells, written and configurable in Python";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
