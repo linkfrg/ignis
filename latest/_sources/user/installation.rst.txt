@@ -4,8 +4,6 @@ Installation
 Arch Linux
 -----------
 
-maintainer: @linkfrg
-
 Install the package from AUR.
 
 .. code-block:: bash
@@ -20,14 +18,6 @@ For the latest (git) version of Ignis install ``ignis-git``
 
 Nix
 ---
-
-maintainer: missing specific maintainers, the package is mostly maintained by free contributors (bugs are expected)
-
-Contributors:
-    - @frdiener
-    - @somokill
-    - @ratson
-    - @0x006E
 
 .. warning::
     This will install the latest (git) version of Ignis.
