@@ -20,6 +20,6 @@ Get started
    cli
    options
    expanding_functionality
-   troubleshooting
    nix
+   troubleshooting
    faq
