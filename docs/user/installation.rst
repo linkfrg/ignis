@@ -19,7 +19,7 @@ For the latest (git) version of Ignis install ``ignis-git``
 Nix
 ---
 
-Read more about it on the `Nix page <nix.html>`_
+Read more on the `Nix page <nix.html>`_.
 
 Pip
 ----
