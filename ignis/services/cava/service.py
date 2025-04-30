@@ -27,9 +27,6 @@ class CavaService(BaseService):
         # Get the current frequency bands
         print(cava_service.bands)
 
-        # Convert the bands to a string of Unicode blocks
-        print(cava_service.bands_to_bar_string())
-
         # Start streaming band data
         cava_service.__start_stream()
 
