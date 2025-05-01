@@ -83,12 +83,7 @@
     pygobject3
     pycairo
     click
-    charset-normalizer
-    markupsafe
     loguru
-    certifi
-    idna
-    urllib3
   ];
 
   patchPhase = ''
