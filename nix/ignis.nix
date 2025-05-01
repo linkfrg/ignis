@@ -124,7 +124,7 @@
     changelog = "https://github.com/linkfrg/ignis/releases";
     license = licenses.gpl3;
     platforms = platforms.linux;
-    maintainers = with maintainers; [ frdiener somokill MOIS3Y ];
+    maintainers = with maintainers; [];
     mainProgram = "ignis";
   };
 }
