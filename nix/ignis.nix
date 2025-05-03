@@ -25,19 +25,13 @@
     inherit (lib)
       licenses
       platforms
-      maintainers
     ;
     inherit (python312Packages)
       buildPythonPackage
       pygobject3
       pycairo
       click
-      charset-normalizer
-      markupsafe
       loguru
-      certifi
-      idna
-      urllib3
     ;
     inherit (gst_all_1)
       gstreamer
@@ -119,7 +113,7 @@
     changelog = "https://github.com/linkfrg/ignis/releases";
     license = licenses.gpl3;
     platforms = platforms.linux;
-    maintainers = with maintainers; [];
+    maintainers = [ ];
     mainProgram = "ignis";
   };
 }
