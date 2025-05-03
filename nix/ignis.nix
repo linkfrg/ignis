@@ -85,15 +85,9 @@
     cp -r ${gvc}/* ./subprojects/gvc
   '';
 
-  buildPhase = ''
-    cd ..
-    meson setup build --prefix=$out -DCOMMITHASH=${self.rev or "dirty"}
-    ninja -C build
-  '';
-
-  installPhase = ''
-    ninja -C build install
-  '';
+  mesonFlags = [
+    "-DCOMMITHASH=${self.rev or "dirty"}"
+  ];
 
   #? avoid double wrapping. we manually pass args to wrapper
   dontWrapGApps = true;
