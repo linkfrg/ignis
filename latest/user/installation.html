@@ -376,6 +376,7 @@
 <li class="toctree-l1"><a class="reference internal" href="cli.html">CLI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="options.html">Options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="expanding_functionality.html">Expanding functionality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nix.html">Nix</a></li>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
 </ul>
@@ -453,19 +454,7 @@
 </section>
 <section id="nix">
 <h2>Nix<a class="headerlink" href="#nix" title="Link to this heading">#</a></h2>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>This will install the latest (git) version of Ignis.
-Please refer to the <a class="reference external" href="https://linkfrg.github.io/ignis/latest/index.html">latest documentation</a>.</p>
-</div>
-<p>Add Ignis to your flake's inputs:</p>
-<div class="highlight-nix notranslate"><div class="highlight"><pre><span></span>ignis<span class="o">.</span><span class="ss">url</span> <span class="o">=</span> <span class="s2">&quot;github:linkfrg/ignis&quot;</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>Then add the following to <code class="docutils literal notranslate"><span class="pre">environment.systemPackages</span></code> or <code class="docutils literal notranslate"><span class="pre">home.packages</span></code>:</p>
-<div class="highlight-nix notranslate"><div class="highlight"><pre><span></span>inputs<span class="o">.</span>ignis<span class="o">.</span>packages<span class="o">.</span><span class="si">${</span>system<span class="si">}</span><span class="o">.</span>ignis
-</pre></div>
-</div>
+<p>Read more on the <a class="reference external" href="nix.html">Nix page</a>.</p>
 </section>
 <section id="pip">
 <h2>Pip<a class="headerlink" href="#pip" title="Link to this heading">#</a></h2>
