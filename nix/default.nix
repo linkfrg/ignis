@@ -105,7 +105,7 @@
     '';
     homepage = "https://github.com/linkfrg/ignis";
     changelog = "https://github.com/linkfrg/ignis/releases";
-    license = licenses.gpl3;
+    license = licenses.lgpl21Plus;
     platforms = platforms.linux;
     maintainers = [ ];
     mainProgram = "ignis";
