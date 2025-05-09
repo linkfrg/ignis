@@ -45,5 +45,8 @@ Ignis __is not supported__ on:
 ## Contributing
 Check out the [Developer Guide](https://linkfrg.github.io/ignis/latest/dev/index.html)
 
+## Licensing
+Ignis is licensed under the __LGPL-2.1-or-later__.
+
 ## Special Thanks
 [AGS](https://github.com/aylur/ags) - for inspiration

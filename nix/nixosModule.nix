@@ -1,6 +1,7 @@
 {
   self,
   version,
+  gvc,
   ...
 }:
 {
@@ -32,8 +33,8 @@ in
     nixpkgs.overlays = [
       (prev: final: {
         ignis = final.callPackage ./ignis.nix {
-          inherit self version;
-          extraPythonPackages = cfg.extraPythonPackages;
+          inherit self gvc version;
+          extraPackages = cfg.extraPythonPackages;
         };
       })
     ];

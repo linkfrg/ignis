@@ -1,40 +1,38 @@
 {
-  description = "Flake for build ignis";
+  description = "A widget framework for building desktop shells, written and configurable in Python";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    systems.url = "github:nix-systems/default-linux";
+
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+      inputs.systems.follows = "systems";
+    };
+
+    gvc = {
+      url = "github:linkfrg/libgnome-volume-control-wheel";
+      flake = false; 
+    };
   };
 
-  outputs = { self, nixpkgs }:
+  outputs = { self, nixpkgs, flake-utils, gvc, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
     let
-      supportedSystems = [
-        "aarch64-linux"
-        "x86_64-linux"
-      ];
-
-      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
-
+      pkgs = import nixpkgs { inherit system; };
       version = import ./nix/version.nix { inherit self; };
-    in
-    {
-      overlays.default = import ./nix/overlay.nix { inherit self; inherit version; };
+    in {
+        packages = rec {
+          ignis = pkgs.callPackage ./nix { inherit self gvc version; };
+          default = ignis;
+        };
+        apps = rec {
+          ignis = flake-utils.lib.mkApp {drv = self.packages.${system}.ignis;};
+          default = ignis;
+        };
 
-      packages = forAllSystems (system:
-        let
-          pkgs = import nixpkgs {
-            inherit system;
-            overlays = [
-              self.overlays.default
-            ];
-          };
-        in
-        {
-          inherit (pkgs) ignis;
-
-          default = self.packages.${system}.ignis;
-        }
-      );
-      
-      nixosModules.ignis = import ./nix/nixosModule.nix {self = self; version = version; };
-    };
+        nixosModules.ignis = import ./nix/nixosModule.nix { inherit self gvc version;};
+      }
+    );
 }

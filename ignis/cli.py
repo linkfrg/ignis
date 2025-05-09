@@ -86,6 +86,10 @@ def call_client_func(name: str, *args) -> Any:
         exit(1)
 
 
+def get_full_path(path: str) -> str:
+    return os.path.abspath(os.path.expanduser(path))
+
+
 @click.group(cls=OrderedGroup)
 @click.option(
     "--version",
@@ -118,7 +122,7 @@ def init(config: str, debug: bool) -> None:
         print("Ignis is already running")
         exit(1)
 
-    config_path = os.path.expanduser(config)
+    config_path = get_full_path(config)
     run_app(config_path, debug)
 
 
@@ -155,7 +159,7 @@ def run_python(code: str) -> None:
 @cli.command(name="run-file", help="Execute python file")
 @click.argument("file")
 def run_file(file: str) -> None:
-    call_client_func("run_file", file)
+    call_client_func("run_file", get_full_path(file))
 
 
 @cli.command(name="inspector", help="Open GTK Inspector")

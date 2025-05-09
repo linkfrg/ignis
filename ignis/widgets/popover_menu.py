@@ -1,14 +1,14 @@
-from gi.repository import Gtk, Gio  # type: ignore
+from gi.repository import Gtk  # type: ignore
 from ignis.base_widget import BaseWidget
-from ignis.widgets.menuitem import MenuItem
 from ignis.gobject import IgnisProperty
+from ignis.menu_model import IgnisMenuModel
 
 
 class PopoverMenu(Gtk.PopoverMenu, BaseWidget):
     """
     Bases: :class:`Gtk.PopoverMenu`
 
-    A dropdown menu consisting of a list of :class:`~ignis.widgets.Widget.MenuItem`.
+    A dropdown menu.
     It must be added as a child to a container.
     To display it, call the ``popup()`` method.
 
@@ -20,23 +20,32 @@ class PopoverMenu(Gtk.PopoverMenu, BaseWidget):
 
     .. code-block:: python
 
+        from ignis.menu_model import IgnisMenuModel, IgnisMenuItem, IgnisMenuSeparator
+
         Widget.PopoverMenu(
-            items=[
-                Widget.MenuItem(
+            model=IgnisMenuModel(
+                IgnisMenuItem(
                     label="Just item",
                     on_activate=lambda x: print("item activated!"),
                 ),
-                Widget.MenuItem(
+                IgnisMenuItem(
                     label="This is disabled item",
                     enabled=False,
-                    on_activate=lambda x: print("you will not see this message in terminal hehehehehe"),
+                    on_activate=lambda x: print(
+                        "you will not see this message in terminal hehehehehe"
+                    ),
                 ),
-                Widget.MenuItem(
-                    label="This has submenu!",
-                    on_activate=lambda x: print("anyway activate callback working"),
-                    submenu=Widget.PopoverMenu(items=[Widget.MenuItem(label=str(i)) for i in range(10)])
+                IgnisMenuModel(
+                    *(  # unpacking because items must be passed as *args
+                        IgnisMenuItem(
+                            label=str(i),
+                            on_activate=lambda x, i=i: print(f"Clicked on item {i}!"),
+                        )
+                        for i in range(10)
+                    ),
+                    label="Submenu",  # pass label as keyword argument
                 ),
-            ]
+            ),
         )
     """
 
@@ -45,42 +54,25 @@ class PopoverMenu(Gtk.PopoverMenu, BaseWidget):
 
     def __init__(self, **kwargs):
         Gtk.PopoverMenu.__init__(self)
-        self._items: list[MenuItem] = []
+        self._model: IgnisMenuModel | None = None
         BaseWidget.__init__(self, visible=False, **kwargs)
 
-    def __add_item(
-        self, item: MenuItem, menu: Gio.Menu, current_section: Gio.Menu
-    ) -> Gio.Menu:
-        if isinstance(item, Gtk.Separator):
-            current_section = Gio.Menu()
-            menu.append_section(None, current_section)
-            return current_section
-
-        if item.submenu:
-            current_section.append_submenu(item.label, item.submenu.menu_model)
-        else:
-            current_section.append(item.label, f"app.{item.uniq_name}")
-
-        return current_section
-
-    def __generate_menu(self, items: list[MenuItem]) -> Gio.Menu:
-        menu = Gio.Menu.new()
-        current_section = Gio.Menu()
-        menu.append_section(None, current_section)
-
-        for item in items:
-            current_section = self.__add_item(item, menu, current_section)
-
-        return menu
-
     @IgnisProperty
-    def items(self) -> list[MenuItem]:
+    def model(self) -> IgnisMenuModel | None:
         """
-        A list of :class:`~ignis.widgets.Widget.MenuItem`.
+        A menu model.
         """
-        return self._items
+        return self._model
 
-    @items.setter
-    def items(self, value: list[MenuItem]) -> None:
-        self._items = value
-        self.set_menu_model(self.__generate_menu(items=value))
+    @model.setter
+    def model(self, value: IgnisMenuModel) -> None:
+        if self._model:
+            self._model.clean_gmenu()
+
+        self._model = value
+        self.set_menu_model(value.gmenu)
+
+    def __del__(self) -> None:
+        if self._model:
+            self._model.clean_gmenu()
+            self._model = None
