@@ -32,7 +32,10 @@
           default = ignis;
         };
 
-        nixosModules.ignis = import ./nix/nixosModule.nix { inherit self gvc version;};
+        nixosModules = rec {
+          ignis = pkgs.callPackage ./nix/nixosModule.nix { inherit self gvc version;};
+          default = ignis;
+        };
       }
     );
 }
