@@ -16,14 +16,14 @@ in
 {
   options.programs.ignis = {
     enable = mkEnableOption "Enable the Ignis widget framework.";
-    enableUpowerService = mkEnableOption "Enable the Upower service, to get battery status of devices and bluetooth devices.";
+    enableAdditionalServices = mkEnableOption "Enable additional services (e.g. the Upower service, to get battery status of devices and bluetooth devices.)";
     extraPythonPackages = lib.mkOption {
       type = types.listOf types.package;
       default = [ ];
       example = [ pkgs.python312Packages.psutil ];
       description = ''
         Extra python packages to be added to the PATH.
-        This is useful for adding python packages that are not needed by ignis
+        This is useful for adding python packages that are needed by ignis
       '';
     };
   };
@@ -39,7 +39,7 @@ in
     ];
 
     environment.systemPackages = [ pkgs.ignis ];
-    services = mkIf cfg.enableUpowerService {
+    services = mkIf cfg.enableAdditionalServices {
       upower.enable = true;
     };
   };
