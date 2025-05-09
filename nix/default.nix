@@ -19,7 +19,6 @@
 , gst_all_1
 , gvc
 , extraPackages ? []
-, version ? "git"
 }:
   let
     inherit (lib)
@@ -40,6 +39,7 @@
       gst-plugins-bad
       gst-plugins-ugly
     ;
+    version = import ./version.nix { inherit self; };
   in buildPythonPackage {
 
   inherit version;
