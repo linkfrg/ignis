@@ -32,7 +32,7 @@ in
   config = mkIf cfg.enable {
     nixpkgs.overlays = [
       (prev: final: {
-        ignis = final.callPackage ./ignis.nix {
+        ignis = final.callPackage ./default.nix {
           inherit self gvc version;
           extraPackages = cfg.extraPythonPackages;
         };
