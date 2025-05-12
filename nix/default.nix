@@ -91,6 +91,7 @@
 
   #? avoid double wrapping. we manually pass args to wrapper
   dontWrapGApps = true;
+  removeBinByteCode = true;
   preFixup = ''
     makeWrapperArgs+=(
       "''${gappsWrapperArgs[@]}"
@@ -107,7 +108,7 @@
     changelog = "https://github.com/linkfrg/ignis/releases";
     license = licenses.lgpl21Plus;
     platforms = platforms.linux;
-    maintainers = ["nobody"];
+    maintainers = [ ];
     mainProgram = "ignis";
   };
 }
