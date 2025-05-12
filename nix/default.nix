@@ -26,7 +26,7 @@
       platforms
     ;
     inherit (python312Packages)
-      buildPythonPackage
+      buildPythonApplication
       pygobject3
       pycairo
       click
@@ -40,7 +40,7 @@
       gst-plugins-ugly
     ;
     version = import ./version.nix { inherit self; };
-  in buildPythonPackage {
+  in buildPythonApplication {
 
   inherit version;
   pname = "ignis";
@@ -90,9 +90,10 @@
   ];
 
   #? avoid double wrapping. we manually pass args to wrapper
-  #dontWrapGApps = true;
+  dontWrapGApps = true;
   preFixup = ''
     makeWrapperArgs+=(
+      "''${gappsWrapperArgs[@]}"
       --set LD_LIBRARY_PATH "$out/lib:${gtk4-layer-shell}/lib:$LD_LIBRARY_PATH"
     )
   '';
