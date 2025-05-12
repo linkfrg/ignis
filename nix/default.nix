@@ -26,7 +26,7 @@
       platforms
     ;
     inherit (python312Packages)
-      buildPythonApplication
+      buildPythonPackage
       pygobject3
       pycairo
       click
@@ -40,7 +40,7 @@
       gst-plugins-ugly
     ;
     version = import ./version.nix { inherit self; };
-  in buildPythonApplication {
+  in buildPythonPackage {
 
   inherit version;
   pname = "ignis";
@@ -91,6 +91,7 @@
 
   #? avoid double wrapping. we manually pass args to wrapper
   dontWrapGApps = true;
+  removeBinByteCode = false;
   preFixup = ''
     makeWrapperArgs+=(
       "''${gappsWrapperArgs[@]}"
