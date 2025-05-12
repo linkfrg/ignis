@@ -90,14 +90,14 @@
   ];
 
   #? avoid double wrapping. we manually pass args to wrapper
-  dontWrapGApps = true;
-  removeBinByteCode = false;
-  preFixup = ''
-    makeWrapperArgs+=(
-      "''${gappsWrapperArgs[@]}"
-      --set LD_LIBRARY_PATH "$out/lib:${gtk4-layer-shell}/lib:$LD_LIBRARY_PATH"
-    )
-  '';
+  # dontWrapGApps = true;
+  # preFixup = ''
+  #   makeWrapperArgs+=(
+  #     "''${gappsWrapperArgs[@]}"
+  #     --set LD_LIBRARY_PATH "$out/lib:${gtk4-layer-shell}/lib:$LD_LIBRARY_PATH"
+  #   )
+  # '';
+  makeWrapperArgs = ["--set" "LD_LIBRARY_PATH" "$out/lib:${gtk4-layer-shell}/lib:$LD_LIBRARY_PATH"]
 
   meta = {
     description = ''
