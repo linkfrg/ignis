@@ -11,7 +11,7 @@ in
 {
   options.programs.ignis = {
     enable = mkEnableOption "Enable the Ignis widget framework.";
-    UPowerService = mkEnableOption "Enables the UPower Service needed for retrieving battery information of devices";
+    enableUPowerService = mkEnableOption "Enables the UPower Service needed for retrieving battery information of devices";
     extraPythonPackages = lib.mkOption {
       type = types.listOf types.package;
       default = [ ];
