@@ -1,9 +1,4 @@
 {
-  self,
-  gvc,
-  ...
-}:
-{
   lib,
   pkgs,
   config,
@@ -16,7 +11,7 @@ in
 {
   options.programs.ignis = {
     enable = mkEnableOption "Enable the Ignis widget framework.";
-    enableAdditionalServices = mkEnableOption "Enable additional services (e.g. the Upower service, to get battery status of devices and bluetooth devices.)";
+    UPowerService = mkEnableOption "Enables the UPower Service needed for retrieving battery information of devices";
     extraPythonPackages = lib.mkOption {
       type = types.listOf types.package;
       default = [ ];
@@ -28,19 +23,16 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
-    nixpkgs.overlays = [
-      (prev: final: {
-        ignis = final.callPackage ./default.nix {
-          inherit self gvc;
-          extraPackages = cfg.extraPythonPackages;
-        };
-      })
-    ];
-
-    environment.systemPackages = [ pkgs.ignis ];
-    services = mkIf cfg.enableAdditionalServices {
-      upower.enable = true;
-    };
-  };
+  config = mkIf cfg.enable (
+    let
+      ignis = inputs.ignis.packages.${pkgs.stdenv.hostPlatform.system}.ignis.overrideAttrs (final: prev: {
+        extraPackages = cfg.extraPythonPackages;
+      });
+    in{
+      environment.systemPackages = [ ignis ];
+      services = mkIf cfg.enableUPowerService {
+        upower.enable = true;
+      };
+    }
+  );
 }

@@ -21,9 +21,10 @@
     flake-utils.lib.eachDefaultSystem (system:
     let
       pkgs = import nixpkgs { inherit system; };
+      version = import ./nix/version.nix { inherit self; };
     in {
         packages = rec {
-          ignis = pkgs.callPackage ./nix { inherit self gvc; };
+          ignis = pkgs.callPackage ./nix { inherit self gvc version; };
           default = ignis;
         };
         apps = rec {
@@ -32,6 +33,6 @@
         };
       }
     ) // {
-      nixosModules.ignis = import ./nix/nixosModule.nix { inherit self gvc;};
+      nixosModules.ignis = import ./nix/nixosModule.nix;
     };
 }
