@@ -10,6 +10,7 @@
 , gtk4-layer-shell
 , gobject-introspection
 , librsvg
+, gnome-bluetooth
 , python312Packages
 , gvc
 , extraPackages ? []
