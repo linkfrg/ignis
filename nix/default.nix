@@ -27,6 +27,8 @@
       click
       loguru
     ;
+
+    extraPackages =  builtins.trace extraPackages extraPackages;
   in buildPythonPackage {
 
   inherit version;
@@ -56,8 +58,6 @@
     click
     loguru
   ];
-
-  builtins.trace dependencies dependencies
 
   patchPhase = ''
     mkdir -p ./subprojects/gvc
