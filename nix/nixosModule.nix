@@ -47,8 +47,7 @@ in
       # ++ lib.optionals cfg.enableAudioService [ pkgs.libpulseaudio ]
       # ++ lib.optionals cfg.enableSassCompilation [ pkgs.dart-sass ];
       tempPackages = [pkgs.bluez pkgs.gnome-bluetooth pkgs.libpulseaudio];
-      ignis = inputs.ignis.packages.${pkgs.stdenv.hostPlatform.system}.ignis.override (
-        final: prev: {
+      ignis = inputs.ignis.packages.${pkgs.stdenv.hostPlatform.system}.ignis.override {
           # extraPackages = cfg.extraPythonPackages;
           # dependencies = prev.dependencies ++ [
           #     pkgs.bluez
@@ -59,8 +58,7 @@ in
           #   ++ lib.optionals cfg.enableSassCompilation [ pkgs.dart-sass ];
           extraPackages =  (builtins.trace tempPackages tempPackages);
           #mesonFlags = prev.mesonFlags ++ lib.optionals (!cfg.enableAudioService) [ "-Dbuild_gvc=false" ];
-        }
-      );
+        };
     in
     {
       environment.systemPackages = [ ignis ];
