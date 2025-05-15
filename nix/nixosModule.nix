@@ -49,13 +49,15 @@ in
 
       ignis = inputs.ignis.packages.${pkgs.stdenv.hostPlatform.system}.ignis.overrideAttrs (
         final: prev: {
-          extraPackages = cfg.extraPythonPackages ++ [
-            pkgs.bluez
-            pkgs.gnome-bluetooth
-          ]       
-          ++ lib.optionals cfg.enableNetworkService [ pkgs.networkmanager ]
-      ++ lib.optionals cfg.enableAudioService [ pkgs.libpulseaudio ]
-      ++ lib.optionals cfg.enableSassCompilation [ pkgs.dart-sass ];
+          extraPackages =
+            cfg.extraPythonPackages
+            ++ [
+              pkgs.bluez
+              pkgs.gnome-bluetooth
+            ]
+            ++ lib.optionals cfg.enableNetworkService [ pkgs.networkmanager ]
+            ++ lib.optionals cfg.enableAudioService [ pkgs.libpulseaudio ]
+            ++ lib.optionals cfg.enableSassCompilation [ pkgs.dart-sass ];
           mesonFlags = prev.mesonFlags ++ lib.optionals (!cfg.enableAudioService) [ "-Dbuild_gvc=false" ];
         }
       );
