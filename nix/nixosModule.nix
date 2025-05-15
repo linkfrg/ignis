@@ -31,10 +31,7 @@ in
 
   config = mkIf cfg.enable (
     let
-      ignis = inputs.ignis.packages.${pkgs.stdenv.hostPlatform.system}.ignis.overrideAttrs (
-        final: prev: {
-          tempPackages =
-            cfg.extraPythonPackages
+      tempPackages = cfg.extraPythonPackages
             ++ lib.optionals cfg.enableBluetoothService [
               pkgs.bluez
               pkgs.gnome-bluetooth
@@ -50,8 +47,10 @@ in
             ++ lib.optionals cfg.enableNetworkService [ pkgs.networkmanager ]
             ++ lib.optionals cfg.enableAudioService [ pkgs.libpulseaudio ]
             ++ lib.optionals cfg.enableSassCompilation [ pkgs.dart-sass ];
-
-          extraPackages =  builtins.trace tempPackages tempPackages;
+       
+      ignis = inputs.ignis.packages.${pkgs.stdenv.hostPlatform.system}.ignis.overrideAttrs (
+        final: prev: {
+          extraPackages = builtins.trace tempPackages tempPackages;
           mesonFlags = prev.mesonFlags ++ lib.optionals (!cfg.enableAudioService) [ "-Dbuild_gvc=false" ];
         }
       );
