@@ -51,7 +51,7 @@ in
 
       ignis = inputs.ignis.packages.${pkgs.stdenv.hostPlatform.system}.ignis.overrideAttrs (
         final: prev: {
-          extraPackages = lib.debug.traceVal tempPackages;
+          extraPackages = lib.debug.traceValSeq tempPackages;
           mesonFlags = prev.mesonFlags ++ lib.optionals (!cfg.enableAudioService) [ "-Dbuild_gvc=false" ];
         }
       );
