@@ -31,34 +31,36 @@ in
 
   config = mkIf cfg.enable (
     let
-      # tempPackages = cfg.extraPythonPackages ++ [
-      #   pkgs.bluez
-      #   pkgs.gnome-bluetooth
-      # ];
-      # ++ lib.optionals cfg.enableRecorderService [
-      #   pkgs.pipewire
-      #   pkgs.gst_all_1.gstreamer
-      #   pkgs.gst_all_1.gst-plugins-base
-      #   pkgs.gst_all_1.gst-plugins-good
-      #   pkgs.gst_all_1.gst-plugins-bad
-      #   pkgs.gst_all_1.gst-plugins-ugly
-      # ]
-      # ++ lib.optionals cfg.enableNetworkService [ pkgs.networkmanager ]
-      # ++ lib.optionals cfg.enableAudioService [ pkgs.libpulseaudio ]
-      # ++ lib.optionals cfg.enableSassCompilation [ pkgs.dart-sass ];
-      tempPackages = [pkgs.bluez pkgs.gnome-bluetooth pkgs.libpulseaudio];
-      ignis = inputs.ignis.packages.${pkgs.stdenv.hostPlatform.system}.ignis.override {
-          # extraPackages = cfg.extraPythonPackages;
-          # dependencies = prev.dependencies ++ [
-          #     pkgs.bluez
-          #     pkgs.gnome-bluetooth
-          #   ]
-          #   ++ lib.optionals cfg.enableNetworkService [ pkgs.networkmanager ]
-          #   ++ lib.optionals cfg.enableAudioService [ pkgs.libpulseaudio ]]
-          #   ++ lib.optionals cfg.enableSassCompilation [ pkgs.dart-sass ];
-          extraPackages =  (builtins.trace tempPackages tempPackages);
-          #mesonFlags = prev.mesonFlags ++ lib.optionals (!cfg.enableAudioService) [ "-Dbuild_gvc=false" ];
-        };
+      tempPackages = [
+        pkgs.bluez
+        pkgs.gnome-bluetooth
+        pkgs.libpulseaudio
+      ];
+      ignis =
+        (inputs.ignis.packages.${pkgs.stdenv.hostPlatform.system}.ignis.overrideAttrs (
+          final: prev: {
+            mesonFlags = prev.mesonFlags ++ lib.optionals (!cfg.enableAudioService) [ "-Dbuild_gvc=false" ];
+          }
+        )).override
+          {
+            extraPackages =
+              cfg.extraPythonPackages
+              ++ lib.optionals cfg.enableBluetoothService [
+                pkgs.bluez
+                pkgs.gnome-bluetooth
+              ]
+              ++ lib.optionals cfg.enableRecorderService [
+                pkgs.pipewire
+                pkgs.gst_all_1.gstreamer
+                pkgs.gst_all_1.gst-plugins-base
+                pkgs.gst_all_1.gst-plugins-good
+                pkgs.gst_all_1.gst-plugins-bad
+                pkgs.gst_all_1.gst-plugins-ugly
+              ]
+              ++ lib.optionals cfg.enableNetworkService [ pkgs.networkmanager ]
+              ++ lib.optionals cfg.enableAudioService [ pkgs.libpulseaudio ]
+              ++ lib.optionals cfg.enableSassCompilation [ pkgs.dart-sass ];
+          };
     in
     {
       environment.systemPackages = [ ignis ];
