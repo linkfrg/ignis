@@ -57,7 +57,7 @@
     loguru
   ];
 
-  lib.debug.traceVal dependencies
+  builtins.trace dependencies dependencies
 
   patchPhase = ''
     mkdir -p ./subprojects/gvc
