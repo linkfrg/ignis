@@ -33,25 +33,25 @@ in
     let
       tempPackages =
         cfg.extraPythonPackages
-        ++ lib.optionals cfg.enableBluetoothService [
+        ++ [
           pkgs.bluez
           pkgs.gnome-bluetooth
-        ]
-        ++ lib.optionals cfg.enableRecorderService [
-          pkgs.pipewire
-          pkgs.gst_all_1.gstreamer
-          pkgs.gst_all_1.gst-plugins-base
-          pkgs.gst_all_1.gst-plugins-good
-          pkgs.gst_all_1.gst-plugins-bad
-          pkgs.gst_all_1.gst-plugins-ugly
-        ]
-        ++ lib.optionals cfg.enableNetworkService [ pkgs.networkmanager ]
-        ++ lib.optionals cfg.enableAudioService [ pkgs.libpulseaudio ]
-        ++ lib.optionals cfg.enableSassCompilation [ pkgs.dart-sass ];
+        ];
+        # ++ lib.optionals cfg.enableRecorderService [
+        #   pkgs.pipewire
+        #   pkgs.gst_all_1.gstreamer
+        #   pkgs.gst_all_1.gst-plugins-base
+        #   pkgs.gst_all_1.gst-plugins-good
+        #   pkgs.gst_all_1.gst-plugins-bad
+        #   pkgs.gst_all_1.gst-plugins-ugly
+        # ]
+        # ++ lib.optionals cfg.enableNetworkService [ pkgs.networkmanager ]
+        # ++ lib.optionals cfg.enableAudioService [ pkgs.libpulseaudio ]
+        # ++ lib.optionals cfg.enableSassCompilation [ pkgs.dart-sass ];
 
       ignis = inputs.ignis.packages.${pkgs.stdenv.hostPlatform.system}.ignis.overrideAttrs (
         final: prev: {
-          extraPackages = lib.debug.traceValSeq tempPackages;
+          extraPackages = tempPackages;
           mesonFlags = prev.mesonFlags ++ lib.optionals (!cfg.enableAudioService) [ "-Dbuild_gvc=false" ];
         }
       );
