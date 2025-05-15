@@ -27,8 +27,6 @@
       click
       loguru
     ;
-
-    extraPackages =  builtins.trace extraPackages extraPackages;
   in buildPythonPackage {
 
   inherit version;
