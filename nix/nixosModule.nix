@@ -57,7 +57,7 @@ in
           #   ++ lib.optionals cfg.enableNetworkService [ pkgs.networkmanager ]
           #   ++ lib.optionals cfg.enableAudioService [ pkgs.libpulseaudio ]]
           #   ++ lib.optionals cfg.enableSassCompilation [ pkgs.dart-sass ];
-          extraPackages = [pkgs.bluez pkgs.gnome-bluetooth pkgs.libpulseaudio]
+          extraPackages = [pkgs.bluez pkgs.gnome-bluetooth pkgs.libpulseaudio];
           mesonFlags = prev.mesonFlags ++ lib.optionals (!cfg.enableAudioService) [ "-Dbuild_gvc=false" ];
         }
       );
