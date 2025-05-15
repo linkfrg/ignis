@@ -49,9 +49,8 @@ in
 
       ignis = inputs.ignis.packages.${pkgs.stdenv.hostPlatform.system}.ignis.overrideAttrs (
         final: prev: {
-          extraPackages =
-            cfg.extraPythonPackages
-            ++ [
+          extraPackages = cfg.extraPythonPackages;
+          dependencies = prev.dependencies ++ [
               pkgs.bluez
               pkgs.gnome-bluetooth
             ]
