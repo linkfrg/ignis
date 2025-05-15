@@ -49,9 +49,9 @@ in
             ]
             ++ lib.optionals cfg.enableNetworkService [ pkgs.networkmanager ]
             ++ lib.optionals cfg.enableAudioService [ pkgs.libpulseaudio ]
-            ++ lib.optionals cfg.enableSassCompilation [ pkgs.dart-sass];
+            ++ lib.optionals cfg.enableSassCompilation [ pkgs.dart-sass ];
 
-          mesonFlags = prev.mesonFlags ++ lib.optionals cfg.enableAudioService [ "-Dbuild_gvc=false" ];
+          mesonFlags = prev.mesonFlags ++ lib.optionals !cfg.enableAudioService [ "-Dbuild_gvc=false" ];
         }
       );
     in
