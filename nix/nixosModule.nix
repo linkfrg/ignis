@@ -12,13 +12,37 @@ in
 {
   options.programs.ignis = {
     enable = mkEnableOption "Enable the Ignis widget framework.";
-    enableBluetoothService = mkEnableOption "Enables all dependencies needed for the Bluetooth Service";
-    enableUPowerService = mkEnableOption "Enables all dependencies needed for the UPower Service";
-    enableRecorderService = mkEnableOption "Enables all dependencies needed for the Recorder Service";
-    enableNetworkService = mkEnableOption "Enables all dependencies needed for the Network Service";
-    enableAudioService = mkEnableOption "Enables all dependencies needed for the Audio Service";
-    enableSassCompilation = mkEnableOption "Enables Sass compilation";
-    extraPythonPackages = lib.mkOption {
+    enableBluetoothService = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Enables all dependencies needed for the Bluetooth Service";
+    };
+    enableUPowerService = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Enables all dependencies needed for the UPower Service";
+    };
+    enableRecorderService = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Enables all dependencies needed for the Recorder Service";
+    };
+    enableNetworkService = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Enables all dependencies needed for the Network Service";
+    };
+    enableAudioService = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Enables all dependencies needed for the Audio Service";
+    };
+    enableSassCompilation = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Enables Sass compilation";
+    };
+    extraPythonPackages = mkOption {
       type = types.listOf types.package;
       default = [ ];
       example = [ pkgs.python312Packages.psutil ];
