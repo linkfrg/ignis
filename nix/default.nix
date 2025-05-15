@@ -57,6 +57,8 @@
     loguru
   ];
 
+  lib.debug.traceVal dependencies
+
   patchPhase = ''
     mkdir -p ./subprojects/gvc
     cp -r ${gvc}/* ./subprojects/gvc
