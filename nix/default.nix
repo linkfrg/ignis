@@ -10,7 +10,13 @@
 , gtk4-layer-shell
 , gobject-introspection
 , librsvg
+, dart-sass
+, libpulseaudio
+, pipewire
+, networkmanager
+, gnome-bluetooth
 , python312Packages
+, gnome-bluetooth
 , gvc
 , extraPackages ? []
 , version ? "git"
@@ -26,6 +32,13 @@
       pycairo
       click
       loguru
+    ;
+    inherit (gst_all_1)
+      gstreamer
+      gst-plugins-base
+      gst-plugins-good
+      gst-plugins-bad
+      gst-plugins-ugly
     ;
   in buildPythonPackage {
 
@@ -44,7 +57,20 @@
     wrapGAppsHook4
   ];
 
-  dependencies = extraPackages ++ [
+  serviceDepencies = [
+    dart-sass
+    gstreamer
+    gst-plugins-base
+    gst-plugins-good
+    gst-plugins-bad
+    gst-plugins-ugly
+    libpulseaudio
+    pipewire
+    networkmanager
+    gnome-bluetooth
+  ];
+
+  dependencies = extraPackages ++ serviceDepencies ++ [
     glib
     gtk4
     gtk4-layer-shell
