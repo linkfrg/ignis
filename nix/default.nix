@@ -19,6 +19,18 @@
 , gst_all_1
 , gvc
 , extraPackages ? []
+, serviceDepencies ? [
+    dart-sass
+    gst_all_1.gstreamer
+    gst_all_1.gst-plugins-base
+    gst_all_1.gst-plugins-good
+    gst_all_1.gst-plugins-bad
+    gst_all_1.gst-plugins-ugly
+    libpulseaudio
+    pipewire
+    networkmanager
+    gnome-bluetooth
+  ]
 , version ? "git"
 }:
   let
@@ -33,27 +45,6 @@
       click
       loguru
     ;
-    inherit (gst_all_1)
-      gstreamer
-      gst-plugins-base
-      gst-plugins-good
-      gst-plugins-bad
-      gst-plugins-ugly
-    ;
-    
-    serviceDepencies = [
-      dart-sass
-      gstreamer
-      gst-plugins-base
-      gst-plugins-good
-      gst-plugins-bad
-      gst-plugins-ugly
-      libpulseaudio
-      pipewire
-      networkmanager
-      gnome-bluetooth
-    ];
-
   in buildPythonPackage {
 
   inherit version;
