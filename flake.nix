@@ -24,7 +24,7 @@
       version = import ./nix/version.nix { inherit self; };
     in {
         packages = rec {
-          ignis = pkgs.callPackage ./nix { inherit self gvc version; };
+          ignis = pkgs.callPackage ./nix { inherit self gvc version pkgs; };
           default = ignis;
         };
         apps = rec {
