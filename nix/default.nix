@@ -40,6 +40,20 @@
       gst-plugins-bad
       gst-plugins-ugly
     ;
+    
+    serviceDepencies = [
+      dart-sass
+      gstreamer
+      gst-plugins-base
+      gst-plugins-good
+      gst-plugins-bad
+      gst-plugins-ugly
+      libpulseaudio
+      pipewire
+      networkmanager
+      gnome-bluetooth
+    ];
+
   in buildPythonPackage {
 
   inherit version;
@@ -55,19 +69,6 @@
     git
     gobject-introspection
     wrapGAppsHook4
-  ];
-
-  serviceDepencies = [
-    dart-sass
-    gstreamer
-    gst-plugins-base
-    gst-plugins-good
-    gst-plugins-bad
-    gst-plugins-ugly
-    libpulseaudio
-    pipewire
-    networkmanager
-    gnome-bluetooth
   ];
 
   dependencies = extraPackages ++ serviceDepencies ++ [
