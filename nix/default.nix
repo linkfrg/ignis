@@ -1,6 +1,5 @@
 { self
 , lib
-, pkg
 , wrapGAppsHook4
 , pkg-config
 , meson
@@ -15,16 +14,16 @@
 , gvc
 , extraPackages ? []
 , serviceDepencies ? [
-    pkg.dart-sass
-    pkg.gst_all_1.gstreamer
-    pkg.gst_all_1.gst-plugins-base
-    pkg.gst_all_1.gst-plugins-good
-    pkg.gst_all_1.gst-plugins-bad
-    pkg.gst_all_1.gst-plugins-ugly
-    pkg.libpulseaudio
-    pkg.pipewire
-    pkg.networkmanager
-    pkg.gnome-bluetooth
+    pkgs.dart-sass
+    pkgs.gst_all_1.gstreamer
+    pkgs.gst_all_1.gst-plugins-base
+    pkgs.gst_all_1.gst-plugins-good
+    pkgs.gst_all_1.gst-plugins-bad
+    pkgs.gst_all_1.gst-plugins-ugly
+    pkgs.libpulseaudio
+    pkgs.pipewire
+    pkgs.networkmanager
+    pkgs.gnome-bluetooth
   ]
 , version ? "git"
 }:
