@@ -11,7 +11,7 @@ let
 in
 {
   options.programs.ignis = {
-    enable = mkEnableOption "Enable the Ignis widget framework.";
+    enable = mkEnableOption "Enable the Ignis widget framework";
     enableBluetoothService = mkOption {
       type = types.bool;
       default = true;
@@ -20,27 +20,27 @@ in
     enableUPowerService = mkOption {
       type = types.bool;
       default = true;
-      description = "Enables all dependencies needed for the UPower Service";
+      description = "Enable the UPower Service";
     };
     enableRecorderService = mkOption {
       type = types.bool;
       default = true;
-      description = "Enables all dependencies needed for the Recorder Service";
+      description = "Enable the Recorder Service";
     };
     enableNetworkService = mkOption {
       type = types.bool;
       default = true;
-      description = "Enables all dependencies needed for the Network Service";
+      description = "Enable the Network Service";
     };
     enableAudioService = mkOption {
       type = types.bool;
       default = true;
-      description = "Enables all dependencies needed for the Audio Service";
+      description = "Enable the Audio Service";
     };
     enableSassCompilation = mkOption {
       type = types.bool;
       default = true;
-      description = "Enables Sass compilation";
+      description = "Enable Sass compilation support";
     };
     extraPythonPackages = mkOption {
       type = types.listOf types.package;
