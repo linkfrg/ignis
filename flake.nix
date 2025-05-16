@@ -24,7 +24,19 @@
       version = import ./nix/version.nix { inherit self; };
     in {
         packages = rec {
-          ignis = pkgs.callPackage ./nix { inherit self gvc version; };
+          ignis = (pkgs.callPackage ./nix { inherit self gvc version; }).override{
+            serviceDepencies = [
+                pkgs.dart-sass
+                pkgs.gst_all_1.gstreamer
+                pkgs.gst_all_1.gst-plugins-base
+                pkgs.gst_all_1.gst-plugins-good
+                pkgs.gst_all_1.gst-plugins-bad
+                pkgs.gst_all_1.gst-plugins-ugly
+                pkgs.libpulseaudio
+                pkgs.pipewire
+                pkgs.networkmanager
+                pkgs.gnome-bluetooth];
+          };
           default = ignis;
         };
         apps = rec {
