@@ -42,12 +42,12 @@ in
       default = true;
       description = "Enable Sass compilation support";
     };
-    extraPythonPackages = mkOption {
+    extraPackages = mkOption {
       type = types.listOf types.package;
       default = [ ];
       example = [ pkgs.python312Packages.psutil ];
       description = ''
-        Extra python packages to be added to the PATH.
+        Extra packages to be added to the PATH.
         This is useful for adding python packages that are needed by ignis
       '';
     };
@@ -68,7 +68,7 @@ in
         )).override
           {
             extraPackages =
-              cfg.extraPythonPackages
+              cfg.extraPackages
               ++ lib.optionals cfg.enableBluetoothService [
                 pkgs.bluez
                 pkgs.gnome-bluetooth
