@@ -16,7 +16,7 @@
 , networkmanager
 , gnome-bluetooth
 , python312Packages
-, gnome-bluetooth
+, gst_all_1
 , gvc
 , extraPackages ? []
 , version ? "git"
