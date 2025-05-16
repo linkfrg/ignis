@@ -10,13 +10,7 @@
 , gtk4-layer-shell
 , gobject-introspection
 , librsvg
-, dart-sass
-, libpulseaudio
-, pipewire
-, networkmanager
-, gnome-bluetooth
 , python312Packages
-, gst_all_1
 , gvc
 , extraPackages ? []
 , serviceDepencies ? [
