@@ -1,5 +1,6 @@
 { self
 , lib
+, pkg
 , wrapGAppsHook4
 , pkg-config
 , meson
