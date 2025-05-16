@@ -36,6 +36,12 @@ def raise_css_parsing_error(
     raise CssParsingError(section, gerror)
 
 
+def _is_elf_file(path: str) -> bool:
+    with open(path, "rb") as f:
+        magic = f.read(4)
+        return magic == b"\x7fELF"
+
+
 @dataclass
 class _CssProviderInfo:
     provider: Gtk.CssProvider
@@ -524,7 +530,14 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         Reload Ignis.
         """
         self.quit()
-        os.execl(sys.executable, sys.executable, *sys.argv)
+
+        # https://github.com/linkfrg/ignis/issues/267
+        # Nix wraps the Ignis executable, so bin/ignis is not python file anymore, but a binary file (ELF)
+        # So, we launch this binary directly (it's always the first in sys.argv)
+        if _is_elf_file(sys.argv[0]):
+            os.execl(sys.argv[0], sys.argv[0], *sys.argv[1:])
+        else:
+            os.execl(sys.executable, sys.executable, *sys.argv)
 
     def quit(self) -> None:
         """
