@@ -14,16 +14,16 @@
 , gvc
 , extraPackages ? []
 , serviceDepencies ? [
-    dart-sass
-    gst_all_1.gstreamer
-    gst_all_1.gst-plugins-base
-    gst_all_1.gst-plugins-good
-    gst_all_1.gst-plugins-bad
-    gst_all_1.gst-plugins-ugly
-    libpulseaudio
-    pipewire
-    networkmanager
-    gnome-bluetooth
+    pkg.dart-sass
+    pkg.gst_all_1.gstreamer
+    pkg.gst_all_1.gst-plugins-base
+    pkg.gst_all_1.gst-plugins-good
+    pkg.gst_all_1.gst-plugins-bad
+    pkg.gst_all_1.gst-plugins-ugly
+    pkg.libpulseaudio
+    pkg.pipewire
+    pkg.networkmanager
+    pkg.gnome-bluetooth
   ]
 , version ? "git"
 }:
