@@ -13,38 +13,52 @@
 
     gvc = {
       url = "github:linkfrg/libgnome-volume-control-wheel";
-      flake = false; 
+      flake = false;
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, gvc, ... }:
-    flake-utils.lib.eachDefaultSystem (system:
-    let
-      pkgs = import nixpkgs { inherit system; };
-      version = import ./nix/version.nix { inherit self; };
-    in {
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+      gvc,
+      ...
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = import nixpkgs { inherit system; };
+        version = import ./nix/version.nix { inherit self; };
+        serviceDepencies = [
+          pkgs.dart-sass
+          pkgs.gst_all_1.gstreamer
+          pkgs.gst_all_1.gst-plugins-base
+          pkgs.gst_all_1.gst-plugins-good
+          pkgs.gst_all_1.gst-plugins-bad
+          pkgs.gst_all_1.gst-plugins-ugly
+          pkgs.libpulseaudio
+          pkgs.pipewire
+          pkgs.networkmanager
+          pkgs.gnome-bluetooth
+        ];
+      in
+      {
         packages = rec {
-          ignis = (pkgs.callPackage ./nix { inherit self gvc version; }).override{
-            serviceDepencies = [
-                pkgs.dart-sass
-                pkgs.gst_all_1.gstreamer
-                pkgs.gst_all_1.gst-plugins-base
-                pkgs.gst_all_1.gst-plugins-good
-                pkgs.gst_all_1.gst-plugins-bad
-                pkgs.gst_all_1.gst-plugins-ugly
-                pkgs.libpulseaudio
-                pkgs.pipewire
-                pkgs.networkmanager
-                pkgs.gnome-bluetooth];
+          ignis = (pkgs.callPackage ./nix { inherit self gvc version; }).override {
+            serviceDepencies = serviceDepencies;
           };
           default = ignis;
         };
         apps = rec {
-          ignis = flake-utils.lib.mkApp {drv = self.packages.${system}.ignis;};
+          ignis = (flake-utils.lib.mkApp { drv = self.packages.${system}.ignis; }).override {
+            serviceDepencies = serviceDepencies;
+          };
           default = ignis;
         };
       }
-    ) // {
+    )
+    // {
       nixosModules.ignis = import ./nix/nixosModule.nix;
     };
 }
