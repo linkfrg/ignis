@@ -15,7 +15,7 @@ in
     enableBluetoothService = mkOption {
       type = types.bool;
       default = true;
-      description = "Enables all dependencies needed for the Bluetooth Service";
+      description = "Enable the Bluetooth Service";
     };
     enableUPowerService = mkOption {
       type = types.bool;
