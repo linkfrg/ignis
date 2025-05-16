@@ -64,12 +64,7 @@ in
         (inputs.ignis.packages.${pkgs.stdenv.hostPlatform.system}.ignis.overrideAttrs (
           final: prev: {
             mesonFlags = prev.mesonFlags ++ lib.optionals (!cfg.enableAudioService) [ "-Dbuild_gvc=false" ];
-          }
-        )).override
-          {
-            extraPackages =
-              cfg.extraPackages
-              ++ lib.optionals cfg.enableBluetoothService [
+            serviceDepencies = lib.optionals cfg.enableBluetoothService [
                 pkgs.bluez
                 pkgs.gnome-bluetooth
               ]
@@ -84,6 +79,10 @@ in
               ++ lib.optionals cfg.enableNetworkService [ pkgs.networkmanager ]
               ++ lib.optionals cfg.enableAudioService [ pkgs.libpulseaudio ]
               ++ lib.optionals cfg.enableSassCompilation [ pkgs.dart-sass ];
+          }
+        )).override
+          {
+            extraPackages = cfg.extraPackages;
           };
     in
     {
