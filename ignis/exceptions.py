@@ -406,3 +406,27 @@ class GnomeBluetoothNotFoundError(Exception):
             "GnomeBluetooth-3.0 is not found! To use the Bluetooth Service, install GnomeBluetooth-3.0",
             *args,
         )
+
+
+class CffiNotFoundError(Exception):
+    """
+    Raised when Cffi is not found.
+    """
+
+    def __init__(self, *args: object) -> None:
+        super().__init__(
+            "Cffi was not found! To use the CAVA service, install the cffi python library.",
+            *args,
+        )
+
+
+class CavaNotFoundError(Exception):
+    """
+    Raised when libcava is not found.
+    """
+
+    def __init__(self, *args: object) -> None:
+        super().__init__(
+            "CAVA was not found! To use the CAVA service, install the libcava fork.",
+            *args,
+        )
