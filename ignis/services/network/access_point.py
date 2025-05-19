@@ -260,6 +260,12 @@ class WifiAccessPoint(IgnisGObject):
         Clear a stored secret.
         This will reset security settings (PSK and security protocol).
 
+        .. danger::
+            This function **only** resets security settings. This means that the connection will remain,
+            but without the PSK and security protocol. Connecting to this access point again will create a new connection.
+
+            If you want to actually forget (delete) the connection, use :func:`forget`.
+
         .. warning::
             After calling this method, you have to manually call :func:`commit_changes_async` to save changes to the disk.
         """
