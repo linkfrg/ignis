@@ -17,7 +17,7 @@ from ignis.exceptions import (
     StylePathAppliedError,
     CssParsingError,
 )
-from ignis.logging import configure_logger
+from ignis.log_utils import configure_logger
 
 StylePriority = Literal["application", "fallback", "settings", "theme", "user"]
 

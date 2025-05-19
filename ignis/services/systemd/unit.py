@@ -1,7 +1,7 @@
 from gi.repository import Gio, GLib  # type: ignore
 from ignis.dbus import DBusProxy
 from ignis.utils import Utils
-from ignis.logging import logger
+from loguru import logger
 from ignis.gobject import IgnisGObject, IgnisProperty
 from typing import Literal
 
