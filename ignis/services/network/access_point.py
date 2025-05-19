@@ -33,7 +33,6 @@ class WifiAccessPoint(IgnisGObject):
             "notify::activating-connection", lambda *args: self.notify("icon-name")
         )
 
-        self.__sync_connections()
         self._client.connect(
             "notify::connections", lambda *_: self.__sync_connections()
         )
@@ -57,6 +56,7 @@ class WifiAccessPoint(IgnisGObject):
         )
 
         self._ssid = self.__get_ssid()
+        self.__sync_connections()
 
     def __get_ssid(self) -> str | None:
         ssid = self._point.props.ssid
