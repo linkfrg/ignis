@@ -244,6 +244,8 @@ class HyprlandService(BaseService):
                     ws_id = int(value_list[0])
 
                 self.__change_special_ws_on_monitor(ws_id, value_list[1], value_list[2])
+            case "moveworkspace":
+                self.__move_workspace(int(value_list[0]), value_list[1])
 
     def __get_self_dict(self, obj_desc: _HyprlandObjDesc) -> dict:
         return getattr(self, f"_{obj_desc.prop_name}")
@@ -319,6 +321,16 @@ class HyprlandService(BaseService):
 
     def __rename_workspace(self, workspace_id: int, new_name: str) -> None:
         self.__sync_obj_data("workspace", workspace_id, {"name": new_name})
+
+    def __move_workspace(self, workspace_id: int, monitor_name: str) -> None:
+        monitor_obj = self.get_monitor_by_name(monitor_name)
+
+        if monitor_obj:
+            self.__sync_obj_data(
+                "workspace",
+                workspace_id,
+                {"monitor": monitor_name, "monitor_id": monitor_obj.id},
+            )
 
     def __sort_workspaces(self) -> None:
         self._workspaces = dict(sorted(self._workspaces.items()))
