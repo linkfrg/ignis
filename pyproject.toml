@@ -2,7 +2,7 @@
 name = 'ignis'
 description = 'A widget framework for building desktop shells, written and configurable in Python'
 readme = 'README.md'
-license = { file = 'LICENSE' }
+license = { text = 'LGPL-2.1-or-later' }
 authors = [{ name = 'linkfrg' }]
 dynamic = ['version']
 requires-python = ">=3.11"
