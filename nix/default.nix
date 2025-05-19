@@ -13,7 +13,7 @@
 , python312Packages
 , gvc
 , extraPackages ? []
-, serviceDepencies ? []
+, serviceDependencies ? []
 , version ? "git"
 }:
   let
@@ -45,7 +45,7 @@
     wrapGAppsHook4
   ];
 
-  dependencies = extraPackages ++ serviceDepencies ++ [
+  dependencies = extraPackages ++ serviceDependencies ++ [
     glib
     gtk4
     gtk4-layer-shell

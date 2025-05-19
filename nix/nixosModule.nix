@@ -68,7 +68,7 @@ in
         )).override
           {
             extraPackages = cfg.extraPackages;
-            serviceDepencies = lib.optionals cfg.enableBluetoothService [
+            serviceDependencies = lib.optionals cfg.enableBluetoothService [
                 pkgs.bluez
                 pkgs.gnome-bluetooth
               ]

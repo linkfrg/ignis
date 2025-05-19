@@ -30,7 +30,7 @@
       let
         pkgs = import nixpkgs { inherit system; };
         version = import ./nix/version.nix { inherit self; };
-        serviceDepencies = [
+        serviceDependencies = [
           pkgs.dart-sass
           pkgs.gst_all_1.gstreamer
           pkgs.gst_all_1.gst-plugins-base
