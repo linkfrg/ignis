@@ -1,6 +1,6 @@
 from gi.repository import GLib  # type: ignore
 from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
-from ignis.logging import logger
+from loguru import logger
 from ._imports import GnomeBluetooth
 
 
