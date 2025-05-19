@@ -1059,6 +1059,12 @@ This function is asynchronous.</p>
 <dd><p>Clear a stored secret.
 This will reset security settings (PSK and security protocol).
 :rtype: <span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>This function <strong>only</strong> resets security settings. This means that the connection will remain,
+but without the PSK and security protocol. Connecting to this access point again will create a new connection.</p>
+<p>If you want to actually forget (delete) the connection, use <a class="reference internal" href="#ignis.services.network.WifiAccessPoint.forget" title="ignis.services.network.WifiAccessPoint.forget"><code class="xref py py-func docutils literal notranslate"><span class="pre">forget()</span></code></a>.</p>
+</div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>After calling this method, you have to manually call <a class="reference internal" href="#ignis.services.network.WifiAccessPoint.commit_changes_async" title="ignis.services.network.WifiAccessPoint.commit_changes_async"><code class="xref py py-func docutils literal notranslate"><span class="pre">commit_changes_async()</span></code></a> to save changes to the disk.</p>
