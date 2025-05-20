@@ -9,7 +9,7 @@ from ignis.exceptions import (
     WindowNotFoundError,
 )
 from ignis.app import IgnisApp
-from ignis.gobject import IgnisProperty
+from ignis.gobject import IgnisProperty, IgnisSignal
 
 app = IgnisApp.get_default()
 
@@ -50,7 +50,7 @@ class Window(Gtk.Window, BaseWidget):
 
     Args:
         namespace: The name of the window, used to access it from the CLI and :class:`~ignis.app.IgnisApp`. It must be unique. It is also the name of the layer.
-        dynamic_input_region: Whether to dynamically update an input region depending on the :attr:`child` size. See :attr:`dynamic_input_region` for more info.
+        dynamic_input_region: Whether to dynamically update the input region depending on the :attr:`child` size.
         **kwargs: Properties to set.
 
     .. warning::
@@ -159,25 +159,28 @@ class Window(Gtk.Window, BaseWidget):
             self.__set_dynamic_input_region()
 
     def __set_dynamic_input_region(self) -> None:
-        def sync(child: Gtk.Widget) -> None:
+        child = self.get_child()
+        if not child:
+            raise TypeError(
+                "Trying to set dynamic_input_region to True but the child is None"
+            )
+
+        def sync() -> None:
             self.input_width = child.get_width()
             self.input_height = child.get_height()
 
-        child = self.get_child()
-        if not child or not child.find_property("child"):
-            raise TypeError(
-                """Trying to set dynamic_input_region to True but the child widget doesn't implement "child" property"""
-            )
+        self.connect("size-changed", lambda *_: sync())
 
-        child.connect(
-            "notify::child", lambda x, y: Utils.Timeout(50, sync, child)
-        )  # timeout so that the size has time to update
-        sync(child)
+        sync()
 
     def __close_popup(self, event_controller_key, keyval, keycode, state):
         if self._popup:
             if keyval == 65307:  # 65307 = ESC
                 self.visible = False
+
+    @IgnisSignal
+    def size_changed(self):  # private signal
+        ...
 
     @IgnisProperty
     def namespace(self) -> str:
@@ -340,10 +343,7 @@ class Window(Gtk.Window, BaseWidget):
     @IgnisProperty
     def dynamic_input_region(self) -> bool:
         """
-        Whether to dynamically update an input region depending on the :attr:`child` size.
-
-        :attr:`child` must implement ``child`` property. E.g., :class:`Widget.Box`, :class:`Widget.EventBox` and etc.
-        The input region will change when ``child`` is changed.
+        Whether to dynamically update the input region depending on the :attr:`child` size.
         """
         return self._dynamic_input_region
 
@@ -436,3 +436,7 @@ class Window(Gtk.Window, BaseWidget):
     def unrealize(self):
         self.__remove()
         return super().unrealize()
+
+    def do_size_allocate(self, width: int, height: int, baseline: int) -> None:
+        self.emit("size-changed")
+        return Gtk.Window.do_size_allocate(self, width, height, baseline)
