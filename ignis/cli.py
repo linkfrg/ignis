@@ -1,24 +1,23 @@
 import os
-import click
+import typer
 import subprocess
-import collections
 from ignis.client import IgnisClient
 from ignis.utils import Utils
 from ignis.exceptions import WindowNotFoundError
 from typing import Any
 from gi.repository import GLib  # type: ignore
 from ignis import is_editable_install
+from typing import Annotated
+
 
 DEFAULT_CONFIG_PATH = f"{GLib.get_user_config_dir()}/ignis/config.py"
 
 
-class OrderedGroup(click.Group):
-    def __init__(self, name=None, commands=None, **attrs):
-        super().__init__(name, commands, **attrs)
-        self.commands = commands or collections.OrderedDict()
-
-    def list_commands(self, ctx):
-        return self.commands
+cli_app = typer.Typer(
+    name="ignis",
+    help="A widget framework for building desktop shells, written and configurable in Python.",
+    no_args_is_help=True,
+)
 
 
 def _run_git_cmd(args: str) -> str | None:
@@ -68,11 +67,6 @@ os-release:
 {os_release}"""
 
 
-def print_version(ctx, param, value):
-    if value:
-        ctx.exit(print(get_version_message()))
-
-
 def call_client_func(name: str, *args) -> Any:
     client = IgnisClient()
     if not client.has_owner:
@@ -90,30 +84,39 @@ def get_full_path(path: str) -> str:
     return os.path.abspath(os.path.expanduser(path))
 
 
-@click.group(cls=OrderedGroup)
-@click.option(
-    "--version",
-    is_flag=True,
-    callback=print_version,
-    expose_value=False,
-    is_eager=True,
-    help="Print version and exit",
-)
-def cli():
-    pass
+def version_callback(value: bool):
+    if value:
+        typer.echo(get_version_message())
+        raise typer.Exit()
 
 
-@cli.command(name="init", help="Initialize Ignis")
-@click.option(
-    "--config",
-    "-c",
-    help=f"Path to the configuration file (default: {DEFAULT_CONFIG_PATH})",
-    default=DEFAULT_CONFIG_PATH,
-    type=str,
-    metavar="PATH",
-)
-@click.option("--debug", help="Print debug information to terminal", is_flag=True)
-def init(config: str, debug: bool) -> None:
+@cli_app.callback()
+def main_callback(
+    version: Annotated[
+        bool | None,
+        typer.Option(
+            "--version",
+            callback=version_callback,
+            is_eager=True,
+            help="Print version and exit.",
+        ),
+    ] = None,
+):
+    return
+
+
+@cli_app.command()
+def init(
+    config: Annotated[
+        str, typer.Option(help="Path to the configuration file", metavar="PATH")
+    ] = DEFAULT_CONFIG_PATH,
+    debug: Annotated[
+        bool, typer.Option(help="Print debug information to terminal")
+    ] = False,
+) -> None:
+    """
+    Initialize Ignis.
+    """
     from ignis.app import run_app
 
     client = IgnisClient()
@@ -126,57 +129,82 @@ def init(config: str, debug: bool) -> None:
     run_app(config_path, debug)
 
 
-@cli.command(name="open", help="Open window")
-@click.argument("window")
+@cli_app.command()
 def open_window(window: str) -> None:
+    """
+    Open a window.
+    """
     call_client_func("open_window", window)
 
 
-@cli.command(name="close", help="Close window")
-@click.argument("window")
-def close(window: str) -> None:
+@cli_app.command()
+def close_window(window: str) -> None:
+    """
+    Close a window.
+    """
     call_client_func("close_window", window)
 
 
-@cli.command(name="toggle", help="Toggle window")
-@click.argument("window")
-def toggle(window: str) -> None:
-    call_client_func("toggle_window", window)
+@cli_app.command()
+def toggle_window(window: str) -> None:
+    """
+    Toggle a window.
+    """
+    call_client_func("open_window", window)
 
 
-@cli.command(name="list-windows", help="List all windows")
+@cli_app.command()
 def list_windows() -> None:
+    """
+    List names of all window.
+    """
     window_list = call_client_func("list_windows")
     print("\n".join(window_list))
 
 
-@cli.command(name="run-python", help="Execute python code")
-@click.argument("code")
+@cli_app.command()
 def run_python(code: str) -> None:
+    """
+    Execute a Python code inside the running Ignis process.
+    """
     call_client_func("run_python", code)
 
 
-@cli.command(name="run-file", help="Execute python file")
-@click.argument("file")
+@cli_app.command()
 def run_file(file: str) -> None:
-    call_client_func("run_file", get_full_path(file))
+    """
+    Execute a Python file inside the running Ignis process.
+    """
+    call_client_func("run_python", get_full_path(file))
 
 
-@cli.command(name="inspector", help="Open GTK Inspector")
+@cli_app.command()
 def inspector() -> None:
+    """
+    Open GTK Inspector.
+    """
     call_client_func("inspector")
 
 
-@cli.command(name="reload", help="Reload Ignis")
+@cli_app.command()
 def reload() -> None:
+    """
+    Reload Ignis.
+    """
     call_client_func("reload")
 
 
-@cli.command(name="quit", help="Quit Ignis")
+@cli_app.command()
 def quit() -> None:
+    """
+    Quit Ignis.
+    """
     call_client_func("quit")
 
 
-@cli.command(name="systeminfo", help="Print system information")
+@cli_app.command()
 def systeminfo() -> None:
+    """
+    Print system information.
+    """
     print(get_systeminfo())
