@@ -5,12 +5,15 @@ from ignis.client import IgnisClient
 from ignis.utils import Utils
 from ignis.exceptions import WindowNotFoundError
 from typing import Any
-from gi.repository import GLib  # type: ignore
-from ignis import is_editable_install
+from ignis import is_editable_install, is_sphinx_build
 from typing import Annotated
 
+if is_sphinx_build:
+    DEFAULT_CONFIG_PATH = "$HOME/.config/ignis/config.py"
+else:
+    from gi.repository import GLib  # type: ignore
 
-DEFAULT_CONFIG_PATH = f"{GLib.get_user_config_dir()}/ignis/config.py"
+    DEFAULT_CONFIG_PATH = f"{GLib.get_user_config_dir()}/ignis/config.py"
 
 
 cli_app = typer.Typer(
