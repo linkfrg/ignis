@@ -169,7 +169,7 @@ def toggle_window(window: WindowArgument) -> None:
     """
     Toggle a window.
     """
-    call_client_func("open_window", window)
+    call_client_func("toggle_window", window)
 
 
 @cli_app.command()
