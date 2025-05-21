@@ -1,7 +1,7 @@
 CLI
 ==============
 
-Run ``ignis --help`` to get the help message for CLI usage.
+Run ``ignis --help`` to view the CLI usage help message.
 
 .. typer:: ignis.cli.cli_app
     :prog: ignis
