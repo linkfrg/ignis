@@ -25,7 +25,7 @@
       buildPythonPackage
       pygobject3
       pycairo
-      click
+      typer
       loguru
     ;
   in buildPythonPackage {
@@ -54,7 +54,7 @@
 
     pygobject3
     pycairo
-    click
+    typer
     loguru
   ];
 
