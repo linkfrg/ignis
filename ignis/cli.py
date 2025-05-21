@@ -9,7 +9,7 @@ from ignis import is_editable_install, is_sphinx_build
 from typing import Annotated
 
 if is_sphinx_build:
-    DEFAULT_CONFIG_PATH = "$HOME/.config/ignis/config.py"
+    DEFAULT_CONFIG_PATH = ""  # not used during sphinx build, just set to empty string
 else:
     from gi.repository import GLib  # type: ignore
 
@@ -111,10 +111,15 @@ def main_callback(
 @cli_app.command()
 def init(
     config: Annotated[
-        str, typer.Option(help="Path to the configuration file", metavar="PATH")
+        str,
+        typer.Option(
+            help="Path to the configuration file.",
+            metavar="PATH",
+            show_default="~/.config/ignis/config.py",
+        ),
     ] = DEFAULT_CONFIG_PATH,
     debug: Annotated[
-        bool, typer.Option(help="Print debug information to terminal")
+        bool, typer.Option(help="Print debug information to terminal.")
     ] = False,
 ) -> None:
     """
@@ -132,8 +137,16 @@ def init(
     run_app(config_path, debug)
 
 
+WindowArgument = Annotated[
+    str,
+    typer.Argument(
+        help="The name of the window.", metavar="WINDOW_NAME", show_default=False
+    ),
+]
+
+
 @cli_app.command()
-def open_window(window: str) -> None:
+def open_window(window: WindowArgument) -> None:
     """
     Open a window.
     """
@@ -141,7 +154,7 @@ def open_window(window: str) -> None:
 
 
 @cli_app.command()
-def close_window(window: str) -> None:
+def close_window(window: WindowArgument) -> None:
     """
     Close a window.
     """
@@ -149,7 +162,7 @@ def close_window(window: str) -> None:
 
 
 @cli_app.command()
-def toggle_window(window: str) -> None:
+def toggle_window(window: WindowArgument) -> None:
     """
     Toggle a window.
     """
@@ -159,14 +172,19 @@ def toggle_window(window: str) -> None:
 @cli_app.command()
 def list_windows() -> None:
     """
-    List names of all window.
+    List names of all windows.
     """
     window_list = call_client_func("list_windows")
     print("\n".join(window_list))
 
 
 @cli_app.command()
-def run_python(code: str) -> None:
+def run_python(
+    code: Annotated[
+        str,
+        typer.Argument(help="The code to execute.", metavar="CODE", show_default=False),
+    ],
+) -> None:
     """
     Execute a Python code inside the running Ignis process.
     """
@@ -174,7 +192,12 @@ def run_python(code: str) -> None:
 
 
 @cli_app.command()
-def run_file(file: str) -> None:
+def run_file(
+    file: Annotated[
+        str,
+        typer.Argument(help="The file to execute.", metavar="PATH", show_default=False),
+    ],
+) -> None:
     """
     Execute a Python file inside the running Ignis process.
     """
