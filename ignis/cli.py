@@ -90,7 +90,7 @@ def get_full_path(path: str) -> str:
     return os.path.abspath(os.path.expanduser(path))
 
 
-def version_callback(value: bool):
+def version_callback(value: bool) -> None:
     if value:
         typer.echo(get_version_message())
         raise typer.Exit()
@@ -107,7 +107,7 @@ def main_callback(
             help="Print version and exit.",
         ),
     ] = None,
-):
+) -> None:
     return
 
 
