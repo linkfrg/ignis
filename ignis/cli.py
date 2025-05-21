@@ -201,7 +201,7 @@ def run_file(
     """
     Execute a Python file inside the running Ignis process.
     """
-    call_client_func("run_python", get_full_path(file))
+    call_client_func("run_file", get_full_path(file))
 
 
 @cli_app.command()
