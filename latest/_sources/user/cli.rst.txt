@@ -9,3 +9,4 @@ Run ``ignis --help`` to view the CLI usage help message.
     :preferred: svg
     :show-nested:
     :make-sections:
+    :theme: monokai
