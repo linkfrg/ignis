@@ -116,6 +116,8 @@ def init(
     config: Annotated[
         str,
         typer.Option(
+            "--config",
+            "-c",
             help="Path to the configuration file.",
             metavar="PATH",
             show_default="~/.config/ignis/config.py",
