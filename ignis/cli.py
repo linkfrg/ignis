@@ -8,6 +8,9 @@ from typing import Any
 from ignis import is_editable_install, is_sphinx_build
 from typing import Annotated
 
+# Do not import gi.repository during sphinx build
+# Otherwise, ignis.cli package will be unavailable:
+# ``AttributeError: module 'ignis' has no attribute 'cli' [docutils]``
 if is_sphinx_build:
     DEFAULT_CONFIG_PATH = ""  # not used during sphinx build, just set to empty string
 else:
