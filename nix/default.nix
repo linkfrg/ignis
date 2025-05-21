@@ -30,7 +30,7 @@
       buildPythonPackage
       pygobject3
       pycairo
-      click
+      typer
       loguru
     ;
     inherit (gst_all_1)
@@ -76,7 +76,7 @@
 
     pygobject3
     pycairo
-    click
+    typer
     loguru
   ];
 
