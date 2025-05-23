@@ -1,5 +1,8 @@
-import sys
+from __future__ import annotations
+
 import io
+import sys
+import loguru
 import asyncio
 from loguru import logger
 from gi.repository import GLib  # type: ignore
@@ -54,7 +57,7 @@ def g_log_writer(
 
 
 # source: https://github.com/Delgan/loguru/issues/540#issuecomment-1868010541
-def rich_formatter(record, force_terminal: bool = True) -> str:
+def rich_formatter(record: loguru.Record, force_terminal: bool = True) -> str:
     format_ = LOG_FORMAT + "\n"
 
     if record["exception"] is not None:
