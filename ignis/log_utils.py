@@ -1,7 +1,10 @@
 import sys
+import io
 import asyncio
 from loguru import logger
 from gi.repository import GLib  # type: ignore
+from rich.traceback import Traceback
+from rich.console import Console
 
 LOG_DIR = f"{GLib.get_user_state_dir()}/ignis"
 LOG_FILE = f"{LOG_DIR}/ignis.log"
@@ -50,6 +53,21 @@ def g_log_writer(
     return GLib.LogWriterOutput.HANDLED
 
 
+# source: https://github.com/Delgan/loguru/issues/540#issuecomment-1868010541
+def rich_formatter(record, force_terminal: bool = True) -> str:
+    format_ = LOG_FORMAT + "\n"
+
+    if record["exception"] is not None:
+        output = io.StringIO()
+        console = Console(file=output, force_terminal=force_terminal)
+        traceback = Traceback.from_exception(*record["exception"])  # type: ignore
+        console.print(traceback)
+        record["extra"]["rich_exception"] = output.getvalue()
+        format_ += "{extra[rich_exception]}"
+
+    return format_
+
+
 def configure_logger(debug: bool) -> None:
     logger.remove()
 
@@ -58,8 +76,19 @@ def configure_logger(debug: bool) -> None:
     else:
         LEVEL = "INFO"
 
-    logger.add(sys.stderr, colorize=True, format=LOG_FORMAT, level=LEVEL)
-    logger.add(LOG_FILE, format=LOG_FORMAT, level=LEVEL, rotation="1 day")
+    logger.add(
+        sys.stderr,
+        level=LEVEL,
+        format=lambda record: rich_formatter(record, True),
+        colorize=True,
+    )
+    logger.add(
+        LOG_FILE,
+        level=LEVEL,
+        # pass False to second arg to make traceback colorless in log file
+        format=lambda record: rich_formatter(record, False),
+        rotation="1 day",
+    )
 
     logger.level("INFO", color="<green>")
 
