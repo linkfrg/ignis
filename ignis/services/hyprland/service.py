@@ -244,8 +244,8 @@ class HyprlandService(BaseService):
                     ws_id = int(value_list[0])
 
                 self.__change_special_ws_on_monitor(ws_id, value_list[1], value_list[2])
-            case "moveworkspace":
-                self.__move_workspace(int(value_list[0]), value_list[1])
+            case "moveworkspacev2":
+                self.__move_workspace(int(value_list[0]), value_list[2])
 
     def __get_self_dict(self, obj_desc: _HyprlandObjDesc) -> dict:
         return getattr(self, f"_{obj_desc.prop_name}")
