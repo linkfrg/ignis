@@ -32,6 +32,7 @@
       pycairo
       typer
       loguru
+      rich
     ;
     inherit (gst_all_1)
       gstreamer
@@ -78,6 +79,7 @@
     pycairo
     typer
     loguru
+    rich
   ];
 
   patchPhase = ''
