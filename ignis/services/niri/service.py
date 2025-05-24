@@ -329,7 +329,9 @@ class NiriService(BaseService):
 
         with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as sock:
             sock.connect(NIRI_SOCKET)
-            return Utils.send_socket(sock, json.dumps(cmd) + "\n", errors="ignore")
+            return Utils.send_socket(
+                sock, json.dumps(cmd) + "\n", errors="ignore", end_char="\n"
+            )
 
     def switch_kb_layout(self) -> None:
         """
