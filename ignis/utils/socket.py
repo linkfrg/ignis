@@ -16,7 +16,7 @@ def send_socket(
         sock: An instance of a socket.
         message: The message to send.
         errors: The error handling scheme that will be passed to :py:meth:`bytes.decode`.
-        end_char: The character after which the response is considered complete (e.g, ``\\n``).
+        end_char: The character after which the response is considered fully received (e.g, ``\\n``).
 
     Returns:
         The response from the socket.
