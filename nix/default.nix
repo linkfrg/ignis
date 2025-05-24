@@ -27,6 +27,7 @@
       pycairo
       typer
       loguru
+      rich
     ;
   in buildPythonPackage {
 
@@ -56,6 +57,7 @@
     pycairo
     typer
     loguru
+    rich
   ];
 
   patchPhase = ''
