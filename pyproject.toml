@@ -11,6 +11,7 @@ dependencies = [
     "pycairo>=1.26.1",
     "PyGObject>=3.50.0",
     "loguru>=0.7.2",
+    "rich>=13.9.4",
 ]
 
 [project.urls]
