@@ -23,7 +23,10 @@ def send_socket(
     resp = sock.recv(8192)
 
     while True:
-        new_data = sock.recv(8192)
+        try:
+            new_data = sock.recv(8192, socket.MSG_DONTWAIT)
+        except BlockingIOError:
+            break
         if not new_data:
             break
         resp += new_data
