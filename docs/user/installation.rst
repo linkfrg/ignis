@@ -21,6 +21,28 @@ Nix
 
 Read more on the `Nix page <nix.html>`_.
 
+Void Linux
+----------
+
+An ``xbps-src`` template is available in a `third party repository <https://github.com/binarylinuxx/ignis-xbps-src>`_
+with `prebuilt packages <https://github.com/binarylinuxx/ignis-xbps-src/tree/x86_64-glibc>`_ too.
+
+Add this repository by creating ``ignis.conf`` at ``/etc/xbps.d/``:
+
+.. tab-set::
+
+    .. tab-item:: /etc/xbps.d/ignis.conf
+
+        .. code-block::
+
+            repository=https://raw.githubusercontent.com/binarylinuxx/ignis-xbps-src/x86_64-glibc/pkgs
+
+Then, you can install Ignis as a usual package using ``xbps-install``.
+
+.. code-block:: bash
+
+    sudo xbps-install -S ignis
+
 Pip
 ----
 
