@@ -47,6 +47,7 @@ class NiriService(BaseService):
         self._active_window: NiriWindow = NiriWindow(self)
         self._workspaces: dict[int, NiriWorkspace] = {}
         self._active_output: str = ""
+        self._overview_opened = False
 
         if self.is_available:
             self.__start_event_stream()
@@ -105,6 +106,13 @@ class NiriService(BaseService):
         """
         return self._active_output
 
+    @IgnisProperty
+    def overview_opened(self) -> bool:
+        """
+        The current state of the overview.
+        """
+        return self._overview_opened
+
     def __start_event_stream(self) -> None:
         # Initialize socket connection
         sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
@@ -159,6 +167,8 @@ class NiriService(BaseService):
                 self.__update_workspace_active_window(event_data)
             case "WorkspacesChanged":
                 self.__update_workspaces(event_data)
+            case "OverviewOpenedOrClosed":
+                self.__update_overview_opened(event_data)
 
     def __update_current_layout(self, data: dict) -> None:
         self._keyboard_layouts.sync({"current_idx": data["idx"]})
@@ -310,6 +320,10 @@ class NiriService(BaseService):
         self._workspaces[data["workspace_id"]].sync(
             {"active_window_id": data["active_window_id"]}
         )
+
+    def __update_overview_opened(self, data: dict) -> None:
+        self._overview_opened = data["is_open"]
+        self.notify("overview_opened")
 
     def send_command(self, cmd: dict | str) -> str:
         """
