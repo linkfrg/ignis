@@ -41,7 +41,7 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../_static/documentation_options.js?v=c8bc6dd9"></script>
+    <script src="../../_static/documentation_options.js?v=421b0634"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -51,7 +51,7 @@
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://linkfrg.github.io/ignis/latest/_static/switcher.json';
-        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'v0.5';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'v0.5.1';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
         </script>
@@ -526,7 +526,7 @@
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>namespace</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The name of the window, used to access it from the CLI and <a class="reference internal" href="../app.html#ignis.app.IgnisApp" title="ignis.app.IgnisApp"><code class="xref py py-class docutils literal notranslate"><span class="pre">IgnisApp</span></code></a>. It must be unique. It is also the name of the layer.</p></li>
-<li><p><strong>dynamic_input_region</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">False</span></code>) -- Whether to dynamically update an input region depending on the <code class="xref py py-attr docutils literal notranslate"><span class="pre">child</span></code> size. See <a class="reference internal" href="#ignis.widgets.Widget.Window.dynamic_input_region" title="ignis.widgets.Widget.Window.dynamic_input_region"><code class="xref py py-attr docutils literal notranslate"><span class="pre">dynamic_input_region</span></code></a> for more info.</p></li>
+<li><p><strong>dynamic_input_region</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>, default: <code class="docutils literal notranslate"><span class="pre">False</span></code>) -- Whether to dynamically update the input region depending on the <code class="xref py py-attr docutils literal notranslate"><span class="pre">child</span></code> size.</p></li>
 <li><p><strong>**kwargs</strong> -- Properties to set.</p></li>
 </ul>
 </dd>
@@ -701,9 +701,7 @@ If the list is empty, the window will be centered on the screen.
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
-<p>Whether to dynamically update an input region depending on the <code class="xref py py-attr docutils literal notranslate"><span class="pre">child</span></code> size.</p>
-<p><code class="xref py py-attr docutils literal notranslate"><span class="pre">child</span></code> must implement <code class="docutils literal notranslate"><span class="pre">child</span></code> property. E.g., <code class="xref py py-class docutils literal notranslate"><span class="pre">Widget.Box</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Widget.EventBox</span></code> and etc.
-The input region will change when <code class="docutils literal notranslate"><span class="pre">child</span></code> is changed.</p>
+<p>Whether to dynamically update the input region depending on the <code class="xref py py-attr docutils literal notranslate"><span class="pre">child</span></code> size.</p>
 </dd></dl>
 
 <dl class="py gproperty">

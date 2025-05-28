@@ -4,8 +4,6 @@ Installation
 Arch Linux
 -----------
 
-maintainer: @linkfrg
-
 Install the package from AUR.
 
 .. code-block:: bash
@@ -21,29 +19,29 @@ For the latest (git) version of Ignis install ``ignis-git``
 Nix
 ---
 
-maintainer: missing specific maintainers, the package is mostly maintained by free contributors (bugs are expected)
+Read more on the `Nix page <nix.html>`_.
 
-Contributors:
-    - @frdiener
-    - @somokill
-    - @ratson
-    - @0x006E
+Void Linux
+----------
 
-.. warning::
-    This will install the latest (git) version of Ignis.
-    Please refer to the `latest documentation <https://linkfrg.github.io/ignis/latest/index.html>`_.
+An ``xbps-src`` template is available in a `third party repository <https://github.com/binarylinuxx/ignis-xbps-src>`_
+with `prebuilt packages <https://github.com/binarylinuxx/ignis-xbps-src/tree/x86_64-glibc>`_ too.
 
-Add Ignis to your flake's inputs:
+Add this repository by creating ``ignis.conf`` at ``/etc/xbps.d/``:
 
-.. code-block:: nix
-    
-    ignis.url = "github:linkfrg/ignis";
+.. tab-set::
 
-Then add the following to ``environment.systemPackages`` or ``home.packages``:
+    .. tab-item:: /etc/xbps.d/ignis.conf
 
-.. code-block:: nix
-  
-    inputs.ignis.packages.${system}.ignis
+        .. code-block::
+
+            repository=https://raw.githubusercontent.com/binarylinuxx/ignis-xbps-src/x86_64-glibc/pkgs
+
+Then, you can install Ignis as a usual package using ``xbps-install``.
+
+.. code-block:: bash
+
+    sudo xbps-install -S ignis
 
 Pip
 ----

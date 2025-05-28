@@ -20,5 +20,6 @@ Get started
    cli
    options
    expanding_functionality
+   nix
    troubleshooting
    faq
