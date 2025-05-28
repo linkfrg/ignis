@@ -34,7 +34,7 @@ class ListBox(Gtk.ListBox, BaseWidget):
 
     def __init__(self, **kwargs):
         Gtk.ListBox.__init__(self)
-        self._rows: list[ListBoxRow] = []
+        self._rows: list[Gtk.Widget] = []
         BaseWidget.__init__(self, **kwargs)
 
         self.connect("row_activated", self.__on_row_activated)
@@ -44,19 +44,25 @@ class ListBox(Gtk.ListBox, BaseWidget):
             if row.on_activate:
                 row.on_activate(row)
 
-    def select_row(self, row: ListBoxRow) -> None:  # type: ignore
-        super().select_row(row)
-        self.__on_row_activated(None, row)
+    def activate_row(self, row: ListBoxRow) -> None:
+        """
+        Manually trigger the activation of the row.
+
+        Args:
+            row: The row to activate.
+        """
+        self.select_row(row)
+        self.emit("row-activated", row)
 
     @IgnisProperty
-    def rows(self) -> list[ListBoxRow]:
+    def rows(self) -> list[Gtk.Widget]:
         """
         A list of rows.
         """
         return self._rows
 
     @rows.setter
-    def rows(self, value: list[ListBoxRow]) -> None:
+    def rows(self, value: list[Gtk.Widget]) -> None:
         for i in self._rows:
             self.remove(i)
 
@@ -68,3 +74,28 @@ class ListBox(Gtk.ListBox, BaseWidget):
                     self.select_row(i)
 
         self._rows = value
+
+    def append(self, child: Gtk.Widget) -> None:
+        self._rows.append(child)
+        super().append(child)
+        self.notify("rows")
+
+    def remove(self, child: Gtk.Widget) -> None:
+        self._rows.remove(child)
+        super().remove(child)
+        self.notify("rows")
+
+    def insert(self, child: Gtk.Widget, position: int) -> None:
+        self._rows.insert(position, child)
+        super().insert(child, position)
+        self.notify("rows")
+
+    def prepend(self, child: Gtk.Widget) -> None:
+        self._rows.insert(0, child)
+        super().prepend(child)
+        self.notify("rows")
+
+    def remove_all(self) -> None:
+        self._rows.clear()
+        super().remove_all()
+        self.notify("rows")

@@ -2,6 +2,7 @@ from __future__ import annotations
 import os
 import sys
 import datetime
+from dataclasses import dataclass
 from typing import Literal
 from ignis.dbus import DBusService
 from ignis.utils import Utils
@@ -16,7 +17,7 @@ from ignis.exceptions import (
     StylePathAppliedError,
     CssParsingError,
 )
-from ignis.logging import configure_logger
+from ignis.log_utils import configure_logger
 
 StylePriority = Literal["application", "fallback", "settings", "theme", "user"]
 
@@ -33,6 +34,14 @@ def raise_css_parsing_error(
     css_provider: Gtk.CssProvider, section: Gtk.CssSection, gerror: GLib.Error
 ) -> None:
     raise CssParsingError(section, gerror)
+
+
+@dataclass
+class _CssProviderInfo:
+    provider: Gtk.CssProvider
+    path: str
+    priority: StylePriority
+    compiler: Literal["sass", "grass"] | None = None
 
 
 class IgnisApp(Gtk.Application, IgnisGObject):
@@ -80,9 +89,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         self.__dbus.register_dbus_method(name="ListWindows", method=self.__ListWindows)
 
         self._config_path: str | None = None
-        self._css_providers: dict[
-            str, Gtk.CssProvider
-        ] = {}  # {style_path: Gtk.CssProvider}
+        self._css_providers: dict[str, _CssProviderInfo] = {}
         self._windows: dict[str, Gtk.Window] = {}
         self._autoreload_config: bool = True
         self._autoreload_css: bool = True
@@ -278,7 +285,12 @@ class IgnisApp(Gtk.Application, IgnisGObject):
             GTK_STYLE_PRIORITIES[style_priority],
         )
 
-        self._css_providers[style_path] = provider
+        self._css_providers[style_path] = _CssProviderInfo(
+            provider=provider,
+            path=style_path,
+            priority=style_priority,
+            compiler=compiler,
+        )
 
         logger.info(f"Applied css: {style_path}")
 
@@ -298,14 +310,14 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         if not display:
             raise DisplayNotFoundError()
 
-        provider = self._css_providers.pop(style_path, None)
+        provider_info = self._css_providers.pop(style_path, None)
 
-        if provider is None:
+        if provider_info is None:
             raise StylePathNotFoundError(style_path)
 
         Gtk.StyleContext.remove_provider_for_display(
             display,
-            provider,
+            provider_info.provider,
         )
 
     def reset_css(self) -> None:
@@ -325,11 +337,15 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         Raises:
             DisplayNotFoundError
         """
-        style_paths = self._css_providers.copy().keys()
+        css_providers = self._css_providers.copy().values()
         self.reset_css()
 
-        for i in style_paths:
-            self.apply_css(i)
+        for provider_info in css_providers:
+            self.apply_css(
+                style_path=provider_info.path,
+                style_priority=provider_info.priority,
+                compiler=provider_info.compiler,
+            )
 
     def add_icons(self, path: str) -> None:
         """
