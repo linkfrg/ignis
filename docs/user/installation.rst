@@ -8,13 +8,13 @@ Install the package from AUR.
 
 .. code-block:: bash
 
-    paru -S ignis
+    paru -S python-ignis
 
-For the latest (git) version of Ignis install ``ignis-git``
+For the latest (git) version of Ignis install ``python-ignis-git``.
 
 .. code-block:: bash
 
-    paru -S ignis-git
+    paru -S python-ignis-git
 
 Nix
 ---
