@@ -123,10 +123,10 @@ class NiriService(BaseService):
         app.connect("shutdown", lambda *_: sock.close())
 
         # Launch an unthreaded event stream to ensure all variables get initialized
-        # before returning from __init__ . KeyboardLayoutsChanged is always the last
+        # before returning from __init__ . OverviewOpenedOrClosed is the last
         # event to be sent during initialization of the Niri event stream, so once
         # it is received, we are ready to launch a threaded (non blocking) version.
-        self.__listen_events(sock=sock, break_on="KeyboardLayoutsChanged")
+        self.__listen_events(sock=sock, break_on="OverviewOpenedOrClosed")
 
         Utils.thread(lambda: self.__listen_events(sock=sock))
         # No need to send any other commands after event stream initialization:
