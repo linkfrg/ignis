@@ -30,7 +30,9 @@ def _get_contents(
     elif contents:
         pass
     else:
-        raise TypeError(f"{func_name} requires either contents or a string to be provided")
+        raise TypeError(
+            f"{func_name} requires either contents or a string to be provided"
+        )
 
     return contents  # type: ignore
 
