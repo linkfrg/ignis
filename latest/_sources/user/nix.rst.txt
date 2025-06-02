@@ -6,7 +6,7 @@ Installation
 
 .. warning::
     This will install the latest (git) version of Ignis.
-    Please refer to the `latest documentation <https://linkfrg.github.io/ignis/latest/index.html>`_.
+    Please refer to the `latest documentation <https://ignis-sh.github.io/ignis/latest/index.html>`_.
 
 Add Ignis to the flake's inputs:
 
@@ -20,7 +20,7 @@ Add Ignis to the flake's inputs:
           inputs.nixpkgs.follows = "nixpkgs";
         };
         ignis = {
-          url = "github:linkfrg/ignis";
+          url = "github:ignis-sh/ignis";
           # ! Important to override
           # Nix will not allow overriding dependencies if the input
           # doesn't follow your system pkgs
@@ -144,7 +144,7 @@ The basic Flake example
                 inputs.nixpkgs.follows = "nixpkgs";
               };
               ignis = {
-                url = "github:linkfrg/ignis";
+                url = "github:ignis-sh/ignis";
                 inputs.nixpkgs.follows = "nixpkgs";
               };
             };

@@ -50,7 +50,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'user/nix';</script>
     <script>
         DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
-        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://linkfrg.github.io/ignis/latest/_static/switcher.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://ignis-sh.github.io/ignis/latest/_static/switcher.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
             true;
@@ -222,7 +222,7 @@
           
           
           
-          <a href="https://github.com/linkfrg/ignis" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+          <a href="https://github.com/ignis-sh/ignis" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
             <span class="sr-only">GitHub</span></a>
         </li>
 </ul></div>
@@ -352,7 +352,7 @@
           
           
           
-          <a href="https://github.com/linkfrg/ignis" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+          <a href="https://github.com/ignis-sh/ignis" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
             <span class="sr-only">GitHub</span></a>
         </li>
 </ul></div>
@@ -446,7 +446,7 @@
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>This will install the latest (git) version of Ignis.
-Please refer to the <a class="reference external" href="https://linkfrg.github.io/ignis/latest/index.html">latest documentation</a>.</p>
+Please refer to the <a class="reference external" href="https://ignis-sh.github.io/ignis/latest/index.html">latest documentation</a>.</p>
 </div>
 <p>Add Ignis to the flake's inputs:</p>
 <div class="highlight-nix notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -457,7 +457,7 @@ Please refer to the <a class="reference external" href="https://linkfrg.github.i
       inputs<span class="o">.</span>nixpkgs<span class="o">.</span><span class="ss">follows</span> <span class="o">=</span> <span class="s2">&quot;nixpkgs&quot;</span><span class="p">;</span>
     <span class="p">};</span>
     <span class="ss">ignis</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="ss">url</span> <span class="o">=</span> <span class="s2">&quot;github:linkfrg/ignis&quot;</span><span class="p">;</span>
+      <span class="ss">url</span> <span class="o">=</span> <span class="s2">&quot;github:ignis-sh/ignis&quot;</span><span class="p">;</span>
       <span class="c1"># ! Important to override</span>
       <span class="c1"># Nix will not allow overriding dependencies if the input</span>
       <span class="c1"># doesn&#39;t follow your system pkgs</span>
@@ -571,7 +571,7 @@ flake.nix</label><div class="sd-tab-content docutils">
       inputs<span class="o">.</span>nixpkgs<span class="o">.</span><span class="ss">follows</span> <span class="o">=</span> <span class="s2">&quot;nixpkgs&quot;</span><span class="p">;</span>
     <span class="p">};</span>
     <span class="ss">ignis</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="ss">url</span> <span class="o">=</span> <span class="s2">&quot;github:linkfrg/ignis&quot;</span><span class="p">;</span>
+      <span class="ss">url</span> <span class="o">=</span> <span class="s2">&quot;github:ignis-sh/ignis&quot;</span><span class="p">;</span>
       inputs<span class="o">.</span>nixpkgs<span class="o">.</span><span class="ss">follows</span> <span class="o">=</span> <span class="s2">&quot;nixpkgs&quot;</span><span class="p">;</span>
     <span class="p">};</span>
   <span class="p">};</span>

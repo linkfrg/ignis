@@ -3,8 +3,8 @@ Ignis
 
 **Useful links**:
 `Installation <user/installation.html>`__ |
-`Source Repository <https://github.com/linkfrg/ignis>`__ |
-`Issue Tracker <https://github.com/linkfrg/ignis/issues>`__
+`Source Repository <https://github.com/ignis-sh/ignis>`__ |
+`Issue Tracker <https://github.com/ignis-sh/ignis/issues>`__
 
 A widget framework for building desktop shells, written and configurable in Python.
 
