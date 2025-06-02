@@ -8,7 +8,7 @@ Place ``config.py`` and ``style.css`` in the ``~/.config/ignis/`` directory.
 > [!WARNING]
 > Requires the latest development version of Ignis (for Arch Linux install ``ignis-git``).
 >
-> Or, use the example bar for the latest stable Ignis version: [v0.5.1](https://github.com/linkfrg/ignis/tree/v0.5.1/examples/bar)
+> Or, use the example bar for the latest stable Ignis version: [v0.5.1](https://github.com/ignis-sh/ignis/tree/v0.5.1/examples/bar)
 
 **Dependencies:**
 ```

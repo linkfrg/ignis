@@ -15,10 +15,10 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://linkfrg.github.io/ignis"
-Documentation = "https://linkfrg.github.io/ignis"
-Repository = "https://github.com/linkfrg/ignis"
-Issues = "https://github.com/linkfrg/ignis/issues"
+Homepage = "https://ignis-sh.github.io/ignis"
+Documentation = "https://ignis-sh.github.io/ignis"
+Repository = "https://github.com/ignis-sh/ignis"
+Issues = "https://github.com/ignis-sh/ignis/issues"
 
 [build-system]
 build-backend = 'mesonpy'
