@@ -11,7 +11,7 @@ Firstly, you have to grab the Ignis sources:
 .. code-block:: bash
 
     # replace with the actual URL of your fork (if needed)
-    git clone https://github.com/linkfrg/ignis.git
+    git clone https://github.com/ignis-sh/ignis.git
     cd ignis
 
 Virtual Environment

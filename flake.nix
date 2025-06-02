@@ -12,7 +12,7 @@
     };
 
     gvc = {
-      url = "github:linkfrg/libgnome-volume-control-wheel";
+      url = "github:ignis-sh/libgnome-volume-control-wheel";
       flake = false; 
     };
   };

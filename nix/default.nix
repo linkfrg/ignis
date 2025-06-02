@@ -105,8 +105,8 @@
       A widget framework for building desktop shells,
       written and configurable in Python.
     '';
-    homepage = "https://github.com/linkfrg/ignis";
-    changelog = "https://github.com/linkfrg/ignis/releases";
+    homepage = "https://github.com/ignis-sh/ignis";
+    changelog = "https://github.com/ignis-sh/ignis/releases";
     license = licenses.lgpl21Plus;
     platforms = platforms.linux;
     maintainers = [ ];
