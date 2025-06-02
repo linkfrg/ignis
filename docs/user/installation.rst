@@ -63,14 +63,14 @@ To install the latest (Git) version of Ignis:
 
 .. code-block:: bash
 
-    pip install git+https://github.com/linkfrg/ignis.git
+    pip install git+https://github.com/ignis-sh/ignis.git
 
 To install a specific version (e.g., ``v0.5``):
 
 .. code-block:: bash
 
     # replace "TAG" with the desired Git tag
-    pip install git+https://github.com/linkfrg/ignis.git@TAG
+    pip install git+https://github.com/ignis-sh/ignis.git@TAG
 
 .. seealso::
 
@@ -95,7 +95,7 @@ Building from source
 
 .. code-block:: bash
     
-    git clone https://github.com/linkfrg/ignis.git
+    git clone https://github.com/ignis-sh/ignis.git
     cd ignis
     meson setup build --prefix=/usr
     meson compile -C build

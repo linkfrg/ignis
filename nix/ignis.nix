@@ -3,7 +3,7 @@ let
   inherit (pkgs.lib) concatStringsSep;
 
   gvc = fetchFromGitHub {
-    owner = "linkfrg";
+    owner = "ignis-sh";
     repo = "libgnome-volume-control-wheel";
     rev = "2d1cb33dacdae43127bb843a48b159ea7b8925d0";
     hash = "sha256-ikF9EzFlsRH8i4+SVUHETF4Jk1ob2JX1RLsuMdzrQOQ=";
@@ -88,8 +88,8 @@ pkgs.stdenv.mkDerivation {
 
   meta = with pkgs.lib; {
     description = "A widget framework for building desktop shells, written and configurable in Python";
-    homepage = "https://github.com/linkfrg/ignis";
-    changelog = "https://github.com/linkfrg/ignis/releases/tag/v${version}";
+    homepage = "https://github.com/ignis-sh/ignis";
+    changelog = "https://github.com/ignis-sh/ignis/releases/tag/v${version}";
     license = licenses.gpl3;
     maintainers = with maintainers; [ frdiener somokill ];
     mainProgram = "ignis";

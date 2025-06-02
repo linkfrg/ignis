@@ -10,8 +10,8 @@ sys.path.insert(0, os.path.abspath(".."))
 project = "Ignis"
 copyright = "2024, linkfrg"
 author = "linkfrg"
-REPO_URL = "https://github.com/linkfrg/ignis"
-DOCS_URL = "https://linkfrg.github.io/ignis/latest"
+REPO_URL = "https://github.com/ignis-sh/ignis"
+DOCS_URL = "https://ignis-sh.github.io/ignis/latest"
 
 extensions = [
     "sphinx.ext.intersphinx",
@@ -104,7 +104,7 @@ html_theme_options = {
 }
 
 html_context = {
-    "github_user": "linkfrg",
+    "github_user": "ignis-sh",
     "github_repo": "ignis",
     "github_version": "main",
     "doc_path": "docs/",
