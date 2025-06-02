@@ -105,7 +105,7 @@ html_theme_options = {
 }
 
 html_context = {
-    "github_user": "linkfrg",
+    "github_user": "ignis-sh",
     "github_repo": "ignis",
     "github_version": "main",
     "doc_path": "docs/",
