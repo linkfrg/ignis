@@ -356,10 +356,16 @@ class NiriService(BaseService):
 
     def switch_to_workspace(self, workspace_id: int) -> None:
         """
-        Switch to a workspace by its ID.
+        Switch to a workspace by its ``idx``.
+
+        .. note::
+            This function switches to the workspace on the currently active monitor.
+
+            If you have multiple monitors and want to switch to a workspace
+            by its unique ID (not by ``idx``), use :func:`switch_to_workspace_by_id`.
 
         Args:
-            workspace_id: The ID of the workspace to switch to.
+            workspace_id: The ``idx`` of the workspace to switch to.
         """
         cmd = {"Action": {"FocusWorkspace": {"reference": {"Index": workspace_id}}}}
         self.send_command(cmd)
