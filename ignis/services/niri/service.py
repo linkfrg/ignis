@@ -364,6 +364,16 @@ class NiriService(BaseService):
         cmd = {"Action": {"FocusWorkspace": {"reference": {"Index": workspace_id}}}}
         self.send_command(cmd)
 
+    def switch_to_workspace_by_id(self, workspace_id: int) -> None:
+        """
+        Switch to a workspace by its unique ID.
+
+        Args:
+            workspace_id: The unique ID of the workspace to switch to.
+        """
+        cmd = {"Action": {"FocusWorkspace": {"reference": {"Id": workspace_id}}}}
+        self.send_command(cmd)
+
     def get_workspace_by_id(self, workspace_id: int) -> NiriWorkspace | None:
         """
         Get a workspace by its ID.
