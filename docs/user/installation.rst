@@ -89,7 +89,7 @@ Building from source
 - glib-mkenums (glib2-devel)
 - pygobject >= 3.50.0
 - pycairo
-- python-typer
+- python-click
 - python-loguru
 - libpulse (if using PipeWire, install ``pipewire-pulse``)
 
