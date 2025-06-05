@@ -20,7 +20,6 @@ extensions = [
     "sphinx_design",
     "sphinx_copybutton",
     "sphinx_autodoc_typehints",
-    'sphinxcontrib.typer',
     "_ext.ignis_directives",
 ]
 
@@ -41,7 +40,7 @@ suppress_warnings = ["config.cache"]
 
 # ============================ AUTODOC/TYPEHINTS ============================
 
-autodoc_mock_imports = ["gi", "loguru", "setuptools", "typer", "cairo"]
+autodoc_mock_imports = ["gi", "loguru", "setuptools", "click", "cairo"]
 autodoc_member_order = "bysource"
 
 smartquotes = False

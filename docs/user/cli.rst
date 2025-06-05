@@ -1,12 +1,26 @@
 CLI
 ==============
 
-Run ``ignis --help`` to view the CLI usage help message.
+I'm too lazy to describe everything in detail, so here's a help message for you
 
-.. typer:: ignis.cli.cli_app
-    :prog: ignis
-    :width: 80
-    :preferred: svg
-    :show-nested:
-    :make-sections:
-    :theme: monokai
+.. code-block:: bash
+
+    $ ignis --help
+
+    Usage: ignis [OPTIONS] COMMAND [ARGS]...
+
+    Options:
+    --version  Print version and exit
+    --help     Show this message and exit.
+
+    Commands:
+    init          Initialize Ignis
+    open          Open window
+    close         Close window
+    toggle        Toggle window
+    list-windows  List all windows
+    run-python    Execute python code
+    run-file      Execute python file
+    inspector     Open GTK Inspector
+    reload        Reload Ignis
+    quit          Quit Ignis
