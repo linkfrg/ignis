@@ -40,8 +40,17 @@ def deprecated_class(message: str):
         message: The message to log. ``{name}`` will be replaced with the class name.
     """
 
-    def decorator(cls):
-        deprecation_warning(message.replace("{name}", cls.__name__))
-        return cls
+    def wrapper(cls):
+        class DeprecatedMeta(type(cls)):  # type: ignore
+            _warned = False
 
-    return decorator
+            def __getattribute__(self, name):
+                if not DeprecatedMeta._warned:
+                    deprecation_warning(message=message.format(name=cls.__name__))
+                    DeprecatedMeta._warned = True
+
+                return super().__getattribute__(name)
+
+        return DeprecatedMeta(cls.__name__, cls.__bases__, dict(cls.__dict__))
+
+    return wrapper
