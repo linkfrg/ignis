@@ -21,12 +21,12 @@ class FileDialog(Gtk.FileDialog, IgnisGObject):
 
     .. code-block :: python
 
-        Widget.FileDialog(
+        widgets.FileDialog(
             initial_path=os.path.expanduser("~/.config"),
             on_file_set=lambda self, file: print(file.get_path()),
             select_folder=False,
             filters=[
-                Widget.FileFilter(
+                widgets.FileFilter(
                     mime_types=["image/jpeg", "image/png"],
                     default=True,
                     name="Images JPEG/PNG",

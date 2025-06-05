@@ -12,7 +12,7 @@ class FileFilter(Gtk.FileFilter, IgnisGObject):
         It doesn't support common widget properties and cannot be added as a child to a container.
 
     A file filter.
-    Intended for use in :class:`~ignis.widgets.Widget.FileDialog`.
+    Intended for use in :class:`~ignis.widgets.FileDialog`.
     Uses MIME types, `here <https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types>`_ is a list of common MIME types.
 
     Args:
@@ -21,7 +21,7 @@ class FileFilter(Gtk.FileFilter, IgnisGObject):
 
     .. code-block :: python
 
-        Widget.FileFilter(
+        widgets.FileFilter(
             mime_types=["image/jpeg", "image/png"],
             default=True,
             name="Images JPEG/PNG",

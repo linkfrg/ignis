@@ -24,7 +24,7 @@ class Scale(Gtk.Scale, BaseWidget):
 
     .. code-block:: python
 
-        Widget.Scale(
+        widgets.Scale(
             vertical=False,
             min=0,
             max=100,

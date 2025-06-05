@@ -15,7 +15,7 @@ class SpinButton(Gtk.SpinButton, BaseWidget):  # type: ignore
 
     .. code-block:: python
 
-        Widget.SpinButton(
+        widgets.SpinButton(
             min=0,
             max=100,
             step=1,

@@ -13,7 +13,7 @@ class Calendar(Gtk.Calendar, BaseWidget):
 
     .. code-block:: python
 
-        Widget.Calendar(
+        widgets.Calendar(
             day=1,
             month=1,
             year=2024,

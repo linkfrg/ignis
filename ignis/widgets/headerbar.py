@@ -13,7 +13,7 @@ class HeaderBar(Gtk.HeaderBar, BaseWidget):
 
     .. code-block:: python
 
-        Widget.HeaderBar(
+        widgets.HeaderBar(
             show_title_buttons=True,
         )
     """

@@ -34,8 +34,10 @@ from .revealer_window import RevealerWindow
 from .stack import Stack
 from .stack_switcher import StackSwitcher
 from .stack_page import StackPage
+from ignis.deprecation import deprecated_class
 
 
+@deprecated_class(message="{name}")
 class Widget:
     Window: TypeAlias = Window
     Label: TypeAlias = Label
@@ -72,3 +74,42 @@ class Widget:
     Stack: TypeAlias = Stack
     StackSwitcher: TypeAlias = StackSwitcher
     StackPage = StackPage
+
+
+__all__ = [
+    "Arrow",
+    "ArrowButton",
+    "Box",
+    "Button",
+    "Calendar",
+    "CenterBox",
+    "CheckButton",
+    "DropDown",
+    "Entry",
+    "EventBox",
+    "FileChooserButton",
+    "FileDialog",
+    "FileFilter",
+    "Grid",
+    "HeaderBar",
+    "Icon",
+    "Label",
+    "ListBox",
+    "ListBoxRow",
+    "Overlay",
+    "Picture",
+    "PopoverMenu",
+    "RegularWindow",
+    "Revealer",
+    "RevealerWindow",
+    "Scale",
+    "Scroll",
+    "Separator",
+    "SpinButton",
+    "Stack",
+    "StackPage",
+    "StackSwitcher",
+    "Switch",
+    "ToggleButton",
+    "Window",
+]

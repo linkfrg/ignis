@@ -31,7 +31,7 @@ To add CSS classes to a widget, use the ``css_classes`` property.
 
 .. code-block:: python
     
-    Widget.Label(
+    widgets.Label(
         label="hello",
         css_classes=["my-label"]
     )
@@ -52,7 +52,7 @@ Using the ``style`` property
 
 .. code-block:: python
 
-    Widget.Label(
+    widgets.Label(
         label="hello",
         style="background-color: black;"
     )

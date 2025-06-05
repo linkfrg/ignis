@@ -15,8 +15,8 @@ class ListBoxRow(Gtk.ListBoxRow, BaseWidget):
 
     .. code-block:: python
 
-        Widget.ListBoxRow(
-            child=Widget.Label(label="row 1"),
+        widgets.ListBoxRow(
+            child=widgets.Label(label="row 1"),
             on_activate=lambda x: print("selected row 1"),
             selected=True
         )
