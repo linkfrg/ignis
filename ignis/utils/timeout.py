@@ -15,9 +15,9 @@ class Timeout(IgnisGObject):
 
     .. code-block:: python
 
-        from ignis.utils import Utils
+        from ignis import utils
 
-        Utils.Timeout(ms=3000, target=lambda: print("Hello"))
+        utils.Timeout(ms=3000, target=lambda: print("Hello"))
     """
 
     def __init__(self, ms: int, target: Callable, *args):

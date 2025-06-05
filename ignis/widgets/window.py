@@ -1,7 +1,7 @@
 import cairo
 from gi.repository import Gtk  # type: ignore
 from ignis.base_widget import BaseWidget
-from ignis.utils import Utils
+from ignis import utils
 from gi.repository import Gtk4LayerShell as GtkLayerShell  # type: ignore
 from ignis.exceptions import (
     MonitorNotFoundError,
@@ -309,7 +309,7 @@ class Window(Gtk.Window, BaseWidget):
         if value is None:
             return
 
-        gdkmonitor = Utils.get_monitor(value)
+        gdkmonitor = utils.get_monitor(value)
         if gdkmonitor is None:
             raise MonitorNotFoundError(value)
 

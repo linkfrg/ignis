@@ -2,7 +2,7 @@ import os
 import json
 from ignis.dbus import DBusService, DBusProxy
 from gi.repository import GLib, GdkPixbuf  # type: ignore
-from ignis.utils import Utils
+from ignis import utils
 from loguru import logger
 from datetime import datetime
 from ignis.base_service import BaseService
@@ -45,7 +45,7 @@ class NotificationService(BaseService):
         self.__dbus = DBusService(
             name="org.freedesktop.Notifications",
             object_path="/org/freedesktop/Notifications",
-            info=Utils.load_interface_xml("org.freedesktop.Notifications"),
+            info=utils.load_interface_xml("org.freedesktop.Notifications"),
             on_name_lost=self.__on_name_lost,
         )
 
@@ -74,7 +74,7 @@ class NotificationService(BaseService):
             name="org.freedesktop.Notifications",
             interface_name="org.freedesktop.Notifications",
             object_path="/org/freedesktop/Notifications",
-            info=Utils.load_interface_xml("org.freedesktop.Notifications"),
+            info=utils.load_interface_xml("org.freedesktop.Notifications"),
         )
         try:
             info = proxy.GetServerInformation()

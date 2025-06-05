@@ -1,9 +1,9 @@
 Thread
 ======
 
-.. autofunction:: ignis.utils.Utils.thread
+.. autofunction:: ignis.utils.thread
 
-.. autofunction:: ignis.utils.Utils.run_in_thread
+.. autofunction:: ignis.utils.run_in_thread
 
-.. autoclass:: ignis.utils.Utils.ThreadTask
+.. autoclass:: ignis.utils.ThreadTask
     :members:

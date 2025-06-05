@@ -1,6 +1,6 @@
 import json
 from ignis.gobject import IgnisGObject, Binding, IgnisProperty, IgnisSignal
-from ignis.utils import Utils
+from ignis import utils
 from typing import Any, TypeVar
 from collections.abc import Callable
 from collections.abc import Generator
@@ -360,7 +360,7 @@ class OptionsManager(OptionsGroup):
             self.load_from_file(self._file, emit=False)
 
             if hot_reload:
-                Utils.FileMonitor(path=self._file, callback=self.__hot_reload)
+                utils.FileMonitor(path=self._file, callback=self.__hot_reload)
 
     def __hot_reload(self, x, path: str, event_type: str) -> None:
         if not self._file:

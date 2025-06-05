@@ -7,7 +7,7 @@ Static text can be boring, so let's add some dynamic elements!
 
     import datetime
     from ignis.widgets import Widget
-    from ignis.utils import Utils
+    from ignis import utils
 
     def update_label(clock_label: Widget.Label) -> None:
         text = datetime.datetime.now().strftime("%H:%M:%S")
@@ -16,7 +16,7 @@ Static text can be boring, so let's add some dynamic elements!
     def bar(monitor: int) -> Widget.Window:
         clock_label = Widget.Label()
 
-        Utils.Poll(1000, lambda x: update_label(clock_label))
+        utils.Poll(1000, lambda x: update_label(clock_label))
 
         return Widget.Window(
             namespace=f"some-window-{monitor}",

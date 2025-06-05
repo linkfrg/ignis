@@ -1,5 +1,5 @@
 from ignis.widgets.icon import Icon
-from ignis.utils import Utils
+from ignis import utils
 from ignis.gobject import IgnisProperty
 
 DIRECTION = {
@@ -90,7 +90,7 @@ class Arrow(Icon):
         interval = self.time // steps
 
         for i in range(steps):
-            Utils.Timeout(interval * i, self.__rotate, value)
+            utils.Timeout(interval * i, self.__rotate, value)
 
         self._rotated = value
 

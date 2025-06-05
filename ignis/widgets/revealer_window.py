@@ -1,6 +1,6 @@
 from .window import Window
 from .revealer import Revealer
-from ignis.utils import Utils
+from ignis import utils
 from typing import Any
 from ignis.gobject import IgnisProperty
 
@@ -55,7 +55,7 @@ class RevealerWindow(Window):
             if value:
                 super().set_property(prop_name, value)
             else:
-                Utils.Timeout(
+                utils.Timeout(
                     ms=self._revealer.transition_duration,
                     target=lambda x=super(): x.set_property(prop_name, value),
                 )

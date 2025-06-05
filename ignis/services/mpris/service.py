@@ -1,6 +1,6 @@
 import asyncio
 from ignis.dbus import DBusProxy
-from ignis.utils import Utils
+from ignis import utils
 from ignis.base_service import BaseService
 from ignis.gobject import IgnisProperty, IgnisSignal
 from .player import MprisPlayer
@@ -29,7 +29,7 @@ class MprisService(BaseService):
             name="org.freedesktop.DBus",
             object_path="/org/freedesktop/DBus",
             interface_name="org.freedesktop.DBus",
-            info=Utils.load_interface_xml("org.freedesktop.DBus"),
+            info=utils.load_interface_xml("org.freedesktop.DBus"),
         )
 
         self.__dbus.signal_subscribe(

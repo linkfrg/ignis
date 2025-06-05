@@ -60,7 +60,7 @@ def listen_socket(
         with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as sock:
             sock.connect("path/to/socket.sock")
 
-            for message in Utils.listen_socket(sock):
+            for message in utils.listen_socket(sock):
                 print(message)
     """
 

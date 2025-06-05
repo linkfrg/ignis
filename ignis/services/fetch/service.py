@@ -163,7 +163,7 @@ class FetchService(BaseService):
         """
         The current uptime (days, hours, minutes, seconds).
 
-        You can use :class:`~ignis.utils.Utils.Poll` to get the current uptime every minute or second.
+        You can use :class:`~ignis.utils.utils.Poll` to get the current uptime every minute or second.
         """
         with open("/proc/uptime") as f:
             uptime_seconds = float(f.readline().split()[0])

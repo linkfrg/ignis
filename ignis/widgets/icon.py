@@ -1,7 +1,7 @@
 import os
 from ignis.base_widget import BaseWidget
 from gi.repository import Gtk, GdkPixbuf, Gdk  # type: ignore
-from ignis.utils import Utils
+from ignis import utils
 from ignis.gobject import IgnisProperty
 
 
@@ -60,7 +60,7 @@ class Icon(Gtk.Image, BaseWidget):
             return
 
         if not self.pixel_size <= 0:
-            pixbuf = Utils.scale_pixbuf(pixbuf, self.pixel_size, self.pixel_size)
+            pixbuf = utils.scale_pixbuf(pixbuf, self.pixel_size, self.pixel_size)
 
         paintable = Gdk.Texture.new_for_pixbuf(pixbuf)
         self.set_from_paintable(paintable)

@@ -39,14 +39,14 @@ class RecorderService(BaseService):
     .. code-block:: python
 
         from ignis.services.recorder import RecorderService
-        from ignis.utils import Utils
+        from ignis import utils
 
         recorder = RecorderService.get_default()
 
         recorder.start_recording(record_internal_audio=True)
 
         # record for 30 seconds and then stop
-        Utils.Timeout(ms=30 * 1000, target=recorder.stop_recording)
+        utils.Timeout(ms=30 * 1000, target=recorder.stop_recording)
     """
 
     def __init__(self):

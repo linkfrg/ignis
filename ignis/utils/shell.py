@@ -19,7 +19,7 @@ def exec_sh(command: str, **kwargs) -> subprocess.CompletedProcess:
 
 class AsyncCompletedProcess:
     """
-    Completed process object for :func:`~ignis.utils.Utils.exec_sh_async`.
+    Completed process object for :func:`~ignis.utils.utils.exec_sh_async`.
     """
 
     def __init__(self, stdout: str, stderr: str, returncode: int) -> None:

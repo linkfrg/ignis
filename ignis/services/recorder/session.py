@@ -1,6 +1,6 @@
 from gi.repository import GLib  # type: ignore
 from ignis.dbus import DBusProxy
-from ignis.utils import Utils
+from ignis import utils
 from collections.abc import Callable
 
 
@@ -16,7 +16,7 @@ class SessionManager:
             name="org.freedesktop.portal.Desktop",
             object_path="/org/freedesktop/portal/desktop",
             interface_name="org.freedesktop.portal.ScreenCast",
-            info=Utils.load_interface_xml("org.freedesktop.portal.ScreenCast"),
+            info=utils.load_interface_xml("org.freedesktop.portal.ScreenCast"),
         )
 
         self._session_token_counter: int = 0
@@ -54,7 +54,7 @@ class SessionManager:
             name="org.freedesktop.portal.Desktop",
             object_path=request_path,
             interface_name="org.freedesktop.portal.Request",
-            info=Utils.load_interface_xml("org.freedesktop.portal.Request"),
+            info=utils.load_interface_xml("org.freedesktop.portal.Request"),
         )
 
         request_proxy.signal_subscribe(
