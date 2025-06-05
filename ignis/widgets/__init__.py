@@ -37,7 +37,9 @@ from .stack_page import StackPage
 from ignis.deprecation import deprecated_class
 
 
-@deprecated_class(message="""The "Widget" class is deprecated, please use "from ignis import widgets" instead.""")
+@deprecated_class(
+    message="""The "Widget" class is deprecated, please use "from ignis import widgets" instead."""
+)
 class Widget:
     Window: TypeAlias = Window
     Label: TypeAlias = Label
