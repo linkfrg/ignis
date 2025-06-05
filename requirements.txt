@@ -1,4 +1,4 @@
-typer>=0.15.2
+click>=8.1.7
 pycairo>=1.26.1
 PyGObject>=3.50.0
 loguru>=0.7.2

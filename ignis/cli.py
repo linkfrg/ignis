@@ -1,29 +1,24 @@
 import os
-import typer
+import click
 import subprocess
+import collections
 from ignis.client import IgnisClient
 from ignis.utils import Utils
 from ignis.exceptions import WindowNotFoundError
 from typing import Any
-from ignis import is_editable_install, is_sphinx_build
-from typing import Annotated
+from gi.repository import GLib  # type: ignore
+from ignis import is_editable_install
 
-# Do not import gi.repository during sphinx build
-# Otherwise, ignis.cli package will be unavailable:
-# ``AttributeError: module 'ignis' has no attribute 'cli' [docutils]``
-if is_sphinx_build:
-    DEFAULT_CONFIG_PATH = ""  # not used during sphinx build, just set to empty string
-else:
-    from gi.repository import GLib  # type: ignore
-
-    DEFAULT_CONFIG_PATH = f"{GLib.get_user_config_dir()}/ignis/config.py"
+DEFAULT_CONFIG_PATH = f"{GLib.get_user_config_dir()}/ignis/config.py"
 
 
-cli_app = typer.Typer(
-    name="ignis",
-    help="A widget framework for building desktop shells, written and configurable in Python.",
-    no_args_is_help=True,
-)
+class OrderedGroup(click.Group):
+    def __init__(self, name=None, commands=None, **attrs):
+        super().__init__(name, commands, **attrs)
+        self.commands = commands or collections.OrderedDict()
+
+    def list_commands(self, ctx):
+        return self.commands
 
 
 def _run_git_cmd(args: str) -> str | None:
@@ -73,6 +68,11 @@ os-release:
 {os_release}"""
 
 
+def print_version(ctx, param, value):
+    if value:
+        ctx.exit(print(get_version_message()))
+
+
 def call_client_func(name: str, *args) -> Any:
     client = IgnisClient()
     if not client.has_owner:
@@ -90,46 +90,30 @@ def get_full_path(path: str) -> str:
     return os.path.abspath(os.path.expanduser(path))
 
 
-def version_callback(value: bool) -> None:
-    if value:
-        typer.echo(get_version_message())
-        raise typer.Exit()
+@click.group(cls=OrderedGroup)
+@click.option(
+    "--version",
+    is_flag=True,
+    callback=print_version,
+    expose_value=False,
+    is_eager=True,
+    help="Print version and exit",
+)
+def cli():
+    pass
 
 
-@cli_app.callback()
-def main_callback(
-    version: Annotated[
-        bool | None,
-        typer.Option(
-            "--version",
-            callback=version_callback,
-            is_eager=True,
-            help="Print version and exit.",
-        ),
-    ] = None,
-) -> None:
-    return
-
-
-@cli_app.command()
-def init(
-    config: Annotated[
-        str,
-        typer.Option(
-            "--config",
-            "-c",
-            help="Path to the configuration file.",
-            metavar="PATH",
-            show_default="~/.config/ignis/config.py",
-        ),
-    ] = DEFAULT_CONFIG_PATH,
-    debug: Annotated[
-        bool, typer.Option(help="Print debug information to terminal.")
-    ] = False,
-) -> None:
-    """
-    Initialize Ignis.
-    """
+@cli.command(name="init", help="Initialize Ignis")
+@click.option(
+    "--config",
+    "-c",
+    help=f"Path to the configuration file (default: {DEFAULT_CONFIG_PATH})",
+    default=DEFAULT_CONFIG_PATH,
+    type=str,
+    metavar="PATH",
+)
+@click.option("--debug", help="Print debug information to terminal", is_flag=True)
+def init(config: str, debug: bool) -> None:
     from ignis.app import run_app
 
     client = IgnisClient()
@@ -142,100 +126,57 @@ def init(
     run_app(config_path, debug)
 
 
-WindowArgument = Annotated[
-    str,
-    typer.Argument(
-        help="The name of the window.", metavar="WINDOW_NAME", show_default=False
-    ),
-]
-
-
-@cli_app.command()
-def open_window(window: WindowArgument) -> None:
-    """
-    Open a window.
-    """
+@cli.command(name="open", help="Open window")
+@click.argument("window")
+def open_window(window: str) -> None:
     call_client_func("open_window", window)
 
 
-@cli_app.command()
-def close_window(window: WindowArgument) -> None:
-    """
-    Close a window.
-    """
+@cli.command(name="close", help="Close window")
+@click.argument("window")
+def close(window: str) -> None:
     call_client_func("close_window", window)
 
 
-@cli_app.command()
-def toggle_window(window: WindowArgument) -> None:
-    """
-    Toggle a window.
-    """
+@cli.command(name="toggle", help="Toggle window")
+@click.argument("window")
+def toggle(window: str) -> None:
     call_client_func("toggle_window", window)
 
 
-@cli_app.command()
+@cli.command(name="list-windows", help="List all windows")
 def list_windows() -> None:
-    """
-    List names of all windows.
-    """
     window_list = call_client_func("list_windows")
     print("\n".join(window_list))
 
 
-@cli_app.command()
-def run_python(
-    code: Annotated[
-        str,
-        typer.Argument(help="The code to execute.", metavar="CODE", show_default=False),
-    ],
-) -> None:
-    """
-    Execute a Python code inside the running Ignis process.
-    """
+@cli.command(name="run-python", help="Execute python code")
+@click.argument("code")
+def run_python(code: str) -> None:
     call_client_func("run_python", code)
 
 
-@cli_app.command()
-def run_file(
-    file: Annotated[
-        str,
-        typer.Argument(help="The file to execute.", metavar="PATH", show_default=False),
-    ],
-) -> None:
-    """
-    Execute a Python file inside the running Ignis process.
-    """
+@cli.command(name="run-file", help="Execute python file")
+@click.argument("file")
+def run_file(file: str) -> None:
     call_client_func("run_file", get_full_path(file))
 
 
-@cli_app.command()
+@cli.command(name="inspector", help="Open GTK Inspector")
 def inspector() -> None:
-    """
-    Open GTK Inspector.
-    """
     call_client_func("inspector")
 
 
-@cli_app.command()
+@cli.command(name="reload", help="Reload Ignis")
 def reload() -> None:
-    """
-    Reload Ignis.
-    """
     call_client_func("reload")
 
 
-@cli_app.command()
+@cli.command(name="quit", help="Quit Ignis")
 def quit() -> None:
-    """
-    Quit Ignis.
-    """
     call_client_func("quit")
 
 
-@cli_app.command()
+@cli.command(name="systeminfo", help="Print system information")
 def systeminfo() -> None:
-    """
-    Print system information.
-    """
     print(get_systeminfo())

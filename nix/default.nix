@@ -30,7 +30,7 @@
       buildPythonPackage
       pygobject3
       pycairo
-      typer
+      click
       loguru
       rich
     ;
@@ -77,7 +77,7 @@
 
     pygobject3
     pycairo
-    typer
+    click
     loguru
     rich
   ];

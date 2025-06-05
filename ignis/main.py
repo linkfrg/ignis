@@ -1,5 +1,5 @@
 import ctypes
-from ignis.cli import cli_app
+from ignis.cli import cli
 
 
 def set_process_name(name):
@@ -9,7 +9,7 @@ def set_process_name(name):
 
 def main():
     set_process_name("ignis")
-    cli_app(prog_name="ignis")
+    cli(prog_name="ignis")
 
 
 if __name__ == "__main__":
