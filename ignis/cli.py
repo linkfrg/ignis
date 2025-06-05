@@ -76,7 +76,7 @@ def print_version(ctx, param, value):
 def call_client_func(name: str, *args) -> Any:
     client = IgnisClient()
     if not client.has_owner:
-        print("Ignis is not running")
+        print("Ignis is not running.")
         exit(1)
 
     try:
@@ -110,7 +110,7 @@ def cli():
 @click.option(
     "--config",
     "-c",
-    help="Path to the configuration file (default: ~/.config/ignis/config.py)",
+    help="Path to the configuration file (default: ~/.config/ignis/config.py).",
     default=DEFAULT_CONFIG_PATH,
     type=str,
     metavar="PATH",
