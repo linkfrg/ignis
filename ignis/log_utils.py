@@ -6,8 +6,6 @@ import loguru
 import asyncio
 from loguru import logger
 from gi.repository import GLib  # type: ignore
-from rich.traceback import Traceback
-from rich.console import Console
 
 LOG_DIR = f"{GLib.get_user_state_dir()}/ignis"
 LOG_FILE = f"{LOG_DIR}/ignis.log"
@@ -61,6 +59,10 @@ def rich_formatter(record: loguru.Record, force_terminal: bool = True) -> str:
     format_ = LOG_FORMAT + "\n"
 
     if record["exception"] is not None:
+        # lazy load rich to reduce startup time
+        from rich.traceback import Traceback
+        from rich.console import Console
+
         output = io.StringIO()
         console = Console(file=output, force_terminal=force_terminal)
         traceback = Traceback.from_exception(*record["exception"])  # type: ignore
