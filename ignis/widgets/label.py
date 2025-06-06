@@ -35,7 +35,7 @@ class Label(Gtk.Label, BaseWidget):
 
     .. code-block:: python
 
-        Widget.Label(
+        widgets.Label(
             label='heh',
             use_markup=False,
             justify='left',

@@ -14,15 +14,15 @@ class Grid(Gtk.Grid, BaseWidget):
 
     .. code-block:: python
 
-        Widget.Grid(
-            child=[Widget.Button(label=str(i)), for i in range(100)],
+        widgets.Grid(
+            child=[widgets.Button(label=str(i)), for i in range(100)],
             column_num=3
         )
 
     .. code-block:: python
 
-        Widget.Grid(
-            child=[Widget.Button(label=str(i)), for i in range(100)],
+        widgets.Grid(
+            child=[widgets.Button(label=str(i)), for i in range(100)],
             row_num=3
         )
     """

@@ -7,40 +7,40 @@ from ignis.gobject import IgnisProperty
 
 class RevealerWindow(Window):
     """
-    Bases: :class:`~ignis.widgets.Widget.Window`
+    Bases: :class:`~ignis.widgets.Window`
 
     A window with animation.
 
     Args:
-        revealer: An instance of :class:`~ignis.widgets.Widget.Revealer`.
+        revealer: An instance of :class:`~ignis.widgets.Revealer`.
         **kwargs: Properties to set.
 
     .. warning::
-        Do not set ``Widget.Revealer`` as a direct child,
+        Do not set ``widgets.Revealer`` as a direct child,
         as this can lead to various graphical bugs.
-        Instead, place `Widget.Revealer` inside a container (e.g., `Widget.Box`) and then set the container as a child.
+        Instead, place `widgets.Revealer` inside a container (e.g., `widgets.Box`) and then set the container as a child.
 
     Example usage:
 
     .. code-block:: python
 
-        from ignis.widgets import Widget
+        from ignis import widgets
 
-        revealer = Widget.Revealer(
+        revealer = widgets.Revealer(
             transition_type="slide_left",
-            child=Widget.Button(label="test"),
+            child=widgets.Button(label="test"),
             transition_duration=300,
             reveal_child=True,
         )
 
-        box = Widget.Box(child=[revealer])
+        box = widgets.Box(child=[revealer])
 
-        Widget.RevealerWindow(
+        widgets.RevealerWindow(
             visible=False,
             popup=True,
             layer="top",
             namespace="revealer-window",
-            child=box,  # do not set Widget.Revealer as a direct child!
+            child=box,  # do not set widgets.Revealer as a direct child!
             revealer=revealer,
         )
 
@@ -75,7 +75,7 @@ class RevealerWindow(Window):
     @IgnisProperty
     def revealer(self) -> Revealer:
         """
-        An instance of :class:`~ignis.widgets.Widget.Revealer`.
+        An instance of :class:`~ignis.widgets.Revealer`.
         """
         return self._revealer
 

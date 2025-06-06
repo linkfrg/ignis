@@ -17,14 +17,14 @@ class Box(Gtk.Box, BaseWidget):
 
         .. code-block::
 
-            Widget.Box(
-                child=[Widget.Label(label=str(i)) for i in range(10)]
+            widgets.Box(
+                child=[widgets.Label(label=str(i)) for i in range(10)]
             )
 
     .. code-block:: python
 
-        Widget.Box(
-            child=[Widget.Label(label='heh'), Widget.Label(label='heh2')],
+        widgets.Box(
+            child=[widgets.Label(label='heh'), widgets.Label(label='heh2')],
             vertical=False,
             homogeneous=False,
             spacing=52

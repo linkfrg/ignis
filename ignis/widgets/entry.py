@@ -15,7 +15,7 @@ class Entry(Gtk.Entry, BaseWidget):  # type: ignore
 
     .. code-block:: python
 
-        Widget.Entry(
+        widgets.Entry(
             placeholder="placeholder",
             on_accept=lambda x: print(x.text),
             on_change=lambda x: print(x.text),
