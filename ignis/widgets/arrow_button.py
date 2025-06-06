@@ -15,8 +15,8 @@ class ArrowButton(Button):
 
     .. code-block:: python
 
-        Widget.ArrowButton(
-            arrow=Widget.Arrow(
+        widgets.ArrowButton(
+            arrow=widgets.Arrow(
                 ... # Arrow-specific properties go here
             )
         )
@@ -39,6 +39,6 @@ class ArrowButton(Button):
 
     def toggle(self) -> None:
         """
-        Same as :func:`~ignis.widgets.Widget.Arrow.toggle`
+        Same as :func:`~ignis.widgets.Arrow.toggle`
         """
         self._arrow.toggle()

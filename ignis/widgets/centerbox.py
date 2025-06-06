@@ -14,11 +14,11 @@ class CenterBox(Gtk.CenterBox, BaseWidget):
 
     .. code-block:: python
 
-        Widget.CenterBox(
+        widgets.CenterBox(
             vertical=False,
-            start_widget=Widget.Label(label='start'),
-            center_widget=Widget.Label(label='center'),
-            end_widget=Widget.Label(label='end'),
+            start_widget=widgets.Label(label='start'),
+            center_widget=widgets.Label(label='center'),
+            end_widget=widgets.Label(label='end'),
         )
     """
 

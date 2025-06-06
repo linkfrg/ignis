@@ -134,7 +134,7 @@ Widgets
 
         .. code-block:: python
 
-            Widget.WIDGET_NAME(
+            widgets.WIDGET_NAME(
                 prop1="asd",
                 prop2=12
             )

@@ -22,7 +22,7 @@ class PopoverMenu(Gtk.PopoverMenu, BaseWidget):
 
         from ignis.menu_model import IgnisMenuModel, IgnisMenuItem, IgnisMenuSeparator
 
-        Widget.PopoverMenu(
+        widgets.PopoverMenu(
             model=IgnisMenuModel(
                 IgnisMenuItem(
                     label="Just item",

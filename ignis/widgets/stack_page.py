@@ -7,10 +7,10 @@ class StackPage(IgnisGObject):
     """
     Bases: :class:`~ignis.gobject.IgnisGObject`
 
-    Intented to use with :class:`~ignis.widgets.Widget.Stack`.
+    Intented to use with :class:`~ignis.widgets.Stack`.
 
     Args:
-        title: The title. It will be used by :class:`~ignis.widgets.Widget.StackSwitcher` to display :attr:`child` in a tab bar.
+        title: The title. It will be used by :class:`~ignis.widgets.StackSwitcher` to display :attr:`child` in a tab bar.
         child: The child widget.
 
     .. warning::
@@ -26,7 +26,7 @@ class StackPage(IgnisGObject):
     def title(self) -> str:
         """
         The title.
-        It will be used by :class:`~ignis.widgets.Widget.StackSwitcher` to display :attr:`child` in a tab bar.
+        It will be used by :class:`~ignis.widgets.StackSwitcher` to display :attr:`child` in a tab bar.
         """
         return self._title
 

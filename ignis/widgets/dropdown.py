@@ -15,7 +15,7 @@ class DropDown(Gtk.DropDown, BaseWidget):
 
     .. code-block:: python
 
-        Widget.DropDown(
+        widgets.DropDown(
             items=["option 1", "option 2", "option 3"],
             on_selected=lambda x, selected: print(selected)
         )

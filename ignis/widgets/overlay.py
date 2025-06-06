@@ -15,12 +15,12 @@ class Overlay(Gtk.Overlay, BaseWidget):
 
     .. code-block:: python
 
-        Widget.Overlay(
-            child=Widget.Label(label="This is the main child"),
+        widgets.Overlay(
+            child=widgets.Label(label="This is the main child"),
             overlays=[
-                Widget.Label(label="Overlay child 1"),
-                Widget.Label(label="Overlay child 2"),
-                Widget.Label(label="Overlay child 3"),
+                widgets.Label(label="Overlay child 1"),
+                widgets.Label(label="Overlay child 2"),
+                widgets.Label(label="Overlay child 3"),
             ]
         )
     """

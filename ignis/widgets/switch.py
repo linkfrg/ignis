@@ -16,7 +16,7 @@ class Switch(Gtk.Switch, BaseWidget):
 
     .. code-block:: python
 
-        Widget.Switch(
+        widgets.Switch(
             active=True,
             on_change=lambda x, active: print(active),
         )

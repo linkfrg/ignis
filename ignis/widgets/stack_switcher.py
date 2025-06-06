@@ -6,7 +6,7 @@ class StackSwitcher(Gtk.StackSwitcher, BaseWidget):
     """
     Bases: :class:`Gtk.StackSwitcher`
 
-    The StackSwitcher shows a row of buttons to switch between :class:`~ignis.widgets.Widget.Stack` pages.
+    The StackSwitcher shows a row of buttons to switch between :class:`~ignis.widgets.Stack` pages.
 
     Args:
         **kwargs: Properties to set.
