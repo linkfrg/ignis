@@ -2,7 +2,7 @@ import os
 from ignis.base_service import BaseService
 from .device import BacklightDevice
 from .constants import SYS_BACKLIGHT
-from ignis.utils import Utils
+from ignis import utils
 from ignis.gobject import IgnisProperty
 
 
@@ -34,7 +34,7 @@ class BacklightService(BaseService):
         self._devices: list[BacklightDevice] = []
 
         # FIXME: not working
-        Utils.FileMonitor(
+        utils.FileMonitor(
             path=SYS_BACKLIGHT,
             callback=lambda x, path, event_type: self.__sync_devices()
             if event_type == "deleted" or event_type == "created"

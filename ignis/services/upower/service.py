@@ -1,6 +1,6 @@
 from ignis.base_service import BaseService
 from ignis.dbus import DBusProxy
-from ignis.utils import Utils
+from ignis import utils
 from ignis.exceptions import UPowerNotRunningError
 from ignis.gobject import IgnisProperty, IgnisSignal
 from .device import UPowerDevice
@@ -22,7 +22,7 @@ class UPowerService(BaseService):
             name="org.freedesktop.UPower",
             object_path="/org/freedesktop/UPower",
             interface_name="org.freedesktop.UPower",
-            info=Utils.load_interface_xml("org.freedesktop.UPower"),
+            info=utils.load_interface_xml("org.freedesktop.UPower"),
             bus_type="system",
         )
 

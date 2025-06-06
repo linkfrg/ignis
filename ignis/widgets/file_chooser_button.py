@@ -6,7 +6,7 @@ from ignis.widgets.label import Label
 from ignis.widgets.box import Box
 from ignis.widgets.icon import Icon
 from ignis.widgets.file_dialog import FileDialog
-from ignis.utils import Utils
+from ignis import utils
 from ignis.gobject import IgnisProperty
 
 
@@ -89,7 +89,7 @@ class FileChooserButton(Gtk.Button, BaseWidget):
     def __sync(self, path: str) -> None:
         self.label.label = os.path.basename(path)
         try:
-            self.__file_icon.icon_name = Utils.get_file_icon_name(path, symbolic=True)
+            self.__file_icon.icon_name = utils.get_file_icon_name(path, symbolic=True)
             self.__file_icon.visible = True
         except FileNotFoundError:
             pass

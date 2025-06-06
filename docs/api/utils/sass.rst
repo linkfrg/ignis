@@ -1,4 +1,4 @@
 Sass
 ====
 
-.. autofunction:: ignis.utils.Utils.sass_compile
+.. autofunction:: ignis.utils.sass_compile

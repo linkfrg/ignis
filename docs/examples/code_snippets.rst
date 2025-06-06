@@ -76,7 +76,7 @@ Display applications icons on Hyprland workspaces buttons
                     "windows",
                     lambda _: [
                         # find the icon of the app by its class name
-                        widgets.Icon(icon_name=Utils.get_app_icon_name(window.class_name))
+                        widgets.Icon(icon_name=utils.get_app_icon_name(window.class_name))
                         # get all windows on the current workspace
                         for window in hyprland.get_windows_on_workspace(
                             workspace_id=workspace.id

@@ -1,5 +1,5 @@
 from ignis.dbus import DBusService
-from ignis.utils import Utils
+from ignis import utils
 from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
 from .action import NotificationAction
 
@@ -46,7 +46,7 @@ class Notification(IgnisGObject):
             for i in range(0, len(actions), 2)
         ]
 
-        Utils.Timeout(timeout, self.dismiss)
+        utils.Timeout(timeout, self.dismiss)
 
     @IgnisSignal
     def closed(self):

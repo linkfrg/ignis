@@ -1,7 +1,7 @@
 import asyncio
 from typing import Literal
 from collections.abc import Callable
-from ignis.utils import Utils
+from ignis import utils
 from ignis.dbus import DBusProxy
 from gi.repository import GLib, GdkPixbuf, Gtk, Gdk  # type: ignore
 from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
@@ -77,7 +77,7 @@ class SystemTrayItem(IgnisGObject):
             name=name,
             object_path=object_path,
             interface_name="org.kde.StatusNotifierItem",
-            info=Utils.load_interface_xml("org.kde.StatusNotifierItem"),
+            info=utils.load_interface_xml("org.kde.StatusNotifierItem"),
         )
 
         if not proxy.has_owner:
@@ -114,7 +114,7 @@ class SystemTrayItem(IgnisGObject):
     async def __sync_property(self, py_name: str) -> None:
         try:
             value = await self._proxy.get_dbus_property_async(
-                Utils.snake_to_pascal(py_name)
+                utils.snake_to_pascal(py_name)
             )
         except GLib.Error:
             return

@@ -1,6 +1,6 @@
 String Cases
 ============
 
-.. autofunction:: ignis.utils.Utils.snake_to_pascal
+.. autofunction:: ignis.utils.snake_to_pascal
 
-.. autofunction:: ignis.utils.Utils.pascal_to_snake
+.. autofunction:: ignis.utils.pascal_to_snake

@@ -1,6 +1,6 @@
 from gi.repository import Gio, GLib  # type: ignore
 from ignis.dbus import DBusProxy
-from ignis.utils import Utils
+from ignis import utils
 from loguru import logger
 from ignis.gobject import IgnisGObject, IgnisProperty
 from typing import Literal
@@ -24,7 +24,7 @@ class SystemdUnit(IgnisGObject):
             name="org.freedesktop.systemd1",
             object_path=object_path,
             interface_name="org.freedesktop.systemd1.Unit",
-            info=Utils.load_interface_xml("org.freedesktop.systemd1.Unit"),
+            info=utils.load_interface_xml("org.freedesktop.systemd1.Unit"),
             bus_type=bus_type,
         )
 

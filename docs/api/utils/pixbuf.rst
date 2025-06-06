@@ -1,6 +1,6 @@
 Pixbuf
 ======
 
-.. autofunction:: ignis.utils.Utils.crop_pixbuf
+.. autofunction:: ignis.utils.crop_pixbuf
 
-.. autofunction:: ignis.utils.Utils.scale_pixbuf
+.. autofunction:: ignis.utils.scale_pixbuf

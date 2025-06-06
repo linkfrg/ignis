@@ -1,7 +1,7 @@
 import json
 import os
 import socket
-from ignis.utils import Utils
+from ignis import utils
 from ignis.exceptions import NiriIPCNotFoundError
 from ignis.base_service import BaseService
 from ignis.gobject import IgnisProperty, IgnisSignal
@@ -128,7 +128,7 @@ class NiriService(BaseService):
         # it is received, we are ready to launch a threaded (non blocking) version.
         self.__listen_events(sock=sock, break_on="OverviewOpenedOrClosed")
 
-        Utils.thread(lambda: self.__listen_events(sock=sock))
+        utils.thread(lambda: self.__listen_events(sock=sock))
         # No need to send any other commands after event stream initialization:
         #
         #  "The event stream IPC is designed to give you the complete current
@@ -138,7 +138,7 @@ class NiriService(BaseService):
         #   - https://github.com/YaLTeR/niri/wiki/IPC
 
     def __listen_events(self, sock: socket.socket, break_on: str = "") -> None:
-        for event in Utils.listen_socket(sock, errors="ignore"):
+        for event in utils.listen_socket(sock, errors="ignore"):
             json_data = json.loads(event)
             event_type = list(json_data.keys())[0]
             event_data = list(json_data.values())[0]
@@ -343,7 +343,7 @@ class NiriService(BaseService):
 
         with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as sock:
             sock.connect(NIRI_SOCKET)
-            return Utils.send_socket(
+            return utils.send_socket(
                 sock, json.dumps(cmd) + "\n", errors="ignore", end_char="\n"
             )
 

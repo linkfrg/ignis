@@ -1,7 +1,7 @@
 import os
 from ignis.base_widget import BaseWidget
 from gi.repository import Gtk, GdkPixbuf, Gdk  # type: ignore
-from ignis.utils import Utils
+from ignis import utils
 from ignis.gobject import IgnisProperty
 
 
@@ -137,7 +137,7 @@ class Picture(Gtk.Picture, BaseWidget):
         if size <= 0:
             size = 16
 
-        paintable = Utils.get_paintable(self, icon_name, size)
+        paintable = utils.get_paintable(self, icon_name, size)
 
         if not paintable:
             return
@@ -165,6 +165,6 @@ class Picture(Gtk.Picture, BaseWidget):
             return pixbuf
 
         if self.content_fit == "cover":
-            pixbuf = Utils.crop_pixbuf(pixbuf, width, height)
+            pixbuf = utils.crop_pixbuf(pixbuf, width, height)
 
-        return Utils.scale_pixbuf(pixbuf, width, height)
+        return utils.scale_pixbuf(pixbuf, width, height)

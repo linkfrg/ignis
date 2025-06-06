@@ -2,7 +2,7 @@ import datetime
 import asyncio
 from ignis.menu_model import IgnisMenuModel, IgnisMenuItem, IgnisMenuSeparator
 from ignis import widgets
-from ignis.utils import Utils
+from ignis import utils
 from ignis.app import IgnisApp
 from ignis.services.audio import AudioService
 from ignis.services.system_tray import SystemTrayService, SystemTrayItem
@@ -13,7 +13,7 @@ from ignis.services.mpris import MprisService, MprisPlayer
 
 app = IgnisApp.get_default()
 
-app.apply_css(f"{Utils.get_current_dir()}/style.scss")
+app.apply_css(f"{utils.get_current_dir()}/style.scss")
 
 
 audio = AudioService.get_default()
@@ -202,7 +202,7 @@ def clock() -> widgets.Label:
     # poll for current time every second
     return widgets.Label(
         css_classes=["clock"],
-        label=Utils.Poll(
+        label=utils.Poll(
             1_000, lambda self: datetime.datetime.now().strftime("%H:%M")
         ).bind("output"),
     )
@@ -287,7 +287,7 @@ def speaker_slider() -> widgets.Scale:
 
 def create_exec_task(cmd: str) -> None:
     # use create_task to run async function in a regular (sync) one
-    asyncio.create_task(Utils.exec_sh_async(cmd))
+    asyncio.create_task(utils.exec_sh_async(cmd))
 
 
 def logout() -> None:
@@ -372,7 +372,7 @@ def right() -> widgets.Box:
 
 
 def bar(monitor_id: int = 0) -> widgets.Window:
-    monitor_name = Utils.get_monitor(monitor_id).get_connector()  # type: ignore
+    monitor_name = utils.get_monitor(monitor_id).get_connector()  # type: ignore
     return widgets.Window(
         namespace=f"ignis_bar_{monitor_id}",
         monitor=monitor_id,
@@ -388,5 +388,5 @@ def bar(monitor_id: int = 0) -> widgets.Window:
 
 
 # this will display bar on all monitors
-for i in range(Utils.get_n_monitors()):
+for i in range(utils.get_n_monitors()):
     bar(i)

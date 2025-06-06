@@ -5,7 +5,7 @@ import datetime
 from dataclasses import dataclass
 from typing import Literal
 from ignis.dbus import DBusService
-from ignis.utils import Utils
+from ignis import utils
 from loguru import logger
 from gi.repository import Gtk, Gdk, Gio, GLib  # type: ignore
 from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
@@ -79,7 +79,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         self.__dbus = DBusService(
             name="com.github.linkfrg.ignis",
             object_path="/com/github/linkfrg/ignis",
-            info=Utils.load_interface_xml("com.github.linkfrg.ignis"),
+            info=utils.load_interface_xml("com.github.linkfrg.ignis"),
         )
 
         self.__dbus.register_dbus_method(name="OpenWindow", method=self.__OpenWindow)
@@ -104,7 +104,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         self._widgets_style_priority: StylePriority = "application"
 
     def __watch_config(
-        self, file_monitor: Utils.FileMonitor, path: str, event_type: str
+        self, file_monitor: utils.FileMonitor, path: str, event_type: str
     ) -> None:
         if event_type != "changes_done_hint":
             return
@@ -122,7 +122,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
                 logger.info("Monitors have changed, reloading.")
                 self.reload()
 
-        monitors = Utils.get_monitors()
+        monitors = utils.get_monitors()
         monitors.connect("items-changed", callback)
 
     @classmethod
@@ -271,7 +271,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
             )
 
         if style_path.endswith(".scss") or style_path.endswith(".sass"):
-            css_style = Utils.sass_compile(path=style_path, compiler=compiler)
+            css_style = utils.sass_compile(path=style_path, compiler=compiler)
         elif style_path.endswith(".css"):
             with open(style_path) as file:
                 css_style = file.read()
@@ -382,12 +382,12 @@ class IgnisApp(Gtk.Application, IgnisGObject):
 
         .. code-block:: python
 
-            from ignis.utils import Utils
+            from ignis import utils
             from ignis.app import IgnisApp
 
             app = IgnisApp.get_default()
 
-            app.add_icons(f"{Utils.get_current_dir()}/icons")
+            app.add_icons(f"{utils.get_current_dir()}/icons")
         """
         display = Gdk.Display.get_default()
 
@@ -417,7 +417,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
 
         logger.info(f"Using configuration file: {self._config_path}")
 
-        self._monitor = Utils.FileMonitor(
+        self._monitor = utils.FileMonitor(
             path=config_dir, callback=self.__watch_config, recursive=True
         )
 
