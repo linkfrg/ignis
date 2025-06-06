@@ -494,7 +494,7 @@ But you can always use GTK directly.</p>
                 <span class="s2">&quot;windows&quot;</span><span class="p">,</span>
                 <span class="k">lambda</span> <span class="n">_</span><span class="p">:</span> <span class="p">[</span>
                     <span class="c1"># find the icon of the app by its class name</span>
-                    <span class="n">widgets</span><span class="o">.</span><span class="n">Icon</span><span class="p">(</span><span class="n">icon_name</span><span class="o">=</span><span class="n">Utils</span><span class="o">.</span><span class="n">get_app_icon_name</span><span class="p">(</span><span class="n">window</span><span class="o">.</span><span class="n">class_name</span><span class="p">))</span>
+                    <span class="n">widgets</span><span class="o">.</span><span class="n">Icon</span><span class="p">(</span><span class="n">icon_name</span><span class="o">=</span><span class="n">utils</span><span class="o">.</span><span class="n">get_app_icon_name</span><span class="p">(</span><span class="n">window</span><span class="o">.</span><span class="n">class_name</span><span class="p">))</span>
                     <span class="c1"># get all windows on the current workspace</span>
                     <span class="k">for</span> <span class="n">window</span> <span class="ow">in</span> <span class="n">hyprland</span><span class="o">.</span><span class="n">get_windows_on_workspace</span><span class="p">(</span>
                         <span class="n">workspace_id</span><span class="o">=</span><span class="n">workspace</span><span class="o">.</span><span class="n">id</span>

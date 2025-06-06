@@ -1,9 +1,9 @@
 Shell Commands
 ==============
 
-.. autofunction:: ignis.utils.Utils.exec_sh
+.. autofunction:: ignis.utils.exec_sh
 
-.. autofunction:: ignis.utils.Utils.exec_sh_async
+.. autofunction:: ignis.utils.exec_sh_async
 
-.. autoclass:: ignis.utils.Utils.AsyncCompletedProcess
+.. autoclass:: ignis.utils.AsyncCompletedProcess
     :members:

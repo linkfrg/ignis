@@ -454,9 +454,9 @@ Asynchronous programming allows you to wait until a task is finished in the back
 </ol>
 <p>Use <a class="reference external" href="https://docs.python.org/3/library/asyncio-task.html#asyncio.create_task" title="(in Python v3.13)"><code class="xref py py-func docutils literal notranslate"><span class="pre">asyncio.create_task()</span></code></a> to schedule execution.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">ignis.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">Utils</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ignis</span><span class="w"> </span><span class="kn">import</span> <span class="n">utils</span>
 
-<span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">Utils</span><span class="o">.</span><span class="n">exec_sh_async</span><span class="p">(</span><span class="s2">&quot;notify-send &#39;asynchrony!&#39;&quot;</span><span class="p">))</span>
+<span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">utils</span><span class="o">.</span><span class="n">exec_sh_async</span><span class="p">(</span><span class="s2">&quot;notify-send &#39;asynchrony!&#39;&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="2">
@@ -464,10 +464,10 @@ Asynchronous programming allows you to wait until a task is finished in the back
 </ol>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">await</span></code> keyword to wait for execution.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">ignis.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">Utils</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ignis</span><span class="w"> </span><span class="kn">import</span> <span class="n">utils</span>
 
 <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">some_func</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="k">await</span> <span class="n">Utils</span><span class="o">.</span><span class="n">exec_sh_async</span><span class="p">(</span><span class="s2">&quot;notify-send &#39;asynchrony!&#39;&quot;</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">utils</span><span class="o">.</span><span class="n">exec_sh_async</span><span class="p">(</span><span class="s2">&quot;notify-send &#39;asynchrony!&#39;&quot;</span><span class="p">)</span>
 
 <span class="c1"># you still need create_task() because some_func is async</span>
 <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">some_func</span><span class="p">())</span>

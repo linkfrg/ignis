@@ -520,12 +520,12 @@
   <section id="debounce">
 <h1>Debounce<a class="headerlink" href="#debounce" title="Link to this heading">#</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="ignis.utils.Utils.DebounceTask">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.utils.Utils.</span></span><span class="sig-name descname"><span class="pre">DebounceTask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.utils.Utils.DebounceTask" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.utils.DebounceTask">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.utils.</span></span><span class="sig-name descname"><span class="pre">DebounceTask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.utils.DebounceTask" title="Link to this definition">#</a></dt>
 <dd><p>Delays function calls until a specified time elapses after the most recent call.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>See the decorator for this class <a class="reference internal" href="#ignis.utils.Utils.debounce" title="ignis.utils.Utils.debounce"><code class="xref py py-func docutils literal notranslate"><span class="pre">debounce()</span></code></a>.</p>
+<p>See the decorator for this class <code class="xref py py-func docutils literal notranslate"><span class="pre">debounce()</span></code>.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -538,19 +538,19 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="ignis.utils.Utils.debounce">
-<span class="sig-prename descclassname"><span class="pre">ignis.utils.Utils.</span></span><span class="sig-name descname"><span class="pre">debounce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.utils.Utils.debounce" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.utils.debounce">
+<span class="sig-prename descclassname"><span class="pre">ignis.utils.</span></span><span class="sig-name descname"><span class="pre">debounce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.utils.debounce" title="Link to this definition">#</a></dt>
 <dd><p>A decorator to delay function execution until a set time has passed since the last call.</p>
-<p>This is a convenient wrapper for the <a class="reference internal" href="#ignis.utils.Utils.DebounceTask" title="ignis.utils.Utils.DebounceTask"><code class="xref py py-class docutils literal notranslate"><span class="pre">DebounceTask</span></code></a> class.</p>
+<p>This is a convenient wrapper for the <code class="xref py py-class docutils literal notranslate"><span class="pre">DebounceTask</span></code> class.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>ms</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) -- The delay time in milliseconds.</p>
 </dd>
 </dl>
 <p>Example usage:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ignis.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">Utils</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ignis</span><span class="w"> </span><span class="kn">import</span> <span class="n">utils</span>
 
-<span class="nd">@Utils</span><span class="o">.</span><span class="n">debounce</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span> <span class="c1"># delay for 500 ms (0.5 s)</span>
+<span class="nd">@utils</span><span class="o">.</span><span class="n">debounce</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span> <span class="c1"># delay for 500 ms (0.5 s)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">some_func</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;called!&quot;</span><span class="p">)</span>
 
@@ -609,8 +609,8 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.DebounceTask"><code class="docutils literal notranslate"><span class="pre">DebounceTask</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.Utils.debounce"><code class="docutils literal notranslate"><span class="pre">debounce()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.DebounceTask"><code class="docutils literal notranslate"><span class="pre">DebounceTask</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.debounce"><code class="docutils literal notranslate"><span class="pre">debounce()</span></code></a></li>
 </ul>
   </nav></div>
 
