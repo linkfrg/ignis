@@ -19,10 +19,10 @@ class Poll(IgnisGObject):
 
     .. code-block:: python
 
-        from ignis.utils import Utils
+        from ignis import utils
 
         # print "Hello" every second
-        Utils.Poll(timeout=1_000, callback=lambda self: print("Hello"))
+        utils.Poll(timeout=1_000, callback=lambda self: print("Hello"))
     """
 
     def __init__(self, timeout: int, callback: Callable, *args):

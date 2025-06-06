@@ -2,7 +2,7 @@ import asyncio
 from gi.repository import Gio, GLib  # type: ignore
 from typing import Any, overload
 from collections.abc import Callable
-from ignis.utils import Utils
+from ignis import utils
 from ignis.gobject import IgnisGObject, IgnisProperty
 from ignis.exceptions import DBusMethodNotFoundError, DBusPropertyNotFoundError
 from typing import Literal
@@ -17,7 +17,7 @@ class DBusService(IgnisGObject):
     Args:
         name: The well-known name to own.
         object_path: An object path.
-        info: An instance of :class:`Gio.DBusInterfaceInfo`. You can get it from XML using :func:`~ignis.utils.Utils.load_interface_xml`.
+        info: An instance of :class:`Gio.DBusInterfaceInfo`. You can get it from XML using :func:`~ignis.utils.utils.load_interface_xml`.
         on_name_acquired: The function to call when ``name`` is acquired.
         on_name_lost: The function to call when ``name`` is lost.
 
@@ -85,7 +85,7 @@ class DBusService(IgnisGObject):
         """
         An instance of :class:`Gio.DBusInterfaceInfo`
 
-        You can get it from XML using :func:`~ignis.utils.Utils.load_interface_xml`.
+        You can get it from XML using :func:`~ignis.utils.utils.load_interface_xml`.
         """
         return self._info
 
@@ -163,7 +163,7 @@ class DBusService(IgnisGObject):
         # params can contain pixbuf, very large amount of data
         # and unpacking may take some time and block the main thread
         # so we unpack in another thread, and call DBus method when unpacking is finished
-        Utils.ThreadTask(
+        utils.ThreadTask(
             target=params.unpack, callback=lambda result: callback(func, result)
         ).run()
 
@@ -313,7 +313,7 @@ class DBusProxy(IgnisGObject):
             name: A bus name (well-known or unique).
             object_path: An object path.
             interface_name: A D-Bus interface name.
-            info: A :class:`Gio.DBusInterfaceInfo` instance. You can get it from XML using :class:`~ignis.utils.Utils.load_interface_xml`.
+            info: A :class:`Gio.DBusInterfaceInfo` instance. You can get it from XML using :class:`~ignis.utils.utils.load_interface_xml`.
             bus_type: The type of the bus.
         """
         gproxy = Gio.DBusProxy.new_for_bus_sync(
@@ -343,7 +343,7 @@ class DBusProxy(IgnisGObject):
             name: A bus name (well-known or unique).
             object_path: An object path.
             interface_name: A D-Bus interface name.
-            info: A :class:`Gio.DBusInterfaceInfo` instance. You can get it from XML using :class:`~ignis.utils.Utils.load_interface_xml`.
+            info: A :class:`Gio.DBusInterfaceInfo` instance. You can get it from XML using :class:`~ignis.utils.utils.load_interface_xml`.
             bus_type: The type of the bus.
             callback: A function to call when the initialization is complete. The function will receive a newly initialized instance of this class.
             *user_data: User data to pass to ``callback``.
@@ -386,7 +386,7 @@ class DBusProxy(IgnisGObject):
         """
         A :class:`Gio.DBusInterfaceInfo` instance.
 
-        You can get it from XML using :class:`~ignis.utils.Utils.load_interface_xml`.
+        You can get it from XML using :class:`~ignis.utils.utils.load_interface_xml`.
         """
         return self._gproxy.props.g_interface_info
 
@@ -434,7 +434,7 @@ class DBusProxy(IgnisGObject):
             name="org.freedesktop.DBus",
             object_path="/org/freedesktop/DBus",
             interface_name="org.freedesktop.DBus",
-            info=Utils.load_interface_xml("org.freedesktop.DBus"),
+            info=utils.load_interface_xml("org.freedesktop.DBus"),
             bus_type=self.bus_type,
         )
         return dbus.NameHasOwner("(s)", self.name)

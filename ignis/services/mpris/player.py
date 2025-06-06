@@ -3,7 +3,7 @@ import asyncio
 from ignis.dbus import DBusProxy
 from gi.repository import GLib  # type: ignore
 from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
-from ignis.utils import Utils
+from ignis import utils
 from ignis.connection_manager import ConnectionManager
 from collections.abc import Callable
 from .constants import ART_URL_CACHE_DIR
@@ -69,14 +69,14 @@ class MprisPlayer(IgnisGObject):
             name=name,
             object_path="/org/mpris/MediaPlayer2",
             interface_name="org.mpris.MediaPlayer2",
-            info=Utils.load_interface_xml("org.mpris.MediaPlayer2"),
+            info=utils.load_interface_xml("org.mpris.MediaPlayer2"),
         )
 
         player_proxy = await DBusProxy.new_async(
             name=name,
             object_path="/org/mpris/MediaPlayer2",
             interface_name="org.mpris.MediaPlayer2.Player",
-            info=Utils.load_interface_xml("org.mpris.MediaPlayer2.Player"),
+            info=utils.load_interface_xml("org.mpris.MediaPlayer2.Player"),
         )
 
         obj = cls(mpris_proxy=mpris_proxy, player_proxy=player_proxy)
@@ -97,7 +97,7 @@ class MprisPlayer(IgnisGObject):
 
     async def __sync_property(self, proxy: DBusProxy, py_name: str) -> None:
         try:
-            value = await proxy.get_dbus_property_async(Utils.snake_to_pascal(py_name))
+            value = await proxy.get_dbus_property_async(utils.snake_to_pascal(py_name))
         except GLib.Error:
             return
 
@@ -179,8 +179,8 @@ class MprisPlayer(IgnisGObject):
         if os.path.exists(path):
             return path
 
-        contents = await Utils.read_file_async(uri=art_url, decode=False)
-        await Utils.write_file_async(path=path, contents=contents)
+        contents = await utils.read_file_async(uri=art_url, decode=False)
+        await utils.write_file_async(path=path, contents=contents)
         return path
 
     async def __update_position(self) -> None:

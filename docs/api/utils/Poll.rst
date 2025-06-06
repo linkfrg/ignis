@@ -1,5 +1,5 @@
 Poll
 ====
 
-.. autoclass:: ignis.utils.Utils.Poll
+.. autoclass:: ignis.utils.Poll
     :members:

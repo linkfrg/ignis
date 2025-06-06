@@ -19,8 +19,12 @@ from .version import (
     get_ignis_branch,
     get_ignis_commit_msg,
 )
+from ignis.deprecation import deprecated_class
 
 
+@deprecated_class(
+    message="""The "Utils" class is deprecated, please use "from ignis import utils" instead."""
+)
 class Utils:
     exec_sh = exec_sh
     exec_sh_async = exec_sh_async
@@ -56,3 +60,41 @@ class Utils:
     write_file = write_file
     write_file_async = write_file_async
     get_app_icon_name = get_app_icon_name
+
+
+__all__ = [
+    "AsyncCompletedProcess",
+    "DebounceTask",
+    "FileMonitor",
+    "Poll",
+    "ThreadTask",
+    "Timeout",
+    "crop_pixbuf",
+    "debounce",
+    "exec_sh",
+    "exec_sh_async",
+    "get_app_icon_name",
+    "get_current_dir",
+    "get_file_icon_name",
+    "get_ignis_branch",
+    "get_ignis_commit",
+    "get_ignis_commit_msg",
+    "get_ignis_version",
+    "get_monitor",
+    "get_monitors",
+    "get_n_monitors",
+    "get_paintable",
+    "listen_socket",
+    "load_interface_xml",
+    "pascal_to_snake",
+    "read_file",
+    "read_file_async",
+    "run_in_thread",
+    "sass_compile",
+    "scale_pixbuf",
+    "send_socket",
+    "snake_to_pascal",
+    "thread",
+    "write_file",
+    "write_file_async",
+]

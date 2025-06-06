@@ -35,7 +35,7 @@ class FileMonitor(IgnisGObject):
 
     .. code-block::
 
-        Utils.FileMonitor(
+        utils.FileMonitor(
             path="path/to/something",
             recursive=False,
             callback=lambda path, event_type: print(path, event_type),

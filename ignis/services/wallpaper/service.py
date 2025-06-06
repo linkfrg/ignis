@@ -1,6 +1,6 @@
 import os
 import shutil
-from ignis.utils import Utils
+from ignis import utils
 from ignis.base_service import BaseService
 from ignis.options import options
 from .window import WallpaperLayerWindow
@@ -54,8 +54,8 @@ class WallpaperService(BaseService):
 
         self._windows = []
 
-        for monitor_id in range(Utils.get_n_monitors()):
-            gdkmonitor = Utils.get_monitor(monitor_id)
+        for monitor_id in range(utils.get_n_monitors()):
+            gdkmonitor = utils.get_monitor(monitor_id)
             if not gdkmonitor:
                 return
 

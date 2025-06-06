@@ -21,9 +21,9 @@ Use :func:`asyncio.create_task` to schedule execution.
 .. code-block:: python
     
     import asyncio
-    from ignis.utils import Utils
+    from ignis import utils
 
-    asyncio.create_task(Utils.exec_sh_async("notify-send 'asynchrony!'"))
+    asyncio.create_task(utils.exec_sh_async("notify-send 'asynchrony!'"))
 
 2. From another asynchronous function
 
@@ -32,10 +32,10 @@ Use the ``await`` keyword to wait for execution.
 .. code-block:: python
     
     import asyncio
-    from ignis.utils import Utils
+    from ignis import utils
 
     async def some_func() -> None:
-        await Utils.exec_sh_async("notify-send 'asynchrony!'")
+        await utils.exec_sh_async("notify-send 'asynchrony!'")
 
     # you still need create_task() because some_func is async
     asyncio.create_task(some_func())

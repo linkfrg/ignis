@@ -1,7 +1,7 @@
 from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
 from gi.repository import GLib  # type: ignore
 from ignis.dbus import DBusProxy
-from ignis.utils import Utils
+from ignis import utils
 from .constants import DEVICE_KIND, DeviceState
 
 
@@ -20,7 +20,7 @@ class UPowerDevice(IgnisGObject):
             name="org.freedesktop.UPower",
             object_path=object_path,
             interface_name="org.freedesktop.UPower.Device",
-            info=Utils.load_interface_xml("org.freedesktop.UPower.Device"),
+            info=utils.load_interface_xml("org.freedesktop.UPower.Device"),
             bus_type="system",
         )
         self._proxy.gproxy.connect("g-properties-changed", self.__sync)

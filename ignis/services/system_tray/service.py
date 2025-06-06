@@ -1,5 +1,5 @@
 import asyncio
-from ignis.utils import Utils
+from ignis import utils
 from ignis.dbus import DBusService, DBusProxy
 from gi.repository import Gio, GLib  # type: ignore
 from ignis.base_service import BaseService
@@ -34,7 +34,7 @@ class SystemTrayService(BaseService):
         self.__dbus: DBusService = DBusService(
             name="org.kde.StatusNotifierWatcher",
             object_path="/StatusNotifierWatcher",
-            info=Utils.load_interface_xml("org.kde.StatusNotifierWatcher"),
+            info=utils.load_interface_xml("org.kde.StatusNotifierWatcher"),
             on_name_lost=self.__on_name_lost,
         )
 
@@ -59,7 +59,7 @@ class SystemTrayService(BaseService):
             name="org.kde.StatusNotifierWatcher",
             interface_name="org.kde.StatusNotifierWatcher",
             object_path="/StatusNotifierWatcher",
-            info=Utils.load_interface_xml("org.kde.StatusNotifierWatcher"),
+            info=utils.load_interface_xml("org.kde.StatusNotifierWatcher"),
         )
         name = proxy.gproxy.get_name_owner()
         raise AnotherSystemTrayRunningError(name)

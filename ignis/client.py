@@ -1,5 +1,5 @@
 from ignis.dbus import DBusProxy
-from ignis.utils import Utils
+from ignis import utils
 from ignis.exceptions import WindowNotFoundError, IgnisNotRunningError
 from typing import Any
 
@@ -34,7 +34,7 @@ class IgnisClient:
             name="com.github.linkfrg.ignis",
             object_path="/com/github/linkfrg/ignis",
             interface_name="com.github.linkfrg.ignis",
-            info=Utils.load_interface_xml("com.github.linkfrg.ignis"),
+            info=utils.load_interface_xml("com.github.linkfrg.ignis"),
         )
 
     @property

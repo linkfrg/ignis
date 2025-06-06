@@ -2,7 +2,7 @@ import asyncio
 import weakref
 from gi.repository import Gtk, GLib  # type: ignore
 from ignis.dbus import DBusProxy
-from ignis.utils import Utils
+from ignis import utils
 from ignis.gobject import IgnisProperty
 from ignis.menu_model import (
     IgnisMenuModel,
@@ -103,7 +103,7 @@ class DBusMenu(Gtk.PopoverMenu):
             name=name,
             object_path=object_path,
             interface_name="com.canonical.dbusmenu",
-            info=Utils.load_interface_xml("com.canonical.dbusmenu"),
+            info=utils.load_interface_xml("com.canonical.dbusmenu"),
         )
         obj = cls(proxy)
         layout = proxy.GetLayout(*DBUS_GET_LAYOUT_ARGS)
@@ -125,7 +125,7 @@ class DBusMenu(Gtk.PopoverMenu):
             name=name,
             object_path=object_path,
             interface_name="com.canonical.dbusmenu",
-            info=Utils.load_interface_xml("com.canonical.dbusmenu"),
+            info=utils.load_interface_xml("com.canonical.dbusmenu"),
         )
         obj = cls(proxy)
         layout = await proxy.GetLayoutAsync(*DBUS_GET_LAYOUT_ARGS)

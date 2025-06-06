@@ -1,7 +1,7 @@
 from __future__ import annotations
 import os
 from ignis.dbus import DBusProxy
-from ignis.utils import Utils
+from ignis import utils
 from ignis.base_service import BaseService
 from ignis.gobject import IgnisProperty
 from typing import Literal
@@ -45,7 +45,7 @@ class SystemdService(BaseService):
             name="org.freedesktop.systemd1",
             object_path="/org/freedesktop/systemd1",
             interface_name="org.freedesktop.systemd1.Manager",
-            info=Utils.load_interface_xml("org.freedesktop.systemd1.Manager"),
+            info=utils.load_interface_xml("org.freedesktop.systemd1.Manager"),
             bus_type=bus_type,
         )
 
