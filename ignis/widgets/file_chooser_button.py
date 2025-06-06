@@ -17,24 +17,24 @@ class FileChooserButton(Gtk.Button, BaseWidget):
     A button that allows the user to select a file.
 
     Args:
-        dialog: An instance of :class:`~ignis.widgets.Widget.FileDialog`.
-        label: An instance of :class:`~ignis.widgets.Widget.Label`.
+        dialog: An instance of :class:`~ignis.widgets.FileDialog`.
+        label: An instance of :class:`~ignis.widgets.Label`.
         **kwargs: Properties to set.
 
     .. code-block :: python
 
-        Widget.FileChooserButton(
-            dialog=Widget.FileDialog(
+        widgets.FileChooserButton(
+            dialog=widgets.FileDialog(
                 initial_path=os.path.expanduser("~/.wallpaper"),
                 filters=[
-                    Widget.FileFilter(
+                    widgets.FileFilter(
                         mime_types=["image/jpeg", "image/png"],
                         default=True,
                         name="Images JPEG/PNG",
                     )
                 ]
             ),
-            label=Widget.Label(label='Select', ellipsize="end", max_width_chars=20)
+            label=widgets.Label(label='Select', ellipsize="end", max_width_chars=20)
         )
     """
 
@@ -75,14 +75,14 @@ class FileChooserButton(Gtk.Button, BaseWidget):
     @IgnisProperty
     def dialog(self) -> FileDialog:
         """
-        An instance of :class:`~ignis.widgets.Widget.FileDialog`.
+        An instance of :class:`~ignis.widgets.FileDialog`.
         """
         return self._dialog
 
     @IgnisProperty
     def label(self) -> Label:
         """
-        An instance of :class:`~ignis.widgets.Widget.Label`.
+        An instance of :class:`~ignis.widgets.Label`.
         """
         return self._label
 

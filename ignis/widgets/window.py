@@ -54,18 +54,18 @@ class Window(Gtk.Window, BaseWidget):
         **kwargs: Properties to set.
 
     .. warning::
-        Applying CSS styles directly to ``Widget.Window`` can cause various graphical glitches/bugs.
-        It's highly recommended to set some container (for example, ``Widget.Box``) or widget as a child and apply styles to it.
+        Applying CSS styles directly to ``widgets.Window`` can cause various graphical glitches/bugs.
+        It's highly recommended to set some container (for example, ``widgets.Box``) or widget as a child and apply styles to it.
         For example:
 
         .. code-block:: python
 
-            from ignis.widgets import Widget
+            from ignis import widgets
 
-            Widget.Window(
+            widgets.Window(
                 namespace="some-window",
                 # css_classes=['test-window'],  # don't do this!
-                child=Widget.Box(
+                child=widgets.Box(
                     css_classes=['test-window'],  # use this instead
                     child=[...]
                 )
@@ -76,9 +76,9 @@ class Window(Gtk.Window, BaseWidget):
 
     .. code-block:: python
 
-        Widget.Window(
+        widgets.Window(
             namespace="example_window",
-            child=Widget.Label(label='heh'),
+            child=widgets.Label(label='heh'),
             monitor=0,
             anchor=["top", "right"],
             exclusive=True,

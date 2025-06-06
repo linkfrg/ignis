@@ -17,7 +17,7 @@ class CheckButton(Gtk.CheckButton, BaseWidget):
 
     .. code-block:: python
 
-        Widget.CheckButton(
+        widgets.CheckButton(
             label='check button',
             active=True,
         )
@@ -26,8 +26,8 @@ class CheckButton(Gtk.CheckButton, BaseWidget):
 
     .. code-block:: python
 
-        Widget.CheckButton(
-            group=Widget.CheckButton(label='radiobutton 1'),
+        widgets.CheckButton(
+            group=widgets.CheckButton(label='radiobutton 1'),
             label='radiobutton 2',
             active=True,
         )

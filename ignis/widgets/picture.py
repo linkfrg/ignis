@@ -27,7 +27,7 @@ class Picture(Gtk.Picture, BaseWidget):
 
     .. code-block:: python
 
-        Widget.Picture(
+        widgets.Picture(
             image='path/to/img',
             width=20,
             height=30

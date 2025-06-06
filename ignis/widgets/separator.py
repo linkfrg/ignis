@@ -14,7 +14,7 @@ class Separator(Gtk.Separator, BaseWidget):
 
     .. code-block:: python
 
-        Widget.Separator(
+        widgets.Separator(
             vertical=False,
         )
     """

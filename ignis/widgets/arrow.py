@@ -22,15 +22,15 @@ class Arrow(Icon):
 
     .. hint::
         If you are looking for a button with an arrow that rotates on click,
-        see :class:`~ignis.widgets.Widget.ArrowButton`.
+        see :class:`~ignis.widgets.ArrowButton`.
 
     .. hint::
         You can set your custom icon name or image using the ``image`` property.
 
     .. code-block:: python
 
-        Widget.Arrow(
-            pixel_size=20, # inherited from Widget.Icon
+        widgets.Arrow(
+            pixel_size=20, # inherited from widgets.Icon
             rotated=False,
             degree=90,
             time=135,

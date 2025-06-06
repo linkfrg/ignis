@@ -15,7 +15,7 @@ class ToggleButton(Gtk.ToggleButton, BaseWidget):
 
     .. code-block:: python
 
-        Widget.ToggleButton(
+        widgets.ToggleButton(
             on_toggled=lambda x, active: print(active)
         )
     """

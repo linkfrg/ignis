@@ -11,7 +11,7 @@ class Stack(Gtk.Stack, BaseWidget):
     Stack is a container which only shows one of its children at a time.
 
     It does not provide a means for users to change the visible child.
-    Instead, a separate widget such as :class:`~ignis.widgets.Widget.StackSwitcher` can be used with Stack to provide this functionality.
+    Instead, a separate widget such as :class:`~ignis.widgets.StackSwitcher` can be used with Stack to provide this functionality.
 
     Args:
         **kwargs: Properties to set.
@@ -21,26 +21,26 @@ class Stack(Gtk.Stack, BaseWidget):
 
     .. code-block:: python
 
-        from ignis.widgets import Widget
+        from ignis import widgets
 
-        stack = Widget.Stack(
+        stack = widgets.Stack(
             child=[
-                Widget.StackPage(
-                    title="page 1", child=Widget.Label(label="welcome to page 1!")
+                widgets.StackPage(
+                    title="page 1", child=widgets.Label(label="welcome to page 1!")
                 ),
-                Widget.StackPage(
-                    title="page 2", child=Widget.Label(label="welcome to page 2!")
+                widgets.StackPage(
+                    title="page 2", child=widgets.Label(label="welcome to page 2!")
                 ),
-                Widget.StackPage(
-                    title="page 3", child=Widget.Label(label="welcome to page 3!")
+                widgets.StackPage(
+                    title="page 3", child=widgets.Label(label="welcome to page 3!")
                 ),
             ]
         )
 
-        Widget.Box(
+        widgets.Box(
             vertical=True,
             # you should add both StackSwitcher and Stack.
-            child=[Widget.StackSwitcher(stack=stack), stack],
+            child=[widgets.StackSwitcher(stack=stack), stack],
         )
     """
 

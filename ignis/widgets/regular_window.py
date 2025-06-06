@@ -19,11 +19,11 @@ class RegularWindow(Gtk.Window, BaseWidget):
 
     .. code-block:: python
 
-        Widget.RegularWindow(
-            child=Widget.Label(label="this is regular window"),
+        widgets.RegularWindow(
+            child=widgets.Label(label="this is regular window"),
             title="This is title",
             namespace='some-regular-window',
-            titlebar=Widget.HeaderBar(show_title_buttons=True),
+            titlebar=widgets.HeaderBar(show_title_buttons=True),
         )
     """
 
