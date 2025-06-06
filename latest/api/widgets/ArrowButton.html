@@ -520,28 +520,28 @@
   <section id="arrowbutton">
 <h1>ArrowButton<a class="headerlink" href="#arrowbutton" title="Link to this heading">#</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.ArrowButton">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.widgets.Widget.</span></span><span class="sig-name descname"><span class="pre">ArrowButton</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arrow</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="Arrow.html#ignis.widgets.Widget.Arrow" title="ignis.widgets.arrow.Arrow"><span class="pre">Arrow</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.widgets.Widget.ArrowButton" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="Button.html#ignis.widgets.Widget.Button" title="ignis.widgets.button.Button"><code class="xref py py-class docutils literal notranslate"><span class="pre">Button</span></code></a></p>
+<dt class="sig sig-object py" id="ignis.widgets.ArrowButton">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.widgets.</span></span><span class="sig-name descname"><span class="pre">ArrowButton</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arrow</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="Arrow.html#ignis.widgets.Arrow" title="ignis.widgets.arrow.Arrow"><span class="pre">Arrow</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.widgets.ArrowButton" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="Button.html#ignis.widgets.Button" title="ignis.widgets.button.Button"><code class="xref py py-class docutils literal notranslate"><span class="pre">Button</span></code></a></p>
 <p>A simple button with an arrow. On click, it will toggle (rotate) the arrow.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>arrow</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="Arrow.html#ignis.widgets.Widget.Arrow" title="ignis.widgets.arrow.Arrow"><code class="xref py py-class docutils literal notranslate"><span class="pre">Arrow</span></code></a></span>) -- An instance of an arrow.</p></li>
+<li><p><strong>arrow</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="Arrow.html#ignis.widgets.Arrow" title="ignis.widgets.arrow.Arrow"><code class="xref py py-class docutils literal notranslate"><span class="pre">Arrow</span></code></a></span>) -- An instance of an arrow.</p></li>
 <li><p><strong>**kwargs</strong> -- Properties to set.</p></li>
 </ul>
 </dd>
 </dl>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Widget</span><span class="o">.</span><span class="n">ArrowButton</span><span class="p">(</span>
-    <span class="n">arrow</span><span class="o">=</span><span class="n">Widget</span><span class="o">.</span><span class="n">Arrow</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">widgets</span><span class="o">.</span><span class="n">ArrowButton</span><span class="p">(</span>
+    <span class="n">arrow</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Arrow</span><span class="p">(</span>
         <span class="o">...</span> <span class="c1"># Arrow-specific properties go here</span>
     <span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <dl class="py gproperty">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.ArrowButton.arrow">
-<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">arrow</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="Arrow.html#ignis.widgets.Widget.Arrow" title="ignis.widgets.arrow.Arrow"><span class="pre">Arrow</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.ArrowButton.arrow" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.ArrowButton.arrow">
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">arrow</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="Arrow.html#ignis.widgets.Arrow" title="ignis.widgets.arrow.Arrow"><span class="pre">Arrow</span></a></em><a class="headerlink" href="#ignis.widgets.ArrowButton.arrow" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
@@ -549,9 +549,9 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.ArrowButton.toggle">
-<span class="sig-name descname"><span class="pre">toggle</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.widgets.Widget.ArrowButton.toggle" title="Link to this definition">#</a></dt>
-<dd><p>Same as <a class="reference internal" href="Arrow.html#ignis.widgets.Widget.Arrow.toggle" title="ignis.widgets.Widget.Arrow.toggle"><code class="xref py py-func docutils literal notranslate"><span class="pre">toggle()</span></code></a></p>
+<dt class="sig sig-object py" id="ignis.widgets.ArrowButton.toggle">
+<span class="sig-name descname"><span class="pre">toggle</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.widgets.ArrowButton.toggle" title="Link to this definition">#</a></dt>
+<dd><p>Same as <a class="reference internal" href="Arrow.html#ignis.widgets.Arrow.toggle" title="ignis.widgets.Arrow.toggle"><code class="xref py py-func docutils literal notranslate"><span class="pre">toggle()</span></code></a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
@@ -610,9 +610,9 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.ArrowButton"><code class="docutils literal notranslate"><span class="pre">ArrowButton</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.ArrowButton.arrow"><code class="docutils literal notranslate"><span class="pre">ArrowButton.arrow</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.ArrowButton.toggle"><code class="docutils literal notranslate"><span class="pre">ArrowButton.toggle()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.ArrowButton"><code class="docutils literal notranslate"><span class="pre">ArrowButton</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.ArrowButton.arrow"><code class="docutils literal notranslate"><span class="pre">ArrowButton.arrow</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.ArrowButton.toggle"><code class="docutils literal notranslate"><span class="pre">ArrowButton.toggle()</span></code></a></li>
 </ul>
 </li>
 </ul>

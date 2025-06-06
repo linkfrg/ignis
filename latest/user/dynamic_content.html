@@ -443,22 +443,22 @@
 <h1>Dynamic content<a class="headerlink" href="#dynamic-content" title="Link to this heading">#</a></h1>
 <p>Static text can be boring, so let's add some dynamic elements!</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">ignis.widgets</span><span class="w"> </span><span class="kn">import</span> <span class="n">Widget</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ignis</span><span class="w"> </span><span class="kn">import</span> <span class="n">widgets</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">ignis.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">Utils</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">update_label</span><span class="p">(</span><span class="n">clock_label</span><span class="p">:</span> <span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">update_label</span><span class="p">(</span><span class="n">clock_label</span><span class="p">:</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Label</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">text</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H:%M:%S&quot;</span><span class="p">)</span>
     <span class="n">clock_label</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">bar</span><span class="p">(</span><span class="n">monitor</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Widget</span><span class="o">.</span><span class="n">Window</span><span class="p">:</span>
-    <span class="n">clock_label</span> <span class="o">=</span> <span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">()</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">bar</span><span class="p">(</span><span class="n">monitor</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Window</span><span class="p">:</span>
+    <span class="n">clock_label</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Label</span><span class="p">()</span>
 
     <span class="n">Utils</span><span class="o">.</span><span class="n">Poll</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">update_label</span><span class="p">(</span><span class="n">clock_label</span><span class="p">))</span>
 
-    <span class="k">return</span> <span class="n">Widget</span><span class="o">.</span><span class="n">Window</span><span class="p">(</span>
+    <span class="k">return</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Window</span><span class="p">(</span>
         <span class="n">namespace</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;some-window-</span><span class="si">{</span><span class="n">monitor</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
         <span class="n">monitor</span><span class="o">=</span><span class="n">monitor</span><span class="p">,</span>
-        <span class="n">child</span><span class="o">=</span><span class="n">Widget</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span>
+        <span class="n">child</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span>
             <span class="n">vertical</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
             <span class="n">spacing</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
             <span class="n">child</span><span class="o">=</span><span class="p">[</span><span class="n">clock_label</span><span class="p">],</span>
@@ -471,7 +471,7 @@
 <h2>Signals<a class="headerlink" href="#signals" title="Link to this heading">#</a></h2>
 <p>Polling data every second isn't always ideal, as it can negatively impact performance.
 This is where <strong>signals</strong> are useful.
-Signals let us call a callback only when an event occurs (like <code class="docutils literal notranslate"><span class="pre">on_click</span></code> in <code class="docutils literal notranslate"><span class="pre">Widget.Button</span></code>).</p>
+Signals let us call a callback only when an event occurs (like <code class="docutils literal notranslate"><span class="pre">on_click</span></code> in <code class="docutils literal notranslate"><span class="pre">widgets.Button</span></code>).</p>
 <p>Let's consider services, which often have both <strong>signals</strong> and <strong>properties</strong>.</p>
 <p>Here's an example using the <a class="reference internal" href="../api/services/mpris.html#ignis.services.mpris.MprisService" title="ignis.services.mpris.MprisService"><code class="xref py py-class docutils literal notranslate"><span class="pre">MprisService</span></code></a>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ignis.services.mpris</span><span class="w"> </span><span class="kn">import</span> <span class="n">MprisService</span>
@@ -496,18 +496,18 @@ Magic! The player name and title will be printed.</p>
 <p>Next, let's <strong>bind</strong> a property.
 Use the <code class="docutils literal notranslate"><span class="pre">.bind()</span></code> method, passing the property name as the first argument, and optionally a <strong>transform</strong> function.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ignis.services.audio</span><span class="w"> </span><span class="kn">import</span> <span class="n">AudioService</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">ignis.widgets</span><span class="w"> </span><span class="kn">import</span> <span class="n">Widget</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ignis</span><span class="w"> </span><span class="kn">import</span> <span class="n">widgets</span>
 
 <span class="n">audio</span> <span class="o">=</span> <span class="n">AudioService</span><span class="o">.</span><span class="n">get_default</span><span class="p">()</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">bar</span><span class="p">(</span><span class="n">monitor</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Widget</span><span class="o">.</span><span class="n">Window</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">Widget</span><span class="o">.</span><span class="n">Window</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">bar</span><span class="p">(</span><span class="n">monitor</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Window</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Window</span><span class="p">(</span>
         <span class="n">namespace</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;some-window-</span><span class="si">{</span><span class="n">monitor</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
         <span class="n">monitor</span><span class="o">=</span><span class="n">monitor</span><span class="p">,</span>
-        <span class="n">child</span><span class="o">=</span><span class="n">Widget</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span>
+        <span class="n">child</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span>
             <span class="n">child</span><span class="o">=</span><span class="p">[</span>
-                <span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Current volume: &quot;</span><span class="p">),</span>
-                <span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span>
+                <span class="n">widgets</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Current volume: &quot;</span><span class="p">),</span>
+                <span class="n">widgets</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span>
                     <span class="n">label</span><span class="o">=</span><span class="n">audio</span><span class="o">.</span><span class="n">speaker</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s2">&quot;volume&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>  <span class="c1"># this function converts the value to a string</span>
                 <span class="p">)</span>
             <span class="p">]</span>
@@ -521,7 +521,7 @@ Use the <code class="docutils literal notranslate"><span class="pre">.bind()</sp
 <section id="multiple-binding">
 <h2>Multiple Binding<a class="headerlink" href="#multiple-binding" title="Link to this heading">#</a></h2>
 <p>You can bind multiple properties at the same time with <code class="docutils literal notranslate"><span class="pre">bind_many()</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Widget</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">widgets</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span>
     <span class="n">value</span><span class="o">=</span><span class="n">audio</span><span class="o">.</span><span class="n">speaker</span><span class="o">.</span><span class="n">bind_many</span><span class="p">(</span>
         <span class="p">[</span><span class="s2">&quot;volume&quot;</span><span class="p">,</span> <span class="s2">&quot;is_muted&quot;</span><span class="p">],</span>
         <span class="k">lambda</span> <span class="n">volume</span><span class="p">,</span> <span class="n">is_muted</span><span class="p">:</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">is_muted</span> <span class="k">else</span> <span class="n">volume</span><span class="p">,</span>

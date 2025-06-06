@@ -10,11 +10,11 @@ A common use case is to close a window.
 
 .. code-block:: python
 
-    Widget.Window(
+    widgets.Window(
         namespace="my-window",
         anchor=["left", "right", "top", "bottom"],  # to make a window fullscreen
-        child=Widget.Overlay(
-            child=Widget.Button(
+        child=widgets.Overlay(
+            child=widgets.Button(
                 vexpand=True,
                 hexpand=True,
                 can_focus=False,
@@ -67,16 +67,16 @@ Display applications icons on Hyprland workspaces buttons
 
     # The code from the example bar
 
-    def hyprland_workspace_button(workspace: HyprlandWorkspace) -> Widget.Button:
-        widget = Widget.Button(
+    def hyprland_workspace_button(workspace: HyprlandWorkspace) -> widgets.Button:
+        widget = widgets.Button(
             css_classes=["workspace"],
             on_click=lambda x: workspace.switch_to(),
-            child=Widget.Box(
+            child=widgets.Box(
                 child=hyprland.bind(
                     "windows",
                     lambda _: [
                         # find the icon of the app by its class name
-                        Widget.Icon(icon_name=Utils.get_app_icon_name(window.class_name))
+                        widgets.Icon(icon_name=Utils.get_app_icon_name(window.class_name))
                         # get all windows on the current workspace
                         for window in hyprland.get_windows_on_workspace(
                             workspace_id=workspace.id

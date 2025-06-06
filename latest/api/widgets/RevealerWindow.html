@@ -520,53 +520,53 @@
   <section id="revealerwindow">
 <h1>RevealerWindow<a class="headerlink" href="#revealerwindow" title="Link to this heading">#</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.RevealerWindow">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.widgets.Widget.</span></span><span class="sig-name descname"><span class="pre">RevealerWindow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">revealer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="Revealer.html#ignis.widgets.Widget.Revealer" title="ignis.widgets.revealer.Revealer"><span class="pre">Revealer</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.widgets.Widget.RevealerWindow" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="Window.html#ignis.widgets.Widget.Window" title="ignis.widgets.Widget.Window"><code class="xref py py-class docutils literal notranslate"><span class="pre">Window</span></code></a></p>
+<dt class="sig sig-object py" id="ignis.widgets.RevealerWindow">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.widgets.</span></span><span class="sig-name descname"><span class="pre">RevealerWindow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">revealer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="Revealer.html#ignis.widgets.Revealer" title="ignis.widgets.revealer.Revealer"><span class="pre">Revealer</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.widgets.RevealerWindow" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="Window.html#ignis.widgets.Window" title="ignis.widgets.Window"><code class="xref py py-class docutils literal notranslate"><span class="pre">Window</span></code></a></p>
 <p>A window with animation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>revealer</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="Revealer.html#ignis.widgets.Widget.Revealer" title="ignis.widgets.revealer.Revealer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Revealer</span></code></a></span>) -- An instance of <a class="reference internal" href="Revealer.html#ignis.widgets.Widget.Revealer" title="ignis.widgets.Widget.Revealer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Revealer</span></code></a>.</p></li>
+<li><p><strong>revealer</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="Revealer.html#ignis.widgets.Revealer" title="ignis.widgets.revealer.Revealer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Revealer</span></code></a></span>) -- An instance of <a class="reference internal" href="Revealer.html#ignis.widgets.Revealer" title="ignis.widgets.Revealer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Revealer</span></code></a>.</p></li>
 <li><p><strong>**kwargs</strong> -- Properties to set.</p></li>
 </ul>
 </dd>
 </dl>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Do not set <code class="docutils literal notranslate"><span class="pre">Widget.Revealer</span></code> as a direct child,
+<p>Do not set <code class="docutils literal notranslate"><span class="pre">widgets.Revealer</span></code> as a direct child,
 as this can lead to various graphical bugs.
-Instead, place <cite>Widget.Revealer</cite> inside a container (e.g., <cite>Widget.Box</cite>) and then set the container as a child.</p>
+Instead, place <cite>widgets.Revealer</cite> inside a container (e.g., <cite>widgets.Box</cite>) and then set the container as a child.</p>
 </div>
 <p>Example usage:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ignis.widgets</span><span class="w"> </span><span class="kn">import</span> <span class="n">Widget</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ignis</span><span class="w"> </span><span class="kn">import</span> <span class="n">widgets</span>
 
-<span class="n">revealer</span> <span class="o">=</span> <span class="n">Widget</span><span class="o">.</span><span class="n">Revealer</span><span class="p">(</span>
+<span class="n">revealer</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Revealer</span><span class="p">(</span>
     <span class="n">transition_type</span><span class="o">=</span><span class="s2">&quot;slide_left&quot;</span><span class="p">,</span>
-    <span class="n">child</span><span class="o">=</span><span class="n">Widget</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">),</span>
+    <span class="n">child</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">),</span>
     <span class="n">transition_duration</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
     <span class="n">reveal_child</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">box</span> <span class="o">=</span> <span class="n">Widget</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span><span class="n">child</span><span class="o">=</span><span class="p">[</span><span class="n">revealer</span><span class="p">])</span>
+<span class="n">box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span><span class="n">child</span><span class="o">=</span><span class="p">[</span><span class="n">revealer</span><span class="p">])</span>
 
-<span class="n">Widget</span><span class="o">.</span><span class="n">RevealerWindow</span><span class="p">(</span>
+<span class="n">widgets</span><span class="o">.</span><span class="n">RevealerWindow</span><span class="p">(</span>
     <span class="n">visible</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">popup</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">layer</span><span class="o">=</span><span class="s2">&quot;top&quot;</span><span class="p">,</span>
     <span class="n">namespace</span><span class="o">=</span><span class="s2">&quot;revealer-window&quot;</span><span class="p">,</span>
-    <span class="n">child</span><span class="o">=</span><span class="n">box</span><span class="p">,</span>  <span class="c1"># do not set Widget.Revealer as a direct child!</span>
+    <span class="n">child</span><span class="o">=</span><span class="n">box</span><span class="p">,</span>  <span class="c1"># do not set widgets.Revealer as a direct child!</span>
     <span class="n">revealer</span><span class="o">=</span><span class="n">revealer</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <dl class="py gproperty">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.RevealerWindow.revealer">
-<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">revealer</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="Revealer.html#ignis.widgets.Widget.Revealer" title="ignis.widgets.revealer.Revealer"><span class="pre">Revealer</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.RevealerWindow.revealer" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.RevealerWindow.revealer">
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">revealer</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="Revealer.html#ignis.widgets.Revealer" title="ignis.widgets.revealer.Revealer"><span class="pre">Revealer</span></a></em><a class="headerlink" href="#ignis.widgets.RevealerWindow.revealer" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-write</p></li>
 </ul>
-<p>An instance of <a class="reference internal" href="Revealer.html#ignis.widgets.Widget.Revealer" title="ignis.widgets.Widget.Revealer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Revealer</span></code></a>.</p>
+<p>An instance of <a class="reference internal" href="Revealer.html#ignis.widgets.Revealer" title="ignis.widgets.Revealer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Revealer</span></code></a>.</p>
 </dd></dl>
 
 </dd></dl>
@@ -620,8 +620,8 @@ Instead, place <cite>Widget.Revealer</cite> inside a container (e.g., <cite>Widg
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.RevealerWindow"><code class="docutils literal notranslate"><span class="pre">RevealerWindow</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.RevealerWindow.revealer"><code class="docutils literal notranslate"><span class="pre">RevealerWindow.revealer</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.RevealerWindow"><code class="docutils literal notranslate"><span class="pre">RevealerWindow</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.RevealerWindow.revealer"><code class="docutils literal notranslate"><span class="pre">RevealerWindow.revealer</span></code></a></li>
 </ul>
 </li>
 </ul>

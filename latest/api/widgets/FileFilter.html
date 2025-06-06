@@ -520,8 +520,8 @@
   <section id="filefilter">
 <h1>FileFilter<a class="headerlink" href="#filefilter" title="Link to this heading">#</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.FileFilter">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.widgets.Widget.</span></span><span class="sig-name descname"><span class="pre">FileFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mime_types</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.widgets.Widget.FileFilter" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.FileFilter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.widgets.</span></span><span class="sig-name descname"><span class="pre">FileFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mime_types</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.widgets.FileFilter" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-4.0/classes/FileFilter.html#Gtk.FileFilter" title="(in Gtk 4.0 v4.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gtk.FileFilter</span></code></a></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -529,7 +529,7 @@
 It doesn't support common widget properties and cannot be added as a child to a container.</p>
 </div>
 <p>A file filter.
-Intended for use in <a class="reference internal" href="FileDialog.html#ignis.widgets.Widget.FileDialog" title="ignis.widgets.Widget.FileDialog"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileDialog</span></code></a>.
+Intended for use in <a class="reference internal" href="FileDialog.html#ignis.widgets.FileDialog" title="ignis.widgets.FileDialog"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileDialog</span></code></a>.
 Uses MIME types, <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types">here</a> is a list of common MIME types.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -539,7 +539,7 @@ Uses MIME types, <a class="reference external" href="https://developer.mozilla.o
 </ul>
 </dd>
 </dl>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Widget</span><span class="o">.</span><span class="n">FileFilter</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">widgets</span><span class="o">.</span><span class="n">FileFilter</span><span class="p">(</span>
     <span class="n">mime_types</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;image/jpeg&quot;</span><span class="p">,</span> <span class="s2">&quot;image/png&quot;</span><span class="p">],</span>
     <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Images JPEG/PNG&quot;</span><span class="p">,</span>
@@ -547,8 +547,8 @@ Uses MIME types, <a class="reference external" href="https://developer.mozilla.o
 </pre></div>
 </div>
 <dl class="py gproperty">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.FileFilter.mime_types">
-<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mime_types</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.widgets.Widget.FileFilter.mime_types" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.FileFilter.mime_types">
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mime_types</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.widgets.FileFilter.mime_types" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
@@ -556,8 +556,8 @@ Uses MIME types, <a class="reference external" href="https://developer.mozilla.o
 </dd></dl>
 
 <dl class="py gproperty">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.FileFilter.default">
-<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">default</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.FileFilter.default" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.FileFilter.default">
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">default</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.widgets.FileFilter.default" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-write</p></li>
 </ul>
@@ -615,9 +615,9 @@ Uses MIME types, <a class="reference external" href="https://developer.mozilla.o
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.FileFilter"><code class="docutils literal notranslate"><span class="pre">FileFilter</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.FileFilter.mime_types"><code class="docutils literal notranslate"><span class="pre">FileFilter.mime_types</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.FileFilter.default"><code class="docutils literal notranslate"><span class="pre">FileFilter.default</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.FileFilter"><code class="docutils literal notranslate"><span class="pre">FileFilter</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.FileFilter.mime_types"><code class="docutils literal notranslate"><span class="pre">FileFilter.mime_types</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.FileFilter.default"><code class="docutils literal notranslate"><span class="pre">FileFilter.default</span></code></a></li>
 </ul>
 </li>
 </ul>

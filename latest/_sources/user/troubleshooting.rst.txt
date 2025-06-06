@@ -1,13 +1,13 @@
 Troubleshooting
 ================
 
-Cannot view children of ``Widget.Scroll`` 
+Cannot view children of ``widgets.Scroll`` 
 ------------------------------------------
 
-Set ``min-height: 100px;`` or ``min-width: 100px;`` to your ``Widget.Scroll`` in CSS.
+Set ``min-height: 100px;`` or ``min-width: 100px;`` to your ``widgets.Scroll`` in CSS.
 Where ``100px`` you can set any value.
 
-Alternatively, set ``vexpand=True`` or ``hexpand=True`` to your ``Widget.Scroll``.
+Alternatively, set ``vexpand=True`` or ``hexpand=True`` to your ``widgets.Scroll``.
 
 Render issues or Unresponsive UI after wake up from suspend
 -----------------------------------------------------------

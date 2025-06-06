@@ -520,8 +520,8 @@
   <section id="filedialog">
 <h1>FileDialog<a class="headerlink" href="#filedialog" title="Link to this heading">#</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.FileDialog">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.widgets.Widget.</span></span><span class="sig-name descname"><span class="pre">FileDialog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.widgets.Widget.FileDialog" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.FileDialog">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.widgets.</span></span><span class="sig-name descname"><span class="pre">FileDialog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.widgets.FileDialog" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-4.0/classes/FileDialog.html#Gtk.FileDialog" title="(in Gtk 4.0 v4.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gtk.FileDialog</span></code></a></p>
 <div class="admonition danger">
 <p class="admonition-title">Danger</p>
@@ -534,12 +534,12 @@ It doesn't support common widget properties and cannot be added as a child to a 
 <dd class="field-odd"><p><strong>**kwargs</strong> -- Properties to set.</p>
 </dd>
 </dl>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Widget</span><span class="o">.</span><span class="n">FileDialog</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">widgets</span><span class="o">.</span><span class="n">FileDialog</span><span class="p">(</span>
     <span class="n">initial_path</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/.config&quot;</span><span class="p">),</span>
     <span class="n">on_file_set</span><span class="o">=</span><span class="k">lambda</span> <span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">get_path</span><span class="p">()),</span>
     <span class="n">select_folder</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">filters</span><span class="o">=</span><span class="p">[</span>
-        <span class="n">Widget</span><span class="o">.</span><span class="n">FileFilter</span><span class="p">(</span>
+        <span class="n">widgets</span><span class="o">.</span><span class="n">FileFilter</span><span class="p">(</span>
             <span class="n">mime_types</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;image/jpeg&quot;</span><span class="p">,</span> <span class="s2">&quot;image/png&quot;</span><span class="p">],</span>
             <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
             <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Images JPEG/PNG&quot;</span><span class="p">,</span>
@@ -549,8 +549,8 @@ It doesn't support common widget properties and cannot be added as a child to a 
 </pre></div>
 </div>
 <dl class="py method">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.FileDialog.open_dialog">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">open_dialog</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.widgets.Widget.FileDialog.open_dialog" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.FileDialog.open_dialog">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">open_dialog</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.widgets.FileDialog.open_dialog" title="Link to this definition">#</a></dt>
 <dd><p>Open dialog.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -560,8 +560,8 @@ It doesn't support common widget properties and cannot be added as a child to a 
 </dd></dl>
 
 <dl class="py signal">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.FileDialog.file_set">
-<em class="property"><span class="pre">signal</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">file_set</span></span><a class="headerlink" href="#ignis.widgets.Widget.FileDialog.file_set" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.FileDialog.file_set">
+<em class="property"><span class="pre">signal</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">file_set</span></span><a class="headerlink" href="#ignis.widgets.FileDialog.file_set" title="Link to this definition">#</a></dt>
 <dd><p>Emitted when a file or directory is selected.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -571,8 +571,8 @@ It doesn't support common widget properties and cannot be added as a child to a 
 </dd></dl>
 
 <dl class="py gproperty">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.FileDialog.file">
-<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">file</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/classes/File.html#Gio.File" title="(in Gio 2.0 v2.0)"><span class="pre">Gio.File</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.FileDialog.file" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.FileDialog.file">
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">file</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://lazka.github.io/pgi-docs/Gio-2.0/classes/File.html#Gio.File" title="(in Gio 2.0 v2.0)"><span class="pre">Gio.File</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.widgets.FileDialog.file" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
@@ -584,8 +584,8 @@ It doesn't support common widget properties and cannot be added as a child to a 
 </dd></dl>
 
 <dl class="py gproperty">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.FileDialog.on_file_set">
-<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">on_file_set</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.FileDialog.on_file_set" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.FileDialog.on_file_set">
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">on_file_set</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></em><a class="headerlink" href="#ignis.widgets.FileDialog.on_file_set" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-write</p></li>
 </ul>
@@ -593,8 +593,8 @@ It doesn't support common widget properties and cannot be added as a child to a 
 </dd></dl>
 
 <dl class="py gproperty">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.FileDialog.filters">
-<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">filters</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="FileFilter.html#ignis.widgets.Widget.FileFilter" title="ignis.widgets.file_filter.FileFilter"><span class="pre">FileFilter</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.widgets.Widget.FileDialog.filters" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.FileDialog.filters">
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">filters</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="FileFilter.html#ignis.widgets.FileFilter" title="ignis.widgets.file_filter.FileFilter"><span class="pre">FileFilter</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.widgets.FileDialog.filters" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-write</p></li>
 </ul>
@@ -602,8 +602,8 @@ It doesn't support common widget properties and cannot be added as a child to a 
 </dd></dl>
 
 <dl class="py gproperty">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.FileDialog.initial_path">
-<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">initial_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.FileDialog.initial_path" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.FileDialog.initial_path">
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">initial_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.widgets.FileDialog.initial_path" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-write</p></li>
 </ul>
@@ -611,8 +611,8 @@ It doesn't support common widget properties and cannot be added as a child to a 
 </dd></dl>
 
 <dl class="py gproperty">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.FileDialog.select_folder">
-<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">select_folder</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.FileDialog.select_folder" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.FileDialog.select_folder">
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">select_folder</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.widgets.FileDialog.select_folder" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-write</p></li>
 </ul>
@@ -620,12 +620,12 @@ It doesn't support common widget properties and cannot be added as a child to a 
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.FileDialog.add_filter">
-<span class="sig-name descname"><span class="pre">add_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="FileFilter.html#ignis.widgets.Widget.FileFilter" title="ignis.widgets.file_filter.FileFilter"><span class="pre">FileFilter</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.widgets.Widget.FileDialog.add_filter" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.FileDialog.add_filter">
+<span class="sig-name descname"><span class="pre">add_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="FileFilter.html#ignis.widgets.FileFilter" title="ignis.widgets.file_filter.FileFilter"><span class="pre">FileFilter</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.widgets.FileDialog.add_filter" title="Link to this definition">#</a></dt>
 <dd><p>Add a filter.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>filter</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="FileFilter.html#ignis.widgets.Widget.FileFilter" title="ignis.widgets.file_filter.FileFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileFilter</span></code></a></span>) -- The instance of filter to add.</p>
+<dd class="field-odd"><p><strong>filter</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="FileFilter.html#ignis.widgets.FileFilter" title="ignis.widgets.file_filter.FileFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileFilter</span></code></a></span>) -- The instance of filter to add.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></span></p>
@@ -684,15 +684,15 @@ It doesn't support common widget properties and cannot be added as a child to a 
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.FileDialog"><code class="docutils literal notranslate"><span class="pre">FileDialog</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.FileDialog.open_dialog"><code class="docutils literal notranslate"><span class="pre">FileDialog.open_dialog()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.FileDialog.file_set"><code class="docutils literal notranslate"><span class="pre">FileDialog.file_set</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.FileDialog.file"><code class="docutils literal notranslate"><span class="pre">FileDialog.file</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.FileDialog.on_file_set"><code class="docutils literal notranslate"><span class="pre">FileDialog.on_file_set</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.FileDialog.filters"><code class="docutils literal notranslate"><span class="pre">FileDialog.filters</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.FileDialog.initial_path"><code class="docutils literal notranslate"><span class="pre">FileDialog.initial_path</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.FileDialog.select_folder"><code class="docutils literal notranslate"><span class="pre">FileDialog.select_folder</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.FileDialog.add_filter"><code class="docutils literal notranslate"><span class="pre">FileDialog.add_filter()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.FileDialog"><code class="docutils literal notranslate"><span class="pre">FileDialog</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.FileDialog.open_dialog"><code class="docutils literal notranslate"><span class="pre">FileDialog.open_dialog()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.FileDialog.file_set"><code class="docutils literal notranslate"><span class="pre">FileDialog.file_set</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.FileDialog.file"><code class="docutils literal notranslate"><span class="pre">FileDialog.file</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.FileDialog.on_file_set"><code class="docutils literal notranslate"><span class="pre">FileDialog.on_file_set</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.FileDialog.filters"><code class="docutils literal notranslate"><span class="pre">FileDialog.filters</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.FileDialog.initial_path"><code class="docutils literal notranslate"><span class="pre">FileDialog.initial_path</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.FileDialog.select_folder"><code class="docutils literal notranslate"><span class="pre">FileDialog.select_folder</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.FileDialog.add_filter"><code class="docutils literal notranslate"><span class="pre">FileDialog.add_filter()</span></code></a></li>
 </ul>
 </li>
 </ul>

@@ -520,9 +520,9 @@
   <section id="arrow">
 <h1>Arrow<a class="headerlink" href="#arrow" title="Link to this heading">#</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.Arrow">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.widgets.Widget.</span></span><span class="sig-name descname"><span class="pre">Arrow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.widgets.Widget.Arrow" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="Icon.html#ignis.widgets.Widget.Icon" title="ignis.widgets.icon.Icon"><code class="xref py py-class docutils literal notranslate"><span class="pre">Icon</span></code></a></p>
+<dt class="sig sig-object py" id="ignis.widgets.Arrow">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.widgets.</span></span><span class="sig-name descname"><span class="pre">Arrow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.widgets.Arrow" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="Icon.html#ignis.widgets.Icon" title="ignis.widgets.icon.Icon"><code class="xref py py-class docutils literal notranslate"><span class="pre">Icon</span></code></a></p>
 <p>An arrow icon that can rotate (with animation!).
 Useful for dropdown lists.</p>
 <dl class="field-list simple">
@@ -533,14 +533,14 @@ Useful for dropdown lists.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>If you are looking for a button with an arrow that rotates on click,
-see <a class="reference internal" href="ArrowButton.html#ignis.widgets.Widget.ArrowButton" title="ignis.widgets.Widget.ArrowButton"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrowButton</span></code></a>.</p>
+see <a class="reference internal" href="ArrowButton.html#ignis.widgets.ArrowButton" title="ignis.widgets.ArrowButton"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArrowButton</span></code></a>.</p>
 </div>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>You can set your custom icon name or image using the <code class="docutils literal notranslate"><span class="pre">image</span></code> property.</p>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Widget</span><span class="o">.</span><span class="n">Arrow</span><span class="p">(</span>
-    <span class="n">pixel_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="c1"># inherited from Widget.Icon</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">widgets</span><span class="o">.</span><span class="n">Arrow</span><span class="p">(</span>
+    <span class="n">pixel_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="c1"># inherited from widgets.Icon</span>
     <span class="n">rotated</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">degree</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span>
     <span class="n">time</span><span class="o">=</span><span class="mi">135</span><span class="p">,</span>
@@ -551,8 +551,8 @@ see <a class="reference internal" href="ArrowButton.html#ignis.widgets.Widget.Ar
 </pre></div>
 </div>
 <dl class="py gproperty">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.Arrow.rotated">
-<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rotated</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.Arrow.rotated" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.Arrow.rotated">
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rotated</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.widgets.Arrow.rotated" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-write</p></li>
 </ul>
@@ -561,8 +561,8 @@ see <a class="reference internal" href="ArrowButton.html#ignis.widgets.Widget.Ar
 </dd></dl>
 
 <dl class="py gproperty">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.Arrow.degree">
-<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">degree</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.Arrow.degree" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.Arrow.degree">
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">degree</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.widgets.Arrow.degree" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-write</p></li>
 </ul>
@@ -572,8 +572,8 @@ Must be &gt; 0.</p>
 </dd></dl>
 
 <dl class="py gproperty">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.Arrow.time">
-<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">time</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.Arrow.time" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.Arrow.time">
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">time</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><a class="headerlink" href="#ignis.widgets.Arrow.time" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-write</p></li>
 </ul>
@@ -582,8 +582,8 @@ Must be &gt; 0.</p>
 </dd></dl>
 
 <dl class="py gproperty">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.Arrow.direction">
-<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">direction</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.Arrow.direction" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.Arrow.direction">
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">direction</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.widgets.Arrow.direction" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-write</p></li>
 </ul>
@@ -602,8 +602,8 @@ Do not use this property if using custom icon name.</p>
 </dd></dl>
 
 <dl class="py gproperty">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.Arrow.counterclockwise">
-<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">counterclockwise</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.Arrow.counterclockwise" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.Arrow.counterclockwise">
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">counterclockwise</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></em><a class="headerlink" href="#ignis.widgets.Arrow.counterclockwise" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-write</p></li>
 </ul>
@@ -612,8 +612,8 @@ Do not use this property if using custom icon name.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.Arrow.toggle">
-<span class="sig-name descname"><span class="pre">toggle</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.widgets.Widget.Arrow.toggle" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.Arrow.toggle">
+<span class="sig-name descname"><span class="pre">toggle</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#ignis.widgets.Arrow.toggle" title="Link to this definition">#</a></dt>
 <dd><p>Rotate arrow.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -673,13 +673,13 @@ Do not use this property if using custom icon name.</p>
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.Arrow"><code class="docutils literal notranslate"><span class="pre">Arrow</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.Arrow.rotated"><code class="docutils literal notranslate"><span class="pre">Arrow.rotated</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.Arrow.degree"><code class="docutils literal notranslate"><span class="pre">Arrow.degree</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.Arrow.time"><code class="docutils literal notranslate"><span class="pre">Arrow.time</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.Arrow.direction"><code class="docutils literal notranslate"><span class="pre">Arrow.direction</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.Arrow.counterclockwise"><code class="docutils literal notranslate"><span class="pre">Arrow.counterclockwise</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.Arrow.toggle"><code class="docutils literal notranslate"><span class="pre">Arrow.toggle()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Arrow"><code class="docutils literal notranslate"><span class="pre">Arrow</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Arrow.rotated"><code class="docutils literal notranslate"><span class="pre">Arrow.rotated</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Arrow.degree"><code class="docutils literal notranslate"><span class="pre">Arrow.degree</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Arrow.time"><code class="docutils literal notranslate"><span class="pre">Arrow.time</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Arrow.direction"><code class="docutils literal notranslate"><span class="pre">Arrow.direction</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Arrow.counterclockwise"><code class="docutils literal notranslate"><span class="pre">Arrow.counterclockwise</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Arrow.toggle"><code class="docutils literal notranslate"><span class="pre">Arrow.toggle()</span></code></a></li>
 </ul>
 </li>
 </ul>

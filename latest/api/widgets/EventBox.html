@@ -520,10 +520,10 @@
   <section id="eventbox">
 <h1>EventBox<a class="headerlink" href="#eventbox" title="Link to this heading">#</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.EventBox">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.widgets.Widget.</span></span><span class="sig-name descname"><span class="pre">EventBox</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scroll_flags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.Gtk.EventControllerScrollFlags</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">gi.repository.Gtk.EventControllerScrollFlags.BOTH_AXES</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.widgets.Widget.EventBox" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="Box.html#ignis.widgets.Widget.Box" title="ignis.widgets.box.Box"><code class="xref py py-class docutils literal notranslate"><span class="pre">Box</span></code></a></p>
-<p>The same <a class="reference internal" href="Box.html#ignis.widgets.Widget.Box" title="ignis.widgets.box.Box"><code class="xref py py-class docutils literal notranslate"><span class="pre">Box</span></code></a>, but it can receive events.</p>
+<dt class="sig sig-object py" id="ignis.widgets.EventBox">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.widgets.</span></span><span class="sig-name descname"><span class="pre">EventBox</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scroll_flags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.Gtk.EventControllerScrollFlags</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">gi.repository.Gtk.EventControllerScrollFlags.BOTH_AXES</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.widgets.EventBox" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="Box.html#ignis.widgets.Box" title="ignis.widgets.box.Box"><code class="xref py py-class docutils literal notranslate"><span class="pre">Box</span></code></a></p>
+<p>The same <a class="reference internal" href="Box.html#ignis.widgets.Box" title="ignis.widgets.box.Box"><code class="xref py py-class docutils literal notranslate"><span class="pre">Box</span></code></a>, but it can receive events.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -532,8 +532,8 @@
 </ul>
 </dd>
 </dl>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Widget</span><span class="o">.</span><span class="n">EventBox</span><span class="p">(</span>
-    <span class="n">child</span><span class="o">=</span><span class="p">[</span><span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;this is eventbox&#39;</span><span class="p">),</span> <span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;It can contain multiple child as Widget.Box&quot;</span><span class="p">)],</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">widgets</span><span class="o">.</span><span class="n">EventBox</span><span class="p">(</span>
+    <span class="n">child</span><span class="o">=</span><span class="p">[</span><span class="n">widgets</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;this is eventbox&#39;</span><span class="p">),</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;It can contain multiple child as widgets.Box&quot;</span><span class="p">)],</span>
     <span class="n">vertical</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">homogeneous</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">spacing</span><span class="o">=</span><span class="mi">52</span><span class="p">,</span>
@@ -550,8 +550,8 @@
 </pre></div>
 </div>
 <dl class="py gproperty">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.EventBox.on_click">
-<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">on_click</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.EventBox.on_click" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.EventBox.on_click">
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">on_click</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></em><a class="headerlink" href="#ignis.widgets.EventBox.on_click" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-write</p></li>
 </ul>
@@ -559,8 +559,8 @@
 </dd></dl>
 
 <dl class="py gproperty">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.EventBox.on_right_click">
-<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">on_right_click</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.EventBox.on_right_click" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.EventBox.on_right_click">
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">on_right_click</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></em><a class="headerlink" href="#ignis.widgets.EventBox.on_right_click" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-write</p></li>
 </ul>
@@ -568,8 +568,8 @@
 </dd></dl>
 
 <dl class="py gproperty">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.EventBox.on_middle_click">
-<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">on_middle_click</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.EventBox.on_middle_click" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.EventBox.on_middle_click">
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">on_middle_click</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></em><a class="headerlink" href="#ignis.widgets.EventBox.on_middle_click" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-write</p></li>
 </ul>
@@ -577,8 +577,8 @@
 </dd></dl>
 
 <dl class="py gproperty">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.EventBox.on_hover">
-<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">on_hover</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.EventBox.on_hover" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.EventBox.on_hover">
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">on_hover</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></em><a class="headerlink" href="#ignis.widgets.EventBox.on_hover" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-write</p></li>
 </ul>
@@ -586,8 +586,8 @@
 </dd></dl>
 
 <dl class="py gproperty">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.EventBox.on_hover_lost">
-<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">on_hover_lost</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.EventBox.on_hover_lost" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.EventBox.on_hover_lost">
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">on_hover_lost</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></em><a class="headerlink" href="#ignis.widgets.EventBox.on_hover_lost" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-write</p></li>
 </ul>
@@ -595,8 +595,8 @@
 </dd></dl>
 
 <dl class="py gproperty">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.EventBox.scroll_flags">
-<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">scroll_flags</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">gi.repository.Gtk.EventControllerScrollFlags</span></em><a class="headerlink" href="#ignis.widgets.Widget.EventBox.scroll_flags" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.EventBox.scroll_flags">
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">scroll_flags</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">gi.repository.Gtk.EventControllerScrollFlags</span></em><a class="headerlink" href="#ignis.widgets.EventBox.scroll_flags" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
@@ -604,8 +604,8 @@
 </dd></dl>
 
 <dl class="py gproperty">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.EventBox.on_scroll_up">
-<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">on_scroll_up</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.EventBox.on_scroll_up" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.EventBox.on_scroll_up">
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">on_scroll_up</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></em><a class="headerlink" href="#ignis.widgets.EventBox.on_scroll_up" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-write</p></li>
 </ul>
@@ -613,8 +613,8 @@
 </dd></dl>
 
 <dl class="py gproperty">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.EventBox.on_scroll_down">
-<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">on_scroll_down</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.EventBox.on_scroll_down" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.EventBox.on_scroll_down">
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">on_scroll_down</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></em><a class="headerlink" href="#ignis.widgets.EventBox.on_scroll_down" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-write</p></li>
 </ul>
@@ -622,8 +622,8 @@
 </dd></dl>
 
 <dl class="py gproperty">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.EventBox.on_scroll_right">
-<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">on_scroll_right</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.EventBox.on_scroll_right" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.EventBox.on_scroll_right">
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">on_scroll_right</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></em><a class="headerlink" href="#ignis.widgets.EventBox.on_scroll_right" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-write</p></li>
 </ul>
@@ -631,8 +631,8 @@
 </dd></dl>
 
 <dl class="py gproperty">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.EventBox.on_scroll_left">
-<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">on_scroll_left</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.EventBox.on_scroll_left" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.EventBox.on_scroll_left">
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">on_scroll_left</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a></em><a class="headerlink" href="#ignis.widgets.EventBox.on_scroll_left" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-write</p></li>
 </ul>
@@ -690,17 +690,17 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.EventBox"><code class="docutils literal notranslate"><span class="pre">EventBox</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.EventBox.on_click"><code class="docutils literal notranslate"><span class="pre">EventBox.on_click</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.EventBox.on_right_click"><code class="docutils literal notranslate"><span class="pre">EventBox.on_right_click</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.EventBox.on_middle_click"><code class="docutils literal notranslate"><span class="pre">EventBox.on_middle_click</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.EventBox.on_hover"><code class="docutils literal notranslate"><span class="pre">EventBox.on_hover</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.EventBox.on_hover_lost"><code class="docutils literal notranslate"><span class="pre">EventBox.on_hover_lost</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.EventBox.scroll_flags"><code class="docutils literal notranslate"><span class="pre">EventBox.scroll_flags</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.EventBox.on_scroll_up"><code class="docutils literal notranslate"><span class="pre">EventBox.on_scroll_up</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.EventBox.on_scroll_down"><code class="docutils literal notranslate"><span class="pre">EventBox.on_scroll_down</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.EventBox.on_scroll_right"><code class="docutils literal notranslate"><span class="pre">EventBox.on_scroll_right</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.EventBox.on_scroll_left"><code class="docutils literal notranslate"><span class="pre">EventBox.on_scroll_left</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.EventBox"><code class="docutils literal notranslate"><span class="pre">EventBox</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.EventBox.on_click"><code class="docutils literal notranslate"><span class="pre">EventBox.on_click</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.EventBox.on_right_click"><code class="docutils literal notranslate"><span class="pre">EventBox.on_right_click</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.EventBox.on_middle_click"><code class="docutils literal notranslate"><span class="pre">EventBox.on_middle_click</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.EventBox.on_hover"><code class="docutils literal notranslate"><span class="pre">EventBox.on_hover</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.EventBox.on_hover_lost"><code class="docutils literal notranslate"><span class="pre">EventBox.on_hover_lost</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.EventBox.scroll_flags"><code class="docutils literal notranslate"><span class="pre">EventBox.scroll_flags</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.EventBox.on_scroll_up"><code class="docutils literal notranslate"><span class="pre">EventBox.on_scroll_up</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.EventBox.on_scroll_down"><code class="docutils literal notranslate"><span class="pre">EventBox.on_scroll_down</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.EventBox.on_scroll_right"><code class="docutils literal notranslate"><span class="pre">EventBox.on_scroll_right</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.EventBox.on_scroll_left"><code class="docutils literal notranslate"><span class="pre">EventBox.on_scroll_left</span></code></a></li>
 </ul>
 </li>
 </ul>

@@ -520,12 +520,12 @@
   <section id="stack">
 <h1>Stack<a class="headerlink" href="#stack" title="Link to this heading">#</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.Stack">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.widgets.Widget.</span></span><span class="sig-name descname"><span class="pre">Stack</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.widgets.Widget.Stack" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.Stack">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.widgets.</span></span><span class="sig-name descname"><span class="pre">Stack</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.widgets.Stack" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-4.0/classes/Stack.html#Gtk.Stack" title="(in Gtk 4.0 v4.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gtk.Stack</span></code></a></p>
 <p>Stack is a container which only shows one of its children at a time.</p>
 <p>It does not provide a means for users to change the visible child.
-Instead, a separate widget such as <a class="reference internal" href="#ignis.widgets.Widget.StackSwitcher" title="ignis.widgets.Widget.StackSwitcher"><code class="xref py py-class docutils literal notranslate"><span class="pre">StackSwitcher</span></code></a> can be used with Stack to provide this functionality.</p>
+Instead, a separate widget such as <a class="reference internal" href="#ignis.widgets.StackSwitcher" title="ignis.widgets.StackSwitcher"><code class="xref py py-class docutils literal notranslate"><span class="pre">StackSwitcher</span></code></a> can be used with Stack to provide this functionality.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>**kwargs</strong> -- Properties to set.</p>
@@ -537,32 +537,32 @@ Instead, a separate widget such as <a class="reference internal" href="#ignis.wi
 </ul>
 </dd>
 </dl>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ignis.widgets</span><span class="w"> </span><span class="kn">import</span> <span class="n">Widget</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ignis</span><span class="w"> </span><span class="kn">import</span> <span class="n">widgets</span>
 
-<span class="n">stack</span> <span class="o">=</span> <span class="n">Widget</span><span class="o">.</span><span class="n">Stack</span><span class="p">(</span>
+<span class="n">stack</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Stack</span><span class="p">(</span>
     <span class="n">child</span><span class="o">=</span><span class="p">[</span>
-        <span class="n">Widget</span><span class="o">.</span><span class="n">StackPage</span><span class="p">(</span>
-            <span class="n">title</span><span class="o">=</span><span class="s2">&quot;page 1&quot;</span><span class="p">,</span> <span class="n">child</span><span class="o">=</span><span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;welcome to page 1!&quot;</span><span class="p">)</span>
+        <span class="n">widgets</span><span class="o">.</span><span class="n">StackPage</span><span class="p">(</span>
+            <span class="n">title</span><span class="o">=</span><span class="s2">&quot;page 1&quot;</span><span class="p">,</span> <span class="n">child</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;welcome to page 1!&quot;</span><span class="p">)</span>
         <span class="p">),</span>
-        <span class="n">Widget</span><span class="o">.</span><span class="n">StackPage</span><span class="p">(</span>
-            <span class="n">title</span><span class="o">=</span><span class="s2">&quot;page 2&quot;</span><span class="p">,</span> <span class="n">child</span><span class="o">=</span><span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;welcome to page 2!&quot;</span><span class="p">)</span>
+        <span class="n">widgets</span><span class="o">.</span><span class="n">StackPage</span><span class="p">(</span>
+            <span class="n">title</span><span class="o">=</span><span class="s2">&quot;page 2&quot;</span><span class="p">,</span> <span class="n">child</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;welcome to page 2!&quot;</span><span class="p">)</span>
         <span class="p">),</span>
-        <span class="n">Widget</span><span class="o">.</span><span class="n">StackPage</span><span class="p">(</span>
-            <span class="n">title</span><span class="o">=</span><span class="s2">&quot;page 3&quot;</span><span class="p">,</span> <span class="n">child</span><span class="o">=</span><span class="n">Widget</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;welcome to page 3!&quot;</span><span class="p">)</span>
+        <span class="n">widgets</span><span class="o">.</span><span class="n">StackPage</span><span class="p">(</span>
+            <span class="n">title</span><span class="o">=</span><span class="s2">&quot;page 3&quot;</span><span class="p">,</span> <span class="n">child</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;welcome to page 3!&quot;</span><span class="p">)</span>
         <span class="p">),</span>
     <span class="p">]</span>
 <span class="p">)</span>
 
-<span class="n">Widget</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span>
+<span class="n">widgets</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span>
     <span class="n">vertical</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="c1"># you should add both StackSwitcher and Stack.</span>
-    <span class="n">child</span><span class="o">=</span><span class="p">[</span><span class="n">Widget</span><span class="o">.</span><span class="n">StackSwitcher</span><span class="p">(</span><span class="n">stack</span><span class="o">=</span><span class="n">stack</span><span class="p">),</span> <span class="n">stack</span><span class="p">],</span>
+    <span class="n">child</span><span class="o">=</span><span class="p">[</span><span class="n">widgets</span><span class="o">.</span><span class="n">StackSwitcher</span><span class="p">(</span><span class="n">stack</span><span class="o">=</span><span class="n">stack</span><span class="p">),</span> <span class="n">stack</span><span class="p">],</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <dl class="py gproperty">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.Stack.child">
-<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">child</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ignis.widgets.Widget.StackPage" title="ignis.widgets.stack_page.StackPage"><span class="pre">StackPage</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.widgets.Widget.Stack.child" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.Stack.child">
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">child</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ignis.widgets.StackPage" title="ignis.widgets.stack_page.StackPage"><span class="pre">StackPage</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ignis.widgets.Stack.child" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-write</p></li>
 </ul>
@@ -572,14 +572,14 @@ Instead, a separate widget such as <a class="reference internal" href="#ignis.wi
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.StackPage">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.widgets.Widget.</span></span><span class="sig-name descname"><span class="pre">StackPage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">child</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.Gtk.Widget</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.widgets.Widget.StackPage" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.StackPage">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.widgets.</span></span><span class="sig-name descname"><span class="pre">StackPage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">child</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.Gtk.Widget</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.widgets.StackPage" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../gobject.html#ignis.gobject.IgnisGObject" title="ignis.gobject.IgnisGObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">IgnisGObject</span></code></a></p>
-<p>Intented to use with <a class="reference internal" href="#ignis.widgets.Widget.Stack" title="ignis.widgets.Widget.Stack"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stack</span></code></a>.</p>
+<p>Intented to use with <a class="reference internal" href="#ignis.widgets.Stack" title="ignis.widgets.Stack"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stack</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>title</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The title. It will be used by <a class="reference internal" href="#ignis.widgets.Widget.StackSwitcher" title="ignis.widgets.Widget.StackSwitcher"><code class="xref py py-class docutils literal notranslate"><span class="pre">StackSwitcher</span></code></a> to display <a class="reference internal" href="#ignis.widgets.Widget.StackPage.child" title="ignis.widgets.Widget.StackPage.child"><code class="xref py py-attr docutils literal notranslate"><span class="pre">child</span></code></a> in a tab bar.</p></li>
+<li><p><strong>title</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) -- The title. It will be used by <a class="reference internal" href="#ignis.widgets.StackSwitcher" title="ignis.widgets.StackSwitcher"><code class="xref py py-class docutils literal notranslate"><span class="pre">StackSwitcher</span></code></a> to display <a class="reference internal" href="#ignis.widgets.StackPage.child" title="ignis.widgets.StackPage.child"><code class="xref py py-attr docutils literal notranslate"><span class="pre">child</span></code></a> in a tab bar.</p></li>
 <li><p><strong>child</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Widget</span></code></span>) -- The child widget.</p></li>
 </ul>
 </dd>
@@ -589,18 +589,18 @@ Instead, a separate widget such as <a class="reference internal" href="#ignis.wi
 <p>It is not a widget.</p>
 </div>
 <dl class="py gproperty">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.StackPage.title">
-<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.widgets.Widget.StackPage.title" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.StackPage.title">
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">title</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.widgets.StackPage.title" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
 <p>The title.
-It will be used by <a class="reference internal" href="#ignis.widgets.Widget.StackSwitcher" title="ignis.widgets.Widget.StackSwitcher"><code class="xref py py-class docutils literal notranslate"><span class="pre">StackSwitcher</span></code></a> to display <a class="reference internal" href="#ignis.widgets.Widget.StackPage.child" title="ignis.widgets.Widget.StackPage.child"><code class="xref py py-attr docutils literal notranslate"><span class="pre">child</span></code></a> in a tab bar.</p>
+It will be used by <a class="reference internal" href="#ignis.widgets.StackSwitcher" title="ignis.widgets.StackSwitcher"><code class="xref py py-class docutils literal notranslate"><span class="pre">StackSwitcher</span></code></a> to display <a class="reference internal" href="#ignis.widgets.StackPage.child" title="ignis.widgets.StackPage.child"><code class="xref py py-attr docutils literal notranslate"><span class="pre">child</span></code></a> in a tab bar.</p>
 </dd></dl>
 
 <dl class="py gproperty">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.StackPage.child">
-<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">child</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">gi.repository.Gtk.Widget</span></em><a class="headerlink" href="#ignis.widgets.Widget.StackPage.child" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.StackPage.child">
+<em class="property"><span class="pre">gproperty</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">child</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">gi.repository.Gtk.Widget</span></em><a class="headerlink" href="#ignis.widgets.StackPage.child" title="Link to this definition">#</a></dt>
 <dd><ul class="simple">
 <li><p>read-only</p></li>
 </ul>
@@ -610,10 +610,10 @@ It will be used by <a class="reference internal" href="#ignis.widgets.Widget.Sta
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="ignis.widgets.Widget.StackSwitcher">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.widgets.Widget.</span></span><span class="sig-name descname"><span class="pre">StackSwitcher</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.widgets.Widget.StackSwitcher" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="ignis.widgets.StackSwitcher">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.widgets.</span></span><span class="sig-name descname"><span class="pre">StackSwitcher</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.widgets.StackSwitcher" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://lazka.github.io/pgi-docs/Gtk-4.0/classes/StackSwitcher.html#Gtk.StackSwitcher" title="(in Gtk 4.0 v4.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gtk.StackSwitcher</span></code></a></p>
-<p>The StackSwitcher shows a row of buttons to switch between <a class="reference internal" href="#ignis.widgets.Widget.Stack" title="ignis.widgets.Widget.Stack"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stack</span></code></a> pages.</p>
+<p>The StackSwitcher shows a row of buttons to switch between <a class="reference internal" href="#ignis.widgets.Stack" title="ignis.widgets.Stack"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stack</span></code></a> pages.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>**kwargs</strong> -- Properties to set.</p>
@@ -670,16 +670,16 @@ It will be used by <a class="reference internal" href="#ignis.widgets.Widget.Sta
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.Stack"><code class="docutils literal notranslate"><span class="pre">Stack</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.Stack.child"><code class="docutils literal notranslate"><span class="pre">Stack.child</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Stack"><code class="docutils literal notranslate"><span class="pre">Stack</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Stack.child"><code class="docutils literal notranslate"><span class="pre">Stack.child</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.StackPage"><code class="docutils literal notranslate"><span class="pre">StackPage</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.StackPage.title"><code class="docutils literal notranslate"><span class="pre">StackPage.title</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.StackPage.child"><code class="docutils literal notranslate"><span class="pre">StackPage.child</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.StackPage"><code class="docutils literal notranslate"><span class="pre">StackPage</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.StackPage.title"><code class="docutils literal notranslate"><span class="pre">StackPage.title</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.StackPage.child"><code class="docutils literal notranslate"><span class="pre">StackPage.child</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.Widget.StackSwitcher"><code class="docutils literal notranslate"><span class="pre">StackSwitcher</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.widgets.StackSwitcher"><code class="docutils literal notranslate"><span class="pre">StackSwitcher</span></code></a></li>
 </ul>
   </nav></div>
 

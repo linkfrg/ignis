@@ -1,11 +1,11 @@
 Stack
 =======
 
-.. autoclass:: ignis.widgets.Widget.Stack
+.. autoclass:: ignis.widgets.Stack
     :members:
 
-.. autoclass:: ignis.widgets.Widget.StackPage
+.. autoclass:: ignis.widgets.StackPage
     :members:
 
-.. autoclass:: ignis.widgets.Widget.StackSwitcher
+.. autoclass:: ignis.widgets.StackSwitcher
     :members:
