@@ -88,9 +88,6 @@ class Options(OptionsManager):
     """
 
     def __init__(self):
-        if is_sphinx_build:
-            return
-
         if not os.path.exists(OPTIONS_FILE) and os.path.exists(OLD_OPTIONS_FILE):
             _migrate_old_options_file()
 
