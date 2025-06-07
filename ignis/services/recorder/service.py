@@ -1,15 +1,13 @@
-import os
 import signal
 import asyncio
 import datetime
 import subprocess
 from ignis.app import IgnisApp
 from ignis.base_service import BaseService
-from ignis.options import options
 from ignis.gobject import IgnisProperty, IgnisSignal
 from ignis.exceptions import GpuScreenRecorderError
-from typing import Literal
 from loguru import logger
+from .config import RecorderConfigDefaults, RecorderConfigManual
 
 app = IgnisApp.get_default()
 
@@ -85,33 +83,8 @@ class RecorderService(BaseService):
 
     async def start_recording(
         self,
-        source: Literal["screen", "screen-direct", "focused", "portal", "region"] | str,
-        path: str | None = None,
-        resolution_limit: str | None = None,
-        region: str | None = None,
-        framerate: int | None = None,
-        audio_devices: list[str] | None = None,
-        quality: Literal["medium", "high", "very_high", "ultra"] | None = None,
-        video_codec: Literal[
-            "auto",
-            "h264",
-            "hevc",
-            "av1",
-            "vp8",
-            "vp9",
-            "hevc_hdr",
-            "av1_hdr",
-            "hevc_10bit",
-            "av1_10bit",
-        ]
-        | None = None,
-        audio_codec: Literal["aac", "opus", "flac"] | None = None,
-        audio_bitrate: int | None = None,
-        framerate_mode: Literal["cfr", "vfr", "content"] | None = None,
-        bitrate_mode: Literal["auto", "qp", "vbr", "cbr"] | None = None,
-        color_range: Literal["limited", "full"] | None = None,
-        cursor: Literal["yes", "no"] | None = None,
-        encoder: Literal["gpu", "cpu"] | None = None,
+        config: RecorderConfigDefaults | RecorderConfigManual,
+        format_time: bool = True,
         *extra_args,
     ) -> None:
         """
@@ -123,32 +96,28 @@ class RecorderService(BaseService):
         cmd_options: dict[str, str] = {}
 
         for key, value in {
-            "-w": source,
-            "-s": resolution_limit,
-            "-region": region,
-            "-o": path,
-            "-f": str(framerate) if framerate else None,
-            "-q": quality,
-            "-ac": audio_codec,
-            "-ab": str(audio_bitrate) if audio_bitrate else None,
-            "-bm": bitrate_mode,
-            "-cr": color_range,
-            "-k": video_codec,
-            "-fm": framerate_mode,
-            "-cursor": cursor,
-            "-encoder": encoder,
+            "-w": config.source,
+            "-s": config.resolution_limit,
+            "-region": config.region,
+            "-o": datetime.datetime.now().strftime(config.path)
+            if format_time
+            else config.path,
+            "-f": str(config.framerate) if config.framerate else None,
+            "-q": config.quality,
+            "-ac": config.audio_codec,
+            "-ab": str(config.audio_bitrate) if config.audio_bitrate else None,
+            "-bm": config.bitrate_mode,
+            "-cr": config.color_range,
+            "-k": config.video_codec,
+            "-fm": config.framerate_mode,
+            "-cursor": config.cursor,
+            "-encoder": config.encoder,
         }.items():
             if value is not None:
                 cmd_options[key] = value
 
-        if not path:
-            cmd_options["-o"] = os.path.join(
-                options.recorder.default_file_location,  # type: ignore
-                datetime.datetime.now().strftime(options.recorder.default_filename),
-            )
-
-        if audio_devices:
-            for device in audio_devices:
+        if config.audio_devices:
+            for device in config.audio_devices:
                 cmd_args.extend(["-a", device])
 
         for key, value in cmd_options.items():
