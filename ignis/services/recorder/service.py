@@ -118,7 +118,7 @@ class RecorderService(BaseService):
         Start recording.
         """
 
-        cmd_args: list[str] = ["gpu-screen-recorder"]
+        cmd_args: list[str] = []
 
         cmd_options: dict[str, str] = {}
 
@@ -159,6 +159,7 @@ class RecorderService(BaseService):
         logger.debug(f"Running gpu-screen-recorder with args:\n{cmd_args}")
 
         self._process = await asyncio.create_subprocess_exec(
+            "gpu-screen-recorder",
             *cmd_args,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
