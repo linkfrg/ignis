@@ -7,7 +7,7 @@ from ignis.base_service import BaseService
 from ignis.gobject import IgnisProperty, IgnisSignal
 from ignis.exceptions import GpuScreenRecorderError
 from loguru import logger
-from .config import RecorderConfigDefaults, RecorderConfigManual
+from .config import RecorderConfig
 
 app = IgnisApp.get_default()
 
@@ -83,7 +83,7 @@ class RecorderService(BaseService):
 
     async def start_recording(
         self,
-        config: RecorderConfigDefaults | RecorderConfigManual,
+        config: RecorderConfig,
         format_time: bool = True,
         *extra_args,
     ) -> None:

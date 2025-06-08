@@ -3,7 +3,7 @@ from ignis import DATA_DIR, CACHE_DIR, is_sphinx_build
 from gi.repository import GLib  # type: ignore
 from ignis.options_manager import OptionsManager, OptionsGroup, TrackedList
 from loguru import logger
-from ignis.services._shared import recorder_arg_types
+from ignis.services.recorder import arg_types as recorder_arg_types
 
 
 OPTIONS_FILE = f"{DATA_DIR}/options.json"
