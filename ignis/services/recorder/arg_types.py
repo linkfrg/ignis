@@ -1,8 +1,7 @@
 from typing import Literal
-from typing import Annotated
 
 Source = Literal["screen", "screen-direct", "focused", "portal", "region"] | str
-Path = Annotated[str, "Path-like string"]
+Path = str
 ResolutionLimit = str | None
 Region = str | None
 Framerate = int | None
