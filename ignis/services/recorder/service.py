@@ -14,23 +14,9 @@ app = IgnisApp.get_default()
 
 class RecorderService(BaseService):
     """
-    A screen recorder.
-    Uses XDG Desktop portal and PipeWire.
-    Allow record screen with microphone audio and internal system audio.
+    A screen recorder. Uses ``gpu-screen-recorder`` as the backend.
 
     There are options available for this service: :class:`~ignis.options.Options.Recorder`.
-
-    Dependencies:
-        - GStreamer
-        - PipeWire
-        - gst-plugin-pipewire
-        - gst-plugins-good
-        - gst-plugins-ugly
-        - pipewire-pulse: for audio recording.
-
-    Raises:
-        GstNotFoundError: If GStreamer is not found.
-        GstPluginNotFoundError: If GStreamer plugin is not found.
 
     Example usage:
 
@@ -89,6 +75,10 @@ class RecorderService(BaseService):
     ) -> None:
         """
         Start recording.
+
+        Args:
+            config: The recorder configuration.
+            format_time: Whether to format the time in :obj:`RecorderConfig.path`.
         """
 
         cmd_args: list[str] = []
