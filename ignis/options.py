@@ -180,6 +180,9 @@ class Options(OptionsManager):
         #: Whether to format the time by default.
         default_format_time: recorder_arg_types.FormatTime = True
 
+        #: The default extra arguments to pass to `gpu-screen-recorder`.
+        default_extra_args: recorder_arg_types.ExtraArgs = {}
+
     class Applications(OptionsGroup):
         """
         Options for the :class:`~ignis.services.applications.ApplicationsService`.

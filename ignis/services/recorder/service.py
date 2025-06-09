@@ -70,7 +70,6 @@ class RecorderService(BaseService):
     async def start_recording(
         self,
         config: RecorderConfig,
-        *extra_args,
     ) -> None:
         """
         Start recording.
@@ -111,7 +110,8 @@ class RecorderService(BaseService):
         for key, value in cmd_options.items():
             cmd_args.extend([key, value])
 
-        cmd_args.extend(extra_args)
+        for key, value in config.extra_args.items():
+            cmd_args.extend([key, value])
 
         logger.debug(f"Running gpu-screen-recorder with args:\n{cmd_args}")
 

@@ -1,4 +1,4 @@
-from dataclasses import dataclass, fields
+from dataclasses import dataclass, field, fields
 from . import arg_types
 
 
@@ -60,6 +60,9 @@ class RecorderConfig:
 
     #: Whether to format the time in :attr:`path`.
     format_time: arg_types.FormatTime = True
+
+    #: Extra arguments to pass to `gpu-screen-recorder`.
+    extra_args: arg_types.ExtraArgs = field(default_factory=dict)
 
     @classmethod
     def new_from_options(cls: type["RecorderConfig"]) -> "RecorderConfig":

@@ -30,3 +30,4 @@ ColorRange = Literal["limited", "full"] | None
 Cursor = Literal["yes", "no"] | None
 Encoder = Literal["gpu", "cpu"] | None
 FormatTime = bool
+ExtraArgs = dict[str, str]
