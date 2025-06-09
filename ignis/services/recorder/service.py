@@ -10,6 +10,7 @@ from .config import RecorderConfig
 from .capture_option import CaptureOption
 from .audio_device import AudioDevice
 
+
 class RecorderService(BaseService):
     """
     A screen recorder. Uses ``gpu-screen-recorder`` as the backend.
