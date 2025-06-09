@@ -123,6 +123,12 @@ class Options(OptionsManager):
         For more detailed information, see :class:`~ignis.services.recorder.RecorderConfig`.
         """
 
+        #: The bitrate of the recording.
+        #:
+        #: .. deprecated:: 0.6
+        #:    This option is deprecated and no longer has any effect.
+        bitrate: int = 8000
+
         #: The default location for saving recordings. Defaults to XDG Video directory. Has effect only if :attr:`default_path` is not overridden.
         default_file_location: str | None = get_recorder_default_file_location()
 
