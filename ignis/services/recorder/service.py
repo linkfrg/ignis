@@ -165,6 +165,11 @@ class RecorderService(BaseService):
         self.notify("is-paused")
         self.emit("recording_stopped")
 
+    def __set_paused(self, value: bool) -> None:
+        self._is_paused = value
+        self._process.send_signal(signal.SIGUSR2)
+        self.notify("is-paused")
+
     def pause_recording(self) -> None:
         """
         Pause recording. This has an effect only if the recording is active and not already paused.
@@ -172,9 +177,10 @@ class RecorderService(BaseService):
         if not self._process:
             return
 
-        self._is_paused = True
-        self._process.send_signal(signal.SIGUSR2)
-        self.notify("is-paused")
+        if self._is_paused:
+            return
+
+        self.__set_paused(True)
 
     def continue_recording(self) -> None:
         """
@@ -183,6 +189,7 @@ class RecorderService(BaseService):
         if not self._process:
             return
 
-        self._is_paused = False
-        self._process.send_signal(signal.SIGUSR2)
-        self.notify("is-paused")
+        if not self._is_paused:
+            return
+
+        self.__set_paused(False)
