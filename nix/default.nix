@@ -16,7 +16,7 @@
 , networkmanager
 , gnome-bluetooth
 , python312Packages
-, gst_all_1
+, gpu-screen-recorder
 , gvc
 , extraPackages ? []
 , version ? "git"
@@ -33,13 +33,6 @@
       click
       loguru
       rich
-    ;
-    inherit (gst_all_1)
-      gstreamer
-      gst-plugins-base
-      gst-plugins-good
-      gst-plugins-bad
-      gst-plugins-ugly
     ;
   in buildPythonPackage {
 
@@ -64,11 +57,7 @@
     gtk4-layer-shell
     gobject-introspection
     dart-sass
-    gstreamer
-    gst-plugins-base
-    gst-plugins-good
-    gst-plugins-bad
-    gst-plugins-ugly
+    gpu-screen-recorder
     librsvg
     libpulseaudio
     pipewire
