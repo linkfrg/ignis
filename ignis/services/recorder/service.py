@@ -24,15 +24,50 @@ class RecorderService(BaseService):
 
     .. code-block:: python
 
-        from ignis.services.recorder import RecorderService
-        from ignis import utils
+        import asyncio
+        from ignis.services.recorder import RecorderService, RecorderConfig
 
         recorder = RecorderService.get_default()
 
-        recorder.start_recording(record_internal_audio=True)
+        # You can create a configuration from the options
+        rec_config = RecorderConfig.new_from_options()
 
-        # record for 30 seconds and then stop
-        utils.Timeout(ms=30 * 1000, target=recorder.stop_recording)
+        # You can override them for this config
+        rec_config.cursor = False
+
+        # Manual creation of configuration
+        rec_config = RecorderConfig(
+            source="portal",  # You can also pass a monitor name here
+            path="path/to/file",
+            # only source and path are required btw
+            # arguments below are optional
+            video_codec="h264",
+            framerate=144,
+            cursor=True,
+            # "default_input" for microphone
+            # "default_output" for internal audio
+            # "default_output|default_input" for both
+            audio_devices=["default_output"],
+            # and a lot more...
+        )
+
+        # Start recording
+        asyncio.create_task(recorder.start_recording(config=rec_config))
+
+        # Stop recording
+        recorder.stop_recording()
+
+        # Pause recording
+        recorder.pause_recording()
+
+        # Continue recording
+        recorder.continue_recording()
+
+        # You can list available capture options (sources)
+        print(recorder.list_capture_options())
+
+        # And audio devices
+        print(recorder.list_audio_devices())
     """
 
     def __init__(self):
