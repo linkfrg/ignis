@@ -2,7 +2,6 @@ import signal
 import asyncio
 import datetime
 import subprocess
-from ignis.app import IgnisApp
 from ignis.base_service import BaseService
 from ignis.gobject import IgnisProperty, IgnisSignal
 from ignis.exceptions import GpuScreenRecorderError
@@ -10,9 +9,6 @@ from loguru import logger
 from .config import RecorderConfig
 from .capture_option import CaptureOption
 from .audio_device import AudioDevice
-
-app = IgnisApp.get_default()
-
 
 class RecorderService(BaseService):
     """
@@ -104,10 +100,7 @@ class RecorderService(BaseService):
         """
         return self._is_paused
 
-    async def start_recording(
-        self,
-        config: RecorderConfig,
-    ) -> None:
+    async def start_recording(self, config: RecorderConfig) -> None:
         """
         Start recording.
 
