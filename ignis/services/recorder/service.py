@@ -77,7 +77,6 @@ class RecorderService(BaseService):
 
         Args:
             config: The recorder configuration.
-            format_time: Whether to format the time in :obj:`RecorderConfig.path`.
         """
 
         cmd_args: list[str] = []
