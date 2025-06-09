@@ -14,8 +14,9 @@ LOG_FORMAT = "{time:YYYY-MM-DD HH:mm:ss} [<level>{level}</level>] {message}"
 
 G_LOG_LEVEL_FUNC = {
     GLib.LogLevelFlags.LEVEL_DEBUG: lambda message: logger.debug(message),
-    GLib.LogLevelFlags.LEVEL_MESSAGE: lambda message: logger.trace(message),
-    GLib.LogLevelFlags.LEVEL_INFO: lambda message: logger.info(message),
+    # LEVEL_INFO logs are not very useful to print them to logger.info()
+    GLib.LogLevelFlags.LEVEL_INFO: lambda message: logger.debug(message),
+    GLib.LogLevelFlags.LEVEL_MESSAGE: lambda message: logger.info(message),
     GLib.LogLevelFlags.LEVEL_WARNING: lambda message: logger.warning(message),
     GLib.LogLevelFlags.LEVEL_ERROR: lambda message: logger.error(message),
     GLib.LogLevelFlags.LEVEL_CRITICAL: lambda message: logger.critical(message),
@@ -41,15 +42,9 @@ def g_log_writer(
 ) -> GLib.LogWriterOutput:
     message = GLib.log_writer_format_fields(logs_level, log_fields, False)
 
-    # debug and info messages usually useless
-    if logs_level == GLib.LogLevelFlags.LEVEL_DEBUG:
-        ...
-    elif logs_level == GLib.LogLevelFlags.LEVEL_INFO:
-        ...
-    else:
-        func = G_LOG_LEVEL_FUNC.get(logs_level, None)
-        if func is not None:
-            func(message.strip())
+    func = G_LOG_LEVEL_FUNC.get(logs_level, None)
+    if func is not None:
+        func(message.strip())
 
     return GLib.LogWriterOutput.HANDLED
 
