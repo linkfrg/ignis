@@ -177,6 +177,9 @@ class Options(OptionsManager):
         #: The default encoder.
         default_encoder: recorder_arg_types.Encoder = None
 
+        #: Whether to format the time by default.
+        default_format_time: recorder_arg_types.FormatTime = True
+
     class Applications(OptionsGroup):
         """
         Options for the :class:`~ignis.services.applications.ApplicationsService`.

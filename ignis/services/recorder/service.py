@@ -70,7 +70,6 @@ class RecorderService(BaseService):
     async def start_recording(
         self,
         config: RecorderConfig,
-        format_time: bool = True,
         *extra_args,
     ) -> None:
         """
@@ -90,7 +89,7 @@ class RecorderService(BaseService):
             "-s": config.resolution_limit,
             "-region": config.region,
             "-o": datetime.datetime.now().strftime(config.path)
-            if format_time
+            if config.format_time
             else config.path,
             "-f": str(config.framerate) if config.framerate else None,
             "-q": config.quality,

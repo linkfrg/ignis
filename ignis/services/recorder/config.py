@@ -58,6 +58,9 @@ class RecorderConfig:
     #: [``-encoder``] Which device should be used for video encoding.
     encoder: arg_types.Encoder = None
 
+    #: Whether to format the time in :attr:`path`.
+    format_time: arg_types.FormatTime = True
+
     @classmethod
     def new_from_options(cls: type["RecorderConfig"]) -> "RecorderConfig":
         """
