@@ -8,6 +8,8 @@ from ignis.gobject import IgnisProperty, IgnisSignal
 from ignis.exceptions import GpuScreenRecorderError
 from loguru import logger
 from .config import RecorderConfig
+from .capture_option import CaptureOption
+from .audio_device import AudioDevice
 
 app = IgnisApp.get_default()
 
@@ -186,3 +188,120 @@ class RecorderService(BaseService):
         """
         if self._is_paused:
             self.__set_paused(False)
+
+    def __get_list(self, cmd: str) -> list[str]:
+        proc = subprocess.run(
+            ["gpu-screen-recorder", cmd], text=True, capture_output=True
+        )
+        if proc.returncode != 0:
+            raise GpuScreenRecorderError(returncode=proc.returncode, stderr=proc.stderr)
+
+        if proc.stdout == "":
+            return []
+
+        result = proc.stdout.strip().split("\n")
+        return result
+
+    async def __get_list_async(self, cmd: str) -> list[str]:
+        proc = await asyncio.create_subprocess_exec(
+            "gpu-screen-recorder",
+            cmd,
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE,
+        )
+        stdout, stderr = await proc.communicate()
+
+        if proc.returncode != 0:
+            raise GpuScreenRecorderError(
+                returncode=proc.returncode, stderr=stderr.decode()
+            )
+
+        decoded_stdout = stdout.decode()
+
+        if decoded_stdout == "":
+            return []
+
+        return decoded_stdout.strip().split("\n")
+
+    def __parse_capture_options(
+        self, capture_options: list[str]
+    ) -> list[CaptureOption]:
+        result = []
+        for i in capture_options:
+            if "|" not in i:
+                result.append(CaptureOption(option=i))
+            else:
+                name, resolution = i.split("|", 1)
+
+                result.append(CaptureOption(option=name, monitor_resolution=resolution))
+
+        return result
+
+    def __parse_audio_devices(self, audio_devices: list[str]) -> list[AudioDevice]:
+        result = []
+
+        for i in audio_devices:
+            name, human_readable_name = i.split("|")
+            result.append(
+                AudioDevice(device_name=name, human_readable_name=human_readable_name)
+            )
+
+        return result
+
+    def list_capture_options(self) -> list[CaptureOption]:
+        """
+        List available capture options.
+
+        Returns:
+            A list of available capture options.
+        """
+        return self.__parse_capture_options(self.__get_list("--list-capture-options"))
+
+    async def list_capture_options_async(self) -> list[CaptureOption]:
+        """
+        Asynchronous version of :func:`list_capture_options`.
+
+        Returns:
+            A list of available capture options.
+        """
+        return self.__parse_capture_options(
+            await self.__get_list_async("--list-capture-options")
+        )
+
+    def list_audio_devices(self) -> list[AudioDevice]:
+        """
+        List audio devices.
+
+        Returns:
+            A list of audio devices.
+        """
+        return self.__parse_audio_devices(self.__get_list("--list-audio-devices"))
+
+    async def list_audio_devices_async(self) -> list[AudioDevice]:
+        """
+        Asynchronous version of :func:`list_audio_devices`.
+
+        Returns:
+            A list of audio devices.
+        """
+        return self.__parse_audio_devices(
+            await self.__get_list_async("--list-audio-devices")
+        )
+
+    def list_application_audio(self) -> list[str]:
+        """
+        List applications that you can record audio from.
+
+        Returns:
+            A list of applications that you can record audio from.
+        """
+        return self.__get_list("--list-application-audio")
+
+    async def list_application_audio_async(self) -> list[str]:
+        """
+        Asynchronous version of :func:`list_application_audio`.
+
+        Returns:
+            A list of applications that you can record audio from.
+        """
+        return await self.__get_list_async("--list-application-audio")
