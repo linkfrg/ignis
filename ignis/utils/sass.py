@@ -2,9 +2,8 @@ import shutil
 import subprocess
 from typing import Literal
 from ignis.exceptions import SassCompilationError, SassNotFoundError
-from ignis import TEMP_DIR
+from ignis import get_temp_dir
 
-COMPILED_CSS = f"{TEMP_DIR}/compiled.css"
 
 # resolve Sass compiler paths and pick a default one
 # "sass" (dart-sass) is the default,
@@ -17,12 +16,14 @@ for cmd in ("sass", "grass"):
 
 
 def compile_file(path: str, compiler_path: str) -> str:
-    result = subprocess.run([compiler_path, path, COMPILED_CSS], capture_output=True)
+    compiled_css = f"{get_temp_dir()}/compiled.css"
+
+    result = subprocess.run([compiler_path, path, compiled_css], capture_output=True)
 
     if result.returncode != 0:
         raise SassCompilationError(result.stderr.decode())
 
-    with open(COMPILED_CSS) as file:
+    with open(compiled_css) as file:
         return file.read()
 
 

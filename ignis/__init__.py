@@ -32,19 +32,49 @@ is_sphinx_build: bool = "sphinx" in sys.modules
 is_editable_install: bool = _get_is_editable_install()
 
 #: The random temporary directory for this Ignis instance.
-TEMP_DIR = tempfile.mkdtemp(prefix="ignis-")
+#:
+#: .. deprecated:: 0.6
+#:    Use :func:`get_temp_dir` instead.
+TEMP_DIR = "/tmp/ignis-deprecated-temp"
 
-#: The cache directory. Equals ``$XDG_CACHE_HOME/ignis`` by default, or :obj:`TEMP_DIR` during the Sphinx doc build.
-CACHE_DIR = f"{GLib.get_user_cache_dir()}/ignis" if not is_sphinx_build else TEMP_DIR
+#: The cache directory, equals ``$XDG_CACHE_HOME/ignis``.
+CACHE_DIR = (
+    f"{GLib.get_user_cache_dir()}/ignis"
+    if not is_sphinx_build
+    else "$XDG_CACHE_HOME/ignis"
+)
 
-#: The data directory. Equals ``$XDG_DATA_HOME/ignis`` by default, or :obj:`TEMP_DIR` during the Sphinx doc build.
-DATA_DIR = f"{GLib.get_user_data_dir()}/ignis" if not is_sphinx_build else TEMP_DIR
+#: The data directory, equals ``$XDG_DATA_HOME/ignis``.
+DATA_DIR = (
+    f"{GLib.get_user_data_dir()}/ignis"
+    if not is_sphinx_build
+    else "$XDG_DATA_HOME/ignis"
+)
 
 #: Whether libgirepository-2.0 is being used (``True`` for PyGObject 3.51.0 and higher).
 #: Always equals ``False`` during the Sphinx doc build.
 is_girepository_2_0: bool = (
     gi.version_info >= (3, 51, 0) if not is_sphinx_build else False  # type: ignore
 )
+
+global _temp_dir
+_temp_dir: str | None = None
+
+
+def get_temp_dir() -> str:
+    """
+    Get the temporary directory for this Ignis instance.
+    Create if it doesn't exist, otherwise return the existing one.
+
+    Returns:
+        The temporary directory for this Ignis instance.
+    """
+    global _temp_dir
+
+    if not _temp_dir:
+        _temp_dir = tempfile.mkdtemp(prefix="ignis-")
+
+    return _temp_dir
 
 
 def _prepend_to_repo(path: str) -> None:
