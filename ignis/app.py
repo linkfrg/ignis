@@ -2,6 +2,8 @@ from __future__ import annotations
 import os
 import sys
 import datetime
+import ignis
+import shutil
 from dataclasses import dataclass
 from typing import Literal
 from ignis.dbus import DBusService
@@ -543,6 +545,13 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         """
         Quit Ignis.
         """
+        if ignis._temp_dir:
+            logger.debug(f"Removing temp dir: {ignis._temp_dir}")
+            try:
+                shutil.rmtree(ignis._temp_dir)
+            except FileNotFoundError:
+                pass
+
         super().quit()
         logger.info("Quitting.")
 
