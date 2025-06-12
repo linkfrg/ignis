@@ -46,13 +46,13 @@
       {
         packages = rec {
           ignis = (pkgs.callPackage ./nix { inherit self gvc version; }).override {
-            serviceDepencies = serviceDepencies;
+            serviceDependencies = serviceDependencies;
           };
           default = ignis;
         };
         apps = rec {
           ignis = (flake-utils.lib.mkApp { drv = self.packages.${system}.ignis; }).override {
-            serviceDepencies = serviceDepencies;
+            serviceDependencies = serviceDependencies;
           };
           default = ignis;
         };
