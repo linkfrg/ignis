@@ -3,6 +3,8 @@
   lib,
   pkgs,
   config,
+  hardware,
+  services,
   ...
 }:
 with lib;
