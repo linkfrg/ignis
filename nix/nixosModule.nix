@@ -60,10 +60,6 @@ in
     in
     {
       environment.systemPackages = [ ignis ];
-      services.upower = mkIf cfg.enableUPowerService {
-        enable = true;
-      };
-
       assertions = [
         {
           assertion = !(cfg.services.bluetooth && !(hardware.bluetooth.enable));
