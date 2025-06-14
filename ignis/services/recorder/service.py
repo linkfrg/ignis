@@ -5,7 +5,11 @@ import subprocess
 import shutil
 from ignis.base_service import BaseService
 from ignis.gobject import IgnisProperty, IgnisSignal
-from ignis.exceptions import GpuScreenRecorderError, GpuScreenRecorderNotFoundError
+from ignis.exceptions import (
+    GpuScreenRecorderError,
+    GpuScreenRecorderNotFoundError,
+    RecorderPortalCaptureCanceled,
+)
 from loguru import logger
 from .config import RecorderConfig
 from .capture_option import CaptureOption
@@ -124,6 +128,7 @@ class RecorderService(BaseService):
         Raises:
             GpuScreenRecorderError: If an error occurs during recording.
             GpuScreenRecorderNotFoundError: if ``gpu-screen-recorder`` is not found.
+            RecorderPortalCaptureCanceled: if the user cancels the desktop portal capture (when :attr:`RecorderConfig.source` is set to ``"portal"``).
         """
         self.__check_availability()
 
@@ -196,7 +201,10 @@ class RecorderService(BaseService):
         self.notify("active")
         self.notify("is-paused")
 
-        raise GpuScreenRecorderError(returncode=returncode, stderr=stderr)
+        if returncode == 60:
+            raise RecorderPortalCaptureCanceled()
+        else:
+            raise GpuScreenRecorderError(returncode=returncode, stderr=stderr)
 
     def stop_recording(self) -> None:
         """

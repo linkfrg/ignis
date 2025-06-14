@@ -443,3 +443,12 @@ class GpuScreenRecorderNotFoundError(Exception):
             "gpu-screen-recorder is not found! To use the Recorder Service, install gpu-screen-recorder",
             *args,
         )
+
+
+class RecorderPortalCaptureCanceled(Exception):
+    """
+    Raised when the desktop portal capture is canceled by the user (e.g., by closing the “Select Sources” window).
+    """
+
+    def __init__(self, *args):
+        super().__init__("The desktop portal capture was canceled by the user", *args)
