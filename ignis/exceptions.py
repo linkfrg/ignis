@@ -431,3 +431,15 @@ class GpuScreenRecorderError(Exception):
     @property
     def stderr(self) -> str:
         return self._stderr
+
+
+class GpuScreenRecorderNotFoundError(Exception):
+    """
+    Raised when gpu-screen-recorder is not found.
+    """
+
+    def __init__(self, *args):
+        super().__init__(
+            "gpu-screen-recorder is not found! To use the Recorder Service, install gpu-screen-recorder",
+            *args,
+        )

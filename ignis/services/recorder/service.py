@@ -2,9 +2,10 @@ import signal
 import asyncio
 import datetime
 import subprocess
+import shutil
 from ignis.base_service import BaseService
 from ignis.gobject import IgnisProperty, IgnisSignal
-from ignis.exceptions import GpuScreenRecorderError
+from ignis.exceptions import GpuScreenRecorderError, GpuScreenRecorderNotFoundError
 from loguru import logger
 from .config import RecorderConfig
 from .capture_option import CaptureOption
@@ -101,6 +102,17 @@ class RecorderService(BaseService):
         """
         return self._is_paused
 
+    @IgnisProperty
+    def is_available(self) -> bool:
+        """
+        Whether gpu-screen-recorder is installed and available.
+        """
+        return bool(shutil.which("gpu-screen-recorder"))
+
+    def __check_availability(self) -> None:
+        if not self.is_available:
+            raise GpuScreenRecorderNotFoundError()
+
     async def start_recording(self, config: RecorderConfig) -> None:
         """
         Start recording.
@@ -111,6 +123,7 @@ class RecorderService(BaseService):
         Raises:
             GpuScreenRecorderError: If an error occurs during recording.
         """
+        self.__check_availability()
 
         cmd_args: list[str] = []
 
@@ -228,6 +241,8 @@ class RecorderService(BaseService):
         return stdout.strip().split("\n")
 
     def __get_list(self, cmd: str) -> list[str]:
+        self.__check_availability()
+
         proc = subprocess.run(
             ["gpu-screen-recorder", cmd], text=True, capture_output=True
         )
@@ -237,6 +252,8 @@ class RecorderService(BaseService):
         return self.__process_list_stdout(proc.stdout)
 
     async def __get_list_async(self, cmd: str) -> list[str]:
+        self.__check_availability()
+
         proc = await asyncio.create_subprocess_exec(
             "gpu-screen-recorder",
             cmd,
