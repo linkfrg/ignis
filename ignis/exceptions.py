@@ -413,7 +413,7 @@ class GnomeBluetoothNotFoundError(Exception):
 
 class GpuScreenRecorderError(Exception):
     """
-    Raised when gpu-screen-recorder exits with an error.
+    Raised when ``gpu-screen-recorder`` exits with an error.
     """
 
     def __init__(self, returncode: int | None, stderr: str, *args):
@@ -435,7 +435,7 @@ class GpuScreenRecorderError(Exception):
 
 class GpuScreenRecorderNotFoundError(Exception):
     """
-    Raised when gpu-screen-recorder is not found.
+    Raised when ``gpu-screen-recorder`` is not found.
     """
 
     def __init__(self, *args):
