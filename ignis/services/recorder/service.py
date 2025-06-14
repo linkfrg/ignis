@@ -120,8 +120,10 @@ class RecorderService(BaseService):
 
         Args:
             config: The recorder configuration.
+
         Raises:
             GpuScreenRecorderError: If an error occurs during recording.
+            GpuScreenRecorderNotFoundError: if ``gpu-screen-recorder`` is not found.
         """
         self.__check_availability()
 
@@ -300,6 +302,10 @@ class RecorderService(BaseService):
 
         Returns:
             A list of available capture options.
+
+        Raises:
+            GpuScreenRecorderError: if ``gpu-screen-recorder`` exits with an error.
+            GpuScreenRecorderNotFoundError: if ``gpu-screen-recorder`` is not found.
         """
         return self.__parse_capture_options(self.__get_list("--list-capture-options"))
 
@@ -309,6 +315,10 @@ class RecorderService(BaseService):
 
         Returns:
             A list of available capture options.
+
+        Raises:
+            GpuScreenRecorderError: if ``gpu-screen-recorder`` exits with an error.
+            GpuScreenRecorderNotFoundError: if ``gpu-screen-recorder`` is not found.
         """
         return self.__parse_capture_options(
             await self.__get_list_async("--list-capture-options")
@@ -320,6 +330,10 @@ class RecorderService(BaseService):
 
         Returns:
             A list of audio devices.
+
+        Raises:
+            GpuScreenRecorderError: if ``gpu-screen-recorder`` exits with an error.
+            GpuScreenRecorderNotFoundError: if ``gpu-screen-recorder`` is not found.
         """
         return self.__parse_audio_devices(self.__get_list("--list-audio-devices"))
 
@@ -329,6 +343,10 @@ class RecorderService(BaseService):
 
         Returns:
             A list of audio devices.
+
+        Raises:
+            GpuScreenRecorderError: if ``gpu-screen-recorder`` exits with an error.
+            GpuScreenRecorderNotFoundError: if ``gpu-screen-recorder`` is not found.
         """
         return self.__parse_audio_devices(
             await self.__get_list_async("--list-audio-devices")
@@ -340,6 +358,10 @@ class RecorderService(BaseService):
 
         Returns:
             A list of applications that you can record audio from.
+
+        Raises:
+            GpuScreenRecorderError: if ``gpu-screen-recorder`` exits with an error.
+            GpuScreenRecorderNotFoundError: if ``gpu-screen-recorder`` is not found.
         """
         return self.__get_list("--list-application-audio")
 
@@ -349,5 +371,9 @@ class RecorderService(BaseService):
 
         Returns:
             A list of applications that you can record audio from.
+
+        Raises:
+            GpuScreenRecorderError: if ``gpu-screen-recorder`` exits with an error.
+            GpuScreenRecorderNotFoundError: if ``gpu-screen-recorder`` is not found.
         """
         return await self.__get_list_async("--list-application-audio")
