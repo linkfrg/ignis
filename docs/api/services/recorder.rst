@@ -12,3 +12,6 @@ Recorder
 
 .. autoclass:: ignis.services.recorder.AudioDevice
     :members:
+
+.. autoclass:: ignis.services.recorder.ApplicationAudio
+    :members:

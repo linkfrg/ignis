@@ -14,6 +14,15 @@ from loguru import logger
 from .config import RecorderConfig
 from .capture_option import CaptureOption
 from .audio_device import AudioDevice
+from .app_audio import ApplicationAudio
+from typing import TypeVar, Protocol
+
+
+class _InfoCls(Protocol):
+    def __init__(self, arg1: str, arg2: str = ...) -> None: ...
+
+
+_ParseListCls = TypeVar("_ParseListCls", bound=_InfoCls)
 
 
 class RecorderService(BaseService):
@@ -244,24 +253,19 @@ class RecorderService(BaseService):
         if self._is_paused:
             self.__set_paused(False)
 
-    def __process_list_stdout(self, stdout: str) -> list[str]:
-        if stdout == "":
-            return []
-
-        return stdout.strip().split("\n")
-
-    def __get_list(self, cmd: str) -> list[str]:
+    def __call_cmd(self, cmd: str) -> str:
         self.__check_availability()
 
         proc = subprocess.run(
             ["gpu-screen-recorder", cmd], text=True, capture_output=True
         )
+
         if proc.returncode != 0:
             raise GpuScreenRecorderError(returncode=proc.returncode, stderr=proc.stderr)
 
-        return self.__process_list_stdout(proc.stdout)
+        return proc.stdout
 
-    async def __get_list_async(self, cmd: str) -> list[str]:
+    async def __call_cmd_async(self, cmd: str) -> str:
         self.__check_availability()
 
         proc = await asyncio.create_subprocess_exec(
@@ -277,32 +281,40 @@ class RecorderService(BaseService):
                 returncode=proc.returncode, stderr=bstderr.decode()
             )
 
-        return self.__process_list_stdout(bstdout.decode())
+        return bstdout.decode()
 
-    def __parse_capture_options(
-        self, capture_options: list[str]
-    ) -> list[CaptureOption]:
+    def __parse_list(
+        self,
+        stdout: str,
+        klass: type[_ParseListCls],
+    ) -> list[_ParseListCls]:
+        if stdout == "":
+            return []
+
         result = []
-        for i in capture_options:
-            if "|" not in i:
-                result.append(CaptureOption(option=i))
+
+        for string in stdout.strip().split("\n"):
+            if "|" not in string:
+                result.append(klass(string))
+
+            elif "|" in string:
+                arg1, arg2 = string.split("|", 1)
+
+                result.append(klass(arg1, arg2))
             else:
-                name, resolution = i.split("|", 1)
-
-                result.append(CaptureOption(option=name, monitor_resolution=resolution))
+                raise ValueError(f"Invalid string: {string}")
 
         return result
 
-    def __parse_audio_devices(self, audio_devices: list[str]) -> list[AudioDevice]:
-        result = []
+    def __list_helper(
+        self, cmd: str, klass: type[_ParseListCls]
+    ) -> list[_ParseListCls]:
+        return self.__parse_list(self.__call_cmd(cmd), klass)
 
-        for i in audio_devices:
-            name, human_readable_name = i.split("|")
-            result.append(
-                AudioDevice(device_name=name, human_readable_name=human_readable_name)
-            )
-
-        return result
+    async def __list_helper_async(
+        self, cmd: str, klass: type[_ParseListCls]
+    ) -> list[_ParseListCls]:
+        return self.__parse_list(await self.__call_cmd_async(cmd), klass)
 
     def list_capture_options(self) -> list[CaptureOption]:
         """
@@ -315,7 +327,7 @@ class RecorderService(BaseService):
             GpuScreenRecorderError: If ``gpu-screen-recorder`` exits with an error.
             GpuScreenRecorderNotFoundError: If ``gpu-screen-recorder`` is not found.
         """
-        return self.__parse_capture_options(self.__get_list("--list-capture-options"))
+        return self.__list_helper("--list-capture-options", CaptureOption)
 
     async def list_capture_options_async(self) -> list[CaptureOption]:
         """
@@ -328,9 +340,7 @@ class RecorderService(BaseService):
             GpuScreenRecorderError: If ``gpu-screen-recorder`` exits with an error.
             GpuScreenRecorderNotFoundError: If ``gpu-screen-recorder`` is not found.
         """
-        return self.__parse_capture_options(
-            await self.__get_list_async("--list-capture-options")
-        )
+        return await self.__list_helper_async("--list-capture-options", CaptureOption)
 
     def list_audio_devices(self) -> list[AudioDevice]:
         """
@@ -343,7 +353,7 @@ class RecorderService(BaseService):
             GpuScreenRecorderError: If ``gpu-screen-recorder`` exits with an error.
             GpuScreenRecorderNotFoundError: If ``gpu-screen-recorder`` is not found.
         """
-        return self.__parse_audio_devices(self.__get_list("--list-audio-devices"))
+        return self.__list_helper("--list-audio-devices", AudioDevice)
 
     async def list_audio_devices_async(self) -> list[AudioDevice]:
         """
@@ -356,11 +366,9 @@ class RecorderService(BaseService):
             GpuScreenRecorderError: If ``gpu-screen-recorder`` exits with an error.
             GpuScreenRecorderNotFoundError: If ``gpu-screen-recorder`` is not found.
         """
-        return self.__parse_audio_devices(
-            await self.__get_list_async("--list-audio-devices")
-        )
+        return await self.__list_helper_async("--list-audio-devices", AudioDevice)
 
-    def list_application_audio(self) -> list[str]:
+    def list_application_audio(self) -> list[ApplicationAudio]:
         """
         List applications that you can record audio from.
 
@@ -371,9 +379,9 @@ class RecorderService(BaseService):
             GpuScreenRecorderError: If ``gpu-screen-recorder`` exits with an error.
             GpuScreenRecorderNotFoundError: If ``gpu-screen-recorder`` is not found.
         """
-        return self.__get_list("--list-application-audio")
+        return self.__list_helper("--list-application-audio", ApplicationAudio)
 
-    async def list_application_audio_async(self) -> list[str]:
+    async def list_application_audio_async(self) -> list[ApplicationAudio]:
         """
         Asynchronous version of :func:`list_application_audio`.
 
@@ -384,4 +392,6 @@ class RecorderService(BaseService):
             GpuScreenRecorderError: If ``gpu-screen-recorder`` exits with an error.
             GpuScreenRecorderNotFoundError: If ``gpu-screen-recorder`` is not found.
         """
-        return await self.__get_list_async("--list-application-audio")
+        return await self.__list_helper_async(
+            "--list-application-audio", ApplicationAudio
+        )
