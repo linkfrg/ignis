@@ -104,9 +104,12 @@ class RecorderService(BaseService):
     async def start_recording(self, config: RecorderConfig) -> None:
         """
         Start recording.
+        This function exits when recording ends.
 
         Args:
             config: The recorder configuration.
+        Raises:
+            GpuScreenRecorderError: If an error occurs during recording.
         """
 
         cmd_args: list[str] = []
