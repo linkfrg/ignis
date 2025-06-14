@@ -221,6 +221,12 @@ class RecorderService(BaseService):
         if self._is_paused:
             self.__set_paused(False)
 
+    def __process_list_stdout(self, stdout: str) -> list[str]:
+        if stdout == "":
+            return []
+
+        return stdout.strip().split("\n")
+
     def __get_list(self, cmd: str) -> list[str]:
         proc = subprocess.run(
             ["gpu-screen-recorder", cmd], text=True, capture_output=True
@@ -228,11 +234,7 @@ class RecorderService(BaseService):
         if proc.returncode != 0:
             raise GpuScreenRecorderError(returncode=proc.returncode, stderr=proc.stderr)
 
-        if proc.stdout == "":
-            return []
-
-        result = proc.stdout.strip().split("\n")
-        return result
+        return self.__process_list_stdout(proc.stdout)
 
     async def __get_list_async(self, cmd: str) -> list[str]:
         proc = await asyncio.create_subprocess_exec(
@@ -241,19 +243,14 @@ class RecorderService(BaseService):
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE,
         )
-        stdout, stderr = await proc.communicate()
+        bstdout, bstderr = await proc.communicate()
 
         if proc.returncode != 0:
             raise GpuScreenRecorderError(
-                returncode=proc.returncode, stderr=stderr.decode()
+                returncode=proc.returncode, stderr=bstderr.decode()
             )
 
-        decoded_stdout = stdout.decode()
-
-        if decoded_stdout == "":
-            return []
-
-        return decoded_stdout.strip().split("\n")
+        return self.__process_list_stdout(bstdout.decode())
 
     def __parse_capture_options(
         self, capture_options: list[str]
