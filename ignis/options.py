@@ -3,6 +3,7 @@ from ignis import DATA_DIR, CACHE_DIR, is_sphinx_build
 from gi.repository import GLib  # type: ignore
 from ignis.options_manager import OptionsManager, OptionsGroup, TrackedList
 from loguru import logger
+from ignis.services.recorder import arg_types as recorder_arg_types
 
 
 OPTIONS_FILE = f"{DATA_DIR}/options.json"
@@ -117,16 +118,76 @@ class Options(OptionsManager):
     class Recorder(OptionsGroup):
         """
         Options for the :class:`~ignis.services.recorder.RecorderService`.
+
+        This mainly includes the default recorder configuration options.
+        For more detailed information, see :class:`~ignis.services.recorder.RecorderConfig`.
         """
 
         #: The bitrate of the recording.
+        #:
+        #: .. deprecated:: 0.6
+        #:    This option is deprecated and no longer has any effect.
         bitrate: int = 8000
 
-        #: The default location for saving recordings. Defaults to XDG Video directory.
+        #: The default location for saving recordings. Defaults to XDG Video directory. Has effect only if :attr:`default_path` is not overridden.
         default_file_location: str | None = get_recorder_default_file_location()
 
-        #: The default filename for recordings. Supports time formating.
+        #: The default filename for recordings. Supports time formating. Has effect only if :attr:`default_path` is not overridden.
         default_filename: str = "%Y-%m-%d_%H-%M-%S.mp4"
+
+        #: The default recording source.
+        default_source: recorder_arg_types.Source = "portal"
+
+        #: The default output file path. By default equals to :attr:`default_file_location` / :attr:`default_filename`.
+        default_path: recorder_arg_types.Path = os.path.join(
+            default_file_location,  # type: ignore
+            default_filename,
+        )
+
+        #: The default resolution limit.
+        default_resolution_limit: recorder_arg_types.ResolutionLimit = None
+
+        #: The default region to capture.
+        default_region: recorder_arg_types.Region = None
+
+        #: The default framerate.
+        default_framerate: recorder_arg_types.Framerate = None
+
+        #: The default audio devices.
+        default_audio_devices: recorder_arg_types.AudioDevices = None
+
+        #: The default quality.
+        default_quality: recorder_arg_types.Quality = None
+
+        #: The default video codec.
+        default_video_codec: recorder_arg_types.VideoCodec = None
+
+        #: The default audio codec.
+        default_audio_codec: recorder_arg_types.AudioCodec = None
+
+        #: The default audio bitrate.
+        default_audio_bitrate: recorder_arg_types.AudioBitrate = None
+
+        #: The default framerate mode.
+        default_framerate_mode: recorder_arg_types.FramerateMode = None
+
+        #: The default bitrate mode.
+        default_bitrate_mode: recorder_arg_types.BitrateMode = None
+
+        #: The default color range.
+        default_color_range: recorder_arg_types.ColorRange = None
+
+        #: Whether to record cursor by default.
+        default_cursor: recorder_arg_types.Cursor = None
+
+        #: The default encoder.
+        default_encoder: recorder_arg_types.Encoder = None
+
+        #: Whether to format the time by default.
+        default_format_time: recorder_arg_types.FormatTime = True
+
+        #: The default extra arguments to pass to `gpu-screen-recorder`.
+        default_extra_args: recorder_arg_types.ExtraArgs = {}
 
     class Applications(OptionsGroup):
         """
