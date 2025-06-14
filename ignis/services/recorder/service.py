@@ -1,80 +1,80 @@
+import signal
+import asyncio
 import datetime
-from gi.repository import GLib  # type: ignore
-from ignis.app import IgnisApp
-from ignis.services.audio import AudioService
-from ignis.exceptions import GstPluginNotFoundError
+import subprocess
+import shutil
 from ignis.base_service import BaseService
-from ignis.options import options
 from ignis.gobject import IgnisProperty, IgnisSignal
-from .session import SessionManager
-from .util import gst_inspect
-from ._imports import Gst
-from .constants import PIPELINE_TEMPLATE, MAIN_AUDIO_PIPELINE, AUDIO_DEVICE_PIPELINE
-
-app = IgnisApp.get_default()
+from ignis.exceptions import GpuScreenRecorderError, GpuScreenRecorderNotFoundError
+from loguru import logger
+from .config import RecorderConfig
+from .capture_option import CaptureOption
+from .audio_device import AudioDevice
 
 
 class RecorderService(BaseService):
     """
-    A screen recorder.
-    Uses XDG Desktop portal and PipeWire.
-    Allow record screen with microphone audio and internal system audio.
+    A screen recorder. Uses ``gpu-screen-recorder`` as the backend.
 
     There are options available for this service: :class:`~ignis.options.Options.Recorder`.
-
-    Dependencies:
-        - GStreamer
-        - PipeWire
-        - gst-plugin-pipewire
-        - gst-plugins-good
-        - gst-plugins-ugly
-        - pipewire-pulse: for audio recording.
-
-    Raises:
-        GstNotFoundError: If GStreamer is not found.
-        GstPluginNotFoundError: If GStreamer plugin is not found.
 
     Example usage:
 
     .. code-block:: python
 
-        from ignis.services.recorder import RecorderService
-        from ignis import utils
+        import asyncio
+        from ignis.services.recorder import RecorderService, RecorderConfig
 
         recorder = RecorderService.get_default()
 
-        recorder.start_recording(record_internal_audio=True)
+        # You can create a configuration from the options
+        rec_config = RecorderConfig.new_from_options()
 
-        # record for 30 seconds and then stop
-        utils.Timeout(ms=30 * 1000, target=recorder.stop_recording)
+        # You can override them for this config
+        rec_config.cursor = False
+
+        # Manual creation of configuration
+        rec_config = RecorderConfig(
+            source="portal",  # You can also pass a monitor name here
+            path="path/to/file",
+            # only source and path are required btw
+            # arguments below are optional
+            video_codec="h264",
+            framerate=144,
+            cursor=True,
+            # "default_input" for microphone
+            # "default_output" for internal audio
+            # "default_output|default_input" for both
+            audio_devices=["default_output"],
+            # and a lot more...
+        )
+
+        # Start recording
+        asyncio.create_task(recorder.start_recording(config=rec_config))
+
+        # Stop recording
+        recorder.stop_recording()
+
+        # Pause recording
+        recorder.pause_recording()
+
+        # Continue recording
+        recorder.continue_recording()
+
+        # You can list available capture options (sources)
+        print(recorder.list_capture_options())
+
+        # And audio devices
+        print(recorder.list_audio_devices())
     """
 
     def __init__(self):
         super().__init__()
-        self.__check_deps()
-        Gst.init(None)
-
-        self.__manager = SessionManager()
 
         self._active: bool = False
         self._is_paused: bool = False
-        self.__pipeline: Gst.Element | None = None
 
-        self._N_THREADS: str = str(min(max(1, GLib.get_num_processors()), 64))
-
-        self._audio = AudioService.get_default()
-
-        app.connect("shutdown", lambda x: self.stop_recording())
-
-    def __check_deps(self) -> None:
-        if not gst_inspect("pipewiresrc"):
-            raise GstPluginNotFoundError("PipeWire", "gst-plugin-pipewire")
-
-        if not gst_inspect("x264enc"):
-            raise GstPluginNotFoundError("H.264 encoder", "gst-plugins-ugly")
-
-        if not gst_inspect("mp4mux"):
-            raise GstPluginNotFoundError("MP4 muxer", "gst-plugins-good")
+        self._process: asyncio.subprocess.Process | None = None
 
     @IgnisSignal
     def recording_started(self):
@@ -102,122 +102,252 @@ class RecorderService(BaseService):
         """
         return self._is_paused
 
-    def start_recording(
-        self,
-        path: str | None = None,
-        record_microphone: bool = False,
-        record_internal_audio: bool = False,
-        audio_devices: list[str] | None = None,
-    ) -> None:
+    @IgnisProperty
+    def is_available(self) -> bool:
+        """
+        Whether gpu-screen-recorder is installed and available.
+        """
+        return bool(shutil.which("gpu-screen-recorder"))
+
+    def __check_availability(self) -> None:
+        if not self.is_available:
+            raise GpuScreenRecorderNotFoundError()
+
+    async def start_recording(self, config: RecorderConfig) -> None:
         """
         Start recording.
+        This function exits when recording ends.
 
         Args:
-            path: Recording path. It will override ``default_file_location`` and ``default_filename`` properties.
-            record_microphone: Whether record audio from microphone.
-            record_internal_audio: Whether record internal audio.
-            audio_devices: A list of audio devices names from which audio should be recorded.
+            config: The recorder configuration.
+        Raises:
+            GpuScreenRecorderError: If an error occurs during recording.
         """
+        self.__check_availability()
 
-        if path is None:
-            path = f"{options.recorder.default_file_location}/{datetime.datetime.now().strftime(options.recorder.default_filename)}"
+        cmd_args: list[str] = []
 
-        pipeline_description = (
-            PIPELINE_TEMPLATE.replace("{n_threads}", self._N_THREADS)
-            .replace("{path}", path)
-            .replace("{bitrate}", str(options.recorder.bitrate))
+        cmd_options: dict[str, str] = {}
+
+        for key, value in {
+            "-w": config.source,
+            "-s": config.resolution_limit,
+            "-region": config.region,
+            "-o": datetime.datetime.now().strftime(config.path)
+            if config.format_time
+            else config.path,
+            "-f": str(config.framerate) if config.framerate else None,
+            "-q": config.quality,
+            "-ac": config.audio_codec,
+            "-ab": str(config.audio_bitrate) if config.audio_bitrate else None,
+            "-bm": config.bitrate_mode,
+            "-cr": config.color_range,
+            "-k": config.video_codec,
+            "-fm": config.framerate_mode,
+            "-cursor": config.cursor,
+            "-encoder": config.encoder,
+        }.items():
+            if value is not None:
+                cmd_options[key] = value
+
+        if config.audio_devices:
+            for device in config.audio_devices:
+                cmd_args.extend(["-a", device])
+
+        for key, value in cmd_options.items():
+            cmd_args.extend([key, value])
+
+        for key, value in config.extra_args.items():
+            cmd_args.extend([key, value])
+
+        logger.debug(f"Running gpu-screen-recorder with args:\n{cmd_args}")
+
+        self._process = await asyncio.create_subprocess_exec(
+            "gpu-screen-recorder",
+            *cmd_args,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
         )
-
-        audio_pipeline = ""
-
-        if record_microphone:
-            audio_pipeline = self.__combine_audio_pipeline(
-                audio_pipeline, self._audio.microphone.name
-            )
-
-        if record_internal_audio:
-            audio_pipeline = self.__combine_audio_pipeline(
-                audio_pipeline, self._audio.speaker.name + ".monitor"
-            )
-
-        if audio_devices:
-            for device in audio_devices:
-                audio_pipeline = self.__combine_audio_pipeline(audio_pipeline, device)
-
-        pipeline_description += audio_pipeline
-
-        self.__manager.start_session(self.__play_pipewire_stream, pipeline_description)
-
-    def __combine_audio_pipeline(self, audio_pipeline: str, device: str) -> str:
-        if audio_pipeline != "":
-            template = AUDIO_DEVICE_PIPELINE
-        else:
-            template = MAIN_AUDIO_PIPELINE
-
-        audio_pipeline += template.replace("{device}", device)
-        return audio_pipeline
-
-    def stop_recording(self) -> None:
-        """
-        Stop recording.
-        """
-        if not self.__pipeline:
-            return
-
-        self.__pipeline.send_event(Gst.Event.new_eos())
-
-        bus = self.__pipeline.get_bus()
-        if not bus:
-            return
-
-        bus.timed_pop_filtered(Gst.CLOCK_TIME_NONE, Gst.MessageType.EOS)
-
-        self.__pipeline.set_state(Gst.State.NULL)
-
-        self.__pipeline = None
-        self._pipeline_description = ""
-        self._active = False
-        self._is_paused = False
-        self.notify("active")
-        self.notify("is-paused")
-        self.emit("recording_stopped")
-
-    def pause_recording(self) -> None:
-        """
-        Pause recording. This has an effect only if the recording is active and not already paused.
-        """
-        if self.__pipeline:
-            self._is_paused = True
-            self.__pipeline.set_state(Gst.State.PAUSED)
-            self.notify("is-paused")
-
-    def continue_recording(self) -> None:
-        """
-        Continue recording. This has an effect only if the recording is active and paused.
-        """
-        if self.__pipeline:
-            self._is_paused = False
-            self.__pipeline.set_state(Gst.State.PLAYING)
-            self.notify("is-paused")
-
-    def __play_pipewire_stream(self, node_id: int, pipeline_description: str) -> None:
-        pipeline_description = pipeline_description.replace("{node_id}", str(node_id))
-
-        self.__pipeline = Gst.parse_launch(pipeline_description)
-        self.__pipeline.set_state(Gst.State.PLAYING)
-        bus = self.__pipeline.get_bus()
-        if not bus:
-            return
-
-        bus.connect("message", self.__on_gst_message)
 
         self._active = True
         self._is_paused = False
 
         self.notify("active")
         self.notify("is-paused")
-        self.emit("recording_started")
+        self.emit("recording-started")
 
-    def __on_gst_message(self, bus, message):
-        if message.type == Gst.MessageType.EOS or message.type == Gst.MessageType.ERROR:
-            self.stop_recording()
+        bstdout, bstderr = await self._process.communicate()
+
+        stdout = bstdout.decode().strip()
+        stderr = bstderr.decode().strip()
+
+        logger.debug(
+            f"gpu-screen-recorder exited with returncode: {self._process.returncode}\nstdout:\n{stdout}\nstderr:\n{stderr}"
+        )
+
+        if self._process.returncode != 0:
+            self.__recording_error(self._process.returncode, stderr)
+
+    def __recording_error(self, returncode: int | None, stderr: str) -> None:
+        self._active = False
+        self._is_paused = False
+        self.notify("active")
+        self.notify("is-paused")
+
+        raise GpuScreenRecorderError(returncode=returncode, stderr=stderr)
+
+    def stop_recording(self) -> None:
+        """
+        Stop recording.
+        """
+        if not self._process:
+            return
+
+        self._process.send_signal(signal.SIGINT)
+
+        self._active = False
+        self._is_paused = False
+
+        self.notify("active")
+        self.notify("is-paused")
+        self.emit("recording_stopped")
+
+    def __set_paused(self, value: bool) -> None:
+        if not self._process:
+            return
+
+        self._is_paused = value
+        self._process.send_signal(signal.SIGUSR2)
+        self.notify("is-paused")
+
+    def pause_recording(self) -> None:
+        """
+        Pause recording. This has an effect only if the recording is active and not already paused.
+        """
+        if not self._is_paused:
+            self.__set_paused(True)
+
+    def continue_recording(self) -> None:
+        """
+        Continue recording. This has an effect only if the recording is active and paused.
+        """
+        if self._is_paused:
+            self.__set_paused(False)
+
+    def __process_list_stdout(self, stdout: str) -> list[str]:
+        if stdout == "":
+            return []
+
+        return stdout.strip().split("\n")
+
+    def __get_list(self, cmd: str) -> list[str]:
+        self.__check_availability()
+
+        proc = subprocess.run(
+            ["gpu-screen-recorder", cmd], text=True, capture_output=True
+        )
+        if proc.returncode != 0:
+            raise GpuScreenRecorderError(returncode=proc.returncode, stderr=proc.stderr)
+
+        return self.__process_list_stdout(proc.stdout)
+
+    async def __get_list_async(self, cmd: str) -> list[str]:
+        self.__check_availability()
+
+        proc = await asyncio.create_subprocess_exec(
+            "gpu-screen-recorder",
+            cmd,
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE,
+        )
+        bstdout, bstderr = await proc.communicate()
+
+        if proc.returncode != 0:
+            raise GpuScreenRecorderError(
+                returncode=proc.returncode, stderr=bstderr.decode()
+            )
+
+        return self.__process_list_stdout(bstdout.decode())
+
+    def __parse_capture_options(
+        self, capture_options: list[str]
+    ) -> list[CaptureOption]:
+        result = []
+        for i in capture_options:
+            if "|" not in i:
+                result.append(CaptureOption(option=i))
+            else:
+                name, resolution = i.split("|", 1)
+
+                result.append(CaptureOption(option=name, monitor_resolution=resolution))
+
+        return result
+
+    def __parse_audio_devices(self, audio_devices: list[str]) -> list[AudioDevice]:
+        result = []
+
+        for i in audio_devices:
+            name, human_readable_name = i.split("|")
+            result.append(
+                AudioDevice(device_name=name, human_readable_name=human_readable_name)
+            )
+
+        return result
+
+    def list_capture_options(self) -> list[CaptureOption]:
+        """
+        List available capture options.
+
+        Returns:
+            A list of available capture options.
+        """
+        return self.__parse_capture_options(self.__get_list("--list-capture-options"))
+
+    async def list_capture_options_async(self) -> list[CaptureOption]:
+        """
+        Asynchronous version of :func:`list_capture_options`.
+
+        Returns:
+            A list of available capture options.
+        """
+        return self.__parse_capture_options(
+            await self.__get_list_async("--list-capture-options")
+        )
+
+    def list_audio_devices(self) -> list[AudioDevice]:
+        """
+        List audio devices.
+
+        Returns:
+            A list of audio devices.
+        """
+        return self.__parse_audio_devices(self.__get_list("--list-audio-devices"))
+
+    async def list_audio_devices_async(self) -> list[AudioDevice]:
+        """
+        Asynchronous version of :func:`list_audio_devices`.
+
+        Returns:
+            A list of audio devices.
+        """
+        return self.__parse_audio_devices(
+            await self.__get_list_async("--list-audio-devices")
+        )
+
+    def list_application_audio(self) -> list[str]:
+        """
+        List applications that you can record audio from.
+
+        Returns:
+            A list of applications that you can record audio from.
+        """
+        return self.__get_list("--list-application-audio")
+
+    async def list_application_audio_async(self) -> list[str]:
+        """
+        Asynchronous version of :func:`list_application_audio`.
+
+        Returns:
+            A list of applications that you can record audio from.
+        """
+        return await self.__get_list_async("--list-application-audio")
