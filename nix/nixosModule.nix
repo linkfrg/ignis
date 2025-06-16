@@ -5,7 +5,6 @@
   config,
   ...
 }:
-with lib;
 let
   cfg = config.programs.ignis;
 in
@@ -20,7 +19,7 @@ in
       audio = lib.mkEnableOption "Enable Audio service";
     };
     enableSassCompilation = lib.mkEnableOption "Enable Sass compilation support";
-    extraPackages = mkOption {
+    extraPackages = lib.mkOption {
       type = types.listOf types.package;
       default = [ ];
       example = [ pkgs.python312Packages.psutil ];
@@ -62,26 +61,31 @@ in
       environment.systemPackages = [ ignis ];
       warnings = [
         {
-          assertion = !(cfg.services.bluetooth && !(config.hardware.bluetooth.enable));
-          message = "To use bluetooth services of ignis you must put 'hardware.bluetooth.enable = true' in your configuration";
-        }
-        {
-          assertion = !(cfg.services.upower && !(config.services.upower.enable));
-          message = "To use upower services of ignis you must put 'services.upower.enable = true' in your configuration";
-        }
-        {
-          assertion = !(cfg.services.recorder && !(config.services.pipewire.enable));
-          message = "To use recorder services of ignis you must put 'services.pipewire.enable = true' in your configuration";
-        }
-        {
-          assertion = !(cfg.services.network && !(config.networking.networkmanager.enable));
-          message = "To use network services of ignis you must put 'networking.networkmanager.enable = true' in your configuration";
-        }
-        {
-          assertion = !(cfg.services.audio && !(config.services.pipewire.enable));
-          message = "To use audio services of ignis you must put 'services.pipewire.enable = true' in your configuration";
+          lib.optionals !(cfg.services.upower && !(config.services.upower.enable)) "To use upower services of ignis you must put 'services.upower.enable = true' in your configuration"
         }
       ];
+      # warnings = [
+      #   {
+      #     assertion = !(cfg.services.bluetooth && !(config.hardware.bluetooth.enable));
+      #     message = "To use bluetooth services of ignis you must put 'hardware.bluetooth.enable = true' in your configuration";
+      #   }
+      #   {
+      #     assertion = !(cfg.services.upower && !(config.services.upower.enable));
+      #     message = "To use upower services of ignis you must put 'services.upower.enable = true' in your configuration";
+      #   }
+      #   {
+      #     assertion = !(cfg.services.recorder && !(config.services.pipewire.enable));
+      #     message = "To use recorder services of ignis you must put 'services.pipewire.enable = true' in your configuration";
+      #   }
+      #   {
+      #     assertion = !(cfg.services.network && !(config.networking.networkmanager.enable));
+      #     message = "To use network services of ignis you must put 'networking.networkmanager.enable = true' in your configuration";
+      #   }
+      #   {
+      #     assertion = !(cfg.services.audio && !(config.services.pipewire.enable));
+      #     message = "To use audio services of ignis you must put 'services.pipewire.enable = true' in your configuration";
+      #   }
+      # ];
     }
   );
 }
