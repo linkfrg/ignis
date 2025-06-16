@@ -58,7 +58,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Variable" href="variable.html" />
-    <link rel="prev" title="Application" href="app.html" />
+    <link rel="prev" title="Singleton" href="singleton.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -369,6 +369,7 @@
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="toplevel.html">Toplevel package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="app.html">Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="singleton.html">Singleton</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">GObject</a></li>
 <li class="toctree-l1"><a class="reference internal" href="variable.html">Variable</a></li>
 <li class="toctree-l1"><a class="reference internal" href="client.html">Client</a></li>
@@ -614,6 +615,13 @@ You can pass unlimited number of property names as arguments.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="ignis.gobject.IgnisGObjectSingleton">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.gobject.</span></span><span class="sig-name descname"><span class="pre">IgnisGObjectSingleton</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.gobject.IgnisGObjectSingleton" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ignis.gobject.IgnisGObject" title="ignis.gobject.IgnisGObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">IgnisGObject</span></code></a>, <a class="reference internal" href="singleton.html#ignis.singleton.IgnisSingleton" title="ignis.singleton.IgnisSingleton"><code class="xref py py-class docutils literal notranslate"><span class="pre">IgnisSingleton</span></code></a>.</p>
+<p>The <a class="reference internal" href="#ignis.gobject.IgnisGObject" title="ignis.gobject.IgnisGObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">IgnisGObject</span></code></a> singleton class.</p>
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="ignis.gobject.Binding">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.gobject.</span></span><span class="sig-name descname"><span class="pre">Binding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">gi.repository.GObject.Object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_properties</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable" title="(in Python v3.13)"><span class="pre">Callable</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.gobject.Binding" title="Link to this definition">#</a></dt>
 <dd><p>An object that describe binding.</p>
@@ -749,12 +757,12 @@ All other attributes must be private (prefixed with __).</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="app.html"
+       href="singleton.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Application</p>
+        <p class="prev-next-title">Singleton</p>
       </div>
     </a>
     <a class="right-next"
@@ -793,6 +801,7 @@ All other attributes must be private (prefixed with __).</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.gobject.IgnisGObject.bind_many"><code class="docutils literal notranslate"><span class="pre">IgnisGObject.bind_many()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.gobject.IgnisGObjectSingleton"><code class="docutils literal notranslate"><span class="pre">IgnisGObjectSingleton</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.gobject.Binding"><code class="docutils literal notranslate"><span class="pre">Binding</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.gobject.Binding.target"><code class="docutils literal notranslate"><span class="pre">Binding.target()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.gobject.Binding.target_properties"><code class="docutils literal notranslate"><span class="pre">Binding.target_properties()</span></code></a></li>
