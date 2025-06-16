@@ -5,13 +5,12 @@
   config,
   ...
 }:
-with lib;
 let
   cfg = config.programs.ignis;
 in
 {
   options.programs.ignis = {
-    enable = mkEnableOption "Enable the Ignis widget framework";
+    enable = lib.mkEnableOption "Enable the Ignis widget framework";
     services = {
       bluetooth = lib.mkEnableOption "Whether to enable upower";
       upower = lib.mkEnableOption "Enable UPower service";
@@ -20,7 +19,7 @@ in
       audio = lib.mkEnableOption "Enable Audio service";
     };
     enableSassCompilation = lib.mkEnableOption "Enable Sass compilation support";
-    extraPackages = mkOption {
+    extraPackages = lib.mkOption {
       type = types.listOf types.package;
       default = [ ];
       example = [ pkgs.python312Packages.psutil ];
@@ -31,7 +30,7 @@ in
     };
   };
 
-  config = mkIf cfg.enable (
+  config = lib.mkIf cfg.enable (
     let
       ignis =
         (inputs.ignis.packages.${pkgs.stdenv.hostPlatform.system}.ignis.overrideAttrs (
@@ -60,15 +59,15 @@ in
     in
     {
       environment.systemPackages = [ ignis ];
-      warnings = lib.optionals (!(cfg.services.bluetooth && !(config.hardware.bluetooth.enable))) [
+      warnings = lib.optionals !(cfg.services.bluetooth && !(config.hardware.bluetooth.enable)) [
         "To use bluetooth services of ignis you must put 'hardware.bluetooth.enable = true' in your configuration"
-      ] ++ lib.optionals (!(cfg.services.upower && !(config.services.upower.enable))) [
+      ] ++ lib.optionals !(cfg.services.upower && !(config.services.upower.enable)) [
         "To use upower services of ignis you must put 'services.upower.enable = true' in your configuration"
-      ] ++ lib.optionals (!(cfg.services.recorder && !(config.services.pipewire.enable))) [
+      ] ++ lib.optionals !(cfg.services.recorder && !(config.services.pipewire.enable)) [
         "To use recorder services of ignis you must put 'services.pipewire.enable = true' in your configuration"
-      ] ++ lib.optionals (!(cfg.services.network && !(config.networking.networkmanager.enable))) [
+      ] ++ lib.optionals !(cfg.services.network && !(config.networking.networkmanager.enable)) [
         "To use network services of ignis you must put 'networking.networkmanager.enable = true' in your configuration"
-      ] ++ lib.optionals (!(cfg.services.audio && !(config.services.pipewire.enable))) [
+      ] ++ lib.optionals !(cfg.services.audio && !(config.services.pipewire.enable)) [
         "To use audio services of ignis you must put 'services.pipewire.enable = true' in your configuration"
       ];
       # assertions = [
