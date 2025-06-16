@@ -426,10 +426,16 @@ class GpuScreenRecorderError(Exception):
 
     @property
     def returncode(self) -> int | None:
+        """
+        The returncode.
+        """
         return self._returncode
 
     @property
     def stderr(self) -> str:
+        """
+        The stderr.
+        """
         return self._stderr
 
 
