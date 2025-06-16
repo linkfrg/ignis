@@ -8,6 +8,7 @@ This reference manual details functions, modules, and objects included in Ignis,
 
    toplevel
    app
+   singleton
    gobject
    variable
    client
