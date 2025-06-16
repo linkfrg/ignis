@@ -20,7 +20,7 @@ in
     };
     enableSassCompilation = lib.mkEnableOption "Enable Sass compilation support";
     extraPackages = lib.mkOption {
-      type = lib.types.listOf types.package;
+      type = lib.types.listOf lib.types.package;
       default = [ ];
       example = [ pkgs.python312Packages.psutil ];
       description = ''
