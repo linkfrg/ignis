@@ -815,6 +815,36 @@
 <dd><p>Raised when GnomeBluetooth-3.0 is not found.</p>
 </dd></dl>
 
+<dl class="py exception">
+<dt class="sig sig-object py" id="ignis.exceptions.GpuScreenRecorderError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.exceptions.</span></span><span class="sig-name descname"><span class="pre">GpuScreenRecorderError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">returncode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">stderr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.exceptions.GpuScreenRecorderError" title="Link to this definition">#</a></dt>
+<dd><p>Raised when <code class="docutils literal notranslate"><span class="pre">gpu-screen-recorder</span></code> exits with an error.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.exceptions.GpuScreenRecorderError.returncode">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">returncode</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></em><a class="headerlink" href="#ignis.exceptions.GpuScreenRecorderError.returncode" title="Link to this definition">#</a></dt>
+<dd><p>The returncode.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ignis.exceptions.GpuScreenRecorderError.stderr">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">stderr</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></em><a class="headerlink" href="#ignis.exceptions.GpuScreenRecorderError.stderr" title="Link to this definition">#</a></dt>
+<dd><p>The stderr.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="ignis.exceptions.GpuScreenRecorderNotFoundError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.exceptions.</span></span><span class="sig-name descname"><span class="pre">GpuScreenRecorderNotFoundError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.exceptions.GpuScreenRecorderNotFoundError" title="Link to this definition">#</a></dt>
+<dd><p>Raised when <code class="docutils literal notranslate"><span class="pre">gpu-screen-recorder</span></code> is not found.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="ignis.exceptions.RecorderPortalCaptureCanceled">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ignis.exceptions.</span></span><span class="sig-name descname"><span class="pre">RecorderPortalCaptureCanceled</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ignis.exceptions.RecorderPortalCaptureCanceled" title="Link to this definition">#</a></dt>
+<dd><p>Raised when the desktop portal capture is canceled by the user (e.g., by closing the “Select Sources” window).</p>
+</dd></dl>
+
 </section>
 
 
@@ -926,6 +956,13 @@
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.UPowerNotRunningError"><code class="docutils literal notranslate"><span class="pre">UPowerNotRunningError</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.GnomeBluetoothNotFoundError"><code class="docutils literal notranslate"><span class="pre">GnomeBluetoothNotFoundError</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.GpuScreenRecorderError"><code class="docutils literal notranslate"><span class="pre">GpuScreenRecorderError</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.GpuScreenRecorderError.returncode"><code class="docutils literal notranslate"><span class="pre">GpuScreenRecorderError.returncode</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.GpuScreenRecorderError.stderr"><code class="docutils literal notranslate"><span class="pre">GpuScreenRecorderError.stderr</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.GpuScreenRecorderNotFoundError"><code class="docutils literal notranslate"><span class="pre">GpuScreenRecorderNotFoundError</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.exceptions.RecorderPortalCaptureCanceled"><code class="docutils literal notranslate"><span class="pre">RecorderPortalCaptureCanceled</span></code></a></li>
 </ul>
   </nav></div>
 
