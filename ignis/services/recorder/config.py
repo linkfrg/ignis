@@ -61,13 +61,16 @@ class RecorderConfig:
     #: Whether to format the time in :attr:`path`.
     format_time: arg_types.FormatTime = True
 
-    #: Extra arguments to pass to `gpu-screen-recorder`.
+    #: Extra arguments to pass to ``gpu-screen-recorder``.
     extra_args: arg_types.ExtraArgs = field(default_factory=dict)
 
     @classmethod
     def new_from_options(cls: type["RecorderConfig"]) -> "RecorderConfig":
         """
         Create a :class:`RecorderConfig` based on options (:class:`~ignis.options.Options.Recorder`).
+
+        Returns:
+            An instance of :class:`RecorderConfig` with data from options.
 
         .. hint::
 
