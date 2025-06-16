@@ -60,7 +60,7 @@ in
     in
     {
       environment.systemPackages = [ ignis ];
-      assertions = [
+      warnings = [
         {
           assertion = !(cfg.services.bluetooth && !(config.hardware.bluetooth.enable));
           message = "To use bluetooth services of ignis you must put 'hardware.bluetooth.enable = true' in your configuration";
