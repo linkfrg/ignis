@@ -12,7 +12,6 @@ from loguru import logger
 from gi.repository import Gtk, Gdk, Gio, GLib  # type: ignore
 from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
 from ignis.exceptions import (
-    WindowAddedError,
     WindowNotFoundError,
     DisplayNotFoundError,
     StylePathNotFoundError,
@@ -20,6 +19,8 @@ from ignis.exceptions import (
     CssParsingError,
 )
 from ignis.log_utils import configure_logger
+from ignis.window_manager import WindowManager
+from ignis.deprecation import deprecated_func
 
 StylePriority = Literal["application", "fallback", "settings", "theme", "user"]
 
@@ -30,6 +31,8 @@ GTK_STYLE_PRIORITIES: dict[StylePriority, int] = {
     "theme": Gtk.STYLE_PROVIDER_PRIORITY_THEME,
     "user": Gtk.STYLE_PROVIDER_PRIORITY_USER,
 }
+
+window_manager = WindowManager.get_default()
 
 
 def raise_css_parsing_error(
@@ -98,7 +101,6 @@ class IgnisApp(Gtk.Application, IgnisGObject):
 
         self._config_path: str | None = None
         self._css_providers: dict[str, _CssProviderInfo] = {}
-        self._windows: dict[str, Gtk.Window] = {}
         self._autoreload_config: bool = True
         self._autoreload_css: bool = True
         self._reload_on_monitors_change: bool = True
@@ -152,12 +154,13 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         """
         return self._is_ready
 
+    @deprecated_func("{name} property is deprecated, use ignis.window_manager.WindowManager.windows property instead.")
     @IgnisProperty
     def windows(self) -> list[Gtk.Window]:
         """
         A list of windows added to this application.
         """
-        return list(self._windows.values())
+        return window_manager.windows
 
     @IgnisProperty
     def autoreload_config(self) -> bool:
@@ -440,92 +443,65 @@ class IgnisApp(Gtk.Application, IgnisGObject):
     def __happy_new_year(self) -> None:
         logger.success("Happy New Year!")
 
+    @deprecated_func(
+        "{name} is deprecated, use ignis.window_manager.WindowManager.get_window() instead."
+    )
     def get_window(self, window_name: str) -> Gtk.Window:
         """
-        Get a window by name.
-
-        Args:
-            window_name: The window's namespace.
-
-        Returns:
-            The window object.
-
-        Raises:
-            WindowNotFoundError: If a window with the given namespace does not exist.
+        .. deprecated:: 0.6
+            Use :func:`~ignis.window_manager.WindowManager.get_window` instead.
         """
-        window = self._windows.get(window_name, None)
-        if window:
-            return window
-        else:
-            raise WindowNotFoundError(window_name)
+        return window_manager.get_window(window_name)
 
+    @deprecated_func(
+        "{name} is deprecated, use ignis.window_manager.WindowManager.open_window() instead."
+    )
     def open_window(self, window_name: str) -> None:
         """
-        Open (show) a window by its name.
-
-        Args:
-            window_name: The window's namespace.
-        Raises:
-            WindowNotFoundError: If a window with the given namespace does not exist.
+        .. deprecated:: 0.6
+            Use :func:`~ignis.window_manager.WindowManager.open_window` instead.
         """
-        window = self.get_window(window_name)
-        window.set_visible(True)
+        window_manager.open_window(window_name)
 
+    @deprecated_func(
+        "{name} is deprecated, use ignis.window_manager.WindowManager.close_window() instead."
+    )
     def close_window(self, window_name: str) -> None:
         """
-        Close (hide) a window by its name.
-
-        Args:
-            window_name: The window's namespace.
-        Raises:
-            WindowNotFoundError: If a window with the given namespace does not exist.
+        .. deprecated:: 0.6
+            Use :func:`~ignis.window_manager.WindowManager.close_window` instead.
         """
-        window = self.get_window(window_name)
-        window.set_visible(False)
+        window_manager.close_window(window_name)
 
+    @deprecated_func(
+        "{name} is deprecated, use ignis.window_manager.WindowManager.toggle_window() instead."
+    )
     def toggle_window(self, window_name: str) -> None:
         """
-        Toggle (change visibility to opposite state) a window by its name.
-
-        Args:
-            window_name: The window's namespace.
-        Raises:
-            WindowNotFoundError: If a window with the given namespace does not exist.
+        .. deprecated:: 0.6
+            Use :func:`~ignis.window_manager.WindowManager.close_window` instead.
         """
-        window = self.get_window(window_name)
-        window.set_visible(not window.get_visible())
+        window_manager.toggle_window(window_name)
 
+    @deprecated_func(
+        "{name} is deprecated, use ignis.window_manager.WindowManager.add_window() instead."
+    )
     def add_window(self, window_name: str, window: Gtk.Window) -> None:  # type: ignore
         """
-        Add a window.
-        You typically shouldn't use this method, as windows are added to the app automatically.
-
-        Args:
-            window_name: The window's namespace.
-            window: The window instance.
-
-        Raises:
-            WindowAddedError: If a window with the given namespace already exists.
+        .. deprecated:: 0.6
+            Use :func:`~ignis.window_manager.WindowManager.add_window` instead.
         """
-        if window_name in self._windows:
-            raise WindowAddedError(window_name)
+        window_manager.add_window(window_name, window)
 
-        self._windows[window_name] = window
-
+    @deprecated_func(
+        "{name} is deprecated, use ignis.window_manager.WindowManager.remove_window() instead."
+    )
     def remove_window(self, window_name: str) -> None:  # type: ignore
         """
-        Remove a window by its name.
-        The window will be removed from the application.
-
-        Args:
-            window_name: The window's namespace.
-
-        Raises:
-            WindowNotFoundError: If a window with the given namespace does not exist.
+        .. deprecated:: 0.6
+            Use :func:`~ignis.window_manager.WindowManager.remove_window` instead.
         """
-        window = self._windows.pop(window_name, None)
-        if not window:
-            raise WindowNotFoundError(window_name)
+        window_manager.remove_window(window_name)
 
     def reload(self) -> None:
         """
@@ -561,9 +537,9 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         """
         Gtk.Window.set_interactive_debugging(True)
 
-    def __call_window_method(self, _type: str, window_name: str) -> GLib.Variant:
+    def __call_window_method(self, type_: str, window_name: str) -> GLib.Variant:
         try:
-            getattr(self, f"{_type}_window")(window_name)
+            getattr(window_manager, f"{type_}_window")(window_name)
             return GLib.Variant("(b)", (True,))
         except WindowNotFoundError:
             return GLib.Variant("(b)", (False,))
