@@ -98,6 +98,19 @@ class WindowManager(IgnisGObjectSingleton):
         if not window:
             raise WindowNotFoundError(window_name)
 
+    def close_window(self, window_name: str) -> None:
+        """
+        Close (hide) a window by its name.
+
+        Args:
+            window_name: The window's namespace.
+
+        Raises:
+            WindowNotFoundError: If a window with the given namespace does not exist.
+        """
+        window = self.get_window(window_name)
+        window.set_visible(False)
+
     def toggle_window(self, window_name: str) -> None:
         """
         Toggle (change visibility to opposite state) a window by its name.
