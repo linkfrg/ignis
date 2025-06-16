@@ -71,18 +71,6 @@ class WindowManager(IgnisGObjectSingleton):
 
         self._windows[window_name] = window
 
-    def open_window(self, window_name: str) -> None:
-        """
-        Open (show) a window by its name.
-
-        Args:
-            window_name: The window's namespace.
-        Raises:
-            WindowNotFoundError: If a window with the given namespace does not exist.
-        """
-        window = self.get_window(window_name)
-        window.set_visible(True)
-
     def remove_window(self, window_name: str) -> None:
         """
         Remove a window by its name.
@@ -97,6 +85,18 @@ class WindowManager(IgnisGObjectSingleton):
         window = self._windows.pop(window_name, None)
         if not window:
             raise WindowNotFoundError(window_name)
+
+    def open_window(self, window_name: str) -> None:
+        """
+        Open (show) a window by its name.
+
+        Args:
+            window_name: The window's namespace.
+        Raises:
+            WindowNotFoundError: If a window with the given namespace does not exist.
+        """
+        window = self.get_window(window_name)
+        window.set_visible(True)
 
     def close_window(self, window_name: str) -> None:
         """
