@@ -1,4 +1,5 @@
 from gi.repository import Gtk, GLib  # type: ignore
+from ignis.deprecation import deprecated_class
 
 
 class WindowNotFoundError(Exception):
@@ -89,6 +90,7 @@ class NetworkManagerNotFoundError(Exception):
         )
 
 
+@deprecated_class("{name} is deprecated and no longer used.")
 class GstNotFoundError(Exception):
     """
     Raised when GStreamer is not found.
@@ -100,6 +102,7 @@ class GstNotFoundError(Exception):
         )
 
 
+@deprecated_class("{name} is deprecated and no longer used.")
 class GstPluginNotFoundError(Exception):
     """
     Raised when a GStreamer plugin is not found.
@@ -406,3 +409,52 @@ class GnomeBluetoothNotFoundError(Exception):
             "GnomeBluetooth-3.0 is not found! To use the Bluetooth Service, install GnomeBluetooth-3.0",
             *args,
         )
+
+
+class GpuScreenRecorderError(Exception):
+    """
+    Raised when ``gpu-screen-recorder`` exits with an error.
+    """
+
+    def __init__(self, returncode: int | None, stderr: str, *args):
+        self._returncode = returncode
+        self._stderr = stderr
+
+        super().__init__(
+            f"gpu-screen-recorder exited with returncode {returncode}:\n{stderr}", *args
+        )
+
+    @property
+    def returncode(self) -> int | None:
+        """
+        The returncode.
+        """
+        return self._returncode
+
+    @property
+    def stderr(self) -> str:
+        """
+        The stderr.
+        """
+        return self._stderr
+
+
+class GpuScreenRecorderNotFoundError(Exception):
+    """
+    Raised when ``gpu-screen-recorder`` is not found.
+    """
+
+    def __init__(self, *args):
+        super().__init__(
+            "gpu-screen-recorder is not found! To use the Recorder Service, install gpu-screen-recorder",
+            *args,
+        )
+
+
+class RecorderPortalCaptureCanceled(Exception):
+    """
+    Raised when the desktop portal capture is canceled by the user (e.g., by closing the “Select Sources” window).
+    """
+
+    def __init__(self, *args):
+        super().__init__("The desktop portal capture was canceled by the user", *args)
