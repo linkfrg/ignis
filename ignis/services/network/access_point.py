@@ -9,6 +9,7 @@ from .constants import WIFI_ICON_TEMPLATE
 
 window_manager = WindowManager.get_default()
 
+
 class WifiAccessPoint(IgnisGObject):
     """
     A Wi-Fi access point (Wi-Fi network).

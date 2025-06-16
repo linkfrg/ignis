@@ -6,6 +6,7 @@ from ignis.gobject import IgnisProperty
 
 window_manager = WindowManager.get_default()
 
+
 class RegularWindow(Gtk.Window, BaseWidget):
     """
     Bases: :class:`Gtk.Window`

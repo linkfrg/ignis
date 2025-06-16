@@ -154,7 +154,9 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         """
         return self._is_ready
 
-    @deprecated_func("{name} property is deprecated, use ignis.window_manager.WindowManager.windows property instead.")
+    @deprecated_func(
+        "{name} property is deprecated, use ignis.window_manager.WindowManager.windows property instead."
+    )
     @IgnisProperty
     def windows(self) -> list[Gtk.Window]:
         """
