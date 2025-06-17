@@ -3,6 +3,7 @@ from __future__ import annotations
 import io
 import sys
 import loguru
+import warnings
 import asyncio
 from loguru import logger
 from gi.repository import GLib  # type: ignore
@@ -68,6 +69,12 @@ def rich_formatter(record: loguru.Record, force_terminal: bool = True) -> str:
     return format_
 
 
+# source: https://github.com/Delgan/loguru/issues/554#issuecomment-998185211
+def log_showwarning(message, category, filename, lineno, file=None, line=None):
+    new_message = warnings.formatwarning(message, category, filename, lineno, line)
+    logger.warning(new_message)
+
+
 def configure_logger(debug: bool) -> None:
     logger.remove()
 
@@ -99,4 +106,4 @@ def configure_logger(debug: bool) -> None:
 
     GLib.log_set_writer_func(g_log_writer)
 
-    logger.level("DEPRECATED", no=25, color="<yellow>")
+    warnings.showwarning = log_showwarning
