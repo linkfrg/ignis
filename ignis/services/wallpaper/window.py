@@ -2,6 +2,7 @@ from ignis.widgets.picture import Picture
 from gi.repository import Gtk, Gdk  # type: ignore
 from gi.repository import Gtk4LayerShell as GtkLayerShell  # type: ignore
 from ignis.exceptions import LayerShellNotSupportedError
+from ignis.app import IgnisApp
 
 
 class WallpaperLayerWindow(Gtk.Window):
@@ -11,7 +12,9 @@ class WallpaperLayerWindow(Gtk.Window):
         if not GtkLayerShell.is_supported():
             raise LayerShellNotSupportedError()
 
-        Gtk.Window.__init__(self)
+        app = IgnisApp.get_default()
+
+        Gtk.Window.__init__(self, application=app)
         GtkLayerShell.init_for_window(self)
 
         for anchor in ["LEFT", "RIGHT", "TOP", "BOTTOM"]:

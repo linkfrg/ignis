@@ -10,9 +10,9 @@ from ignis.exceptions import (
 )
 from ignis.gobject import IgnisProperty, IgnisSignal
 from ignis.window_manager import WindowManager
+from ignis.app import IgnisApp
 
 window_manager = WindowManager.get_default()
-
 LAYER = {
     "background": GtkLayerShell.Layer.BACKGROUND,
     "bottom": GtkLayerShell.Layer.BOTTOM,
@@ -111,7 +111,9 @@ class Window(Gtk.Window, BaseWidget):
         if not GtkLayerShell.is_supported():
             raise LayerShellNotSupportedError()
 
-        Gtk.Window.__init__(self)
+        app = IgnisApp.get_default()
+
+        Gtk.Window.__init__(self, application=app)
         GtkLayerShell.init_for_window(self)
 
         self._anchor = None
