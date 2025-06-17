@@ -57,19 +57,19 @@ class IgnisClient:
 
     def open_window(self, window_name: str) -> None:
         """
-        Same as :func:`~ignis.app.IgnisApp.open_window`.
+        Same as :func:`~ignis.window_manager.WindowManager.open_window`.
         """
         self.__call_window_method("OpenWindow", window_name)
 
     def close_window(self, window_name: str) -> None:
         """
-        Same as :func:`~ignis.app.IgnisApp.close_window`.
+        Same as :func:`~ignis.window_manager.WindowManager.close_window`.
         """
         self.__call_window_method("CloseWindow", window_name)
 
     def toggle_window(self, window_name: str) -> None:
         """
-        Same as :func:`~ignis.app.IgnisApp.toggle_window`.
+        Same as :func:`~ignis.window_manager.WindowManager.toggle_window`.
         """
         self.__call_window_method("ToggleWindow", window_name)
 

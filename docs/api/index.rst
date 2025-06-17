@@ -8,6 +8,8 @@ This reference manual details functions, modules, and objects included in Ignis,
 
    toplevel
    app
+   window_manager
+   singleton
    gobject
    variable
    client

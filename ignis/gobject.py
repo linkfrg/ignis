@@ -3,6 +3,7 @@ from gi.repository import GObject, GLib  # type: ignore
 from typing import Any, Literal, get_args, get_origin
 from collections.abc import Callable
 from ignis import is_sphinx_build, is_girepository_2_0
+from ignis.singleton import IgnisSingleton
 
 
 class Binding(GObject.Object):
@@ -189,6 +190,14 @@ class IgnisGObject(GObject.Object):
                 return lambda: self.get_property(property_name)
 
         return super().__getattribute__(name)
+
+
+class IgnisGObjectSingleton(IgnisGObject, IgnisSingleton):
+    """
+    Bases: :class:`IgnisGObject`, :class:`~ignis.singleton.IgnisSingleton`.
+
+    The :class:`IgnisGObject` singleton class.
+    """
 
 
 if is_sphinx_build:
