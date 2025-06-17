@@ -134,7 +134,7 @@ class DBusService(IgnisGObject):
 
     def __export_object(self, connection: Gio.DBusConnection, name: str) -> None:
         self._connection = connection
-        self._connection.register_object(
+        self._connection.register_object_with_closures2(  # type: ignore
             self._object_path,
             self._info,
             self.__handle_method_call,
