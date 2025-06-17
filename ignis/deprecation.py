@@ -3,6 +3,7 @@
 import warnings
 from collections.abc import Callable
 
+
 # FIXME: make public someday
 def _enable_deprecation_warnings() -> None:
     warnings.filterwarnings("default", category=DeprecationWarning)
