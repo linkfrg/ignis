@@ -8,11 +8,11 @@ from ignis.exceptions import (
     LayerShellNotSupportedError,
     WindowNotFoundError,
 )
-from ignis.app import IgnisApp
 from ignis.gobject import IgnisProperty, IgnisSignal
+from ignis.window_manager import WindowManager
+from ignis.app import IgnisApp
 
-app = IgnisApp.get_default()
-
+window_manager = WindowManager.get_default()
 LAYER = {
     "background": GtkLayerShell.Layer.BACKGROUND,
     "bottom": GtkLayerShell.Layer.BOTTOM,
@@ -111,7 +111,9 @@ class Window(Gtk.Window, BaseWidget):
         if not GtkLayerShell.is_supported():
             raise LayerShellNotSupportedError()
 
-        Gtk.Window.__init__(self, application=app)  # type: ignore
+        app = IgnisApp.get_default()
+
+        Gtk.Window.__init__(self, application=app)
         GtkLayerShell.init_for_window(self)
 
         self._anchor = None
@@ -145,7 +147,7 @@ class Window(Gtk.Window, BaseWidget):
 
         GtkLayerShell.set_namespace(self, name_space=namespace)
 
-        app.add_window(namespace, self)
+        window_manager.add_window(namespace, self)
 
         key_controller = Gtk.EventControllerKey()
         self.add_controller(key_controller)
@@ -421,7 +423,7 @@ class Window(Gtk.Window, BaseWidget):
 
     def __remove(self, *args) -> None:
         try:
-            app.remove_window(self.namespace)
+            window_manager.remove_window(self.namespace)
         except WindowNotFoundError:
             pass
 

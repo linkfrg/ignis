@@ -1,13 +1,13 @@
 from gi.repository import GLib  # type: ignore
 from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
 from typing import Literal
-from ignis.app import IgnisApp
+from ignis.window_manager import WindowManager
 from .util import filter_connections
 from ._imports import NM
 from .wifi_connect_dialog import WifiConnectDialog
 from .constants import WIFI_ICON_TEMPLATE
 
-app = IgnisApp.get_default()
+window_manager = WindowManager.get_default()
 
 
 class WifiAccessPoint(IgnisGObject):
@@ -366,7 +366,7 @@ class WifiAccessPoint(IgnisGObject):
             self._connect_dialog.destroy()
 
     def __invoke_wifi_dialog(self) -> None:
-        if self._connect_dialog not in app.windows:
+        if self._connect_dialog not in window_manager.windows:
             self._connect_dialog = WifiConnectDialog(
                 self, self.__connect_to_graphical_callback
             )

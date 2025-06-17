@@ -1,10 +1,10 @@
 from gi.repository import Gtk  # type: ignore
 from ignis.base_widget import BaseWidget
-from ignis.app import IgnisApp
+from ignis.window_manager import WindowManager
 from ignis.exceptions import WindowNotFoundError
 from ignis.gobject import IgnisProperty
 
-app = IgnisApp.get_default()
+window_manager = WindowManager.get_default()
 
 
 class RegularWindow(Gtk.Window, BaseWidget):
@@ -36,7 +36,7 @@ class RegularWindow(Gtk.Window, BaseWidget):
 
         self._namespace = namespace
 
-        app.add_window(namespace, self)
+        window_manager.add_window(namespace, self)
 
         self.connect("close-request", self.__on_close_request)
 
@@ -50,7 +50,7 @@ class RegularWindow(Gtk.Window, BaseWidget):
 
     def __remove(self, *args) -> None:
         try:
-            app.remove_window(self.namespace)
+            window_manager.remove_window(self.namespace)
         except WindowNotFoundError:
             pass
 

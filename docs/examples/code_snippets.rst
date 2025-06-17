@@ -18,7 +18,7 @@ A common use case is to close a window.
                 vexpand=True,
                 hexpand=True,
                 can_focus=False,
-                on_click=lambda x: CALLBACK, # e.g., app.close_window("my-window")
+                on_click=lambda x: CALLBACK, # e.g., window_manager.close_window("my-window")
             ),
             overlays=[ACTUAL_CONTENT],
         ),
