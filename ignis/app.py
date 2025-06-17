@@ -33,6 +33,9 @@ GTK_STYLE_PRIORITIES: dict[StylePriority, int] = {
 }
 
 window_manager = WindowManager.get_default()
+_window_deprecated_func = deprecated_func(
+    "IgnisApp.{name}() is deprecated, use WindowManager.{name}() instead."
+)
 
 
 def raise_css_parsing_error(
@@ -445,9 +448,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
     def __happy_new_year(self) -> None:
         logger.success("Happy New Year!")
 
-    @deprecated_func(
-        "{name} is deprecated, use ignis.window_manager.WindowManager.get_window() instead."
-    )
+    @_window_deprecated_func
     def get_window(self, window_name: str) -> Gtk.Window:
         """
         .. deprecated:: 0.6
@@ -455,9 +456,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         """
         return window_manager.get_window(window_name)
 
-    @deprecated_func(
-        "{name} is deprecated, use ignis.window_manager.WindowManager.open_window() instead."
-    )
+    @_window_deprecated_func
     def open_window(self, window_name: str) -> None:
         """
         .. deprecated:: 0.6
@@ -465,9 +464,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         """
         window_manager.open_window(window_name)
 
-    @deprecated_func(
-        "{name} is deprecated, use ignis.window_manager.WindowManager.close_window() instead."
-    )
+    @_window_deprecated_func
     def close_window(self, window_name: str) -> None:
         """
         .. deprecated:: 0.6
@@ -475,9 +472,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         """
         window_manager.close_window(window_name)
 
-    @deprecated_func(
-        "{name} is deprecated, use ignis.window_manager.WindowManager.toggle_window() instead."
-    )
+    @_window_deprecated_func
     def toggle_window(self, window_name: str) -> None:
         """
         .. deprecated:: 0.6
@@ -485,9 +480,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         """
         window_manager.toggle_window(window_name)
 
-    @deprecated_func(
-        "{name} is deprecated, use ignis.window_manager.WindowManager.add_window() instead."
-    )
+    @_window_deprecated_func
     def add_window(self, window_name: str, window: Gtk.Window) -> None:  # type: ignore
         """
         .. deprecated:: 0.6
@@ -495,9 +488,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         """
         window_manager.add_window(window_name, window)
 
-    @deprecated_func(
-        "{name} is deprecated, use ignis.window_manager.WindowManager.remove_window() instead."
-    )
+    @_window_deprecated_func
     def remove_window(self, window_name: str) -> None:  # type: ignore
         """
         .. deprecated:: 0.6
