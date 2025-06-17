@@ -69,7 +69,7 @@ class BaseWidget(Gtk.Widget, IgnisGObject):
         css_provider = Gtk.CssProvider()
         css_provider.connect("parsing-error", raise_css_parsing_error)
 
-        css_provider.load_from_data(value.encode())
+        css_provider.load_from_string(value)
 
         self.get_style_context().add_provider(
             css_provider, GTK_STYLE_PRIORITIES[self._style_priority]
