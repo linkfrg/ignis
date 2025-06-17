@@ -555,6 +555,19 @@
 </dl>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="ignis.deprecation.ignore_deprecation_warnings">
+<span class="sig-prename descclassname"><span class="pre">ignis.deprecation.</span></span><span class="sig-name descname"><span class="pre">ignore_deprecation_warnings</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ignis.deprecation.ignore_deprecation_warnings" title="Link to this definition">#</a></dt>
+<dd><p>Context manager that temporarily suppresses DeprecationWarning messages.</p>
+<p>Example usage:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ignis.deprecation</span><span class="w"> </span><span class="kn">import</span> <span class="n">ignore_deprecation_warnings</span>
+
+<span class="k">with</span> <span class="n">ignore_deprecation_warnings</span><span class="p">():</span>
+    <span class="n">deprecated_function</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </section>
 
 
@@ -607,6 +620,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.deprecation.deprecation_warning"><code class="docutils literal notranslate"><span class="pre">deprecation_warning()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.deprecation.deprecated_func"><code class="docutils literal notranslate"><span class="pre">deprecated_func()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.deprecation.deprecated_class"><code class="docutils literal notranslate"><span class="pre">deprecated_class()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.deprecation.ignore_deprecation_warnings"><code class="docutils literal notranslate"><span class="pre">ignore_deprecation_warnings()</span></code></a></li>
 </ul>
   </nav></div>
 
