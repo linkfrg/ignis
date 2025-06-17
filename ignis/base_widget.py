@@ -4,6 +4,7 @@ from collections.abc import Callable
 from ignis.gobject import IgnisGObject, IgnisProperty
 from ignis.exceptions import CssParsingError
 from ignis.app import IgnisApp, StylePriority, GTK_STYLE_PRIORITIES
+from ignis.deprecation import ignore_deprecation_warnings
 
 app = IgnisApp.get_default()
 
@@ -61,7 +62,8 @@ class BaseWidget(Gtk.Widget, IgnisGObject):
     @style.setter
     def style(self, value: str) -> None:
         if self._css_provider:
-            self.get_style_context().remove_provider(self._css_provider)
+            with ignore_deprecation_warnings():
+                self.get_style_context().remove_provider(self._css_provider)
 
         if "{" not in value and "}" not in value:
             value = "* {" + value + "}"
@@ -71,9 +73,10 @@ class BaseWidget(Gtk.Widget, IgnisGObject):
 
         css_provider.load_from_string(value)
 
-        self.get_style_context().add_provider(
-            css_provider, GTK_STYLE_PRIORITIES[self._style_priority]
-        )
+        with ignore_deprecation_warnings():
+            self.get_style_context().add_provider(
+                css_provider, GTK_STYLE_PRIORITIES[self._style_priority]
+            )
 
         self._css_provider = css_provider
         self._style = value
