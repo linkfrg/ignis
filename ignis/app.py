@@ -452,54 +452,6 @@ class IgnisApp(Gtk.Application, IgnisGObject):
     def __happy_new_year(self) -> None:
         logger.success("Happy New Year!")
 
-    def get_window(self, window_name: str) -> Gtk.Window:
-        """
-        .. deprecated:: 0.6
-            Use :func:`~ignis.window_manager.WindowManager.get_window` instead.
-        """
-        _window_deprecated_func("get_window")
-        return window_manager.get_window(window_name)
-
-    def open_window(self, window_name: str) -> None:
-        """
-        .. deprecated:: 0.6
-            Use :func:`~ignis.window_manager.WindowManager.open_window` instead.
-        """
-        _window_deprecated_func("open_window")
-        window_manager.open_window(window_name)
-
-    def close_window(self, window_name: str) -> None:
-        """
-        .. deprecated:: 0.6
-            Use :func:`~ignis.window_manager.WindowManager.close_window` instead.
-        """
-        _window_deprecated_func("close_window")
-        window_manager.close_window(window_name)
-
-    def toggle_window(self, window_name: str) -> None:
-        """
-        .. deprecated:: 0.6
-            Use :func:`~ignis.window_manager.WindowManager.close_window` instead.
-        """
-        _window_deprecated_func("toggle_window")
-        window_manager.toggle_window(window_name)
-
-    def add_window(self, window_name: str, window: Gtk.Window) -> None:  # type: ignore
-        """
-        .. deprecated:: 0.6
-            Use :func:`~ignis.window_manager.WindowManager.add_window` instead.
-        """
-        _window_deprecated_func("add_window")
-        window_manager.add_window(window_name, window)
-
-    def remove_window(self, window_name: str) -> None:  # type: ignore
-        """
-        .. deprecated:: 0.6
-            Use :func:`~ignis.window_manager.WindowManager.remove_window` instead.
-        """
-        _window_deprecated_func("remove_window")
-        window_manager.remove_window(window_name)
-
     def reload(self) -> None:
         """
         Reload Ignis.
@@ -572,6 +524,57 @@ class IgnisApp(Gtk.Application, IgnisGObject):
 
     def __Quit(self, invocation) -> None:
         self.quit()
+
+    # =========================== DEPRECATED ZONE START ===========================
+    def get_window(self, window_name: str) -> Gtk.Window:
+        """
+        .. deprecated:: 0.6
+            Use :func:`~ignis.window_manager.WindowManager.get_window` instead.
+        """
+        _window_deprecated_func("get_window")
+        return window_manager.get_window(window_name)
+
+    def open_window(self, window_name: str) -> None:
+        """
+        .. deprecated:: 0.6
+            Use :func:`~ignis.window_manager.WindowManager.open_window` instead.
+        """
+        _window_deprecated_func("open_window")
+        window_manager.open_window(window_name)
+
+    def close_window(self, window_name: str) -> None:
+        """
+        .. deprecated:: 0.6
+            Use :func:`~ignis.window_manager.WindowManager.close_window` instead.
+        """
+        _window_deprecated_func("close_window")
+        window_manager.close_window(window_name)
+
+    def toggle_window(self, window_name: str) -> None:
+        """
+        .. deprecated:: 0.6
+            Use :func:`~ignis.window_manager.WindowManager.toggle_window` instead.
+        """
+        _window_deprecated_func("toggle_window")
+        window_manager.toggle_window(window_name)
+
+    def add_window(self, window_name: str, window: Gtk.Window) -> None:  # type: ignore
+        """
+        .. deprecated:: 0.6
+            Use :func:`~ignis.window_manager.WindowManager.add_window` instead.
+        """
+        _window_deprecated_func("add_window")
+        window_manager.add_window(window_name, window)
+
+    def remove_window(self, window_name: str) -> None:  # type: ignore
+        """
+        .. deprecated:: 0.6
+            Use :func:`~ignis.window_manager.WindowManager.remove_window` instead.
+        """
+        _window_deprecated_func("remove_window")
+        window_manager.remove_window(window_name)
+
+    # ============================ DEPRECATED ZONE END ============================
 
 
 def run_app(config_path: str, debug: bool) -> None:
