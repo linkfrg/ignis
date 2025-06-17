@@ -89,7 +89,7 @@ def configure_logger(debug: bool) -> None:
         format=lambda record: rich_formatter(record, True),
         colorize=True,
         backtrace=False,
-        diagnose=False
+        diagnose=False,
     )
     logger.add(
         LOG_FILE,
@@ -98,7 +98,7 @@ def configure_logger(debug: bool) -> None:
         format=lambda record: rich_formatter(record, False),
         rotation="1 day",
         backtrace=False,
-        diagnose=False
+        diagnose=False,
     )
 
     logger.level("INFO", color="<green>")
