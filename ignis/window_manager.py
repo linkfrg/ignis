@@ -57,7 +57,7 @@ class WindowManager(IgnisGObjectSingleton):
     def add_window(self, window_name: str, window: Gtk.Window) -> None:
         """
         Add a window.
-        You typically shouldn't use this method, as windows are added to the app automatically.
+        You typically shouldn't use this method, as windows are added automatically.
 
         Args:
             window_name: The window's namespace.
@@ -74,7 +74,7 @@ class WindowManager(IgnisGObjectSingleton):
     def remove_window(self, window_name: str) -> None:
         """
         Remove a window by its name.
-        The window will be removed from the application.
+        This will **not** destroy the window.
 
         Args:
             window_name: The window's namespace.
@@ -92,6 +92,7 @@ class WindowManager(IgnisGObjectSingleton):
 
         Args:
             window_name: The window's namespace.
+
         Raises:
             WindowNotFoundError: If a window with the given namespace does not exist.
         """
@@ -117,6 +118,7 @@ class WindowManager(IgnisGObjectSingleton):
 
         Args:
             window_name: The window's namespace.
+
         Raises:
             WindowNotFoundError: If a window with the given namespace does not exist.
         """
