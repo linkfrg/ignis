@@ -2,6 +2,7 @@
 
 import warnings
 from collections.abc import Callable
+from contextlib import contextmanager
 
 
 # FIXME: make public someday
@@ -59,3 +60,22 @@ def deprecated_class(message: str):
         return DeprecatedMeta(cls.__name__, cls.__bases__, dict(cls.__dict__))
 
     return wrapper
+
+
+@contextmanager
+def ignore_deprecation_warnings():
+    """
+    Context manager that temporarily suppresses DeprecationWarning messages.
+
+    Example usage:
+
+    .. code-block:: python
+
+        from ignis.deprecation import ignore_deprecation_warnings
+
+        with ignore_deprecation_warnings():
+            deprecated_function()
+    """
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", category=DeprecationWarning)
+        yield
