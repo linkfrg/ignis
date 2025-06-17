@@ -1,17 +1,21 @@
 """Simple deprecation utilities."""
 
-from loguru import logger
+import warnings
 from collections.abc import Callable
+
+# FIXME: make public someday
+def _enable_deprecation_warnings() -> None:
+    warnings.filterwarnings("default", category=DeprecationWarning)
 
 
 def deprecation_warning(message: str) -> None:
     """
-    Log a warning about the deprecation of a feature or function.
+    Print a warning about deprecated features.
 
     Args:
         message: The message to print.
     """
-    logger.log("DEPRECATED", message)
+    warnings.warn(message, DeprecationWarning, stacklevel=2)
 
 
 def deprecated_func(message: str):
@@ -19,7 +23,7 @@ def deprecated_func(message: str):
     A decorator to mark a function as deprecated.
 
     Args:
-        message: The message to log. ``{name}`` will be replaced with the function name.
+        message: The warning message. ``{name}`` will be replaced with the function name.
     """
 
     def decorator(func: Callable):
@@ -37,7 +41,7 @@ def deprecated_class(message: str):
     A decorator to mark a class as deprecated.
 
     Args:
-        message: The message to log. ``{name}`` will be replaced with the class name.
+        message: The warning message. ``{name}`` will be replaced with the class name.
     """
 
     def wrapper(cls):

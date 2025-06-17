@@ -20,7 +20,7 @@ from ignis.exceptions import (
 )
 from ignis.log_utils import configure_logger
 from ignis.window_manager import WindowManager
-from ignis.deprecation import deprecation_warning
+from ignis.deprecation import deprecation_warning, _enable_deprecation_warnings
 
 StylePriority = Literal["application", "fallback", "settings", "theme", "user"]
 
@@ -578,6 +578,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
 
 
 def run_app(config_path: str, debug: bool) -> None:
+    _enable_deprecation_warnings()
     configure_logger(debug)
 
     app = IgnisApp.get_default()
