@@ -32,13 +32,12 @@
         version = import ./nix/version.nix { inherit self; };
         serviceDependencies = [
           pkgs.dart-sass
-          pkgs.gst_all_1.gstreamer
+          pkgs.gpu-screen-recorder
           pkgs.gst_all_1.gst-plugins-base
           pkgs.gst_all_1.gst-plugins-good
           pkgs.gst_all_1.gst-plugins-bad
           pkgs.gst_all_1.gst-plugins-ugly
           pkgs.libpulseaudio
-          pkgs.pipewire
           pkgs.networkmanager
           pkgs.gnome-bluetooth
         ];

@@ -12,7 +12,7 @@ in
   options.programs.ignis = {
     enable = lib.mkEnableOption "Enable the Ignis widget framework";
     services = {
-      bluetooth = lib.mkEnableOption "Whether to enable upower";
+      bluetooth = lib.mkEnableOption "Enable Bluetooth service";
       upower = lib.mkEnableOption "Enable UPower service";
       recorder = lib.mkEnableOption "Enable Recorder service";
       network = lib.mkEnableOption "Enable Network service";
@@ -45,8 +45,7 @@ in
                 pkgs.gnome-bluetooth
               ]
               ++ lib.optionals cfg.services.recorder [
-                pkgs.pipewire
-                pkgs.gst_all_1.gstreamer
+                pkgs.gpu-screen-recorder
                 pkgs.gst_all_1.gst-plugins-base
                 pkgs.gst_all_1.gst-plugins-good
                 pkgs.gst_all_1.gst-plugins-bad
@@ -60,15 +59,13 @@ in
     {
       environment.systemPackages = [ ignis ];
       warnings = lib.optionals (cfg.services.bluetooth && !config.hardware.bluetooth.enable) [
-        "To use bluetooth services of ignis you must put 'hardware.bluetooth.enable = true' in your configuration"
+        "To use the Ignis Bluetooth Service, enable Bluetooth in your Nix configuration by adding 'hardware.bluetooth.enable = true'."
       ] ++ lib.optionals (cfg.services.upower && !config.services.upower.enable) [
-        "To use upower services of ignis you must put 'services.upower.enable = true' in your configuration"
-      ] ++ lib.optionals (cfg.services.recorder && !config.services.pipewire.enable) [
-        "To use recorder services of ignis you must put 'services.pipewire.enable = true' in your configuration"
+        "To use the Ignis UPower Service, enable UPower in your Nix configuration by adding 'services.upower.enable = true'."
       ] ++ lib.optionals (cfg.services.network && !config.networking.networkmanager.enable) [
-        "To use network services of ignis you must put 'networking.networkmanager.enable = true' in your configuration"
+        "To use the Ignis Network Service, enable Network Manager in your Nix configuration by adding 'networking.networkmanager.enable = true'."
       ] ++ lib.optionals (cfg.services.audio && !config.services.pipewire.enable) [
-        "To use audio services of ignis you must put 'services.pipewire.enable = true' in your configuration"
+        "To use the Ignis Audio Service, enable Pipewire in your Nix configuration by adding 'services.pipewire.enable = true'."
       ];
     }
   );
