@@ -20,7 +20,7 @@ from ignis.exceptions import (
 )
 from ignis.log_utils import configure_logger
 from ignis.window_manager import WindowManager
-from ignis.deprecation import deprecated_func
+from ignis.deprecation import deprecated_func, deprecation_warning
 
 StylePriority = Literal["application", "fallback", "settings", "theme", "user"]
 
@@ -157,14 +157,15 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         """
         return self._is_ready
 
-    @deprecated_func(
-        "{name} property is deprecated, use ignis.window_manager.WindowManager.windows property instead."
-    )
     @IgnisProperty
     def windows(self) -> list[Gtk.Window]:
         """
-        A list of windows added to this application.
+        .. deprecated:: 0.6
+            Use :attr:`~ignis.window_manager.WindowManager.windows` instead.
         """
+        deprecation_warning(
+            "IgnisApp.windows is deprecated, use WindowManager.windows instead."
+        )
         return window_manager.windows
 
     @IgnisProperty
