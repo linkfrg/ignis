@@ -557,6 +557,23 @@ If you want to load interface info from the path or XML string, you need to prov
 </dl>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="ignis.utils.get_gdk_display">
+<span class="sig-prename descclassname"><span class="pre">ignis.utils.</span></span><span class="sig-name descname"><span class="pre">get_gdk_display</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">gi.repository.Gdk.Display</span></span></span><a class="headerlink" href="#ignis.utils.get_gdk_display" title="Link to this definition">#</a></dt>
+<dd><p>Get the default <code class="xref py py-class docutils literal notranslate"><span class="pre">Gdk.Display</span></code> or raise <code class="xref py py-class docutils literal notranslate"><span class="pre">DisplayNotFoundError</span></code> if it's <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Display</span></code></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The default <code class="xref py py-class docutils literal notranslate"><span class="pre">Gdk.Display</span></code>.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../exceptions.html#ignis.exceptions.DisplayNotFoundError" title="ignis.exceptions.DisplayNotFoundError"><strong>DisplayNotFoundError</strong></a> -- If <code class="xref py py-func docutils literal notranslate"><span class="pre">Gdk.Display.get_default()</span></code> returned <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
 
@@ -608,6 +625,7 @@ If you want to load interface info from the path or XML string, you need to prov
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.get_current_dir"><code class="docutils literal notranslate"><span class="pre">get_current_dir()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.load_interface_xml"><code class="docutils literal notranslate"><span class="pre">load_interface_xml()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ignis.utils.get_gdk_display"><code class="docutils literal notranslate"><span class="pre">get_gdk_display()</span></code></a></li>
 </ul>
   </nav></div>
 
