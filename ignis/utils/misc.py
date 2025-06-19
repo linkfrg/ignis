@@ -1,6 +1,7 @@
 import os
 import inspect
-from gi.repository import Gio  # type: ignore
+from gi.repository import Gio, Gdk  # type: ignore
+from ignis.exceptions import DisplayNotFoundError
 
 
 def get_current_dir() -> str:
@@ -50,3 +51,19 @@ def load_interface_xml(
         )
 
     return Gio.DBusNodeInfo.new_for_xml(xml_string).interfaces[0]
+
+
+def get_gdk_display() -> Gdk.Display:
+    """
+    Get the default :class:`Gdk.Display` or raise :class:`DisplayNotFoundError` if it's ``None``.
+
+    Returns:
+        The default :class:`Gdk.Display`.
+
+    Raises:
+        DisplayNotFoundError: If :func:`Gdk.Display.get_default` returned ``None``.
+    """
+    if display := Gdk.Display.get_default():
+        return display
+    else:
+        raise DisplayNotFoundError()

@@ -1,5 +1,5 @@
 from gi.repository import Gdk, Gio  # type: ignore
-from ignis.exceptions import DisplayNotFoundError
+from .misc import get_gdk_display
 
 
 def get_monitor(monitor_id: int) -> "Gdk.Monitor | None":
@@ -12,11 +12,7 @@ def get_monitor(monitor_id: int) -> "Gdk.Monitor | None":
     Returns:
         The monitor with the given ID, or ``None`` if no such monitor exists.
     """
-    display = Gdk.Display.get_default()
-    if not display:
-        raise DisplayNotFoundError()
-
-    return display.get_monitors().get_item(monitor_id)  # type: ignore
+    return get_gdk_display().get_monitors().get_item(monitor_id)  # type: ignore
 
 
 def get_monitors() -> Gio.ListModel:
@@ -26,10 +22,7 @@ def get_monitors() -> Gio.ListModel:
     Returns:
         A list model of :class:`Gdk.Monitor`.
     """
-    display = Gdk.Display.get_default()
-    if not display:
-        raise DisplayNotFoundError()
-    return display.get_monitors()
+    return get_gdk_display().get_monitors()
 
 
 def get_n_monitors() -> int:
@@ -39,8 +32,4 @@ def get_n_monitors() -> int:
     Returns:
         The number of monitors.
     """
-    display = Gdk.Display.get_default()
-    if not display:
-        raise DisplayNotFoundError()
-
-    return len(display.get_monitors())
+    return len(get_gdk_display().get_monitors())

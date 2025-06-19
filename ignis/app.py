@@ -9,11 +9,10 @@ from typing import Literal
 from ignis.dbus import DBusService
 from ignis import utils
 from loguru import logger
-from gi.repository import Gtk, Gdk, Gio, GLib  # type: ignore
+from gi.repository import Gtk, Gio, GLib  # type: ignore
 from ignis.gobject import IgnisGObject, IgnisProperty, IgnisSignal
 from ignis.exceptions import (
     WindowNotFoundError,
-    DisplayNotFoundError,
     StylePathNotFoundError,
     StylePathAppliedError,
     CssParsingError,
@@ -271,11 +270,6 @@ class IgnisApp(Gtk.Application, IgnisGObject):
             CssParsingError: If an error occured while parsing the CSS/SCSS file. NOTE: If you compile a SASS/SCSS file, it will print the wrong section.
         """
 
-        display = Gdk.Display.get_default()
-
-        if not display:
-            raise DisplayNotFoundError()
-
         if style_path in self._css_providers:
             raise StylePathAppliedError(style_path)
 
@@ -300,7 +294,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         provider.load_from_string(css_style)
 
         Gtk.StyleContext.add_provider_for_display(
-            display,
+            utils.get_gdk_display(),
             provider,
             GTK_STYLE_PRIORITIES[style_priority],
         )
@@ -326,17 +320,13 @@ class IgnisApp(Gtk.Application, IgnisGObject):
             DisplayNotFoundError
         """
 
-        display = Gdk.Display.get_default()
-        if not display:
-            raise DisplayNotFoundError()
-
         provider_info = self._css_providers.pop(style_path, None)
 
         if provider_info is None:
             raise StylePathNotFoundError(style_path)
 
         Gtk.StyleContext.remove_provider_for_display(
-            display,
+            utils.get_gdk_display(),
             provider_info.provider,
         )
 
@@ -403,12 +393,7 @@ class IgnisApp(Gtk.Application, IgnisGObject):
 
             app.add_icons(f"{utils.get_current_dir()}/icons")
         """
-        display = Gdk.Display.get_default()
-
-        if not display:
-            raise DisplayNotFoundError()
-
-        icon_theme = Gtk.IconTheme.get_for_display(display)
+        icon_theme = Gtk.IconTheme.get_for_display(utils.get_gdk_display())
         icon_theme.add_search_path(path)
 
     def do_activate(self) -> None:

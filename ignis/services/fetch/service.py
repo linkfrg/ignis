@@ -1,9 +1,9 @@
 import os
 import glob
-from gi.repository import Gtk, Gdk  # type: ignore
-from ignis.exceptions import DisplayNotFoundError
+from gi.repository import Gtk  # type: ignore
 from ignis.base_service import BaseService
 from ignis.gobject import IgnisProperty
+from ignis import utils
 
 
 class FetchService(BaseService):
@@ -317,8 +317,4 @@ class FetchService(BaseService):
         """
         Current icon theme.
         """
-        display = Gdk.Display.get_default()
-        if not display:
-            raise DisplayNotFoundError()
-
-        return Gtk.IconTheme.get_for_display(display).get_theme_name()
+        return Gtk.IconTheme.get_for_display(utils.get_gdk_display()).get_theme_name()

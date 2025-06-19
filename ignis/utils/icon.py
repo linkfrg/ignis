@@ -1,6 +1,6 @@
 import os
-from gi.repository import Gtk, Gdk, Gio  # type: ignore
-from ignis.exceptions import DisplayNotFoundError
+from gi.repository import Gtk, Gio  # type: ignore
+from ignis import utils
 
 
 def get_paintable(
@@ -17,12 +17,9 @@ def get_paintable(
     Returns:
         The paintable object for the icon or ``None`` if no such icon exists.
     """
-    display = Gdk.Display.get_default()
-    if not display:
-        raise DisplayNotFoundError()
 
     icon = Gio.ThemedIcon.new(icon_name)
-    icon_theme = Gtk.IconTheme.get_for_display(display)
+    icon_theme = Gtk.IconTheme.get_for_display(utils.get_gdk_display())
     return icon_theme.lookup_by_gicon(
         icon,
         size,
