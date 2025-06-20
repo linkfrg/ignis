@@ -19,7 +19,11 @@ from ignis.exceptions import (
 )
 from ignis.log_utils import configure_logger
 from ignis.window_manager import WindowManager
-from ignis._deprecation import deprecation_warning, _enable_deprecation_warnings
+from ignis._deprecation import (
+    deprecated,
+    deprecation_warning,
+    _enable_deprecation_warnings,
+)
 
 StylePriority = Literal["application", "fallback", "settings", "theme", "user"]
 
@@ -34,10 +38,8 @@ GTK_STYLE_PRIORITIES: dict[StylePriority, int] = {
 window_manager = WindowManager.get_default()
 
 
-def _window_deprecated_func(name: str):
-    deprecation_warning(
-        f"IgnisApp.{name}() is deprecated, use WindowManager.{name}() instead."
-    )
+def _get_wm_depr_msg(name: str):
+    return f"IgnisApp.{name}() is deprecated, use WindowManager.{name}() instead."
 
 
 def raise_css_parsing_error(
@@ -511,52 +513,53 @@ class IgnisApp(Gtk.Application, IgnisGObject):
         self.quit()
 
     # =========================== DEPRECATED ZONE START ===========================
+
+    @deprecated(_get_wm_depr_msg("get_window"))
     def get_window(self, window_name: str) -> Gtk.Window:
         """
         .. deprecated:: 0.6
             Use :func:`~ignis.window_manager.WindowManager.get_window` instead.
         """
-        _window_deprecated_func("get_window")
         return window_manager.get_window(window_name)
 
+    @deprecated(_get_wm_depr_msg("open_window"))
     def open_window(self, window_name: str) -> None:
         """
         .. deprecated:: 0.6
             Use :func:`~ignis.window_manager.WindowManager.open_window` instead.
         """
-        _window_deprecated_func("open_window")
         window_manager.open_window(window_name)
 
+    @deprecated(_get_wm_depr_msg("close_window"))
     def close_window(self, window_name: str) -> None:
         """
         .. deprecated:: 0.6
             Use :func:`~ignis.window_manager.WindowManager.close_window` instead.
         """
-        _window_deprecated_func("close_window")
         window_manager.close_window(window_name)
 
+    @deprecated(_get_wm_depr_msg("toggle_window"))
     def toggle_window(self, window_name: str) -> None:
         """
         .. deprecated:: 0.6
             Use :func:`~ignis.window_manager.WindowManager.toggle_window` instead.
         """
-        _window_deprecated_func("toggle_window")
         window_manager.toggle_window(window_name)
 
+    @deprecated(_get_wm_depr_msg("add_window"))
     def add_window(self, window_name: str, window: Gtk.Window) -> None:  # type: ignore
         """
         .. deprecated:: 0.6
             Use :func:`~ignis.window_manager.WindowManager.add_window` instead.
         """
-        _window_deprecated_func("add_window")
         window_manager.add_window(window_name, window)
 
+    @deprecated(_get_wm_depr_msg("remove_window"))
     def remove_window(self, window_name: str) -> None:  # type: ignore
         """
         .. deprecated:: 0.6
             Use :func:`~ignis.window_manager.WindowManager.remove_window` instead.
         """
-        _window_deprecated_func("remove_window")
         window_manager.remove_window(window_name)
 
     # ============================ DEPRECATED ZONE END ============================

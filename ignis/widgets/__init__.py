@@ -34,11 +34,11 @@ from .revealer_window import RevealerWindow
 from .stack import Stack
 from .stack_switcher import StackSwitcher
 from .stack_page import StackPage
-from ignis._deprecation import deprecated_class
+from ignis._deprecation import deprecated_getattribute
 
 
-@deprecated_class(
-    message="""The "Widget" class is deprecated, please use "from ignis import widgets" instead."""
+@deprecated_getattribute(
+    """The "Widget" class is deprecated, please use "from ignis import widgets" instead."""
 )
 class Widget:
     Window: TypeAlias = Window

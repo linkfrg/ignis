@@ -1,5 +1,5 @@
 from gi.repository import Gtk, GLib  # type: ignore
-from ignis._deprecation import deprecated_class
+from ignis._deprecation import deprecated
 
 
 class WindowNotFoundError(Exception):
@@ -90,7 +90,7 @@ class NetworkManagerNotFoundError(Exception):
         )
 
 
-@deprecated_class("{name} is deprecated and no longer used.")
+@deprecated("GstNotFoundError is deprecated and no longer used.")
 class GstNotFoundError(Exception):
     """
     Raised when GStreamer is not found.
@@ -102,7 +102,7 @@ class GstNotFoundError(Exception):
         )
 
 
-@deprecated_class("{name} is deprecated and no longer used.")
+@deprecated("GstPluginNotFoundError is deprecated and no longer used.")
 class GstPluginNotFoundError(Exception):
     """
     Raised when a GStreamer plugin is not found.
