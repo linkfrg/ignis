@@ -17,20 +17,47 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, gvc, ... }:
-    flake-utils.lib.eachDefaultSystem (system:
-    let
-      pkgs = import nixpkgs { inherit system; };
-      version = import ./nix/version.nix { inherit self; };
-    in {
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+      gvc,
+      ...
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = import nixpkgs { inherit system; };
+        version = import ./nix/version.nix { inherit self; };
+        serviceDependencies = [
+          pkgs.dart-sass
+          pkgs.gpu-screen-recorder
+          pkgs.gst_all_1.gst-plugins-base
+          pkgs.gst_all_1.gst-plugins-good
+          pkgs.gst_all_1.gst-plugins-bad
+          pkgs.gst_all_1.gst-plugins-ugly
+          pkgs.libpulseaudio
+          pkgs.networkmanager
+          pkgs.gnome-bluetooth
+        ];
+      in
+      {
         packages = rec {
-          ignis = pkgs.callPackage ./nix { inherit self gvc version; };
+          ignis = (pkgs.callPackage ./nix { inherit self gvc version; }).override {
+            serviceDependencies = serviceDependencies;
+          };
           default = ignis;
         };
         apps = rec {
-          ignis = flake-utils.lib.mkApp {drv = self.packages.${system}.ignis;};
+          ignis = (flake-utils.lib.mkApp { drv = self.packages.${system}.ignis; }).override {
+            serviceDependencies = serviceDependencies;
+          };
           default = ignis;
         };
       }
-    );
+    )
+    // {
+      nixosModules.ignis = import ./nix/nixosModule.nix;
+    };
 }
