@@ -20,7 +20,7 @@ from ignis.exceptions import (
 )
 from ignis.log_utils import configure_logger
 from ignis.window_manager import WindowManager
-from ignis.deprecation import deprecation_warning, _enable_deprecation_warnings
+from ignis._deprecation import deprecation_warning, _enable_deprecation_warnings
 
 StylePriority = Literal["application", "fallback", "settings", "theme", "user"]
 

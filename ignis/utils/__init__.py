@@ -19,7 +19,7 @@ from .version import (
     get_ignis_branch,
     get_ignis_commit_msg,
 )
-from ignis.deprecation import deprecated_class
+from ignis._deprecation import deprecated_class
 
 
 @deprecated_class(

@@ -4,7 +4,7 @@ from collections.abc import Callable
 from ignis.gobject import IgnisGObject, IgnisProperty
 from ignis.exceptions import CssParsingError
 from ignis.app import IgnisApp, StylePriority, GTK_STYLE_PRIORITIES
-from ignis.deprecation import ignore_deprecation_warnings
+from ignis._deprecation import ignore_deprecation_warnings
 
 app = IgnisApp.get_default()
 
