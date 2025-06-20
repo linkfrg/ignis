@@ -1,5 +1,5 @@
 from gi.repository import Gtk, GLib  # type: ignore
-from ignis.deprecation import deprecated_class
+from ignis._deprecation import deprecated_class
 
 
 class WindowNotFoundError(Exception):

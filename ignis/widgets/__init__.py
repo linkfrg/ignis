@@ -34,7 +34,7 @@ from .revealer_window import RevealerWindow
 from .stack import Stack
 from .stack_switcher import StackSwitcher
 from .stack_page import StackPage
-from ignis.deprecation import deprecated_class
+from ignis._deprecation import deprecated_class
 
 
 @deprecated_class(
