@@ -19,11 +19,11 @@ from .version import (
     get_ignis_branch,
     get_ignis_commit_msg,
 )
-from ignis._deprecation import deprecated_class
+from ignis._deprecation import deprecated_getattribute
 
 
-@deprecated_class(
-    message="""The "Utils" class is deprecated, please use "from ignis import utils" instead."""
+@deprecated_getattribute(
+    """The "Utils" class is deprecated, please use "from ignis import utils" instead."""
 )
 class Utils:
     exec_sh = exec_sh
